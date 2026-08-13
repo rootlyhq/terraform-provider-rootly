@@ -62,6 +62,7 @@ resource "rootly_form_field_option" "north_america" {
 
 - `id` (String) The ID of this resource.
 - `resource_type` (String) The resource type this field belongs to. Value must be one of `incident`, `problem`.
+- `slug` (String) The slug of the form field
 
 ## Import
 

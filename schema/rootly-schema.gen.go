@@ -1275,6 +1275,7 @@ func (e AlertStatus) Valid() bool {
 
 // Defines values for AlertEventAction.
 const (
+	AlertEventActionAckTimeoutRetriggered AlertEventAction = "ack_timeout_retriggered"
 	AlertEventActionAcknowledged          AlertEventAction = "acknowledged"
 	AlertEventActionAdded                 AlertEventAction = "added"
 	AlertEventActionAnswered              AlertEventAction = "answered"
@@ -1313,6 +1314,8 @@ const (
 // Valid indicates whether the value is a known member of the AlertEventAction enum.
 func (e AlertEventAction) Valid() bool {
 	switch e {
+	case AlertEventActionAckTimeoutRetriggered:
+		return true
 	case AlertEventActionAcknowledged:
 		return true
 	case AlertEventActionAdded:
@@ -5551,6 +5554,24 @@ func (e CustomFieldRequired) Valid() bool {
 	}
 }
 
+// Defines values for CustomFieldResourceType.
+const (
+	CustomFieldResourceTypeIncident CustomFieldResourceType = "incident"
+	CustomFieldResourceTypeProblem  CustomFieldResourceType = "problem"
+)
+
+// Valid indicates whether the value is a known member of the CustomFieldResourceType enum.
+func (e CustomFieldResourceType) Valid() bool {
+	switch e {
+	case CustomFieldResourceTypeIncident:
+		return true
+	case CustomFieldResourceTypeProblem:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for CustomFieldShown.
 const (
 	CustomFieldShownIncidentForm                CustomFieldShown = "incident_form"
@@ -5881,6 +5902,42 @@ func (e EscalationLevelNotificationTargetParamsType) Valid() bool {
 	}
 }
 
+// Defines values for EscalationLevelPagingStrategyConfigurationRepeatsMode.
+const (
+	EscalationLevelPagingStrategyConfigurationRepeatsModeAll   EscalationLevelPagingStrategyConfigurationRepeatsMode = "all"
+	EscalationLevelPagingStrategyConfigurationRepeatsModeUsers EscalationLevelPagingStrategyConfigurationRepeatsMode = "users"
+)
+
+// Valid indicates whether the value is a known member of the EscalationLevelPagingStrategyConfigurationRepeatsMode enum.
+func (e EscalationLevelPagingStrategyConfigurationRepeatsMode) Valid() bool {
+	switch e {
+	case EscalationLevelPagingStrategyConfigurationRepeatsModeAll:
+		return true
+	case EscalationLevelPagingStrategyConfigurationRepeatsModeUsers:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EscalationLevelPagingStrategyConfigurationRotationScope.
+const (
+	EscalationLevelPagingStrategyConfigurationRotationScopeActiveRotation EscalationLevelPagingStrategyConfigurationRotationScope = "active_rotation"
+	EscalationLevelPagingStrategyConfigurationRotationScopeEntireSchedule EscalationLevelPagingStrategyConfigurationRotationScope = "entire_schedule"
+)
+
+// Valid indicates whether the value is a known member of the EscalationLevelPagingStrategyConfigurationRotationScope enum.
+func (e EscalationLevelPagingStrategyConfigurationRotationScope) Valid() bool {
+	switch e {
+	case EscalationLevelPagingStrategyConfigurationRotationScopeActiveRotation:
+		return true
+	case EscalationLevelPagingStrategyConfigurationRotationScopeEntireSchedule:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for EscalationLevelPagingStrategyConfigurationScheduleStrategy.
 const (
 	EscalationLevelPagingStrategyConfigurationScheduleStrategyEveryone   EscalationLevelPagingStrategyConfigurationScheduleStrategy = "everyone"
@@ -6095,7 +6152,6 @@ const (
 	EscalationPathRulesTimeZoneAsiaMagadan                 EscalationPathRulesTimeZone = "Asia/Magadan"
 	EscalationPathRulesTimeZoneAsiaMuscat                  EscalationPathRulesTimeZone = "Asia/Muscat"
 	EscalationPathRulesTimeZoneAsiaNovosibirsk             EscalationPathRulesTimeZone = "Asia/Novosibirsk"
-	EscalationPathRulesTimeZoneAsiaRangoon                 EscalationPathRulesTimeZone = "Asia/Rangoon"
 	EscalationPathRulesTimeZoneAsiaRiyadh                  EscalationPathRulesTimeZone = "Asia/Riyadh"
 	EscalationPathRulesTimeZoneAsiaSeoul                   EscalationPathRulesTimeZone = "Asia/Seoul"
 	EscalationPathRulesTimeZoneAsiaShanghai                EscalationPathRulesTimeZone = "Asia/Shanghai"
@@ -6182,7 +6238,6 @@ const (
 	EscalationPathRulesTimeZoneEuropeHelsinki              EscalationPathRulesTimeZone = "Europe/Helsinki"
 	EscalationPathRulesTimeZoneEuropeIstanbul              EscalationPathRulesTimeZone = "Europe/Istanbul"
 	EscalationPathRulesTimeZoneEuropeKaliningrad           EscalationPathRulesTimeZone = "Europe/Kaliningrad"
-	EscalationPathRulesTimeZoneEuropeKiev                  EscalationPathRulesTimeZone = "Europe/Kiev"
 	EscalationPathRulesTimeZoneEuropeLisbon                EscalationPathRulesTimeZone = "Europe/Lisbon"
 	EscalationPathRulesTimeZoneEuropeLjubljana             EscalationPathRulesTimeZone = "Europe/Ljubljana"
 	EscalationPathRulesTimeZoneEuropeLondon                EscalationPathRulesTimeZone = "Europe/London"
@@ -6232,7 +6287,6 @@ const (
 	EscalationPathRulesTimeZoneKrasnoyarsk                 EscalationPathRulesTimeZone = "Krasnoyarsk"
 	EscalationPathRulesTimeZoneKualaLumpur                 EscalationPathRulesTimeZone = "Kuala Lumpur"
 	EscalationPathRulesTimeZoneKuwait                      EscalationPathRulesTimeZone = "Kuwait"
-	EscalationPathRulesTimeZoneKyiv                        EscalationPathRulesTimeZone = "Kyiv"
 	EscalationPathRulesTimeZoneLaPaz                       EscalationPathRulesTimeZone = "La Paz"
 	EscalationPathRulesTimeZoneLima                        EscalationPathRulesTimeZone = "Lima"
 	EscalationPathRulesTimeZoneLisbon                      EscalationPathRulesTimeZone = "Lisbon"
@@ -6289,7 +6343,6 @@ const (
 	EscalationPathRulesTimeZonePretoria                    EscalationPathRulesTimeZone = "Pretoria"
 	EscalationPathRulesTimeZonePuertoRico                  EscalationPathRulesTimeZone = "Puerto Rico"
 	EscalationPathRulesTimeZoneQuito                       EscalationPathRulesTimeZone = "Quito"
-	EscalationPathRulesTimeZoneRangoon                     EscalationPathRulesTimeZone = "Rangoon"
 	EscalationPathRulesTimeZoneRiga                        EscalationPathRulesTimeZone = "Riga"
 	EscalationPathRulesTimeZoneRiyadh                      EscalationPathRulesTimeZone = "Riyadh"
 	EscalationPathRulesTimeZoneRome                        EscalationPathRulesTimeZone = "Rome"
@@ -6473,8 +6526,6 @@ func (e EscalationPathRulesTimeZone) Valid() bool {
 		return true
 	case EscalationPathRulesTimeZoneAsiaNovosibirsk:
 		return true
-	case EscalationPathRulesTimeZoneAsiaRangoon:
-		return true
 	case EscalationPathRulesTimeZoneAsiaRiyadh:
 		return true
 	case EscalationPathRulesTimeZoneAsiaSeoul:
@@ -6647,8 +6698,6 @@ func (e EscalationPathRulesTimeZone) Valid() bool {
 		return true
 	case EscalationPathRulesTimeZoneEuropeKaliningrad:
 		return true
-	case EscalationPathRulesTimeZoneEuropeKiev:
-		return true
 	case EscalationPathRulesTimeZoneEuropeLisbon:
 		return true
 	case EscalationPathRulesTimeZoneEuropeLjubljana:
@@ -6746,8 +6795,6 @@ func (e EscalationPathRulesTimeZone) Valid() bool {
 	case EscalationPathRulesTimeZoneKualaLumpur:
 		return true
 	case EscalationPathRulesTimeZoneKuwait:
-		return true
-	case EscalationPathRulesTimeZoneKyiv:
 		return true
 	case EscalationPathRulesTimeZoneLaPaz:
 		return true
@@ -6860,8 +6907,6 @@ func (e EscalationPathRulesTimeZone) Valid() bool {
 	case EscalationPathRulesTimeZonePuertoRico:
 		return true
 	case EscalationPathRulesTimeZoneQuito:
-		return true
-	case EscalationPathRulesTimeZoneRangoon:
 		return true
 	case EscalationPathRulesTimeZoneRiga:
 		return true
@@ -7022,7 +7067,6 @@ const (
 	EscalationPathTimeRestrictionTimeZoneAsiaMagadan                 EscalationPathTimeRestrictionTimeZone = "Asia/Magadan"
 	EscalationPathTimeRestrictionTimeZoneAsiaMuscat                  EscalationPathTimeRestrictionTimeZone = "Asia/Muscat"
 	EscalationPathTimeRestrictionTimeZoneAsiaNovosibirsk             EscalationPathTimeRestrictionTimeZone = "Asia/Novosibirsk"
-	EscalationPathTimeRestrictionTimeZoneAsiaRangoon                 EscalationPathTimeRestrictionTimeZone = "Asia/Rangoon"
 	EscalationPathTimeRestrictionTimeZoneAsiaRiyadh                  EscalationPathTimeRestrictionTimeZone = "Asia/Riyadh"
 	EscalationPathTimeRestrictionTimeZoneAsiaSeoul                   EscalationPathTimeRestrictionTimeZone = "Asia/Seoul"
 	EscalationPathTimeRestrictionTimeZoneAsiaShanghai                EscalationPathTimeRestrictionTimeZone = "Asia/Shanghai"
@@ -7109,7 +7153,6 @@ const (
 	EscalationPathTimeRestrictionTimeZoneEuropeHelsinki              EscalationPathTimeRestrictionTimeZone = "Europe/Helsinki"
 	EscalationPathTimeRestrictionTimeZoneEuropeIstanbul              EscalationPathTimeRestrictionTimeZone = "Europe/Istanbul"
 	EscalationPathTimeRestrictionTimeZoneEuropeKaliningrad           EscalationPathTimeRestrictionTimeZone = "Europe/Kaliningrad"
-	EscalationPathTimeRestrictionTimeZoneEuropeKiev                  EscalationPathTimeRestrictionTimeZone = "Europe/Kiev"
 	EscalationPathTimeRestrictionTimeZoneEuropeLisbon                EscalationPathTimeRestrictionTimeZone = "Europe/Lisbon"
 	EscalationPathTimeRestrictionTimeZoneEuropeLjubljana             EscalationPathTimeRestrictionTimeZone = "Europe/Ljubljana"
 	EscalationPathTimeRestrictionTimeZoneEuropeLondon                EscalationPathTimeRestrictionTimeZone = "Europe/London"
@@ -7159,7 +7202,6 @@ const (
 	EscalationPathTimeRestrictionTimeZoneKrasnoyarsk                 EscalationPathTimeRestrictionTimeZone = "Krasnoyarsk"
 	EscalationPathTimeRestrictionTimeZoneKualaLumpur                 EscalationPathTimeRestrictionTimeZone = "Kuala Lumpur"
 	EscalationPathTimeRestrictionTimeZoneKuwait                      EscalationPathTimeRestrictionTimeZone = "Kuwait"
-	EscalationPathTimeRestrictionTimeZoneKyiv                        EscalationPathTimeRestrictionTimeZone = "Kyiv"
 	EscalationPathTimeRestrictionTimeZoneLaPaz                       EscalationPathTimeRestrictionTimeZone = "La Paz"
 	EscalationPathTimeRestrictionTimeZoneLima                        EscalationPathTimeRestrictionTimeZone = "Lima"
 	EscalationPathTimeRestrictionTimeZoneLisbon                      EscalationPathTimeRestrictionTimeZone = "Lisbon"
@@ -7216,7 +7258,6 @@ const (
 	EscalationPathTimeRestrictionTimeZonePretoria                    EscalationPathTimeRestrictionTimeZone = "Pretoria"
 	EscalationPathTimeRestrictionTimeZonePuertoRico                  EscalationPathTimeRestrictionTimeZone = "Puerto Rico"
 	EscalationPathTimeRestrictionTimeZoneQuito                       EscalationPathTimeRestrictionTimeZone = "Quito"
-	EscalationPathTimeRestrictionTimeZoneRangoon                     EscalationPathTimeRestrictionTimeZone = "Rangoon"
 	EscalationPathTimeRestrictionTimeZoneRiga                        EscalationPathTimeRestrictionTimeZone = "Riga"
 	EscalationPathTimeRestrictionTimeZoneRiyadh                      EscalationPathTimeRestrictionTimeZone = "Riyadh"
 	EscalationPathTimeRestrictionTimeZoneRome                        EscalationPathTimeRestrictionTimeZone = "Rome"
@@ -7400,8 +7441,6 @@ func (e EscalationPathTimeRestrictionTimeZone) Valid() bool {
 		return true
 	case EscalationPathTimeRestrictionTimeZoneAsiaNovosibirsk:
 		return true
-	case EscalationPathTimeRestrictionTimeZoneAsiaRangoon:
-		return true
 	case EscalationPathTimeRestrictionTimeZoneAsiaRiyadh:
 		return true
 	case EscalationPathTimeRestrictionTimeZoneAsiaSeoul:
@@ -7574,8 +7613,6 @@ func (e EscalationPathTimeRestrictionTimeZone) Valid() bool {
 		return true
 	case EscalationPathTimeRestrictionTimeZoneEuropeKaliningrad:
 		return true
-	case EscalationPathTimeRestrictionTimeZoneEuropeKiev:
-		return true
 	case EscalationPathTimeRestrictionTimeZoneEuropeLisbon:
 		return true
 	case EscalationPathTimeRestrictionTimeZoneEuropeLjubljana:
@@ -7673,8 +7710,6 @@ func (e EscalationPathTimeRestrictionTimeZone) Valid() bool {
 	case EscalationPathTimeRestrictionTimeZoneKualaLumpur:
 		return true
 	case EscalationPathTimeRestrictionTimeZoneKuwait:
-		return true
-	case EscalationPathTimeRestrictionTimeZoneKyiv:
 		return true
 	case EscalationPathTimeRestrictionTimeZoneLaPaz:
 		return true
@@ -7787,8 +7822,6 @@ func (e EscalationPathTimeRestrictionTimeZone) Valid() bool {
 	case EscalationPathTimeRestrictionTimeZonePuertoRico:
 		return true
 	case EscalationPathTimeRestrictionTimeZoneQuito:
-		return true
-	case EscalationPathTimeRestrictionTimeZoneRangoon:
 		return true
 	case EscalationPathTimeRestrictionTimeZoneRiga:
 		return true
@@ -8063,7 +8096,6 @@ const (
 	EscalationPolicyBusinessHoursTimeZoneAsiaMagadan                 EscalationPolicyBusinessHoursTimeZone = "Asia/Magadan"
 	EscalationPolicyBusinessHoursTimeZoneAsiaMuscat                  EscalationPolicyBusinessHoursTimeZone = "Asia/Muscat"
 	EscalationPolicyBusinessHoursTimeZoneAsiaNovosibirsk             EscalationPolicyBusinessHoursTimeZone = "Asia/Novosibirsk"
-	EscalationPolicyBusinessHoursTimeZoneAsiaRangoon                 EscalationPolicyBusinessHoursTimeZone = "Asia/Rangoon"
 	EscalationPolicyBusinessHoursTimeZoneAsiaRiyadh                  EscalationPolicyBusinessHoursTimeZone = "Asia/Riyadh"
 	EscalationPolicyBusinessHoursTimeZoneAsiaSeoul                   EscalationPolicyBusinessHoursTimeZone = "Asia/Seoul"
 	EscalationPolicyBusinessHoursTimeZoneAsiaShanghai                EscalationPolicyBusinessHoursTimeZone = "Asia/Shanghai"
@@ -8150,7 +8182,6 @@ const (
 	EscalationPolicyBusinessHoursTimeZoneEuropeHelsinki              EscalationPolicyBusinessHoursTimeZone = "Europe/Helsinki"
 	EscalationPolicyBusinessHoursTimeZoneEuropeIstanbul              EscalationPolicyBusinessHoursTimeZone = "Europe/Istanbul"
 	EscalationPolicyBusinessHoursTimeZoneEuropeKaliningrad           EscalationPolicyBusinessHoursTimeZone = "Europe/Kaliningrad"
-	EscalationPolicyBusinessHoursTimeZoneEuropeKiev                  EscalationPolicyBusinessHoursTimeZone = "Europe/Kiev"
 	EscalationPolicyBusinessHoursTimeZoneEuropeLisbon                EscalationPolicyBusinessHoursTimeZone = "Europe/Lisbon"
 	EscalationPolicyBusinessHoursTimeZoneEuropeLjubljana             EscalationPolicyBusinessHoursTimeZone = "Europe/Ljubljana"
 	EscalationPolicyBusinessHoursTimeZoneEuropeLondon                EscalationPolicyBusinessHoursTimeZone = "Europe/London"
@@ -8200,7 +8231,6 @@ const (
 	EscalationPolicyBusinessHoursTimeZoneKrasnoyarsk                 EscalationPolicyBusinessHoursTimeZone = "Krasnoyarsk"
 	EscalationPolicyBusinessHoursTimeZoneKualaLumpur                 EscalationPolicyBusinessHoursTimeZone = "Kuala Lumpur"
 	EscalationPolicyBusinessHoursTimeZoneKuwait                      EscalationPolicyBusinessHoursTimeZone = "Kuwait"
-	EscalationPolicyBusinessHoursTimeZoneKyiv                        EscalationPolicyBusinessHoursTimeZone = "Kyiv"
 	EscalationPolicyBusinessHoursTimeZoneLaPaz                       EscalationPolicyBusinessHoursTimeZone = "La Paz"
 	EscalationPolicyBusinessHoursTimeZoneLima                        EscalationPolicyBusinessHoursTimeZone = "Lima"
 	EscalationPolicyBusinessHoursTimeZoneLisbon                      EscalationPolicyBusinessHoursTimeZone = "Lisbon"
@@ -8257,7 +8287,6 @@ const (
 	EscalationPolicyBusinessHoursTimeZonePretoria                    EscalationPolicyBusinessHoursTimeZone = "Pretoria"
 	EscalationPolicyBusinessHoursTimeZonePuertoRico                  EscalationPolicyBusinessHoursTimeZone = "Puerto Rico"
 	EscalationPolicyBusinessHoursTimeZoneQuito                       EscalationPolicyBusinessHoursTimeZone = "Quito"
-	EscalationPolicyBusinessHoursTimeZoneRangoon                     EscalationPolicyBusinessHoursTimeZone = "Rangoon"
 	EscalationPolicyBusinessHoursTimeZoneRiga                        EscalationPolicyBusinessHoursTimeZone = "Riga"
 	EscalationPolicyBusinessHoursTimeZoneRiyadh                      EscalationPolicyBusinessHoursTimeZone = "Riyadh"
 	EscalationPolicyBusinessHoursTimeZoneRome                        EscalationPolicyBusinessHoursTimeZone = "Rome"
@@ -8441,8 +8470,6 @@ func (e EscalationPolicyBusinessHoursTimeZone) Valid() bool {
 		return true
 	case EscalationPolicyBusinessHoursTimeZoneAsiaNovosibirsk:
 		return true
-	case EscalationPolicyBusinessHoursTimeZoneAsiaRangoon:
-		return true
 	case EscalationPolicyBusinessHoursTimeZoneAsiaRiyadh:
 		return true
 	case EscalationPolicyBusinessHoursTimeZoneAsiaSeoul:
@@ -8615,8 +8642,6 @@ func (e EscalationPolicyBusinessHoursTimeZone) Valid() bool {
 		return true
 	case EscalationPolicyBusinessHoursTimeZoneEuropeKaliningrad:
 		return true
-	case EscalationPolicyBusinessHoursTimeZoneEuropeKiev:
-		return true
 	case EscalationPolicyBusinessHoursTimeZoneEuropeLisbon:
 		return true
 	case EscalationPolicyBusinessHoursTimeZoneEuropeLjubljana:
@@ -8714,8 +8739,6 @@ func (e EscalationPolicyBusinessHoursTimeZone) Valid() bool {
 	case EscalationPolicyBusinessHoursTimeZoneKualaLumpur:
 		return true
 	case EscalationPolicyBusinessHoursTimeZoneKuwait:
-		return true
-	case EscalationPolicyBusinessHoursTimeZoneKyiv:
 		return true
 	case EscalationPolicyBusinessHoursTimeZoneLaPaz:
 		return true
@@ -8828,8 +8851,6 @@ func (e EscalationPolicyBusinessHoursTimeZone) Valid() bool {
 	case EscalationPolicyBusinessHoursTimeZonePuertoRico:
 		return true
 	case EscalationPolicyBusinessHoursTimeZoneQuito:
-		return true
-	case EscalationPolicyBusinessHoursTimeZoneRangoon:
 		return true
 	case EscalationPolicyBusinessHoursTimeZoneRiga:
 		return true
@@ -9091,6 +9112,24 @@ func (e FormFieldKind) Valid() bool {
 	case FormFieldKindTypes:
 		return true
 	case FormFieldKindVisibility:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for FormFieldResourceType.
+const (
+	FormFieldResourceTypeIncident FormFieldResourceType = "incident"
+	FormFieldResourceTypeProblem  FormFieldResourceType = "problem"
+)
+
+// Valid indicates whether the value is a known member of the FormFieldResourceType enum.
+func (e FormFieldResourceType) Valid() bool {
+	switch e {
+	case FormFieldResourceTypeIncident:
+		return true
+	case FormFieldResourceTypeProblem:
 		return true
 	default:
 		return false
@@ -10672,6 +10711,30 @@ func (e IncidentStatusPageEventStatus) Valid() bool {
 	case IncidentStatusPageEventStatusResolved:
 		return true
 	case IncidentStatusPageEventStatusScheduled:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for IncidentStatusPageEventStatusPageComponentsStatus.
+const (
+	IncidentStatusPageEventStatusPageComponentsStatusDegradedPerformance IncidentStatusPageEventStatusPageComponentsStatus = "degraded_performance"
+	IncidentStatusPageEventStatusPageComponentsStatusMajorOutage         IncidentStatusPageEventStatusPageComponentsStatus = "major_outage"
+	IncidentStatusPageEventStatusPageComponentsStatusOperational         IncidentStatusPageEventStatusPageComponentsStatus = "operational"
+	IncidentStatusPageEventStatusPageComponentsStatusPartialOutage       IncidentStatusPageEventStatusPageComponentsStatus = "partial_outage"
+)
+
+// Valid indicates whether the value is a known member of the IncidentStatusPageEventStatusPageComponentsStatus enum.
+func (e IncidentStatusPageEventStatusPageComponentsStatus) Valid() bool {
+	switch e {
+	case IncidentStatusPageEventStatusPageComponentsStatusDegradedPerformance:
+		return true
+	case IncidentStatusPageEventStatusPageComponentsStatusMajorOutage:
+		return true
+	case IncidentStatusPageEventStatusPageComponentsStatusOperational:
+		return true
+	case IncidentStatusPageEventStatusPageComponentsStatusPartialOutage:
 		return true
 	default:
 		return false
@@ -13882,6 +13945,42 @@ func (e NewEscalationLevelDataAttributesNotificationTargetParamsType) Valid() bo
 	}
 }
 
+// Defines values for NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode.
+const (
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeAll   NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode = "all"
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeUsers NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode = "users"
+)
+
+// Valid indicates whether the value is a known member of the NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode enum.
+func (e NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode) Valid() bool {
+	switch e {
+	case NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeAll:
+		return true
+	case NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeUsers:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope.
+const (
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScopeActiveRotation NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope = "active_rotation"
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScopeEntireSchedule NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope = "entire_schedule"
+)
+
+// Valid indicates whether the value is a known member of the NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope enum.
+func (e NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope) Valid() bool {
+	switch e {
+	case NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScopeActiveRotation:
+		return true
+	case NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScopeEntireSchedule:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy.
 const (
 	NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategyEveryone   NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy = "everyone"
@@ -14114,7 +14213,6 @@ const (
 	NewEscalationPathDataAttributesRulesTimeZoneAsiaMagadan                 NewEscalationPathDataAttributesRulesTimeZone = "Asia/Magadan"
 	NewEscalationPathDataAttributesRulesTimeZoneAsiaMuscat                  NewEscalationPathDataAttributesRulesTimeZone = "Asia/Muscat"
 	NewEscalationPathDataAttributesRulesTimeZoneAsiaNovosibirsk             NewEscalationPathDataAttributesRulesTimeZone = "Asia/Novosibirsk"
-	NewEscalationPathDataAttributesRulesTimeZoneAsiaRangoon                 NewEscalationPathDataAttributesRulesTimeZone = "Asia/Rangoon"
 	NewEscalationPathDataAttributesRulesTimeZoneAsiaRiyadh                  NewEscalationPathDataAttributesRulesTimeZone = "Asia/Riyadh"
 	NewEscalationPathDataAttributesRulesTimeZoneAsiaSeoul                   NewEscalationPathDataAttributesRulesTimeZone = "Asia/Seoul"
 	NewEscalationPathDataAttributesRulesTimeZoneAsiaShanghai                NewEscalationPathDataAttributesRulesTimeZone = "Asia/Shanghai"
@@ -14201,7 +14299,6 @@ const (
 	NewEscalationPathDataAttributesRulesTimeZoneEuropeHelsinki              NewEscalationPathDataAttributesRulesTimeZone = "Europe/Helsinki"
 	NewEscalationPathDataAttributesRulesTimeZoneEuropeIstanbul              NewEscalationPathDataAttributesRulesTimeZone = "Europe/Istanbul"
 	NewEscalationPathDataAttributesRulesTimeZoneEuropeKaliningrad           NewEscalationPathDataAttributesRulesTimeZone = "Europe/Kaliningrad"
-	NewEscalationPathDataAttributesRulesTimeZoneEuropeKiev                  NewEscalationPathDataAttributesRulesTimeZone = "Europe/Kiev"
 	NewEscalationPathDataAttributesRulesTimeZoneEuropeLisbon                NewEscalationPathDataAttributesRulesTimeZone = "Europe/Lisbon"
 	NewEscalationPathDataAttributesRulesTimeZoneEuropeLjubljana             NewEscalationPathDataAttributesRulesTimeZone = "Europe/Ljubljana"
 	NewEscalationPathDataAttributesRulesTimeZoneEuropeLondon                NewEscalationPathDataAttributesRulesTimeZone = "Europe/London"
@@ -14251,7 +14348,6 @@ const (
 	NewEscalationPathDataAttributesRulesTimeZoneKrasnoyarsk                 NewEscalationPathDataAttributesRulesTimeZone = "Krasnoyarsk"
 	NewEscalationPathDataAttributesRulesTimeZoneKualaLumpur                 NewEscalationPathDataAttributesRulesTimeZone = "Kuala Lumpur"
 	NewEscalationPathDataAttributesRulesTimeZoneKuwait                      NewEscalationPathDataAttributesRulesTimeZone = "Kuwait"
-	NewEscalationPathDataAttributesRulesTimeZoneKyiv                        NewEscalationPathDataAttributesRulesTimeZone = "Kyiv"
 	NewEscalationPathDataAttributesRulesTimeZoneLaPaz                       NewEscalationPathDataAttributesRulesTimeZone = "La Paz"
 	NewEscalationPathDataAttributesRulesTimeZoneLima                        NewEscalationPathDataAttributesRulesTimeZone = "Lima"
 	NewEscalationPathDataAttributesRulesTimeZoneLisbon                      NewEscalationPathDataAttributesRulesTimeZone = "Lisbon"
@@ -14308,7 +14404,6 @@ const (
 	NewEscalationPathDataAttributesRulesTimeZonePretoria                    NewEscalationPathDataAttributesRulesTimeZone = "Pretoria"
 	NewEscalationPathDataAttributesRulesTimeZonePuertoRico                  NewEscalationPathDataAttributesRulesTimeZone = "Puerto Rico"
 	NewEscalationPathDataAttributesRulesTimeZoneQuito                       NewEscalationPathDataAttributesRulesTimeZone = "Quito"
-	NewEscalationPathDataAttributesRulesTimeZoneRangoon                     NewEscalationPathDataAttributesRulesTimeZone = "Rangoon"
 	NewEscalationPathDataAttributesRulesTimeZoneRiga                        NewEscalationPathDataAttributesRulesTimeZone = "Riga"
 	NewEscalationPathDataAttributesRulesTimeZoneRiyadh                      NewEscalationPathDataAttributesRulesTimeZone = "Riyadh"
 	NewEscalationPathDataAttributesRulesTimeZoneRome                        NewEscalationPathDataAttributesRulesTimeZone = "Rome"
@@ -14492,8 +14587,6 @@ func (e NewEscalationPathDataAttributesRulesTimeZone) Valid() bool {
 		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneAsiaNovosibirsk:
 		return true
-	case NewEscalationPathDataAttributesRulesTimeZoneAsiaRangoon:
-		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneAsiaRiyadh:
 		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneAsiaSeoul:
@@ -14666,8 +14759,6 @@ func (e NewEscalationPathDataAttributesRulesTimeZone) Valid() bool {
 		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneEuropeKaliningrad:
 		return true
-	case NewEscalationPathDataAttributesRulesTimeZoneEuropeKiev:
-		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneEuropeLisbon:
 		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneEuropeLjubljana:
@@ -14765,8 +14856,6 @@ func (e NewEscalationPathDataAttributesRulesTimeZone) Valid() bool {
 	case NewEscalationPathDataAttributesRulesTimeZoneKualaLumpur:
 		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneKuwait:
-		return true
-	case NewEscalationPathDataAttributesRulesTimeZoneKyiv:
 		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneLaPaz:
 		return true
@@ -14879,8 +14968,6 @@ func (e NewEscalationPathDataAttributesRulesTimeZone) Valid() bool {
 	case NewEscalationPathDataAttributesRulesTimeZonePuertoRico:
 		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneQuito:
-		return true
-	case NewEscalationPathDataAttributesRulesTimeZoneRangoon:
 		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneRiga:
 		return true
@@ -15041,7 +15128,6 @@ const (
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaMagadan                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Magadan"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaMuscat                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Muscat"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaNovosibirsk             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Novosibirsk"
-	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaRangoon                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Rangoon"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaRiyadh                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Riyadh"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaSeoul                   NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Seoul"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaShanghai                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Shanghai"
@@ -15128,7 +15214,6 @@ const (
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeHelsinki              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Helsinki"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeIstanbul              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Istanbul"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKaliningrad           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kaliningrad"
-	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKiev                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kiev"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLisbon                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Lisbon"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLjubljana             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Ljubljana"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLondon                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/London"
@@ -15178,7 +15263,6 @@ const (
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKrasnoyarsk                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Krasnoyarsk"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKualaLumpur                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Kuala Lumpur"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKuwait                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Kuwait"
-	NewEscalationPathDataAttributesTimeRestrictionTimeZoneKyiv                        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Kyiv"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneLaPaz                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "La Paz"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneLima                        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Lima"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneLisbon                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Lisbon"
@@ -15235,7 +15319,6 @@ const (
 	NewEscalationPathDataAttributesTimeRestrictionTimeZonePretoria                    NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Pretoria"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZonePuertoRico                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Puerto Rico"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneQuito                       NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Quito"
-	NewEscalationPathDataAttributesTimeRestrictionTimeZoneRangoon                     NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Rangoon"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneRiga                        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Riga"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneRiyadh                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Riyadh"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneRome                        NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Rome"
@@ -15419,8 +15502,6 @@ func (e NewEscalationPathDataAttributesTimeRestrictionTimeZone) Valid() bool {
 		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaNovosibirsk:
 		return true
-	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaRangoon:
-		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaRiyadh:
 		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaSeoul:
@@ -15593,8 +15674,6 @@ func (e NewEscalationPathDataAttributesTimeRestrictionTimeZone) Valid() bool {
 		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKaliningrad:
 		return true
-	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKiev:
-		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLisbon:
 		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLjubljana:
@@ -15692,8 +15771,6 @@ func (e NewEscalationPathDataAttributesTimeRestrictionTimeZone) Valid() bool {
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneKualaLumpur:
 		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneKuwait:
-		return true
-	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneKyiv:
 		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneLaPaz:
 		return true
@@ -15806,8 +15883,6 @@ func (e NewEscalationPathDataAttributesTimeRestrictionTimeZone) Valid() bool {
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZonePuertoRico:
 		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneQuito:
-		return true
-	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneRangoon:
 		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneRiga:
 		return true
@@ -16082,7 +16157,6 @@ const (
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaMagadan                 NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Magadan"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaMuscat                  NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Muscat"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaNovosibirsk             NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Novosibirsk"
-	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaRangoon                 NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Rangoon"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaRiyadh                  NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Riyadh"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaSeoul                   NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Seoul"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaShanghai                NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Shanghai"
@@ -16169,7 +16243,6 @@ const (
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeHelsinki              NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Helsinki"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeIstanbul              NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Istanbul"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKaliningrad           NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kaliningrad"
-	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKiev                  NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kiev"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLisbon                NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Lisbon"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLjubljana             NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Ljubljana"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLondon                NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/London"
@@ -16219,7 +16292,6 @@ const (
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneKrasnoyarsk                 NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Krasnoyarsk"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneKualaLumpur                 NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kuala Lumpur"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneKuwait                      NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kuwait"
-	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneKyiv                        NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kyiv"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneLaPaz                       NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "La Paz"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneLima                        NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Lima"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneLisbon                      NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Lisbon"
@@ -16276,7 +16348,6 @@ const (
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZonePretoria                    NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pretoria"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZonePuertoRico                  NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Puerto Rico"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneQuito                       NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Quito"
-	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneRangoon                     NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Rangoon"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneRiga                        NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Riga"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneRiyadh                      NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Riyadh"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneRome                        NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Rome"
@@ -16460,8 +16531,6 @@ func (e NewEscalationPolicyDataAttributesBusinessHoursTimeZone) Valid() bool {
 		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaNovosibirsk:
 		return true
-	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaRangoon:
-		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaRiyadh:
 		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaSeoul:
@@ -16634,8 +16703,6 @@ func (e NewEscalationPolicyDataAttributesBusinessHoursTimeZone) Valid() bool {
 		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKaliningrad:
 		return true
-	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKiev:
-		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLisbon:
 		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLjubljana:
@@ -16733,8 +16800,6 @@ func (e NewEscalationPolicyDataAttributesBusinessHoursTimeZone) Valid() bool {
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneKualaLumpur:
 		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneKuwait:
-		return true
-	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneKyiv:
 		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneLaPaz:
 		return true
@@ -16847,8 +16912,6 @@ func (e NewEscalationPolicyDataAttributesBusinessHoursTimeZone) Valid() bool {
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZonePuertoRico:
 		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneQuito:
-		return true
-	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneRangoon:
 		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneRiga:
 		return true
@@ -18109,6 +18172,30 @@ func (e NewIncidentStatusPageEventDataAttributesStatus) Valid() bool {
 	case NewIncidentStatusPageEventDataAttributesStatusResolved:
 		return true
 	case NewIncidentStatusPageEventDataAttributesStatusScheduled:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus.
+const (
+	NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusDegradedPerformance NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus = "degraded_performance"
+	NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusMajorOutage         NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus = "major_outage"
+	NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusOperational         NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus = "operational"
+	NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusPartialOutage       NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus = "partial_outage"
+)
+
+// Valid indicates whether the value is a known member of the NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus enum.
+func (e NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus) Valid() bool {
+	switch e {
+	case NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusDegradedPerformance:
+		return true
+	case NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusMajorOutage:
+		return true
+	case NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusOperational:
+		return true
+	case NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusPartialOutage:
 		return true
 	default:
 		return false
@@ -20647,6 +20734,21 @@ const (
 func (e NewStatusPageDataType) Valid() bool {
 	switch e {
 	case NewStatusPageDataTypeStatusPages:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewStatusPageAnnouncementDataType.
+const (
+	NewStatusPageAnnouncementDataTypeStatusPageAnnouncements NewStatusPageAnnouncementDataType = "status_page_announcements"
+)
+
+// Valid indicates whether the value is a known member of the NewStatusPageAnnouncementDataType enum.
+func (e NewStatusPageAnnouncementDataType) Valid() bool {
+	switch e {
+	case NewStatusPageAnnouncementDataTypeStatusPageAnnouncements:
 		return true
 	default:
 		return false
@@ -25153,6 +25255,36 @@ func (e StatusPageShowUptimeLastDays) Valid() bool {
 	}
 }
 
+// Defines values for StatusPageAnnouncementListDataType.
+const (
+	StatusPageAnnouncementListDataTypeStatusPageAnnouncements StatusPageAnnouncementListDataType = "status_page_announcements"
+)
+
+// Valid indicates whether the value is a known member of the StatusPageAnnouncementListDataType enum.
+func (e StatusPageAnnouncementListDataType) Valid() bool {
+	switch e {
+	case StatusPageAnnouncementListDataTypeStatusPageAnnouncements:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for StatusPageAnnouncementResponseDataType.
+const (
+	StatusPageAnnouncementResponseDataTypeStatusPageAnnouncements StatusPageAnnouncementResponseDataType = "status_page_announcements"
+)
+
+// Valid indicates whether the value is a known member of the StatusPageAnnouncementResponseDataType enum.
+func (e StatusPageAnnouncementResponseDataType) Valid() bool {
+	switch e {
+	case StatusPageAnnouncementResponseDataTypeStatusPageAnnouncements:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for StatusPageComponentStatus.
 const (
 	StatusPageComponentStatusDegradedPerformance StatusPageComponentStatus = "degraded_performance"
@@ -27553,6 +27685,42 @@ func (e UpdateEscalationLevelDataAttributesNotificationTargetParamsType) Valid()
 	}
 }
 
+// Defines values for UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode.
+const (
+	UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeAll   UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode = "all"
+	UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeUsers UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode = "users"
+)
+
+// Valid indicates whether the value is a known member of the UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode enum.
+func (e UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode) Valid() bool {
+	switch e {
+	case UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeAll:
+		return true
+	case UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeUsers:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope.
+const (
+	ActiveRotation UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope = "active_rotation"
+	EntireSchedule UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope = "entire_schedule"
+)
+
+// Valid indicates whether the value is a known member of the UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope enum.
+func (e UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope) Valid() bool {
+	switch e {
+	case ActiveRotation:
+		return true
+	case EntireSchedule:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy.
 const (
 	Everyone   UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy = "everyone"
@@ -27785,7 +27953,6 @@ const (
 	UpdateEscalationPathDataAttributesRulesTimeZoneAsiaMagadan                 UpdateEscalationPathDataAttributesRulesTimeZone = "Asia/Magadan"
 	UpdateEscalationPathDataAttributesRulesTimeZoneAsiaMuscat                  UpdateEscalationPathDataAttributesRulesTimeZone = "Asia/Muscat"
 	UpdateEscalationPathDataAttributesRulesTimeZoneAsiaNovosibirsk             UpdateEscalationPathDataAttributesRulesTimeZone = "Asia/Novosibirsk"
-	UpdateEscalationPathDataAttributesRulesTimeZoneAsiaRangoon                 UpdateEscalationPathDataAttributesRulesTimeZone = "Asia/Rangoon"
 	UpdateEscalationPathDataAttributesRulesTimeZoneAsiaRiyadh                  UpdateEscalationPathDataAttributesRulesTimeZone = "Asia/Riyadh"
 	UpdateEscalationPathDataAttributesRulesTimeZoneAsiaSeoul                   UpdateEscalationPathDataAttributesRulesTimeZone = "Asia/Seoul"
 	UpdateEscalationPathDataAttributesRulesTimeZoneAsiaShanghai                UpdateEscalationPathDataAttributesRulesTimeZone = "Asia/Shanghai"
@@ -27872,7 +28039,6 @@ const (
 	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeHelsinki              UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/Helsinki"
 	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeIstanbul              UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/Istanbul"
 	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeKaliningrad           UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/Kaliningrad"
-	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeKiev                  UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/Kiev"
 	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeLisbon                UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/Lisbon"
 	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeLjubljana             UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/Ljubljana"
 	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeLondon                UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/London"
@@ -27922,7 +28088,6 @@ const (
 	UpdateEscalationPathDataAttributesRulesTimeZoneKrasnoyarsk                 UpdateEscalationPathDataAttributesRulesTimeZone = "Krasnoyarsk"
 	UpdateEscalationPathDataAttributesRulesTimeZoneKualaLumpur                 UpdateEscalationPathDataAttributesRulesTimeZone = "Kuala Lumpur"
 	UpdateEscalationPathDataAttributesRulesTimeZoneKuwait                      UpdateEscalationPathDataAttributesRulesTimeZone = "Kuwait"
-	UpdateEscalationPathDataAttributesRulesTimeZoneKyiv                        UpdateEscalationPathDataAttributesRulesTimeZone = "Kyiv"
 	UpdateEscalationPathDataAttributesRulesTimeZoneLaPaz                       UpdateEscalationPathDataAttributesRulesTimeZone = "La Paz"
 	UpdateEscalationPathDataAttributesRulesTimeZoneLima                        UpdateEscalationPathDataAttributesRulesTimeZone = "Lima"
 	UpdateEscalationPathDataAttributesRulesTimeZoneLisbon                      UpdateEscalationPathDataAttributesRulesTimeZone = "Lisbon"
@@ -27979,7 +28144,6 @@ const (
 	UpdateEscalationPathDataAttributesRulesTimeZonePretoria                    UpdateEscalationPathDataAttributesRulesTimeZone = "Pretoria"
 	UpdateEscalationPathDataAttributesRulesTimeZonePuertoRico                  UpdateEscalationPathDataAttributesRulesTimeZone = "Puerto Rico"
 	UpdateEscalationPathDataAttributesRulesTimeZoneQuito                       UpdateEscalationPathDataAttributesRulesTimeZone = "Quito"
-	UpdateEscalationPathDataAttributesRulesTimeZoneRangoon                     UpdateEscalationPathDataAttributesRulesTimeZone = "Rangoon"
 	UpdateEscalationPathDataAttributesRulesTimeZoneRiga                        UpdateEscalationPathDataAttributesRulesTimeZone = "Riga"
 	UpdateEscalationPathDataAttributesRulesTimeZoneRiyadh                      UpdateEscalationPathDataAttributesRulesTimeZone = "Riyadh"
 	UpdateEscalationPathDataAttributesRulesTimeZoneRome                        UpdateEscalationPathDataAttributesRulesTimeZone = "Rome"
@@ -28163,8 +28327,6 @@ func (e UpdateEscalationPathDataAttributesRulesTimeZone) Valid() bool {
 		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneAsiaNovosibirsk:
 		return true
-	case UpdateEscalationPathDataAttributesRulesTimeZoneAsiaRangoon:
-		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneAsiaRiyadh:
 		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneAsiaSeoul:
@@ -28337,8 +28499,6 @@ func (e UpdateEscalationPathDataAttributesRulesTimeZone) Valid() bool {
 		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneEuropeKaliningrad:
 		return true
-	case UpdateEscalationPathDataAttributesRulesTimeZoneEuropeKiev:
-		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneEuropeLisbon:
 		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneEuropeLjubljana:
@@ -28436,8 +28596,6 @@ func (e UpdateEscalationPathDataAttributesRulesTimeZone) Valid() bool {
 	case UpdateEscalationPathDataAttributesRulesTimeZoneKualaLumpur:
 		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneKuwait:
-		return true
-	case UpdateEscalationPathDataAttributesRulesTimeZoneKyiv:
 		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneLaPaz:
 		return true
@@ -28550,8 +28708,6 @@ func (e UpdateEscalationPathDataAttributesRulesTimeZone) Valid() bool {
 	case UpdateEscalationPathDataAttributesRulesTimeZonePuertoRico:
 		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneQuito:
-		return true
-	case UpdateEscalationPathDataAttributesRulesTimeZoneRangoon:
 		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneRiga:
 		return true
@@ -28712,7 +28868,6 @@ const (
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaMagadan                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Magadan"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaMuscat                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Muscat"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaNovosibirsk             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Novosibirsk"
-	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaRangoon                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Rangoon"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaRiyadh                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Riyadh"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaSeoul                   UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Seoul"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaShanghai                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Shanghai"
@@ -28799,7 +28954,6 @@ const (
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeHelsinki              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Helsinki"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeIstanbul              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Istanbul"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKaliningrad           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kaliningrad"
-	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKiev                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kiev"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLisbon                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Lisbon"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLjubljana             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Ljubljana"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLondon                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/London"
@@ -28849,7 +29003,6 @@ const (
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneKrasnoyarsk                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Krasnoyarsk"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneKualaLumpur                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Kuala Lumpur"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneKuwait                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Kuwait"
-	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneKyiv                        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Kyiv"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneLaPaz                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "La Paz"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneLima                        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Lima"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneLisbon                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Lisbon"
@@ -28906,7 +29059,6 @@ const (
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZonePretoria                    UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Pretoria"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZonePuertoRico                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Puerto Rico"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneQuito                       UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Quito"
-	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneRangoon                     UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Rangoon"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneRiga                        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Riga"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneRiyadh                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Riyadh"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneRome                        UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Rome"
@@ -29090,8 +29242,6 @@ func (e UpdateEscalationPathDataAttributesTimeRestrictionTimeZone) Valid() bool 
 		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaNovosibirsk:
 		return true
-	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaRangoon:
-		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaRiyadh:
 		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaSeoul:
@@ -29264,8 +29414,6 @@ func (e UpdateEscalationPathDataAttributesTimeRestrictionTimeZone) Valid() bool 
 		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKaliningrad:
 		return true
-	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKiev:
-		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLisbon:
 		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLjubljana:
@@ -29363,8 +29511,6 @@ func (e UpdateEscalationPathDataAttributesTimeRestrictionTimeZone) Valid() bool 
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneKualaLumpur:
 		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneKuwait:
-		return true
-	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneKyiv:
 		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneLaPaz:
 		return true
@@ -29477,8 +29623,6 @@ func (e UpdateEscalationPathDataAttributesTimeRestrictionTimeZone) Valid() bool 
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZonePuertoRico:
 		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneQuito:
-		return true
-	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneRangoon:
 		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneRiga:
 		return true
@@ -29753,7 +29897,6 @@ const (
 	AsiaMagadan                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Magadan"
 	AsiaMuscat                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Muscat"
 	AsiaNovosibirsk             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Novosibirsk"
-	AsiaRangoon                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Rangoon"
 	AsiaRiyadh                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Riyadh"
 	AsiaSeoul                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Seoul"
 	AsiaShanghai                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Shanghai"
@@ -29840,7 +29983,6 @@ const (
 	EuropeHelsinki              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Helsinki"
 	EuropeIstanbul              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Istanbul"
 	EuropeKaliningrad           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kaliningrad"
-	EuropeKiev                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kiev"
 	EuropeLisbon                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Lisbon"
 	EuropeLjubljana             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Ljubljana"
 	EuropeLondon                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/London"
@@ -29890,7 +30032,6 @@ const (
 	Krasnoyarsk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Krasnoyarsk"
 	KualaLumpur                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kuala Lumpur"
 	Kuwait                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kuwait"
-	Kyiv                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kyiv"
 	LaPaz                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "La Paz"
 	Lima                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Lima"
 	Lisbon                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Lisbon"
@@ -29947,7 +30088,6 @@ const (
 	Pretoria                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pretoria"
 	PuertoRico                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Puerto Rico"
 	Quito                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Quito"
-	Rangoon                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Rangoon"
 	Riga                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Riga"
 	Riyadh                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Riyadh"
 	Rome                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Rome"
@@ -30131,8 +30271,6 @@ func (e UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone) Valid() bool 
 		return true
 	case AsiaNovosibirsk:
 		return true
-	case AsiaRangoon:
-		return true
 	case AsiaRiyadh:
 		return true
 	case AsiaSeoul:
@@ -30305,8 +30443,6 @@ func (e UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone) Valid() bool 
 		return true
 	case EuropeKaliningrad:
 		return true
-	case EuropeKiev:
-		return true
 	case EuropeLisbon:
 		return true
 	case EuropeLjubljana:
@@ -30404,8 +30540,6 @@ func (e UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone) Valid() bool 
 	case KualaLumpur:
 		return true
 	case Kuwait:
-		return true
-	case Kyiv:
 		return true
 	case LaPaz:
 		return true
@@ -30518,8 +30652,6 @@ func (e UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone) Valid() bool 
 	case PuertoRico:
 		return true
 	case Quito:
-		return true
-	case Rangoon:
 		return true
 	case Riga:
 		return true
@@ -34948,6 +35080,21 @@ func (e UpdateStatusPageDataType) Valid() bool {
 	}
 }
 
+// Defines values for UpdateStatusPageAnnouncementDataType.
+const (
+	UpdateStatusPageAnnouncementDataTypeStatusPageAnnouncements UpdateStatusPageAnnouncementDataType = "status_page_announcements"
+)
+
+// Valid indicates whether the value is a known member of the UpdateStatusPageAnnouncementDataType enum.
+func (e UpdateStatusPageAnnouncementDataType) Valid() bool {
+	switch e {
+	case UpdateStatusPageAnnouncementDataTypeStatusPageAnnouncements:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateStatusPageComponentDataType.
 const (
 	UpdateStatusPageComponentDataTypeStatusPageComponents UpdateStatusPageComponentDataType = "status_page_components"
@@ -36546,6 +36693,7 @@ func (e ListAlertEventsFeedParamsFilterKind) Valid() bool {
 
 // Defines values for ListAlertEventsFeedParamsFilterAction.
 const (
+	AckTimeoutRetriggered ListAlertEventsFeedParamsFilterAction = "ack_timeout_retriggered"
 	Acknowledged          ListAlertEventsFeedParamsFilterAction = "acknowledged"
 	Added                 ListAlertEventsFeedParamsFilterAction = "added"
 	Answered              ListAlertEventsFeedParamsFilterAction = "answered"
@@ -36584,6 +36732,8 @@ const (
 // Valid indicates whether the value is a known member of the ListAlertEventsFeedParamsFilterAction enum.
 func (e ListAlertEventsFeedParamsFilterAction) Valid() bool {
 	switch e {
+	case AckTimeoutRetriggered:
+		return true
 	case Acknowledged:
 		return true
 	case Added:
@@ -40016,7 +40166,7 @@ type AlertsSource struct {
 	// SourceType The alert source type
 	SourceType *AlertsSourceSourceType `json:"source_type,omitempty"`
 
-	// SourceableAttributes Provide additional attributes for generic_webhook alerts source
+	// SourceableAttributes Provide additional attributes for the underlying source. `auto_resolve`, `resolve_state` and `field_mappings_attributes` apply to generic_webhook sources; `accept_threaded_emails` applies to email sources.
 	SourceableAttributes *struct {
 		// AcceptThreadedEmails Set this to false to reject threaded emails
 		AcceptThreadedEmails *bool `json:"accept_threaded_emails,omitempty"`
@@ -40032,6 +40182,9 @@ type AlertsSource struct {
 			// JsonPath JSON path expression to extract a specific value from the alert's payload for evaluation. For `notification_target_id` only: if your account has opted in to Dynamic Notification Targets, this may also be a Liquid template that resolves to a notification target id at routing time.
 			JsonPath *string `json:"json_path,omitempty"`
 		} `json:"field_mappings_attributes,omitempty"`
+
+		// Id Unique ID of the underlying source. Read-only; it is resolved from the alert source itself on update.
+		Id *openapi_types.UUID `json:"id,omitempty"`
 
 		// ResolveState This value is matched with the value extracted from alerts payload using JSON path in field_mappings_attributes
 		ResolveState *string `json:"resolve_state,omitempty"`
@@ -40618,8 +40771,11 @@ type Catalog struct {
 	Name      string            `json:"name"`
 
 	// Position Default position of the catalog when displayed in a list.
-	Position  *int   `json:"position"`
-	UpdatedAt string `json:"updated_at"`
+	Position *int `json:"position"`
+
+	// Slug The slug of the catalog. Derived from `name`.
+	Slug      *string `json:"slug,omitempty"`
+	UpdatedAt string  `json:"updated_at"`
 }
 
 // CatalogIcon defines model for Catalog.Icon.
@@ -40748,7 +40904,13 @@ type CatalogEntity struct {
 		// Value The value for this property
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
-	UpdatedAt string `json:"updated_at"`
+
+	// PublicDescription The status page description of the catalog entity
+	PublicDescription *string `json:"public_description,omitempty"`
+
+	// Slug The slug of the catalog entity. Derived from `name`.
+	Slug      *string `json:"slug,omitempty"`
+	UpdatedAt string  `json:"updated_at"`
 }
 
 // CatalogEntityManagedBy Which source manages this resource (read-only).
@@ -41092,6 +41254,9 @@ type Cause struct {
 		// Value The property value
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
+
+	// PublicDescription The status page description of the cause
+	PublicDescription *string `json:"public_description,omitempty"`
 
 	// Slug The slug of the cause
 	Slug *string `json:"slug,omitempty"`
@@ -41515,6 +41680,9 @@ type CreateAirtableTableRecordTaskParamsTaskType string
 
 // CreateAnthropicChatCompletionTaskParams defines model for create_anthropic_chat_completion_task_params.
 type CreateAnthropicChatCompletionTaskParams struct {
+	// MaxTokens Maximum number of tokens to generate. Defaults to 4000 when omitted
+	MaxTokens *int `json:"max_tokens,omitempty"`
+
 	// Model The Anthropic model. eg: claude-3-5-sonnet-20241022
 	Model struct {
 		Id   *string `json:"id,omitempty"`
@@ -43051,7 +43219,10 @@ type CustomField struct {
 	// Position The position of the custom_field
 	Position int                    `json:"position"`
 	Required *[]CustomFieldRequired `json:"required"`
-	Shown    []CustomFieldShown     `json:"shown"`
+
+	// ResourceType The resource type this field belongs to
+	ResourceType *CustomFieldResourceType `json:"resource_type,omitempty"`
+	Shown        []CustomFieldShown       `json:"shown"`
 
 	// Slug The slug of the custom_field
 	Slug *string `json:"slug,omitempty"`
@@ -43062,6 +43233,9 @@ type CustomField struct {
 
 // CustomFieldRequired Where the custom_field is required
 type CustomFieldRequired string
+
+// CustomFieldResourceType The resource type this field belongs to
+type CustomFieldResourceType string
 
 // CustomFieldShown Where the custom_field is shown
 type CustomFieldShown string
@@ -43319,6 +43493,9 @@ type Environment struct {
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
 
+	// PublicDescription The status page description of the environment
+	PublicDescription *string `json:"public_description,omitempty"`
+
 	// SlackAliases Slack Aliases associated with this environment
 	SlackAliases *[]struct {
 		// Id Slack alias ID
@@ -43431,6 +43608,18 @@ type EscalationLevel struct {
 		// Type The type of the notification target
 		Type EscalationLevelNotificationTargetParamsType `json:"type"`
 	} `json:"notification_target_params"`
+
+	// PagingStrategyConfigurationPageUsersCount Number of users to page at a time (cycle-based round robin).
+	PagingStrategyConfigurationPageUsersCount *int `json:"paging_strategy_configuration_page_users_count,omitempty"`
+
+	// PagingStrategyConfigurationRepeats Number of times to rotate through the roster (cycle-based round robin).
+	PagingStrategyConfigurationRepeats *int `json:"paging_strategy_configuration_repeats,omitempty"`
+
+	// PagingStrategyConfigurationRepeatsMode Controls how repeats are interpreted: 'users' pages exactly N users, 'all' pages everyone once.
+	PagingStrategyConfigurationRepeatsMode *EscalationLevelPagingStrategyConfigurationRepeatsMode `json:"paging_strategy_configuration_repeats_mode,omitempty"`
+
+	// PagingStrategyConfigurationRotationScope Scope of rotation ordering: active rotation members only, or entire schedule.
+	PagingStrategyConfigurationRotationScope    *EscalationLevelPagingStrategyConfigurationRotationScope    `json:"paging_strategy_configuration_rotation_scope,omitempty"`
 	PagingStrategyConfigurationScheduleStrategy *EscalationLevelPagingStrategyConfigurationScheduleStrategy `json:"paging_strategy_configuration_schedule_strategy,omitempty"`
 	PagingStrategyConfigurationStrategy         *EscalationLevelPagingStrategyConfigurationStrategy         `json:"paging_strategy_configuration_strategy,omitempty"`
 
@@ -43446,6 +43635,12 @@ type EscalationLevelNotificationTargetParamsTeamMembers string
 
 // EscalationLevelNotificationTargetParamsType The type of the notification target
 type EscalationLevelNotificationTargetParamsType string
+
+// EscalationLevelPagingStrategyConfigurationRepeatsMode Controls how repeats are interpreted: 'users' pages exactly N users, 'all' pages everyone once.
+type EscalationLevelPagingStrategyConfigurationRepeatsMode string
+
+// EscalationLevelPagingStrategyConfigurationRotationScope Scope of rotation ordering: active rotation members only, or entire schedule.
+type EscalationLevelPagingStrategyConfigurationRotationScope string
 
 // EscalationLevelPagingStrategyConfigurationScheduleStrategy defines model for EscalationLevel.PagingStrategyConfigurationScheduleStrategy.
 type EscalationLevelPagingStrategyConfigurationScheduleStrategy string
@@ -43762,6 +43957,9 @@ type FormField struct {
 	Name     string   `json:"name"`
 	Required []string `json:"required"`
 
+	// ResourceType The resource type this field belongs to
+	ResourceType *FormFieldResourceType `json:"resource_type,omitempty"`
+
 	// ShowOnIncidentDetails Whether the form field is shown on the incident details panel
 	ShowOnIncidentDetails *bool    `json:"show_on_incident_details,omitempty"`
 	Shown                 []string `json:"shown"`
@@ -43784,6 +43982,9 @@ type FormFieldInputKind string
 
 // FormFieldKind The kind of the form field
 type FormFieldKind string
+
+// FormFieldResourceType The resource type this field belongs to
+type FormFieldResourceType string
 
 // FormFieldValueKind The value kind of the form field
 type FormFieldValueKind string
@@ -43870,7 +44071,7 @@ type FormFieldPlacement struct {
 	// FormFieldId The form field that is placed.
 	FormFieldId string `json:"form_field_id"`
 
-	// FormSetId The form set this field is placed in.
+	// FormSetId The form set this field is placed in. The form set must have the same `resource_type` as the form field, otherwise the request is rejected with 422.
 	FormSetId string `json:"form_set_id"`
 
 	// NonEditable Whether the field is read-only and cannot be edited by users.
@@ -44213,7 +44414,7 @@ type Functionality struct {
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
 
-	// PublicDescription The public description of the functionality
+	// PublicDescription The status page description of the functionality
 	PublicDescription *string `json:"public_description,omitempty"`
 
 	// ServiceIds Services associated with this functionality
@@ -44426,12 +44627,12 @@ type Heartbeat struct {
 	// Enabled Whether to trigger alerts when heartbeat is expired.
 	Enabled bool `json:"enabled"`
 
-	// ExpiresAt When heartbeat expires
+	// ExpiresAt Persisted expiry deadline, including up to 30 seconds of coalescing grace.
 	ExpiresAt    *string               `json:"expires_at,omitempty"`
 	Interval     int                   `json:"interval"`
 	IntervalUnit HeartbeatIntervalUnit `json:"interval_unit"`
 
-	// LastPingedAt When the heartbeat was last pinged.
+	// LastPingedAt Last persisted heartbeat ping timestamp. Accepted pings may be coalesced for up to 30 seconds.
 	LastPingedAt *string `json:"last_pinged_at,omitempty"`
 
 	// Name The name of the heartbeat
@@ -45830,6 +46031,15 @@ type IncidentStatusPageEvent struct {
 	// Status The status of the incident event
 	Status *IncidentStatusPageEventStatus `json:"status,omitempty"`
 
+	// StatusPageComponents Affected status page components recorded on the event and their statuses
+	StatusPageComponents *[]struct {
+		// Status The status recorded for the component
+		Status *IncidentStatusPageEventStatusPageComponentsStatus `json:"status,omitempty"`
+
+		// StatusPageComponentId Unique ID of a component on the event's status page
+		StatusPageComponentId string `json:"status_page_component_id"`
+	} `json:"status_page_components,omitempty"`
+
 	// StatusPageId Unique ID of the status page you wish to post the event to
 	StatusPageId *string `json:"status_page_id,omitempty"`
 
@@ -45839,6 +46049,9 @@ type IncidentStatusPageEvent struct {
 
 // IncidentStatusPageEventStatus The status of the incident event
 type IncidentStatusPageEventStatus string
+
+// IncidentStatusPageEventStatusPageComponentsStatus The status recorded for the component
+type IncidentStatusPageEventStatusPageComponentsStatus string
 
 // IncidentStatusPageEventList defines model for incident_status_page_event_list.
 type IncidentStatusPageEventList struct {
@@ -46055,6 +46268,9 @@ type IncidentType struct {
 		// Value The property value
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
+
+	// PublicDescription The status page description of the incident type
+	PublicDescription *string `json:"public_description,omitempty"`
 
 	// SlackAliases Slack Aliases associated with this incident type
 	SlackAliases *[]struct {
@@ -46769,6 +46985,10 @@ type NewAlertField struct {
 		Attributes struct {
 			// Name The name of the alert field
 			Name string `json:"name"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewAlertFieldDataType `json:"type"`
 	} `json:"data"`
@@ -46828,7 +47048,11 @@ type NewAlertGroup struct {
 			GroupByAlertUrgency *NewAlertGroupDataAttributesGroupByAlertUrgency `json:"group_by_alert_urgency,omitempty"`
 
 			// Name The name of the alert group
-			Name    string `json:"name"`
+			Name string `json:"name"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug    *string `json:"slug,omitempty"`
 			Targets *[]struct {
 				// TargetId id for the Group, Service, EscalationPolicy or Functionality
 				TargetId openapi_types.UUID `json:"target_id"`
@@ -47201,7 +47425,7 @@ type NewAlertsSource struct {
 			// SourceType The alert source type
 			SourceType *NewAlertsSourceDataAttributesSourceType `json:"source_type,omitempty"`
 
-			// SourceableAttributes Provide additional attributes for generic_webhook alerts source
+			// SourceableAttributes Provide additional attributes for the underlying source. `auto_resolve`, `resolve_state` and `field_mappings_attributes` apply to generic_webhook sources; `accept_threaded_emails` applies to email sources.
 			SourceableAttributes *struct {
 				// AcceptThreadedEmails Set this to false to reject threaded emails
 				AcceptThreadedEmails *bool `json:"accept_threaded_emails,omitempty"`
@@ -47346,6 +47570,10 @@ type NewCatalog struct {
 
 			// Position Default position of the catalog when displayed in a list.
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCatalogDataType `json:"type"`
 	} `json:"data"`
@@ -47394,6 +47622,10 @@ type NewCatalogChecklistTemplate struct {
 
 			// ScopeType The scope type
 			ScopeType NewCatalogChecklistTemplateDataAttributesScopeType `json:"scope_type"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCatalogChecklistTemplateDataType `json:"type"`
 	} `json:"data"`
@@ -47437,6 +47669,13 @@ type NewCatalogEntity struct {
 				// Value The value for this property
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
+
+			// PublicDescription The status page description of the catalog entity
+			PublicDescription *string `json:"public_description,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCatalogEntityDataType `json:"type"`
 	} `json:"data"`
@@ -47488,6 +47727,10 @@ type NewCatalogField struct {
 
 			// Required Whether the field is required.
 			Required *bool `json:"required,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCatalogFieldDataType `json:"type"`
 	} `json:"data"`
@@ -47525,6 +47768,10 @@ type NewCatalogProperty struct {
 
 			// Required Whether the property is required.
 			Required *bool `json:"required,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCatalogPropertyDataType `json:"type"`
 	} `json:"data"`
@@ -47560,6 +47807,13 @@ type NewCause struct {
 				// Value The property value
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
+
+			// PublicDescription The status page description of the cause
+			PublicDescription *string `json:"public_description,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCauseDataType `json:"type"`
 	} `json:"data"`
@@ -47657,6 +47911,10 @@ type NewCommunicationsStage struct {
 
 			// Position Position of the communications stage
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCommunicationsStageDataType `json:"type"`
 	} `json:"data"`
@@ -47721,6 +47979,10 @@ type NewCommunicationsType struct {
 
 			// Position Position of the communications type
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCommunicationsTypeDataType `json:"type"`
 	} `json:"data"`
@@ -47792,6 +48054,10 @@ type NewCustomForm struct {
 
 			// Name The name of the custom form.
 			Name string `json:"name"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCustomFormDataType `json:"type"`
 	} `json:"data"`
@@ -47878,6 +48144,9 @@ type NewEnvironment struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
+			// PublicDescription The status page description of the environment
+			PublicDescription *string `json:"public_description,omitempty"`
+
 			// SlackAliases Slack Aliases associated with this environment
 			SlackAliases *[]struct {
 				// Id Slack alias ID
@@ -47895,6 +48164,10 @@ type NewEnvironment struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewEnvironmentDataType `json:"type"`
 	} `json:"data"`
@@ -47924,6 +48197,18 @@ type NewEscalationLevel struct {
 				// Type The type of the notification target
 				Type NewEscalationLevelDataAttributesNotificationTargetParamsType `json:"type"`
 			} `json:"notification_target_params"`
+
+			// PagingStrategyConfigurationPageUsersCount Number of users to page at a time (cycle-based round robin).
+			PagingStrategyConfigurationPageUsersCount *int `json:"paging_strategy_configuration_page_users_count,omitempty"`
+
+			// PagingStrategyConfigurationRepeats Number of times to rotate through the roster (cycle-based round robin).
+			PagingStrategyConfigurationRepeats *int `json:"paging_strategy_configuration_repeats,omitempty"`
+
+			// PagingStrategyConfigurationRepeatsMode Controls how repeats are interpreted: 'users' pages exactly N users, 'all' pages everyone once.
+			PagingStrategyConfigurationRepeatsMode *NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode `json:"paging_strategy_configuration_repeats_mode,omitempty"`
+
+			// PagingStrategyConfigurationRotationScope Scope of rotation ordering: active rotation members only, or entire schedule.
+			PagingStrategyConfigurationRotationScope    *NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope    `json:"paging_strategy_configuration_rotation_scope,omitempty"`
 			PagingStrategyConfigurationScheduleStrategy *NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy `json:"paging_strategy_configuration_schedule_strategy,omitempty"`
 			PagingStrategyConfigurationStrategy         *NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategy         `json:"paging_strategy_configuration_strategy,omitempty"`
 
@@ -47939,6 +48224,12 @@ type NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers string
 
 // NewEscalationLevelDataAttributesNotificationTargetParamsType The type of the notification target
 type NewEscalationLevelDataAttributesNotificationTargetParamsType string
+
+// NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode Controls how repeats are interpreted: 'users' pages exactly N users, 'all' pages everyone once.
+type NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode string
+
+// NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope Scope of rotation ordering: active rotation members only, or entire schedule.
+type NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope string
 
 // NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy defines model for NewEscalationLevel.Data.Attributes.PagingStrategyConfigurationScheduleStrategy.
 type NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy string
@@ -48171,6 +48462,10 @@ type NewFormField struct {
 			ShowOnIncidentDetails *bool     `json:"show_on_incident_details,omitempty"`
 			Shown                 *[]string `json:"shown,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// ValueKind The value kind of the form field
 			ValueKind *NewFormFieldDataAttributesValueKind `json:"value_kind,omitempty"`
 
@@ -48224,7 +48519,7 @@ type NewFormFieldPlacement struct {
 			// Form The form this field is placed on.
 			Form string `json:"form"`
 
-			// FormSetId The form set this field is placed in.
+			// FormSetId The form set this field is placed in. The form set must have the same `resource_type` as the form field, otherwise the request is rejected with 422.
 			FormSetId string `json:"form_set_id"`
 
 			// NonEditable Whether the field is read-only and cannot be edited by users.
@@ -48319,6 +48614,10 @@ type NewFormSet struct {
 
 			// Name The name of the form set
 			Name string `json:"name"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewFormSetDataType `json:"type"`
 	} `json:"data"`
@@ -48408,7 +48707,7 @@ type NewFunctionality struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
-			// PublicDescription The public description of the functionality
+			// PublicDescription The status page description of the functionality
 			PublicDescription *string `json:"public_description,omitempty"`
 
 			// ServiceIds Services associated with this functionality
@@ -48440,6 +48739,10 @@ type NewFunctionality struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewFunctionalityDataType `json:"type"`
 	} `json:"data"`
@@ -48883,6 +49186,10 @@ type NewIncidentPermissionSet struct {
 			Name                       string                                                              `json:"name"`
 			PrivateIncidentPermissions *[]NewIncidentPermissionSetDataAttributesPrivateIncidentPermissions `json:"private_incident_permissions,omitempty"`
 			PublicIncidentPermissions  *[]NewIncidentPermissionSetDataAttributesPublicIncidentPermissions  `json:"public_incident_permissions,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewIncidentPermissionSetDataType `json:"type"`
 	} `json:"data"`
@@ -48979,6 +49286,10 @@ type NewIncidentRole struct {
 			// Position Position of the incident role
 			Position *int `json:"position,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// Summary The summary of the incident role
 			Summary *string `json:"summary,omitempty"`
 		} `json:"attributes"`
@@ -49032,6 +49343,15 @@ type NewIncidentStatusPageEvent struct {
 			// Status The status of the incident event
 			Status *NewIncidentStatusPageEventDataAttributesStatus `json:"status,omitempty"`
 
+			// StatusPageComponents Affected status page components and their statuses. Requires the status-page-v3-phase-1 feature. Ignored for terminal event statuses (resolved, completed), which clear component impact. A status is required per component except for scheduled maintenance incidents.
+			StatusPageComponents *[]struct {
+				// Status The status to record for the component
+				Status *NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus `json:"status,omitempty"`
+
+				// StatusPageComponentId Unique ID of a component on the event's status page
+				StatusPageComponentId string `json:"status_page_component_id"`
+			} `json:"status_page_components,omitempty"`
+
 			// StatusPageId Unique ID of the status page you wish to post the event to
 			StatusPageId *string `json:"status_page_id,omitempty"`
 		} `json:"attributes"`
@@ -49041,6 +49361,9 @@ type NewIncidentStatusPageEvent struct {
 
 // NewIncidentStatusPageEventDataAttributesStatus The status of the incident event
 type NewIncidentStatusPageEventDataAttributesStatus string
+
+// NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus The status to record for the component
+type NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus string
 
 // NewIncidentStatusPageEventDataType defines model for NewIncidentStatusPageEvent.Data.Type.
 type NewIncidentStatusPageEventDataType string
@@ -49090,6 +49413,9 @@ type NewIncidentType struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
+			// PublicDescription The status page description of the incident type
+			PublicDescription *string `json:"public_description,omitempty"`
+
 			// SlackAliases Slack Aliases associated with this incident type
 			SlackAliases *[]struct {
 				// Id Slack alias ID
@@ -49107,6 +49433,10 @@ type NewIncidentType struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewIncidentTypeDataType `json:"type"`
 	} `json:"data"`
@@ -49278,6 +49608,10 @@ type NewOnCallRole struct {
 			ScheduleOverridePermissions      *[]NewOnCallRoleDataAttributesScheduleOverridePermissions      `json:"schedule_override_permissions,omitempty"`
 			SchedulesPermissions             *[]NewOnCallRoleDataAttributesSchedulesPermissions             `json:"schedules_permissions,omitempty"`
 			ServicesPermissions              *[]NewOnCallRoleDataAttributesServicesPermissions              `json:"services_permissions,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 
 			// SystemRole The kind of role (user and custom type roles are only editable)
 			SystemRole           *string                                            `json:"system_role,omitempty"`
@@ -49483,6 +49817,10 @@ type NewPostMortemTemplate struct {
 
 			// Name The name of the postmortem template
 			Name string `json:"name"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewPostMortemTemplateDataType `json:"type"`
 	} `json:"data"`
@@ -49620,6 +49958,10 @@ type NewRetrospectiveStep struct {
 			// Skippable Is the step skippable?
 			Skippable *bool `json:"skippable,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `title`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// Title The name of the step
 			Title string `json:"title"`
 		} `json:"attributes"`
@@ -49669,10 +50011,14 @@ type NewRole struct {
 			ServicesPermissions         *[]NewRoleDataAttributesServicesPermissions         `json:"services_permissions,omitempty"`
 			SeveritiesPermissions       *[]NewRoleDataAttributesSeveritiesPermissions       `json:"severities_permissions,omitempty"`
 			SlasPermissions             *[]NewRoleDataAttributesSlasPermissions             `json:"slas_permissions,omitempty"`
-			StatusPagesPermissions      *[]NewRoleDataAttributesStatusPagesPermissions      `json:"status_pages_permissions,omitempty"`
-			SubStatusesPermissions      *[]NewRoleDataAttributesSubStatusesPermissions      `json:"sub_statuses_permissions,omitempty"`
-			WebhooksPermissions         *[]NewRoleDataAttributesWebhooksPermissions         `json:"webhooks_permissions,omitempty"`
-			WorkflowsPermissions        *[]NewRoleDataAttributesWorkflowsPermissions        `json:"workflows_permissions,omitempty"`
+
+			// Slug Deprecated. Custom role slugs remain accepted temporarily. Stop setting `slug`; it will become read-only and be derived from `name` when this property is removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug                   *string                                        `json:"slug,omitempty"`
+			StatusPagesPermissions *[]NewRoleDataAttributesStatusPagesPermissions `json:"status_pages_permissions,omitempty"`
+			SubStatusesPermissions *[]NewRoleDataAttributesSubStatusesPermissions `json:"sub_statuses_permissions,omitempty"`
+			WebhooksPermissions    *[]NewRoleDataAttributesWebhooksPermissions    `json:"webhooks_permissions,omitempty"`
+			WorkflowsPermissions   *[]NewRoleDataAttributesWorkflowsPermissions   `json:"workflows_permissions,omitempty"`
 		} `json:"attributes"`
 		Type NewRoleDataType `json:"type"`
 	} `json:"data"`
@@ -50108,7 +50454,7 @@ type NewService struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
-			// PublicDescription The public description of the service
+			// PublicDescription The status page description of the service
 			PublicDescription *string `json:"public_description,omitempty"`
 
 			// ServiceIds Services dependent on this service
@@ -50140,6 +50486,10 @@ type NewService struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewServiceDataType `json:"type"`
 	} `json:"data"`
@@ -50190,6 +50540,10 @@ type NewSeverity struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewSeverityDataType `json:"type"`
 	} `json:"data"`
@@ -50296,6 +50650,10 @@ type NewSla struct {
 
 			// Position Position of the SLA for ordering
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewSlaDataType `json:"type"`
 	} `json:"data"`
@@ -50402,6 +50760,10 @@ type NewStatusPage struct {
 			// ShowUptimeLastDays Show uptime over x days
 			ShowUptimeLastDays *NewStatusPageDataAttributesShowUptimeLastDays `json:"show_uptime_last_days,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `title`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// SuccessMessage Message showing when all components are operational
 			SuccessMessage *string `json:"success_message,omitempty"`
 
@@ -50438,6 +50800,26 @@ type NewStatusPageDataAttributesShowUptimeLastDays int
 
 // NewStatusPageDataType defines model for NewStatusPage.Data.Type.
 type NewStatusPageDataType string
+
+// NewStatusPageAnnouncement defines model for new_status_page_announcement.
+type NewStatusPageAnnouncement struct {
+	Data struct {
+		Attributes struct {
+			// Body Body of the announcement
+			Body string `json:"body"`
+
+			// NotifySubscribers Controls if status page subscribers should be notified. Defaults to true
+			NotifySubscribers *bool `json:"notify_subscribers,omitempty"`
+
+			// Title Title of the announcement
+			Title string `json:"title"`
+		} `json:"attributes"`
+		Type NewStatusPageAnnouncementDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewStatusPageAnnouncementDataType defines model for NewStatusPageAnnouncement.Data.Type.
+type NewStatusPageAnnouncementDataType string
 
 // NewStatusPageComponent defines model for new_status_page_component.
 type NewStatusPageComponent struct {
@@ -50502,6 +50884,10 @@ type NewSubStatus struct {
 			Name         string                                 `json:"name"`
 			ParentStatus NewSubStatusDataAttributesParentStatus `json:"parent_status"`
 			Position     *int                                   `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewSubStatusDataType `json:"type"`
 	} `json:"data"`
@@ -50604,6 +50990,9 @@ type NewTeam struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
+			// PublicDescription The status page description of the team
+			PublicDescription *string `json:"public_description,omitempty"`
+
 			// ServiceNowCiSysId The Service Now CI sys id associated to this team
 			ServiceNowCiSysId *string `json:"service_now_ci_sys_id,omitempty"`
 
@@ -50624,6 +51013,10 @@ type NewTeam struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 
 			// UserIds The user ids of the members of this team.
 			UserIds *[]int `json:"user_ids,omitempty"`
@@ -50736,6 +51129,10 @@ type NewWebhooksEndpoint struct {
 			// Secret The webhook signing secret used to verify webhook requests.
 			Secret *string `json:"secret,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// Url The URL of the endpoint.
 			Url string `json:"url"`
 		} `json:"attributes"`
@@ -50792,12 +51189,16 @@ type NewWorkflow struct {
 			RepeatConditionNumberOfRepeats *int `json:"repeat_condition_number_of_repeats,omitempty"`
 
 			// RepeatEveryDuration Repeat workflow every duration
-			RepeatEveryDuration *string                                    `json:"repeat_every_duration,omitempty"`
-			RepeatOn            *[]NewWorkflowDataAttributesRepeatOn       `json:"repeat_on,omitempty"`
-			ServiceIds          *[]string                                  `json:"service_ids,omitempty"`
-			SeverityIds         *[]string                                  `json:"severity_ids,omitempty"`
-			SubStatusIds        *[]string                                  `json:"sub_status_ids,omitempty"`
-			TriggerParams       *NewWorkflow_Data_Attributes_TriggerParams `json:"trigger_params,omitempty"`
+			RepeatEveryDuration *string                              `json:"repeat_every_duration,omitempty"`
+			RepeatOn            *[]NewWorkflowDataAttributesRepeatOn `json:"repeat_on,omitempty"`
+			ServiceIds          *[]string                            `json:"service_ids,omitempty"`
+			SeverityIds         *[]string                            `json:"severity_ids,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug          *string                                    `json:"slug,omitempty"`
+			SubStatusIds  *[]string                                  `json:"sub_status_ids,omitempty"`
+			TriggerParams *NewWorkflow_Data_Attributes_TriggerParams `json:"trigger_params,omitempty"`
 
 			// Wait Wait this duration before executing
 			Wait *string `json:"wait,omitempty"`
@@ -50932,6 +51333,10 @@ type NewWorkflowGroup struct {
 
 			// Position The position of the workflow group
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name` and `kind`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewWorkflowGroupDataType `json:"type"`
 	} `json:"data"`
@@ -53536,7 +53941,7 @@ type Service struct {
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
 
-	// PublicDescription The public description of the service
+	// PublicDescription The status page description of the service
 	PublicDescription *string `json:"public_description,omitempty"`
 
 	// ServiceIds Services dependent on this service
@@ -54283,6 +54688,62 @@ type StatusPageSectionOrder string
 // StatusPageShowUptimeLastDays Show uptime over x days
 type StatusPageShowUptimeLastDays int
 
+// StatusPageAnnouncement defines model for status_page_announcement.
+type StatusPageAnnouncement struct {
+	// Body Body of the announcement
+	Body string `json:"body"`
+
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// PublishedAt Date the announcement was published
+	PublishedAt string `json:"published_at"`
+
+	// StatusPageId ID of the status page the announcement was posted to
+	StatusPageId string `json:"status_page_id"`
+
+	// Title Title of the announcement
+	Title string `json:"title"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+
+	// UserId ID of the user who posted the announcement
+	UserId *int `json:"user_id,omitempty"`
+}
+
+// StatusPageAnnouncementList defines model for status_page_announcement_list.
+type StatusPageAnnouncementList struct {
+	Data []struct {
+		Attributes StatusPageAnnouncement `json:"attributes"`
+
+		// Id Unique ID of the status page announcement
+		Id   string                             `json:"id"`
+		Type StatusPageAnnouncementListDataType `json:"type"`
+	} `json:"data"`
+	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
+	Links    Links                      `json:"links"`
+	Meta     Meta                       `json:"meta"`
+}
+
+// StatusPageAnnouncementListDataType defines model for StatusPageAnnouncementList.Data.Type.
+type StatusPageAnnouncementListDataType string
+
+// StatusPageAnnouncementResponse defines model for status_page_announcement_response.
+type StatusPageAnnouncementResponse struct {
+	Data struct {
+		Attributes StatusPageAnnouncement `json:"attributes"`
+
+		// Id Unique ID of the status page announcement
+		Id   string                                 `json:"id"`
+		Type StatusPageAnnouncementResponseDataType `json:"type"`
+	} `json:"data"`
+	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
+}
+
+// StatusPageAnnouncementResponseDataType defines model for StatusPageAnnouncementResponse.Data.Type.
+type StatusPageAnnouncementResponseDataType string
+
 // StatusPageComponent defines model for status_page_component.
 type StatusPageComponent struct {
 	// CreatedAt Date of creation
@@ -54660,6 +55121,9 @@ type Team struct {
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
 
+	// PublicDescription The status page description of the team
+	PublicDescription *string `json:"public_description,omitempty"`
+
 	// ServiceNowCiSysId The Service Now CI sys id associated to this team
 	ServiceNowCiSysId *string `json:"service_now_ci_sys_id,omitempty"`
 
@@ -54732,7 +55196,7 @@ type TeamResponseDataType string
 
 // TriggerWorkflowTaskParams defines model for trigger_workflow_task_params.
 type TriggerWorkflowTaskParams struct {
-	// AttributeToQueryBy ["(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(post_mortem) kind can only match [:id]", "(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(pulse) kind can only match [:id]", "(alert) kind can only match [:id]"]
+	// AttributeToQueryBy ["(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(post_mortem) kind can only match [:id]", "(pulse) kind can only match [:id]", "(alert) kind can only match [:id]"]
 	AttributeToQueryBy      TriggerWorkflowTaskParamsAttributeToQueryBy `json:"attribute_to_query_by"`
 	CheckWorkflowConditions *bool                                       `json:"check_workflow_conditions,omitempty"`
 	Kind                    TriggerWorkflowTaskParamsKind               `json:"kind"`
@@ -54747,7 +55211,7 @@ type TriggerWorkflowTaskParams struct {
 	} `json:"workflow"`
 }
 
-// TriggerWorkflowTaskParamsAttributeToQueryBy ["(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(post_mortem) kind can only match [:id]", "(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(pulse) kind can only match [:id]", "(alert) kind can only match [:id]"]
+// TriggerWorkflowTaskParamsAttributeToQueryBy ["(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(post_mortem) kind can only match [:id]", "(pulse) kind can only match [:id]", "(alert) kind can only match [:id]"]
 type TriggerWorkflowTaskParamsAttributeToQueryBy string
 
 // TriggerWorkflowTaskParamsKind defines model for TriggerWorkflowTaskParams.Kind.
@@ -54962,6 +55426,10 @@ type UpdateAlertField struct {
 		Attributes struct {
 			// Name The name of the alert field
 			Name *string `json:"name,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateAlertFieldDataType `json:"type"`
 	} `json:"data"`
@@ -55021,7 +55489,11 @@ type UpdateAlertGroup struct {
 			GroupByAlertUrgency *UpdateAlertGroupDataAttributesGroupByAlertUrgency `json:"group_by_alert_urgency,omitempty"`
 
 			// Name The name of the alert group
-			Name    *string `json:"name,omitempty"`
+			Name *string `json:"name,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug    *string `json:"slug,omitempty"`
 			Targets *[]struct {
 				// TargetId id for the Group, Service, EscalationPolicy or Functionality
 				TargetId openapi_types.UUID `json:"target_id"`
@@ -55397,7 +55869,7 @@ type UpdateAlertsSource struct {
 			// SourceType The alert source type
 			SourceType *UpdateAlertsSourceDataAttributesSourceType `json:"source_type,omitempty"`
 
-			// SourceableAttributes Provide additional attributes for generic_webhook alerts source
+			// SourceableAttributes Provide additional attributes for the underlying source. `auto_resolve`, `resolve_state` and `field_mappings_attributes` apply to generic_webhook sources; `accept_threaded_emails` applies to email sources.
 			SourceableAttributes *struct {
 				// AcceptThreadedEmails Set this to false to reject threaded emails
 				AcceptThreadedEmails *bool `json:"accept_threaded_emails,omitempty"`
@@ -55556,6 +56028,10 @@ type UpdateCatalog struct {
 
 			// Position Default position of the catalog when displayed in a list.
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateCatalogDataType `json:"type"`
 	} `json:"data"`
@@ -55595,6 +56071,10 @@ type UpdateCatalogChecklistTemplate struct {
 				// Type Type of owner
 				Type UpdateCatalogChecklistTemplateDataAttributesOwnersType `json:"type"`
 			} `json:"owners,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateCatalogChecklistTemplateDataType `json:"type"`
 	} `json:"data"`
@@ -55632,6 +56112,13 @@ type UpdateCatalogEntity struct {
 				// Value The value for this property
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
+
+			// PublicDescription The status page description of the catalog entity
+			PublicDescription *string `json:"public_description,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateCatalogEntityDataType `json:"type"`
 	} `json:"data"`
@@ -55677,6 +56164,10 @@ type UpdateCatalogField struct {
 
 			// Required Whether the field is required.
 			Required *bool `json:"required,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateCatalogFieldDataType `json:"type"`
 	} `json:"data"`
@@ -55712,6 +56203,13 @@ type UpdateCause struct {
 				// Value The property value
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
+
+			// PublicDescription The status page description of the cause
+			PublicDescription *string `json:"public_description,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateCauseDataType `json:"type"`
 	} `json:"data"`
@@ -55876,6 +56374,10 @@ type UpdateCommunicationsStage struct {
 
 			// Position Position of the communications stage
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateCommunicationsStageDataType `json:"type"`
 	} `json:"data"`
@@ -55940,6 +56442,10 @@ type UpdateCommunicationsType struct {
 
 			// Position Position of the communications type
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateCommunicationsTypeDataType `json:"type"`
 	} `json:"data"`
@@ -56045,6 +56551,10 @@ type UpdateCustomForm struct {
 
 			// Name The name of the custom form.
 			Name *string `json:"name,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateCustomFormDataType `json:"type"`
 	} `json:"data"`
@@ -56181,6 +56691,9 @@ type UpdateEnvironment struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
+			// PublicDescription The status page description of the environment
+			PublicDescription *string `json:"public_description,omitempty"`
+
 			// SlackAliases Slack Aliases associated with this environment
 			SlackAliases *[]struct {
 				// Id Slack alias ID
@@ -56198,6 +56711,10 @@ type UpdateEnvironment struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateEnvironmentDataType `json:"type"`
 	} `json:"data"`
@@ -56227,6 +56744,18 @@ type UpdateEscalationLevel struct {
 				// Type The type of the notification target
 				Type UpdateEscalationLevelDataAttributesNotificationTargetParamsType `json:"type"`
 			} `json:"notification_target_params,omitempty"`
+
+			// PagingStrategyConfigurationPageUsersCount Number of users to page at a time (cycle-based round robin).
+			PagingStrategyConfigurationPageUsersCount *int `json:"paging_strategy_configuration_page_users_count,omitempty"`
+
+			// PagingStrategyConfigurationRepeats Number of times to rotate through the roster (cycle-based round robin).
+			PagingStrategyConfigurationRepeats *int `json:"paging_strategy_configuration_repeats,omitempty"`
+
+			// PagingStrategyConfigurationRepeatsMode Controls how repeats are interpreted: 'users' pages exactly N users, 'all' pages everyone once.
+			PagingStrategyConfigurationRepeatsMode *UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode `json:"paging_strategy_configuration_repeats_mode,omitempty"`
+
+			// PagingStrategyConfigurationRotationScope Scope of rotation ordering: active rotation members only, or entire schedule.
+			PagingStrategyConfigurationRotationScope    *UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope    `json:"paging_strategy_configuration_rotation_scope,omitempty"`
 			PagingStrategyConfigurationScheduleStrategy *UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy `json:"paging_strategy_configuration_schedule_strategy,omitempty"`
 			PagingStrategyConfigurationStrategy         *UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategy         `json:"paging_strategy_configuration_strategy,omitempty"`
 
@@ -56242,6 +56771,12 @@ type UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers stri
 
 // UpdateEscalationLevelDataAttributesNotificationTargetParamsType The type of the notification target
 type UpdateEscalationLevelDataAttributesNotificationTargetParamsType string
+
+// UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode Controls how repeats are interpreted: 'users' pages exactly N users, 'all' pages everyone once.
+type UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode string
+
+// UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope Scope of rotation ordering: active rotation members only, or entire schedule.
+type UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope string
 
 // UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy defines model for UpdateEscalationLevel.Data.Attributes.PagingStrategyConfigurationScheduleStrategy.
 type UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy string
@@ -56474,6 +57009,10 @@ type UpdateFormField struct {
 			ShowOnIncidentDetails *bool     `json:"show_on_incident_details,omitempty"`
 			Shown                 *[]string `json:"shown,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// ValueKind The value kind of the form field
 			ValueKind *UpdateFormFieldDataAttributesValueKind `json:"value_kind,omitempty"`
 
@@ -56524,7 +57063,7 @@ type UpdateFormFieldPlacement struct {
 			// Form The form this field is placed on.
 			Form *string `json:"form,omitempty"`
 
-			// FormSetId The form set this field is placed in.
+			// FormSetId The form set this field is placed in. The form set must have the same `resource_type` as the form field, otherwise the request is rejected with 422.
 			FormSetId *string `json:"form_set_id,omitempty"`
 
 			// NonEditable Whether the field is read-only and cannot be edited by users.
@@ -56619,6 +57158,10 @@ type UpdateFormSet struct {
 
 			// Name The name of the form set
 			Name *string `json:"name,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateFormSetDataType `json:"type"`
 	} `json:"data"`
@@ -56708,7 +57251,7 @@ type UpdateFunctionality struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
-			// PublicDescription The public description of the functionality
+			// PublicDescription The status page description of the functionality
 			PublicDescription *string `json:"public_description,omitempty"`
 
 			// ServiceIds Services associated with this functionality
@@ -56734,6 +57277,10 @@ type UpdateFunctionality struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateFunctionalityDataType `json:"type"`
 	} `json:"data"`
@@ -57323,6 +57870,10 @@ type UpdateIncidentPermissionSet struct {
 			Name                       *string                                                                `json:"name,omitempty"`
 			PrivateIncidentPermissions *[]UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissions `json:"private_incident_permissions,omitempty"`
 			PublicIncidentPermissions  *[]UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissions  `json:"public_incident_permissions,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateIncidentPermissionSetDataType `json:"type"`
 	} `json:"data"`
@@ -57525,6 +58076,10 @@ type UpdateIncidentRole struct {
 			// Position Position of the incident role
 			Position *int `json:"position,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// Summary The summary of the incident role
 			Summary *string `json:"summary,omitempty"`
 		} `json:"attributes"`
@@ -57691,6 +58246,9 @@ type UpdateIncidentType struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
+			// PublicDescription The status page description of the incident type
+			PublicDescription *string `json:"public_description,omitempty"`
+
 			// SlackAliases Slack Aliases associated with this incident type
 			SlackAliases *[]struct {
 				// Id Slack alias ID
@@ -57708,6 +58266,10 @@ type UpdateIncidentType struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateIncidentTypeDataType `json:"type"`
 	} `json:"data"`
@@ -58032,6 +58594,10 @@ type UpdateOnCallRole struct {
 			SchedulesPermissions             *[]UpdateOnCallRoleDataAttributesSchedulesPermissions             `json:"schedules_permissions,omitempty"`
 			ServicesPermissions              *[]UpdateOnCallRoleDataAttributesServicesPermissions              `json:"services_permissions,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// SystemRole The kind of role (user and custom type roles are only editable)
 			SystemRole           *string                                               `json:"system_role,omitempty"`
 			WebhooksPermissions  *[]UpdateOnCallRoleDataAttributesWebhooksPermissions  `json:"webhooks_permissions,omitempty"`
@@ -58348,6 +58914,10 @@ type UpdatePostMortemTemplate struct {
 
 			// Name The name of the postmortem template
 			Name *string `json:"name,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdatePostMortemTemplateDataType `json:"type"`
 	} `json:"data"`
@@ -58523,6 +59093,10 @@ type UpdateRetrospectiveStep struct {
 			// Skippable Is the step skippable?
 			Skippable *bool `json:"skippable,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `title`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// Title The name of the step
 			Title *string `json:"title,omitempty"`
 		} `json:"attributes"`
@@ -58576,10 +59150,14 @@ type UpdateRole struct {
 			ServicesPermissions         *[]UpdateRoleDataAttributesServicesPermissions         `json:"services_permissions,omitempty"`
 			SeveritiesPermissions       *[]UpdateRoleDataAttributesSeveritiesPermissions       `json:"severities_permissions,omitempty"`
 			SlasPermissions             *[]UpdateRoleDataAttributesSlasPermissions             `json:"slas_permissions,omitempty"`
-			StatusPagesPermissions      *[]UpdateRoleDataAttributesStatusPagesPermissions      `json:"status_pages_permissions,omitempty"`
-			SubStatusesPermissions      *[]UpdateRoleDataAttributesSubStatusesPermissions      `json:"sub_statuses_permissions,omitempty"`
-			WebhooksPermissions         *[]UpdateRoleDataAttributesWebhooksPermissions         `json:"webhooks_permissions,omitempty"`
-			WorkflowsPermissions        *[]UpdateRoleDataAttributesWorkflowsPermissions        `json:"workflows_permissions,omitempty"`
+
+			// Slug Deprecated. Custom role slugs remain accepted temporarily. Stop setting `slug`; it will become read-only and be derived from `name` when this property is removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug                   *string                                           `json:"slug,omitempty"`
+			StatusPagesPermissions *[]UpdateRoleDataAttributesStatusPagesPermissions `json:"status_pages_permissions,omitempty"`
+			SubStatusesPermissions *[]UpdateRoleDataAttributesSubStatusesPermissions `json:"sub_statuses_permissions,omitempty"`
+			WebhooksPermissions    *[]UpdateRoleDataAttributesWebhooksPermissions    `json:"webhooks_permissions,omitempty"`
+			WorkflowsPermissions   *[]UpdateRoleDataAttributesWorkflowsPermissions   `json:"workflows_permissions,omitempty"`
 		} `json:"attributes"`
 		Type UpdateRoleDataType `json:"type"`
 	} `json:"data"`
@@ -59000,7 +59578,7 @@ type UpdateService struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
-			// PublicDescription The public description of the service
+			// PublicDescription The status page description of the service
 			PublicDescription *string `json:"public_description,omitempty"`
 
 			// ServiceIds Services dependent on this service
@@ -59026,6 +59604,10 @@ type UpdateService struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateServiceDataType `json:"type"`
 	} `json:"data"`
@@ -59104,6 +59686,10 @@ type UpdateSeverity struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateSeverityDataType `json:"type"`
 	} `json:"data"`
@@ -59259,6 +59845,10 @@ type UpdateSla struct {
 
 			// Position Position of the SLA for ordering
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateSlaDataType `json:"type"`
 	} `json:"data"`
@@ -59378,6 +59968,10 @@ type UpdateStatusPage struct {
 			// ShowUptimeLastDays Show uptime over x days
 			ShowUptimeLastDays *UpdateStatusPageDataAttributesShowUptimeLastDays `json:"show_uptime_last_days,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `title`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// SuccessMessage Message showing when all components are operational
 			SuccessMessage *string `json:"success_message,omitempty"`
 
@@ -59414,6 +60008,23 @@ type UpdateStatusPageDataAttributesShowUptimeLastDays int
 
 // UpdateStatusPageDataType defines model for UpdateStatusPage.Data.Type.
 type UpdateStatusPageDataType string
+
+// UpdateStatusPageAnnouncement defines model for update_status_page_announcement.
+type UpdateStatusPageAnnouncement struct {
+	Data struct {
+		Attributes struct {
+			// Body Body of the announcement
+			Body *string `json:"body,omitempty"`
+
+			// Title Title of the announcement
+			Title *string `json:"title,omitempty"`
+		} `json:"attributes"`
+		Type UpdateStatusPageAnnouncementDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateStatusPageAnnouncementDataType defines model for UpdateStatusPageAnnouncement.Data.Type.
+type UpdateStatusPageAnnouncementDataType string
 
 // UpdateStatusPageComponent defines model for update_status_page_component.
 type UpdateStatusPageComponent struct {
@@ -59482,6 +60093,10 @@ type UpdateSubStatus struct {
 			Description *string `json:"description,omitempty"`
 			Name        *string `json:"name,omitempty"`
 			Position    *int    `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateSubStatusDataType `json:"type"`
 	} `json:"data"`
@@ -59578,6 +60193,9 @@ type UpdateTeam struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
+			// PublicDescription The status page description of the team
+			PublicDescription *string `json:"public_description,omitempty"`
+
 			// ServiceNowCiSysId The Service Now CI sys id associated to this team
 			ServiceNowCiSysId *string `json:"service_now_ci_sys_id,omitempty"`
 
@@ -59598,6 +60216,10 @@ type UpdateTeam struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 
 			// UserIds The user ids of the members of this team.
 			UserIds *[]int `json:"user_ids,omitempty"`
@@ -59773,6 +60395,10 @@ type UpdateWebhooksEndpoint struct {
 
 			// Name The name of the endpoint
 			Name *string `json:"name,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateWebhooksEndpointDataType `json:"type"`
 	} `json:"data"`
@@ -59824,11 +60450,15 @@ type UpdateWorkflow struct {
 			RepeatConditionNumberOfRepeats *int `json:"repeat_condition_number_of_repeats,omitempty"`
 
 			// RepeatEveryDuration Repeat workflow every duration
-			RepeatEveryDuration *string                                       `json:"repeat_every_duration,omitempty"`
-			ServiceIds          *[]string                                     `json:"service_ids,omitempty"`
-			SeverityIds         *[]string                                     `json:"severity_ids,omitempty"`
-			SubStatusIds        *[]string                                     `json:"sub_status_ids,omitempty"`
-			TriggerParams       *UpdateWorkflow_Data_Attributes_TriggerParams `json:"trigger_params,omitempty"`
+			RepeatEveryDuration *string   `json:"repeat_every_duration,omitempty"`
+			ServiceIds          *[]string `json:"service_ids,omitempty"`
+			SeverityIds         *[]string `json:"severity_ids,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug          *string                                       `json:"slug,omitempty"`
+			SubStatusIds  *[]string                                     `json:"sub_status_ids,omitempty"`
+			TriggerParams *UpdateWorkflow_Data_Attributes_TriggerParams `json:"trigger_params,omitempty"`
 
 			// Wait Wait this duration before executing
 			Wait *string `json:"wait,omitempty"`
@@ -59836,6 +60466,9 @@ type UpdateWorkflow struct {
 			// WorkflowGroupId The group this workflow belongs to.
 			WorkflowGroupId *string `json:"workflow_group_id,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The workflow to update is identified by the id in the path.
+		Id   *string                `json:"id,omitempty"`
 		Type UpdateWorkflowDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59942,6 +60575,10 @@ type UpdateWorkflowGroup struct {
 
 			// Position The position of the workflow group
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name` and `kind`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type UpdateWorkflowGroupDataType `json:"type"`
 	} `json:"data"`
@@ -63005,9 +63642,12 @@ type ListScheduleRotationUsersParams struct {
 
 // ListSchedulesParams defines parameters for ListSchedules.
 type ListSchedulesParams struct {
-	Include            *string `form:"include,omitempty" json:"include,omitempty"`
-	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
-	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	Include      *string `form:"include,omitempty" json:"include,omitempty"`
+	FilterSearch *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterName   *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+
+	// FilterTeamIds Filter schedules by owning team IDs. Comma-separate multiple values.
+	FilterTeamIds      *string `form:"filter[team_ids],omitempty" json:"filter[team_ids],omitempty"`
 	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
 	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
 	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
@@ -63016,6 +63656,10 @@ type ListSchedulesParams struct {
 	FilterNameNotEq    *string `form:"filter[name][not_eq],omitempty" json:"filter[name][not_eq],omitempty"`
 	FilterNameIn       *string `form:"filter[name][in],omitempty" json:"filter[name][in],omitempty"`
 	FilterNameNotIn    *string `form:"filter[name][not_in],omitempty" json:"filter[name][not_in],omitempty"`
+	FilterTeamIdsEq    *string `form:"filter[team_ids][eq],omitempty" json:"filter[team_ids][eq],omitempty"`
+	FilterTeamIdsNotEq *string `form:"filter[team_ids][not_eq],omitempty" json:"filter[team_ids][not_eq],omitempty"`
+	FilterTeamIdsIn    *string `form:"filter[team_ids][in],omitempty" json:"filter[team_ids][in],omitempty"`
+	FilterTeamIdsNotIn *string `form:"filter[team_ids][not_in],omitempty" json:"filter[team_ids][not_in],omitempty"`
 	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
@@ -63225,6 +63869,13 @@ type ListStatusPagesParams struct {
 	FilterSlugIn       *string `form:"filter[slug][in],omitempty" json:"filter[slug][in],omitempty"`
 	FilterSlugNotIn    *string `form:"filter[slug][not_in],omitempty" json:"filter[slug][not_in],omitempty"`
 	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
+// ListStatusPageAnnouncementsParams defines parameters for ListStatusPageAnnouncements.
+type ListStatusPageAnnouncementsParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
 // ListStatusPageComponentGroupsParams defines parameters for ListStatusPageComponentGroups.
@@ -63626,6 +64277,9 @@ type ResolveAlertApplicationVndAPIPlusJSONRequestBody = ResolveAlert
 
 // SnoozeAlertApplicationVndAPIPlusJSONRequestBody defines body for SnoozeAlert for application/vnd.api+json ContentType.
 type SnoozeAlertApplicationVndAPIPlusJSONRequestBody = SnoozeAlert
+
+// UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody defines body for UpdateStatusPageAnnouncement for application/vnd.api+json ContentType.
+type UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody = UpdateStatusPageAnnouncement
 
 // CreateApiKeyApplicationVndAPIPlusJSONRequestBody defines body for CreateApiKey for application/vnd.api+json ContentType.
 type CreateApiKeyApplicationVndAPIPlusJSONRequestBody = NewApiKey
@@ -64136,6 +64790,9 @@ type CreateStatusPageApplicationVndAPIPlusJSONRequestBody = NewStatusPage
 
 // UpdateStatusPageApplicationVndAPIPlusJSONRequestBody defines body for UpdateStatusPage for application/vnd.api+json ContentType.
 type UpdateStatusPageApplicationVndAPIPlusJSONRequestBody = UpdateStatusPage
+
+// CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody defines body for CreateStatusPageAnnouncement for application/vnd.api+json ContentType.
+type CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody = NewStatusPageAnnouncement
 
 // CreateStatusPageComponentGroupApplicationVndAPIPlusJSONRequestBody defines body for CreateStatusPageComponentGroup for application/vnd.api+json ContentType.
 type CreateStatusPageComponentGroupApplicationVndAPIPlusJSONRequestBody = NewStatusPageComponentGroup
@@ -79403,6 +80060,17 @@ type ClientInterface interface {
 
 	SnoozeAlertWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body SnoozeAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteStatusPageAnnouncement request
+	DeleteStatusPageAnnouncement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetStatusPageAnnouncement request
+	GetStatusPageAnnouncement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateStatusPageAnnouncementWithBody request with any body
+	UpdateStatusPageAnnouncementWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListApiKeys request
 	ListApiKeys(ctx context.Context, params *ListApiKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -81059,6 +81727,14 @@ type ClientInterface interface {
 
 	UpdateStatusPageWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateStatusPageApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListStatusPageAnnouncements request
+	ListStatusPageAnnouncements(ctx context.Context, statusPageId string, params *ListStatusPageAnnouncementsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateStatusPageAnnouncementWithBody request with any body
+	CreateStatusPageAnnouncementWithBody(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBody(ctx context.Context, statusPageId string, body CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListStatusPageComponentGroups request
 	ListStatusPageComponentGroups(ctx context.Context, statusPageId string, params *ListStatusPageComponentGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -82329,6 +83005,54 @@ func (c *Client) SnoozeAlertWithBody(ctx context.Context, id string, contentType
 
 func (c *Client) SnoozeAlertWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body SnoozeAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSnoozeAlertRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteStatusPageAnnouncement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteStatusPageAnnouncementRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetStatusPageAnnouncement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetStatusPageAnnouncementRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateStatusPageAnnouncementWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateStatusPageAnnouncementRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateStatusPageAnnouncementRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -89619,6 +90343,42 @@ func (c *Client) UpdateStatusPageWithApplicationVndAPIPlusJSONBody(ctx context.C
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListStatusPageAnnouncements(ctx context.Context, statusPageId string, params *ListStatusPageAnnouncementsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListStatusPageAnnouncementsRequest(c.Server, statusPageId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateStatusPageAnnouncementWithBody(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateStatusPageAnnouncementRequestWithBody(c.Server, statusPageId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBody(ctx context.Context, statusPageId string, body CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateStatusPageAnnouncementRequestWithApplicationVndAPIPlusJSONBody(c.Server, statusPageId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListStatusPageComponentGroups(ctx context.Context, statusPageId string, params *ListStatusPageComponentGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListStatusPageComponentGroupsRequest(c.Server, statusPageId, params)
 	if err != nil {
@@ -95613,6 +96373,121 @@ func NewSnoozeAlertRequestWithBody(server string, id string, contentType string,
 	}
 
 	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteStatusPageAnnouncementRequest generates requests for DeleteStatusPageAnnouncement
+func NewDeleteStatusPageAnnouncementRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/announcements/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetStatusPageAnnouncementRequest generates requests for GetStatusPageAnnouncement
+func NewGetStatusPageAnnouncementRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/announcements/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateStatusPageAnnouncementRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateStatusPageAnnouncement builder with application/vnd.api+json body
+func NewUpdateStatusPageAnnouncementRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateStatusPageAnnouncementRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateStatusPageAnnouncementRequestWithBody generates requests for UpdateStatusPageAnnouncement with any type of body
+func NewUpdateStatusPageAnnouncementRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/announcements/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -122883,6 +123758,18 @@ func NewListSchedulesRequest(server string, params *ListSchedulesParams) (*http.
 
 		}
 
+		if params.FilterTeamIds != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[team_ids]", *params.FilterTeamIds, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
 		if params.FilterCreatedAtGt != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][gt]", *params.FilterCreatedAtGt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
@@ -122970,6 +123857,54 @@ func NewListSchedulesRequest(server string, params *ListSchedulesParams) (*http.
 		if params.FilterNameNotIn != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[name][not_in]", *params.FilterNameNotIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterTeamIdsEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[team_ids][eq]", *params.FilterTeamIdsEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterTeamIdsNotEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[team_ids][not_eq]", *params.FilterTeamIdsNotEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterTeamIdsIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[team_ids][in]", *params.FilterTeamIdsIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterTeamIdsNotIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[team_ids][not_in]", *params.FilterTeamIdsNotIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -126575,6 +127510,138 @@ func NewUpdateStatusPageRequestWithBody(server string, id string, contentType st
 	}
 
 	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListStatusPageAnnouncementsRequest generates requests for ListStatusPageAnnouncements
+func NewListStatusPageAnnouncementsRequest(server string, statusPageId string, params *ListStatusPageAnnouncementsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "status_page_id", statusPageId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/status-pages/%s/announcements", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "include", *params.Include, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[number]", *params.PageNumber, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[size]", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateStatusPageAnnouncementRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateStatusPageAnnouncement builder with application/vnd.api+json body
+func NewCreateStatusPageAnnouncementRequestWithApplicationVndAPIPlusJSONBody(server string, statusPageId string, body CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateStatusPageAnnouncementRequestWithBody(server, statusPageId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateStatusPageAnnouncementRequestWithBody generates requests for CreateStatusPageAnnouncement with any type of body
+func NewCreateStatusPageAnnouncementRequestWithBody(server string, statusPageId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "status_page_id", statusPageId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/status-pages/%s/announcements", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -132211,6 +133278,17 @@ type ClientWithResponsesInterface interface {
 
 	SnoozeAlertWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body SnoozeAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*SnoozeAlertResponse, error)
 
+	// DeleteStatusPageAnnouncementWithResponse request
+	DeleteStatusPageAnnouncementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteStatusPageAnnouncementResponse, error)
+
+	// GetStatusPageAnnouncementWithResponse request
+	GetStatusPageAnnouncementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetStatusPageAnnouncementResponse, error)
+
+	// UpdateStatusPageAnnouncementWithBodyWithResponse request with any body
+	UpdateStatusPageAnnouncementWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateStatusPageAnnouncementResponse, error)
+
+	UpdateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateStatusPageAnnouncementResponse, error)
+
 	// ListApiKeysWithResponse request
 	ListApiKeysWithResponse(ctx context.Context, params *ListApiKeysParams, reqEditors ...RequestEditorFn) (*ListApiKeysResponse, error)
 
@@ -133866,6 +134944,14 @@ type ClientWithResponsesInterface interface {
 	UpdateStatusPageWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateStatusPageResponse, error)
 
 	UpdateStatusPageWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateStatusPageApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateStatusPageResponse, error)
+
+	// ListStatusPageAnnouncementsWithResponse request
+	ListStatusPageAnnouncementsWithResponse(ctx context.Context, statusPageId string, params *ListStatusPageAnnouncementsParams, reqEditors ...RequestEditorFn) (*ListStatusPageAnnouncementsResponse, error)
+
+	// CreateStatusPageAnnouncementWithBodyWithResponse request with any body
+	CreateStatusPageAnnouncementWithBodyWithResponse(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateStatusPageAnnouncementResponse, error)
+
+	CreateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, statusPageId string, body CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateStatusPageAnnouncementResponse, error)
 
 	// ListStatusPageComponentGroupsWithResponse request
 	ListStatusPageComponentGroupsWithResponse(ctx context.Context, statusPageId string, params *ListStatusPageComponentGroupsParams, reqEditors ...RequestEditorFn) (*ListStatusPageComponentGroupsResponse, error)
@@ -135991,6 +137077,99 @@ func (r SnoozeAlertResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r SnoozeAlertResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DeleteStatusPageAnnouncementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *StatusPageAnnouncementResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteStatusPageAnnouncementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteStatusPageAnnouncementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DeleteStatusPageAnnouncementResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetStatusPageAnnouncementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *StatusPageAnnouncementResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetStatusPageAnnouncementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetStatusPageAnnouncementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetStatusPageAnnouncementResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateStatusPageAnnouncementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *StatusPageAnnouncementResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateStatusPageAnnouncementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateStatusPageAnnouncementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateStatusPageAnnouncementResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -149454,6 +150633,68 @@ func (r UpdateStatusPageResponse) ContentType() string {
 	return ""
 }
 
+type ListStatusPageAnnouncementsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *StatusPageAnnouncementList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListStatusPageAnnouncementsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListStatusPageAnnouncementsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListStatusPageAnnouncementsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CreateStatusPageAnnouncementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *StatusPageAnnouncementResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateStatusPageAnnouncementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateStatusPageAnnouncementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateStatusPageAnnouncementResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ListStatusPageComponentGroupsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -151165,6 +152406,7 @@ type UpdateWorkflowFormFieldConditionResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowFormFieldConditionResponse
 	ApplicationvndApiJSON404 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -151753,6 +152995,7 @@ type CreateWorkflowFormFieldConditionResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON201 *WorkflowFormFieldConditionResponse
 	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -152615,6 +153858,41 @@ func (c *ClientWithResponses) SnoozeAlertWithApplicationVndAPIPlusJSONBodyWithRe
 		return nil, err
 	}
 	return ParseSnoozeAlertResponse(rsp)
+}
+
+// DeleteStatusPageAnnouncementWithResponse request returning *DeleteStatusPageAnnouncementResponse
+func (c *ClientWithResponses) DeleteStatusPageAnnouncementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteStatusPageAnnouncementResponse, error) {
+	rsp, err := c.DeleteStatusPageAnnouncement(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteStatusPageAnnouncementResponse(rsp)
+}
+
+// GetStatusPageAnnouncementWithResponse request returning *GetStatusPageAnnouncementResponse
+func (c *ClientWithResponses) GetStatusPageAnnouncementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetStatusPageAnnouncementResponse, error) {
+	rsp, err := c.GetStatusPageAnnouncement(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetStatusPageAnnouncementResponse(rsp)
+}
+
+// UpdateStatusPageAnnouncementWithBodyWithResponse request with arbitrary body returning *UpdateStatusPageAnnouncementResponse
+func (c *ClientWithResponses) UpdateStatusPageAnnouncementWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateStatusPageAnnouncementResponse, error) {
+	rsp, err := c.UpdateStatusPageAnnouncementWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateStatusPageAnnouncementResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateStatusPageAnnouncementResponse, error) {
+	rsp, err := c.UpdateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateStatusPageAnnouncementResponse(rsp)
 }
 
 // ListApiKeysWithResponse request returning *ListApiKeysResponse
@@ -157909,6 +159187,32 @@ func (c *ClientWithResponses) UpdateStatusPageWithApplicationVndAPIPlusJSONBodyW
 	return ParseUpdateStatusPageResponse(rsp)
 }
 
+// ListStatusPageAnnouncementsWithResponse request returning *ListStatusPageAnnouncementsResponse
+func (c *ClientWithResponses) ListStatusPageAnnouncementsWithResponse(ctx context.Context, statusPageId string, params *ListStatusPageAnnouncementsParams, reqEditors ...RequestEditorFn) (*ListStatusPageAnnouncementsResponse, error) {
+	rsp, err := c.ListStatusPageAnnouncements(ctx, statusPageId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListStatusPageAnnouncementsResponse(rsp)
+}
+
+// CreateStatusPageAnnouncementWithBodyWithResponse request with arbitrary body returning *CreateStatusPageAnnouncementResponse
+func (c *ClientWithResponses) CreateStatusPageAnnouncementWithBodyWithResponse(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateStatusPageAnnouncementResponse, error) {
+	rsp, err := c.CreateStatusPageAnnouncementWithBody(ctx, statusPageId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateStatusPageAnnouncementResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, statusPageId string, body CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateStatusPageAnnouncementResponse, error) {
+	rsp, err := c.CreateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBody(ctx, statusPageId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateStatusPageAnnouncementResponse(rsp)
+}
+
 // ListStatusPageComponentGroupsWithResponse request returning *ListStatusPageComponentGroupsResponse
 func (c *ClientWithResponses) ListStatusPageComponentGroupsWithResponse(ctx context.Context, statusPageId string, params *ListStatusPageComponentGroupsParams, reqEditors ...RequestEditorFn) (*ListStatusPageComponentGroupsResponse, error) {
 	rsp, err := c.ListStatusPageComponentGroups(ctx, statusPageId, params, reqEditors...)
@@ -160771,6 +162075,105 @@ func ParseSnoozeAlertResponse(rsp *http.Response) (*SnoozeAlertResponse, error) 
 			return nil, err
 		}
 		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteStatusPageAnnouncementResponse parses an HTTP response from a DeleteStatusPageAnnouncementWithResponse call
+func ParseDeleteStatusPageAnnouncementResponse(rsp *http.Response) (*DeleteStatusPageAnnouncementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteStatusPageAnnouncementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest StatusPageAnnouncementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetStatusPageAnnouncementResponse parses an HTTP response from a GetStatusPageAnnouncementWithResponse call
+func ParseGetStatusPageAnnouncementResponse(rsp *http.Response) (*GetStatusPageAnnouncementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetStatusPageAnnouncementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest StatusPageAnnouncementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateStatusPageAnnouncementResponse parses an HTTP response from a UpdateStatusPageAnnouncementWithResponse call
+func ParseUpdateStatusPageAnnouncementResponse(rsp *http.Response) (*UpdateStatusPageAnnouncementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateStatusPageAnnouncementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest StatusPageAnnouncementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -174698,6 +176101,72 @@ func ParseUpdateStatusPageResponse(rsp *http.Response) (*UpdateStatusPageRespons
 	return response, nil
 }
 
+// ParseListStatusPageAnnouncementsResponse parses an HTTP response from a ListStatusPageAnnouncementsWithResponse call
+func ParseListStatusPageAnnouncementsResponse(rsp *http.Response) (*ListStatusPageAnnouncementsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListStatusPageAnnouncementsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest StatusPageAnnouncementList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateStatusPageAnnouncementResponse parses an HTTP response from a CreateStatusPageAnnouncementWithResponse call
+func ParseCreateStatusPageAnnouncementResponse(rsp *http.Response) (*CreateStatusPageAnnouncementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateStatusPageAnnouncementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest StatusPageAnnouncementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListStatusPageComponentGroupsResponse parses an HTTP response from a ListStatusPageComponentGroupsWithResponse call
 func ParseListStatusPageComponentGroupsResponse(rsp *http.Response) (*ListStatusPageComponentGroupsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -176548,6 +178017,13 @@ func ParseUpdateWorkflowFormFieldConditionResponse(rsp *http.Response) (*UpdateW
 		}
 		response.ApplicationvndApiJSON404 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
 	}
 
 	return response, nil
@@ -177167,6 +178643,13 @@ func ParseCreateWorkflowFormFieldConditionResponse(rsp *http.Response) (*CreateW
 			return nil, err
 		}
 		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
 
 	}
 
