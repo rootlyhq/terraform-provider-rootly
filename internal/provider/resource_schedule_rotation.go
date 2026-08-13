@@ -19,6 +19,8 @@ import (
 	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diagutils"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/jsonapitypes"
 	"github.com/samber/lo"
 )
 
@@ -192,13 +194,12 @@ func (r *ScheduleRotationResource) Create(ctx context.Context, req resource.Crea
 		return
 	}
 
-	v, diags := data.ToApi(ctx)
-	resp.Diagnostics.Append(diags...)
+	item := diagutils.MergeDiagnostics(data.ToApi(ctx))(&resp.Diagnostics)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	res, err := r.client.CreateScheduleRotation(ctx, *v)
+	res, err := r.client.CreateScheduleRotation(ctx, *item)
 	if err != nil {
 		resp.Diagnostics.AddError("Unable to create schedule rotation", err.Error())
 		return
@@ -206,8 +207,14 @@ func (r *ScheduleRotationResource) Create(ctx context.Context, req resource.Crea
 
 	data.Id = types.StringValue(res.ID)
 
-	if err := r.read(ctx, &data); err != nil {
+	item, err = r.client.GetScheduleRotation(ctx, data.Id.ValueString())
+	if err != nil {
 		resp.Diagnostics.AddError("Unable to read schedule rotation", err.Error())
+		return
+	}
+
+	resp.Diagnostics.Append(data.FromApi(ctx, *item)...)
+	if resp.Diagnostics.HasError() {
 		return
 	}
 
@@ -222,7 +229,8 @@ func (r *ScheduleRotationResource) Read(ctx context.Context, req resource.ReadRe
 		return
 	}
 
-	if err := r.read(ctx, &data); err != nil {
+	item, err := r.client.GetScheduleRotation(ctx, data.Id.ValueString())
+	if err != nil {
 		if errors.Is(err, client.NotFoundError{}) {
 			resp.State.RemoveResource(ctx)
 			return
@@ -231,92 +239,12 @@ func (r *ScheduleRotationResource) Read(ctx context.Context, req resource.ReadRe
 		return
 	}
 
+	resp.Diagnostics.Append(data.FromApi(ctx, *item)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
-}
-
-func (r *ScheduleRotationResource) read(ctx context.Context, data *ScheduleRotationResourceModel) error {
-	item, err := r.client.GetScheduleRotation(ctx, data.Id.ValueString())
-	if err != nil {
-		return err
-	}
-
-	data.Id = types.StringValue(item.ID)
-	data.ScheduleId = types.StringValue(item.ScheduleId)
-	data.Name = types.StringValue(item.Name)
-	data.Position = types.Int64Value(item.Position)
-	data.ScheduleRotationableType = types.StringValue(item.ScheduleRotationableType)
-
-	if v, err := item.ActiveAllWeek.Get(); err == nil {
-		data.ActiveAllWeek = types.BoolValue(v)
-	} else {
-		data.ActiveAllWeek = types.BoolNull()
-	}
-
-	data.ActiveDays = supertypes.NewSetValueOfSlice(ctx, item.ActiveDays)
-
-	if v, err := item.ActiveTimeType.Get(); err == nil {
-		data.ActiveTimeType = types.StringValue(v)
-	} else {
-		data.ActiveTimeType = types.StringNull()
-	}
-
-	data.TimeZone = types.StringValue(item.TimeZone)
-
-	if v, err := item.StartTime.Get(); err == nil {
-		data.StartTime = types.StringValue(v)
-	} else {
-		data.StartTime = types.StringNull()
-	}
-
-	if v, err := item.EndTime.Get(); err == nil {
-		data.EndTime = types.StringValue(v)
-	} else {
-		data.EndTime = types.StringNull()
-	}
-
-	var scheduleRotationableAttributes ScheduleRotationResourceScheduleRotationAttributesModel
-	if v, err := item.ScheduleRotationableAttributes.HandoffTime.Get(); err == nil {
-		scheduleRotationableAttributes.HandoffTime = types.StringValue(v)
-	} else {
-		scheduleRotationableAttributes.HandoffTime = types.StringNull()
-	}
-	if v, err := item.ScheduleRotationableAttributes.HandoffDay.Get(); err == nil {
-		scheduleRotationableAttributes.HandoffDay = types.StringValue(v)
-	} else {
-		scheduleRotationableAttributes.HandoffDay = types.StringNull()
-	}
-	if v, err := item.ScheduleRotationableAttributes.ShiftLength.Get(); err == nil {
-		scheduleRotationableAttributes.ShiftLength = types.Int64Value(v)
-	} else {
-		scheduleRotationableAttributes.ShiftLength = types.Int64Null()
-	}
-	if v, err := item.ScheduleRotationableAttributes.ShiftLengthUnit.Get(); err == nil {
-		scheduleRotationableAttributes.ShiftLengthUnit = types.StringValue(v)
-	} else {
-		scheduleRotationableAttributes.ShiftLengthUnit = types.StringNull()
-	}
-	data.ScheduleRotationableAttributes = supertypes.NewSingleNestedObjectValueOf(ctx, &scheduleRotationableAttributes)
-
-	if data.ActiveTimeAttributes.IsKnown() {
-		data.ActiveTimeAttributes = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(item.ActiveTimeAttributes, func(v apiclient.ScheduleRotationActiveTimeAttributes, _ int) ScheduleRotationResourceActiveTimeModel {
-			return ScheduleRotationResourceActiveTimeModel{
-				StartTime: types.StringValue(v.StartTime),
-				EndTime:   types.StringValue(v.EndTime),
-			}
-		}))
-	}
-
-	if data.ScheduleRotationMembers.IsKnown() {
-		data.ScheduleRotationMembers = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(item.ScheduleRotationMembers, func(v apiclient.ScheduleRotationMember, _ int) ScheduleRotationResourceScheduleRotationMemberModel {
-			return ScheduleRotationResourceScheduleRotationMemberModel{
-				MemberId:   types.StringValue(v.MemberID),
-				MemberType: types.StringValue(v.MemberType),
-				Position:   types.Int64Value(v.Position),
-			}
-		}))
-	}
-
-	return nil
 }
 
 func (r *ScheduleRotationResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
@@ -327,20 +255,25 @@ func (r *ScheduleRotationResource) Update(ctx context.Context, req resource.Upda
 		return
 	}
 
-	v, diags := data.ToApi(ctx)
-	resp.Diagnostics.Append(diags...)
+	item := diagutils.MergeDiagnostics(data.ToApi(ctx))(&resp.Diagnostics)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	_, err := r.client.UpdateScheduleRotation(ctx, *v)
+	_, err := r.client.UpdateScheduleRotation(ctx, *item)
 	if err != nil {
 		resp.Diagnostics.AddError("Unable to update schedule rotation", err.Error())
 		return
 	}
 
-	if err := r.read(ctx, &data); err != nil {
+	item, err = r.client.GetScheduleRotation(ctx, data.Id.ValueString())
+	if err != nil {
 		resp.Diagnostics.AddError("Unable to read schedule rotation", err.Error())
+		return
+	}
+
+	resp.Diagnostics.Append(data.FromApi(ctx, *item)...)
+	if resp.Diagnostics.HasError() {
 		return
 	}
 
@@ -357,6 +290,9 @@ func (r *ScheduleRotationResource) Delete(ctx context.Context, req resource.Dele
 
 	err := r.legacyClient.DeleteScheduleRotation(data.Id.ValueString())
 	if err != nil {
+		if errors.Is(err, client.NotFoundError{}) {
+			return
+		}
 		resp.Diagnostics.AddError("Unable to delete schedule rotation", err.Error())
 	}
 }
@@ -380,6 +316,47 @@ type ScheduleRotationResourceModel struct {
 	ScheduleRotationableAttributes supertypes.SingleNestedObjectValueOf[ScheduleRotationResourceScheduleRotationAttributesModel] `tfsdk:"schedule_rotationable_attributes"`
 	ActiveTimeAttributes           supertypes.SetNestedObjectValueOf[ScheduleRotationResourceActiveTimeModel]                    `tfsdk:"active_time_attributes"`
 	ScheduleRotationMembers        supertypes.SetNestedObjectValueOf[ScheduleRotationResourceScheduleRotationMemberModel]        `tfsdk:"schedule_rotation_members"`
+}
+
+func (m *ScheduleRotationResourceModel) FromApi(ctx context.Context, data apiclient.ScheduleRotation) diag.Diagnostics {
+	m.Id = types.StringValue(data.ID)
+	m.ScheduleId = types.StringValue(data.ScheduleId)
+	m.Name = types.StringValue(data.Name)
+	m.Position = types.Int64Value(data.Position)
+	m.ScheduleRotationableType = types.StringValue(data.ScheduleRotationableType)
+	m.ActiveAllWeek = jsonapitypes.NullableBoolValue(data.ActiveAllWeek)
+	m.ActiveDays = supertypes.NewSetValueOfSlice(ctx, data.ActiveDays)
+	m.ActiveTimeType = jsonapitypes.NullableStringValue(data.ActiveTimeType)
+	m.TimeZone = types.StringValue(data.TimeZone)
+	m.StartTime = jsonapitypes.NullableStringValue(data.StartTime)
+	m.EndTime = jsonapitypes.NullableStringValue(data.EndTime)
+	m.ScheduleRotationableAttributes = supertypes.NewSingleNestedObjectValueOf(ctx, &ScheduleRotationResourceScheduleRotationAttributesModel{
+		HandoffTime:     jsonapitypes.NullableStringValue(data.ScheduleRotationableAttributes.HandoffTime),
+		HandoffDay:      jsonapitypes.NullableStringValue(data.ScheduleRotationableAttributes.HandoffDay),
+		ShiftLength:     jsonapitypes.NullableInt64Value(data.ScheduleRotationableAttributes.ShiftLength),
+		ShiftLengthUnit: jsonapitypes.NullableStringValue(data.ScheduleRotationableAttributes.ShiftLengthUnit),
+	})
+
+	if m.ActiveTimeAttributes.IsKnown() {
+		m.ActiveTimeAttributes = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.ActiveTimeAttributes, func(v apiclient.ScheduleRotationActiveTimeAttributes, _ int) ScheduleRotationResourceActiveTimeModel {
+			return ScheduleRotationResourceActiveTimeModel{
+				StartTime: types.StringValue(v.StartTime),
+				EndTime:   types.StringValue(v.EndTime),
+			}
+		}))
+	}
+
+	if m.ScheduleRotationMembers.IsKnown() {
+		m.ScheduleRotationMembers = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.ScheduleRotationMembers, func(v apiclient.ScheduleRotationMember, _ int) ScheduleRotationResourceScheduleRotationMemberModel {
+			return ScheduleRotationResourceScheduleRotationMemberModel{
+				MemberId:   types.StringValue(v.MemberID),
+				MemberType: types.StringValue(v.MemberType),
+				Position:   types.Int64Value(v.Position),
+			}
+		}))
+	}
+
+	return nil
 }
 
 func (m *ScheduleRotationResourceModel) ToApi(ctx context.Context) (*apiclient.ScheduleRotation, diag.Diagnostics) {
