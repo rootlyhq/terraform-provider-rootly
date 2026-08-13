@@ -3,7 +3,6 @@ module github.com/rootlyhq/terraform-provider-rootly/v5
 go 1.25.8
 
 require (
-	github.com/DataDog/jsonapi v0.13.0
 	github.com/buxizhizhoum/inflection v1.0.4
 	github.com/google/jsonapi v1.0.0
 	github.com/google/uuid v1.6.0
@@ -20,7 +19,6 @@ require (
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.40.1
 	github.com/hashicorp/terraform-plugin-testing v1.16.0
 	github.com/jianyuan/go-utils v0.0.0-20250223213401-62c93a9e0b6c
-	github.com/oapi-codegen/nullable v1.2.0
 	github.com/oapi-codegen/runtime v1.6.0
 	github.com/orange-cloudavenue/terraform-plugin-framework-supertypes v1.2.0
 	github.com/samber/lo v1.53.0
@@ -62,7 +60,6 @@ require (
 	github.com/hashicorp/go-uuid v1.0.3 // indirect
 	github.com/hashicorp/hc-install v0.9.5 // indirect
 	github.com/hashicorp/hcl/v2 v2.24.0 // indirect
-	github.com/hashicorp/jsonapi v1.5.0 // indirect
 	github.com/hashicorp/logutils v1.0.0 // indirect
 	github.com/hashicorp/terraform-exec v0.25.2 // indirect
 	github.com/hashicorp/terraform-json v0.28.0 // indirect
@@ -79,6 +76,7 @@ require (
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
+	github.com/oapi-codegen/nullable v1.2.0 // indirect
 	github.com/oapi-codegen/oapi-codegen/v2 v2.7.2 // indirect
 	github.com/oasdiff/yaml v0.1.1 // indirect
 	github.com/oasdiff/yaml3 v0.0.14 // indirect
