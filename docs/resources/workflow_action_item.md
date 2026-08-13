@@ -88,7 +88,7 @@ Optional:
 - `incident_kinds` (List of String) Value must be one of `test`, `test_sub`, `example`, `example_sub`, `normal`, `normal_sub`, `backfilled`, `scheduled`, `scheduled_sub`.
 - `incident_labels` (List of String)
 - `incident_statuses` (List of String) Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `closed`, `cancelled`, `scheduled`, `in_progress`, `completed`.
-- `incident_visibilities` (List of String)
+- `incident_visibilities` (List of Boolean)
 - `trigger_type` (String) Value must be one of `action_item`.
 - `triggers` (List of String) Actions that trigger the workflow. One of custom_fields.<slug>.updated, incident_updated, action_item_created, action_item_updated, assigned_user_updated, summary_updated, description_updated, status_updated, priority_updated, due_date_updated, teams_updated, slack_command
 

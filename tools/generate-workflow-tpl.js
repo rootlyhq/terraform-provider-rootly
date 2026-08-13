@@ -217,6 +217,22 @@ function jsonapiToGoType(type) {
   }
 }
 
+// Terraform element type for the items of a primitive array. The API stores
+// some arrays as non-strings (e.g. incident_visibilities is a boolean array),
+// and using the wrong element type breaks reads and imports.
+function terraformElemType(items) {
+  switch (items && items.type) {
+    case "boolean":
+      return "schema.TypeBool";
+    case "integer":
+      return "schema.TypeInt";
+    case "number":
+      return "schema.TypeFloat";
+    default:
+      return "schema.TypeString";
+  }
+}
+
 function schemaFields(resourceSchema, requiredFields, taskParamsSchema) {
   return Object.keys(resourceSchema.properties)
     .filter(excludeDateFields)
@@ -363,7 +379,7 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 				"${name}": &schema.Schema {
 					Type: schema.TypeList,
 					Elem: &schema.Schema {
-						Type: schema.TypeString,
+						Type: ${terraformElemType(schema.items)},
 					},
 					DiffSuppressFunc: tools.EqualIgnoringOrder,
 					Computed: ${optional},
