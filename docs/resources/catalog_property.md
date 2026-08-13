@@ -30,7 +30,7 @@ resource "rootly_catalog_property" "support_level" {
 
 - `catalog_id` (String)
 - `catalog_type` (String) The type of catalog the property belongs to.. Value must be one of `catalog`, `cause`, `environment`, `functionality`, `incident_type`, `service`, `team`.
-- `kind` (String) Value must be one of `text`, `reference`.
+- `kind` (String) Value must be one of `text`, `reference`, `boolean`, `service`, `functionality`, `environment`, `group`, `cause`, `incident_type`, `user`.
 - `kind_catalog_id` (String) Restricts values to items of specified catalog.
 - `multiple` (Boolean) Whether the attribute accepts multiple values.. Value must be one of true or false
 - `required` (Boolean) Whether the property is required.. Value must be one of true or false
