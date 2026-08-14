@@ -62,6 +62,7 @@ func (c *Client) GetScheduleRotation(ctx context.Context, id string) (*ScheduleR
 		return nil, err
 	}
 
+	defer httpResp.Body.Close()
 	body, err := io.ReadAll(httpResp.Body)
 	if err != nil {
 		return nil, err
@@ -98,6 +99,7 @@ func (c *Client) CreateScheduleRotation(ctx context.Context, req ScheduleRotatio
 		return nil, err
 	}
 
+	defer httpResp.Body.Close()
 	body, err := io.ReadAll(httpResp.Body)
 	if err != nil {
 		return nil, err
@@ -134,6 +136,7 @@ func (c *Client) UpdateScheduleRotation(ctx context.Context, req ScheduleRotatio
 		return nil, err
 	}
 
+	defer httpResp.Body.Close()
 	body, err := io.ReadAll(httpResp.Body)
 	if err != nil {
 		return nil, err
