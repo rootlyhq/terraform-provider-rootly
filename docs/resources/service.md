@@ -84,16 +84,17 @@ resource "rootly_service" "customer_postgresql_prod" {
 - `pagerduty_id` (String) The PagerDuty service id associated to this service
 - `position` (Number) Position of the service
 - `properties` (Block List) Array of property values for this service. (see [below for nested schema](#nestedblock--properties))
-- `public_description` (String) The public description of the service
+- `public_description` (String) The status page description of the service
 - `service_ids` (List of String) Services dependent on this service
 - `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this service
 - `slack_aliases` (Block List) Slack Aliases associated with this service (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this service (see [below for nested schema](#nestedblock--slack_channels))
+- `slug` (String, Deprecated) The slug of the service
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-- `slug` (String) The slug of the service
+- `managed_by` (String) How this service is managed (provenance): web, api, terraform, etc. Read-only.. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.
 
 <a id="nestedblock--alert_broadcast_channel"></a>
 ### Nested Schema for `alert_broadcast_channel`

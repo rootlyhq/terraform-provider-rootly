@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -49,14 +50,16 @@ func resourceAlertGroup() *schema.Resource {
 			},
 
 			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "The slug of the alert group",
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				Deprecated:       "`slug` is derived from `name` and any configured value is ignored. It will become read-only in the next major version; remove it from your configuration.",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "[DEPRECATED] The slug of the alert group. Derived from `name`; any configured value is ignored.",
 			},
 
 			"condition_type": &schema.Schema{
@@ -351,9 +354,6 @@ func resourceAlertGroupCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
 	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
 	if value, ok := d.GetOkExists("condition_type"); ok {
 		s.ConditionType = value.(string)
 	}
@@ -494,9 +494,6 @@ func resourceAlertGroupUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
 	}
 	if d.HasChange("condition_type") {
 		s.ConditionType = d.Get("condition_type").(string)

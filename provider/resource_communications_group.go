@@ -96,14 +96,16 @@ func resourceCommunicationsGroup() *schema.Resource {
 			},
 
 			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "The slug of the communications group",
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "The slug of the communications group",
+				Deprecated:       "`slug` is derived from `name` and any configured value is ignored. It will become read-only in the next major version; remove it from your configuration.",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
 			},
 
 			"description": &schema.Schema{
@@ -374,9 +376,6 @@ func resourceCommunicationsGroupCreate(ctx context.Context, d *schema.ResourceDa
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
 	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
 	}
@@ -540,9 +539,6 @@ func resourceCommunicationsGroupUpdate(ctx context.Context, d *schema.ResourceDa
 
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
 	}
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)

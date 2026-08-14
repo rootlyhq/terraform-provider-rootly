@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -36,6 +37,19 @@ func resourceCatalogEntity() *schema.Resource {
 				Description: "",
 			},
 
+			"slug": &schema.Schema{
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "The slug of the catalog entity. Derived from `name`.",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
+				Deprecated:       "Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.",
+			},
+
 			"description": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -45,6 +59,17 @@ func resourceCatalogEntity() *schema.Resource {
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "",
+			},
+
+			"public_description": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The status page description of the catalog entity",
 			},
 
 			"position": &schema.Schema{
@@ -156,6 +181,9 @@ func resourceCatalogEntityCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
 	}
+	if value, ok := d.GetOkExists("public_description"); ok {
+		s.PublicDescription = value.(string)
+	}
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
@@ -201,7 +229,9 @@ func resourceCatalogEntityRead(ctx context.Context, d *schema.ResourceData, meta
 	}
 
 	d.Set("name", item.Name)
+	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
+	d.Set("public_description", item.PublicDescription)
 	d.Set("position", item.Position)
 	d.Set("backstage_id", item.BackstageId)
 	d.Set("external_id", item.ExternalId)
@@ -242,6 +272,9 @@ func resourceCatalogEntityUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("public_description") {
+		s.PublicDescription = d.Get("public_description").(string)
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)

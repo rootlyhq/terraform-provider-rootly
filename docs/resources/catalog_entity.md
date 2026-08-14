@@ -40,6 +40,8 @@ resource "rootly_catalog_entity" "growth_tier" {
 - `external_id` (String) An external identifier for this catalog entity. Must be unique within the catalog.
 - `position` (Number) Default position of the item when displayed in a list.
 - `properties` (Block List) Array of property values for this catalog entity (see [below for nested schema](#nestedblock--properties))
+- `public_description` (String) The status page description of the catalog entity
+- `slug` (String, Deprecated) The slug of the catalog entity. Derived from `name`.
 
 ### Read-Only
 
