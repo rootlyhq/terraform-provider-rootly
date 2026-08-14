@@ -179,7 +179,7 @@ func TestAccResourceScheduleRotationMembersValidation(t *testing.T) {
 		Steps: []resource.TestStep{
 			{
 				Config:      testAccResourceScheduleRotationMembersInvalidTypeConfig(rName),
-				ExpectError: acctest.ExpectLiteralError(`Attribute schedule_rotation_members[Value({"member_id":"dummy-id","member_type":"InvalidType","position":1})].member_type value must be one of: ["Schedule" "User"], got: "InvalidType"`),
+				ExpectError: acctest.ExpectLiteralErrors(`Attribute schedule_rotation_members[Value({"member_id":"dummy-id","member_type":"InvalidType","position":1})].member_type value must be one of: ["Schedule" "User"], got: "InvalidType"`),
 			},
 		},
 	})

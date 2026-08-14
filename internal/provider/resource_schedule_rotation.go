@@ -21,6 +21,7 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diagutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/jsonapitypes"
+	intsetvalidator "github.com/rootlyhq/terraform-provider-rootly/v5/internal/validators/setvalidator"
 	"github.com/samber/lo"
 )
 
@@ -180,6 +181,9 @@ func (r *ScheduleRotationResource) Schema(ctx context.Context, _ resource.Schema
 							},
 						},
 					},
+				},
+				Validators: []validator.Set{
+					intsetvalidator.UniqueByAttribute("position"),
 				},
 			},
 		},
