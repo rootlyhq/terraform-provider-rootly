@@ -1,12 +1,27 @@
 # Changelog
 
-## [Unreleased]
+## [5.19.0] -- 2026-08-13
 
 ### Added
-- `rootly_status_page_component` resource: manage ad-hoc and catalog-backed (Service/Functionality) status page components, including group membership and ordering via `position`. Requires the `status-page-v3-phase-1` feature flag.
-- `rootly_status_page_component_group` resource: manage status page component groups, including `collapsed_by_default` and ordering via `position`. Deleting a group also deletes the components it contains. Requires the `status-page-v3-phase-1` feature flag.
+
+- `rootly_status_page_component` resource: manage ad-hoc and catalog-backed (Service/Functionality) status page components, including group membership and ordering via `position`. Requires the `status-page-v3-phase-1` feature flag. (#421)
+- `rootly_status_page_component_group` resource: manage status page component groups, including `collapsed_by_default` and ordering via `position`. Deleting a group also deletes the components it contains. Requires the `status-page-v3-phase-1` feature flag. (#421)
+- `rootly_escalation_level` now supports cycle-based round-robin paging through `paging_strategy_configuration_repeats`, `paging_strategy_configuration_repeats_mode`, `paging_strategy_configuration_rotation_scope`, and `paging_strategy_configuration_page_users_count`. (#424)
+- `rootly_schedule` now exposes the optional, computed `time_zone` attribute for organizations using schedule-level timezone enforcement. (#422)
+- `rootly_catalog_property.kind` now accepts `functionality`. (#370)
+- `rootly_workflow_task_create_anthropic_chat_completion` now exposes `max_tokens`, with a provider default of `4000`. (#433)
+- Regenerated provider schemas now expose current API fields including catalog/catalog-entity slugs, catalog-entity/cause/environment/incident-type/team public descriptions, environment external IDs, form-field resource types, and management provenance on environments, functionalities, services, and teams. (#433)
+
+### Changed
+
+- Deprecated `slug` on 37 generated resources is now `Optional + Computed`. Existing configurations remain valid and receive a deprecation warning, state differences for the server-derived value are suppressed, and create/update requests no longer send ignored slug values. (#433, fixes #431)
+- `rootly_schedule_rotation.time_zone` is now computed instead of defaulting to `Etc/UTC`, allowing the API to inherit the parent schedule timezone. (#422)
+- `rootly_form_field.kind` accepts `status`, and `rootly_webhooks_endpoint.events` accepts `alert.updated`. (#433)
 
 ### Fixed
+
+- Restored `terraform validate` compatibility for configurations that declared `slug` before it became read-only in v5.17.0. (#433, fixes #431)
+- Prevented schedule and rotation creates/updates from sending conflicting `Etc/UTC` values when one-timezone-per-schedule enforcement is enabled. (#422)
 - `rootly_status_page`: `service_ids` and `functionality_ids` are now computed, matching the API's `tf_computed` annotation, so pages no longer drift when catalog-backed components attach their source to the page server-side.
 - `rootly_status_page_component`: removing `status_page_component_group_id` from config now moves the component back to the top level; the client sends an explicit blank instead of omitting the attribute, and the field is no longer computed so the removal produces a plan diff.
 
