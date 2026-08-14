@@ -78,16 +78,19 @@ resource "rootly_environment" "production" {
 
 - `color` (String) The hex color of the environment
 - `description` (String) The description of the environment
+- `external_id` (String) The external id associated to this environment
 - `notify_emails` (List of String) Emails attached to the environment
 - `position` (Number) Position of the environment
 - `properties` (Block List) Array of property values for this environment. (see [below for nested schema](#nestedblock--properties))
+- `public_description` (String) The status page description of the environment
 - `slack_aliases` (Block List) Slack Aliases associated with this environment (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this environment (see [below for nested schema](#nestedblock--slack_channels))
+- `slug` (String, Deprecated) The slug of the environment
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-- `slug` (String) The slug of the environment
+- `managed_by` (String) How this environment is managed (provenance): web, api, terraform, etc. Read-only.. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.
 
 <a id="nestedblock--properties"></a>
 ### Nested Schema for `properties`

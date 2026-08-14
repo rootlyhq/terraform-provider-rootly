@@ -1,6 +1,12 @@
 const inflect = require("./inflect");
 
-module.exports = (name, resourceSchema, requiredFields, taskParamsSchema) => {
+module.exports = (
+  name,
+  resourceSchema,
+  requiredFields,
+  taskParamsSchema,
+  deprecatedFields
+) => {
   // convert {anyOf: [{enum: [null]}, {type: "string"}]} to {type: "string"}
   Object.keys(taskParamsSchema.properties).forEach((key) => {
     const propSchema = taskParamsSchema.properties[key];
@@ -25,6 +31,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -38,7 +45,7 @@ func resource${nameCamel}() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		Schema: map[string]*schema.Schema {
-			${schemaFields(resourceSchema, requiredFields, taskParamsSchema)}
+			${schemaFields(resourceSchema, requiredFields, taskParamsSchema, deprecatedFields)}
 		},
 	}
 }
@@ -50,7 +57,7 @@ func resource${nameCamel}Create(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.Workflow{}
 
-	${createResourceFields(resourceSchema)}
+	${createResourceFields(resourceSchema, deprecatedFields)}
 
 	res, err := c.CreateWorkflow(s)
 	if err != nil {
@@ -91,7 +98,7 @@ func resource${nameCamel}Update(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.Workflow{}
 
-	${updateResourceFields(resourceSchema)}
+	${updateResourceFields(resourceSchema, deprecatedFields)}
 
 	_, err := c.UpdateWorkflow(d.Id(), s)
 	if err != nil {
@@ -145,9 +152,10 @@ function setResourceFields(resourceSchema) {
     .join("\n  ");
 }
 
-function createResourceFields(resourceSchema) {
+function createResourceFields(resourceSchema, deprecatedFields) {
   return Object.keys(resourceSchema.properties)
     .filter(excludeDateFields)
+    .filter((field) => !(deprecatedFields && deprecatedFields[field]))
     .map((field) => {
       const schema = resourceSchema.properties[field];
       if (field === "trigger_params") {
@@ -169,9 +177,10 @@ function createResourceFields(resourceSchema) {
     .join("\n  ");
 }
 
-function updateResourceFields(resourceSchema) {
+function updateResourceFields(resourceSchema, deprecatedFields) {
   return Object.keys(resourceSchema.properties)
     .filter(excludeDateFields)
+    .filter((field) => !(deprecatedFields && deprecatedFields[field]))
     .map((field) => {
       const schema = resourceSchema.properties[field];
       if (field === "trigger_params") {
@@ -217,7 +226,12 @@ function jsonapiToGoType(type) {
   }
 }
 
-function schemaFields(resourceSchema, requiredFields, taskParamsSchema) {
+function schemaFields(
+  resourceSchema,
+  requiredFields,
+  taskParamsSchema,
+  deprecatedFields
+) {
   return Object.keys(resourceSchema.properties)
     .filter(excludeDateFields)
     .map((field) => {
@@ -225,7 +239,8 @@ function schemaFields(resourceSchema, requiredFields, taskParamsSchema) {
         field,
         resourceSchema,
         requiredFields,
-        taskParamsSchema
+        taskParamsSchema,
+        deprecatedFields
       );
     })
     .join("\n");
@@ -266,7 +281,13 @@ function annotatedDescription(schema) {
   return description;
 }
 
-function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
+function schemaField(
+  name,
+  resourceSchema,
+  requiredFields,
+  taskParamsSchema,
+  deprecatedFields
+) {
   const schema = resourceSchema.properties[name];
   const optional =
     (requiredFields || []).indexOf(name) === -1 || schema.enum
@@ -285,6 +306,11 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
     defaultValue = `Computed: ${optional}`;
   }
   const description = annotatedDescription(schema);
+  const deprecationMessage = (deprecatedFields || {})[name];
+  const isDeprecated = Boolean(deprecationMessage);
+  const deprecationFields = isDeprecated
+    ? `\n\t\t\t\tDiffSuppressFunc: diffsuppressfunc.Skip,\n\t\t\t\tDeprecated: "${deprecationMessage.replace(/"/g, '\\"')}",`
+    : "";
   switch (schema.type) {
     case "string":
       return `
@@ -293,7 +319,7 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 				${defaultValue},
 				Required: ${required},
 				Optional: ${optional},
-				Description: "${description}",
+				Description: "${description}",${deprecationFields}
 			},
 			`;
     case "integer":
@@ -303,7 +329,7 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 				Computed: ${optional},
 				Required: ${required},
 				Optional: ${optional},
-				Description: "${description}",
+				Description: "${description}",${deprecationFields}
 			},
 			`;
     case "number":
@@ -313,7 +339,7 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 				Computed: ${optional},
 				Required: ${required},
 				Optional: ${optional},
-				Description: "${description}",
+				Description: "${description}",${deprecationFields}
 			},
 			`;
     case "boolean":
@@ -323,6 +349,7 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 					Type: schema.TypeBool,
 					Default: true,
 					Optional: true,
+					${deprecationFields}
 				},
 				`;
       }
@@ -332,7 +359,7 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 				Computed: ${optional},
 				Required: ${required},
 				Optional: ${optional},
-				Description: "${description}",
+				Description: "${description}",${deprecationFields}
 			},
 			`;
     case "array":
@@ -343,7 +370,7 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 					Computed: ${optional},
 					Required: ${required},
 					Optional: ${optional},
-					Description: "${description}",
+					Description: "${description}",${deprecationFields}
 					Elem: &schema.Resource{
 						Schema: map[string]*schema.Schema {
 							"id": &schema.Schema {
@@ -365,11 +392,11 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 					Elem: &schema.Schema {
 						Type: schema.TypeString,
 					},
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					DiffSuppressFunc: ${isDeprecated ? "diffsuppressfunc.Skip" : "tools.EqualIgnoringOrder"},
 					Computed: ${optional},
 					Required: ${required},
 					Optional: ${optional},
-					Description: "${description}",
+					Description: "${description}",${isDeprecated ? `\n\t\t\t\t\tDeprecated: "${deprecationMessage.replace(/"/g, '\\"')}",` : ""}
 				},
 				`;
       }
@@ -400,7 +427,7 @@ function schemaField(name, resourceSchema, requiredFields, taskParamsSchema) {
 				Computed: ${optional},
 				Required: ${required},
 				Optional: ${optional},
-				Description: "${description}",
+				Description: "${description}",${deprecationFields}
 			},
 			`;
   }

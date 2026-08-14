@@ -48,7 +48,7 @@ resource "rootly_custom_field_option" "eu_west_1" {
 - `position` (Number) The position of the custom_field
 - `required` (List of String)
 - `shown` (List of String)
-- `slug` (String) The slug of the custom_field
+- `slug` (String, Deprecated) The slug of the custom_field
 
 ### Read-Only
 

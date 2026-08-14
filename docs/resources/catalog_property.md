@@ -34,7 +34,7 @@ resource "rootly_catalog_property" "support_level" {
 - `kind_catalog_id` (String) Restricts values to items of specified catalog.
 - `multiple` (Boolean) Whether the attribute accepts multiple values.. Value must be one of true or false
 - `required` (Boolean) Whether the property is required.. Value must be one of true or false
-- `slug` (String)
+- `slug` (String, Deprecated)
 
 ### Read-Only
 

@@ -66,7 +66,7 @@ resource "rootly_on_call_role" "custom" {
 - `schedule_override_permissions` (List of String) Value must be one of `create`, `update`.
 - `schedules_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `services_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
-- `slug` (String) The role slug.
+- `slug` (String, Deprecated) [DEPRECATED] The role slug. Derived from `name`; any configured value is ignored.
 - `system_role` (String) The kind of role
 - `webhooks_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `workflows_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.

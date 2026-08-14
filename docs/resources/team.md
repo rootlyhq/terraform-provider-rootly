@@ -57,7 +57,7 @@ resource "rootly_team" "sre" {
 - `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this team
 - `slack_aliases` (Block List) Slack Aliases associated with this team (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this team (see [below for nested schema](#nestedblock--slack_channels))
-- `slug` (String)
+- `slug` (String, Deprecated)
 - `user_ids` (List of Number) The user ids of the members of this team.
 - `victor_ops_id` (String) The VictorOps group id associated to this team
 
