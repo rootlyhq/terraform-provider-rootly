@@ -11,6 +11,53 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/acctest"
 )
 
+func TestAccResourceScheduleRotation_Validation(t *testing.T) {
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				PlanOnly: true,
+				Config: `
+					resource "rootly_schedule_rotation" "test" {
+						schedule_id          = "123"
+						name                 = "name"
+						active_all_week      = true
+						active_time_type     = "all_day"
+						position             = 1
+						start_time           = "2025-06-20T00:00:00Z"
+
+						schedule_rotationable_type       = "ScheduleCustomRotation"
+						schedule_rotationable_attributes = {
+							shift_length      = 7
+							shift_length_unit = "days"
+							handoff_time      = "09:00"
+						}
+
+						schedule_rotation_members {
+							position    = 1
+							member_type = "User"
+							member_id   = "1"
+						}
+
+						// Duplicate position should fail
+						schedule_rotation_members {
+							position    = 1
+							member_type = "User"
+							member_id   = "2"
+						}
+					}
+				`,
+				ExpectError: acctest.ExpectLiteralErrors(
+					`• Conflicting Path 1: schedule_rotation_members[Value({"member_id":"1","member_type":"User","position":1})].position`,
+					`• Conflicting Path 2: schedule_rotation_members[Value({"member_id":"2","member_type":"User","position":1})].position`,
+					`Values for "position" must be unique across all elements in the set.`,
+				),
+			},
+		},
+	})
+}
+
 func TestAccResourceScheduleRotation_UpgradeFromVersion(t *testing.T) {
 	addr := "rootly_schedule_rotation.test"
 	name := acctest.RandomWithPrefix("tf-rotation")
@@ -126,11 +173,11 @@ func TestAccResourceScheduleRotation_Basic(t *testing.T) {
 	}
 
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck: func() { testAccPreCheck(t) },
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
-				Config:                   testAccResourceScheduleRotationConfig(name, ""),
+				Config: testAccResourceScheduleRotationConfig(name, ""),
 				ConfigStateChecks: append(
 					configStateChecks,
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
@@ -140,7 +187,6 @@ func TestAccResourceScheduleRotation_Basic(t *testing.T) {
 				),
 			},
 			{
-				ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 				Config: testAccResourceScheduleRotationConfig(name+"-updated", `
 					active_days = ["M", "T", "W"]
 					end_time = "2025-06-21T00:00:00Z"
@@ -178,7 +224,6 @@ func TestAccResourceScheduleRotation_Basic(t *testing.T) {
 				),
 			},
 			{
-				ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 				Config: testAccResourceScheduleRotationConfig(name+"-updated", `
 					active_time_attributes {
 						start_time = "13:00"
