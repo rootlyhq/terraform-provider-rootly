@@ -84,7 +84,7 @@ func TestUniqueByAttributeValidator(t *testing.T) {
 				},
 			),
 			expectedErr:  true,
-			expectedDiag: "Duplicate Value Found",
+			expectedDiag: "Duplicate Attribute Value",
 		},
 	}
 
