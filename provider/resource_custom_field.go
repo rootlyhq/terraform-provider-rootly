@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -50,12 +51,14 @@ func resourceCustomField() *schema.Resource {
 			},
 
 			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "The slug of the custom_field",
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				ForceNew:         false,
+				Description:      "The slug of the custom_field",
+				Deprecated:       "`slug` is derived from `name` and any configured value is ignored. It will become read-only in the next major version; remove it from your configuration.",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
 			},
 
 			"description": &schema.Schema{
@@ -125,9 +128,6 @@ func resourceCustomFieldCreate(ctx context.Context, d *schema.ResourceData, meta
 	}
 	if value, ok := d.GetOkExists("enabled"); ok {
 		s.Enabled = tools.Bool(value.(bool))
-	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
 	}
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
@@ -200,9 +200,6 @@ func resourceCustomFieldUpdate(ctx context.Context, d *schema.ResourceData, meta
 	}
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
 	}
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)

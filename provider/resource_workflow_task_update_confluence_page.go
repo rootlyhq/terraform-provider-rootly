@@ -115,6 +115,11 @@ func resourceWorkflowTaskUpdateConfluencePage() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
+						"include_follow_ups": &schema.Schema{
+							Description: "Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 					},
 				},
 			},

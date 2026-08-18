@@ -60,7 +60,7 @@ resource "rootly_workflow_incident" "my-workflow" {
 - `repeat_on` (List of String) Repeat on weekdays. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
 - `service_ids` (List of String)
 - `severity_ids` (List of String)
-- `slug` (String) The slug of the workflow
+- `slug` (String, Deprecated) The slug of the workflow
 - `sub_status_ids` (List of String)
 - `trigger_params` (Block List, Max: 1) (see [below for nested schema](#nestedblock--trigger_params))
 - `wait` (String) Wait this duration before executing

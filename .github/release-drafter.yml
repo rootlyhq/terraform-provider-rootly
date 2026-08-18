@@ -1,0 +1,41 @@
+# Configuration for Release Drafter: https://github.com/release-drafter/release-drafter
+name-template: $NEXT_PATCH_VERSION
+tag-template: $NEXT_PATCH_VERSION
+
+template: |
+  $CHANGES
+
+categories:
+  - title: 🚀 New features and improvements
+    labels:
+      - enhancement
+  - title: 🐛 Bug fixes
+    labels:
+      - bug
+  - title: 📝 Documentation updates
+    labels:
+      - documentation
+  - title: 👻 Maintenance
+    labels:
+      - chore
+      - maintenance
+  - title: 🚦 Tests
+    labels:
+      - test
+  - title: ✍ Other changes
+  - title: 📦 Dependency updates
+    labels:
+      - dependencies
+    collapse-after: 5
+  - title: 🔐 Security
+    labels:
+      - "🔐 security"
+
+exclude-labels:
+  - skip-changelog
+  - invalid
+
+autolabeler:
+  - label: documentation
+    files:
+      - "*.md"

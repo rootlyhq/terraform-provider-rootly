@@ -108,7 +108,6 @@ ${resources
 				"rootly_on_call_role": resourceOnCallRole(),
 				"rootly_override_shift": resourceOverrideShift(),
 				"rootly_schedule": resourceSchedule(),
-				"rootly_schedule_rotation": resourceScheduleRotation(),
 				"rootly_schedule_rotation_user": resourceScheduleRotationUser(),
 				"rootly_user_on_call_role": resourceUserOnCallRole(),
 				"rootly_catalog_property": resourceCatalogProperty(),

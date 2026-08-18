@@ -32,6 +32,7 @@ resource "rootly_catalog" "customer_tier" {
 - `external_id` (String) An external identifier for this catalog. Must be unique within the team.
 - `icon` (String) Value must be one of `globe-alt`, `server-stack`, `users`, `user-group`, `chart-bar`, `shapes`, `light-bulb`, `cursor-arrow-ripple`.
 - `position` (Number) Default position of the catalog when displayed in a list.
+- `slug` (String, Deprecated) The slug of the catalog. Derived from `name`.
 
 ### Read-Only
 
