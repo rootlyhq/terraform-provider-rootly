@@ -12,6 +12,7 @@ export interface ClientConfig {
 
 interface DataSourceListConfig {
   type: "list";
+  resourceName: string;
 }
 
 interface DataSourceSingleConfig {
@@ -20,7 +21,6 @@ interface DataSourceSingleConfig {
 
 export type DataSourceConfig = {
   name: string;
-  resourceName: string;
   description?: string;
 } & (DataSourceListConfig | DataSourceSingleConfig);
 

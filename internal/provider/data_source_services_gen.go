@@ -32,7 +32,7 @@ func (d *ServicesDataSource) Metadata(ctx context.Context, req datasource.Metada
 
 func (d *ServicesDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "",
+		MarkdownDescription: "Retrieves a list of all services.",
 		Attributes: map[string]schema.Attribute{
 			"services": schema.ListNestedAttribute{
 				Computed:   true,

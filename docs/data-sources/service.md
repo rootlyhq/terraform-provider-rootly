@@ -2,12 +2,12 @@
 page_title: "Data Source rootly_service - terraform-provider-rootly"
 subcategory:
 description: |-
-    
+    Retrieves a service.
 ---
 
 # Data Source (rootly_service)
 
-
+Retrieves a service.
 
 ## Example Usage
 
