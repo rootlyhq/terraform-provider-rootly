@@ -1,13 +1,23 @@
-# providergen
+# Next-gen provider generator
 
 To install dependencies:
 
 ```bash
+# At ./internal/providergen
 bun install
 ```
 
-To run:
+You will need to pull and clean the swagger file first by running the existing
+codegen:
 
 ```bash
-bun run index.ts
+# At root of the provider
+make codegen
+```
+
+Then generate the provider code using the new generator:
+
+```bash
+# At ./internal/providergen
+bun run index.ts --input ../../schema/swagger.json
 ```
