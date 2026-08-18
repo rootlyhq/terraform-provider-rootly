@@ -25,7 +25,6 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io"
 	"reflect"
 
 	"github.com/rootlyhq/jsonapi"
@@ -168,17 +167,11 @@ func (c *Client) ${camelize(config.name)}List(ctx context.Context) (*[]${cameliz
 		resp, err := c.ClientWithResponses.${operationName}WithResponse(ctx, &params)
 		if err != nil {
 			return nil, err
-		} else if resp.HTTPResponse == nil {
+		} else if resp == nil {
 			return nil, fmt.Errorf("empty response")
 		}
 
-		defer resp.HTTPResponse.Body.Close()
-		body, err := io.ReadAll(resp.HTTPResponse.Body)
-		if err != nil {
-			return nil, fmt.Errorf("failed to read response body: %w", err)
-		}
-
-		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(body), reflect.TypeOf(new(${camelize(config.name)})))
+		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(resp.Body), reflect.TypeOf(new(${camelize(config.name)})))
 		if err != nil {
 			return nil, fmt.Errorf("failed to unmarshal response body: %w", err)
 		}
@@ -220,21 +213,15 @@ function generateGetAction({
 
   return `
 func (c *Client) ${camelize(config.name)}Get(ctx context.Context, id string) (*${camelize(config.name)}, error) {
-  httpResp, err := c.ClientWithResponses.${operationName}(ctx, id)
+  resp, err := c.ClientWithResponses.${operationName}WithResponse(ctx, id)
   if err != nil {
     return nil, err
-  } else if httpResp == nil {
+  } else if resp == nil {
     return nil, fmt.Errorf("empty response")
   }
 
-  defer httpResp.Body.Close()
-  body, err := io.ReadAll(httpResp.Body)
-  if err != nil {
-    return nil, fmt.Errorf("failed to read response body: %w", err)
-  }
-
   var item ${camelize(config.name)}
-  if err := jsonapi.UnmarshalPayload(bytes.NewReader(body), &item); err != nil {
+  if err := jsonapi.UnmarshalPayload(bytes.NewReader(resp.Body), &item); err != nil {
 		return nil, err
 	}
 

@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io"
 	"reflect"
 
 	"github.com/rootlyhq/jsonapi"
@@ -131,17 +130,11 @@ func (c *Client) ServiceList(ctx context.Context) (*[]Service, error) {
 		resp, err := c.ClientWithResponses.ListServicesWithResponse(ctx, &params)
 		if err != nil {
 			return nil, err
-		} else if resp.HTTPResponse == nil {
+		} else if resp == nil {
 			return nil, fmt.Errorf("empty response")
 		}
 
-		defer resp.HTTPResponse.Body.Close()
-		body, err := io.ReadAll(resp.HTTPResponse.Body)
-		if err != nil {
-			return nil, fmt.Errorf("failed to read response body: %w", err)
-		}
-
-		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(body), reflect.TypeOf(new(Service)))
+		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(resp.Body), reflect.TypeOf(new(Service)))
 		if err != nil {
 			return nil, fmt.Errorf("failed to unmarshal response body: %w", err)
 		}
@@ -165,21 +158,15 @@ func (c *Client) ServiceList(ctx context.Context) (*[]Service, error) {
 }
 
 func (c *Client) ServiceGet(ctx context.Context, id string) (*Service, error) {
-	httpResp, err := c.ClientWithResponses.GetService(ctx, id)
+	resp, err := c.ClientWithResponses.GetServiceWithResponse(ctx, id)
 	if err != nil {
 		return nil, err
-	} else if httpResp == nil {
+	} else if resp == nil {
 		return nil, fmt.Errorf("empty response")
 	}
 
-	defer httpResp.Body.Close()
-	body, err := io.ReadAll(httpResp.Body)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read response body: %w", err)
-	}
-
 	var item Service
-	if err := jsonapi.UnmarshalPayload(bytes.NewReader(body), &item); err != nil {
+	if err := jsonapi.UnmarshalPayload(bytes.NewReader(resp.Body), &item); err != nil {
 		return nil, err
 	}
 
