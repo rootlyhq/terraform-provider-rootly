@@ -66,6 +66,7 @@ const excluded = {
     "secret",
     "shift",
     "sla", // manual change: retry logic for eventual consistency on list queries (Searchkick index)
+    "user", // hand-maintained: exposes on_call_role/role relationships
     "user_notification_rule",
     "webhooks_delivery",
     "workflow_run",
@@ -132,6 +133,7 @@ const excluded = {
   clients: [
     "escalation_level", // manual fix: delay must not use omitempty so 0 is sent
     "escalation_path", // manual fix: initial_delay must not use omitempty so 0 is sent (c74784b)
+    "user", // hand-maintained: exposes on_call_role/role relations + on_call_role update
   ]
 }
 

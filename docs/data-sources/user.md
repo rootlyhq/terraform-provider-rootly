@@ -28,3 +28,5 @@ data "rootly_user" "my-user" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `on_call_role_id` (String) The ID of the user's on-call role, or empty when unset.
+- `role_id` (String) The ID of the user's (general) role, or empty when unset.
