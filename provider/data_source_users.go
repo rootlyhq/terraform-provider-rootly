@@ -108,6 +108,10 @@ func dataSourceUsersRead(ctx context.Context, d *schema.ResourceData, meta inter
 			})
 		}
 
+		if wanted != nil && len(users) == len(wanted) {
+			break
+		}
+
 		if len(items) < pageSize {
 			break
 		}

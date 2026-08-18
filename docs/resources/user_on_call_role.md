@@ -11,7 +11,7 @@ Manages the on-call role assigned to a Rootly user. The resource id is the user 
 
 ## Example Usage
 
-```shell
+```terraform
 data "rootly_user" "john" {
   email = "john@acme.com"
 }

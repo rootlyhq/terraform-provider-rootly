@@ -66,6 +66,7 @@ const excluded = {
     "secret",
     "shift",
     "sla", // manual change: retry logic for eventual consistency on list queries (Searchkick index)
+    "user", // hand-maintained: exposes on_call_role/role relationships
     "user_notification_rule",
     "webhooks_delivery",
     "workflow_run",

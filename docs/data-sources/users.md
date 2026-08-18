@@ -11,7 +11,7 @@ Lists Rootly users, optionally filtered to a set of emails. Emails that do not r
 
 ## Example Usage
 
-```shell
+```terraform
 data "rootly_users" "team" {
   emails = [
     "john@acme.com",
