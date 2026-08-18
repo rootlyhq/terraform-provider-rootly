@@ -91,7 +91,6 @@ const excluded = {
     "custom_field_option",
     "custom_field",
     "dashboard",
-    "escalation_level", // manual fix: Update must always send delay, not only on HasChange (see resource_escalation_level.go)
     "escalation_path",
     "escalation_policy",
     "incident_action_item",

@@ -327,12 +327,9 @@ func resourceEscalationLevelUpdate(ctx context.Context, d *schema.ResourceData, 
 	if d.HasChange("paging_strategy_configuration_page_users_count") {
 		s.PagingStrategyConfigurationPageUsersCount = d.Get("paging_strategy_configuration_page_users_count").(int)
 	}
-	// Delay is serialised without omitempty (see client.EscalationLevel, and
-	// tools/generate.js excluded.clients) so that an explicit 0 reaches the API.
-	// That means every update sends a delay, so it must always be populated from
-	// state - guarding on HasChange leaves it at Go's zero value and silently
-	// resets the level's delay to 0 whenever some *other* field changes.
+
 	s.Delay = d.Get("delay").(int)
+
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
 	}
