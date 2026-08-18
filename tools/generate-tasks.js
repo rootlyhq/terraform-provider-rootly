@@ -27,6 +27,7 @@ function genResourceFile(task_name, task_schema) {
     .join("");
 
   const needsJSON = hasJSONProperty(task_schema);
+  const needsStateUpgrade = task_name === "http_client";
 
   return `package provider
 
@@ -43,6 +44,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	${needsStateUpgrade ? '"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"' : ""}
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -58,6 +60,14 @@ func resourceWorkflowTask${task_name_camel}() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		CustomizeDiff: validateUniqueWorkflowTaskPosition,
+${needsStateUpgrade ? `		SchemaVersion: 1,
+		StateUpgraders: []schema.StateUpgrader{
+			{
+				Version: 0,
+				Type:    stateupgrade.WorkflowTaskHTTPClientV0().CoreConfigSchema().ImpliedType(),
+				Upgrade: stateupgrade.UpgradeWorkflowTaskHTTPClientV0ToV1,
+			},
+		},` : ""}
 
 		Schema: map[string]*schema.Schema {
 			"workflow_id": {

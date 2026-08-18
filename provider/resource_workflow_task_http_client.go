@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -28,6 +29,14 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		CustomizeDiff: validateUniqueWorkflowTaskPosition,
+		SchemaVersion: 1,
+		StateUpgraders: []schema.StateUpgrader{
+			{
+				Version: 0,
+				Type:    stateupgrade.WorkflowTaskHTTPClientV0().CoreConfigSchema().ImpliedType(),
+				Upgrade: stateupgrade.UpgradeWorkflowTaskHTTPClientV0ToV1,
+			},
+		},
 
 		Schema: map[string]*schema.Schema {
 			"workflow_id": {
