@@ -94,10 +94,14 @@ jobs:
       continue-on-error: true
 
   # run acceptance tests in sharded matrix for speed
+  # On push to master: runs immediately (secrets available).
+  # On PRs (including forks): requires approval from engineering team
+  # via the 'acceptance-tests' environment before secrets are exposed.
   test:
     name: Matrix Test
     needs: [build, sweep]
     runs-on: blacksmith-4vcpu-ubuntu-2404
+    environment: ${{ github.event_name == 'pull_request' && 'acceptance-tests' || '' }}
     timeout-minutes: 45
     strategy:
       fail-fast: false
