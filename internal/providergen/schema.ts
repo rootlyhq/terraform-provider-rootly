@@ -20,6 +20,7 @@ interface DataSourceSingleConfig {
 
 export type DataSourceConfig = {
   name: string;
+  resource: string;
   description?: string;
 } & (DataSourceListConfig | DataSourceSingleConfig);
 
@@ -37,8 +38,13 @@ export type ComputedOptionalRequired =
 
 declare module "openapi3-ts/oas30" {
   interface SchemaObject {
+    // Defines the jsonapi attribute tag
+    "x-tf-jsonapi-tag"?: "primary" | "attr";
+    // Defines the jsonapi type
+    "x-tf-jsonapi-type"?: string;
+    // Defines if the property is computed, optional or required.
     "x-tf-computed-optional-required"?: ComputedOptionalRequired;
-    // Inidcates this is the top level item type for the data source. Only used for plural data sources.
+    // Indicates this is the top level item type for the data source. Only used for plural data sources.
     "x-tf-top-level-item-type"?: boolean;
   }
 }
