@@ -47,7 +47,7 @@ func TestUpgradeWorkflowTaskHTTPClientV0ToV1DropsEmptyValues(t *testing.T) {
 	require.NotContains(t, params, "retry_wait_time")
 }
 
-func TestUpgradeWorkflowTaskHTTPClientV0ToV1RejectsInvalidValues(t *testing.T) {
+func TestUpgradeWorkflowTaskHTTPClientV0ToV1DropsInvalidValues(t *testing.T) {
 	t.Parallel()
 
 	rawState := map[string]any{
@@ -56,6 +56,9 @@ func TestUpgradeWorkflowTaskHTTPClientV0ToV1RejectsInvalidValues(t *testing.T) {
 		},
 	}
 
-	_, err := UpgradeWorkflowTaskHTTPClientV0ToV1(context.Background(), rawState, nil)
-	require.ErrorContains(t, err, `retry_count "one"`)
+	upgraded, err := UpgradeWorkflowTaskHTTPClientV0ToV1(context.Background(), rawState, nil)
+	require.NoError(t, err)
+
+	params := upgraded["task_params"].([]any)[0].(map[string]any)
+	require.NotContains(t, params, "retry_count")
 }

@@ -2,7 +2,6 @@ package stateupgrade
 
 import (
 	"context"
-	"fmt"
 	"strconv"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -77,6 +76,8 @@ func UpgradeWorkflowTaskHTTPClientV0ToV1(_ context.Context, rawState map[string]
 		switch value := value.(type) {
 		case int:
 			continue
+		case float64:
+			continue
 		case string:
 			if value == "" {
 				delete(params, field)
@@ -84,11 +85,12 @@ func UpgradeWorkflowTaskHTTPClientV0ToV1(_ context.Context, rawState map[string]
 			}
 			converted, err := strconv.Atoi(value)
 			if err != nil {
-				return nil, fmt.Errorf("upgrade workflow_task_http_client %s %q to an integer: %w", field, value, err)
+				delete(params, field)
+				continue
 			}
 			params[field] = converted
 		default:
-			return nil, fmt.Errorf("upgrade workflow_task_http_client %s: expected string state, got %T", field, value)
+			delete(params, field)
 		}
 	}
 

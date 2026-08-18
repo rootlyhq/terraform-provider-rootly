@@ -1,5 +1,13 @@
 const fs = require("fs");
 
+const taskStateUpgrades = {
+  http_client: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskHTTPClientV0",
+    upgradeFunction: "UpgradeWorkflowTaskHTTPClientV0ToV1",
+  },
+};
+
 module.exports = function generateWorkflowTaskResources(tasks, swagger) {
 	tasks.forEach((taskName) => {
 		const taskSchema = swagger.components.schemas[`${taskName}_task_params`]
@@ -27,7 +35,7 @@ function genResourceFile(task_name, task_schema) {
     .join("");
 
   const needsJSON = hasJSONProperty(task_schema);
-  const needsStateUpgrade = task_name === "http_client";
+  const stateUpgrade = taskStateUpgrades[task_name];
 
   return `package provider
 
@@ -44,7 +52,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
-	${needsStateUpgrade ? '"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"' : ""}
+	${stateUpgrade ? '"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"' : ""}
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -60,12 +68,12 @@ func resourceWorkflowTask${task_name_camel}() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		CustomizeDiff: validateUniqueWorkflowTaskPosition,
-${needsStateUpgrade ? `		SchemaVersion: 1,
+${stateUpgrade ? `		SchemaVersion: ${stateUpgrade.schemaVersion},
 		StateUpgraders: []schema.StateUpgrader{
 			{
 				Version: 0,
-				Type:    stateupgrade.WorkflowTaskHTTPClientV0().CoreConfigSchema().ImpliedType(),
-				Upgrade: stateupgrade.UpgradeWorkflowTaskHTTPClientV0ToV1,
+				Type:    stateupgrade.${stateUpgrade.schemaFactory}().CoreConfigSchema().ImpliedType(),
+				Upgrade: stateupgrade.${stateUpgrade.upgradeFunction},
 			},
 		},` : ""}
 
