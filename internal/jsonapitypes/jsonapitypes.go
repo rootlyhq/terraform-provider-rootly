@@ -1,7 +1,10 @@
 package jsonapitypes
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
 	"github.com/rootlyhq/jsonapi"
 )
 
@@ -24,4 +27,11 @@ func NullableInt64Value(v jsonapi.NullableAttr[int64]) types.Int64 {
 		return types.Int64Value(v)
 	}
 	return types.Int64Null()
+}
+
+func NullableListOfValue[T any](ctx context.Context, v jsonapi.NullableAttr[[]T]) supertypes.ListValueOf[T] {
+	if v, err := v.Get(); err == nil {
+		return supertypes.NewListValueOfSlice(ctx, v)
+	}
+	return supertypes.NewListValueOfNull[T](ctx)
 }
