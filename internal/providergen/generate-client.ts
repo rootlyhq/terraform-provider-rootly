@@ -1,4 +1,10 @@
-import { camelize, pluralize, singularize, underscore } from "inflection";
+import {
+  camelize,
+  humanize,
+  pluralize,
+  singularize,
+  underscore,
+} from "inflection";
 import { oas30 } from "openapi3-ts";
 import { match } from "ts-pattern";
 import type { ClientConfig } from "./schema";
@@ -24,9 +30,9 @@ export function generateClient({
     draft.properties = {
       id: {
         type: "string",
-        description: "The ID of the resource",
-        "x-tf-jsonapi-tag": "primary",
-        "x-tf-jsonapi-type": underscore(pluralize(config.name)),
+        description: `The ID of the ${humanize(config.name, true)}.`,
+        "x-go-jsonapi-tag": "primary",
+        "x-go-jsonapi-type": underscore(pluralize(config.name)),
       },
       ...draft.properties,
     };
@@ -85,8 +91,8 @@ function generateModel({
     };
 
     const structTagParts = [
-      value["x-tf-jsonapi-tag"] ?? "attr",
-      value["x-tf-jsonapi-type"] ?? key,
+      value["x-go-jsonapi-tag"] ?? "attr",
+      value["x-go-jsonapi-type"] ?? key,
     ];
     if (!property.required) {
       structTagParts.push("omitempty");

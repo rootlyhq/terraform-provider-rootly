@@ -114,7 +114,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task":                    dataSourceWorkflowTask(),
 				"rootly_teams":                            dataSourceTeams(),
 				"rootly_severities":                       dataSourceSeverities(),
-				"rootly_services":                         dataSourceServices(),
 				"rootly_schedule":                         dataSourceSchedule(),
 				"rootly_users":                            dataSourceUsers(),
 			},

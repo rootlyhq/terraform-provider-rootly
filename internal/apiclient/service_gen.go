@@ -12,7 +12,7 @@ import (
 )
 
 type Service struct {
-	// The ID of the resource
+	// The ID of the service.
 	Id string `jsonapi:"primary,services"`
 	// The name of the service
 	Name string `jsonapi:"attr,name"`
