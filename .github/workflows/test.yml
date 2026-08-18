@@ -16,8 +16,10 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: tests-${{ github.head_ref || github.ref }}
-  cancel-in-progress: true
+  # Serialize all test workflow runs so their acceptance-test matrices cannot
+  # overlap while sharing the same Rootly organization.
+  group: tests
+  cancel-in-progress: false
   # For systems with an upstream API that could drift unexpectedly (like most SaaS systems, etc.),
   # we recommend testing at a regular interval not necessarily tied to code changes. This will
   # ensure you are alerted to something breaking due to an API change, even if the code did not
@@ -125,7 +127,7 @@ jobs:
     - name: Install gotestsum
       run: go install gotest.tools/gotestsum@latest
 
-    - name: Run internal/provider tests (shard 0 only, sequential)
+    - name: Run internal tests (shard 0 only, sequential)
       if: matrix.shard == 0
       timeout-minutes: 15
       env:
@@ -134,7 +136,7 @@ jobs:
       run: |
         gotestsum --format standard-verbose -- \
           -v -cover -timeout 15m \
-          ./internal/provider/
+          ./internal/...
 
     - name: Discover and shard provider tests
       id: shard

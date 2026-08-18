@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -38,14 +39,16 @@ func resourceWebhooksEndpoint() *schema.Resource {
 			},
 
 			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    false,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "The slug of the endpoint",
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "The slug of the endpoint",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
+				Deprecated:       "Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.",
 			},
 
 			"url": &schema.Schema{
@@ -63,7 +66,7 @@ func resourceWebhooksEndpoint() *schema.Resource {
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
 					Type:         schema.TypeString,
-					ValidateFunc: validation.StringInSlice([]string{"incident.created", "incident.updated", "incident.in_triage", "incident.mitigated", "incident.resolved", "incident.cancelled", "incident.deleted", "incident.scheduled.created", "incident.scheduled.updated", "incident.scheduled.in_progress", "incident.scheduled.completed", "incident.scheduled.deleted", "incident_post_mortem.created", "incident_post_mortem.updated", "incident_post_mortem.published", "incident_post_mortem.deleted", "incident_status_page_event.created", "incident_status_page_event.updated", "incident_status_page_event.deleted", "incident_event.created", "incident_event.updated", "incident_event.deleted", "alert.created", "pulse.created", "shift.started", "genius_workflow_run.queued", "genius_workflow_run.started", "genius_workflow_run.completed", "genius_workflow_run.failed", "genius_workflow_run.canceled", "audit_log.created"}, false),
+					ValidateFunc: validation.StringInSlice([]string{"incident.created", "incident.updated", "incident.in_triage", "incident.mitigated", "incident.resolved", "incident.cancelled", "incident.deleted", "incident.scheduled.created", "incident.scheduled.updated", "incident.scheduled.in_progress", "incident.scheduled.completed", "incident.scheduled.deleted", "incident_post_mortem.created", "incident_post_mortem.updated", "incident_post_mortem.published", "incident_post_mortem.deleted", "incident_status_page_event.created", "incident_status_page_event.updated", "incident_status_page_event.deleted", "incident_event.created", "incident_event.updated", "incident_event.deleted", "alert.created", "alert.updated", "pulse.created", "shift.started", "genius_workflow_run.queued", "genius_workflow_run.started", "genius_workflow_run.completed", "genius_workflow_run.failed", "genius_workflow_run.canceled", "audit_log.created"}, false),
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Computed:         false,
@@ -72,7 +75,7 @@ func resourceWebhooksEndpoint() *schema.Resource {
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
-				Description:      "Value must be one of `incident.created`, `incident.updated`, `incident.in_triage`, `incident.mitigated`, `incident.resolved`, `incident.cancelled`, `incident.deleted`, `incident.scheduled.created`, `incident.scheduled.updated`, `incident.scheduled.in_progress`, `incident.scheduled.completed`, `incident.scheduled.deleted`, `incident_post_mortem.created`, `incident_post_mortem.updated`, `incident_post_mortem.published`, `incident_post_mortem.deleted`, `incident_status_page_event.created`, `incident_status_page_event.updated`, `incident_status_page_event.deleted`, `incident_event.created`, `incident_event.updated`, `incident_event.deleted`, `alert.created`, `pulse.created`, `shift.started`, `genius_workflow_run.queued`, `genius_workflow_run.started`, `genius_workflow_run.completed`, `genius_workflow_run.failed`, `genius_workflow_run.canceled`, `audit_log.created`.",
+				Description:      "Value must be one of `incident.created`, `incident.updated`, `incident.in_triage`, `incident.mitigated`, `incident.resolved`, `incident.cancelled`, `incident.deleted`, `incident.scheduled.created`, `incident.scheduled.updated`, `incident.scheduled.in_progress`, `incident.scheduled.completed`, `incident.scheduled.deleted`, `incident_post_mortem.created`, `incident_post_mortem.updated`, `incident_post_mortem.published`, `incident_post_mortem.deleted`, `incident_status_page_event.created`, `incident_status_page_event.updated`, `incident_status_page_event.deleted`, `incident_event.created`, `incident_event.updated`, `incident_event.deleted`, `alert.created`, `alert.updated`, `pulse.created`, `shift.started`, `genius_workflow_run.queued`, `genius_workflow_run.started`, `genius_workflow_run.completed`, `genius_workflow_run.failed`, `genius_workflow_run.canceled`, `audit_log.created`.",
 			},
 
 			"secret": &schema.Schema{

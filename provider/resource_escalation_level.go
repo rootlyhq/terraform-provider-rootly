@@ -72,6 +72,52 @@ func resourceEscalationLevel() *schema.Resource {
 				ValidateFunc: validation.StringInSlice([]string{"on_call_only", "everyone"}, false),
 			},
 
+			"paging_strategy_configuration_repeats": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Number of times to rotate through the roster (cycle-based round robin).",
+			},
+
+			"paging_strategy_configuration_repeats_mode": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Controls how repeats are interpreted: 'users' pages exactly N users, 'all' pages everyone once.. Value must be one of `users`, `all`.",
+				ValidateFunc: validation.StringInSlice([]string{"users", "all"}, false),
+			},
+
+			"paging_strategy_configuration_rotation_scope": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Scope of rotation ordering: active rotation members only, or entire schedule.. Value must be one of `active_rotation`, `entire_schedule`.",
+				ValidateFunc: validation.StringInSlice([]string{"active_rotation", "entire_schedule"}, false),
+			},
+
+			"paging_strategy_configuration_page_users_count": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Number of users to page at a time (cycle-based round robin).",
+			},
+
 			"delay": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
@@ -126,8 +172,8 @@ func resourceEscalationLevel() *schema.Resource {
 							Sensitive:    false,
 							ForceNew:     false,
 							WriteOnly:    false,
-							Description:  "The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`, `service`.",
-							ValidateFunc: validation.StringInSlice([]string{"team", "user", "schedule", "slack_channel", "service"}, false),
+							Description:  "The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`, `microsoft_teams_channel`, `service`.",
+							ValidateFunc: validation.StringInSlice([]string{"team", "user", "schedule", "slack_channel", "microsoft_teams_channel", "service"}, false),
 						},
 
 						"team_members": &schema.Schema{
@@ -166,6 +212,18 @@ func resourceEscalationLevelCreate(ctx context.Context, d *schema.ResourceData, 
 	}
 	if value, ok := d.GetOkExists("paging_strategy_configuration_schedule_strategy"); ok {
 		s.PagingStrategyConfigurationScheduleStrategy = value.(string)
+	}
+	if value, ok := d.GetOkExists("paging_strategy_configuration_repeats"); ok {
+		s.PagingStrategyConfigurationRepeats = value.(int)
+	}
+	if value, ok := d.GetOkExists("paging_strategy_configuration_repeats_mode"); ok {
+		s.PagingStrategyConfigurationRepeatsMode = value.(string)
+	}
+	if value, ok := d.GetOkExists("paging_strategy_configuration_rotation_scope"); ok {
+		s.PagingStrategyConfigurationRotationScope = value.(string)
+	}
+	if value, ok := d.GetOkExists("paging_strategy_configuration_page_users_count"); ok {
+		s.PagingStrategyConfigurationPageUsersCount = value.(int)
 	}
 	if value, ok := d.GetOkExists("delay"); ok {
 		s.Delay = value.(int)
@@ -209,6 +267,10 @@ func resourceEscalationLevelRead(ctx context.Context, d *schema.ResourceData, me
 	d.Set("escalation_policy_path_id", item.EscalationPolicyPathId)
 	d.Set("paging_strategy_configuration_strategy", item.PagingStrategyConfigurationStrategy)
 	d.Set("paging_strategy_configuration_schedule_strategy", item.PagingStrategyConfigurationScheduleStrategy)
+	d.Set("paging_strategy_configuration_repeats", item.PagingStrategyConfigurationRepeats)
+	d.Set("paging_strategy_configuration_repeats_mode", item.PagingStrategyConfigurationRepeatsMode)
+	d.Set("paging_strategy_configuration_rotation_scope", item.PagingStrategyConfigurationRotationScope)
+	d.Set("paging_strategy_configuration_page_users_count", item.PagingStrategyConfigurationPageUsersCount)
 	d.Set("delay", item.Delay)
 	d.Set("position", item.Position)
 
@@ -252,6 +314,18 @@ func resourceEscalationLevelUpdate(ctx context.Context, d *schema.ResourceData, 
 	}
 	if d.HasChange("paging_strategy_configuration_schedule_strategy") {
 		s.PagingStrategyConfigurationScheduleStrategy = d.Get("paging_strategy_configuration_schedule_strategy").(string)
+	}
+	if d.HasChange("paging_strategy_configuration_repeats") {
+		s.PagingStrategyConfigurationRepeats = d.Get("paging_strategy_configuration_repeats").(int)
+	}
+	if d.HasChange("paging_strategy_configuration_repeats_mode") {
+		s.PagingStrategyConfigurationRepeatsMode = d.Get("paging_strategy_configuration_repeats_mode").(string)
+	}
+	if d.HasChange("paging_strategy_configuration_rotation_scope") {
+		s.PagingStrategyConfigurationRotationScope = d.Get("paging_strategy_configuration_rotation_scope").(string)
+	}
+	if d.HasChange("paging_strategy_configuration_page_users_count") {
+		s.PagingStrategyConfigurationPageUsersCount = d.Get("paging_strategy_configuration_page_users_count").(int)
 	}
 	// Delay is serialised without omitempty (see client.EscalationLevel, and
 	// tools/generate.js excluded.clients) so that an explicit 0 reaches the API.

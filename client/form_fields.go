@@ -18,6 +18,7 @@ type FormField struct {
 	ValueKindCatalogId         string        `jsonapi:"attr,value_kind_catalog_id,omitempty"`
 	Name                       string        `jsonapi:"attr,name,omitempty"`
 	Slug                       string        `jsonapi:"attr,slug,omitempty"`
+	ResourceType               string        `jsonapi:"attr,resource_type,omitempty"`
 	Description                string        `jsonapi:"attr,description,omitempty"`
 	Shown                      []interface{} `jsonapi:"attr,shown,omitempty"`
 	Required                   []interface{} `jsonapi:"attr,required,omitempty"`

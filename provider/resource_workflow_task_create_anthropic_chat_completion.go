@@ -90,6 +90,12 @@ func resourceWorkflowTaskCreateAnthropicChatCompletion() *schema.Resource {
 							Type:        schema.TypeString,
 							Required:    true,
 						},
+						"max_tokens": &schema.Schema{
+							Description: "Maximum number of tokens to generate. Defaults to 4000 when omitted",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Default:     4000,
+						},
 					},
 				},
 			},

@@ -11,16 +11,19 @@ import (
 )
 
 type Environment struct {
-	ID            string        `jsonapi:"primary,environments"`
-	Name          string        `jsonapi:"attr,name,omitempty"`
-	Slug          string        `jsonapi:"attr,slug,omitempty"`
-	Description   string        `jsonapi:"attr,description,omitempty"`
-	NotifyEmails  []interface{} `jsonapi:"attr,notify_emails,omitempty"`
-	Color         string        `jsonapi:"attr,color,omitempty"`
-	Position      int           `jsonapi:"attr,position,omitempty"`
-	SlackChannels []interface{} `jsonapi:"attr,slack_channels,omitempty"`
-	SlackAliases  []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
-	Properties    []interface{} `jsonapi:"attr,properties,omitempty"`
+	ID                string        `jsonapi:"primary,environments"`
+	Name              string        `jsonapi:"attr,name,omitempty"`
+	Slug              string        `jsonapi:"attr,slug,omitempty"`
+	ManagedBy         string        `jsonapi:"attr,managed_by,omitempty"`
+	ExternalId        string        `jsonapi:"attr,external_id,omitempty"`
+	Description       string        `jsonapi:"attr,description,omitempty"`
+	PublicDescription string        `jsonapi:"attr,public_description,omitempty"`
+	NotifyEmails      []interface{} `jsonapi:"attr,notify_emails,omitempty"`
+	Color             string        `jsonapi:"attr,color,omitempty"`
+	Position          int           `jsonapi:"attr,position,omitempty"`
+	SlackChannels     []interface{} `jsonapi:"attr,slack_channels,omitempty"`
+	SlackAliases      []interface{} `jsonapi:"attr,slack_aliases,omitempty"`
+	Properties        []interface{} `jsonapi:"attr,properties,omitempty"`
 }
 
 func (c *Client) ListEnvironments(params *rootlygo.ListEnvironmentsParams) ([]interface{}, error) {

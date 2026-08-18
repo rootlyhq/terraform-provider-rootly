@@ -154,6 +154,16 @@ func resourceSchedule() *schema.Resource {
 				Optional:    true,
 				Description: "IANA time zone used for the weekly shift summary (e.g. `Australia/Sydney`).",
 			},
+
+			"time_zone": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "A valid IANA time zone name. Only applicable when config_one_timezone_per_schedule_enabled is true for the organization.",
+			},
+
 		},
 	}
 }
@@ -224,6 +234,9 @@ func resourceScheduleCreate(ctx context.Context, d *schema.ResourceData, meta in
 	if value, ok := d.GetOkExists("shift_report_time_zone"); ok {
 		s.ShiftReportTimeZone = value.(string)
 	}
+	if value, ok := d.GetOkExists("time_zone"); ok {
+		s.TimeZone = value.(string)
+	}
 
 	res, err := c.CreateSchedule(s)
 	if err != nil {
@@ -268,6 +281,7 @@ func resourceScheduleRead(ctx context.Context, d *schema.ResourceData, meta inte
 	d.Set("shift_report_day_of_week", item.ShiftReportDayOfWeek)
 	d.Set("shift_report_time_of_day", item.ShiftReportTimeOfDay)
 	d.Set("shift_report_time_zone", item.ShiftReportTimeZone)
+	d.Set("time_zone", item.TimeZone)
 
 	return nil
 }
@@ -340,6 +354,9 @@ func resourceScheduleUpdate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if d.HasChange("shift_report_time_zone") {
 		s.ShiftReportTimeZone = d.Get("shift_report_time_zone").(string)
+	}
+	if d.HasChange("time_zone") {
+		s.TimeZone = d.Get("time_zone").(string)
 	}
 
 	_, err := c.UpdateSchedule(d.Id(), s)

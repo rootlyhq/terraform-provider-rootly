@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 )
 
 func resourceCatalog() *schema.Resource {
@@ -34,6 +35,19 @@ func resourceCatalog() *schema.Resource {
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "",
+			},
+
+			"slug": &schema.Schema{
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "The slug of the catalog. Derived from `name`.",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
+				Deprecated:       "Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.",
 			},
 
 			"description": &schema.Schema{
@@ -147,6 +161,7 @@ func resourceCatalogRead(ctx context.Context, d *schema.ResourceData, meta inter
 	}
 
 	d.Set("name", item.Name)
+	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
 	d.Set("icon", item.Icon)
 	d.Set("position", item.Position)
