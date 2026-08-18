@@ -2,21 +2,18 @@ package provider
 
 import (
 	"fmt"
-	"regexp"
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/acctest"
 )
 
 func TestAccResourceScheduleRotationMembers(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-sched-rm")
 
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck: func() {
-			testAccPreCheck(t)
-		},
-		ProviderFactories: providerFactories,
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccResourceScheduleRotationMembersCreatedConfig(rName),
@@ -119,10 +116,8 @@ func TestAccResourceScheduleRotationMembersScheduleType(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-sched-rm-s")
 
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck: func() {
-			testAccPreCheck(t)
-		},
-		ProviderFactories: providerFactories,
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccResourceScheduleRotationMembersWithScheduleConfig(rName),
@@ -179,14 +174,12 @@ func TestAccResourceScheduleRotationMembersValidation(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-sched-rm-v")
 
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck: func() {
-			testAccPreCheck(t)
-		},
-		ProviderFactories: providerFactories,
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
 				Config:      testAccResourceScheduleRotationMembersInvalidTypeConfig(rName),
-				ExpectError: regexp.MustCompile(`expected.*member_type.*to be one of.*got InvalidType`),
+				ExpectError: acctest.ExpectLiteralErrors(`Attribute schedule_rotation_members[Value({"member_id":"dummy-id","member_type":"InvalidType","position":1})].member_type value must be one of: ["Schedule" "User"], got: "InvalidType"`),
 			},
 		},
 	})

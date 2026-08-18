@@ -127,7 +127,7 @@ jobs:
     - name: Install gotestsum
       run: go install gotest.tools/gotestsum@latest
 
-    - name: Run internal/provider tests (shard 0 only, sequential)
+    - name: Run internal tests (shard 0 only, sequential)
       if: matrix.shard == 0
       timeout-minutes: 15
       env:
@@ -136,7 +136,7 @@ jobs:
       run: |
         gotestsum --format standard-verbose -- \
           -v -cover -timeout 15m \
-          ./internal/provider/
+          ./internal/...
 
     - name: Discover and shard provider tests
       id: shard
