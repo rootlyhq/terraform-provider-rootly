@@ -327,9 +327,9 @@ func resourceEscalationLevelUpdate(ctx context.Context, d *schema.ResourceData, 
 	if d.HasChange("paging_strategy_configuration_page_users_count") {
 		s.PagingStrategyConfigurationPageUsersCount = d.Get("paging_strategy_configuration_page_users_count").(int)
 	}
-	if d.HasChange("delay") {
-		s.Delay = d.Get("delay").(int)
-	}
+
+	s.Delay = d.Get("delay").(int)
+
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
 	}
