@@ -16,12 +16,13 @@ func TestWorkflowTaskV518StateUpgrades(t *testing.T) {
 	t.Parallel()
 
 	testCases := []struct {
-		name         string
-		resourceName string
-		resource     *schema.Resource
-		legacyState  string
-		currentState string
-		expected     map[string]any
+		name            string
+		resourceName    string
+		resource        *schema.Resource
+		legacyState     string
+		currentState    string
+		expected        map[string]any
+		currentExpected map[string]any
 	}{
 		{
 			name:         "HTTP client retries",
@@ -40,20 +41,22 @@ func TestWorkflowTaskV518StateUpgrades(t *testing.T) {
 			expected:     map[string]any{"days_until_meeting": int64(2), "time_of_meeting": "09:00"},
 		},
 		{
-			name:         "Mistral numeric settings",
-			resourceName: "rootly_workflow_task_create_mistral_chat_completion",
-			resource:     resourceWorkflowTaskCreateMistralChatCompletion(),
-			legacyState:  `{"workflow_id":"workflow-id","task_params":[{"model":{"id":"model-id"},"prompt":"Prompt","temperature":1,"max_tokens":"512","top_p":1}]}`,
-			currentState: `{"workflow_id":"workflow-id","task_params":[{"model":{"id":"model-id"},"prompt":"Prompt","temperature":"1","max_tokens":512,"top_p":"1"}]}`,
-			expected:     map[string]any{"prompt": "Prompt", "temperature": "1", "max_tokens": int64(512), "top_p": "1"},
+			name:            "Mistral numeric settings",
+			resourceName:    "rootly_workflow_task_create_mistral_chat_completion",
+			resource:        resourceWorkflowTaskCreateMistralChatCompletion(),
+			legacyState:     `{"workflow_id":"workflow-id","task_params":[{"model":{"id":"model-id"},"prompt":"Prompt","temperature":1,"max_tokens":"512","top_p":1}]}`,
+			currentState:    `{"workflow_id":"workflow-id","task_params":[{"model":{"id":"model-id"},"prompt":"Prompt","temperature":"0.7","max_tokens":512,"top_p":"0.9"}]}`,
+			expected:        map[string]any{"prompt": "Prompt", "temperature": "1", "max_tokens": int64(512), "top_p": "1"},
+			currentExpected: map[string]any{"prompt": "Prompt", "temperature": "0.7", "max_tokens": int64(512), "top_p": "0.9"},
 		},
 		{
-			name:         "OpenAI numeric settings",
-			resourceName: "rootly_workflow_task_create_openai_chat_completion",
-			resource:     resourceWorkflowTaskCreateOpenaiChatCompletion(),
-			legacyState:  `{"workflow_id":"workflow-id","task_params":[{"model":{"id":"model-id"},"prompt":"Prompt","temperature":1,"max_tokens":"1024","top_p":1}]}`,
-			currentState: `{"workflow_id":"workflow-id","task_params":[{"model":{"id":"model-id"},"prompt":"Prompt","temperature":"1","max_tokens":1024,"top_p":"1"}]}`,
-			expected:     map[string]any{"prompt": "Prompt", "temperature": "1", "max_tokens": int64(1024), "top_p": "1"},
+			name:            "OpenAI numeric settings",
+			resourceName:    "rootly_workflow_task_create_openai_chat_completion",
+			resource:        resourceWorkflowTaskCreateOpenaiChatCompletion(),
+			legacyState:     `{"workflow_id":"workflow-id","task_params":[{"model":{"id":"model-id"},"prompt":"Prompt","temperature":1,"max_tokens":"1024","top_p":1}]}`,
+			currentState:    `{"workflow_id":"workflow-id","task_params":[{"model":{"id":"model-id"},"prompt":"Prompt","temperature":"0.6","max_tokens":1024,"top_p":"0.8"}]}`,
+			expected:        map[string]any{"prompt": "Prompt", "temperature": "1", "max_tokens": int64(1024), "top_p": "1"},
+			currentExpected: map[string]any{"prompt": "Prompt", "temperature": "0.6", "max_tokens": int64(1024), "top_p": "0.8"},
 		},
 		{
 			name:         "Outlook create days",
@@ -109,7 +112,11 @@ func TestWorkflowTaskV518StateUpgrades(t *testing.T) {
 					require.NoError(t, err)
 					params := state.GetAttr("task_params").Index(cty.NumberIntVal(0))
 
-					for field, expected := range testCase.expected {
+					expectedValues := testCase.expected
+					if stateName == "v5.18 state" && testCase.currentExpected != nil {
+						expectedValues = testCase.currentExpected
+					}
+					for field, expected := range expectedValues {
 						value := params.GetAttr(field)
 						switch expected := expected.(type) {
 						case int64:
