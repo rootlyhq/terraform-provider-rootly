@@ -578,6 +578,21 @@ function genTestParams(task_name, task_schema) {
 			return `${key} = ["foo"]`;
 		}
       case "object":
+        if (task_schema.properties[key].additionalProperties) {
+          const valueSchema = task_schema.properties[key].additionalProperties;
+          let mapValue;
+          if (valueSchema.type === "boolean") {
+            mapValue = "false";
+          } else if (valueSchema.type === "integer" || valueSchema.type === "number") {
+            mapValue = "1";
+          } else {
+            const value = valueSchema.example || valueSchema.enum?.[0] || "test";
+            mapValue = `"${value}"`;
+          }
+          return `${key} = {
+					example = ${mapValue}
+				}`;
+        }
         return `${key} = {
 					id = "foo"
 					name = "bar"
