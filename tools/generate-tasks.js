@@ -38,6 +38,10 @@ const taskStateUpgrades = {
   },
 };
 
+const taskCustomizeDiffs = {
+  publish_incident: "validatePublishIncidentWorkflowTaskDiff",
+};
+
 module.exports = function generateWorkflowTaskResources(tasks, swagger) {
 	tasks.forEach((taskName) => {
 		const taskSchema = swagger.components.schemas[`${taskName}_task_params`]
@@ -66,6 +70,7 @@ function genResourceFile(task_name, task_schema) {
 
   const needsJSON = hasJSONProperty(task_schema);
   const stateUpgrade = taskStateUpgrades[task_name];
+  const customizeDiff = taskCustomizeDiffs[task_name] || "validateUniqueWorkflowTaskPosition";
 
   return `package provider
 
@@ -97,7 +102,7 @@ func resourceWorkflowTask${task_name_camel}() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		CustomizeDiff: validateUniqueWorkflowTaskPosition,
+		CustomizeDiff: ${customizeDiff},
 ${stateUpgrade ? `		SchemaVersion: ${stateUpgrade.schemaVersion},
 		StateUpgraders: []schema.StateUpgrader{
 			{
@@ -583,8 +588,10 @@ function genTestParams(task_name, task_schema) {
           let mapValue;
           if (valueSchema.type === "boolean") {
             mapValue = "false";
-          } else if (valueSchema.type === "integer" || valueSchema.type === "number") {
+          } else if (valueSchema.type === "integer") {
             mapValue = "1";
+          } else if (valueSchema.type === "number") {
+            mapValue = `"1"`;
           } else {
             const value = valueSchema.example || valueSchema.enum?.[0] || "test";
             mapValue = `"${value}"`;
