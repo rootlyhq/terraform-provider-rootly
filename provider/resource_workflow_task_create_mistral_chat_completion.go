@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -26,6 +27,14 @@ func resourceWorkflowTaskCreateMistralChatCompletion() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		CustomizeDiff: validateUniqueWorkflowTaskPosition,
+		SchemaVersion: 1,
+		StateUpgraders: []schema.StateUpgrader{
+			{
+				Version: 0,
+				Type:    stateupgrade.WorkflowTaskCreateMistralChatCompletionV0().CoreConfigSchema().ImpliedType(),
+				Upgrade: stateupgrade.UpgradeWorkflowTaskCreateMistralChatCompletionV0ToV1,
+			},
+		},
 
 		Schema: map[string]*schema.Schema {
 			"workflow_id": {

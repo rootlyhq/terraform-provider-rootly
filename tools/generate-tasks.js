@@ -1,5 +1,43 @@
 const fs = require("fs");
 
+const taskStateUpgrades = {
+  create_google_calendar_event: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskCreateGoogleCalendarEventV0",
+    upgradeFunction: "UpgradeWorkflowTaskCreateGoogleCalendarEventV0ToV1",
+  },
+  create_mistral_chat_completion: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskCreateMistralChatCompletionV0",
+    upgradeFunction: "UpgradeWorkflowTaskCreateMistralChatCompletionV0ToV1",
+  },
+  create_openai_chat_completion: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskCreateOpenaiChatCompletionV0",
+    upgradeFunction: "UpgradeWorkflowTaskCreateOpenaiChatCompletionV0ToV1",
+  },
+  create_outlook_event: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskCreateOutlookEventV0",
+    upgradeFunction: "UpgradeWorkflowTaskCreateOutlookEventV0ToV1",
+  },
+  http_client: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskHTTPClientV0",
+    upgradeFunction: "UpgradeWorkflowTaskHTTPClientV0ToV1",
+  },
+  update_google_calendar_event: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskUpdateGoogleCalendarEventV0",
+    upgradeFunction: "UpgradeWorkflowTaskUpdateGoogleCalendarEventV0ToV1",
+  },
+  update_pagerduty_incident: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskUpdatePagerdutyIncidentV0",
+    upgradeFunction: "UpgradeWorkflowTaskUpdatePagerdutyIncidentV0ToV1",
+  },
+};
+
 module.exports = function generateWorkflowTaskResources(tasks, swagger) {
 	tasks.forEach((taskName) => {
 		const taskSchema = swagger.components.schemas[`${taskName}_task_params`]
@@ -27,6 +65,7 @@ function genResourceFile(task_name, task_schema) {
     .join("");
 
   const needsJSON = hasJSONProperty(task_schema);
+  const stateUpgrade = taskStateUpgrades[task_name];
 
   return `package provider
 
@@ -43,6 +82,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	${stateUpgrade ? '"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"' : ""}
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -58,6 +98,14 @@ func resourceWorkflowTask${task_name_camel}() *schema.Resource {
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 		CustomizeDiff: validateUniqueWorkflowTaskPosition,
+${stateUpgrade ? `		SchemaVersion: ${stateUpgrade.schemaVersion},
+		StateUpgraders: []schema.StateUpgrader{
+			{
+				Version: 0,
+				Type:    stateupgrade.${stateUpgrade.schemaFactory}().CoreConfigSchema().ImpliedType(),
+				Upgrade: stateupgrade.${stateUpgrade.upgradeFunction},
+			},
+		},` : ""}
 
 		Schema: map[string]*schema.Schema {
 			"workflow_id": {
