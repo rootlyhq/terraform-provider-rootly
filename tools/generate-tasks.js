@@ -304,6 +304,7 @@ function annotatedDescription(schema) {
   }
   if (
     schema.type === "object" &&
+    schema.properties &&
     schema.properties.id &&
     schema.properties.name
   ) {
@@ -414,6 +415,20 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 								},
 							},`;
     }
+  }
+  if (property_schema.type === "object" && property_schema.additionalProperties) {
+    const valueSchema = property_schema.additionalProperties;
+    a = `${a}
+							Elem: &schema.Schema {
+								Type: ${genTaskSchemaPropertyType(valueSchema.type)},`;
+    if (valueSchema.enum) {
+      a = `${a}
+								ValidateFunc: validation.StringInSlice([]string{
+									${valueSchema.enum.map((value) => `"${value}",`).join("\n")}
+								}, false),`;
+    }
+    a = `${a}
+							},`;
   }
   return `${a}
 						},`;

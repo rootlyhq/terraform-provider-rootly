@@ -22510,6 +22510,30 @@ func (e PrintTaskParamsTaskType) Valid() bool {
 	}
 }
 
+// Defines values for PublishIncidentTaskParamsSelectedComponentStatuses.
+const (
+	PublishIncidentTaskParamsSelectedComponentStatusesDegradedPerformance PublishIncidentTaskParamsSelectedComponentStatuses = "degraded_performance"
+	PublishIncidentTaskParamsSelectedComponentStatusesMajorOutage         PublishIncidentTaskParamsSelectedComponentStatuses = "major_outage"
+	PublishIncidentTaskParamsSelectedComponentStatusesOperational         PublishIncidentTaskParamsSelectedComponentStatuses = "operational"
+	PublishIncidentTaskParamsSelectedComponentStatusesPartialOutage       PublishIncidentTaskParamsSelectedComponentStatuses = "partial_outage"
+)
+
+// Valid indicates whether the value is a known member of the PublishIncidentTaskParamsSelectedComponentStatuses enum.
+func (e PublishIncidentTaskParamsSelectedComponentStatuses) Valid() bool {
+	switch e {
+	case PublishIncidentTaskParamsSelectedComponentStatusesDegradedPerformance:
+		return true
+	case PublishIncidentTaskParamsSelectedComponentStatusesMajorOutage:
+		return true
+	case PublishIncidentTaskParamsSelectedComponentStatusesOperational:
+		return true
+	case PublishIncidentTaskParamsSelectedComponentStatusesPartialOutage:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for PublishIncidentTaskParamsStatus.
 const (
 	PublishIncidentTaskParamsStatusCompleted     PublishIncidentTaskParamsStatus = "completed"
@@ -51995,6 +52019,12 @@ type PublishIncidentTaskParams struct {
 	NotifySubscribers *bool  `json:"notify_subscribers,omitempty"`
 	PublicTitle       string `json:"public_title"`
 
+	// SelectedComponentKeys Composite "SourceType:<id>" keys of the status page components affected by the publish (requires the status-page-v3-phase-1 feature).
+	SelectedComponentKeys *[]string `json:"selected_component_keys,omitempty"`
+
+	// SelectedComponentStatuses Impact status to publish for each selected component key. Keys must match selected_component_keys entries.
+	SelectedComponentStatuses *map[string]PublishIncidentTaskParamsSelectedComponentStatuses `json:"selected_component_statuses,omitempty"`
+
 	// ShouldTweet For Statuspage.io integrated pages auto publishes a tweet for your update
 	ShouldTweet  *bool                           `json:"should_tweet,omitempty"`
 	Status       PublishIncidentTaskParamsStatus `json:"status"`
@@ -52008,6 +52038,9 @@ type PublishIncidentTaskParams struct {
 	} `json:"status_page_template,omitempty"`
 	TaskType *PublishIncidentTaskParamsTaskType `json:"task_type,omitempty"`
 }
+
+// PublishIncidentTaskParamsSelectedComponentStatuses defines model for PublishIncidentTaskParams.SelectedComponentStatuses.
+type PublishIncidentTaskParamsSelectedComponentStatuses string
 
 // PublishIncidentTaskParamsStatus defines model for PublishIncidentTaskParams.Status.
 type PublishIncidentTaskParamsStatus string
