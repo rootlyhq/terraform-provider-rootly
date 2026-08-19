@@ -10,18 +10,19 @@ import { match } from "ts-pattern";
 import type { ClientConfig } from "./schema";
 import { assertSchemaObject } from "./types";
 import { produce } from "immer";
+import { getParametersByOperationId } from "./openapi";
 
 export function generateClient({
-  swagger,
+  doc,
   config,
 }: {
-  swagger: oas30.OpenAPIObject;
+  doc: oas30.OpenAPIObject;
   config: ClientConfig;
 }) {
   console.log(`Generating client: ${config.name}`);
-  let schema = swagger.components?.schemas?.[config.name];
+  let schema = doc.components?.schemas?.[config.name];
   if (!schema) {
-    throw new Error(`Cannot find schema: ${config.name} in swagger`);
+    throw new Error(`Cannot find schema: ${config.name} in doc`);
   }
   assertSchemaObject(schema);
 
@@ -59,9 +60,9 @@ ${generateModel({
   parents: [],
 })}
 
-${config.actions?.list?.enabled ? generateListAction({ swagger, config }) : ""}
+${config.actions?.list?.enabled ? generateListAction({ doc, config }) : ""}
 
-${config.actions?.get?.enabled ? generateGetAction({ swagger, config }) : ""}
+${config.actions?.get?.enabled ? generateGetAction({ doc, config }) : ""}
 `;
 }
 
@@ -163,27 +164,46 @@ ${children.join("\n\n")}
 }
 
 function generateListAction({
-  swagger,
+  doc,
   config,
 }: {
-  swagger: oas30.OpenAPIObject;
+  doc: oas30.OpenAPIObject;
   config: ClientConfig;
 }) {
-  const listSchema = swagger.components?.schemas?.[`${config.name}_list`];
+  const listSchema = doc.components?.schemas?.[`${config.name}_list`];
   if (!listSchema) {
-    throw new Error(`Cannot find schema: ${config.name}_list in swagger`);
+    throw new Error(`Cannot find schema: ${config.name}_list in doc`);
   }
   assertSchemaObject(listSchema);
 
-  const operationName = `List${camelize(pluralize(config.name))}`;
+  const operationId = `list${camelize(pluralize(config.name))}`;
+  const params = getParametersByOperationId({
+    doc,
+    operationId,
+    notIn: ["path"],
+  });
+  const hasParams = Array.isArray(params) && params.length > 0;
+
+  const funcArgs = ["ctx context.Context"];
+  const clientArgs = ["ctx"];
+  if (hasParams) {
+    funcArgs.push(`params *rootly.${camelize(operationId)}Params`);
+    clientArgs.push("params");
+  }
 
   return `
-func (c *Client) ${camelize(config.name)}List(ctx context.Context) (*[]${camelize(singularize(config.name))}, error) {
-  params := rootly.${operationName}Params{}
+func (c *Client) ${camelize(config.name)}List(${funcArgs.join(", ")}) (*[]${camelize(singularize(config.name))}, error) {
+  ${
+    hasParams
+      ? `if params == nil {
+  params = new(rootly.${camelize(operationId)}Params)
+}`
+      : ""
+  }
   items := []${camelize(config.name)}{}
 
   for {
-		resp, err := c.ClientWithResponses.${operationName}WithResponse(ctx, &params)
+		resp, err := c.ClientWithResponses.${camelize(operationId)}WithResponse(${clientArgs.join(", ")})
 		if err != nil {
 			return nil, err
 		} else if resp == nil {
@@ -216,23 +236,36 @@ func (c *Client) ${camelize(config.name)}List(ctx context.Context) (*[]${cameliz
 }
 
 function generateGetAction({
-  swagger,
+  doc,
   config,
 }: {
-  swagger: oas30.OpenAPIObject;
+  doc: oas30.OpenAPIObject;
   config: ClientConfig;
 }) {
-  const listSchema = swagger.components?.schemas?.[config.name];
+  const listSchema = doc.components?.schemas?.[config.name];
   if (!listSchema) {
-    throw new Error(`Cannot find schema: ${config.name} in swagger`);
+    throw new Error(`Cannot find schema: ${config.name} in doc`);
   }
   assertSchemaObject(listSchema);
 
-  const operationName = `Get${camelize(config.name)}`;
+  const operationId = `get${camelize(config.name)}`;
+  const params = getParametersByOperationId({
+    doc,
+    operationId,
+    notIn: ["path"],
+  });
+  const hasParams = Array.isArray(params) && params.length > 0;
+
+  const funcArgs = ["ctx context.Context", "id string"];
+  const clientArgs = ["ctx", "id"];
+  if (hasParams) {
+    funcArgs.push(`params *rootly.${camelize(operationId)}Params`);
+    clientArgs.push("params");
+  }
 
   return `
-func (c *Client) ${camelize(config.name)}Get(ctx context.Context, id string) (*${camelize(config.name)}, error) {
-  resp, err := c.ClientWithResponses.${operationName}WithResponse(ctx, id)
+func (c *Client) ${camelize(config.name)}Get(${funcArgs.join(", ")}) (*${camelize(config.name)}, error) {
+  resp, err := c.ClientWithResponses.${camelize(operationId)}WithResponse(${clientArgs.join(", ")})
   if err != nil {
     return nil, err
   } else if resp == nil {

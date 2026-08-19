@@ -123,12 +123,14 @@ type ServicePropertiesItem struct {
 	Value string `jsonapi:"attr,value"`
 }
 
-func (c *Client) ServiceList(ctx context.Context) (*[]Service, error) {
-	params := rootly.ListServicesParams{}
+func (c *Client) ServiceList(ctx context.Context, params *rootly.ListServicesParams) (*[]Service, error) {
+	if params == nil {
+		params = new(rootly.ListServicesParams)
+	}
 	items := []Service{}
 
 	for {
-		resp, err := c.ClientWithResponses.ListServicesWithResponse(ctx, &params)
+		resp, err := c.ClientWithResponses.ListServicesWithResponse(ctx, params)
 		if err != nil {
 			return nil, err
 		} else if resp == nil {

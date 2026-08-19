@@ -29,17 +29,17 @@ async function parseArguments() {
     throw new Error(`File not found: "${values.input}"`);
   }
 
-  let swagger: oas30.OpenAPIObject;
+  let doc: oas30.OpenAPIObject;
   try {
-    swagger = await file.json();
+    doc = await file.json();
   } catch {
     throw new Error(`Invalid JSON format in file: "${values.input}"`);
   }
 
-  swagger = dereferenceSync(swagger);
+  doc = dereferenceSync(doc);
 
   return {
-    swagger,
+    doc,
   };
 }
 
@@ -50,10 +50,10 @@ async function writeAndFormatGoFile(destination: URL, code: string) {
 }
 
 async function main() {
-  const { swagger } = await parseArguments();
+  const { doc } = await parseArguments();
 
   for (const config of CLIENTS) {
-    const code = generateClient({ swagger, config });
+    const code = generateClient({ doc, config });
     await writeAndFormatGoFile(
       new URL(`../apiclient/${config.name}_gen.go`, import.meta.url),
       code,
@@ -61,7 +61,7 @@ async function main() {
   }
 
   for (const config of DATA_SOURCES) {
-    const code = generateDataSource({ swagger, config });
+    const code = generateDataSource({ doc, config });
     await writeAndFormatGoFile(
       new URL(`../provider/data_source_${config.name}_gen.go`, import.meta.url),
       code,

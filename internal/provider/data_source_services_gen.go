@@ -260,7 +260,7 @@ func (d *ServicesDataSource) Read(ctx context.Context, req datasource.ReadReques
 		return
 	}
 
-	items, err := d.client.ServiceList(ctx)
+	items, err := d.client.ServiceList(ctx, nil)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read, got error: %s", err))
 		return
