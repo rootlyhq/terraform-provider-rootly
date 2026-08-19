@@ -4,8 +4,8 @@
 
 ### Added
 
-- `rootly_status_page_component` resource: manage ad-hoc and catalog-backed (Service/Functionality) status page components, including group membership and ordering via `position`. Requires the `status-page-v3-phase-1` feature flag. (#421)
-- `rootly_status_page_component_group` resource: manage status page component groups, including `collapsed_by_default` and ordering via `position`. Deleting a group also deletes the components it contains. Requires the `status-page-v3-phase-1` feature flag. (#421)
+- `rootly_status_page_component` resource: manage ad-hoc and catalog-backed (Service/Functionality) status page components, including group membership and ordering via `position`. This resource is in Early Access and is not generally available. Contact Rootly Support to request access. (#421)
+- `rootly_status_page_component_group` resource: manage status page component groups, including `collapsed_by_default` and ordering via `position`. Deleting a group also deletes the components it contains. This resource is in Early Access and is not generally available. Contact Rootly Support to request access. (#421)
 - `rootly_escalation_level` now supports cycle-based round-robin paging through `paging_strategy_configuration_repeats`, `paging_strategy_configuration_repeats_mode`, `paging_strategy_configuration_rotation_scope`, and `paging_strategy_configuration_page_users_count`. (#424)
 - `rootly_schedule` now exposes the optional, computed `time_zone` attribute for organizations using schedule-level timezone enforcement. (#422)
 - `rootly_catalog_property.kind` now accepts `functionality`. (#370)
