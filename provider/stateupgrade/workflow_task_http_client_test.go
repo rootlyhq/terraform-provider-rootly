@@ -62,3 +62,25 @@ func TestUpgradeWorkflowTaskHTTPClientV0ToV1DropsInvalidValues(t *testing.T) {
 	params := upgraded["task_params"].([]any)[0].(map[string]any)
 	require.NotContains(t, params, "retry_count")
 }
+
+func TestUpgradeWorkflowTaskFieldsDropsValuesThatCannotMatchTheTargetSchema(t *testing.T) {
+	t.Parallel()
+
+	rawState := map[string]any{
+		"task_params": []any{
+			map[string]any{
+				"integer_field": 1.5,
+				"string_field":  false,
+			},
+		},
+	}
+
+	upgraded := upgradeWorkflowTaskFields(rawState, map[string]workflowTaskFieldType{
+		"integer_field": workflowTaskFieldInt,
+		"string_field":  workflowTaskFieldString,
+	})
+
+	params := upgraded["task_params"].([]any)[0].(map[string]any)
+	require.NotContains(t, params, "integer_field")
+	require.NotContains(t, params, "string_field")
+}

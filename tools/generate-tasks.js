@@ -1,10 +1,40 @@
 const fs = require("fs");
 
 const taskStateUpgrades = {
+  create_google_calendar_event: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskCreateGoogleCalendarEventV0",
+    upgradeFunction: "UpgradeWorkflowTaskCreateGoogleCalendarEventV0ToV1",
+  },
+  create_mistral_chat_completion: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskCreateMistralChatCompletionV0",
+    upgradeFunction: "UpgradeWorkflowTaskCreateMistralChatCompletionV0ToV1",
+  },
+  create_openai_chat_completion: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskCreateOpenaiChatCompletionV0",
+    upgradeFunction: "UpgradeWorkflowTaskCreateOpenaiChatCompletionV0ToV1",
+  },
+  create_outlook_event: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskCreateOutlookEventV0",
+    upgradeFunction: "UpgradeWorkflowTaskCreateOutlookEventV0ToV1",
+  },
   http_client: {
     schemaVersion: 1,
     schemaFactory: "WorkflowTaskHTTPClientV0",
     upgradeFunction: "UpgradeWorkflowTaskHTTPClientV0ToV1",
+  },
+  update_google_calendar_event: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskUpdateGoogleCalendarEventV0",
+    upgradeFunction: "UpgradeWorkflowTaskUpdateGoogleCalendarEventV0ToV1",
+  },
+  update_pagerduty_incident: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskUpdatePagerdutyIncidentV0",
+    upgradeFunction: "UpgradeWorkflowTaskUpdatePagerdutyIncidentV0ToV1",
   },
 };
 
