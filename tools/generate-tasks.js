@@ -1,5 +1,47 @@
 const fs = require("fs");
 
+const taskStateUpgrades = {
+  create_google_calendar_event: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskCreateGoogleCalendarEventV0",
+    upgradeFunction: "UpgradeWorkflowTaskCreateGoogleCalendarEventV0ToV1",
+  },
+  create_mistral_chat_completion: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskCreateMistralChatCompletionV0",
+    upgradeFunction: "UpgradeWorkflowTaskCreateMistralChatCompletionV0ToV1",
+  },
+  create_openai_chat_completion: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskCreateOpenaiChatCompletionV0",
+    upgradeFunction: "UpgradeWorkflowTaskCreateOpenaiChatCompletionV0ToV1",
+  },
+  create_outlook_event: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskCreateOutlookEventV0",
+    upgradeFunction: "UpgradeWorkflowTaskCreateOutlookEventV0ToV1",
+  },
+  http_client: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskHTTPClientV0",
+    upgradeFunction: "UpgradeWorkflowTaskHTTPClientV0ToV1",
+  },
+  update_google_calendar_event: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskUpdateGoogleCalendarEventV0",
+    upgradeFunction: "UpgradeWorkflowTaskUpdateGoogleCalendarEventV0ToV1",
+  },
+  update_pagerduty_incident: {
+    schemaVersion: 1,
+    schemaFactory: "WorkflowTaskUpdatePagerdutyIncidentV0",
+    upgradeFunction: "UpgradeWorkflowTaskUpdatePagerdutyIncidentV0ToV1",
+  },
+};
+
+const taskCustomizeDiffs = {
+  publish_incident: "validatePublishIncidentWorkflowTaskDiff",
+};
+
 module.exports = function generateWorkflowTaskResources(tasks, swagger) {
 	tasks.forEach((taskName) => {
 		const taskSchema = swagger.components.schemas[`${taskName}_task_params`]
@@ -27,6 +69,8 @@ function genResourceFile(task_name, task_schema) {
     .join("");
 
   const needsJSON = hasJSONProperty(task_schema);
+  const stateUpgrade = taskStateUpgrades[task_name];
+  const customizeDiff = taskCustomizeDiffs[task_name] || "validateUniqueWorkflowTaskPosition";
 
   return `package provider
 
@@ -43,6 +87,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	${stateUpgrade ? '"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"' : ""}
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -57,7 +102,15 @@ func resourceWorkflowTask${task_name_camel}() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		CustomizeDiff: validateUniqueWorkflowTaskPosition,
+		CustomizeDiff: ${customizeDiff},
+${stateUpgrade ? `		SchemaVersion: ${stateUpgrade.schemaVersion},
+		StateUpgraders: []schema.StateUpgrader{
+			{
+				Version: 0,
+				Type:    stateupgrade.${stateUpgrade.schemaFactory}().CoreConfigSchema().ImpliedType(),
+				Upgrade: stateupgrade.${stateUpgrade.upgradeFunction},
+			},
+		},` : ""}
 
 		Schema: map[string]*schema.Schema {
 			"workflow_id": {
@@ -256,6 +309,7 @@ function annotatedDescription(schema) {
   }
   if (
     schema.type === "object" &&
+    schema.properties &&
     schema.properties.id &&
     schema.properties.name
   ) {
@@ -366,6 +420,20 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 								},
 							},`;
     }
+  }
+  if (property_schema.type === "object" && property_schema.additionalProperties) {
+    const valueSchema = property_schema.additionalProperties;
+    a = `${a}
+							Elem: &schema.Schema {
+								Type: ${genTaskSchemaPropertyType(valueSchema.type)},`;
+    if (valueSchema.enum) {
+      a = `${a}
+								ValidateFunc: validation.StringInSlice([]string{
+									${valueSchema.enum.map((value) => `"${value}",`).join("\n")}
+								}, false),`;
+    }
+    a = `${a}
+							},`;
   }
   return `${a}
 						},`;
@@ -515,6 +583,23 @@ function genTestParams(task_name, task_schema) {
 			return `${key} = ["foo"]`;
 		}
       case "object":
+        if (task_schema.properties[key].additionalProperties) {
+          const valueSchema = task_schema.properties[key].additionalProperties;
+          let mapValue;
+          if (valueSchema.type === "boolean") {
+            mapValue = "false";
+          } else if (valueSchema.type === "integer") {
+            mapValue = "1";
+          } else if (valueSchema.type === "number") {
+            mapValue = `"1"`;
+          } else {
+            const value = valueSchema.example || valueSchema.enum?.[0] || "test";
+            mapValue = `"${value}"`;
+          }
+          return `${key} = {
+					example = ${mapValue}
+				}`;
+        }
         return `${key} = {
 					id = "foo"
 					name = "bar"

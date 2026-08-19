@@ -80,6 +80,7 @@ ${dataSources
 				"rootly_severities": dataSourceSeverities(),
 				"rootly_services": dataSourceServices(),
 				"rootly_schedule": dataSourceSchedule(),
+				"rootly_users": dataSourceUsers(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
 ${resources
@@ -108,6 +109,7 @@ ${resources
 				"rootly_override_shift": resourceOverrideShift(),
 				"rootly_schedule": resourceSchedule(),
 				"rootly_schedule_rotation_user": resourceScheduleRotationUser(),
+				"rootly_user_on_call_role": resourceUserOnCallRole(),
 				"rootly_catalog_property": resourceCatalogProperty(),
 				"rootly_secret": resourceSecret(),
 				"rootly_status_page": resourceStatusPage(),
