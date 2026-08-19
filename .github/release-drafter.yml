@@ -1,17 +1,22 @@
 # Configuration for Release Drafter: https://github.com/release-drafter/release-drafter
-name-template: $NEXT_PATCH_VERSION
-tag-template: $NEXT_PATCH_VERSION
+name-template: v$RESOLVED_VERSION
+tag-template: v$RESOLVED_VERSION
 
 template: |
   $CHANGES
 
 categories:
   - title: 🚀 New features and improvements
-    labels:
-      - enhancement
+    semver-increment: minor
+    when:
+      - conventional:
+          type: feat
+      - label: enhancement
   - title: 🐛 Bug fixes
-    labels:
-      - bug
+    when:
+      - conventional:
+          type: fix
+      - label: bug
   - title: 📝 Documentation updates
     labels:
       - documentation
@@ -30,6 +35,15 @@ categories:
   - title: 🔐 Security
     labels:
       - "🔐 security"
+
+  - type: version-resolver
+    semver-increment: major
+    when:
+      - conventional:
+          breaking: true
+      - label: major
+  - type: version-resolver
+    semver-increment: patch
 
 exclude-labels:
   - skip-changelog
