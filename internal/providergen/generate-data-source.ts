@@ -424,6 +424,16 @@ function generateModel({
 })()`,
         )
         .with(
+          [{ type: "array", items: { type: "object" } }, { nullable: false }],
+          () => `m.${camelize(key)} = (func() supertypes.ListNestedObjectValueOf[${name}${camelize(key)}Item] {
+  return supertypes.NewListNestedObjectValueOfValueSlice[${name}${camelize(key)}Item](ctx, lo.Map(data.${camelize(key)}, func(vv apiclient.${baseName}${camelize(key)}Item, _ int) ${name}${camelize(key)}Item {
+    var mm ${name}${camelize(key)}Item
+    diags.Append(mm.FromApi(ctx, vv)...)
+    return mm
+  }))
+})()`,
+        )
+        .with(
           [{ type: "array", items: { type: "object" } }, { nullable: true }],
           () => `m.${camelize(key)} = (func() supertypes.ListNestedObjectValueOf[${name}${camelize(key)}Item] {
   if v, err := data.${camelize(key)}.Get(); err == nil {
