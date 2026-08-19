@@ -38,6 +38,10 @@ const taskStateUpgrades = {
   },
 };
 
+const taskCustomizeDiffs = {
+  publish_incident: "validatePublishIncidentWorkflowTaskDiff",
+};
+
 module.exports = function generateWorkflowTaskResources(tasks, swagger) {
 	tasks.forEach((taskName) => {
 		const taskSchema = swagger.components.schemas[`${taskName}_task_params`]
@@ -66,6 +70,7 @@ function genResourceFile(task_name, task_schema) {
 
   const needsJSON = hasJSONProperty(task_schema);
   const stateUpgrade = taskStateUpgrades[task_name];
+  const customizeDiff = taskCustomizeDiffs[task_name] || "validateUniqueWorkflowTaskPosition";
 
   return `package provider
 
@@ -97,7 +102,7 @@ func resourceWorkflowTask${task_name_camel}() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
-		CustomizeDiff: validateUniqueWorkflowTaskPosition,
+		CustomizeDiff: ${customizeDiff},
 ${stateUpgrade ? `		SchemaVersion: ${stateUpgrade.schemaVersion},
 		StateUpgraders: []schema.StateUpgrader{
 			{
@@ -304,6 +309,7 @@ function annotatedDescription(schema) {
   }
   if (
     schema.type === "object" &&
+    schema.properties &&
     schema.properties.id &&
     schema.properties.name
   ) {
@@ -414,6 +420,20 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 								},
 							},`;
     }
+  }
+  if (property_schema.type === "object" && property_schema.additionalProperties) {
+    const valueSchema = property_schema.additionalProperties;
+    a = `${a}
+							Elem: &schema.Schema {
+								Type: ${genTaskSchemaPropertyType(valueSchema.type)},`;
+    if (valueSchema.enum) {
+      a = `${a}
+								ValidateFunc: validation.StringInSlice([]string{
+									${valueSchema.enum.map((value) => `"${value}",`).join("\n")}
+								}, false),`;
+    }
+    a = `${a}
+							},`;
   }
   return `${a}
 						},`;
@@ -563,6 +583,23 @@ function genTestParams(task_name, task_schema) {
 			return `${key} = ["foo"]`;
 		}
       case "object":
+        if (task_schema.properties[key].additionalProperties) {
+          const valueSchema = task_schema.properties[key].additionalProperties;
+          let mapValue;
+          if (valueSchema.type === "boolean") {
+            mapValue = "false";
+          } else if (valueSchema.type === "integer") {
+            mapValue = "1";
+          } else if (valueSchema.type === "number") {
+            mapValue = `"1"`;
+          } else {
+            const value = valueSchema.example || valueSchema.enum?.[0] || "test";
+            mapValue = `"${value}"`;
+          }
+          return `${key} = {
+					example = ${mapValue}
+				}`;
+        }
         return `${key} = {
 					id = "foo"
 					name = "bar"
