@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.20.1] -- 2026-08-19
+
+### Changed
+
+- Clarify documentation on early access for status page components.
+
 ## [5.19.0] -- 2026-08-13
 
 ### Added
