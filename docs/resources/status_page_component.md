@@ -2,12 +2,14 @@
 page_title: "Resource rootly_status_page_component - terraform-provider-rootly"
 subcategory:
 description: |-
-    
+  Manages a Status Pages V3 component. This resource is in Early Access and is not generally available.
 ---
 
 # Resource (rootly_status_page_component)
 
+Manages a Status Pages V3 component.
 
+*Early access: This resource is not generally available. It is available only to organizations participating in the Status Pages V3 Early Access program. Contact Rootly Support to request access.*
 
 ## Example Usage
 

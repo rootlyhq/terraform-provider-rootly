@@ -80,10 +80,10 @@ Optional:
 - `event` (String) Incident event description
 - `integration_payload` (String) Additional API Payload you can pass to statuspage.io for example. Can contain liquid markup and need to be valid JSON
 - `notify_subscribers` (Boolean) When true notifies subscribers of the status page by email/text. Value must be one of true or false
-- `selected_component_keys` (List of String) Composite "SourceType:<id>" keys of the status page components affected by the publish (requires the status-page-v3-phase-1 feature).
+- `selected_component_keys` (List of String) Composite "SourceType:<id>" keys of the status page components affected by the publish. This field is in Early Access and is not generally available; contact Rootly Support to request access.
 - `selected_component_statuses` (Map of String) Impact status to publish for each selected component key. Keys must match selected_component_keys entries.
 - `should_tweet` (Boolean) For Statuspage.io integrated pages auto publishes a tweet for your update. Value must be one of true or false
-- `status_page_ids` (List of String) Publishes the update to every listed status page (requires the status-page-v3-limited-bulk-publish feature). When set, it takes precedence over status_page_id and the first entry becomes status_page_id.
+- `status_page_ids` (List of String) Publishes the update to every listed status page. This field is in limited Early Access; contact Rootly Support to request access. When set, it takes precedence over status_page_id and the first entry becomes status_page_id.
 - `status_page_template` (Map of String) Map must contain two fields, `id` and `name`.
 - `task_type` (String)
 
