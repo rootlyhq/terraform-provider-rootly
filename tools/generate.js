@@ -55,6 +55,7 @@ const excluded = {
     "meeting_recording", // nested under incidents; list/create require incidentId
     "on_call_pay_report", // not exposed via Terraform
     "oncall",
+    "service", // V2: handled by ./internal/providergen
     "status",
     "post_mortem_template",
     "pulse",
