@@ -113,6 +113,17 @@ func resourceApiKey() *schema.Resource {
 				WriteOnly:   false,
 				Description: "Grace period end date",
 			},
+
+			"group_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    true,
+				WriteOnly:   false,
+				Description: "The group (team) ID. Required when kind is 'team'.",
+			},
 		},
 	}
 }
@@ -147,6 +158,9 @@ func resourceApiKeyCreate(ctx context.Context, d *schema.ResourceData, meta inte
 	}
 	if value, ok := d.GetOkExists("grace_period_ends_at"); ok {
 		s.GracePeriodEndsAt = value.(string)
+	}
+	if value, ok := d.GetOkExists("group_id"); ok {
+		s.GroupId = value.(string)
 	}
 
 	res, err := c.CreateApiKey(s)

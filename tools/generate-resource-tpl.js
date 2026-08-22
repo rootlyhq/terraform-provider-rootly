@@ -134,11 +134,16 @@ function excludeIgnoredProperties([field, schema]) {
   return field !== "created_at" && field !== "updated_at" && !schema.tf_ignore;
 }
 
+function excludeCreateOnlyProperties([, schema]) {
+  return !schema.tf_create_only;
+}
+
 function setResourceFields(name, resourceSchema) {
   const isV2Resource = v2Resources.includes(name);
 
   return Object.entries(resourceSchema.properties)
     .filter(excludeIgnoredProperties)
+    .filter(excludeCreateOnlyProperties)
     .map(([field]) => {
       const schema = resourceSchema.properties[field];
 
@@ -301,6 +306,7 @@ function updateResourceFields(name, resourceSchema, writableFields, deprecatedFi
 
   return Object.entries(resourceSchema.properties)
     .filter(excludeIgnoredProperties)
+    .filter(excludeCreateOnlyProperties)
     .filter(([field, schema]) => !(schema.tf_computed && writableFields && !writableFields.includes(field)))
     // Deprecated properties are ignored by the API, so stop sending them.
     .filter(([field]) => !(deprecatedFields && deprecatedFields[field]))
