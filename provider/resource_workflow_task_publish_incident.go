@@ -7,12 +7,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"reflect"
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
-	"reflect"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -238,9 +240,9 @@ func resourceWorkflowTaskPublishIncidentRead(ctx context.Context, d *schema.Reso
 	d.Set("position", res.Position)
 	d.Set("skip_on_failure", res.SkipOnFailure)
 	d.Set("enabled", res.Enabled)
-	tps := make([]interface{}, 1, 1)
-	tps[0] = res.TaskParams
-	d.Set("task_params", tps)
+	taskParamsSchema := resourceWorkflowTaskHttpClient().Schema["task_params"].Elem.(*schema.Resource).Schema
+	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)
+	d.Set("task_params", []interface{}{safeTaskParams})
 
 	return nil
 }

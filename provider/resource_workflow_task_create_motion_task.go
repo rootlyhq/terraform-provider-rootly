@@ -12,6 +12,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -101,13 +103,9 @@ func resourceWorkflowTaskCreateMotionTask() *schema.Resource {
 							Optional:    true,
 						},
 						"labels": &schema.Schema{
-							Description: "",
-							Type:        schema.TypeList,
+							Description: "The task labels",
+							Type:        schema.TypeString,
 							Optional:    true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
 						},
 						"priority": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The priority id and display name",
@@ -185,9 +183,9 @@ func resourceWorkflowTaskCreateMotionTaskRead(ctx context.Context, d *schema.Res
 	d.Set("position", res.Position)
 	d.Set("skip_on_failure", res.SkipOnFailure)
 	d.Set("enabled", res.Enabled)
-	tps := make([]interface{}, 1, 1)
-	tps[0] = res.TaskParams
-	d.Set("task_params", tps)
+	taskParamsSchema := resourceWorkflowTaskHttpClient().Schema["task_params"].Elem.(*schema.Resource).Schema
+	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)
+	d.Set("task_params", []interface{}{safeTaskParams})
 
 	return nil
 }

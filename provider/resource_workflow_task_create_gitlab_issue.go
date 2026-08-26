@@ -12,6 +12,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -78,8 +80,7 @@ func resourceWorkflowTaskCreateGitlabIssue() *schema.Resource {
 						"issue_type": &schema.Schema{
 							Description: "The issue type. Value must be one of `issue`, `incident`, `test_case`, `task`.",
 							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     nil,
+							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
 								"issue",
 								"incident",
@@ -173,9 +174,9 @@ func resourceWorkflowTaskCreateGitlabIssueRead(ctx context.Context, d *schema.Re
 	d.Set("position", res.Position)
 	d.Set("skip_on_failure", res.SkipOnFailure)
 	d.Set("enabled", res.Enabled)
-	tps := make([]interface{}, 1, 1)
-	tps[0] = res.TaskParams
-	d.Set("task_params", tps)
+	taskParamsSchema := resourceWorkflowTaskHttpClient().Schema["task_params"].Elem.(*schema.Resource).Schema
+	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)
+	d.Set("task_params", []interface{}{safeTaskParams})
 
 	return nil
 }

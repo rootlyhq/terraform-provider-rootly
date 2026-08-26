@@ -12,6 +12,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -76,19 +78,20 @@ func resourceWorkflowTaskTriggerWorkflow() *schema.Resource {
 							}, false),
 						},
 						"kind": &schema.Schema{
-							Description: "Value must be one of `incident`, `post_mortem`, `action_item`, `pulse`, `alert`.",
+							Description: "Value must be one of `incident`, `action_item`, `post_mortem`, `pulse`, `alert`, `problem`.",
 							Type:        schema.TypeString,
 							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
 								"incident",
-								"post_mortem",
 								"action_item",
+								"post_mortem",
 								"pulse",
 								"alert",
+								"problem",
 							}, false),
 						},
 						"attribute_to_query_by": &schema.Schema{
-							Description: "[\"(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]\", \"(post_mortem) kind can only match [:id]\", \"(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]\", \"(pulse) kind can only match [:id]\", \"(alert) kind can only match [:id]\"]. Value must be one of `id`, `slug`, `sequential_id`, `pagerduty_incident_id`, `opsgenie_incident_id`, `victor_ops_incident_id`, `jira_issue_id`, `asana_task_id`, `shortcut_task_id`, `linear_issue_id`, `zendesk_ticket_id`, `motion_task_id`, `trello_card_id`, `airtable_record_id`, `shortcut_story_id`, `github_issue_id`, `freshservice_ticket_id`, `freshservice_task_id`, `clickup_task_id`.",
+							Description: "[\"(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]\", \"(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]\", \"(post_mortem) kind can only match [:id]\", \"(pulse) kind can only match [:id]\", \"(alert) kind can only match [:id]\", \"(problem) kind can only match [:id]\"]. Value must be one of `id`, `slug`, `sequential_id`, `pagerduty_incident_id`, `opsgenie_incident_id`, `victor_ops_incident_id`, `jira_issue_id`, `asana_task_id`, `shortcut_task_id`, `linear_issue_id`, `zendesk_ticket_id`, `motion_task_id`, `trello_card_id`, `airtable_record_id`, `shortcut_story_id`, `github_issue_id`, `freshservice_ticket_id`, `freshservice_task_id`, `clickup_task_id`.",
 							Type:        schema.TypeString,
 							Required:    true,
 							ValidateFunc: validation.StringInSlice([]string{
@@ -189,9 +192,9 @@ func resourceWorkflowTaskTriggerWorkflowRead(ctx context.Context, d *schema.Reso
 	d.Set("position", res.Position)
 	d.Set("skip_on_failure", res.SkipOnFailure)
 	d.Set("enabled", res.Enabled)
-	tps := make([]interface{}, 1, 1)
-	tps[0] = res.TaskParams
-	d.Set("task_params", tps)
+	taskParamsSchema := resourceWorkflowTaskHttpClient().Schema["task_params"].Elem.(*schema.Resource).Schema
+	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)
+	d.Set("task_params", []interface{}{safeTaskParams})
 
 	return nil
 }

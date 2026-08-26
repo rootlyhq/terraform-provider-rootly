@@ -87,6 +87,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 	${stateUpgrade ? '"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"' : ""}
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
