@@ -143,7 +143,7 @@ func resourceWorkflowTaskPrintRead(ctx context.Context, d *schema.ResourceData, 
 	d.Set("position", res.Position)
 	d.Set("skip_on_failure", res.SkipOnFailure)
 	d.Set("enabled", res.Enabled)
-	taskParamsSchema := resourceWorkflowTaskHttpClient().Schema["task_params"].Elem.(*schema.Resource).Schema
+	taskParamsSchema := resourceWorkflowTaskPrint().Schema["task_params"].Elem.(*schema.Resource).Schema
 	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)
 	d.Set("task_params", []interface{}{safeTaskParams})
 
