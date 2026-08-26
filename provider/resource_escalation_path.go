@@ -594,30 +594,7 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 	}
 
 	if item.NotificationTypeRules != nil {
-		processed_items_notification_type_rules := make([]map[string]interface{}, 0)
-
-		for _, c := range item.NotificationTypeRules {
-			if rawItem, ok := c.(map[string]interface{}); ok {
-				processed_item_notification_type_rules := map[string]interface{}{
-					"notification_type": rawItem["notification_type"],
-					"match_mode":        rawItem["match_mode"],
-				}
-
-				processed_conditions := make([]map[string]interface{}, 0)
-				if conditions, ok := rawItem["conditions"].([]interface{}); ok {
-					for _, condition := range conditions {
-						if rawCondition, ok := condition.(map[string]interface{}); ok {
-							processed_conditions = append(processed_conditions, processEscalationPathCondition(rawCondition))
-						}
-					}
-				}
-				processed_item_notification_type_rules["conditions"] = processed_conditions
-
-				processed_items_notification_type_rules = append(processed_items_notification_type_rules, processed_item_notification_type_rules)
-			}
-		}
-
-		d.Set("notification_type_rules", processed_items_notification_type_rules)
+		d.Set("notification_type_rules", processEscalationPathNotificationTypeRules(item.NotificationTypeRules))
 	} else {
 		d.Set("notification_type_rules", nil)
 	}
@@ -752,6 +729,32 @@ func resourceEscalationPathDelete(ctx context.Context, d *schema.ResourceData, m
 	d.SetId("")
 
 	return nil
+}
+
+func processEscalationPathNotificationTypeRules(rawRules []interface{}) []map[string]interface{} {
+	processed := make([]map[string]interface{}, 0, len(rawRules))
+	for _, rule := range rawRules {
+		rawRule, ok := rule.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		conditions := make([]map[string]interface{}, 0)
+		if rawConditions, ok := rawRule["conditions"].([]interface{}); ok {
+			for _, condition := range rawConditions {
+				if rawCondition, ok := condition.(map[string]interface{}); ok {
+					conditions = append(conditions, processEscalationPathCondition(rawCondition))
+				}
+			}
+		}
+
+		processed = append(processed, map[string]interface{}{
+			"notification_type": rawRule["notification_type"],
+			"match_mode":        rawRule["match_mode"],
+			"conditions":        conditions,
+		})
+	}
+	return processed
 }
 
 func processEscalationPathCondition(rawItem map[string]interface{}) map[string]interface{} {
