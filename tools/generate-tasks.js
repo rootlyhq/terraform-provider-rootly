@@ -230,9 +230,9 @@ func resourceWorkflowTask${task_name_camel}Read(ctx context.Context, d *schema.R
 	d.Set("position", res.Position)
 	d.Set("skip_on_failure", res.SkipOnFailure)
 	d.Set("enabled", res.Enabled)
-	tps := make([]interface{}, 1, 1)
-	tps[0] = res.TaskParams
-	d.Set("task_params", tps)
+	taskParamsSchema := resourceWorkflowTaskHttpClient().Schema["task_params"].Elem.(*schema.Resource).Schema
+	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)
+	d.Set("task_params", []interface{}{safeTaskParams})
 
 	return nil
 }
