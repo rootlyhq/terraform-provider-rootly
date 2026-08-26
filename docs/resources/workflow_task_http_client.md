@@ -43,6 +43,8 @@ Optional:
 - `body` (String) HTTP body
 - `event_message` (String)
 - `event_url` (String)
+- `expected_response_headers` (Map of String) Map of valid HTTP header names to reg
+- `follow_redirects` (Boolean) Whether to follow HTTP 3xx redirects. Defaults to true. Set to false to treat redirect responses as-is.. Value must be one of true or false
 - `headers` (String) JSON map of HTTP headers
 - `method` (String) HTTP method. Value must be one of `GET`, `POST`, `PATCH`, `PUT`, `DELETE`, `OPTIONS`.
 - `params` (String) JSON map of HTTP query parameters
