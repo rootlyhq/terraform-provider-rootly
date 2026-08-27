@@ -127,7 +127,7 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 							Required:    true,
 						},
 						"status_page_ids": &schema.Schema{
-							Description: "Publishes the update to every listed status page (requires the status-page-v3-limited-bulk-publish feature). When set, it takes precedence over status_page_id and the first entry becomes status_page_id.",
+							Description: "Publishes the update to every listed status page. This field is in limited Early Access; contact Rootly Support to request access. When set, it takes precedence over status_page_id and the first entry becomes status_page_id.",
 							Type:        schema.TypeList,
 							Optional:    true,
 							Elem: &schema.Schema{
@@ -136,7 +136,7 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 						},
 						"selected_component_keys": &schema.Schema{
-							Description: "Composite \"SourceType:<id>\" keys of the status page components affected by the publish (requires the status-page-v3-phase-1 feature).",
+							Description: "Composite \"SourceType:<id>\" keys of the status page components affected by the publish. This field is in Early Access and is not generally available; contact Rootly Support to request access.",
 							Type:        schema.TypeList,
 							Optional:    true,
 							Elem: &schema.Schema{
