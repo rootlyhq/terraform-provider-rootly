@@ -137,6 +137,15 @@ func resourceEscalationPath() *schema.Resource {
 				Description: "Initial delay for escalation path in minutes. Maximum 1 week (10080).",
 			},
 
+			"retrigger_timeout_minutes": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.",
+			},
+
 			"rules": &schema.Schema{
 				Type:             schema.TypeList,
 				Computed:         false,
@@ -449,6 +458,9 @@ func resourceEscalationPathCreate(ctx context.Context, d *schema.ResourceData, m
 	if value, ok := d.GetOkExists("initial_delay"); ok {
 		s.InitialDelay = value.(int)
 	}
+	if value, ok := d.GetOkExists("retrigger_timeout_minutes"); ok {
+		s.RetriggerTimeoutMinutes = value.(int)
+	}
 	if value, ok := d.GetOkExists("rules"); ok {
 		s.Rules = value.([]interface{})
 	}
@@ -499,6 +511,7 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("repeat", item.Repeat)
 	d.Set("repeat_count", item.RepeatCount)
 	d.Set("initial_delay", item.InitialDelay)
+	d.Set("retrigger_timeout_minutes", item.RetriggerTimeoutMinutes)
 
 	if item.Rules != nil {
 		processed_items_rules := make([]map[string]interface{}, 0)
@@ -616,6 +629,9 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 	}
 	if d.HasChange("initial_delay") {
 		s.InitialDelay = d.Get("initial_delay").(int)
+	}
+	if d.HasChange("retrigger_timeout_minutes") {
+		s.RetriggerTimeoutMinutes = d.Get("retrigger_timeout_minutes").(int)
 	}
 
 	if d.HasChange("rules") {
