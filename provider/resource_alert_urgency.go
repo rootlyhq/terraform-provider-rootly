@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceAlertUrgency() *schema.Resource {
@@ -70,7 +71,6 @@ func resourceAlertUrgency() *schema.Resource {
 
 			"retrigger_timeout_minutes": &schema.Schema{
 				Type:        schema.TypeInt,
-				Computed:    true,
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
@@ -146,7 +146,7 @@ func resourceAlertUrgencyCreate(ctx context.Context, d *schema.ResourceData, met
 		s.Position = value.(int)
 	}
 	if value, ok := d.GetOkExists("retrigger_timeout_minutes"); ok {
-		s.RetriggerTimeoutMinutes = value.(int)
+		s.RetriggerTimeoutMinutes = tools.Int(value.(int))
 	}
 	if value, ok := d.GetOkExists("urgency"); ok {
 		s.Urgency = value.(string)
@@ -193,7 +193,11 @@ func resourceAlertUrgencyRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("name", item.Name)
 	d.Set("description", item.Description)
 	d.Set("position", item.Position)
-	d.Set("retrigger_timeout_minutes", item.RetriggerTimeoutMinutes)
+	if item.RetriggerTimeoutMinutes != nil {
+		d.Set("retrigger_timeout_minutes", *item.RetriggerTimeoutMinutes)
+	} else {
+		d.Set("retrigger_timeout_minutes", nil)
+	}
 	d.Set("urgency", item.Urgency)
 	d.Set("color", item.Color)
 	d.Set("team_id", item.TeamId)
@@ -220,8 +224,8 @@ func resourceAlertUrgencyUpdate(ctx context.Context, d *schema.ResourceData, met
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
 	}
-	if d.HasChange("retrigger_timeout_minutes") {
-		s.RetriggerTimeoutMinutes = d.Get("retrigger_timeout_minutes").(int)
+	if value, ok := d.GetOkExists("retrigger_timeout_minutes"); ok {
+		s.RetriggerTimeoutMinutes = tools.Int(value.(int))
 	}
 	if d.HasChange("urgency") {
 		s.Urgency = d.Get("urgency").(string)
