@@ -1,8 +1,8 @@
 import { camelize } from "inflection";
 import type { oas30 } from "openapi3-ts";
-import { match } from "ts-pattern";
+import { match, P } from "ts-pattern";
 
-export function tfSchemaAttributeType({
+export function tfAttributeSchemaType({
   schema,
 }: {
   schema: oas30.SchemaObject;
@@ -21,6 +21,20 @@ export function tfSchemaAttributeType({
       { type: "array", items: { type: "object" } },
       () => "schema.ListNestedAttribute",
     )
+    .exhaustive();
+}
+
+export function tfAttributeValidatorType({
+  schema,
+}: {
+  schema: oas30.SchemaObject;
+}) {
+  return match(schema)
+    .with({ type: "string" }, () => "validator.String")
+    .with({ type: "boolean" }, () => "validator.Bool")
+    .with({ type: "integer" }, () => "validator.Int64")
+    .with({ type: "object" }, () => "validator.Object")
+    .with({ type: "array" }, () => "validator.List")
     .exhaustive();
 }
 
@@ -85,4 +99,18 @@ export function tfAttributeCustomType({
         `supertypes.NewListNestedObjectTypeOf[${parent}${camelize(name)}Item](ctx)`,
     )
     .otherwise(() => null);
+}
+
+export function tfAttributeDefault({ schema }: { schema: oas30.SchemaObject }) {
+  if (!schema.default) {
+    return null;
+  }
+
+  return match(schema)
+    .with(
+      { type: "string", default: P.string },
+      (schema) =>
+        `stringdefault.StaticString(${JSON.stringify(schema.default)})`,
+    )
+    .exhaustive();
 }

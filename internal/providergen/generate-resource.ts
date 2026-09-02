@@ -7,7 +7,12 @@ import { camelize, singularize } from "inflection";
 import { assertSchemaObject } from "./types";
 import { generateModel } from "./generate-common";
 import { match, P } from "ts-pattern";
-import { tfAttributeCustomType, tfSchemaAttributeType } from "./go-types";
+import {
+  tfAttributeCustomType,
+  tfAttributeDefault,
+  tfAttributeSchemaType,
+  tfAttributeValidatorType,
+} from "./go-types";
 import { removeReference } from "./openapi";
 
 export function generateResource({
@@ -298,10 +303,10 @@ function generateSchemaAttribute({
     throw new Error(`Schema does not have a type`);
   }
 
-  const tfCustomType = tfAttributeCustomType({ schema, parent, name });
-
   const parts: string[] = [];
-  parts.push(`${tfSchemaAttributeType({ schema })}{`);
+  parts.push(`${tfAttributeSchemaType({ schema })}{`);
+
+  const validators: string[] = [];
 
   if (schema.description) {
     let description = schema.description;
@@ -319,6 +324,21 @@ function generateSchemaAttribute({
     parts.push(`MarkdownDescription: ${JSON.stringify(description)},`);
   }
 
+  if (schema.enum) {
+    match(schema)
+      .with({ type: "string", enum: P.array(P.string) }, (schema) => {
+        validators.push(
+          `stringvalidator.OneOf(${schema.enum.map((value) => JSON.stringify(value)).join(", ")})`,
+        );
+      })
+      .with({ type: "integer", enum: P.array(P.number) }, (schema) => {
+        validators.push(
+          `int64validator.OneOf(${schema.enum.map((value) => JSON.stringify(JSON.stringify)).join(", ")})`,
+        );
+      })
+      .exhaustive();
+  }
+
   parts.push(
     ...match(schema["x-tf-computed-optional-required"])
       .with("required", () => ["Required: true,"])
@@ -328,8 +348,21 @@ function generateSchemaAttribute({
       .otherwise(() => ["Computed: true,"]),
   );
 
+  const tfCustomType = tfAttributeCustomType({ schema, parent, name });
   if (tfCustomType) {
     parts.push(`CustomType: ${tfCustomType},`);
+  }
+
+  const tfDefault = tfAttributeDefault({ schema });
+  if (tfDefault) {
+    parts.push(`Default: ${tfDefault},`);
+  }
+
+  const tfValidatorType = tfAttributeValidatorType({ schema });
+  if (validators.length > 0) {
+    parts.push(`Validators: []${tfValidatorType}{`);
+    parts.push(...validators.map((validator) => `${validator},`));
+    parts.push(`},`);
   }
 
   match(schema)

@@ -62,15 +62,15 @@ export type ComputedOptionalRequired =
 
 declare module "openapi3-ts/oas30" {
   interface SchemaObject {
-    // Defines the jsonapi attribute tag
+    /** Defines the jsonapi attribute tag. */
     "x-go-jsonapi-tag"?: "primary" | "attr";
-    // Defines the jsonapi type
+    /** Defines the jsonapi type. */
     "x-go-jsonapi-type"?: string;
-    // Overrides the nested object type name. Only used for nested objects.
+    /** Overrides the nested object type name. Only used for nested objects. */
     "x-go-nested-type"?: string;
-    // Defines if the property is computed, optional or required.
+    /** Defines if the property is computed, optional or required. */
     "x-tf-computed-optional-required"?: ComputedOptionalRequired;
-    // Indicates this is the top level item type for the data source. Only used for plural data sources.
+    /** Indicates this is the top level item type for the data source. Only used for plural data sources. */
     "x-tf-top-level-item-type"?: boolean;
   }
 }

@@ -4,7 +4,7 @@ import { match } from "ts-pattern";
 import type { ResolvedDataSourceConfig } from "./schema";
 import { assertSchemaObject } from "./types";
 import { produce } from "immer";
-import { tfAttributeCustomType, tfSchemaAttributeType } from "./go-types";
+import { tfAttributeCustomType, tfAttributeSchemaType } from "./go-types";
 import { getParametersByOperationId, removeReference } from "./openapi";
 import { generateModel } from "./generate-common";
 
@@ -209,7 +209,7 @@ function generateSchemaAttribute({
   const tfCustomType = tfAttributeCustomType({ schema, parent, name });
 
   const parts: string[] = [];
-  parts.push(`${tfSchemaAttributeType({ schema })}{`);
+  parts.push(`${tfAttributeSchemaType({ schema })}{`);
 
   if (schema.description) {
     parts.push(`MarkdownDescription: ${JSON.stringify(schema.description)},`);
