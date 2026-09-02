@@ -43,7 +43,7 @@ Optional:
 - `description` (String) The task description
 - `due_date` (String) The due date
 - `duration` (String) The duration. Eg.  "NONE", "REMINDER", or a integer greater than 0.
-- `labels` (List of String)
+- `labels` (String) The task labels
 - `priority` (Map of String) Map must contain two fields, `id` and `name`. The priority id and display name
 - `project` (Map of String) Map must contain two fields, `id` and `name`.
 - `status` (Map of String) Map must contain two fields, `id` and `name`.

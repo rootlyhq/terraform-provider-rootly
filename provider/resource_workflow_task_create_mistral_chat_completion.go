@@ -6,11 +6,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -36,85 +38,85 @@ func resourceWorkflowTaskCreateMistralChatCompletion() *schema.Resource {
 			},
 		},
 
-		Schema: map[string]*schema.Schema {
+		Schema: map[string]*schema.Schema{
 			"workflow_id": {
-				Description:  "The ID of the parent workflow",
-				Type:         schema.TypeString,
-				Required:     true,
-				ForceNew:     true,
+				Description: "The ID of the parent workflow",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"name": {
-				Description:  "Name of the workflow task",
-				Type:         schema.TypeString,
-				Optional:     true,
-				Computed:     true,
+				Description: "Name of the workflow task",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"position": {
-				Description:  "The position of the workflow task (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
+				Description: "The position of the workflow task (1 being top of list)",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
 			},
 			"skip_on_failure": {
-				Description:  "Skip workflow task if any failures",
-				Type:         schema.TypeBool,
-				Optional:     true,
-				Default:      false,
+				Description: "Skip workflow task if any failures",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
 			},
 			"enabled": {
-				Description:  "Enable/disable this workflow task",
-				Type:         schema.TypeBool,
-				Optional:     true,
-				Default:      true,
+				Description: "Enable/disable this workflow task",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type: schema.TypeList,
-				Required: true,
-				MinItems: 1,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MinItems:    1,
+				MaxItems:    1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema {
-						"task_type": &schema.Schema {
-							Type: schema.TypeString,
+					Schema: map[string]*schema.Schema{
+						"task_type": &schema.Schema{
+							Type:     schema.TypeString,
 							Optional: true,
-							Default: "create_mistral_chat_completion",
-							ValidateFunc: validation.StringInSlice([]string {
+							Default:  "create_mistral_chat_completion",
+							ValidateFunc: validation.StringInSlice([]string{
 								"create_mistral_chat_completion",
 							}, false),
 						},
-						"model": &schema.Schema {
+						"model": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The Mistral model. eg: mistral-large-latest",
-							Type: schema.TypeMap,
-							Required: true,
+							Type:        schema.TypeMap,
+							Required:    true,
 						},
-						"system_prompt": &schema.Schema {
+						"system_prompt": &schema.Schema{
 							Description: "The system prompt to send to Mistral (optional)",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
-						"prompt": &schema.Schema {
+						"prompt": &schema.Schema{
 							Description: "The prompt to send to Mistral",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
-						"temperature": &schema.Schema {
+						"temperature": &schema.Schema{
 							Description: "Sampling temperature (0.0-1.5). Higher values make output more random.",
-							Type: schema.TypeString,
-							Optional: true,
-							Default: nil,
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     nil,
 						},
-						"max_tokens": &schema.Schema {
+						"max_tokens": &schema.Schema{
 							Description: "Maximum number of tokens to generate",
-							Type: schema.TypeInt,
-							Optional: true,
-							Default: nil,
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Default:     nil,
 						},
-						"top_p": &schema.Schema {
+						"top_p": &schema.Schema{
 							Description: "Nucleus sampling parameter (0.0-1.0)",
-							Type: schema.TypeString,
-							Optional: true,
-							Default: nil,
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     nil,
 						},
 					},
 				},
@@ -136,12 +138,12 @@ func resourceWorkflowTaskCreateMistralChatCompletionCreate(ctx context.Context, 
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Name: name,
-		Position: position,
+		WorkflowId:    workflowId,
+		Name:          name,
+		Position:      position,
 		SkipOnFailure: skipOnFailure,
-		Enabled: enabled,
-		TaskParams: taskParams,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -177,9 +179,9 @@ func resourceWorkflowTaskCreateMistralChatCompletionRead(ctx context.Context, d 
 	d.Set("position", res.Position)
 	d.Set("skip_on_failure", res.SkipOnFailure)
 	d.Set("enabled", res.Enabled)
-	tps := make([]interface{}, 1, 1)
-	tps[0] = res.TaskParams
-	d.Set("task_params", tps)
+	taskParamsSchema := resourceWorkflowTaskCreateMistralChatCompletion().Schema["task_params"].Elem.(*schema.Resource).Schema
+	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)
+	d.Set("task_params", []interface{}{safeTaskParams})
 
 	return nil
 }
@@ -196,12 +198,12 @@ func resourceWorkflowTaskCreateMistralChatCompletionUpdate(ctx context.Context, 
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Name: name,
-		Position: position,
+		WorkflowId:    workflowId,
+		Name:          name,
+		Position:      position,
 		SkipOnFailure: skipOnFailure,
-		Enabled: enabled,
-		TaskParams: taskParams,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
