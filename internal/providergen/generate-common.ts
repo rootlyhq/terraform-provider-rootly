@@ -250,6 +250,17 @@ func (m *${name}) FromApi(ctx context.Context, data ${fromApiDataType}) diag.Dia
 	return diags
 }
 
+${
+  config.type === "resource"
+    ? `
+func (m ${name}) ToCreateApi(ctx context.Context) (*apiclient.Create${baseName}, diag.Diagnostics) {
+	return &apiclient.Create${baseName}{
+	}, nil
+}
+`
+    : ""
+}
+
 ${children.join("\n\n")}
 `;
 }

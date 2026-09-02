@@ -1,4 +1,4 @@
-import { camelize, humanize } from "inflection";
+import { camelize, humanize, singularize } from "inflection";
 import type {
   ClientConfig,
   ComputedOptionalRequired,
@@ -140,30 +140,89 @@ function resolveSchema({
   update: oas30.SchemaObject | undefined;
   isTopLevel: boolean;
 }): oas30.SchemaObject {
-  // TODO: Handle data_source
-  if (isTopLevel && type === "resource") {
-    return resolveSchema({
-      doc,
-      config,
-      type,
-      read: {
-        ...read,
-        properties: {
-          id: {
-            type: "string",
-            description: `The ID of the ${humanize(config.name, true)}.`,
-            "x-tf-computed-optional-required": "computed",
+  // Special handling for top level schemas
+  if (isTopLevel) {
+    return match([type, config])
+      .with(["data_source", { strategy: "list" }], () => {
+        const singleSchema = resolveSchema({
+          doc,
+          config,
+          type,
+          read,
+          create,
+          update,
+          isTopLevel: false,
+        });
+
+        return {
+          type: "object",
+          properties: {
+            [config.name]: {
+              type: "array",
+              items: {
+                ...singleSchema,
+                properties: {
+                  id: {
+                    type: "string",
+                    description: `The ID of the ${humanize(singularize(config.name), true)}.`,
+                    "x-tf-computed-optional-required": "computed",
+                  },
+                  ...singleSchema.properties,
+                },
+                required: ["id", ...(singleSchema.required ?? [])],
+              },
+              "x-tf-top-level-item-type": true,
+              "x-tf-collection-type": "list",
+            },
           },
-          ...read.properties,
-        },
-      },
-      create,
-      update,
-      isTopLevel: false,
-    });
+        } satisfies oas30.SchemaObject;
+      })
+      .with(["data_source", { strategy: "single" }], () =>
+        resolveSchema({
+          doc,
+          config,
+          type,
+          read: {
+            ...read,
+            properties: {
+              id: {
+                type: "string",
+                description: `The ID of the ${humanize(config.name, true)}.`,
+                "x-tf-computed-optional-required": "required",
+              },
+              ...read.properties,
+            },
+          },
+          create,
+          update,
+          isTopLevel: false,
+        }),
+      )
+      .with(["resource", P.any], () =>
+        resolveSchema({
+          doc,
+          config,
+          type,
+          read: {
+            ...read,
+            properties: {
+              id: {
+                type: "string",
+                description: `The ID of the ${humanize(config.name, true)}.`,
+                "x-tf-computed-optional-required": "computed",
+              },
+              ...read.properties,
+            },
+          },
+          create,
+          update,
+          isTopLevel: false,
+        }),
+      )
+      .exhaustive();
   }
 
-  return match(read)
+  const schema = match(read)
     .with({ type: "array", items: P.record(P.string, P.any) }, (schema) => ({
       ...schema,
       items: resolveSchema({
@@ -217,6 +276,13 @@ function resolveSchema({
       (schema) => schema,
     )
     .exhaustive();
+
+  return {
+    ...schema,
+    "x-schema-read": read,
+    "x-schema-create": create,
+    "x-schema-update": update,
+  };
 }
 
 function resolveComputedOptionalRequired({

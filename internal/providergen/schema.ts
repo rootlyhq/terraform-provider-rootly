@@ -92,5 +92,11 @@ declare module "openapi3-ts/oas30" {
     "x-tf-top-level-item-type"?: boolean;
     /** The type of collection to use for arrays. */
     "x-tf-collection-type"?: "list" | "set";
+    /** The schema to use for reading the property. */
+    "x-schema-read"?: oas30.SchemaObject;
+    /** The schema to use for creating the property. */
+    "x-schema-create"?: oas30.SchemaObject;
+    /** The schema to use for updating the property. */
+    "x-schema-update"?: oas30.SchemaObject;
   }
 }

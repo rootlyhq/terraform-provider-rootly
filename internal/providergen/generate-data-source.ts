@@ -19,54 +19,6 @@ export function generateDataSource({
 
   const isSingle = config.strategy === "single";
 
-  // Remove creation and update timestamp fields
-  const baseSchema = produce(config.schemas.resolved, (draft) => {
-    if (draft.properties) {
-      delete draft.properties.created_at;
-      delete draft.properties.updated_at;
-    }
-  });
-
-  const schema = match(config)
-    .with(
-      { strategy: "list" },
-      (config) =>
-        ({
-          type: "object",
-          properties: {
-            [config.name]: {
-              type: "array",
-              items: {
-                ...baseSchema,
-                properties: {
-                  id: {
-                    type: "string",
-                    description: `The ID of the ${humanize(singularize(config.name), true)}.`,
-                  },
-                  ...baseSchema.properties,
-                },
-                required: ["id", ...(baseSchema.required ?? [])],
-              },
-              "x-tf-top-level-item-type": true,
-              "x-tf-collection-type": "list",
-            },
-          },
-        }) satisfies oas30.SchemaObject,
-    )
-    .with({ strategy: "single" }, (config) =>
-      produce(baseSchema, (draft) => {
-        draft.properties = {
-          id: {
-            type: "string",
-            description: `The ID of the ${humanize(config.name, true)}.`,
-            "x-tf-computed-optional-required": "required",
-          },
-          ...draft.properties,
-        };
-      }),
-    )
-    .exhaustive();
-
   const clientBase = camelize(singularize(config.name));
   const resultVar = isSingle ? "item" : "items";
   const clientMethod = isSingle ? "Get" : "List";
