@@ -1,11 +1,11 @@
 import { camelize, humanize, pluralize, singularize } from "inflection";
 import { oas30 } from "openapi3-ts";
-import { match, P } from "ts-pattern";
-import type { DataSourceConfig } from "./schema";
+import { match } from "ts-pattern";
+import type { ResolvedDataSourceConfig } from "./schema";
 import { assertSchemaObject } from "./types";
 import { produce } from "immer";
 import { tfAttributeCustomType, tfSchemaAttributeType } from "./go-types";
-import { getParametersByOperationId } from "./openapi";
+import { getParametersByOperationId, removeReference } from "./openapi";
 import { generateModel } from "./generate-common";
 
 export function generateDataSource({
@@ -13,18 +13,17 @@ export function generateDataSource({
   config,
 }: {
   doc: oas30.OpenAPIObject;
-  config: DataSourceConfig;
+  config: ResolvedDataSourceConfig;
 }) {
   console.log(`Generating data source: ${config.name}`);
 
   const isSingle = config.type === "single";
 
   const schemaKey = isSingle ? config.name : config.resourceName;
-  let baseSchema = doc.components?.schemas?.[schemaKey];
+  let baseSchema = removeReference(doc.components?.schemas?.[schemaKey]);
   if (!baseSchema) {
     throw new Error(`Cannot find schema: ${schemaKey} in doc`);
   }
-  assertSchemaObject(baseSchema);
 
   // Remove creation and update timestamp fields
   baseSchema = produce(baseSchema, (draft) => {
@@ -73,9 +72,6 @@ export function generateDataSource({
     )
     .exhaustive();
 
-  const name = `${camelize(config.name)}DataSource`;
-  const modelName = `${camelize(config.name)}DataSourceModel`;
-
   const clientBase = camelize(singularize(config.name));
   const resultVar = isSingle ? "item" : "items";
   const clientMethod = isSingle ? "Get" : "List";
@@ -115,32 +111,32 @@ import (
 	"github.com/samber/lo"
 )
 
-var _ datasource.DataSource = &${name}{}
-var _ datasource.DataSourceWithConfigure = &${name}{}
+var _ datasource.DataSource = &${config.goNames.struct}{}
+var _ datasource.DataSourceWithConfigure = &${config.goNames.struct}{}
 
-func New${name}() datasource.DataSource {
-  return &${name}{}
+func New${config.goNames.struct}() datasource.DataSource {
+  return &${config.goNames.struct}{}
 }
 
-type ${name} struct {
+type ${config.goNames.struct} struct {
   baseDataSource
 }
 
-func (d *${name}) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+func (d *${config.goNames.struct}) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
   resp.TypeName = req.ProviderTypeName + "_${config.name}"
 }
 
-func (d *${name}) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *${config.goNames.struct}) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
   resp.Schema = schema.Schema{
     MarkdownDescription: ${JSON.stringify(config.description ?? schema.description ?? "")},
     Attributes: map[string]schema.Attribute{
-      ${generateSchemaAttributes({ parent: modelName, schema })}
+      ${generateSchemaAttributes({ parent: config.goNames.model, schema })}
     },
   }
 }
 
-func (d *${name}) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-  var data ${modelName}
+func (d *${config.goNames.struct}) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+  var data ${config.goNames.model}
 
   resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
   if resp.Diagnostics.HasError() {
@@ -168,7 +164,7 @@ ${generateModel({
   config,
   schema,
   baseName: camelize(singularize(config.name)),
-  name: modelName,
+  name: config.goNames.model,
   isTopLevel: true,
 })}
 `;

@@ -1,5 +1,8 @@
 import type { oas30 } from "openapi3-ts";
-import type { DataSourceConfig, ResourceConfig } from "./schema";
+import type {
+  ResolvedDataSourceConfig,
+  ResolvedResourceConfig,
+} from "./schema";
 import { assertSchemaObject } from "./types";
 import { tfAttributeValueType } from "./go-types";
 import { camelize } from "inflection";
@@ -12,7 +15,7 @@ export function generateModel({
   name,
   isTopLevel,
 }: {
-  config: DataSourceConfig | ResourceConfig;
+  config: ResolvedDataSourceConfig | ResolvedResourceConfig;
   schema: oas30.SchemaObject;
   baseName: string;
   name: string;
@@ -150,6 +153,19 @@ export function generateModel({
           ],
           () =>
             `m.${camelize(key)} = jsonapitypes.NullableListValueOfSlice(ctx, data.${camelize(key)})`,
+        )
+        .with(
+          [
+            {
+              type: "array",
+              items: {
+                type: P.union("string", "boolean", "integer"),
+              },
+            },
+            { nullable: false },
+          ],
+          () =>
+            `m.${camelize(key)} = supertypes.NewListValueOfSlice(ctx, data.${camelize(key)})`,
         )
         .with(
           [

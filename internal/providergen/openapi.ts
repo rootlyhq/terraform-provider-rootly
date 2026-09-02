@@ -45,3 +45,17 @@ export function getParametersByOperationId({
   }
   return null;
 }
+
+export function removeReference<T>(value: undefined): undefined;
+export function removeReference<T>(value: T | oas30.ReferenceObject): T;
+export function removeReference<T>(
+  value: T | oas30.ReferenceObject | undefined,
+): T | undefined;
+export function removeReference<T>(
+  value: T | oas30.ReferenceObject | undefined,
+): T | undefined {
+  if (typeof value === "object" && value !== null && !("$ref" in value)) {
+    return value as T;
+  }
+  return undefined;
+}

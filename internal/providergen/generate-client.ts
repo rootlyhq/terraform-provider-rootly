@@ -10,7 +10,7 @@ import { match } from "ts-pattern";
 import type { ClientConfig } from "./schema";
 import { assertSchemaObject } from "./types";
 import { produce } from "immer";
-import { getParametersByOperationId } from "./openapi";
+import { getParametersByOperationId, removeReference } from "./openapi";
 
 export function generateClient({
   doc,
@@ -20,11 +20,10 @@ export function generateClient({
   config: ClientConfig;
 }) {
   console.log(`Generating client: ${config.name}`);
-  let schema = doc.components?.schemas?.[config.name];
+  let schema = removeReference(doc.components?.schemas?.[config.name]);
   if (!schema) {
     throw new Error(`Cannot find schema: ${config.name} in doc`);
   }
-  assertSchemaObject(schema);
 
   // Add id to the schema and make it the first property
   schema = produce(schema, (draft) => {
@@ -170,11 +169,12 @@ function generateListAction({
   doc: oas30.OpenAPIObject;
   config: ClientConfig;
 }) {
-  const listSchema = doc.components?.schemas?.[`${config.name}_list`];
+  const listSchema = removeReference(
+    doc.components?.schemas?.[`${config.name}_list`],
+  );
   if (!listSchema) {
     throw new Error(`Cannot find schema: ${config.name}_list in doc`);
   }
-  assertSchemaObject(listSchema);
 
   const operationId = `list${camelize(pluralize(config.name))}`;
   const { funcArgs, clientArgs, hasNonPathParams } = buildFuncAndClientArgs({
@@ -233,11 +233,10 @@ function generateGetAction({
   doc: oas30.OpenAPIObject;
   config: ClientConfig;
 }) {
-  const listSchema = doc.components?.schemas?.[config.name];
+  const listSchema = removeReference(doc.components?.schemas?.[config.name]);
   if (!listSchema) {
     throw new Error(`Cannot find schema: ${config.name} in doc`);
   }
-  assertSchemaObject(listSchema);
 
   const operationId = `get${camelize(config.name)}`;
   const { funcArgs, clientArgs } = buildFuncAndClientArgs({

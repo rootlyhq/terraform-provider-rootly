@@ -20,16 +20,38 @@ interface DataSourceSingleConfig {
 }
 
 export type DataSourceConfig = {
-  kind: "data_source";
   name: string;
   description?: string;
 } & (DataSourceListConfig | DataSourceSingleConfig);
 
+export type ResolvedDataSourceConfig = {
+  kind: "data_source";
+  name: string;
+  description?: string;
+  goNames: {
+    /** Name of the struct that represents the data source. */
+    struct: `${string}DataSource`;
+    /** Name of the struct that represents the model of the data source. */
+    model: `${string}DataSourceModel`;
+  };
+} & (DataSourceListConfig | DataSourceSingleConfig);
+
 // TODO
 export type ResourceConfig = {
+  name: string;
+  description?: string;
+};
+
+export type ResolvedResourceConfig = {
   kind: "resource";
   name: string;
   description?: string;
+  goNames: {
+    /** Name of the struct that represents the resource. */
+    struct: `${string}Resource`;
+    /** Name of the struct that represents the model of the resource. */
+    model: `${string}ResourceModel`;
+  };
 };
 
 export type ComputedOptionalRequired =
