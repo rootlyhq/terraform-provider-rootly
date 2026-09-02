@@ -145,201 +145,65 @@ func resourceEscalationPath() *schema.Resource {
 				Description:      "Escalation path rules",
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
 				Elem: &schema.Resource{
+					Schema: escalationPathConditionSchema(),
+				},
+			},
+
+			"notification_type_rules": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    false,
+				Required:    false,
+				Optional:    true,
+				MaxItems:    10,
+				Description: "Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team. Maximum of 10 rules.",
+				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
-						"rule_type": &schema.Schema{
+						"notification_type": &schema.Schema{
 							Type:         schema.TypeString,
-							Computed:     true,
+							Default:      "audible",
 							Required:     false,
 							Optional:     true,
 							ForceNew:     false,
-							Description:  "The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`, `service`, `deferral_window`, `source`, `related_incidents`.",
-							ValidateFunc: validation.StringInSlice([]string{"alert_urgency", "working_hour", "json_path", "field", "service", "deferral_window", "source", "related_incidents"}, false),
+							Description:  "Outcome when this rule matches. Value must be one of `audible`, `quiet`.",
+							ValidateFunc: validation.StringInSlice([]string{"audible", "quiet"}, false),
 						},
 
-						"urgency_ids": &schema.Schema{
-							Type: schema.TypeList,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Computed:         false,
-							Required:         false,
-							Optional:         true,
-							Description:      "Alert urgency ids for which this escalation path should be used",
-						},
-
-						"within_working_hour": &schema.Schema{
-							Type:        schema.TypeBool,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							Description: "Whether the escalation path should be used within working hours. Value must be one of true or false",
-						},
-
-						"json_path": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "JSON path to extract value from payload",
-						},
-
-						"operator": &schema.Schema{
+						"match_mode": &schema.Schema{
 							Type:         schema.TypeString,
-							Computed:     true,
+							Default:      "match-all-rules",
 							Required:     false,
 							Optional:     true,
 							ForceNew:     false,
-							Description:  "How the value should be matched. For `json_path` rule type: `is`, `is_not`, `contains`, `does_not_contain`. For `field` rule type: `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`. For `source` rule type: `is`, `is_not`, `is_one_of`, `is_not_one_of`. For `related_incidents` rule type: `is_set`, `is_not_set`.",
-							ValidateFunc: validation.StringInSlice([]string{"is", "is_not", "contains", "does_not_contain", "is_one_of", "is_not_one_of", "is_empty", "is_not_empty", "contains_key", "does_not_contain_key", "starts_with", "does_not_start_with", "matches", "does_not_match", "is_set", "is_not_set"}, false),
+							Description:  "Whether all or any of the rule's conditions must match. Value must be one of `match-all-rules`, `match-any-rule`.",
+							ValidateFunc: validation.StringInSlice([]string{"match-all-rules", "match-any-rule"}, false),
 						},
 
-						"value": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "Value with which JSON path value should be matched",
-						},
-
-						"fieldable_type": &schema.Schema{
-							Type:         schema.TypeString,
-							Computed:     true,
-							Required:     false,
-							Optional:     true,
-							ForceNew:     false,
-							Description:  "The type of the fieldable. Only used with `field` rule type. Value must be one of `AlertField`.",
-							ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
-						},
-
-						"fieldable_id": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
-							ForceNew:    false,
-							Description: "The ID of the alert field. Only used with `field` rule type.",
-						},
-
-						"values": &schema.Schema{
-							Type: schema.TypeList,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Computed:         false,
-							Required:         false,
-							Optional:         true,
-							Description:      "Values to match against. Used with `field` and `source` rule types.",
-						},
-
-						"service_ids": &schema.Schema{
-							Type: schema.TypeList,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							},
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
-							Computed:         false,
-							Required:         false,
-							Optional:         true,
-							Description:      "Service ids for which this escalation path should be used. Only used with `service` rule type.",
-						},
-
-						"time_zone": &schema.Schema{
-							Type:         schema.TypeString,
-							Computed:     true,
-							Required:     false,
-							Optional:     true,
-							ForceNew:     false,
-							Description:  "Time zone for the deferral window (IANA format, e.g. `America/New_York`). Only used with `deferral_window` rule type.",
-							ValidateFunc: validation.StringInSlice(IANATimeZones, false),
-						},
-
-						"time_blocks": &schema.Schema{
+						"conditions": &schema.Schema{
 							Type:             schema.TypeList,
 							Computed:         false,
-							Required:         false,
-							Optional:         true,
-							Description:      "Time windows during which alerts are deferred. Only used with `deferral_window` rule type.",
+							Required:         true,
+							Optional:         false,
+							MinItems:         1,
+							MaxItems:         5,
+							Description:      "Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks. Maximum of 5 conditions.",
 							DiffSuppressFunc: tools.EqualIgnoringOrder,
 							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"monday": &schema.Schema{
-										Type:        schema.TypeBool,
-										Default:     false,
-										Optional:    true,
-										Description: "Whether the time block applies on Monday",
-									},
-									"tuesday": &schema.Schema{
-										Type:        schema.TypeBool,
-										Default:     false,
-										Optional:    true,
-										Description: "Whether the time block applies on Tuesday",
-									},
-									"wednesday": &schema.Schema{
-										Type:        schema.TypeBool,
-										Default:     false,
-										Optional:    true,
-										Description: "Whether the time block applies on Wednesday",
-									},
-									"thursday": &schema.Schema{
-										Type:        schema.TypeBool,
-										Default:     false,
-										Optional:    true,
-										Description: "Whether the time block applies on Thursday",
-									},
-									"friday": &schema.Schema{
-										Type:        schema.TypeBool,
-										Default:     false,
-										Optional:    true,
-										Description: "Whether the time block applies on Friday",
-									},
-									"saturday": &schema.Schema{
-										Type:        schema.TypeBool,
-										Default:     false,
-										Optional:    true,
-										Description: "Whether the time block applies on Saturday",
-									},
-									"sunday": &schema.Schema{
-										Type:        schema.TypeBool,
-										Default:     false,
-										Optional:    true,
-										Description: "Whether the time block applies on Sunday",
-									},
-									"start_time": &schema.Schema{
-										Type:        schema.TypeString,
-										Computed:    true,
-										Optional:    true,
-										Description: "Formatted as HH:MM",
-									},
-									"end_time": &schema.Schema{
-										Type:        schema.TypeString,
-										Computed:    true,
-										Optional:    true,
-										Description: "Formatted as HH:MM",
-									},
-									"all_day": &schema.Schema{
-										Type:        schema.TypeBool,
-										Default:     false,
-										Optional:    true,
-										Description: "Whether this time block covers the entire day",
-									},
-									"position": &schema.Schema{
-										Type:        schema.TypeInt,
-										Computed:    true,
-										Required:    false,
-										Optional:    true,
-										ForceNew:    false,
-										Description: "Position of the time block",
-									},
-								},
+								Schema: escalationPathConditionSchema(),
 							},
 						},
 					},
 				},
+			},
+
+			"notification_type_fallback": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team. Value must be one of `audible`, `quiet`.",
+				ValidateFunc: validation.StringInSlice([]string{"audible", "quiet"}, false),
 			},
 
 			"time_restriction_time_zone": &schema.Schema{
@@ -406,6 +270,203 @@ func resourceEscalationPath() *schema.Resource {
 	}
 }
 
+func escalationPathConditionSchema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+
+		"rule_type": &schema.Schema{
+			Type:         schema.TypeString,
+			Computed:     true,
+			Required:     false,
+			Optional:     true,
+			ForceNew:     false,
+			Description:  "The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`, `service`, `deferral_window`, `source`, `related_incidents`.",
+			ValidateFunc: validation.StringInSlice([]string{"alert_urgency", "working_hour", "json_path", "field", "service", "deferral_window", "source", "related_incidents"}, false),
+		},
+
+		"urgency_ids": &schema.Schema{
+			Type: schema.TypeList,
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
+			DiffSuppressFunc: tools.EqualIgnoringOrder,
+			Computed:         false,
+			Required:         false,
+			Optional:         true,
+			Description:      "Alert urgency ids for which this escalation path should be used",
+		},
+
+		"within_working_hour": &schema.Schema{
+			Type:        schema.TypeBool,
+			Computed:    true,
+			Required:    false,
+			Optional:    true,
+			Description: "Whether the escalation path should be used within working hours. Value must be one of true or false",
+		},
+
+		"json_path": &schema.Schema{
+			Type:        schema.TypeString,
+			Computed:    true,
+			Required:    false,
+			Optional:    true,
+			ForceNew:    false,
+			Description: "JSON path to extract value from payload",
+		},
+
+		"operator": &schema.Schema{
+			Type:         schema.TypeString,
+			Computed:     true,
+			Required:     false,
+			Optional:     true,
+			ForceNew:     false,
+			Description:  "How the value should be matched. For `json_path` rule type: `is`, `is_not`, `contains`, `does_not_contain`. For `field` rule type: `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`. For `source` rule type: `is`, `is_not`, `is_one_of`, `is_not_one_of`. For `related_incidents` rule type: `is_set`, `is_not_set`.",
+			ValidateFunc: validation.StringInSlice([]string{"is", "is_not", "contains", "does_not_contain", "is_one_of", "is_not_one_of", "is_empty", "is_not_empty", "contains_key", "does_not_contain_key", "starts_with", "does_not_start_with", "matches", "does_not_match", "is_set", "is_not_set"}, false),
+		},
+
+		"value": &schema.Schema{
+			Type:        schema.TypeString,
+			Computed:    true,
+			Required:    false,
+			Optional:    true,
+			ForceNew:    false,
+			Description: "Value with which JSON path value should be matched",
+		},
+
+		"fieldable_type": &schema.Schema{
+			Type:         schema.TypeString,
+			Computed:     true,
+			Required:     false,
+			Optional:     true,
+			ForceNew:     false,
+			Description:  "The type of the fieldable. Only used with `field` rule type. Value must be one of `AlertField`.",
+			ValidateFunc: validation.StringInSlice([]string{"AlertField"}, false),
+		},
+
+		"fieldable_id": &schema.Schema{
+			Type:        schema.TypeString,
+			Computed:    true,
+			Required:    false,
+			Optional:    true,
+			ForceNew:    false,
+			Description: "The ID of the alert field. Only used with `field` rule type.",
+		},
+
+		"values": &schema.Schema{
+			Type: schema.TypeList,
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
+			DiffSuppressFunc: tools.EqualIgnoringOrder,
+			Computed:         false,
+			Required:         false,
+			Optional:         true,
+			Description:      "Values to match against. Used with `field` and `source` rule types.",
+		},
+
+		"service_ids": &schema.Schema{
+			Type: schema.TypeList,
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
+			DiffSuppressFunc: tools.EqualIgnoringOrder,
+			Computed:         false,
+			Required:         false,
+			Optional:         true,
+			Description:      "Service ids for which this escalation path should be used. Only used with `service` rule type.",
+		},
+
+		"time_zone": &schema.Schema{
+			Type:         schema.TypeString,
+			Computed:     true,
+			Required:     false,
+			Optional:     true,
+			ForceNew:     false,
+			Description:  "Time zone for the deferral window (IANA format, e.g. `America/New_York`). Only used with `deferral_window` rule type.",
+			ValidateFunc: validation.StringInSlice(IANATimeZones, false),
+		},
+
+		"time_blocks": &schema.Schema{
+			Type:             schema.TypeList,
+			Computed:         false,
+			Required:         false,
+			Optional:         true,
+			Description:      "Time windows during which alerts are deferred. Only used with `deferral_window` rule type.",
+			DiffSuppressFunc: tools.EqualIgnoringOrder,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"monday": &schema.Schema{
+						Type:        schema.TypeBool,
+						Default:     false,
+						Optional:    true,
+						Description: "Whether the time block applies on Monday",
+					},
+					"tuesday": &schema.Schema{
+						Type:        schema.TypeBool,
+						Default:     false,
+						Optional:    true,
+						Description: "Whether the time block applies on Tuesday",
+					},
+					"wednesday": &schema.Schema{
+						Type:        schema.TypeBool,
+						Default:     false,
+						Optional:    true,
+						Description: "Whether the time block applies on Wednesday",
+					},
+					"thursday": &schema.Schema{
+						Type:        schema.TypeBool,
+						Default:     false,
+						Optional:    true,
+						Description: "Whether the time block applies on Thursday",
+					},
+					"friday": &schema.Schema{
+						Type:        schema.TypeBool,
+						Default:     false,
+						Optional:    true,
+						Description: "Whether the time block applies on Friday",
+					},
+					"saturday": &schema.Schema{
+						Type:        schema.TypeBool,
+						Default:     false,
+						Optional:    true,
+						Description: "Whether the time block applies on Saturday",
+					},
+					"sunday": &schema.Schema{
+						Type:        schema.TypeBool,
+						Default:     false,
+						Optional:    true,
+						Description: "Whether the time block applies on Sunday",
+					},
+					"start_time": &schema.Schema{
+						Type:        schema.TypeString,
+						Computed:    true,
+						Optional:    true,
+						Description: "Formatted as HH:MM",
+					},
+					"end_time": &schema.Schema{
+						Type:        schema.TypeString,
+						Computed:    true,
+						Optional:    true,
+						Description: "Formatted as HH:MM",
+					},
+					"all_day": &schema.Schema{
+						Type:        schema.TypeBool,
+						Default:     false,
+						Optional:    true,
+						Description: "Whether this time block covers the entire day",
+					},
+					"position": &schema.Schema{
+						Type:        schema.TypeInt,
+						Computed:    true,
+						Required:    false,
+						Optional:    true,
+						ForceNew:    false,
+						Description: "Position of the time block",
+					},
+				},
+			},
+		},
+	}
+}
+
 func resourceEscalationPathCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	c := meta.(*client.Client)
 
@@ -451,6 +512,12 @@ func resourceEscalationPathCreate(ctx context.Context, d *schema.ResourceData, m
 	}
 	if value, ok := d.GetOkExists("rules"); ok {
 		s.Rules = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("notification_type_rules"); ok {
+		s.NotificationTypeRules = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("notification_type_fallback"); ok {
+		s.NotificationTypeFallback = value.(string)
 	}
 	if value, ok := d.GetOkExists("time_restriction_time_zone"); ok {
 		s.TimeRestrictionTimeZone = value.(string)
@@ -505,30 +572,7 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 
 		for _, c := range item.Rules {
 			if rawItem, ok := c.(map[string]interface{}); ok {
-				// Create a new map with only the fields defined in the schema
-				processed_item_rules := map[string]interface{}{
-					"rule_type":           rawItem["rule_type"],
-					"within_working_hour": rawItem["within_working_hour"],
-					"json_path":           rawItem["json_path"],
-					"operator":            rawItem["operator"],
-					"value":               rawItem["value"],
-					"fieldable_type":      rawItem["fieldable_type"],
-					"fieldable_id":        rawItem["fieldable_id"],
-					"time_zone":           rawItem["time_zone"],
-				}
-				if v := nilIfEmpty(rawItem["urgency_ids"]); v != nil {
-					processed_item_rules["urgency_ids"] = v
-				}
-				if v := nilIfEmpty(rawItem["values"]); v != nil {
-					processed_item_rules["values"] = v
-				}
-				if v := nilIfEmpty(rawItem["service_ids"]); v != nil {
-					processed_item_rules["service_ids"] = v
-				}
-				if tb := processTimeBlocks(rawItem["time_blocks"]); tb != nil {
-					processed_item_rules["time_blocks"] = tb
-				}
-				processed_items_rules = append(processed_items_rules, processed_item_rules)
+				processed_items_rules = append(processed_items_rules, processEscalationPathCondition(rawItem))
 			}
 		}
 
@@ -548,6 +592,14 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 	} else {
 		d.Set("rules", nil)
 	}
+
+	if item.NotificationTypeRules != nil {
+		d.Set("notification_type_rules", processEscalationPathNotificationTypeRules(item.NotificationTypeRules))
+	} else {
+		d.Set("notification_type_rules", nil)
+	}
+
+	d.Set("notification_type_fallback", item.NotificationTypeFallback)
 
 	d.Set("time_restriction_time_zone", item.TimeRestrictionTimeZone)
 
@@ -626,6 +678,18 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 		}
 	}
 
+	if d.HasChange("notification_type_rules") {
+		if value, ok := d.GetOk("notification_type_rules"); value != nil && ok {
+			s.NotificationTypeRules = value.([]interface{})
+		} else {
+			s.NotificationTypeRules = []interface{}{}
+		}
+	}
+
+	if d.HasChange("notification_type_fallback") {
+		s.NotificationTypeFallback = d.Get("notification_type_fallback").(string)
+	}
+
 	if d.HasChange("time_restriction_time_zone") {
 		s.TimeRestrictionTimeZone = d.Get("time_restriction_time_zone").(string)
 	}
@@ -665,6 +729,59 @@ func resourceEscalationPathDelete(ctx context.Context, d *schema.ResourceData, m
 	d.SetId("")
 
 	return nil
+}
+
+func processEscalationPathNotificationTypeRules(rawRules []interface{}) []map[string]interface{} {
+	processed := make([]map[string]interface{}, 0, len(rawRules))
+	for _, rule := range rawRules {
+		rawRule, ok := rule.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		conditions := make([]map[string]interface{}, 0)
+		if rawConditions, ok := rawRule["conditions"].([]interface{}); ok {
+			for _, condition := range rawConditions {
+				if rawCondition, ok := condition.(map[string]interface{}); ok {
+					conditions = append(conditions, processEscalationPathCondition(rawCondition))
+				}
+			}
+		}
+
+		processed = append(processed, map[string]interface{}{
+			"notification_type": rawRule["notification_type"],
+			"match_mode":        rawRule["match_mode"],
+			"conditions":        conditions,
+		})
+	}
+	return processed
+}
+
+func processEscalationPathCondition(rawItem map[string]interface{}) map[string]interface{} {
+	// Create a new map with only the fields defined in the schema
+	processed := map[string]interface{}{
+		"rule_type":           rawItem["rule_type"],
+		"within_working_hour": rawItem["within_working_hour"],
+		"json_path":           rawItem["json_path"],
+		"operator":            rawItem["operator"],
+		"value":               rawItem["value"],
+		"fieldable_type":      rawItem["fieldable_type"],
+		"fieldable_id":        rawItem["fieldable_id"],
+		"time_zone":           rawItem["time_zone"],
+	}
+	if v := nilIfEmpty(rawItem["urgency_ids"]); v != nil {
+		processed["urgency_ids"] = v
+	}
+	if v := nilIfEmpty(rawItem["values"]); v != nil {
+		processed["values"] = v
+	}
+	if v := nilIfEmpty(rawItem["service_ids"]); v != nil {
+		processed["service_ids"] = v
+	}
+	if tb := processTimeBlocks(rawItem["time_blocks"]); tb != nil {
+		processed["time_blocks"] = tb
+	}
+	return processed
 }
 
 func nilIfEmpty(v interface{}) interface{} {

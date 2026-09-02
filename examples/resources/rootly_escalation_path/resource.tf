@@ -239,3 +239,49 @@ resource "rootly_escalation_level" "second" {
     team_members = "all"
   }
 }
+# Audible/quiet conditions on a single path - rules are evaluated in order and the
+# first match wins, otherwise notification_type_fallback applies
+resource "rootly_escalation_path" "conditional_notifications" {
+  name                       = "Conditional Notifications"
+  default                    = false
+  escalation_policy_id       = rootly_escalation_policy.primary.id
+  notification_type_fallback = "quiet"
+
+  # Page audibly for low urgency alerts during business hours
+  notification_type_rules {
+    notification_type = "audible"
+    match_mode        = "match-all-rules"
+
+    conditions {
+      rule_type   = "alert_urgency"
+      urgency_ids = [data.rootly_alert_urgency.low.id]
+    }
+
+    conditions {
+      rule_type = "deferral_window"
+      time_zone = "America/New_York"
+      time_blocks {
+        monday     = true
+        tuesday    = true
+        wednesday  = true
+        thursday   = true
+        friday     = true
+        start_time = "09:00"
+        end_time   = "17:00"
+      }
+    }
+  }
+
+  # Stay quiet for informational alerts regardless of when they arrive
+  notification_type_rules {
+    notification_type = "quiet"
+    match_mode        = "match-all-rules"
+
+    conditions {
+      rule_type = "json_path"
+      json_path = "$.severity"
+      operator  = "is"
+      value     = "info"
+    }
+  }
+}
