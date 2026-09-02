@@ -85,17 +85,18 @@ export function generateDataSource({
   const operationId = isSingle
     ? `get${camelize(singularize(config.name))}`
     : `list${camelize(pluralize(config.name))}`;
-  const params = getParametersByOperationId({
+  const nonPathParams = getParametersByOperationId({
     doc,
     operationId,
-    notIn: ["path"],
+    excludeLocations: ["path"],
   });
-  const hasParams = Array.isArray(params) && params.length > 0;
+  const hasNonPathParams =
+    Array.isArray(nonPathParams) && nonPathParams.length > 0;
   const clientArgs = ["ctx"];
   if (isSingle) {
     clientArgs.push("data.Id.ValueString()");
   }
-  if (hasParams) {
+  if (hasNonPathParams) {
     // TODO: Add support for parameters
     clientArgs.push("nil");
   }

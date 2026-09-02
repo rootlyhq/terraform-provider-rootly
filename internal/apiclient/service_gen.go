@@ -137,7 +137,7 @@ func (c *Client) ServiceList(ctx context.Context, params *rootly.ListServicesPar
 			return nil, fmt.Errorf("empty response")
 		}
 
-		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(resp.Body), reflect.TypeOf(new(Service)))
+		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(resp.Body), reflect.TypeFor[Service]())
 		if err != nil {
 			return nil, fmt.Errorf("failed to unmarshal response body: %w", err)
 		}

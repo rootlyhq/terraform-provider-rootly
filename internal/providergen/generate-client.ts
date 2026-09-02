@@ -177,24 +177,15 @@ function generateListAction({
   assertSchemaObject(listSchema);
 
   const operationId = `list${camelize(pluralize(config.name))}`;
-  const params = getParametersByOperationId({
+  const { funcArgs, clientArgs, hasNonPathParams } = buildFuncAndClientArgs({
     doc,
     operationId,
-    notIn: ["path"],
   });
-  const hasParams = Array.isArray(params) && params.length > 0;
-
-  const funcArgs = ["ctx context.Context"];
-  const clientArgs = ["ctx"];
-  if (hasParams) {
-    funcArgs.push(`params *rootly.${camelize(operationId)}Params`);
-    clientArgs.push("params");
-  }
 
   return `
 func (c *Client) ${camelize(config.name)}List(${funcArgs.join(", ")}) (*[]${camelize(singularize(config.name))}, error) {
   ${
-    hasParams
+    hasNonPathParams
       ? `if params == nil {
   params = new(rootly.${camelize(operationId)}Params)
 }`
@@ -210,7 +201,7 @@ func (c *Client) ${camelize(config.name)}List(${funcArgs.join(", ")}) (*[]${came
 			return nil, fmt.Errorf("empty response")
 		}
 
-		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(resp.Body), reflect.TypeOf(new(${camelize(config.name)})))
+		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(resp.Body), reflect.TypeFor[${camelize(config.name)}]())
 		if err != nil {
 			return nil, fmt.Errorf("failed to unmarshal response body: %w", err)
 		}
@@ -249,19 +240,10 @@ function generateGetAction({
   assertSchemaObject(listSchema);
 
   const operationId = `get${camelize(config.name)}`;
-  const params = getParametersByOperationId({
+  const { funcArgs, clientArgs } = buildFuncAndClientArgs({
     doc,
     operationId,
-    notIn: ["path"],
   });
-  const hasParams = Array.isArray(params) && params.length > 0;
-
-  const funcArgs = ["ctx context.Context", "id string"];
-  const clientArgs = ["ctx", "id"];
-  if (hasParams) {
-    funcArgs.push(`params *rootly.${camelize(operationId)}Params`);
-    clientArgs.push("params");
-  }
 
   return `
 func (c *Client) ${camelize(config.name)}Get(${funcArgs.join(", ")}) (*${camelize(config.name)}, error) {
@@ -280,4 +262,39 @@ func (c *Client) ${camelize(config.name)}Get(${funcArgs.join(", ")}) (*${cameliz
 	return &item, nil
 }
 `;
+}
+
+function buildFuncAndClientArgs({
+  doc,
+  operationId,
+}: {
+  doc: oas30.OpenAPIObject;
+  operationId: string;
+}) {
+  const pathParams = getParametersByOperationId({
+    doc,
+    operationId,
+    onlyLocations: ["path"],
+  });
+  const nonPathParams = getParametersByOperationId({
+    doc,
+    operationId,
+    excludeLocations: ["path"],
+  });
+  const hasNonPathParams =
+    Array.isArray(nonPathParams) && nonPathParams.length > 0;
+
+  const funcArgs = ["ctx context.Context"];
+  const clientArgs = ["ctx"];
+  if (pathParams) {
+    for (const param of pathParams) {
+      funcArgs.push(`${camelize(param.name, true)} string`);
+      clientArgs.push(camelize(param.name, true));
+    }
+  }
+  if (hasNonPathParams) {
+    funcArgs.push(`params *rootly.${camelize(operationId)}Params`);
+    clientArgs.push("params");
+  }
+  return { funcArgs, clientArgs, hasNonPathParams };
 }

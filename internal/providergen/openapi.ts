@@ -14,11 +14,13 @@ const HTTP_METHODS = [
 export function getParametersByOperationId({
   doc,
   operationId,
-  notIn,
+  onlyLocations,
+  excludeLocations,
 }: {
   doc: oas30.OpenAPIObject;
   operationId: string;
-  notIn: oas30.ParameterLocation[];
+  onlyLocations?: oas30.ParameterLocation[];
+  excludeLocations?: oas30.ParameterLocation[];
 }): oas30.ParameterObject[] | null {
   for (const [_, pathItem] of Object.entries(doc.paths)) {
     for (const method of HTTP_METHODS) {
@@ -29,7 +31,15 @@ export function getParametersByOperationId({
             ...(pathItem.parameters ?? []),
             ...(operation.parameters ?? []),
           ] as oas30.ParameterObject[]
-        ).filter((param) => !notIn.includes(param.in));
+        ).filter((param) => {
+          if (onlyLocations && !onlyLocations.includes(param.in)) {
+            return false;
+          }
+          if (excludeLocations && excludeLocations.includes(param.in)) {
+            return false;
+          }
+          return true;
+        });
       }
     }
   }
