@@ -1,6 +1,6 @@
 import { camelize, humanize, pluralize, singularize } from "inflection";
 import { oas30 } from "openapi3-ts";
-import { match } from "ts-pattern";
+import { match, P } from "ts-pattern";
 import type { DataSourceConfig } from "./schema";
 import { assertSchemaObject } from "./types";
 import { produce } from "immer";
@@ -392,20 +392,23 @@ function generateModel({
   if v, err := data.${camelize(key)}.Get(); err == nil {
     var mm ${name}${camelize(key)}
     diags.Append(mm.FromApi(ctx, v)...)
-		return supertypes.NewSingleNestedObjectValueOf[${name}${camelize(key)}](ctx, &mm)
+		return supertypes.NewSingleNestedObjectValueOf(ctx, &mm)
 	}
 	return supertypes.NewSingleNestedObjectValueOfNull[${name}${camelize(key)}](ctx)
 })()`,
         )
         .with(
-          [{ type: "array", items: { type: "string" } }, { nullable: true }],
+          [
+            {
+              type: "array",
+              items: {
+                type: P.union("string", "boolean", "integer"),
+              },
+            },
+            { nullable: true },
+          ],
           () =>
-            `m.${camelize(key)} = jsonapitypes.NullableListValueOfSlice[string](ctx, data.${camelize(key)})`,
-        )
-        .with(
-          [{ type: "array", items: { type: "integer" } }, { nullable: true }],
-          () =>
-            `m.${camelize(key)} = jsonapitypes.NullableListValueOfSlice[int64](ctx, data.${camelize(key)})`,
+            `m.${camelize(key)} = jsonapitypes.NullableListValueOfSlice(ctx, data.${camelize(key)})`,
         )
         .with(
           [
@@ -417,7 +420,7 @@ function generateModel({
             { nullable: false },
           ],
           () => `m.${camelize(key)} = (func() supertypes.ListNestedObjectValueOf[${name}${camelize(key)}Item] {
-  return supertypes.NewListNestedObjectValueOfValueSlice[${name}${camelize(key)}Item](ctx, lo.Map(data, func(vv apiclient.${baseName}, _ int) ${name}${camelize(key)}Item {
+  return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(data, func(vv apiclient.${baseName}, _ int) ${name}${camelize(key)}Item {
     var mm ${name}${camelize(key)}Item
     diags.Append(mm.FromApi(ctx, vv)...)
     return mm
@@ -427,7 +430,7 @@ function generateModel({
         .with(
           [{ type: "array", items: { type: "object" } }, { nullable: false }],
           () => `m.${camelize(key)} = (func() supertypes.ListNestedObjectValueOf[${name}${camelize(key)}Item] {
-  return supertypes.NewListNestedObjectValueOfValueSlice[${name}${camelize(key)}Item](ctx, lo.Map(data.${camelize(key)}, func(vv apiclient.${baseName}${camelize(key)}Item, _ int) ${name}${camelize(key)}Item {
+  return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(data.${camelize(key)}, func(vv apiclient.${baseName}${camelize(key)}Item, _ int) ${name}${camelize(key)}Item {
     var mm ${name}${camelize(key)}Item
     diags.Append(mm.FromApi(ctx, vv)...)
     return mm
@@ -438,7 +441,7 @@ function generateModel({
           [{ type: "array", items: { type: "object" } }, { nullable: true }],
           () => `m.${camelize(key)} = (func() supertypes.ListNestedObjectValueOf[${name}${camelize(key)}Item] {
   if v, err := data.${camelize(key)}.Get(); err == nil {
-    return supertypes.NewListNestedObjectValueOfValueSlice[${name}${camelize(key)}Item](ctx, lo.Map(v, func(vv apiclient.${baseName}${camelize(key)}Item, _ int) ${name}${camelize(key)}Item {
+    return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.${baseName}${camelize(key)}Item, _ int) ${name}${camelize(key)}Item {
       var mm ${name}${camelize(key)}Item
       diags.Append(mm.FromApi(ctx, vv)...)
       return mm

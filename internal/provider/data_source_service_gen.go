@@ -316,7 +316,7 @@ func (m *ServiceDataSourceModel) FromApi(ctx context.Context, data apiclient.Ser
 	m.ManagedBy = types.StringValue(data.ManagedBy)
 	m.Description = jsonapitypes.NullableStringValue(data.Description)
 	m.PublicDescription = jsonapitypes.NullableStringValue(data.PublicDescription)
-	m.NotifyEmails = jsonapitypes.NullableListValueOfSlice[string](ctx, data.NotifyEmails)
+	m.NotifyEmails = jsonapitypes.NullableListValueOfSlice(ctx, data.NotifyEmails)
 	m.Color = jsonapitypes.NullableStringValue(data.Color)
 	m.Position = jsonapitypes.NullableInt64Value(data.Position)
 	m.BackstageId = jsonapitypes.NullableStringValue(data.BackstageId)
@@ -330,17 +330,17 @@ func (m *ServiceDataSourceModel) FromApi(ctx context.Context, data apiclient.Ser
 	m.GitlabRepositoryName = jsonapitypes.NullableStringValue(data.GitlabRepositoryName)
 	m.GitlabRepositoryBranch = jsonapitypes.NullableStringValue(data.GitlabRepositoryBranch)
 	m.KubernetesDeploymentName = jsonapitypes.NullableStringValue(data.KubernetesDeploymentName)
-	m.EnvironmentIds = jsonapitypes.NullableListValueOfSlice[string](ctx, data.EnvironmentIds)
-	m.ServiceIds = jsonapitypes.NullableListValueOfSlice[string](ctx, data.ServiceIds)
-	m.OwnerGroupIds = jsonapitypes.NullableListValueOfSlice[string](ctx, data.OwnerGroupIds)
-	m.OwnerUserIds = jsonapitypes.NullableListValueOfSlice[int64](ctx, data.OwnerUserIds)
+	m.EnvironmentIds = jsonapitypes.NullableListValueOfSlice(ctx, data.EnvironmentIds)
+	m.ServiceIds = jsonapitypes.NullableListValueOfSlice(ctx, data.ServiceIds)
+	m.OwnerGroupIds = jsonapitypes.NullableListValueOfSlice(ctx, data.OwnerGroupIds)
+	m.OwnerUserIds = jsonapitypes.NullableListValueOfSlice(ctx, data.OwnerUserIds)
 	m.AlertUrgencyId = jsonapitypes.NullableStringValue(data.AlertUrgencyId)
 	m.EscalationPolicyId = jsonapitypes.NullableStringValue(data.EscalationPolicyId)
 	m.AlertsEmailEnabled = jsonapitypes.NullableBoolValue(data.AlertsEmailEnabled)
 	m.AlertsEmailAddress = jsonapitypes.NullableStringValue(data.AlertsEmailAddress)
 	m.SlackChannels = (func() supertypes.ListNestedObjectValueOf[ServiceDataSourceModelSlackChannelsItem] {
 		if v, err := data.SlackChannels.Get(); err == nil {
-			return supertypes.NewListNestedObjectValueOfValueSlice[ServiceDataSourceModelSlackChannelsItem](ctx, lo.Map(v, func(vv apiclient.ServiceSlackChannelsItem, _ int) ServiceDataSourceModelSlackChannelsItem {
+			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.ServiceSlackChannelsItem, _ int) ServiceDataSourceModelSlackChannelsItem {
 				var mm ServiceDataSourceModelSlackChannelsItem
 				diags.Append(mm.FromApi(ctx, vv)...)
 				return mm
@@ -350,7 +350,7 @@ func (m *ServiceDataSourceModel) FromApi(ctx context.Context, data apiclient.Ser
 	})()
 	m.SlackAliases = (func() supertypes.ListNestedObjectValueOf[ServiceDataSourceModelSlackAliasesItem] {
 		if v, err := data.SlackAliases.Get(); err == nil {
-			return supertypes.NewListNestedObjectValueOfValueSlice[ServiceDataSourceModelSlackAliasesItem](ctx, lo.Map(v, func(vv apiclient.ServiceSlackAliasesItem, _ int) ServiceDataSourceModelSlackAliasesItem {
+			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.ServiceSlackAliasesItem, _ int) ServiceDataSourceModelSlackAliasesItem {
 				var mm ServiceDataSourceModelSlackAliasesItem
 				diags.Append(mm.FromApi(ctx, vv)...)
 				return mm
@@ -363,7 +363,7 @@ func (m *ServiceDataSourceModel) FromApi(ctx context.Context, data apiclient.Ser
 		if v, err := data.AlertBroadcastChannel.Get(); err == nil {
 			var mm ServiceDataSourceModelAlertBroadcastChannel
 			diags.Append(mm.FromApi(ctx, v)...)
-			return supertypes.NewSingleNestedObjectValueOf[ServiceDataSourceModelAlertBroadcastChannel](ctx, &mm)
+			return supertypes.NewSingleNestedObjectValueOf(ctx, &mm)
 		}
 		return supertypes.NewSingleNestedObjectValueOfNull[ServiceDataSourceModelAlertBroadcastChannel](ctx)
 	})()
@@ -372,13 +372,13 @@ func (m *ServiceDataSourceModel) FromApi(ctx context.Context, data apiclient.Ser
 		if v, err := data.IncidentBroadcastChannel.Get(); err == nil {
 			var mm ServiceDataSourceModelIncidentBroadcastChannel
 			diags.Append(mm.FromApi(ctx, v)...)
-			return supertypes.NewSingleNestedObjectValueOf[ServiceDataSourceModelIncidentBroadcastChannel](ctx, &mm)
+			return supertypes.NewSingleNestedObjectValueOf(ctx, &mm)
 		}
 		return supertypes.NewSingleNestedObjectValueOfNull[ServiceDataSourceModelIncidentBroadcastChannel](ctx)
 	})()
 	m.Properties = (func() supertypes.ListNestedObjectValueOf[ServiceDataSourceModelPropertiesItem] {
 		if v, err := data.Properties.Get(); err == nil {
-			return supertypes.NewListNestedObjectValueOfValueSlice[ServiceDataSourceModelPropertiesItem](ctx, lo.Map(v, func(vv apiclient.ServicePropertiesItem, _ int) ServiceDataSourceModelPropertiesItem {
+			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.ServicePropertiesItem, _ int) ServiceDataSourceModelPropertiesItem {
 				var mm ServiceDataSourceModelPropertiesItem
 				diags.Append(mm.FromApi(ctx, vv)...)
 				return mm
