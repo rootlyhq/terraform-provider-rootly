@@ -5,6 +5,7 @@ import { generateClient } from "./generate-client";
 import { generateDataSource } from "./generate-data-source";
 import { generateProvider } from "./generate-provider";
 import { CLIENTS, DATA_SOURCES, RESOURCES } from "./settings";
+import { generateResource } from "./generate-resource";
 
 async function parseArguments() {
   const { values } = parseArgs({
@@ -64,6 +65,14 @@ async function main() {
     const code = generateDataSource({ doc, config });
     await writeAndFormatGoFile(
       new URL(`../provider/data_source_${config.name}_gen.go`, import.meta.url),
+      code,
+    );
+  }
+
+  for (const config of RESOURCES) {
+    const code = generateResource({ doc, config });
+    await writeAndFormatGoFile(
+      new URL(`../provider/resource_${config.name}_gen.go`, import.meta.url),
       code,
     );
   }

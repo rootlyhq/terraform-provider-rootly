@@ -20,12 +20,14 @@ interface DataSourceSingleConfig {
 }
 
 export type DataSourceConfig = {
+  kind: "data_source";
   name: string;
   description?: string;
 } & (DataSourceListConfig | DataSourceSingleConfig);
 
 // TODO
 export type ResourceConfig = {
+  kind: "resource";
   name: string;
   description?: string;
 };

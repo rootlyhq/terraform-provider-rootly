@@ -1,6 +1,7 @@
 import type { DataSourceConfig } from "../schema";
 
 export default {
+  kind: "data_source",
   name: "services",
   type: "list",
   resourceName: "service",
