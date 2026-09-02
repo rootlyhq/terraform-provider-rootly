@@ -1,3 +1,5 @@
+import type { oas30 } from "openapi3-ts";
+
 export interface ClientConfig {
   name: string;
   actions?: {
@@ -11,12 +13,12 @@ export interface ClientConfig {
 }
 
 interface DataSourceListConfig {
-  type: "list";
+  strategy: "list";
   resourceName: string;
 }
 
 interface DataSourceSingleConfig {
-  type: "single";
+  strategy: "single";
 }
 
 export type DataSourceConfig = {
@@ -25,7 +27,7 @@ export type DataSourceConfig = {
 } & (DataSourceListConfig | DataSourceSingleConfig);
 
 export type ResolvedDataSourceConfig = {
-  kind: "data_source";
+  type: "data_source";
   name: string;
   description?: string;
   goNames: {
@@ -33,6 +35,10 @@ export type ResolvedDataSourceConfig = {
     struct: `${string}DataSource`;
     /** Name of the struct that represents the model of the data source. */
     model: `${string}DataSourceModel`;
+  };
+  schemas: {
+    read: oas30.SchemaObject;
+    resolved: oas30.SchemaObject;
   };
 } & (DataSourceListConfig | DataSourceSingleConfig);
 
@@ -43,7 +49,7 @@ export type ResourceConfig = {
 };
 
 export type ResolvedResourceConfig = {
-  kind: "resource";
+  type: "resource";
   name: string;
   description?: string;
   goNames: {
@@ -51,6 +57,12 @@ export type ResolvedResourceConfig = {
     struct: `${string}Resource`;
     /** Name of the struct that represents the model of the resource. */
     model: `${string}ResourceModel`;
+  };
+  schemas: {
+    create: oas30.SchemaObject;
+    read: oas30.SchemaObject;
+    update: oas30.SchemaObject;
+    resolved: oas30.SchemaObject;
   };
 };
 
@@ -72,5 +84,7 @@ declare module "openapi3-ts/oas30" {
     "x-tf-computed-optional-required"?: ComputedOptionalRequired;
     /** Indicates this is the top level item type for the data source. Only used for plural data sources. */
     "x-tf-top-level-item-type"?: boolean;
+    /** The type of collection to use for arrays. */
+    "x-tf-collection-type"?: "list" | "set";
   }
 }

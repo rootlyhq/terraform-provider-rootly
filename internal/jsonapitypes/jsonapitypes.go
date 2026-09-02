@@ -35,3 +35,10 @@ func NullableListValueOfSlice[T any](ctx context.Context, v jsonapi.NullableAttr
 	}
 	return supertypes.NewListValueOfNull[T](ctx)
 }
+
+func NullableSetValueOfSlice[T any](ctx context.Context, v jsonapi.NullableAttr[[]T]) supertypes.SetValueOf[T] {
+	if v, err := v.Get(); err == nil {
+		return supertypes.NewSetValueOfSlice(ctx, v)
+	}
+	return supertypes.NewSetValueOfNull[T](ctx)
+}

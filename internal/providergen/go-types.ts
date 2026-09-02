@@ -13,13 +13,21 @@ export function tfAttributeSchemaType({
     .with({ type: "integer" }, () => "schema.Int64Attribute")
     .with({ type: "object" }, () => "schema.SingleNestedAttribute")
     .with(
-      { type: "array", items: { type: "string" } },
-      { type: "array", items: { type: "integer" } },
-      () => "schema.ListAttribute",
+      {
+        type: "array",
+        items: { type: P.union("string", "integer") },
+        "x-tf-collection-type": P.union("list", "set"),
+      },
+      (schema) => `schema.${camelize(schema["x-tf-collection-type"])}Attribute`,
     )
     .with(
-      { type: "array", items: { type: "object" } },
-      () => "schema.ListNestedAttribute",
+      {
+        type: "array",
+        items: { type: "object" },
+        "x-tf-collection-type": P.union("list", "set"),
+      },
+      (schema) =>
+        `schema.${camelize(schema["x-tf-collection-type"])}NestedAttribute`,
     )
     .exhaustive();
 }
@@ -34,7 +42,7 @@ export function tfAttributeValidatorType({
     .with({ type: "boolean" }, () => "validator.Bool")
     .with({ type: "integer" }, () => "validator.Int64")
     .with({ type: "object" }, () => "validator.Object")
-    .with({ type: "array" }, () => "validator.List")
+    .with({ type: "array" }, () => "validator.Set")
     .exhaustive();
 }
 
@@ -56,16 +64,31 @@ export function tfAttributeValueType({
       () => `supertypes.SingleNestedObjectValueOf[${parent}${name}]`,
     )
     .with(
-      { type: "array", items: { type: "string" } },
-      () => "supertypes.ListValueOf[string]",
+      {
+        type: "array",
+        items: { type: "string" },
+        "x-tf-collection-type": P.union("list", "set"),
+      },
+      (schema) =>
+        `supertypes.${camelize(schema["x-tf-collection-type"])}ValueOf[string]`,
     )
     .with(
-      { type: "array", items: { type: "integer" } },
-      () => "supertypes.ListValueOf[int64]",
+      {
+        type: "array",
+        items: { type: "integer" },
+        "x-tf-collection-type": P.union("list", "set"),
+      },
+      (schema) =>
+        `supertypes.${camelize(schema["x-tf-collection-type"])}ValueOf[int64]`,
     )
     .with(
-      { type: "array", items: { type: "object" } },
-      () => `supertypes.ListNestedObjectValueOf[${parent}${name}Item]`,
+      {
+        type: "array",
+        items: { type: "object" },
+        "x-tf-collection-type": P.union("list", "set"),
+      },
+      (schema) =>
+        `supertypes.${camelize(schema["x-tf-collection-type"])}NestedObjectValueOf[${parent}${name}Item]`,
     )
     .exhaustive();
 }
@@ -86,17 +109,31 @@ export function tfAttributeCustomType({
         `supertypes.NewSingleNestedObjectTypeOf[${parent}${camelize(name)}](ctx)`,
     )
     .with(
-      { type: "array", items: { type: "string" } },
-      () => "supertypes.NewListTypeOf[string](ctx)",
+      {
+        type: "array",
+        items: { type: "string" },
+        "x-tf-collection-type": P.union("list", "set"),
+      },
+      (schema) =>
+        `supertypes.New${camelize(schema["x-tf-collection-type"])}TypeOf[string](ctx)`,
     )
     .with(
-      { type: "array", items: { type: "integer" } },
-      () => "supertypes.NewListTypeOf[int64](ctx)",
+      {
+        type: "array",
+        items: { type: "integer" },
+        "x-tf-collection-type": P.union("list", "set"),
+      },
+      (schema) =>
+        `supertypes.New${camelize(schema["x-tf-collection-type"])}TypeOf[int64](ctx)`,
     )
     .with(
-      { type: "array", items: { type: "object" } },
-      () =>
-        `supertypes.NewListNestedObjectTypeOf[${parent}${camelize(name)}Item](ctx)`,
+      {
+        type: "array",
+        items: { type: "object" },
+        "x-tf-collection-type": P.union("list", "set"),
+      },
+      (schema) =>
+        `supertypes.New${camelize(schema["x-tf-collection-type"])}NestedObjectTypeOf[${parent}${camelize(name)}Item](ctx)`,
     )
     .otherwise(() => null);
 }

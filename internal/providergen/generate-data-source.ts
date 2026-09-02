@@ -17,16 +17,10 @@ export function generateDataSource({
 }) {
   console.log(`Generating data source: ${config.name}`);
 
-  const isSingle = config.type === "single";
-
-  const schemaKey = isSingle ? config.name : config.resourceName;
-  let baseSchema = removeReference(doc.components?.schemas?.[schemaKey]);
-  if (!baseSchema) {
-    throw new Error(`Cannot find schema: ${schemaKey} in doc`);
-  }
+  const isSingle = config.strategy === "single";
 
   // Remove creation and update timestamp fields
-  baseSchema = produce(baseSchema, (draft) => {
+  const baseSchema = produce(config.schemas.resolved, (draft) => {
     if (draft.properties) {
       delete draft.properties.created_at;
       delete draft.properties.updated_at;
@@ -35,7 +29,7 @@ export function generateDataSource({
 
   const schema = match(config)
     .with(
-      { type: "list" },
+      { strategy: "list" },
       (config) =>
         ({
           type: "object",
@@ -54,11 +48,12 @@ export function generateDataSource({
                 required: ["id", ...(baseSchema.required ?? [])],
               },
               "x-tf-top-level-item-type": true,
+              "x-tf-collection-type": "list",
             },
           },
         }) satisfies oas30.SchemaObject,
     )
-    .with({ type: "single" }, (config) =>
+    .with({ strategy: "single" }, (config) =>
       produce(baseSchema, (draft) => {
         draft.properties = {
           id: {

@@ -22,7 +22,7 @@ export function generateModel({
   isTopLevel: boolean;
 }) {
   const fromApiDataType =
-    config.kind === "data_source" && config.type === "list" && isTopLevel
+    config.type === "data_source" && config.strategy === "list" && isTopLevel
       ? `[]apiclient.${baseName}`
       : `apiclient.${baseName}`;
   if (!schema.properties) {
@@ -148,11 +148,12 @@ export function generateModel({
               items: {
                 type: P.union("string", "boolean", "integer"),
               },
+              "x-tf-collection-type": P.union("list", "set"),
             },
             { nullable: true },
           ],
-          () =>
-            `m.${camelize(key)} = jsonapitypes.NullableListValueOfSlice(ctx, data.${camelize(key)})`,
+          ([schema]) =>
+            `m.${camelize(key)} = jsonapitypes.Nullable${camelize(schema["x-tf-collection-type"])}ValueOfSlice(ctx, data.${camelize(key)})`,
         )
         .with(
           [
@@ -161,11 +162,12 @@ export function generateModel({
               items: {
                 type: P.union("string", "boolean", "integer"),
               },
+              "x-tf-collection-type": P.union("list", "set"),
             },
             { nullable: false },
           ],
-          () =>
-            `m.${camelize(key)} = supertypes.NewListValueOfSlice(ctx, data.${camelize(key)})`,
+          ([schema]) =>
+            `m.${camelize(key)} = supertypes.New${camelize(schema["x-tf-collection-type"])}ValueOfSlice(ctx, data.${camelize(key)})`,
         )
         .with(
           [
@@ -173,11 +175,14 @@ export function generateModel({
               type: "array",
               items: { type: "object" },
               "x-tf-top-level-item-type": true,
+              "x-tf-collection-type": P.union("list", "set"),
             },
             { nullable: false },
           ],
-          () => `m.${camelize(key)} = (func() supertypes.ListNestedObjectValueOf[${name}${camelize(key)}Item] {
-  return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(data, func(vv apiclient.${baseName}, _ int) ${name}${camelize(key)}Item {
+          ([
+            schema,
+          ]) => `m.${camelize(key)} = (func() supertypes.${camelize(schema["x-tf-collection-type"])}NestedObjectValueOf[${name}${camelize(key)}Item] {
+  return supertypes.New${camelize(schema["x-tf-collection-type"])}NestedObjectValueOfValueSlice(ctx, lo.Map(data, func(vv apiclient.${baseName}, _ int) ${name}${camelize(key)}Item {
     var mm ${name}${camelize(key)}Item
     diags.Append(mm.FromApi(ctx, vv)...)
     return mm
@@ -185,9 +190,18 @@ export function generateModel({
 })()`,
         )
         .with(
-          [{ type: "array", items: { type: "object" } }, { nullable: false }],
-          () => `m.${camelize(key)} = (func() supertypes.ListNestedObjectValueOf[${name}${camelize(key)}Item] {
-  return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(data.${camelize(key)}, func(vv apiclient.${baseName}${camelize(key)}Item, _ int) ${name}${camelize(key)}Item {
+          [
+            {
+              type: "array",
+              items: { type: "object" },
+              "x-tf-collection-type": P.union("list", "set"),
+            },
+            { nullable: false },
+          ],
+          ([
+            schema,
+          ]) => `m.${camelize(key)} = (func() supertypes.${camelize(schema["x-tf-collection-type"])}NestedObjectValueOf[${name}${camelize(key)}Item] {
+  return supertypes.New${camelize(schema["x-tf-collection-type"])}NestedObjectValueOfValueSlice(ctx, lo.Map(data.${camelize(key)}, func(vv apiclient.${baseName}${camelize(key)}Item, _ int) ${name}${camelize(key)}Item {
     var mm ${name}${camelize(key)}Item
     diags.Append(mm.FromApi(ctx, vv)...)
     return mm
@@ -195,16 +209,25 @@ export function generateModel({
 })()`,
         )
         .with(
-          [{ type: "array", items: { type: "object" } }, { nullable: true }],
-          () => `m.${camelize(key)} = (func() supertypes.ListNestedObjectValueOf[${name}${camelize(key)}Item] {
+          [
+            {
+              type: "array",
+              items: { type: "object" },
+              "x-tf-collection-type": P.union("list", "set"),
+            },
+            { nullable: true },
+          ],
+          ([
+            schema,
+          ]) => `m.${camelize(key)} = (func() supertypes.${camelize(schema["x-tf-collection-type"])}NestedObjectValueOf[${name}${camelize(key)}Item] {
   if v, err := data.${camelize(key)}.Get(); err == nil {
-    return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.${baseName}${camelize(key)}Item, _ int) ${name}${camelize(key)}Item {
+    return supertypes.New${camelize(schema["x-tf-collection-type"])}NestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.${baseName}${camelize(key)}Item, _ int) ${name}${camelize(key)}Item {
       var mm ${name}${camelize(key)}Item
       diags.Append(mm.FromApi(ctx, vv)...)
       return mm
     }))
   }
-  return supertypes.NewListNestedObjectValueOfNull[${name}${camelize(key)}Item](ctx)
+  return supertypes.New${camelize(schema["x-tf-collection-type"])}NestedObjectValueOfNull[${name}${camelize(key)}Item](ctx)
 })()`,
         )
         .otherwise(

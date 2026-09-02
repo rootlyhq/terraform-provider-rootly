@@ -4,7 +4,13 @@ import { parseArgs } from "util";
 import { generateClient } from "./generate-client";
 import { generateDataSource } from "./generate-data-source";
 import { generateProvider } from "./generate-provider";
-import { CLIENTS, DATA_SOURCES, RESOURCES } from "./settings";
+import {
+  CLIENTS,
+  DATA_SOURCES,
+  resolveDataSourceConfig,
+  resolveResourceConfig,
+  RESOURCES,
+} from "./settings";
 import { generateResource } from "./generate-resource";
 
 async function parseArguments() {
@@ -62,17 +68,25 @@ async function main() {
   }
 
   for (const config of DATA_SOURCES) {
-    const code = generateDataSource({ doc, config });
+    const resolvedConfig = resolveDataSourceConfig({ doc, config });
+    const code = generateDataSource({ doc, config: resolvedConfig });
     await writeAndFormatGoFile(
-      new URL(`../provider/data_source_${config.name}_gen.go`, import.meta.url),
+      new URL(
+        `../provider/data_source_${resolvedConfig.name}_gen.go`,
+        import.meta.url,
+      ),
       code,
     );
   }
 
   for (const config of RESOURCES) {
-    const code = generateResource({ doc, config });
+    const resolvedConfig = resolveResourceConfig({ doc, config });
+    const code = generateResource({ doc, config: resolvedConfig });
     await writeAndFormatGoFile(
-      new URL(`../provider/resource_${config.name}_gen.go`, import.meta.url),
+      new URL(
+        `../provider/resource_${resolvedConfig.name}_gen.go`,
+        import.meta.url,
+      ),
       code,
     );
   }
