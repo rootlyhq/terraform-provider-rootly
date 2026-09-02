@@ -33,6 +33,10 @@ Manages workflow auto_assign_role_rootly task.
 <a id="nestedblock--task_params"></a>
 ### Nested Schema for `task_params`
 
+Required:
+
+- `incident_role_id` (String) The role id
+
 Optional:
 
 - `escalation_policy_target` (Map of String) Map must contain two fields, `id` and `name`.
