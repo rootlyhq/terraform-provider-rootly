@@ -9,6 +9,12 @@ export interface ClientConfig {
     get?: {
       enabled: true;
     };
+    create?: {
+      enabled: true;
+    };
+    update?: {
+      enabled: true;
+    };
   };
 }
 

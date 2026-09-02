@@ -170,6 +170,308 @@ type EscalationPathTimeRestrictionsItem struct {
 	EndTime string `jsonapi:"attr,end_time,omitempty"`
 }
 
+type CreateEscalationPath struct {
+	// The name of the escalation path
+	Name string `jsonapi:"attr,name"`
+	// Notification rule type to be used
+	NotificationType string `jsonapi:"attr,notification_type,omitempty"`
+	// The type of escalation path to create
+	PathType string `jsonapi:"attr,path_type,omitempty"`
+	// What happens after a deferral path finishes. Required for deferral paths.
+	AfterDeferralBehavior jsonapi.NullableAttr[string] `jsonapi:"attr,after_deferral_behavior,omitempty"`
+	// The escalation path to execute after this deferral path when after_deferral_behavior is execute_path.
+	AfterDeferralPathId jsonapi.NullableAttr[string] `jsonapi:"attr,after_deferral_path_id,omitempty"`
+	// Whether this escalation path is the default path
+	Default jsonapi.NullableAttr[bool] `jsonapi:"attr,default,omitempty"`
+	// How path rules are matched.
+	MatchMode string `jsonapi:"attr,match_mode,omitempty"`
+	// The position of this path in the paths for this EP.
+	Position int64 `jsonapi:"attr,position,omitempty"`
+	// Whether this path should be repeated until someone acknowledges the alert
+	Repeat jsonapi.NullableAttr[bool] `jsonapi:"attr,repeat,omitempty"`
+	// The number of times this path will be executed until someone acknowledges the alert
+	RepeatCount jsonapi.NullableAttr[int64] `jsonapi:"attr,repeat_count,omitempty"`
+	// Initial delay for escalation path in minutes. Maximum 1 week (10080).
+	InitialDelay int64 `jsonapi:"attr,initial_delay,omitempty"`
+	// Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.
+	RetriggerTimeoutMinutes jsonapi.NullableAttr[int64] `jsonapi:"attr,retrigger_timeout_minutes,omitempty"`
+	// Escalation path conditions
+	Rules []CreateEscalationPathRulesItem `jsonapi:"attr,rules,omitempty"`
+	// Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team.
+	NotificationTypeRules []CreateEscalationPathNotificationTypeRulesItem `jsonapi:"attr,notification_type_rules,omitempty"`
+	// Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team.
+	NotificationTypeFallback string `jsonapi:"attr,notification_type_fallback,omitempty"`
+	// Time zone used for time restrictions.
+	TimeRestrictionTimeZone jsonapi.NullableAttr[string] `jsonapi:"attr,time_restriction_time_zone,omitempty"`
+	// If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.
+	TimeRestrictions []CreateEscalationPathTimeRestrictionsItem `jsonapi:"attr,time_restrictions,omitempty"`
+}
+
+type CreateEscalationPathRulesItem struct {
+	// The type of the escalation path rule
+	RuleType string `jsonapi:"attr,rule_type,omitempty"`
+	// Alert urgency ids for which this escalation path should be used
+	UrgencyIds []string `jsonapi:"attr,urgency_ids,omitempty"`
+	// Whether the escalation path should be used within working hours
+	WithinWorkingHour bool `jsonapi:"attr,within_working_hour,omitempty"`
+	// JSON path to extract value from payload
+	JsonPath string `jsonapi:"attr,json_path,omitempty"`
+	// Whether the alert must (or must not) have related incidents
+	Operator string `jsonapi:"attr,operator,omitempty"`
+	// Value with which JSON path value should be matched
+	Value jsonapi.NullableAttr[string] `jsonapi:"attr,value,omitempty"`
+	// Alert source values to match against (e.g., manual, datadog)
+	Values []string `jsonapi:"attr,values,omitempty"`
+	// The type of the fieldable (e.g., AlertField)
+	FieldableType string `jsonapi:"attr,fieldable_type,omitempty"`
+	// The ID of the alert field
+	FieldableId string `jsonapi:"attr,fieldable_id,omitempty"`
+	// Service ids for which this escalation path should be used
+	ServiceIds []string `jsonapi:"attr,service_ids,omitempty"`
+	// Time zone for the deferral window
+	TimeZone string `jsonapi:"attr,time_zone,omitempty"`
+	// Time windows during which alerts are deferred
+	TimeBlocks []CreateEscalationPathRulesItemTimeBlocksItem `jsonapi:"attr,time_blocks,omitempty"`
+}
+
+type CreateEscalationPathRulesItemTimeBlocksItem struct {
+	// Unique ID of the time block
+	Id        string `jsonapi:"attr,id,omitempty"`
+	Monday    bool   `jsonapi:"attr,monday,omitempty"`
+	Tuesday   bool   `jsonapi:"attr,tuesday,omitempty"`
+	Wednesday bool   `jsonapi:"attr,wednesday,omitempty"`
+	Thursday  bool   `jsonapi:"attr,thursday,omitempty"`
+	Friday    bool   `jsonapi:"attr,friday,omitempty"`
+	Saturday  bool   `jsonapi:"attr,saturday,omitempty"`
+	Sunday    bool   `jsonapi:"attr,sunday,omitempty"`
+	// Formatted as HH:MM
+	StartTime string `jsonapi:"attr,start_time,omitempty"`
+	// Formatted as HH:MM
+	EndTime string `jsonapi:"attr,end_time,omitempty"`
+	AllDay  bool   `jsonapi:"attr,all_day,omitempty"`
+	// Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
+	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position,omitempty"`
+	// Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
+	EndsNextDay bool `jsonapi:"attr,ends_next_day,omitempty"`
+}
+
+type CreateEscalationPathNotificationTypeRulesItem struct {
+	// Outcome when this rule matches
+	NotificationType string `jsonapi:"attr,notification_type,omitempty"`
+	// Whether all or any of the rule's conditions must match
+	MatchMode string `jsonapi:"attr,match_mode,omitempty"`
+	// Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.
+	Conditions []CreateEscalationPathNotificationTypeRulesItemConditionsItem `jsonapi:"attr,conditions"`
+}
+
+type CreateEscalationPathNotificationTypeRulesItemConditionsItem struct {
+	// The type of the escalation path rule
+	RuleType string `jsonapi:"attr,rule_type,omitempty"`
+	// Alert urgency ids for which this escalation path should be used
+	UrgencyIds []string `jsonapi:"attr,urgency_ids,omitempty"`
+	// Whether the escalation path should be used within working hours
+	WithinWorkingHour bool `jsonapi:"attr,within_working_hour,omitempty"`
+	// JSON path to extract value from payload
+	JsonPath string `jsonapi:"attr,json_path,omitempty"`
+	// Whether the alert must (or must not) have related incidents
+	Operator string `jsonapi:"attr,operator,omitempty"`
+	// Value with which JSON path value should be matched
+	Value jsonapi.NullableAttr[string] `jsonapi:"attr,value,omitempty"`
+	// Alert source values to match against (e.g., manual, datadog)
+	Values []string `jsonapi:"attr,values,omitempty"`
+	// The type of the fieldable (e.g., AlertField)
+	FieldableType string `jsonapi:"attr,fieldable_type,omitempty"`
+	// The ID of the alert field
+	FieldableId string `jsonapi:"attr,fieldable_id,omitempty"`
+	// Service ids for which this escalation path should be used
+	ServiceIds []string `jsonapi:"attr,service_ids,omitempty"`
+	// Time zone for the deferral window
+	TimeZone string `jsonapi:"attr,time_zone,omitempty"`
+	// Time windows during which alerts are deferred
+	TimeBlocks []CreateEscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem `jsonapi:"attr,time_blocks,omitempty"`
+}
+
+type CreateEscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem struct {
+	// Unique ID of the time block
+	Id        string `jsonapi:"attr,id,omitempty"`
+	Monday    bool   `jsonapi:"attr,monday,omitempty"`
+	Tuesday   bool   `jsonapi:"attr,tuesday,omitempty"`
+	Wednesday bool   `jsonapi:"attr,wednesday,omitempty"`
+	Thursday  bool   `jsonapi:"attr,thursday,omitempty"`
+	Friday    bool   `jsonapi:"attr,friday,omitempty"`
+	Saturday  bool   `jsonapi:"attr,saturday,omitempty"`
+	Sunday    bool   `jsonapi:"attr,sunday,omitempty"`
+	// Formatted as HH:MM
+	StartTime string `jsonapi:"attr,start_time,omitempty"`
+	// Formatted as HH:MM
+	EndTime string `jsonapi:"attr,end_time,omitempty"`
+	AllDay  bool   `jsonapi:"attr,all_day,omitempty"`
+	// Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
+	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position,omitempty"`
+	// Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
+	EndsNextDay bool `jsonapi:"attr,ends_next_day,omitempty"`
+}
+
+type CreateEscalationPathTimeRestrictionsItem struct {
+	StartDay string `jsonapi:"attr,start_day"`
+	// Formatted as HH:MM
+	StartTime string `jsonapi:"attr,start_time"`
+	EndDay    string `jsonapi:"attr,end_day"`
+	// Formatted as HH:MM
+	EndTime string `jsonapi:"attr,end_time"`
+}
+
+type UpdateEscalationPath struct {
+	// The name of the escalation path
+	Name string `jsonapi:"attr,name,omitempty"`
+	// Position of the escalation policy level
+	NotificationType string `jsonapi:"attr,notification_type,omitempty"`
+	// The type of escalation path. Cannot be changed after creation.
+	PathType string `jsonapi:"attr,path_type,omitempty"`
+	// What happens after a deferral path finishes.
+	AfterDeferralBehavior jsonapi.NullableAttr[string] `jsonapi:"attr,after_deferral_behavior,omitempty"`
+	// The escalation path to execute after this deferral path when after_deferral_behavior is execute_path.
+	AfterDeferralPathId jsonapi.NullableAttr[string] `jsonapi:"attr,after_deferral_path_id,omitempty"`
+	// Whether this escalation path is the default path
+	Default jsonapi.NullableAttr[bool] `jsonapi:"attr,default,omitempty"`
+	// How path rules are matched.
+	MatchMode string `jsonapi:"attr,match_mode,omitempty"`
+	// The position of this path in the paths for this EP.
+	Position int64 `jsonapi:"attr,position,omitempty"`
+	// Whether this path should be repeated until someone acknowledges the alert
+	Repeat jsonapi.NullableAttr[bool] `jsonapi:"attr,repeat,omitempty"`
+	// The number of times this path will be executed until someone acknowledges the alert
+	RepeatCount jsonapi.NullableAttr[int64] `jsonapi:"attr,repeat_count,omitempty"`
+	// Initial delay for escalation path in minutes. Maximum 1 week (10080).
+	InitialDelay int64 `jsonapi:"attr,initial_delay,omitempty"`
+	// Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.
+	RetriggerTimeoutMinutes jsonapi.NullableAttr[int64] `jsonapi:"attr,retrigger_timeout_minutes,omitempty"`
+	// Escalation path conditions
+	Rules []UpdateEscalationPathRulesItem `jsonapi:"attr,rules,omitempty"`
+	// Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team.
+	NotificationTypeRules []UpdateEscalationPathNotificationTypeRulesItem `jsonapi:"attr,notification_type_rules,omitempty"`
+	// Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team.
+	NotificationTypeFallback string `jsonapi:"attr,notification_type_fallback,omitempty"`
+	// Time zone used for time restrictions.
+	TimeRestrictionTimeZone jsonapi.NullableAttr[string] `jsonapi:"attr,time_restriction_time_zone,omitempty"`
+	// If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.
+	TimeRestrictions []UpdateEscalationPathTimeRestrictionsItem `jsonapi:"attr,time_restrictions,omitempty"`
+}
+
+type UpdateEscalationPathRulesItem struct {
+	// The type of the escalation path rule
+	RuleType string `jsonapi:"attr,rule_type,omitempty"`
+	// Alert urgency ids for which this escalation path should be used
+	UrgencyIds []string `jsonapi:"attr,urgency_ids,omitempty"`
+	// Whether the escalation path should be used within working hours
+	WithinWorkingHour bool `jsonapi:"attr,within_working_hour,omitempty"`
+	// JSON path to extract value from payload
+	JsonPath string `jsonapi:"attr,json_path,omitempty"`
+	// Whether the alert must (or must not) have related incidents
+	Operator string `jsonapi:"attr,operator,omitempty"`
+	// Value with which JSON path value should be matched
+	Value jsonapi.NullableAttr[string] `jsonapi:"attr,value,omitempty"`
+	// Alert source values to match against (e.g., manual, datadog)
+	Values []string `jsonapi:"attr,values,omitempty"`
+	// The type of the fieldable (e.g., AlertField)
+	FieldableType string `jsonapi:"attr,fieldable_type,omitempty"`
+	// The ID of the alert field
+	FieldableId string `jsonapi:"attr,fieldable_id,omitempty"`
+	// Service ids for which this escalation path should be used
+	ServiceIds []string `jsonapi:"attr,service_ids,omitempty"`
+	// Time zone for the deferral window
+	TimeZone string `jsonapi:"attr,time_zone,omitempty"`
+	// Time windows during which alerts are deferred
+	TimeBlocks []UpdateEscalationPathRulesItemTimeBlocksItem `jsonapi:"attr,time_blocks,omitempty"`
+}
+
+type UpdateEscalationPathRulesItemTimeBlocksItem struct {
+	// Unique ID of the time block
+	Id        string `jsonapi:"attr,id,omitempty"`
+	Monday    bool   `jsonapi:"attr,monday,omitempty"`
+	Tuesday   bool   `jsonapi:"attr,tuesday,omitempty"`
+	Wednesday bool   `jsonapi:"attr,wednesday,omitempty"`
+	Thursday  bool   `jsonapi:"attr,thursday,omitempty"`
+	Friday    bool   `jsonapi:"attr,friday,omitempty"`
+	Saturday  bool   `jsonapi:"attr,saturday,omitempty"`
+	Sunday    bool   `jsonapi:"attr,sunday,omitempty"`
+	// Formatted as HH:MM
+	StartTime string `jsonapi:"attr,start_time,omitempty"`
+	// Formatted as HH:MM
+	EndTime string `jsonapi:"attr,end_time,omitempty"`
+	AllDay  bool   `jsonapi:"attr,all_day,omitempty"`
+	// Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
+	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position,omitempty"`
+	// Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
+	EndsNextDay bool `jsonapi:"attr,ends_next_day,omitempty"`
+}
+
+type UpdateEscalationPathNotificationTypeRulesItem struct {
+	// Outcome when this rule matches
+	NotificationType string `jsonapi:"attr,notification_type,omitempty"`
+	// Whether all or any of the rule's conditions must match
+	MatchMode string `jsonapi:"attr,match_mode,omitempty"`
+	// Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.
+	Conditions []UpdateEscalationPathNotificationTypeRulesItemConditionsItem `jsonapi:"attr,conditions"`
+}
+
+type UpdateEscalationPathNotificationTypeRulesItemConditionsItem struct {
+	// The type of the escalation path rule
+	RuleType string `jsonapi:"attr,rule_type,omitempty"`
+	// Alert urgency ids for which this escalation path should be used
+	UrgencyIds []string `jsonapi:"attr,urgency_ids,omitempty"`
+	// Whether the escalation path should be used within working hours
+	WithinWorkingHour bool `jsonapi:"attr,within_working_hour,omitempty"`
+	// JSON path to extract value from payload
+	JsonPath string `jsonapi:"attr,json_path,omitempty"`
+	// Whether the alert must (or must not) have related incidents
+	Operator string `jsonapi:"attr,operator,omitempty"`
+	// Value with which JSON path value should be matched
+	Value jsonapi.NullableAttr[string] `jsonapi:"attr,value,omitempty"`
+	// Alert source values to match against (e.g., manual, datadog)
+	Values []string `jsonapi:"attr,values,omitempty"`
+	// The type of the fieldable (e.g., AlertField)
+	FieldableType string `jsonapi:"attr,fieldable_type,omitempty"`
+	// The ID of the alert field
+	FieldableId string `jsonapi:"attr,fieldable_id,omitempty"`
+	// Service ids for which this escalation path should be used
+	ServiceIds []string `jsonapi:"attr,service_ids,omitempty"`
+	// Time zone for the deferral window
+	TimeZone string `jsonapi:"attr,time_zone,omitempty"`
+	// Time windows during which alerts are deferred
+	TimeBlocks []UpdateEscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem `jsonapi:"attr,time_blocks,omitempty"`
+}
+
+type UpdateEscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem struct {
+	// Unique ID of the time block
+	Id        string `jsonapi:"attr,id,omitempty"`
+	Monday    bool   `jsonapi:"attr,monday,omitempty"`
+	Tuesday   bool   `jsonapi:"attr,tuesday,omitempty"`
+	Wednesday bool   `jsonapi:"attr,wednesday,omitempty"`
+	Thursday  bool   `jsonapi:"attr,thursday,omitempty"`
+	Friday    bool   `jsonapi:"attr,friday,omitempty"`
+	Saturday  bool   `jsonapi:"attr,saturday,omitempty"`
+	Sunday    bool   `jsonapi:"attr,sunday,omitempty"`
+	// Formatted as HH:MM
+	StartTime string `jsonapi:"attr,start_time,omitempty"`
+	// Formatted as HH:MM
+	EndTime string `jsonapi:"attr,end_time,omitempty"`
+	AllDay  bool   `jsonapi:"attr,all_day,omitempty"`
+	// Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
+	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position,omitempty"`
+	// Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
+	EndsNextDay bool `jsonapi:"attr,ends_next_day,omitempty"`
+}
+
+type UpdateEscalationPathTimeRestrictionsItem struct {
+	StartDay string `jsonapi:"attr,start_day,omitempty"`
+	// Formatted as HH:MM
+	StartTime string `jsonapi:"attr,start_time,omitempty"`
+	EndDay    string `jsonapi:"attr,end_day,omitempty"`
+	// Formatted as HH:MM
+	EndTime string `jsonapi:"attr,end_time,omitempty"`
+}
+
 func (c *Client) EscalationPathList(ctx context.Context, escalationPolicyId string, params *rootly.ListEscalationPathsParams) (*[]EscalationPath, error) {
 	if params == nil {
 		params = new(rootly.ListEscalationPathsParams)

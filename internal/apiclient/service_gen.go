@@ -123,6 +123,216 @@ type ServicePropertiesItem struct {
 	Value string `jsonapi:"attr,value"`
 }
 
+type CreateService struct {
+	// Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+	Slug jsonapi.NullableAttr[string] `jsonapi:"attr,slug,omitempty"`
+	// The name of the service
+	Name string `jsonapi:"attr,name"`
+	// The description of the service
+	Description jsonapi.NullableAttr[string] `jsonapi:"attr,description,omitempty"`
+	// The status page description of the service
+	PublicDescription jsonapi.NullableAttr[string] `jsonapi:"attr,public_description,omitempty"`
+	// Emails to attach to the service
+	NotifyEmails jsonapi.NullableAttr[[]string] `jsonapi:"attr,notify_emails,omitempty"`
+	// The hex color of the service
+	Color jsonapi.NullableAttr[string] `jsonapi:"attr,color,omitempty"`
+	// Position of the service
+	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position,omitempty"`
+	// Show uptime
+	ShowUptime jsonapi.NullableAttr[bool] `jsonapi:"attr,show_uptime,omitempty"`
+	// Show uptime over x days
+	ShowUptimeLastDays jsonapi.NullableAttr[int64] `jsonapi:"attr,show_uptime_last_days,omitempty"`
+	// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+	BackstageId jsonapi.NullableAttr[string] `jsonapi:"attr,backstage_id,omitempty"`
+	// The PagerDuty service id associated to this service
+	PagerdutyId jsonapi.NullableAttr[string] `jsonapi:"attr,pagerduty_id,omitempty"`
+	// The external id associated to this service
+	ExternalId jsonapi.NullableAttr[string] `jsonapi:"attr,external_id,omitempty"`
+	// The Opsgenie service id associated to this service
+	OpsgenieId jsonapi.NullableAttr[string] `jsonapi:"attr,opsgenie_id,omitempty"`
+	// The Opsgenie team id associated to this service
+	OpsgenieTeamId jsonapi.NullableAttr[string] `jsonapi:"attr,opsgenie_team_id,omitempty"`
+	// The Cortex group id associated to this service
+	CortexId jsonapi.NullableAttr[string] `jsonapi:"attr,cortex_id,omitempty"`
+	// The Service Now CI sys id associated to this service
+	ServiceNowCiSysId jsonapi.NullableAttr[string] `jsonapi:"attr,service_now_ci_sys_id,omitempty"`
+	// The GitHub repository name associated to this service. eg: rootlyhq/my-service
+	GithubRepositoryName jsonapi.NullableAttr[string] `jsonapi:"attr,github_repository_name,omitempty"`
+	// The GitHub repository branch associated to this service. eg: main
+	GithubRepositoryBranch jsonapi.NullableAttr[string] `jsonapi:"attr,github_repository_branch,omitempty"`
+	// The GitLab repository name associated to this service. eg: rootlyhq/my-service
+	GitlabRepositoryName jsonapi.NullableAttr[string] `jsonapi:"attr,gitlab_repository_name,omitempty"`
+	// The GitLab repository branch associated to this service. eg: main
+	GitlabRepositoryBranch jsonapi.NullableAttr[string] `jsonapi:"attr,gitlab_repository_branch,omitempty"`
+	// Environments associated with this service
+	EnvironmentIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,environment_ids,omitempty"`
+	// Services dependent on this service
+	ServiceIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,service_ids,omitempty"`
+	// Owner Teams associated with this service
+	OwnerGroupIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,owner_group_ids,omitempty"`
+	// Owner Users associated with this service
+	OwnerUserIds jsonapi.NullableAttr[[]int64] `jsonapi:"attr,owner_user_ids,omitempty"`
+	// The Kubernetes deployment name associated to this service. eg: namespace/deployment-name
+	KubernetesDeploymentName jsonapi.NullableAttr[string] `jsonapi:"attr,kubernetes_deployment_name,omitempty"`
+	// Enable alerts through email
+	AlertsEmailEnabled jsonapi.NullableAttr[bool] `jsonapi:"attr,alerts_email_enabled,omitempty"`
+	// The alert urgency id of the service
+	AlertUrgencyId jsonapi.NullableAttr[string] `jsonapi:"attr,alert_urgency_id,omitempty"`
+	// The escalation policy id of the service
+	EscalationPolicyId jsonapi.NullableAttr[string] `jsonapi:"attr,escalation_policy_id,omitempty"`
+	// Slack Channels associated with this service
+	SlackChannels jsonapi.NullableAttr[[]CreateServiceSlackChannelsItem] `jsonapi:"attr,slack_channels,omitempty"`
+	// Slack Aliases associated with this service
+	SlackAliases jsonapi.NullableAttr[[]CreateServiceSlackAliasesItem] `jsonapi:"attr,slack_aliases,omitempty"`
+	// Enable alerts to be broadcasted to a specific channel
+	AlertBroadcastEnabled jsonapi.NullableAttr[bool] `jsonapi:"attr,alert_broadcast_enabled,omitempty"`
+	// Slack channel to broadcast alerts to
+	AlertBroadcastChannel jsonapi.NullableAttr[CreateServiceAlertBroadcastChannel] `jsonapi:"attr,alert_broadcast_channel,omitempty"`
+	// Enable incidents to be broadcasted to a specific channel
+	IncidentBroadcastEnabled jsonapi.NullableAttr[bool] `jsonapi:"attr,incident_broadcast_enabled,omitempty"`
+	// Slack channel to broadcast incidents to
+	IncidentBroadcastChannel jsonapi.NullableAttr[CreateServiceIncidentBroadcastChannel] `jsonapi:"attr,incident_broadcast_channel,omitempty"`
+	// Array of property values for this service.
+	Properties []CreateServicePropertiesItem `jsonapi:"attr,properties,omitempty"`
+}
+
+type CreateServiceSlackChannelsItem struct {
+	// Slack channel ID
+	Id string `jsonapi:"attr,id"`
+	// Slack channel name
+	Name string `jsonapi:"attr,name"`
+}
+
+type CreateServiceSlackAliasesItem struct {
+	// Slack alias ID
+	Id string `jsonapi:"attr,id"`
+	// Slack alias name
+	Name string `jsonapi:"attr,name"`
+}
+
+type CreateServiceAlertBroadcastChannel struct {
+	// Slack channel ID
+	Id string `jsonapi:"attr,id"`
+	// Slack channel name
+	Name string `jsonapi:"attr,name,omitempty"`
+}
+
+type CreateServiceIncidentBroadcastChannel struct {
+	// Slack channel ID
+	Id string `jsonapi:"attr,id"`
+	// Slack channel name
+	Name string `jsonapi:"attr,name,omitempty"`
+}
+
+type CreateServicePropertiesItem struct {
+	// Catalog property ID
+	CatalogPropertyId string `jsonapi:"attr,catalog_property_id"`
+	// The property value
+	Value string `jsonapi:"attr,value"`
+}
+
+type UpdateService struct {
+	// Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+	Slug jsonapi.NullableAttr[string] `jsonapi:"attr,slug,omitempty"`
+	// The name of the service
+	Name string `jsonapi:"attr,name,omitempty"`
+	// The description of the service
+	Description jsonapi.NullableAttr[string] `jsonapi:"attr,description,omitempty"`
+	// The status page description of the service
+	PublicDescription jsonapi.NullableAttr[string] `jsonapi:"attr,public_description,omitempty"`
+	// Emails to attach to the service
+	NotifyEmails jsonapi.NullableAttr[[]string] `jsonapi:"attr,notify_emails,omitempty"`
+	// The hex color of the service
+	Color jsonapi.NullableAttr[string] `jsonapi:"attr,color,omitempty"`
+	// Position of the service
+	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position,omitempty"`
+	// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+	BackstageId jsonapi.NullableAttr[string] `jsonapi:"attr,backstage_id,omitempty"`
+	// The external id associated to this service
+	ExternalId jsonapi.NullableAttr[string] `jsonapi:"attr,external_id,omitempty"`
+	// The PagerDuty service id associated to this service
+	PagerdutyId jsonapi.NullableAttr[string] `jsonapi:"attr,pagerduty_id,omitempty"`
+	// The Opsgenie service id associated to this service
+	OpsgenieId jsonapi.NullableAttr[string] `jsonapi:"attr,opsgenie_id,omitempty"`
+	// The Cortex group id associated to this service
+	CortexId jsonapi.NullableAttr[string] `jsonapi:"attr,cortex_id,omitempty"`
+	// The Service Now CI sys id associated to this service
+	ServiceNowCiSysId jsonapi.NullableAttr[string] `jsonapi:"attr,service_now_ci_sys_id,omitempty"`
+	// The GitHub repository name associated to this service. eg: rootlyhq/my-service
+	GithubRepositoryName jsonapi.NullableAttr[string] `jsonapi:"attr,github_repository_name,omitempty"`
+	// The GitHub repository branch associated to this service. eg: main
+	GithubRepositoryBranch jsonapi.NullableAttr[string] `jsonapi:"attr,github_repository_branch,omitempty"`
+	// The GitLab repository name associated to this service. eg: rootlyhq/my-service
+	GitlabRepositoryName jsonapi.NullableAttr[string] `jsonapi:"attr,gitlab_repository_name,omitempty"`
+	// The GitLab repository branch associated to this service. eg: main
+	GitlabRepositoryBranch jsonapi.NullableAttr[string] `jsonapi:"attr,gitlab_repository_branch,omitempty"`
+	// Environments associated with this service
+	EnvironmentIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,environment_ids,omitempty"`
+	// Services dependent on this service
+	ServiceIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,service_ids,omitempty"`
+	// Owner Teams associated with this service. Empty array removes all; omitting or null leaves unchanged.
+	OwnerGroupIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,owner_group_ids,omitempty"`
+	// Owner Users associated with this service. Empty array removes all; omitting or null leaves unchanged.
+	OwnerUserIds jsonapi.NullableAttr[[]int64] `jsonapi:"attr,owner_user_ids,omitempty"`
+	// Enable alerts through email
+	AlertsEmailEnabled jsonapi.NullableAttr[bool] `jsonapi:"attr,alerts_email_enabled,omitempty"`
+	// The alert urgency id of the service
+	AlertUrgencyId jsonapi.NullableAttr[string] `jsonapi:"attr,alert_urgency_id,omitempty"`
+	// The escalation policy id of the service
+	EscalationPolicyId jsonapi.NullableAttr[string] `jsonapi:"attr,escalation_policy_id,omitempty"`
+	// The Kubernetes deployment name associated to this service. eg: namespace/deployment-name
+	KubernetesDeploymentName jsonapi.NullableAttr[string] `jsonapi:"attr,kubernetes_deployment_name,omitempty"`
+	// Slack Channels associated with this service
+	SlackChannels jsonapi.NullableAttr[[]UpdateServiceSlackChannelsItem] `jsonapi:"attr,slack_channels,omitempty"`
+	// Slack Aliases associated with this service
+	SlackAliases jsonapi.NullableAttr[[]UpdateServiceSlackAliasesItem] `jsonapi:"attr,slack_aliases,omitempty"`
+	// Enable alerts to be broadcasted to a specific channel
+	AlertBroadcastEnabled jsonapi.NullableAttr[bool] `jsonapi:"attr,alert_broadcast_enabled,omitempty"`
+	// Slack channel to broadcast alerts to
+	AlertBroadcastChannel jsonapi.NullableAttr[UpdateServiceAlertBroadcastChannel] `jsonapi:"attr,alert_broadcast_channel,omitempty"`
+	// Enable incidents to be broadcasted to a specific channel
+	IncidentBroadcastEnabled jsonapi.NullableAttr[bool] `jsonapi:"attr,incident_broadcast_enabled,omitempty"`
+	// Slack channel to broadcast incidents to
+	IncidentBroadcastChannel jsonapi.NullableAttr[UpdateServiceIncidentBroadcastChannel] `jsonapi:"attr,incident_broadcast_channel,omitempty"`
+	// Array of property values for this service.
+	Properties []UpdateServicePropertiesItem `jsonapi:"attr,properties,omitempty"`
+}
+
+type UpdateServiceSlackChannelsItem struct {
+	// Slack channel ID
+	Id string `jsonapi:"attr,id"`
+	// Slack channel name
+	Name string `jsonapi:"attr,name"`
+}
+
+type UpdateServiceSlackAliasesItem struct {
+	// Slack alias ID
+	Id string `jsonapi:"attr,id"`
+	// Slack alias name
+	Name string `jsonapi:"attr,name"`
+}
+
+type UpdateServiceAlertBroadcastChannel struct {
+	// Slack channel ID
+	Id string `jsonapi:"attr,id"`
+	// Slack channel name
+	Name string `jsonapi:"attr,name,omitempty"`
+}
+
+type UpdateServiceIncidentBroadcastChannel struct {
+	// Slack channel ID
+	Id string `jsonapi:"attr,id"`
+	// Slack channel name
+	Name string `jsonapi:"attr,name,omitempty"`
+}
+
+type UpdateServicePropertiesItem struct {
+	// Catalog property ID
+	CatalogPropertyId string `jsonapi:"attr,catalog_property_id"`
+	// The property value
+	Value string `jsonapi:"attr,value"`
+}
+
 func (c *Client) ServiceList(ctx context.Context, params *rootly.ListServicesParams) (*[]Service, error) {
 	if params == nil {
 		params = new(rootly.ListServicesParams)

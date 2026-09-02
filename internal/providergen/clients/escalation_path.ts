@@ -9,5 +9,11 @@ export default {
     get: {
       enabled: true,
     },
+    create: {
+      enabled: true,
+    },
+    update: {
+      enabled: true,
+    },
   },
 } satisfies ClientConfig;

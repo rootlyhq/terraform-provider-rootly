@@ -1,4 +1,4 @@
-import { camelize } from "inflection";
+import { camelize, humanize } from "inflection";
 import type {
   ClientConfig,
   ComputedOptionalRequired,
@@ -47,6 +47,7 @@ export function resolveDataSourceConfig({
     read,
     create: undefined,
     update: undefined,
+    isTopLevel: true,
   });
 
   return {
@@ -108,6 +109,7 @@ export function resolveResourceConfig({
     read,
     create,
     update,
+    isTopLevel: true,
   });
 
   return {
@@ -128,6 +130,7 @@ function resolveSchema({
   read,
   create,
   update,
+  isTopLevel,
 }: {
   doc: oas30.OpenAPIObject;
   config: DataSourceConfig | ResourceConfig;
@@ -135,7 +138,31 @@ function resolveSchema({
   read: oas30.SchemaObject;
   create: oas30.SchemaObject | undefined;
   update: oas30.SchemaObject | undefined;
+  isTopLevel: boolean;
 }): oas30.SchemaObject {
+  // TODO: Handle data_source
+  if (isTopLevel && type === "resource") {
+    return resolveSchema({
+      doc,
+      config,
+      type,
+      read: {
+        ...read,
+        properties: {
+          id: {
+            type: "string",
+            description: `The ID of the ${humanize(config.name, true)}.`,
+            "x-tf-computed-optional-required": "computed",
+          },
+          ...read.properties,
+        },
+      },
+      create,
+      update,
+      isTopLevel: false,
+    });
+  }
+
   return match(read)
     .with({ type: "array", items: P.record(P.string, P.any) }, (schema) => ({
       ...schema,
@@ -146,6 +173,7 @@ function resolveSchema({
         read: removeReference(schema.items),
         create: removeReference(create?.items),
         update: removeReference(update?.items),
+        isTopLevel: false,
       }),
       "x-tf-collection-type": type === "data_source" ? "list" : "set",
     }))
@@ -166,6 +194,7 @@ function resolveSchema({
                     read: removeReference(value),
                     create: removeReference(create?.properties?.[key]),
                     update: removeReference(update?.properties?.[key]),
+                    isTopLevel: false,
                   }),
                   "x-tf-computed-optional-required":
                     resolveComputedOptionalRequired({
