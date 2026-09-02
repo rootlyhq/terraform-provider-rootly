@@ -11,7 +11,7 @@ import (
 
 type ScheduleRotation struct {
 	ID                             string                                         `jsonapi:"primary,schedule_rotations"`
-	ScheduleId                     string                                         `jsonapi:"attr,schedule_id"`
+	ScheduleId                     string                                         `jsonapi:"attr,schedule_id,omitempty"`
 	Name                           string                                         `jsonapi:"attr,name"`
 	Position                       int64                                          `jsonapi:"attr,position,omitempty"`
 	ScheduleRotationableType       string                                         `jsonapi:"attr,schedule_rotationable_type"`
@@ -121,6 +121,13 @@ func (c *Client) CreateScheduleRotation(ctx context.Context, req ScheduleRotatio
 }
 
 func (c *Client) UpdateScheduleRotation(ctx context.Context, req ScheduleRotation) (*ScheduleRotation, error) {
+	// schedule_id has RequiresReplace in the provider schema — it can never
+	// change on update. Sending it in the PUT body triggers a server-side 500
+	// when schedule_rotation_members is also included. Strip it before marshaling.
+	scheduleId := req.ScheduleId
+	req.ScheduleId = ""
+	defer func() { req.ScheduleId = scheduleId }()
+
 	var buf bytes.Buffer
 	if err := jsonapi.MarshalPayload(&buf, &req); err != nil {
 		return nil, err
