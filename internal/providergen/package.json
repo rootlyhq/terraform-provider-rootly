@@ -3,7 +3,7 @@
   "module": "index.ts",
   "devDependencies": {
     "@types/bun": "latest",
-    "openapi3-ts": "^4.6.1"
+    "openapi3-ts": "4.6.1"
   },
   "peerDependencies": {
     "typescript": "^5"
