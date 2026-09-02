@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceAlertUrgency() *schema.Resource {
@@ -66,6 +67,16 @@ func resourceAlertUrgency() *schema.Resource {
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "Position of the alert urgency",
+			},
+
+			"retrigger_timeout_minutes": &schema.Schema{
+				Type:        schema.TypeInt,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, negative = never.",
 			},
 
 			"urgency": &schema.Schema{
@@ -134,6 +145,9 @@ func resourceAlertUrgencyCreate(ctx context.Context, d *schema.ResourceData, met
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
+	if value, ok := d.GetOkExists("retrigger_timeout_minutes"); ok {
+		s.RetriggerTimeoutMinutes = tools.Int(value.(int))
+	}
 	if value, ok := d.GetOkExists("urgency"); ok {
 		s.Urgency = value.(string)
 	}
@@ -179,6 +193,11 @@ func resourceAlertUrgencyRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("name", item.Name)
 	d.Set("description", item.Description)
 	d.Set("position", item.Position)
+	if item.RetriggerTimeoutMinutes != nil {
+		d.Set("retrigger_timeout_minutes", *item.RetriggerTimeoutMinutes)
+	} else {
+		d.Set("retrigger_timeout_minutes", nil)
+	}
 	d.Set("urgency", item.Urgency)
 	d.Set("color", item.Color)
 	d.Set("team_id", item.TeamId)
@@ -204,6 +223,9 @@ func resourceAlertUrgencyUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
+	}
+	if value, ok := d.GetOkExists("retrigger_timeout_minutes"); ok {
+		s.RetriggerTimeoutMinutes = tools.Int(value.(int))
 	}
 	if d.HasChange("urgency") {
 		s.Urgency = d.Get("urgency").(string)

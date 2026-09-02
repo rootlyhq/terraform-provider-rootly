@@ -24,6 +24,7 @@ type EscalationPath struct {
 	Repeat                  *bool         `jsonapi:"attr,repeat,omitempty"`
 	RepeatCount             int           `jsonapi:"attr,repeat_count,omitempty"`
 	InitialDelay            int           `jsonapi:"attr,initial_delay"`
+	RetriggerTimeoutMinutes *int          `jsonapi:"attr,retrigger_timeout_minutes"`
 	Rules                   []interface{} `jsonapi:"attr,rules,omitempty"`
 	TimeRestrictionTimeZone string        `jsonapi:"attr,time_restriction_time_zone,omitempty"`
 	TimeRestrictions        []interface{} `jsonapi:"attr,time_restrictions,omitempty"`

@@ -42,6 +42,7 @@ resource "rootly_alert_urgency" "informational" {
 - `deleted_at` (String) Date of deletion
 - `id` (String) Unique ID of the alert urgency
 - `position` (Number) Position of the alert urgency
+- `retrigger_timeout_minutes` (Number) Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, negative = never.
 - `team_id` (Number) The ID of the team this urgency belongs to
 - `urgency` (String) The urgency level
 
