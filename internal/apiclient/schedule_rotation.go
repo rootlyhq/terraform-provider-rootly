@@ -124,9 +124,7 @@ func (c *Client) UpdateScheduleRotation(ctx context.Context, req ScheduleRotatio
 	// schedule_id has RequiresReplace in the provider schema — it can never
 	// change on update. Sending it in the PUT body triggers a server-side 500
 	// when schedule_rotation_members is also included. Strip it before marshaling.
-	scheduleId := req.ScheduleId
 	req.ScheduleId = ""
-	defer func() { req.ScheduleId = scheduleId }()
 
 	var buf bytes.Buffer
 	if err := jsonapi.MarshalPayload(&buf, &req); err != nil {
