@@ -75,9 +75,9 @@ func (d *${config.goNames.struct}) Metadata(ctx context.Context, req datasource.
 
 func (d *${config.goNames.struct}) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
   resp.Schema = schema.Schema{
-    MarkdownDescription: ${JSON.stringify(config.description ?? schema.description ?? "")},
+    MarkdownDescription: ${JSON.stringify(config.description ?? config.schemas.resolved.description ?? "")},
     Attributes: map[string]schema.Attribute{
-      ${generateSchemaAttributes({ parent: config.goNames.model, schema })}
+      ${generateSchemaAttributes({ parent: config.goNames.model, schema: config.schemas.resolved })}
     },
   }
 }
@@ -109,7 +109,7 @@ func (d *${config.goNames.struct}) Read(ctx context.Context, req datasource.Read
 
 ${generateModel({
   config,
-  schema,
+  schema: config.schemas.resolved,
   baseName: camelize(singularize(config.name)),
   name: config.goNames.model,
   isTopLevel: true,

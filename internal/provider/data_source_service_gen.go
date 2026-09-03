@@ -36,7 +36,7 @@ func (d *ServiceDataSource) Schema(ctx context.Context, req datasource.SchemaReq
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "The ID of the service.",
-				Required:            true,
+				Computed:            true,
 			},
 			"name": schema.StringAttribute{
 				MarkdownDescription: "The name of the service",
@@ -240,6 +240,14 @@ func (d *ServiceDataSource) Schema(ctx context.Context, req datasource.SchemaReq
 					},
 				},
 			},
+			"created_at": schema.StringAttribute{
+				MarkdownDescription: "Date of creation",
+				Computed:            true,
+			},
+			"updated_at": schema.StringAttribute{
+				MarkdownDescription: "Date of last update",
+				Computed:            true,
+			},
 		},
 	}
 }
@@ -305,6 +313,8 @@ type ServiceDataSourceModel struct {
 	IncidentBroadcastEnabled types.Bool                                                                           `tfsdk:"incident_broadcast_enabled"`
 	IncidentBroadcastChannel supertypes.SingleNestedObjectValueOf[ServiceDataSourceModelIncidentBroadcastChannel] `tfsdk:"incident_broadcast_channel"`
 	Properties               supertypes.ListNestedObjectValueOf[ServiceDataSourceModelPropertiesItem]             `tfsdk:"properties"`
+	CreatedAt                types.String                                                                         `tfsdk:"created_at"`
+	UpdatedAt                types.String                                                                         `tfsdk:"updated_at"`
 }
 
 func (m *ServiceDataSourceModel) FromApi(ctx context.Context, data apiclient.Service) diag.Diagnostics {
@@ -386,6 +396,8 @@ func (m *ServiceDataSourceModel) FromApi(ctx context.Context, data apiclient.Ser
 		}
 		return supertypes.NewListNestedObjectValueOfNull[ServiceDataSourceModelPropertiesItem](ctx)
 	})()
+	m.CreatedAt = types.StringValue(data.CreatedAt)
+	m.UpdatedAt = types.StringValue(data.UpdatedAt)
 
 	return diags
 }

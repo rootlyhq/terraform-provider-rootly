@@ -3,9 +3,20 @@ package provider
 
 import (
 	"context"
+	"errors"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/jsonapitypes"
+	"github.com/samber/lo"
 )
 
 var _ resource.Resource = &EscalationPathResource{}
@@ -27,8 +38,453 @@ func (r *EscalationPathResource) Metadata(ctx context.Context, req resource.Meta
 func (r *EscalationPathResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		MarkdownDescription: "Manages an escalation path.",
-		Attributes:          map[string]schema.Attribute{
-			// Attributes will be generated here
+		Attributes: map[string]schema.Attribute{
+			"id": schema.StringAttribute{
+				MarkdownDescription: "The ID of the escalation path.",
+				Computed:            true,
+			},
+			"name": schema.StringAttribute{
+				MarkdownDescription: "The name of the escalation path.",
+				Required:            true,
+			},
+			"default": schema.BoolAttribute{
+				MarkdownDescription: "Whether this escalation path is the default path.",
+				Optional:            true,
+				Computed:            true,
+			},
+			"notification_type": schema.StringAttribute{
+				MarkdownDescription: "Notification rule type.",
+				Optional:            true,
+				Computed:            true,
+			},
+			"path_type": schema.StringAttribute{
+				MarkdownDescription: "The type of escalation path. Value must be one of `escalation`, `deferral`.",
+				Optional:            true,
+				Computed:            true,
+				Validators: []validator.String{
+					stringvalidator.OneOf("escalation", "deferral"),
+				},
+			},
+			"escalation_policy_id": schema.StringAttribute{
+				MarkdownDescription: "The ID of the escalation policy.",
+				Computed:            true,
+			},
+			"after_deferral_behavior": schema.StringAttribute{
+				MarkdownDescription: "What happens after a deferral path finishes. Value must be one of `re_evaluate`, `execute_path`.",
+				Optional:            true,
+				Computed:            true,
+				Validators: []validator.String{
+					stringvalidator.OneOf("re_evaluate", "execute_path"),
+				},
+			},
+			"after_deferral_path_id": schema.StringAttribute{
+				MarkdownDescription: "The escalation path to execute after this deferral path when after_deferral_behavior is execute_path.",
+				Optional:            true,
+				Computed:            true,
+			},
+			"match_mode": schema.StringAttribute{
+				MarkdownDescription: "How path rules are matched. Value must be one of `match-all-rules`, `match-any-rule`.",
+				Optional:            true,
+				Computed:            true,
+				Validators: []validator.String{
+					stringvalidator.OneOf("match-all-rules", "match-any-rule"),
+				},
+			},
+			"position": schema.Int64Attribute{
+				MarkdownDescription: "The position of this path in the paths for this EP.",
+				Optional:            true,
+				Computed:            true,
+			},
+			"repeat": schema.BoolAttribute{
+				MarkdownDescription: "Whether this path should be repeated until someone acknowledges the alert.",
+				Optional:            true,
+				Computed:            true,
+			},
+			"repeat_count": schema.Int64Attribute{
+				MarkdownDescription: "The number of times this path will be executed until someone acknowledges the alert.",
+				Optional:            true,
+				Computed:            true,
+			},
+			"initial_delay": schema.Int64Attribute{
+				MarkdownDescription: "Initial delay for escalation path in minutes. Maximum 1 week (10080).",
+				Optional:            true,
+				Computed:            true,
+			},
+			"retrigger_timeout_minutes": schema.Int64Attribute{
+				MarkdownDescription: "Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.",
+				Optional:            true,
+				Computed:            true,
+			},
+			"created_at": schema.StringAttribute{
+				MarkdownDescription: "Date of creation.",
+				Computed:            true,
+			},
+			"updated_at": schema.StringAttribute{
+				MarkdownDescription: "Date of last update.",
+				Computed:            true,
+			},
+			"rules": schema.SetNestedAttribute{
+				MarkdownDescription: "Escalation path rules.",
+				Optional:            true,
+				Computed:            true,
+				CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelRulesItem](ctx),
+				NestedObject: schema.NestedAttributeObject{
+					Attributes: map[string]schema.Attribute{
+						"rule_type": schema.StringAttribute{
+							MarkdownDescription: "The type of the escalation path rule. Value must be one of `related_incidents`.",
+							Optional:            true,
+							Computed:            true,
+							Validators: []validator.String{
+								stringvalidator.OneOf("related_incidents"),
+							},
+						},
+						"urgency_ids": schema.SetAttribute{
+							MarkdownDescription: "Alert urgency ids for which this escalation path should be used.",
+							Optional:            true,
+							Computed:            true,
+							CustomType:          supertypes.NewSetTypeOf[string](ctx),
+						},
+						"within_working_hour": schema.BoolAttribute{
+							MarkdownDescription: "Whether the escalation path should be used within working hours.",
+							Optional:            true,
+							Computed:            true,
+						},
+						"json_path": schema.StringAttribute{
+							MarkdownDescription: "JSON path to extract value from payload.",
+							Optional:            true,
+							Computed:            true,
+						},
+						"operator": schema.StringAttribute{
+							MarkdownDescription: "Whether the alert must (or must not) have related incidents. Value must be one of `is_set`, `is_not_set`.",
+							Optional:            true,
+							Computed:            true,
+							Validators: []validator.String{
+								stringvalidator.OneOf("is_set", "is_not_set"),
+							},
+						},
+						"value": schema.StringAttribute{
+							MarkdownDescription: "Value with which JSON path value should be matched.",
+							Optional:            true,
+							Computed:            true,
+						},
+						"values": schema.SetAttribute{
+							MarkdownDescription: "Alert source values to match against (e.g., manual, datadog).",
+							Optional:            true,
+							Computed:            true,
+							CustomType:          supertypes.NewSetTypeOf[string](ctx),
+						},
+						"fieldable_type": schema.StringAttribute{
+							MarkdownDescription: "The type of the fieldable (e.g., AlertField).",
+							Optional:            true,
+							Computed:            true,
+						},
+						"fieldable_id": schema.StringAttribute{
+							MarkdownDescription: "The ID of the alert field.",
+							Optional:            true,
+							Computed:            true,
+						},
+						"service_ids": schema.SetAttribute{
+							MarkdownDescription: "Service ids for which this escalation path should be used.",
+							Optional:            true,
+							Computed:            true,
+							CustomType:          supertypes.NewSetTypeOf[string](ctx),
+						},
+						"time_zone": schema.StringAttribute{
+							MarkdownDescription: "Time zone for the deferral window. Value must be one of `International Date Line West`, `Etc/GMT+12`, `American Samoa`, `Pacific/Pago_Pago`, `Midway Island`, `Pacific/Midway`, `Hawaii`, `Pacific/Honolulu`, `Alaska`, `America/Juneau`, `Pacific Time (US & Canada)`, `America/Los_Angeles`, `Tijuana`, `America/Tijuana`, `Arizona`, `America/Phoenix`, `Mazatlan`, `America/Mazatlan`, `Mountain Time (US & Canada)`, `America/Denver`, `Central America`, `America/Guatemala`, `Central Time (US & Canada)`, `America/Chicago`, `Chihuahua`, `America/Chihuahua`, `Guadalajara`, `America/Mexico_City`, `Mexico City`, `Monterrey`, `America/Monterrey`, `Saskatchewan`, `America/Regina`, `Bogota`, `America/Bogota`, `Eastern Time (US & Canada)`, `America/New_York`, `Indiana (East)`, `America/Indiana/Indianapolis`, `Lima`, `America/Lima`, `Quito`, `Atlantic Time (Canada)`, `America/Halifax`, `Caracas`, `America/Caracas`, `Georgetown`, `America/Guyana`, `La Paz`, `America/La_Paz`, `Puerto Rico`, `America/Puerto_Rico`, `Santiago`, `America/Santiago`, `Newfoundland`, `America/St_Johns`, `Asuncion`, `America/Asuncion`, `Brasilia`, `America/Sao_Paulo`, `Buenos Aires`, `America/Argentina/Buenos_Aires`, `Montevideo`, `America/Montevideo`, `Greenland`, `America/Nuuk`, `Mid-Atlantic`, `Atlantic/South_Georgia`, `Azores`, `Atlantic/Azores`, `Cape Verde Is.`, `Atlantic/Cape_Verde`, `Edinburgh`, `Europe/London`, `Lisbon`, `Europe/Lisbon`, `London`, `Monrovia`, `Africa/Monrovia`, `UTC`, `Etc/UTC`, `Amsterdam`, `Europe/Amsterdam`, `Belgrade`, `Europe/Belgrade`, `Berlin`, `Europe/Berlin`, `Bern`, `Europe/Zurich`, `Bratislava`, `Europe/Bratislava`, `Brussels`, `Europe/Brussels`, `Budapest`, `Europe/Budapest`, `Casablanca`, `Africa/Casablanca`, `Copenhagen`, `Europe/Copenhagen`, `Dublin`, `Europe/Dublin`, `Ljubljana`, `Europe/Ljubljana`, `Madrid`, `Europe/Madrid`, `Paris`, `Europe/Paris`, `Prague`, `Europe/Prague`, `Rome`, `Europe/Rome`, `Sarajevo`, `Europe/Sarajevo`, `Skopje`, `Europe/Skopje`, `Stockholm`, `Europe/Stockholm`, `Vienna`, `Europe/Vienna`, `Warsaw`, `Europe/Warsaw`, `West Central Africa`, `Africa/Algiers`, `Zagreb`, `Europe/Zagreb`, `Zurich`, `Athens`, `Europe/Athens`, `Bucharest`, `Europe/Bucharest`, `Cairo`, `Africa/Cairo`, `Harare`, `Africa/Harare`, `Helsinki`, `Europe/Helsinki`, `Jerusalem`, `Asia/Jerusalem`, `Kaliningrad`, `Europe/Kaliningrad`, `Kyiv`, `Europe/Kiev`, `Pretoria`, `Africa/Johannesburg`, `Riga`, `Europe/Riga`, `Sofia`, `Europe/Sofia`, `Tallinn`, `Europe/Tallinn`, `Vilnius`, `Europe/Vilnius`, `Baghdad`, `Asia/Baghdad`, `Istanbul`, `Europe/Istanbul`, `Kuwait`, `Asia/Kuwait`, `Minsk`, `Europe/Minsk`, `Moscow`, `Europe/Moscow`, `Nairobi`, `Africa/Nairobi`, `Riyadh`, `Asia/Riyadh`, `St. Petersburg`, `Volgograd`, `Europe/Volgograd`, `Tehran`, `Asia/Tehran`, `Abu Dhabi`, `Asia/Muscat`, `Baku`, `Asia/Baku`, `Muscat`, `Samara`, `Europe/Samara`, `Tbilisi`, `Asia/Tbilisi`, `Yerevan`, `Asia/Yerevan`, `Kabul`, `Asia/Kabul`, `Almaty`, `Asia/Almaty`, `Astana`, `Ekaterinburg`, `Asia/Yekaterinburg`, `Islamabad`, `Asia/Karachi`, `Karachi`, `Tashkent`, `Asia/Tashkent`, `Chennai`, `Asia/Kolkata`, `Kolkata`, `Mumbai`, `New Delhi`, `Sri Jayawardenepura`, `Asia/Colombo`, `Kathmandu`, `Asia/Kathmandu`, `Dhaka`, `Asia/Dhaka`, `Urumqi`, `Asia/Urumqi`, `Rangoon`, `Asia/Rangoon`, `Bangkok`, `Asia/Bangkok`, `Hanoi`, `Jakarta`, `Asia/Jakarta`, `Krasnoyarsk`, `Asia/Krasnoyarsk`, `Novosibirsk`, `Asia/Novosibirsk`, `Beijing`, `Asia/Shanghai`, `Chongqing`, `Asia/Chongqing`, `Hong Kong`, `Asia/Hong_Kong`, `Irkutsk`, `Asia/Irkutsk`, `Kuala Lumpur`, `Asia/Kuala_Lumpur`, `Perth`, `Australia/Perth`, `Singapore`, `Asia/Singapore`, `Taipei`, `Asia/Taipei`, `Ulaanbaatar`, `Asia/Ulaanbaatar`, `Osaka`, `Asia/Tokyo`, `Sapporo`, `Seoul`, `Asia/Seoul`, `Tokyo`, `Yakutsk`, `Asia/Yakutsk`, `Adelaide`, `Australia/Adelaide`, `Darwin`, `Australia/Darwin`, `Brisbane`, `Australia/Brisbane`, `Canberra`, `Australia/Canberra`, `Guam`, `Pacific/Guam`, `Hobart`, `Australia/Hobart`, `Melbourne`, `Australia/Melbourne`, `Port Moresby`, `Pacific/Port_Moresby`, `Sydney`, `Australia/Sydney`, `Vladivostok`, `Asia/Vladivostok`, `Magadan`, `Asia/Magadan`, `New Caledonia`, `Pacific/Noumea`, `Solomon Is.`, `Pacific/Guadalcanal`, `Srednekolymsk`, `Asia/Srednekolymsk`, `Auckland`, `Pacific/Auckland`, `Fiji`, `Pacific/Fiji`, `Kamchatka`, `Asia/Kamchatka`, `Marshall Is.`, `Pacific/Majuro`, `Wellington`, `Chatham Is.`, `Pacific/Chatham`, `Nuku'alofa`, `Pacific/Tongatapu`, `Samoa`, `Pacific/Apia`, `Tokelau Is.`, `Pacific/Fakaofo`, `America/Adak`, `America/Atka`, `US/Aleutian`, `America/Vancouver`, `Canada/Pacific`, `America/Miquelon`, `Australia/Eucla`, `Australia/LHI`, `Australia/Lord_Howe`, `Chile/EasterIsland`, `Pacific/Easter`, `Pacific/Gambier`, `Pacific/Pitcairn`, `Pacific/Marquesas`, `Pacific/Kiritimati`, `Pacific/Norfolk`.",
+							Optional:            true,
+							Computed:            true,
+							Validators: []validator.String{
+								stringvalidator.OneOf("International Date Line West", "Etc/GMT+12", "American Samoa", "Pacific/Pago_Pago", "Midway Island", "Pacific/Midway", "Hawaii", "Pacific/Honolulu", "Alaska", "America/Juneau", "Pacific Time (US & Canada)", "America/Los_Angeles", "Tijuana", "America/Tijuana", "Arizona", "America/Phoenix", "Mazatlan", "America/Mazatlan", "Mountain Time (US & Canada)", "America/Denver", "Central America", "America/Guatemala", "Central Time (US & Canada)", "America/Chicago", "Chihuahua", "America/Chihuahua", "Guadalajara", "America/Mexico_City", "Mexico City", "Monterrey", "America/Monterrey", "Saskatchewan", "America/Regina", "Bogota", "America/Bogota", "Eastern Time (US & Canada)", "America/New_York", "Indiana (East)", "America/Indiana/Indianapolis", "Lima", "America/Lima", "Quito", "Atlantic Time (Canada)", "America/Halifax", "Caracas", "America/Caracas", "Georgetown", "America/Guyana", "La Paz", "America/La_Paz", "Puerto Rico", "America/Puerto_Rico", "Santiago", "America/Santiago", "Newfoundland", "America/St_Johns", "Asuncion", "America/Asuncion", "Brasilia", "America/Sao_Paulo", "Buenos Aires", "America/Argentina/Buenos_Aires", "Montevideo", "America/Montevideo", "Greenland", "America/Nuuk", "Mid-Atlantic", "Atlantic/South_Georgia", "Azores", "Atlantic/Azores", "Cape Verde Is.", "Atlantic/Cape_Verde", "Edinburgh", "Europe/London", "Lisbon", "Europe/Lisbon", "London", "Monrovia", "Africa/Monrovia", "UTC", "Etc/UTC", "Amsterdam", "Europe/Amsterdam", "Belgrade", "Europe/Belgrade", "Berlin", "Europe/Berlin", "Bern", "Europe/Zurich", "Bratislava", "Europe/Bratislava", "Brussels", "Europe/Brussels", "Budapest", "Europe/Budapest", "Casablanca", "Africa/Casablanca", "Copenhagen", "Europe/Copenhagen", "Dublin", "Europe/Dublin", "Ljubljana", "Europe/Ljubljana", "Madrid", "Europe/Madrid", "Paris", "Europe/Paris", "Prague", "Europe/Prague", "Rome", "Europe/Rome", "Sarajevo", "Europe/Sarajevo", "Skopje", "Europe/Skopje", "Stockholm", "Europe/Stockholm", "Vienna", "Europe/Vienna", "Warsaw", "Europe/Warsaw", "West Central Africa", "Africa/Algiers", "Zagreb", "Europe/Zagreb", "Zurich", "Athens", "Europe/Athens", "Bucharest", "Europe/Bucharest", "Cairo", "Africa/Cairo", "Harare", "Africa/Harare", "Helsinki", "Europe/Helsinki", "Jerusalem", "Asia/Jerusalem", "Kaliningrad", "Europe/Kaliningrad", "Kyiv", "Europe/Kiev", "Pretoria", "Africa/Johannesburg", "Riga", "Europe/Riga", "Sofia", "Europe/Sofia", "Tallinn", "Europe/Tallinn", "Vilnius", "Europe/Vilnius", "Baghdad", "Asia/Baghdad", "Istanbul", "Europe/Istanbul", "Kuwait", "Asia/Kuwait", "Minsk", "Europe/Minsk", "Moscow", "Europe/Moscow", "Nairobi", "Africa/Nairobi", "Riyadh", "Asia/Riyadh", "St. Petersburg", "Volgograd", "Europe/Volgograd", "Tehran", "Asia/Tehran", "Abu Dhabi", "Asia/Muscat", "Baku", "Asia/Baku", "Muscat", "Samara", "Europe/Samara", "Tbilisi", "Asia/Tbilisi", "Yerevan", "Asia/Yerevan", "Kabul", "Asia/Kabul", "Almaty", "Asia/Almaty", "Astana", "Ekaterinburg", "Asia/Yekaterinburg", "Islamabad", "Asia/Karachi", "Karachi", "Tashkent", "Asia/Tashkent", "Chennai", "Asia/Kolkata", "Kolkata", "Mumbai", "New Delhi", "Sri Jayawardenepura", "Asia/Colombo", "Kathmandu", "Asia/Kathmandu", "Dhaka", "Asia/Dhaka", "Urumqi", "Asia/Urumqi", "Rangoon", "Asia/Rangoon", "Bangkok", "Asia/Bangkok", "Hanoi", "Jakarta", "Asia/Jakarta", "Krasnoyarsk", "Asia/Krasnoyarsk", "Novosibirsk", "Asia/Novosibirsk", "Beijing", "Asia/Shanghai", "Chongqing", "Asia/Chongqing", "Hong Kong", "Asia/Hong_Kong", "Irkutsk", "Asia/Irkutsk", "Kuala Lumpur", "Asia/Kuala_Lumpur", "Perth", "Australia/Perth", "Singapore", "Asia/Singapore", "Taipei", "Asia/Taipei", "Ulaanbaatar", "Asia/Ulaanbaatar", "Osaka", "Asia/Tokyo", "Sapporo", "Seoul", "Asia/Seoul", "Tokyo", "Yakutsk", "Asia/Yakutsk", "Adelaide", "Australia/Adelaide", "Darwin", "Australia/Darwin", "Brisbane", "Australia/Brisbane", "Canberra", "Australia/Canberra", "Guam", "Pacific/Guam", "Hobart", "Australia/Hobart", "Melbourne", "Australia/Melbourne", "Port Moresby", "Pacific/Port_Moresby", "Sydney", "Australia/Sydney", "Vladivostok", "Asia/Vladivostok", "Magadan", "Asia/Magadan", "New Caledonia", "Pacific/Noumea", "Solomon Is.", "Pacific/Guadalcanal", "Srednekolymsk", "Asia/Srednekolymsk", "Auckland", "Pacific/Auckland", "Fiji", "Pacific/Fiji", "Kamchatka", "Asia/Kamchatka", "Marshall Is.", "Pacific/Majuro", "Wellington", "Chatham Is.", "Pacific/Chatham", "Nuku'alofa", "Pacific/Tongatapu", "Samoa", "Pacific/Apia", "Tokelau Is.", "Pacific/Fakaofo", "America/Adak", "America/Atka", "US/Aleutian", "America/Vancouver", "Canada/Pacific", "America/Miquelon", "Australia/Eucla", "Australia/LHI", "Australia/Lord_Howe", "Chile/EasterIsland", "Pacific/Easter", "Pacific/Gambier", "Pacific/Pitcairn", "Pacific/Marquesas", "Pacific/Kiritimati", "Pacific/Norfolk"),
+							},
+						},
+						"time_blocks": schema.SetNestedAttribute{
+							MarkdownDescription: "Time windows during which alerts are deferred.",
+							Optional:            true,
+							Computed:            true,
+							CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelRulesItemTimeBlocksItem](ctx),
+							NestedObject: schema.NestedAttributeObject{
+								Attributes: map[string]schema.Attribute{
+									"id": schema.StringAttribute{
+										MarkdownDescription: "Unique ID of the time block.",
+										Optional:            true,
+										Computed:            true,
+									},
+									"monday": schema.BoolAttribute{
+										Optional: true,
+										Computed: true,
+									},
+									"tuesday": schema.BoolAttribute{
+										Optional: true,
+										Computed: true,
+									},
+									"wednesday": schema.BoolAttribute{
+										Optional: true,
+										Computed: true,
+									},
+									"thursday": schema.BoolAttribute{
+										Optional: true,
+										Computed: true,
+									},
+									"friday": schema.BoolAttribute{
+										Optional: true,
+										Computed: true,
+									},
+									"saturday": schema.BoolAttribute{
+										Optional: true,
+										Computed: true,
+									},
+									"sunday": schema.BoolAttribute{
+										Optional: true,
+										Computed: true,
+									},
+									"start_time": schema.StringAttribute{
+										MarkdownDescription: "Formatted as HH:MM.",
+										Optional:            true,
+										Computed:            true,
+									},
+									"end_time": schema.StringAttribute{
+										MarkdownDescription: "Formatted as HH:MM.",
+										Optional:            true,
+										Computed:            true,
+									},
+									"all_day": schema.BoolAttribute{
+										Optional: true,
+										Computed: true,
+									},
+									"position": schema.Int64Attribute{
+										MarkdownDescription: "Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.",
+										Optional:            true,
+										Computed:            true,
+									},
+									"ends_next_day": schema.BoolAttribute{
+										MarkdownDescription: "Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.",
+										Optional:            true,
+										Computed:            true,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			"notification_type_rules": schema.SetNestedAttribute{
+				MarkdownDescription: "Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team.",
+				Optional:            true,
+				Computed:            true,
+				CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItem](ctx),
+				NestedObject: schema.NestedAttributeObject{
+					Attributes: map[string]schema.Attribute{
+						"notification_type": schema.StringAttribute{
+							MarkdownDescription: "Outcome when this rule matches. Value must be one of `audible`, `quiet`.",
+							Optional:            true,
+							Computed:            true,
+							Default:             stringdefault.StaticString("audible"),
+							Validators: []validator.String{
+								stringvalidator.OneOf("audible", "quiet"),
+							},
+						},
+						"match_mode": schema.StringAttribute{
+							MarkdownDescription: "Whether all or any of the rule's conditions must match. Value must be one of `match-all-rules`, `match-any-rule`.",
+							Optional:            true,
+							Computed:            true,
+							Default:             stringdefault.StaticString("match-all-rules"),
+							Validators: []validator.String{
+								stringvalidator.OneOf("match-all-rules", "match-any-rule"),
+							},
+						},
+						"conditions": schema.SetNestedAttribute{
+							MarkdownDescription: "Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.",
+							Required:            true,
+							CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem](ctx),
+							NestedObject: schema.NestedAttributeObject{
+								Attributes: map[string]schema.Attribute{
+									"rule_type": schema.StringAttribute{
+										MarkdownDescription: "The type of the escalation path rule. Value must be one of `related_incidents`.",
+										Optional:            true,
+										Computed:            true,
+										Validators: []validator.String{
+											stringvalidator.OneOf("related_incidents"),
+										},
+									},
+									"urgency_ids": schema.SetAttribute{
+										MarkdownDescription: "Alert urgency ids for which this escalation path should be used.",
+										Optional:            true,
+										Computed:            true,
+										CustomType:          supertypes.NewSetTypeOf[string](ctx),
+									},
+									"within_working_hour": schema.BoolAttribute{
+										MarkdownDescription: "Whether the escalation path should be used within working hours.",
+										Optional:            true,
+										Computed:            true,
+									},
+									"json_path": schema.StringAttribute{
+										MarkdownDescription: "JSON path to extract value from payload.",
+										Optional:            true,
+										Computed:            true,
+									},
+									"operator": schema.StringAttribute{
+										MarkdownDescription: "Whether the alert must (or must not) have related incidents. Value must be one of `is_set`, `is_not_set`.",
+										Optional:            true,
+										Computed:            true,
+										Validators: []validator.String{
+											stringvalidator.OneOf("is_set", "is_not_set"),
+										},
+									},
+									"value": schema.StringAttribute{
+										MarkdownDescription: "Value with which JSON path value should be matched.",
+										Optional:            true,
+										Computed:            true,
+									},
+									"values": schema.SetAttribute{
+										MarkdownDescription: "Alert source values to match against (e.g., manual, datadog).",
+										Optional:            true,
+										Computed:            true,
+										CustomType:          supertypes.NewSetTypeOf[string](ctx),
+									},
+									"fieldable_type": schema.StringAttribute{
+										MarkdownDescription: "The type of the fieldable (e.g., AlertField).",
+										Optional:            true,
+										Computed:            true,
+									},
+									"fieldable_id": schema.StringAttribute{
+										MarkdownDescription: "The ID of the alert field.",
+										Optional:            true,
+										Computed:            true,
+									},
+									"service_ids": schema.SetAttribute{
+										MarkdownDescription: "Service ids for which this escalation path should be used.",
+										Optional:            true,
+										Computed:            true,
+										CustomType:          supertypes.NewSetTypeOf[string](ctx),
+									},
+									"time_zone": schema.StringAttribute{
+										MarkdownDescription: "Time zone for the deferral window. Value must be one of `International Date Line West`, `Etc/GMT+12`, `American Samoa`, `Pacific/Pago_Pago`, `Midway Island`, `Pacific/Midway`, `Hawaii`, `Pacific/Honolulu`, `Alaska`, `America/Juneau`, `Pacific Time (US & Canada)`, `America/Los_Angeles`, `Tijuana`, `America/Tijuana`, `Arizona`, `America/Phoenix`, `Mazatlan`, `America/Mazatlan`, `Mountain Time (US & Canada)`, `America/Denver`, `Central America`, `America/Guatemala`, `Central Time (US & Canada)`, `America/Chicago`, `Chihuahua`, `America/Chihuahua`, `Guadalajara`, `America/Mexico_City`, `Mexico City`, `Monterrey`, `America/Monterrey`, `Saskatchewan`, `America/Regina`, `Bogota`, `America/Bogota`, `Eastern Time (US & Canada)`, `America/New_York`, `Indiana (East)`, `America/Indiana/Indianapolis`, `Lima`, `America/Lima`, `Quito`, `Atlantic Time (Canada)`, `America/Halifax`, `Caracas`, `America/Caracas`, `Georgetown`, `America/Guyana`, `La Paz`, `America/La_Paz`, `Puerto Rico`, `America/Puerto_Rico`, `Santiago`, `America/Santiago`, `Newfoundland`, `America/St_Johns`, `Asuncion`, `America/Asuncion`, `Brasilia`, `America/Sao_Paulo`, `Buenos Aires`, `America/Argentina/Buenos_Aires`, `Montevideo`, `America/Montevideo`, `Greenland`, `America/Nuuk`, `Mid-Atlantic`, `Atlantic/South_Georgia`, `Azores`, `Atlantic/Azores`, `Cape Verde Is.`, `Atlantic/Cape_Verde`, `Edinburgh`, `Europe/London`, `Lisbon`, `Europe/Lisbon`, `London`, `Monrovia`, `Africa/Monrovia`, `UTC`, `Etc/UTC`, `Amsterdam`, `Europe/Amsterdam`, `Belgrade`, `Europe/Belgrade`, `Berlin`, `Europe/Berlin`, `Bern`, `Europe/Zurich`, `Bratislava`, `Europe/Bratislava`, `Brussels`, `Europe/Brussels`, `Budapest`, `Europe/Budapest`, `Casablanca`, `Africa/Casablanca`, `Copenhagen`, `Europe/Copenhagen`, `Dublin`, `Europe/Dublin`, `Ljubljana`, `Europe/Ljubljana`, `Madrid`, `Europe/Madrid`, `Paris`, `Europe/Paris`, `Prague`, `Europe/Prague`, `Rome`, `Europe/Rome`, `Sarajevo`, `Europe/Sarajevo`, `Skopje`, `Europe/Skopje`, `Stockholm`, `Europe/Stockholm`, `Vienna`, `Europe/Vienna`, `Warsaw`, `Europe/Warsaw`, `West Central Africa`, `Africa/Algiers`, `Zagreb`, `Europe/Zagreb`, `Zurich`, `Athens`, `Europe/Athens`, `Bucharest`, `Europe/Bucharest`, `Cairo`, `Africa/Cairo`, `Harare`, `Africa/Harare`, `Helsinki`, `Europe/Helsinki`, `Jerusalem`, `Asia/Jerusalem`, `Kaliningrad`, `Europe/Kaliningrad`, `Kyiv`, `Europe/Kiev`, `Pretoria`, `Africa/Johannesburg`, `Riga`, `Europe/Riga`, `Sofia`, `Europe/Sofia`, `Tallinn`, `Europe/Tallinn`, `Vilnius`, `Europe/Vilnius`, `Baghdad`, `Asia/Baghdad`, `Istanbul`, `Europe/Istanbul`, `Kuwait`, `Asia/Kuwait`, `Minsk`, `Europe/Minsk`, `Moscow`, `Europe/Moscow`, `Nairobi`, `Africa/Nairobi`, `Riyadh`, `Asia/Riyadh`, `St. Petersburg`, `Volgograd`, `Europe/Volgograd`, `Tehran`, `Asia/Tehran`, `Abu Dhabi`, `Asia/Muscat`, `Baku`, `Asia/Baku`, `Muscat`, `Samara`, `Europe/Samara`, `Tbilisi`, `Asia/Tbilisi`, `Yerevan`, `Asia/Yerevan`, `Kabul`, `Asia/Kabul`, `Almaty`, `Asia/Almaty`, `Astana`, `Ekaterinburg`, `Asia/Yekaterinburg`, `Islamabad`, `Asia/Karachi`, `Karachi`, `Tashkent`, `Asia/Tashkent`, `Chennai`, `Asia/Kolkata`, `Kolkata`, `Mumbai`, `New Delhi`, `Sri Jayawardenepura`, `Asia/Colombo`, `Kathmandu`, `Asia/Kathmandu`, `Dhaka`, `Asia/Dhaka`, `Urumqi`, `Asia/Urumqi`, `Rangoon`, `Asia/Rangoon`, `Bangkok`, `Asia/Bangkok`, `Hanoi`, `Jakarta`, `Asia/Jakarta`, `Krasnoyarsk`, `Asia/Krasnoyarsk`, `Novosibirsk`, `Asia/Novosibirsk`, `Beijing`, `Asia/Shanghai`, `Chongqing`, `Asia/Chongqing`, `Hong Kong`, `Asia/Hong_Kong`, `Irkutsk`, `Asia/Irkutsk`, `Kuala Lumpur`, `Asia/Kuala_Lumpur`, `Perth`, `Australia/Perth`, `Singapore`, `Asia/Singapore`, `Taipei`, `Asia/Taipei`, `Ulaanbaatar`, `Asia/Ulaanbaatar`, `Osaka`, `Asia/Tokyo`, `Sapporo`, `Seoul`, `Asia/Seoul`, `Tokyo`, `Yakutsk`, `Asia/Yakutsk`, `Adelaide`, `Australia/Adelaide`, `Darwin`, `Australia/Darwin`, `Brisbane`, `Australia/Brisbane`, `Canberra`, `Australia/Canberra`, `Guam`, `Pacific/Guam`, `Hobart`, `Australia/Hobart`, `Melbourne`, `Australia/Melbourne`, `Port Moresby`, `Pacific/Port_Moresby`, `Sydney`, `Australia/Sydney`, `Vladivostok`, `Asia/Vladivostok`, `Magadan`, `Asia/Magadan`, `New Caledonia`, `Pacific/Noumea`, `Solomon Is.`, `Pacific/Guadalcanal`, `Srednekolymsk`, `Asia/Srednekolymsk`, `Auckland`, `Pacific/Auckland`, `Fiji`, `Pacific/Fiji`, `Kamchatka`, `Asia/Kamchatka`, `Marshall Is.`, `Pacific/Majuro`, `Wellington`, `Chatham Is.`, `Pacific/Chatham`, `Nuku'alofa`, `Pacific/Tongatapu`, `Samoa`, `Pacific/Apia`, `Tokelau Is.`, `Pacific/Fakaofo`, `America/Adak`, `America/Atka`, `US/Aleutian`, `America/Vancouver`, `Canada/Pacific`, `America/Miquelon`, `Australia/Eucla`, `Australia/LHI`, `Australia/Lord_Howe`, `Chile/EasterIsland`, `Pacific/Easter`, `Pacific/Gambier`, `Pacific/Pitcairn`, `Pacific/Marquesas`, `Pacific/Kiritimati`, `Pacific/Norfolk`.",
+										Optional:            true,
+										Computed:            true,
+										Validators: []validator.String{
+											stringvalidator.OneOf("International Date Line West", "Etc/GMT+12", "American Samoa", "Pacific/Pago_Pago", "Midway Island", "Pacific/Midway", "Hawaii", "Pacific/Honolulu", "Alaska", "America/Juneau", "Pacific Time (US & Canada)", "America/Los_Angeles", "Tijuana", "America/Tijuana", "Arizona", "America/Phoenix", "Mazatlan", "America/Mazatlan", "Mountain Time (US & Canada)", "America/Denver", "Central America", "America/Guatemala", "Central Time (US & Canada)", "America/Chicago", "Chihuahua", "America/Chihuahua", "Guadalajara", "America/Mexico_City", "Mexico City", "Monterrey", "America/Monterrey", "Saskatchewan", "America/Regina", "Bogota", "America/Bogota", "Eastern Time (US & Canada)", "America/New_York", "Indiana (East)", "America/Indiana/Indianapolis", "Lima", "America/Lima", "Quito", "Atlantic Time (Canada)", "America/Halifax", "Caracas", "America/Caracas", "Georgetown", "America/Guyana", "La Paz", "America/La_Paz", "Puerto Rico", "America/Puerto_Rico", "Santiago", "America/Santiago", "Newfoundland", "America/St_Johns", "Asuncion", "America/Asuncion", "Brasilia", "America/Sao_Paulo", "Buenos Aires", "America/Argentina/Buenos_Aires", "Montevideo", "America/Montevideo", "Greenland", "America/Nuuk", "Mid-Atlantic", "Atlantic/South_Georgia", "Azores", "Atlantic/Azores", "Cape Verde Is.", "Atlantic/Cape_Verde", "Edinburgh", "Europe/London", "Lisbon", "Europe/Lisbon", "London", "Monrovia", "Africa/Monrovia", "UTC", "Etc/UTC", "Amsterdam", "Europe/Amsterdam", "Belgrade", "Europe/Belgrade", "Berlin", "Europe/Berlin", "Bern", "Europe/Zurich", "Bratislava", "Europe/Bratislava", "Brussels", "Europe/Brussels", "Budapest", "Europe/Budapest", "Casablanca", "Africa/Casablanca", "Copenhagen", "Europe/Copenhagen", "Dublin", "Europe/Dublin", "Ljubljana", "Europe/Ljubljana", "Madrid", "Europe/Madrid", "Paris", "Europe/Paris", "Prague", "Europe/Prague", "Rome", "Europe/Rome", "Sarajevo", "Europe/Sarajevo", "Skopje", "Europe/Skopje", "Stockholm", "Europe/Stockholm", "Vienna", "Europe/Vienna", "Warsaw", "Europe/Warsaw", "West Central Africa", "Africa/Algiers", "Zagreb", "Europe/Zagreb", "Zurich", "Athens", "Europe/Athens", "Bucharest", "Europe/Bucharest", "Cairo", "Africa/Cairo", "Harare", "Africa/Harare", "Helsinki", "Europe/Helsinki", "Jerusalem", "Asia/Jerusalem", "Kaliningrad", "Europe/Kaliningrad", "Kyiv", "Europe/Kiev", "Pretoria", "Africa/Johannesburg", "Riga", "Europe/Riga", "Sofia", "Europe/Sofia", "Tallinn", "Europe/Tallinn", "Vilnius", "Europe/Vilnius", "Baghdad", "Asia/Baghdad", "Istanbul", "Europe/Istanbul", "Kuwait", "Asia/Kuwait", "Minsk", "Europe/Minsk", "Moscow", "Europe/Moscow", "Nairobi", "Africa/Nairobi", "Riyadh", "Asia/Riyadh", "St. Petersburg", "Volgograd", "Europe/Volgograd", "Tehran", "Asia/Tehran", "Abu Dhabi", "Asia/Muscat", "Baku", "Asia/Baku", "Muscat", "Samara", "Europe/Samara", "Tbilisi", "Asia/Tbilisi", "Yerevan", "Asia/Yerevan", "Kabul", "Asia/Kabul", "Almaty", "Asia/Almaty", "Astana", "Ekaterinburg", "Asia/Yekaterinburg", "Islamabad", "Asia/Karachi", "Karachi", "Tashkent", "Asia/Tashkent", "Chennai", "Asia/Kolkata", "Kolkata", "Mumbai", "New Delhi", "Sri Jayawardenepura", "Asia/Colombo", "Kathmandu", "Asia/Kathmandu", "Dhaka", "Asia/Dhaka", "Urumqi", "Asia/Urumqi", "Rangoon", "Asia/Rangoon", "Bangkok", "Asia/Bangkok", "Hanoi", "Jakarta", "Asia/Jakarta", "Krasnoyarsk", "Asia/Krasnoyarsk", "Novosibirsk", "Asia/Novosibirsk", "Beijing", "Asia/Shanghai", "Chongqing", "Asia/Chongqing", "Hong Kong", "Asia/Hong_Kong", "Irkutsk", "Asia/Irkutsk", "Kuala Lumpur", "Asia/Kuala_Lumpur", "Perth", "Australia/Perth", "Singapore", "Asia/Singapore", "Taipei", "Asia/Taipei", "Ulaanbaatar", "Asia/Ulaanbaatar", "Osaka", "Asia/Tokyo", "Sapporo", "Seoul", "Asia/Seoul", "Tokyo", "Yakutsk", "Asia/Yakutsk", "Adelaide", "Australia/Adelaide", "Darwin", "Australia/Darwin", "Brisbane", "Australia/Brisbane", "Canberra", "Australia/Canberra", "Guam", "Pacific/Guam", "Hobart", "Australia/Hobart", "Melbourne", "Australia/Melbourne", "Port Moresby", "Pacific/Port_Moresby", "Sydney", "Australia/Sydney", "Vladivostok", "Asia/Vladivostok", "Magadan", "Asia/Magadan", "New Caledonia", "Pacific/Noumea", "Solomon Is.", "Pacific/Guadalcanal", "Srednekolymsk", "Asia/Srednekolymsk", "Auckland", "Pacific/Auckland", "Fiji", "Pacific/Fiji", "Kamchatka", "Asia/Kamchatka", "Marshall Is.", "Pacific/Majuro", "Wellington", "Chatham Is.", "Pacific/Chatham", "Nuku'alofa", "Pacific/Tongatapu", "Samoa", "Pacific/Apia", "Tokelau Is.", "Pacific/Fakaofo", "America/Adak", "America/Atka", "US/Aleutian", "America/Vancouver", "Canada/Pacific", "America/Miquelon", "Australia/Eucla", "Australia/LHI", "Australia/Lord_Howe", "Chile/EasterIsland", "Pacific/Easter", "Pacific/Gambier", "Pacific/Pitcairn", "Pacific/Marquesas", "Pacific/Kiritimati", "Pacific/Norfolk"),
+										},
+									},
+									"time_blocks": schema.SetNestedAttribute{
+										MarkdownDescription: "Time windows during which alerts are deferred.",
+										Optional:            true,
+										Computed:            true,
+										CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem](ctx),
+										NestedObject: schema.NestedAttributeObject{
+											Attributes: map[string]schema.Attribute{
+												"id": schema.StringAttribute{
+													MarkdownDescription: "Unique ID of the time block.",
+													Optional:            true,
+													Computed:            true,
+												},
+												"monday": schema.BoolAttribute{
+													Optional: true,
+													Computed: true,
+												},
+												"tuesday": schema.BoolAttribute{
+													Optional: true,
+													Computed: true,
+												},
+												"wednesday": schema.BoolAttribute{
+													Optional: true,
+													Computed: true,
+												},
+												"thursday": schema.BoolAttribute{
+													Optional: true,
+													Computed: true,
+												},
+												"friday": schema.BoolAttribute{
+													Optional: true,
+													Computed: true,
+												},
+												"saturday": schema.BoolAttribute{
+													Optional: true,
+													Computed: true,
+												},
+												"sunday": schema.BoolAttribute{
+													Optional: true,
+													Computed: true,
+												},
+												"start_time": schema.StringAttribute{
+													MarkdownDescription: "Formatted as HH:MM.",
+													Optional:            true,
+													Computed:            true,
+												},
+												"end_time": schema.StringAttribute{
+													MarkdownDescription: "Formatted as HH:MM.",
+													Optional:            true,
+													Computed:            true,
+												},
+												"all_day": schema.BoolAttribute{
+													Optional: true,
+													Computed: true,
+												},
+												"position": schema.Int64Attribute{
+													MarkdownDescription: "Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.",
+													Optional:            true,
+													Computed:            true,
+												},
+												"ends_next_day": schema.BoolAttribute{
+													MarkdownDescription: "Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.",
+													Optional:            true,
+													Computed:            true,
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			"notification_type_fallback": schema.StringAttribute{
+				MarkdownDescription: "Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team. Value must be one of `audible`, `quiet`.",
+				Optional:            true,
+				Computed:            true,
+				Default:             stringdefault.StaticString("audible"),
+				Validators: []validator.String{
+					stringvalidator.OneOf("audible", "quiet"),
+				},
+			},
+			"time_restriction_time_zone": schema.StringAttribute{
+				MarkdownDescription: "Time zone used for time restrictions. Value must be one of `International Date Line West`, `Etc/GMT+12`, `American Samoa`, `Pacific/Pago_Pago`, `Midway Island`, `Pacific/Midway`, `Hawaii`, `Pacific/Honolulu`, `Alaska`, `America/Juneau`, `Pacific Time (US & Canada)`, `America/Los_Angeles`, `Tijuana`, `America/Tijuana`, `Arizona`, `America/Phoenix`, `Mazatlan`, `America/Mazatlan`, `Mountain Time (US & Canada)`, `America/Denver`, `Central America`, `America/Guatemala`, `Central Time (US & Canada)`, `America/Chicago`, `Chihuahua`, `America/Chihuahua`, `Guadalajara`, `America/Mexico_City`, `Mexico City`, `Monterrey`, `America/Monterrey`, `Saskatchewan`, `America/Regina`, `Bogota`, `America/Bogota`, `Eastern Time (US & Canada)`, `America/New_York`, `Indiana (East)`, `America/Indiana/Indianapolis`, `Lima`, `America/Lima`, `Quito`, `Atlantic Time (Canada)`, `America/Halifax`, `Caracas`, `America/Caracas`, `Georgetown`, `America/Guyana`, `La Paz`, `America/La_Paz`, `Puerto Rico`, `America/Puerto_Rico`, `Santiago`, `America/Santiago`, `Newfoundland`, `America/St_Johns`, `Asuncion`, `America/Asuncion`, `Brasilia`, `America/Sao_Paulo`, `Buenos Aires`, `America/Argentina/Buenos_Aires`, `Montevideo`, `America/Montevideo`, `Greenland`, `America/Nuuk`, `Mid-Atlantic`, `Atlantic/South_Georgia`, `Azores`, `Atlantic/Azores`, `Cape Verde Is.`, `Atlantic/Cape_Verde`, `Edinburgh`, `Europe/London`, `Lisbon`, `Europe/Lisbon`, `London`, `Monrovia`, `Africa/Monrovia`, `UTC`, `Etc/UTC`, `Amsterdam`, `Europe/Amsterdam`, `Belgrade`, `Europe/Belgrade`, `Berlin`, `Europe/Berlin`, `Bern`, `Europe/Zurich`, `Bratislava`, `Europe/Bratislava`, `Brussels`, `Europe/Brussels`, `Budapest`, `Europe/Budapest`, `Casablanca`, `Africa/Casablanca`, `Copenhagen`, `Europe/Copenhagen`, `Dublin`, `Europe/Dublin`, `Ljubljana`, `Europe/Ljubljana`, `Madrid`, `Europe/Madrid`, `Paris`, `Europe/Paris`, `Prague`, `Europe/Prague`, `Rome`, `Europe/Rome`, `Sarajevo`, `Europe/Sarajevo`, `Skopje`, `Europe/Skopje`, `Stockholm`, `Europe/Stockholm`, `Vienna`, `Europe/Vienna`, `Warsaw`, `Europe/Warsaw`, `West Central Africa`, `Africa/Algiers`, `Zagreb`, `Europe/Zagreb`, `Zurich`, `Athens`, `Europe/Athens`, `Bucharest`, `Europe/Bucharest`, `Cairo`, `Africa/Cairo`, `Harare`, `Africa/Harare`, `Helsinki`, `Europe/Helsinki`, `Jerusalem`, `Asia/Jerusalem`, `Kaliningrad`, `Europe/Kaliningrad`, `Kyiv`, `Europe/Kiev`, `Pretoria`, `Africa/Johannesburg`, `Riga`, `Europe/Riga`, `Sofia`, `Europe/Sofia`, `Tallinn`, `Europe/Tallinn`, `Vilnius`, `Europe/Vilnius`, `Baghdad`, `Asia/Baghdad`, `Istanbul`, `Europe/Istanbul`, `Kuwait`, `Asia/Kuwait`, `Minsk`, `Europe/Minsk`, `Moscow`, `Europe/Moscow`, `Nairobi`, `Africa/Nairobi`, `Riyadh`, `Asia/Riyadh`, `St. Petersburg`, `Volgograd`, `Europe/Volgograd`, `Tehran`, `Asia/Tehran`, `Abu Dhabi`, `Asia/Muscat`, `Baku`, `Asia/Baku`, `Muscat`, `Samara`, `Europe/Samara`, `Tbilisi`, `Asia/Tbilisi`, `Yerevan`, `Asia/Yerevan`, `Kabul`, `Asia/Kabul`, `Almaty`, `Asia/Almaty`, `Astana`, `Ekaterinburg`, `Asia/Yekaterinburg`, `Islamabad`, `Asia/Karachi`, `Karachi`, `Tashkent`, `Asia/Tashkent`, `Chennai`, `Asia/Kolkata`, `Kolkata`, `Mumbai`, `New Delhi`, `Sri Jayawardenepura`, `Asia/Colombo`, `Kathmandu`, `Asia/Kathmandu`, `Dhaka`, `Asia/Dhaka`, `Urumqi`, `Asia/Urumqi`, `Rangoon`, `Asia/Rangoon`, `Bangkok`, `Asia/Bangkok`, `Hanoi`, `Jakarta`, `Asia/Jakarta`, `Krasnoyarsk`, `Asia/Krasnoyarsk`, `Novosibirsk`, `Asia/Novosibirsk`, `Beijing`, `Asia/Shanghai`, `Chongqing`, `Asia/Chongqing`, `Hong Kong`, `Asia/Hong_Kong`, `Irkutsk`, `Asia/Irkutsk`, `Kuala Lumpur`, `Asia/Kuala_Lumpur`, `Perth`, `Australia/Perth`, `Singapore`, `Asia/Singapore`, `Taipei`, `Asia/Taipei`, `Ulaanbaatar`, `Asia/Ulaanbaatar`, `Osaka`, `Asia/Tokyo`, `Sapporo`, `Seoul`, `Asia/Seoul`, `Tokyo`, `Yakutsk`, `Asia/Yakutsk`, `Adelaide`, `Australia/Adelaide`, `Darwin`, `Australia/Darwin`, `Brisbane`, `Australia/Brisbane`, `Canberra`, `Australia/Canberra`, `Guam`, `Pacific/Guam`, `Hobart`, `Australia/Hobart`, `Melbourne`, `Australia/Melbourne`, `Port Moresby`, `Pacific/Port_Moresby`, `Sydney`, `Australia/Sydney`, `Vladivostok`, `Asia/Vladivostok`, `Magadan`, `Asia/Magadan`, `New Caledonia`, `Pacific/Noumea`, `Solomon Is.`, `Pacific/Guadalcanal`, `Srednekolymsk`, `Asia/Srednekolymsk`, `Auckland`, `Pacific/Auckland`, `Fiji`, `Pacific/Fiji`, `Kamchatka`, `Asia/Kamchatka`, `Marshall Is.`, `Pacific/Majuro`, `Wellington`, `Chatham Is.`, `Pacific/Chatham`, `Nuku'alofa`, `Pacific/Tongatapu`, `Samoa`, `Pacific/Apia`, `Tokelau Is.`, `Pacific/Fakaofo`, `America/Adak`, `America/Atka`, `US/Aleutian`, `America/Vancouver`, `Canada/Pacific`, `America/Miquelon`, `Australia/Eucla`, `Australia/LHI`, `Australia/Lord_Howe`, `Chile/EasterIsland`, `Pacific/Easter`, `Pacific/Gambier`, `Pacific/Pitcairn`, `Pacific/Marquesas`, `Pacific/Kiritimati`, `Pacific/Norfolk`.",
+				Optional:            true,
+				Computed:            true,
+				Validators: []validator.String{
+					stringvalidator.OneOf("International Date Line West", "Etc/GMT+12", "American Samoa", "Pacific/Pago_Pago", "Midway Island", "Pacific/Midway", "Hawaii", "Pacific/Honolulu", "Alaska", "America/Juneau", "Pacific Time (US & Canada)", "America/Los_Angeles", "Tijuana", "America/Tijuana", "Arizona", "America/Phoenix", "Mazatlan", "America/Mazatlan", "Mountain Time (US & Canada)", "America/Denver", "Central America", "America/Guatemala", "Central Time (US & Canada)", "America/Chicago", "Chihuahua", "America/Chihuahua", "Guadalajara", "America/Mexico_City", "Mexico City", "Monterrey", "America/Monterrey", "Saskatchewan", "America/Regina", "Bogota", "America/Bogota", "Eastern Time (US & Canada)", "America/New_York", "Indiana (East)", "America/Indiana/Indianapolis", "Lima", "America/Lima", "Quito", "Atlantic Time (Canada)", "America/Halifax", "Caracas", "America/Caracas", "Georgetown", "America/Guyana", "La Paz", "America/La_Paz", "Puerto Rico", "America/Puerto_Rico", "Santiago", "America/Santiago", "Newfoundland", "America/St_Johns", "Asuncion", "America/Asuncion", "Brasilia", "America/Sao_Paulo", "Buenos Aires", "America/Argentina/Buenos_Aires", "Montevideo", "America/Montevideo", "Greenland", "America/Nuuk", "Mid-Atlantic", "Atlantic/South_Georgia", "Azores", "Atlantic/Azores", "Cape Verde Is.", "Atlantic/Cape_Verde", "Edinburgh", "Europe/London", "Lisbon", "Europe/Lisbon", "London", "Monrovia", "Africa/Monrovia", "UTC", "Etc/UTC", "Amsterdam", "Europe/Amsterdam", "Belgrade", "Europe/Belgrade", "Berlin", "Europe/Berlin", "Bern", "Europe/Zurich", "Bratislava", "Europe/Bratislava", "Brussels", "Europe/Brussels", "Budapest", "Europe/Budapest", "Casablanca", "Africa/Casablanca", "Copenhagen", "Europe/Copenhagen", "Dublin", "Europe/Dublin", "Ljubljana", "Europe/Ljubljana", "Madrid", "Europe/Madrid", "Paris", "Europe/Paris", "Prague", "Europe/Prague", "Rome", "Europe/Rome", "Sarajevo", "Europe/Sarajevo", "Skopje", "Europe/Skopje", "Stockholm", "Europe/Stockholm", "Vienna", "Europe/Vienna", "Warsaw", "Europe/Warsaw", "West Central Africa", "Africa/Algiers", "Zagreb", "Europe/Zagreb", "Zurich", "Athens", "Europe/Athens", "Bucharest", "Europe/Bucharest", "Cairo", "Africa/Cairo", "Harare", "Africa/Harare", "Helsinki", "Europe/Helsinki", "Jerusalem", "Asia/Jerusalem", "Kaliningrad", "Europe/Kaliningrad", "Kyiv", "Europe/Kiev", "Pretoria", "Africa/Johannesburg", "Riga", "Europe/Riga", "Sofia", "Europe/Sofia", "Tallinn", "Europe/Tallinn", "Vilnius", "Europe/Vilnius", "Baghdad", "Asia/Baghdad", "Istanbul", "Europe/Istanbul", "Kuwait", "Asia/Kuwait", "Minsk", "Europe/Minsk", "Moscow", "Europe/Moscow", "Nairobi", "Africa/Nairobi", "Riyadh", "Asia/Riyadh", "St. Petersburg", "Volgograd", "Europe/Volgograd", "Tehran", "Asia/Tehran", "Abu Dhabi", "Asia/Muscat", "Baku", "Asia/Baku", "Muscat", "Samara", "Europe/Samara", "Tbilisi", "Asia/Tbilisi", "Yerevan", "Asia/Yerevan", "Kabul", "Asia/Kabul", "Almaty", "Asia/Almaty", "Astana", "Ekaterinburg", "Asia/Yekaterinburg", "Islamabad", "Asia/Karachi", "Karachi", "Tashkent", "Asia/Tashkent", "Chennai", "Asia/Kolkata", "Kolkata", "Mumbai", "New Delhi", "Sri Jayawardenepura", "Asia/Colombo", "Kathmandu", "Asia/Kathmandu", "Dhaka", "Asia/Dhaka", "Urumqi", "Asia/Urumqi", "Rangoon", "Asia/Rangoon", "Bangkok", "Asia/Bangkok", "Hanoi", "Jakarta", "Asia/Jakarta", "Krasnoyarsk", "Asia/Krasnoyarsk", "Novosibirsk", "Asia/Novosibirsk", "Beijing", "Asia/Shanghai", "Chongqing", "Asia/Chongqing", "Hong Kong", "Asia/Hong_Kong", "Irkutsk", "Asia/Irkutsk", "Kuala Lumpur", "Asia/Kuala_Lumpur", "Perth", "Australia/Perth", "Singapore", "Asia/Singapore", "Taipei", "Asia/Taipei", "Ulaanbaatar", "Asia/Ulaanbaatar", "Osaka", "Asia/Tokyo", "Sapporo", "Seoul", "Asia/Seoul", "Tokyo", "Yakutsk", "Asia/Yakutsk", "Adelaide", "Australia/Adelaide", "Darwin", "Australia/Darwin", "Brisbane", "Australia/Brisbane", "Canberra", "Australia/Canberra", "Guam", "Pacific/Guam", "Hobart", "Australia/Hobart", "Melbourne", "Australia/Melbourne", "Port Moresby", "Pacific/Port_Moresby", "Sydney", "Australia/Sydney", "Vladivostok", "Asia/Vladivostok", "Magadan", "Asia/Magadan", "New Caledonia", "Pacific/Noumea", "Solomon Is.", "Pacific/Guadalcanal", "Srednekolymsk", "Asia/Srednekolymsk", "Auckland", "Pacific/Auckland", "Fiji", "Pacific/Fiji", "Kamchatka", "Asia/Kamchatka", "Marshall Is.", "Pacific/Majuro", "Wellington", "Chatham Is.", "Pacific/Chatham", "Nuku'alofa", "Pacific/Tongatapu", "Samoa", "Pacific/Apia", "Tokelau Is.", "Pacific/Fakaofo", "America/Adak", "America/Atka", "US/Aleutian", "America/Vancouver", "Canada/Pacific", "America/Miquelon", "Australia/Eucla", "Australia/LHI", "Australia/Lord_Howe", "Chile/EasterIsland", "Pacific/Easter", "Pacific/Gambier", "Pacific/Pitcairn", "Pacific/Marquesas", "Pacific/Kiritimati", "Pacific/Norfolk"),
+				},
+			},
+			"time_restrictions": schema.SetNestedAttribute{
+				MarkdownDescription: "If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.",
+				Optional:            true,
+				Computed:            true,
+				CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelTimeRestrictionsItem](ctx),
+				NestedObject: schema.NestedAttributeObject{
+					Attributes: map[string]schema.Attribute{
+						"start_day": schema.StringAttribute{
+							Required: true,
+							Validators: []validator.String{
+								stringvalidator.OneOf("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"),
+							},
+						},
+						"start_time": schema.StringAttribute{
+							MarkdownDescription: "Formatted as HH:MM.",
+							Required:            true,
+						},
+						"end_day": schema.StringAttribute{
+							Required: true,
+							Validators: []validator.String{
+								stringvalidator.OneOf("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"),
+							},
+						},
+						"end_time": schema.StringAttribute{
+							MarkdownDescription: "Formatted as HH:MM.",
+							Required:            true,
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -38,7 +494,33 @@ func (r *EscalationPathResource) Create(ctx context.Context, req resource.Create
 }
 
 func (r *EscalationPathResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	// Read logic will be generated here
+	var data EscalationPathResourceModel
+
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	item, err := r.client.EscalationPathGet(ctx, data.Id.ValueString())
+	if err != nil {
+		if errors.Is(err, client.NotFoundError{}) {
+			resp.Diagnostics.AddWarning("Unable to read Escalation path", "Resource not found, it may have been deleted")
+			resp.State.RemoveResource(ctx)
+			return
+		}
+		resp.Diagnostics.AddError("Unable to read Escalation path", err.Error())
+		return
+	} else if item == nil {
+		resp.Diagnostics.AddError("Unable to read Escalation path", "Unable to read, got nil response")
+		return
+	}
+
+	resp.Diagnostics.Append(data.FromApi(ctx, *item)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *EscalationPathResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
@@ -46,9 +528,347 @@ func (r *EscalationPathResource) Update(ctx context.Context, req resource.Update
 }
 
 func (r *EscalationPathResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	// Delete logic will be generated here
+	var data EscalationPathResourceModel
+
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	err := r.legacyClient.DeleteEscalationPath(data.Id.ValueString())
+	if err != nil {
+		if errors.Is(err, client.NotFoundError{}) {
+			return
+		}
+		resp.Diagnostics.AddError("Unable to delete Escalation path", err.Error())
+	}
 }
 
 func (r *EscalationPathResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// Import logic will be generated here
+}
+
+type EscalationPathResourceModel struct {
+	Id                       types.String                                                                            `tfsdk:"id"`
+	Name                     types.String                                                                            `tfsdk:"name"`
+	Default                  types.Bool                                                                              `tfsdk:"default"`
+	NotificationType         types.String                                                                            `tfsdk:"notification_type"`
+	PathType                 types.String                                                                            `tfsdk:"path_type"`
+	EscalationPolicyId       types.String                                                                            `tfsdk:"escalation_policy_id"`
+	AfterDeferralBehavior    types.String                                                                            `tfsdk:"after_deferral_behavior"`
+	AfterDeferralPathId      types.String                                                                            `tfsdk:"after_deferral_path_id"`
+	MatchMode                types.String                                                                            `tfsdk:"match_mode"`
+	Position                 types.Int64                                                                             `tfsdk:"position"`
+	Repeat                   types.Bool                                                                              `tfsdk:"repeat"`
+	RepeatCount              types.Int64                                                                             `tfsdk:"repeat_count"`
+	InitialDelay             types.Int64                                                                             `tfsdk:"initial_delay"`
+	RetriggerTimeoutMinutes  types.Int64                                                                             `tfsdk:"retrigger_timeout_minutes"`
+	CreatedAt                types.String                                                                            `tfsdk:"created_at"`
+	UpdatedAt                types.String                                                                            `tfsdk:"updated_at"`
+	Rules                    supertypes.SetNestedObjectValueOf[EscalationPathResourceModelRulesItem]                 `tfsdk:"rules"`
+	NotificationTypeRules    supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItem] `tfsdk:"notification_type_rules"`
+	NotificationTypeFallback types.String                                                                            `tfsdk:"notification_type_fallback"`
+	TimeRestrictionTimeZone  types.String                                                                            `tfsdk:"time_restriction_time_zone"`
+	TimeRestrictions         supertypes.SetNestedObjectValueOf[EscalationPathResourceModelTimeRestrictionsItem]      `tfsdk:"time_restrictions"`
+}
+
+func (m *EscalationPathResourceModel) FromApi(ctx context.Context, data apiclient.EscalationPath) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	m.Id = types.StringValue(data.Id)
+	m.Name = types.StringValue(data.Name)
+	m.Default = types.BoolValue(data.Default)
+	m.NotificationType = types.StringValue(data.NotificationType)
+	m.PathType = types.StringValue(data.PathType)
+	m.EscalationPolicyId = types.StringValue(data.EscalationPolicyId)
+	m.AfterDeferralBehavior = jsonapitypes.NullableStringValue(data.AfterDeferralBehavior)
+	m.AfterDeferralPathId = jsonapitypes.NullableStringValue(data.AfterDeferralPathId)
+	m.MatchMode = types.StringValue(data.MatchMode)
+	m.Position = types.Int64Value(data.Position)
+	m.Repeat = jsonapitypes.NullableBoolValue(data.Repeat)
+	m.RepeatCount = jsonapitypes.NullableInt64Value(data.RepeatCount)
+	m.InitialDelay = types.Int64Value(data.InitialDelay)
+	m.RetriggerTimeoutMinutes = jsonapitypes.NullableInt64Value(data.RetriggerTimeoutMinutes)
+	m.CreatedAt = types.StringValue(data.CreatedAt)
+	m.UpdatedAt = types.StringValue(data.UpdatedAt)
+	m.Rules = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelRulesItem] {
+		return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.Rules, func(vv apiclient.EscalationPathRulesItem, _ int) EscalationPathResourceModelRulesItem {
+			var mm EscalationPathResourceModelRulesItem
+			diags.Append(mm.FromApi(ctx, vv)...)
+			return mm
+		}))
+	})()
+	m.NotificationTypeRules = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItem] {
+		return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.NotificationTypeRules, func(vv apiclient.EscalationPathNotificationTypeRulesItem, _ int) EscalationPathResourceModelNotificationTypeRulesItem {
+			var mm EscalationPathResourceModelNotificationTypeRulesItem
+			diags.Append(mm.FromApi(ctx, vv)...)
+			return mm
+		}))
+	})()
+	m.NotificationTypeFallback = types.StringValue(data.NotificationTypeFallback)
+	m.TimeRestrictionTimeZone = jsonapitypes.NullableStringValue(data.TimeRestrictionTimeZone)
+	m.TimeRestrictions = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelTimeRestrictionsItem] {
+		return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.TimeRestrictions, func(vv apiclient.EscalationPathTimeRestrictionsItem, _ int) EscalationPathResourceModelTimeRestrictionsItem {
+			var mm EscalationPathResourceModelTimeRestrictionsItem
+			diags.Append(mm.FromApi(ctx, vv)...)
+			return mm
+		}))
+	})()
+
+	return diags
+}
+
+func (m EscalationPathResourceModel) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPath, diag.Diagnostics) {
+	var m apiclient.CreateEscalationPath
+	var diags diag.Diagnostics
+
+	// TODO: Implement ToCreateApi for EscalationPathResourceModel
+
+	return &m, diags
+}
+
+type EscalationPathResourceModelRulesItem struct {
+	RuleType          types.String                                                                          `tfsdk:"rule_type"`
+	UrgencyIds        supertypes.SetValueOf[string]                                                         `tfsdk:"urgency_ids"`
+	WithinWorkingHour types.Bool                                                                            `tfsdk:"within_working_hour"`
+	JsonPath          types.String                                                                          `tfsdk:"json_path"`
+	Operator          types.String                                                                          `tfsdk:"operator"`
+	Value             types.String                                                                          `tfsdk:"value"`
+	Values            supertypes.SetValueOf[string]                                                         `tfsdk:"values"`
+	FieldableType     types.String                                                                          `tfsdk:"fieldable_type"`
+	FieldableId       types.String                                                                          `tfsdk:"fieldable_id"`
+	ServiceIds        supertypes.SetValueOf[string]                                                         `tfsdk:"service_ids"`
+	TimeZone          types.String                                                                          `tfsdk:"time_zone"`
+	TimeBlocks        supertypes.SetNestedObjectValueOf[EscalationPathResourceModelRulesItemTimeBlocksItem] `tfsdk:"time_blocks"`
+}
+
+func (m *EscalationPathResourceModelRulesItem) FromApi(ctx context.Context, data apiclient.EscalationPathRulesItem) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	m.RuleType = types.StringValue(data.RuleType)
+	m.UrgencyIds = supertypes.NewSetValueOfSlice(ctx, data.UrgencyIds)
+	m.WithinWorkingHour = types.BoolValue(data.WithinWorkingHour)
+	m.JsonPath = types.StringValue(data.JsonPath)
+	m.Operator = types.StringValue(data.Operator)
+	m.Value = jsonapitypes.NullableStringValue(data.Value)
+	m.Values = supertypes.NewSetValueOfSlice(ctx, data.Values)
+	m.FieldableType = types.StringValue(data.FieldableType)
+	m.FieldableId = types.StringValue(data.FieldableId)
+	m.ServiceIds = supertypes.NewSetValueOfSlice(ctx, data.ServiceIds)
+	m.TimeZone = types.StringValue(data.TimeZone)
+	m.TimeBlocks = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelRulesItemTimeBlocksItem] {
+		return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.TimeBlocks, func(vv apiclient.EscalationPathRulesItemTimeBlocksItem, _ int) EscalationPathResourceModelRulesItemTimeBlocksItem {
+			var mm EscalationPathResourceModelRulesItemTimeBlocksItem
+			diags.Append(mm.FromApi(ctx, vv)...)
+			return mm
+		}))
+	})()
+
+	return diags
+}
+
+func (m EscalationPathResourceModelRulesItem) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPathRulesItem, diag.Diagnostics) {
+	var m apiclient.CreateEscalationPathRulesItem
+	var diags diag.Diagnostics
+
+	// TODO: Implement ToCreateApi for EscalationPathResourceModelRulesItem
+
+	return &m, diags
+}
+
+type EscalationPathResourceModelRulesItemTimeBlocksItem struct {
+	Id          types.String `tfsdk:"id"`
+	Monday      types.Bool   `tfsdk:"monday"`
+	Tuesday     types.Bool   `tfsdk:"tuesday"`
+	Wednesday   types.Bool   `tfsdk:"wednesday"`
+	Thursday    types.Bool   `tfsdk:"thursday"`
+	Friday      types.Bool   `tfsdk:"friday"`
+	Saturday    types.Bool   `tfsdk:"saturday"`
+	Sunday      types.Bool   `tfsdk:"sunday"`
+	StartTime   types.String `tfsdk:"start_time"`
+	EndTime     types.String `tfsdk:"end_time"`
+	AllDay      types.Bool   `tfsdk:"all_day"`
+	Position    types.Int64  `tfsdk:"position"`
+	EndsNextDay types.Bool   `tfsdk:"ends_next_day"`
+}
+
+func (m *EscalationPathResourceModelRulesItemTimeBlocksItem) FromApi(ctx context.Context, data apiclient.EscalationPathRulesItemTimeBlocksItem) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	m.Id = types.StringValue(data.Id)
+	m.Monday = types.BoolValue(data.Monday)
+	m.Tuesday = types.BoolValue(data.Tuesday)
+	m.Wednesday = types.BoolValue(data.Wednesday)
+	m.Thursday = types.BoolValue(data.Thursday)
+	m.Friday = types.BoolValue(data.Friday)
+	m.Saturday = types.BoolValue(data.Saturday)
+	m.Sunday = types.BoolValue(data.Sunday)
+	m.StartTime = types.StringValue(data.StartTime)
+	m.EndTime = types.StringValue(data.EndTime)
+	m.AllDay = types.BoolValue(data.AllDay)
+	m.Position = jsonapitypes.NullableInt64Value(data.Position)
+	m.EndsNextDay = types.BoolValue(data.EndsNextDay)
+
+	return diags
+}
+
+func (m EscalationPathResourceModelRulesItemTimeBlocksItem) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPathRulesItemTimeBlocksItem, diag.Diagnostics) {
+	var m apiclient.CreateEscalationPathRulesItemTimeBlocksItem
+	var diags diag.Diagnostics
+
+	// TODO: Implement ToCreateApi for EscalationPathResourceModelRulesItemTimeBlocksItem
+
+	return &m, diags
+}
+
+type EscalationPathResourceModelNotificationTypeRulesItem struct {
+	NotificationType types.String                                                                                          `tfsdk:"notification_type"`
+	MatchMode        types.String                                                                                          `tfsdk:"match_mode"`
+	Conditions       supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem] `tfsdk:"conditions"`
+}
+
+func (m *EscalationPathResourceModelNotificationTypeRulesItem) FromApi(ctx context.Context, data apiclient.EscalationPathNotificationTypeRulesItem) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	m.NotificationType = types.StringValue(data.NotificationType)
+	m.MatchMode = types.StringValue(data.MatchMode)
+	m.Conditions = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem] {
+		return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.Conditions, func(vv apiclient.EscalationPathNotificationTypeRulesItemConditionsItem, _ int) EscalationPathResourceModelNotificationTypeRulesItemConditionsItem {
+			var mm EscalationPathResourceModelNotificationTypeRulesItemConditionsItem
+			diags.Append(mm.FromApi(ctx, vv)...)
+			return mm
+		}))
+	})()
+
+	return diags
+}
+
+func (m EscalationPathResourceModelNotificationTypeRulesItem) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPathNotificationTypeRulesItem, diag.Diagnostics) {
+	var m apiclient.CreateEscalationPathNotificationTypeRulesItem
+	var diags diag.Diagnostics
+
+	// TODO: Implement ToCreateApi for EscalationPathResourceModelNotificationTypeRulesItem
+
+	return &m, diags
+}
+
+type EscalationPathResourceModelNotificationTypeRulesItemConditionsItem struct {
+	RuleType          types.String                                                                                                        `tfsdk:"rule_type"`
+	UrgencyIds        supertypes.SetValueOf[string]                                                                                       `tfsdk:"urgency_ids"`
+	WithinWorkingHour types.Bool                                                                                                          `tfsdk:"within_working_hour"`
+	JsonPath          types.String                                                                                                        `tfsdk:"json_path"`
+	Operator          types.String                                                                                                        `tfsdk:"operator"`
+	Value             types.String                                                                                                        `tfsdk:"value"`
+	Values            supertypes.SetValueOf[string]                                                                                       `tfsdk:"values"`
+	FieldableType     types.String                                                                                                        `tfsdk:"fieldable_type"`
+	FieldableId       types.String                                                                                                        `tfsdk:"fieldable_id"`
+	ServiceIds        supertypes.SetValueOf[string]                                                                                       `tfsdk:"service_ids"`
+	TimeZone          types.String                                                                                                        `tfsdk:"time_zone"`
+	TimeBlocks        supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem] `tfsdk:"time_blocks"`
+}
+
+func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) FromApi(ctx context.Context, data apiclient.EscalationPathNotificationTypeRulesItemConditionsItem) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	m.RuleType = types.StringValue(data.RuleType)
+	m.UrgencyIds = supertypes.NewSetValueOfSlice(ctx, data.UrgencyIds)
+	m.WithinWorkingHour = types.BoolValue(data.WithinWorkingHour)
+	m.JsonPath = types.StringValue(data.JsonPath)
+	m.Operator = types.StringValue(data.Operator)
+	m.Value = jsonapitypes.NullableStringValue(data.Value)
+	m.Values = supertypes.NewSetValueOfSlice(ctx, data.Values)
+	m.FieldableType = types.StringValue(data.FieldableType)
+	m.FieldableId = types.StringValue(data.FieldableId)
+	m.ServiceIds = supertypes.NewSetValueOfSlice(ctx, data.ServiceIds)
+	m.TimeZone = types.StringValue(data.TimeZone)
+	m.TimeBlocks = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem] {
+		return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.TimeBlocks, func(vv apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem, _ int) EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem {
+			var mm EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem
+			diags.Append(mm.FromApi(ctx, vv)...)
+			return mm
+		}))
+	})()
+
+	return diags
+}
+
+func (m EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPathNotificationTypeRulesItemConditionsItem, diag.Diagnostics) {
+	var m apiclient.CreateEscalationPathNotificationTypeRulesItemConditionsItem
+	var diags diag.Diagnostics
+
+	// TODO: Implement ToCreateApi for EscalationPathResourceModelNotificationTypeRulesItemConditionsItem
+
+	return &m, diags
+}
+
+type EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem struct {
+	Id          types.String `tfsdk:"id"`
+	Monday      types.Bool   `tfsdk:"monday"`
+	Tuesday     types.Bool   `tfsdk:"tuesday"`
+	Wednesday   types.Bool   `tfsdk:"wednesday"`
+	Thursday    types.Bool   `tfsdk:"thursday"`
+	Friday      types.Bool   `tfsdk:"friday"`
+	Saturday    types.Bool   `tfsdk:"saturday"`
+	Sunday      types.Bool   `tfsdk:"sunday"`
+	StartTime   types.String `tfsdk:"start_time"`
+	EndTime     types.String `tfsdk:"end_time"`
+	AllDay      types.Bool   `tfsdk:"all_day"`
+	Position    types.Int64  `tfsdk:"position"`
+	EndsNextDay types.Bool   `tfsdk:"ends_next_day"`
+}
+
+func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem) FromApi(ctx context.Context, data apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	m.Id = types.StringValue(data.Id)
+	m.Monday = types.BoolValue(data.Monday)
+	m.Tuesday = types.BoolValue(data.Tuesday)
+	m.Wednesday = types.BoolValue(data.Wednesday)
+	m.Thursday = types.BoolValue(data.Thursday)
+	m.Friday = types.BoolValue(data.Friday)
+	m.Saturday = types.BoolValue(data.Saturday)
+	m.Sunday = types.BoolValue(data.Sunday)
+	m.StartTime = types.StringValue(data.StartTime)
+	m.EndTime = types.StringValue(data.EndTime)
+	m.AllDay = types.BoolValue(data.AllDay)
+	m.Position = jsonapitypes.NullableInt64Value(data.Position)
+	m.EndsNextDay = types.BoolValue(data.EndsNextDay)
+
+	return diags
+}
+
+func (m EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem, diag.Diagnostics) {
+	var m apiclient.CreateEscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem
+	var diags diag.Diagnostics
+
+	// TODO: Implement ToCreateApi for EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem
+
+	return &m, diags
+}
+
+type EscalationPathResourceModelTimeRestrictionsItem struct {
+	StartDay  types.String `tfsdk:"start_day"`
+	StartTime types.String `tfsdk:"start_time"`
+	EndDay    types.String `tfsdk:"end_day"`
+	EndTime   types.String `tfsdk:"end_time"`
+}
+
+func (m *EscalationPathResourceModelTimeRestrictionsItem) FromApi(ctx context.Context, data apiclient.EscalationPathTimeRestrictionsItem) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	m.StartDay = types.StringValue(data.StartDay)
+	m.StartTime = types.StringValue(data.StartTime)
+	m.EndDay = types.StringValue(data.EndDay)
+	m.EndTime = types.StringValue(data.EndTime)
+
+	return diags
+}
+
+func (m EscalationPathResourceModelTimeRestrictionsItem) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPathTimeRestrictionsItem, diag.Diagnostics) {
+	var m apiclient.CreateEscalationPathTimeRestrictionsItem
+	var diags diag.Diagnostics
+
+	// TODO: Implement ToCreateApi for EscalationPathResourceModelTimeRestrictionsItem
+
+	return &m, diags
 }

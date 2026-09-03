@@ -524,3 +524,45 @@ func (c *Client) EscalationPathGet(ctx context.Context, id string, params *rootl
 
 	return &item, nil
 }
+
+func (c *Client) EscalationPathCreate(ctx context.Context, escalationPolicyId string, req CreateEscalationPath) (*EscalationPath, error) {
+	var buf bytes.Buffer
+	if err := jsonapi.MarshalPayload(&buf, &req); err != nil {
+		return nil, err
+	}
+
+	resp, err := c.ClientWithResponses.CreateEscalationPathWithBodyWithResponse(ctx, escalationPolicyId, "application/vnd.api+json", bytes.NewReader(buf.Bytes()))
+	if err != nil {
+		return nil, err
+	} else if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
+
+	var item EscalationPath
+	if err := jsonapi.UnmarshalPayload(bytes.NewReader(resp.Body), &item); err != nil {
+		return nil, err
+	}
+
+	return &item, nil
+}
+
+func (c *Client) EscalationPathUpdate(ctx context.Context, id string, req UpdateEscalationPath) (*EscalationPath, error) {
+	var buf bytes.Buffer
+	if err := jsonapi.MarshalPayload(&buf, &req); err != nil {
+		return nil, err
+	}
+
+	resp, err := c.ClientWithResponses.UpdateEscalationPathWithBodyWithResponse(ctx, id, "application/vnd.api+json", bytes.NewReader(buf.Bytes()))
+	if err != nil {
+		return nil, err
+	} else if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
+
+	var item EscalationPath
+	if err := jsonapi.UnmarshalPayload(bytes.NewReader(resp.Body), &item); err != nil {
+		return nil, err
+	}
+
+	return &item, nil
+}

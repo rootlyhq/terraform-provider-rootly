@@ -254,8 +254,12 @@ ${
   config.type === "resource"
     ? `
 func (m ${name}) ToCreateApi(ctx context.Context) (*apiclient.Create${baseName}, diag.Diagnostics) {
-	return &apiclient.Create${baseName}{
-	}, nil
+  var m apiclient.Create${baseName}
+  var diags diag.Diagnostics
+
+  // TODO: Implement ToCreateApi for ${name}
+
+	return &m, diags
 }
 `
     : ""
