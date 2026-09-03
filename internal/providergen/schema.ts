@@ -1,24 +1,11 @@
 import type { oas30 } from "openapi3-ts";
 import { match, P } from "ts-pattern";
-import { removeReference } from "./openapi";
+import { getParametersByOperationId, removeReference } from "./openapi";
 import assert from "node:assert";
+import { camelize } from "inflection";
 
 export interface ClientConfig {
   name: string;
-  actions?: {
-    list?: {
-      enabled: true;
-    };
-    get?: {
-      enabled: true;
-    };
-    create?: {
-      enabled: true;
-    };
-    update?: {
-      enabled: true;
-    };
-  };
 }
 
 interface DataSourceListConfig {
@@ -35,44 +22,9 @@ export type DataSourceConfig = {
   description?: string;
 } & (DataSourceListConfig | DataSourceSingleConfig);
 
-export type ResolvedDataSourceConfig = {
-  type: "data_source";
-  name: string;
-  description?: string;
-  goNames: {
-    /** Name of the struct that represents the data source. */
-    struct: `${string}DataSource`;
-    /** Name of the struct that represents the model of the data source. */
-    model: `${string}DataSourceModel`;
-  };
-  schemas: {
-    read: oas30.SchemaObject;
-    resolved: oas30.SchemaObject;
-  };
-} & (DataSourceListConfig | DataSourceSingleConfig);
-
-// TODO
 export type ResourceConfig = {
   name: string;
   description?: string;
-};
-
-export type ResolvedResourceConfig = {
-  type: "resource";
-  name: string;
-  description?: string;
-  goNames: {
-    /** Name of the struct that represents the resource. */
-    struct: `${string}Resource`;
-    /** Name of the struct that represents the model of the resource. */
-    model: `${string}ResourceModel`;
-  };
-  schemas: {
-    create: oas30.SchemaObject;
-    read: oas30.SchemaObject;
-    update: oas30.SchemaObject;
-    resolved: oas30.SchemaObject;
-  };
 };
 
 declare module "openapi3-ts/oas30" {
@@ -106,7 +58,7 @@ interface AttributeBase {
   description?: string;
   deprecationMessage?: string;
   sensitive?: string;
-  nullable?: string;
+  nullable?: boolean;
   computedOptionalRequired: ComputedOptionalRequired;
   validators?: string[];
   planModifiers?: string[];
@@ -115,19 +67,28 @@ interface AttributeBase {
     create?: oas30.SchemaObject;
     update?: oas30.SchemaObject;
   };
+  paramSchemas?: {
+    read?: oas30.ParameterObject;
+    create?: oas30.ParameterObject;
+    update?: oas30.ParameterObject;
+    delete?: oas30.ParameterObject;
+  };
 }
 
 export interface AttributeString extends AttributeBase {
   type: "string";
   enum?: string[];
+  default?: string;
 }
 
 export interface AttributeBool extends AttributeBase {
   type: "bool";
+  default?: boolean;
 }
 
 export interface AttributeInt64 extends AttributeBase {
   type: "int64";
+  default?: number;
 }
 
 export interface AttributeObject extends AttributeBase {
@@ -138,12 +99,12 @@ export interface AttributeObject extends AttributeBase {
 
 export interface AttributeList extends AttributeBase {
   type: "list";
-  elementType: "string";
+  elementType: "string" | "int64";
 }
 
 export interface AttributeSet extends AttributeBase {
   type: "set";
-  elementType: "string";
+  elementType: "string" | "int64";
 }
 
 export interface AttributeListNested extends AttributeBase {
@@ -174,14 +135,37 @@ export type ComputedOptionalRequired =
   | "computed_optional"
   | "required";
 
+export interface DataSourceDef {
+  name: string;
+  description?: string;
+  attributes: AttributeType[];
+  blocks: (AttributeListNested | AttributeSetNested)[];
+  goNames: {
+    /** Name of the struct that represents the base client. */
+    clientBase: string;
+    /** Name of the struct that represents the resource. */
+    struct: `${string}DataSource`;
+    /** Name of the struct that represents the model of the resource. */
+    model: `${string}DataSourceModel`;
+  };
+}
+
 export interface ResourceDef {
   name: string;
   description?: string;
   attributes: AttributeType[];
   blocks: (AttributeListNested | AttributeSetNested)[];
+  goNames: {
+    /** Name of the struct that represents the base client. */
+    clientBase: string;
+    /** Name of the struct that represents the resource. */
+    struct: `${string}Resource`;
+    /** Name of the struct that represents the model of the resource. */
+    model: `${string}ResourceModel`;
+  };
 }
 
-function openapiToAttribute({
+function openapiSchemaToAttribute({
   name,
   computedOptionalRequired,
   schemas,
@@ -198,15 +182,20 @@ function openapiToAttribute({
     defaultCollectionType: "list" | "set";
     defaultNestedCollectionType: "list_nested" | "set_nested";
     collectionsAsBlocks: boolean;
+    readOnly?: boolean;
   };
 }): AttributeType {
   const common: Pick<
     AttributeBase,
-    "name" | "description" | "computedOptionalRequired"
+    "name" | "description" | "nullable" | "computedOptionalRequired" | "schemas"
   > = {
     name,
-    description: schemas.read.description,
-    computedOptionalRequired,
+    description: cleanDescription(schemas.read.description),
+    nullable: schemas.read.nullable ?? undefined,
+    computedOptionalRequired: options.readOnly
+      ? "computed"
+      : computedOptionalRequired,
+    schemas,
   };
 
   return match(schemas.read)
@@ -215,28 +204,57 @@ function openapiToAttribute({
       {
         type: "string",
         enum: P.array(P.string).optional(),
+        default: P.string.optional(),
       },
       (schema) => ({
         ...common,
         type: "string",
         enum: schema.enum,
+        default: schema.default,
+        description: withEnumDescription(common.description, schema.enum),
+        validators: schema.enum
+          ? [
+              `stringvalidator.OneOf(${schema.enum.map((value) => JSON.stringify(value)).join(", ")})`,
+            ]
+          : undefined,
       }),
     )
-    .with({ type: "integer" }, () => ({
-      ...common,
-      type: "int64",
-    }))
-    .with({ type: "boolean" }, () => ({
+    .with(
+      {
+        type: "integer",
+        enum: P.array(P.number).optional(),
+        default: P.number.optional(),
+      },
+      (schema) => ({
+        ...common,
+        type: "int64",
+        enum: schema.enum,
+        default: schema.default,
+        description: withEnumDescription(common.description, schema.enum),
+        validators: schema.enum
+          ? [
+              `int64validator.OneOf(${schema.enum.map((value) => JSON.stringify(value)).join(", ")})`,
+            ]
+          : undefined,
+      }),
+    )
+    .with({ type: "boolean", default: P.boolean.optional() }, (schema) => ({
       ...common,
       type: "bool",
+      default: schema.default,
     }))
     .with({ type: "array", items: { type: "string" } }, () => ({
       ...common,
       type: options.defaultCollectionType,
       elementType: "string",
     }))
+    .with({ type: "array", items: { type: "integer" } }, () => ({
+      ...common,
+      type: options.defaultCollectionType,
+      elementType: "int64",
+    }))
     .with({ type: "array", items: { type: "object" } }, (schema) => {
-      const tmpAttr = openapiToAttribute({
+      const tmpAttr = openapiSchemaToAttribute({
         name: "item",
         computedOptionalRequired,
         schemas: {
@@ -264,7 +282,7 @@ function openapiToAttribute({
         const allAttributes = Object.entries(schema.properties)
           .filter(([, property]) => !removeReference(property).tf_ignore)
           .map(([name, property]) =>
-            openapiToAttribute({
+            openapiSchemaToAttribute({
               name,
               computedOptionalRequired: toComputedOptionalRequired({
                 name,
@@ -279,12 +297,11 @@ function openapiToAttribute({
             }),
           );
 
-        const collectionTypes = ["list_nested", "set_nested"];
         const attributes = options.collectionsAsBlocks
-          ? allAttributes.filter((attr) => !collectionTypes.includes(attr.type))
+          ? allAttributes.filter((attr) => !isCollectionAttribute(attr))
           : allAttributes;
         const blocks = options.collectionsAsBlocks
-          ? allAttributes.filter((attr) => collectionTypes.includes(attr.type))
+          ? allAttributes.filter((attr) => isCollectionAttribute(attr))
           : [];
 
         return {
@@ -298,6 +315,143 @@ function openapiToAttribute({
     .otherwise((schema) => {
       throw new Error(`Unsupported schema: ${JSON.stringify(schema)}`);
     });
+}
+
+function openapiParametersToAttributes({
+  params,
+}: {
+  params: {
+    read: oas30.ParameterObject[];
+    list?: oas30.ParameterObject[];
+    create: oas30.ParameterObject[];
+    update: oas30.ParameterObject[];
+    delete: oas30.ParameterObject[];
+  };
+}): AttributeType[] {
+  const allParamNames = Array.from(
+    new Set([
+      ...params.read.map((param) => param.name),
+      ...(params.list?.map((param) => param.name) ?? []),
+      ...params.create.map((param) => param.name),
+      ...params.update.map((param) => param.name),
+      ...params.delete.map((param) => param.name),
+    ]),
+  );
+
+  return allParamNames.map((name) => {
+    const readParam = params.read.find((param) => param.name === name);
+    const listParam = params.list?.find((param) => param.name === name);
+    const createParam = params.create.find((param) => param.name === name);
+    const updateParam = params.update.find((param) => param.name === name);
+    const deleteParam = params.delete.find((param) => param.name === name);
+
+    const baseParam =
+      readParam ?? listParam ?? createParam ?? updateParam ?? deleteParam!;
+    const baseParamSchema = removeReference(baseParam.schema);
+    assert(baseParamSchema, `Parameter ${name} has no schema`);
+    assert(
+      baseParamSchema.type === "string",
+      `Parameter ${name} has no string type`,
+    );
+
+    const {
+      computedOptionalRequired,
+      planModifiers,
+    }: {
+      computedOptionalRequired: ComputedOptionalRequired;
+      planModifiers?: string[];
+    } = (() => {
+      // TODO: Handle listParam
+
+      if (createParam && !readParam && !updateParam && !deleteParam) {
+        return {
+          computedOptionalRequired: "required",
+          planModifiers: ["stringplanmodifier.RequiresReplace()"],
+        };
+      }
+
+      if (!createParam && readParam && updateParam && deleteParam) {
+        return {
+          computedOptionalRequired: "computed",
+          planModifiers: ["stringplanmodifier.UseStateForUnknown()"],
+        };
+      }
+
+      throw new Error(
+        `Unsupported parameter ${name} computed optional required: ${JSON.stringify({ readParam, createParam, updateParam, deleteParam })}`,
+      );
+    })();
+
+    return {
+      type: "string",
+      name,
+      computedOptionalRequired,
+      description: baseParam.description ?? baseParamSchema.description,
+      enum: baseParamSchema.enum,
+      planModifiers,
+      paramSchemas: {
+        read: readParam,
+        list: listParam,
+        create: createParam,
+        update: updateParam,
+        delete: deleteParam,
+      },
+    };
+  });
+}
+
+export function generateDataSourceDef({
+  doc,
+  config,
+}: {
+  doc: oas30.OpenAPIObject;
+  config: DataSourceConfig;
+}): DataSourceDef {
+  const isSingle = config.strategy === "single";
+  const operationId = `${isSingle ? "get" : "list"}${camelize(config.name)}`;
+
+  // Get read schema
+  const readSchemaKey = isSingle ? config.name : config.resourceName;
+  const readSchema = removeReference(doc.components?.schemas?.[readSchemaKey]);
+  if (!readSchema) {
+    throw new Error(`Read schema "${readSchemaKey}" not found`);
+  }
+
+  // Get path params
+  const pathParams = getParametersByOperationId({
+    doc,
+    operationId,
+    onlyLocations: ["path"],
+  });
+
+  // TODO: Add support for path params
+
+  const tmpAttr = openapiSchemaToAttribute({
+    name: config.name,
+    computedOptionalRequired: "computed",
+    schemas: {
+      read: readSchema,
+    },
+    options: {
+      defaultCollectionType: "list",
+      defaultNestedCollectionType: "list_nested",
+      collectionsAsBlocks: false,
+      readOnly: true,
+    },
+  });
+  assert(tmpAttr.type === "object");
+
+  return {
+    name: config.name,
+    description: config.description ?? tmpAttr.description,
+    attributes: tmpAttr.attributes,
+    blocks: tmpAttr.blocks,
+    goNames: {
+      clientBase: camelize(readSchemaKey),
+      struct: `${camelize(config.name)}DataSource`,
+      model: `${camelize(config.name)}DataSourceModel`,
+    },
+  };
 }
 
 export function generateResourceDef({
@@ -335,7 +489,52 @@ export function generateResourceDef({
     throw new Error(`Update schema "update_${config.name}" not found`);
   }
 
-  const tmpAttr = openapiToAttribute({
+  // Get read path params
+  const readPathParams = getParametersByOperationId({
+    doc,
+    operationId: `get${camelize(config.name)}`,
+    onlyLocations: ["path"],
+  });
+
+  // Get read path params
+  const listPathParams = getParametersByOperationId({
+    doc,
+    operationId: `list${camelize(config.name)}`,
+    onlyLocations: ["path"],
+  });
+
+  // Get create path params
+  const createPathParams = getParametersByOperationId({
+    doc,
+    operationId: `create${camelize(config.name)}`,
+    onlyLocations: ["path"],
+  });
+
+  // Get update path params
+  const updatePathParams = getParametersByOperationId({
+    doc,
+    operationId: `update${camelize(config.name)}`,
+    onlyLocations: ["path"],
+  });
+
+  // Get Delete path params
+  const deletePathParams = getParametersByOperationId({
+    doc,
+    operationId: `delete${camelize(config.name)}`,
+    onlyLocations: ["path"],
+  });
+
+  const tmpPathAttrs = openapiParametersToAttributes({
+    params: {
+      read: readPathParams,
+      list: listPathParams,
+      create: createPathParams,
+      update: updatePathParams,
+      delete: deletePathParams,
+    },
+  });
+
+  const tmpAttr = openapiSchemaToAttribute({
     name: config.name,
     computedOptionalRequired: "required",
     schemas: {
@@ -353,9 +552,14 @@ export function generateResourceDef({
 
   return {
     name: config.name,
-    description: config.description,
-    attributes: tmpAttr.attributes,
+    description: cleanDescription(config.description ?? tmpAttr.description),
+    attributes: mergeAttributeTypes(tmpAttr.attributes, tmpPathAttrs),
     blocks: tmpAttr.blocks,
+    goNames: {
+      clientBase: camelize(config.name),
+      struct: `${camelize(config.name)}Resource`,
+      model: `${camelize(config.name)}ResourceModel`,
+    },
   };
 }
 
@@ -402,4 +606,124 @@ function toComputedOptionalRequired({
   throw new Error(
     `Unsupported computedOptionalRequired for field ${name}: ${JSON.stringify({ schemas, inRead, inCreate, inUpdate, reqCreate, reqUpdate })}`,
   );
+}
+
+export function mergeAttributeTypes(
+  ...lists: AttributeType[][]
+): AttributeType[] {
+  const mergedMap = new Map<string, AttributeType>();
+
+  for (const list of lists) {
+    for (const attr of list) {
+      const existing = mergedMap.get(attr.name);
+
+      if (!existing) {
+        mergedMap.set(attr.name, structuredClone(attr));
+        continue;
+      }
+
+      // If types match and are complex nested types, recursively merge children
+      if (
+        existing.type === attr.type &&
+        isNestedAttribute(attr) &&
+        isNestedAttribute(existing)
+      ) {
+        const mergedChildren = mergeAttributeTypes(
+          existing.attributes ?? [],
+          attr.attributes ?? [],
+        );
+
+        const mergedBlocks = mergeNestedBlocks(
+          existing.blocks ?? [],
+          attr.blocks ?? [],
+        );
+
+        mergedMap.set(attr.name, {
+          ...existing,
+          ...attr, // Latter attribute shallow-overrides parent properties
+          attributes: mergedChildren,
+          blocks: mergedBlocks,
+        } as AttributeType);
+      } else {
+        // Simple override (or type changed): latter completely replaces former
+        mergedMap.set(attr.name, structuredClone(attr));
+      }
+    }
+  }
+
+  return Array.from(mergedMap.values());
+}
+
+function isNestedAttribute(
+  attr: AttributeType,
+): attr is AttributeObject | AttributeListNested | AttributeSetNested {
+  return (
+    attr.type === "object" ||
+    attr.type === "list_nested" ||
+    attr.type === "set_nested"
+  );
+}
+
+export function isCollectionAttribute(
+  attr: AttributeType,
+): attr is AttributeListNested | AttributeSetNested {
+  return attr.type === "list_nested" || attr.type === "set_nested";
+}
+
+function mergeNestedBlocks(
+  existingBlocks: (AttributeListNested | AttributeSetNested)[],
+  newBlocks: (AttributeListNested | AttributeSetNested)[],
+): (AttributeListNested | AttributeSetNested)[] {
+  const blockMap = new Map<string, AttributeListNested | AttributeSetNested>();
+
+  for (const block of [...existingBlocks, ...newBlocks]) {
+    const existing = blockMap.get(block.name);
+    if (!existing) {
+      blockMap.set(block.name, structuredClone(block));
+      continue;
+    }
+
+    if (existing.type === block.type) {
+      blockMap.set(block.name, {
+        ...existing,
+        ...block,
+        attributes: mergeAttributeTypes(
+          existing.attributes ?? [],
+          block.attributes ?? [],
+        ),
+        blocks: mergeNestedBlocks(existing.blocks ?? [], block.blocks ?? []),
+      });
+    } else {
+      blockMap.set(block.name, structuredClone(block));
+    }
+  }
+
+  return Array.from(blockMap.values());
+}
+
+function cleanDescription(description: string | undefined): string | undefined {
+  if (!description) {
+    return undefined;
+  }
+  description = description.trim();
+  if (!description.endsWith(".")) {
+    description += ".";
+  }
+  return description;
+}
+
+function withEnumDescription(
+  description: string | undefined,
+  enumValues: (string | number)[] | undefined,
+): string | undefined {
+  if (!enumValues || enumValues.length === 0) {
+    return description;
+  }
+  if (description) {
+    description += " ";
+  } else {
+    description = "";
+  }
+  description += `Value must be one of ${enumValues.map((v) => `\`${v}\``).join(", ")}.`;
+  return description;
 }

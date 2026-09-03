@@ -1,240 +1,47 @@
-import type { oas30 } from "openapi3-ts";
-import type {
-  ResolvedDataSourceConfig,
-  ResolvedResourceConfig,
+import {
+  isCollectionAttribute,
+  type AttributeType,
+  type DataSourceDef,
+  type ResourceDef,
 } from "./schema";
-import { assertSchemaObject } from "./types";
 import { tfAttributeValueType } from "./go-types";
 import { camelize } from "inflection";
 import { match, P } from "ts-pattern";
 
-export function generateModel({
-  config,
-  schema,
-  baseName,
+export function generateModels({
+  def,
   name,
-  isTopLevel,
+  clientName,
+  attributes,
 }: {
-  config: ResolvedDataSourceConfig | ResolvedResourceConfig;
-  schema: oas30.SchemaObject;
-  baseName: string;
+  def: DataSourceDef | ResourceDef;
   name: string;
-  isTopLevel: boolean;
+  clientName: string;
+  attributes: AttributeType[];
 }) {
-  const fromApiDataType =
-    config.type === "data_source" && config.strategy === "list" && isTopLevel
-      ? `[]apiclient.${baseName}`
-      : `apiclient.${baseName}`;
-  if (!schema.properties) {
-    throw new Error(`Schema ${name} does not have properties`);
-  }
-
-  const required = new Set(schema.required);
-
   const fields: string[] = [];
-  const fromApiAssignments: string[] = [];
   const children: string[] = [];
 
-  for (const [key, value] of Object.entries(schema.properties)) {
-    assertSchemaObject(value);
-    const property = {
-      required: required.has(key),
-      nullable: value.nullable ?? false,
-    };
-
-    // Terraform Attribute
-    const goType = tfAttributeValueType({
-      schema: value,
+  for (const attribute of attributes) {
+    const goAttributeValueType = tfAttributeValueType({
+      attribute,
       parent: name,
-      name: camelize(key),
     });
 
-    if (goType) {
-      fields.push(`${camelize(key)} ${goType} \`tfsdk:"${key}"\``);
-    } else {
-      fields.push(
-        `// TODO: Support property ${key} of type ${JSON.stringify(value)}`,
+    fields.push(
+      `${camelize(attribute.name)} ${goAttributeValueType} \`tfsdk:"${attribute.name}"\``,
+    );
+
+    if (isCollectionAttribute(attribute)) {
+      children.push(
+        generateModels({
+          def,
+          name: `${name}${camelize(attribute.name)}Item`,
+          clientName: `${clientName}${camelize(attribute.name)}Item`,
+          attributes: [...attribute.attributes, ...attribute.blocks],
+        }),
       );
     }
-
-    match(value)
-      .with({ type: "object" }, (value) => {
-        children.push(
-          generateModel({
-            config,
-            schema: value,
-            baseName: `${baseName}${camelize(key)}`,
-            name: `${name}${camelize(key)}`,
-            isTopLevel: false,
-          }),
-        );
-      })
-      .with(
-        {
-          type: "array",
-          items: { type: "object" },
-          "x-tf-top-level-item-type": true,
-        },
-        (value) => {
-          children.push(
-            generateModel({
-              config,
-              schema: value.items as oas30.SchemaObject,
-              baseName,
-              name: `${name}${camelize(key)}Item`,
-              isTopLevel: false,
-            }),
-          );
-        },
-      )
-      .with({ type: "array", items: { type: "object" } }, (value) => {
-        children.push(
-          generateModel({
-            config,
-            schema: value.items as oas30.SchemaObject,
-            baseName: `${baseName}${camelize(key)}Item`,
-            name: `${name}${camelize(key)}Item`,
-            isTopLevel: false,
-          }),
-        );
-      });
-
-    // FromApi Assignment
-    fromApiAssignments.push(
-      match([value, property])
-        .with(
-          [{ type: "string" }, { nullable: false }],
-          () => `m.${camelize(key)} = types.StringValue(data.${camelize(key)})`,
-        )
-        .with(
-          [{ type: "string" }, { nullable: true }],
-          () =>
-            `m.${camelize(key)} = jsonapitypes.NullableStringValue(data.${camelize(key)})`,
-        )
-        .with(
-          [{ type: "boolean" }, { nullable: false }],
-          () => `m.${camelize(key)} = types.BoolValue(data.${camelize(key)})`,
-        )
-        .with(
-          [{ type: "boolean" }, { nullable: true }],
-          () =>
-            `m.${camelize(key)} = jsonapitypes.NullableBoolValue(data.${camelize(key)})`,
-        )
-        .with(
-          [{ type: "integer" }, { nullable: false }],
-          () => `m.${camelize(key)} = types.Int64Value(data.${camelize(key)})`,
-        )
-        .with(
-          [{ type: "integer" }, { nullable: true }],
-          () =>
-            `m.${camelize(key)} = jsonapitypes.NullableInt64Value(data.${camelize(key)})`,
-        )
-        .with(
-          [{ type: "object" }, { nullable: true }],
-          () =>
-            `m.${camelize(key)} = (func() supertypes.SingleNestedObjectValueOf[${name}${camelize(key)}] {
-  if v, err := data.${camelize(key)}.Get(); err == nil {
-    var mm ${name}${camelize(key)}
-    diags.Append(mm.FromApi(ctx, v)...)
-		return supertypes.NewSingleNestedObjectValueOf(ctx, &mm)
-	}
-	return supertypes.NewSingleNestedObjectValueOfNull[${name}${camelize(key)}](ctx)
-})()`,
-        )
-        .with(
-          [
-            {
-              type: "array",
-              items: {
-                type: P.union("string", "boolean", "integer"),
-              },
-              "x-tf-collection-type": P.union("list", "set"),
-            },
-            { nullable: true },
-          ],
-          ([schema]) =>
-            `m.${camelize(key)} = jsonapitypes.Nullable${camelize(schema["x-tf-collection-type"])}ValueOfSlice(ctx, data.${camelize(key)})`,
-        )
-        .with(
-          [
-            {
-              type: "array",
-              items: {
-                type: P.union("string", "boolean", "integer"),
-              },
-              "x-tf-collection-type": P.union("list", "set"),
-            },
-            { nullable: false },
-          ],
-          ([schema]) =>
-            `m.${camelize(key)} = supertypes.New${camelize(schema["x-tf-collection-type"])}ValueOfSlice(ctx, data.${camelize(key)})`,
-        )
-        .with(
-          [
-            {
-              type: "array",
-              items: { type: "object" },
-              "x-tf-top-level-item-type": true,
-              "x-tf-collection-type": P.union("list", "set"),
-            },
-            { nullable: false },
-          ],
-          ([
-            schema,
-          ]) => `m.${camelize(key)} = (func() supertypes.${camelize(schema["x-tf-collection-type"])}NestedObjectValueOf[${name}${camelize(key)}Item] {
-  return supertypes.New${camelize(schema["x-tf-collection-type"])}NestedObjectValueOfValueSlice(ctx, lo.Map(data, func(vv apiclient.${baseName}, _ int) ${name}${camelize(key)}Item {
-    var mm ${name}${camelize(key)}Item
-    diags.Append(mm.FromApi(ctx, vv)...)
-    return mm
-  }))
-})()`,
-        )
-        .with(
-          [
-            {
-              type: "array",
-              items: { type: "object" },
-              "x-tf-collection-type": P.union("list", "set"),
-            },
-            { nullable: false },
-          ],
-          ([
-            schema,
-          ]) => `m.${camelize(key)} = (func() supertypes.${camelize(schema["x-tf-collection-type"])}NestedObjectValueOf[${name}${camelize(key)}Item] {
-  return supertypes.New${camelize(schema["x-tf-collection-type"])}NestedObjectValueOfValueSlice(ctx, lo.Map(data.${camelize(key)}, func(vv apiclient.${baseName}${camelize(key)}Item, _ int) ${name}${camelize(key)}Item {
-    var mm ${name}${camelize(key)}Item
-    diags.Append(mm.FromApi(ctx, vv)...)
-    return mm
-  }))
-})()`,
-        )
-        .with(
-          [
-            {
-              type: "array",
-              items: { type: "object" },
-              "x-tf-collection-type": P.union("list", "set"),
-            },
-            { nullable: true },
-          ],
-          ([
-            schema,
-          ]) => `m.${camelize(key)} = (func() supertypes.${camelize(schema["x-tf-collection-type"])}NestedObjectValueOf[${name}${camelize(key)}Item] {
-  if v, err := data.${camelize(key)}.Get(); err == nil {
-    return supertypes.New${camelize(schema["x-tf-collection-type"])}NestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.${baseName}${camelize(key)}Item, _ int) ${name}${camelize(key)}Item {
-      var mm ${name}${camelize(key)}Item
-      diags.Append(mm.FromApi(ctx, vv)...)
-      return mm
-    }))
-  }
-  return supertypes.New${camelize(schema["x-tf-collection-type"])}NestedObjectValueOfNull[${name}${camelize(key)}Item](ctx)
-})()`,
-        )
-        .otherwise(
-          () =>
-            `// TODO: Implement FromApi for ${key} of type ${JSON.stringify(value)} and property ${JSON.stringify(property)}`,
-        ),
-    );
   }
 
   return `
@@ -242,29 +49,205 @@ type ${name} struct {
 ${fields.join("\n")}
 }
 
-func (m *${name}) FromApi(ctx context.Context, data ${fromApiDataType}) diag.Diagnostics {
+${generateFromApi({
+  name,
+  clientName,
+  attributes,
+})}
+
+${generateToApi({
+  action: "create",
+  name,
+  clientName,
+  attributes,
+})}
+
+${generateToApi({
+  action: "update",
+  name,
+  clientName,
+  attributes,
+})}
+
+${children.join("\n\n")}
+`;
+}
+
+function generateFromApi({
+  name,
+  clientName,
+  attributes,
+}: {
+  name: string;
+  clientName: string;
+  attributes: AttributeType[];
+}) {
+  const assignments = attributes.map((attribute) => {
+    if (!attribute.schemas?.read) {
+      return `// ${attribute.name} is not returned`;
+    }
+    const goValue = match(attribute)
+      .with(
+        { type: "string" },
+        (attribute) =>
+          `jsonapitypes.NullableStringValue(data.${camelize(attribute.name)})`,
+      )
+      .with(
+        { type: "int64" },
+        (attribute) =>
+          `jsonapitypes.NullableInt64Value(data.${camelize(attribute.name)})`,
+      )
+      .with(
+        { type: "bool" },
+        (attribute) =>
+          `jsonapitypes.NullableBoolValue(data.${camelize(attribute.name)})`,
+      )
+      .with(
+        { type: "list" },
+        (attribute) =>
+          `jsonapitypes.NullableListValueOfSlice(ctx, data.${camelize(attribute.name)})`,
+      )
+      .with(
+        { type: "set" },
+        (attribute) =>
+          `jsonapitypes.NullableSetValueOfSlice(ctx, data.${camelize(attribute.name)})`,
+      )
+      .with(
+        { type: "list_nested" },
+        (
+          attribute,
+        ) => `(func() supertypes.ListNestedObjectValueOf[${name}${camelize(attribute.name)}Item] {
+  if v, err := data.${camelize(attribute.name)}.Get(); err == nil {
+    return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.${clientName}${camelize(attribute.name)}Item, _ int) ${name}${camelize(attribute.name)}Item {
+      var mm ${name}${camelize(attribute.name)}Item
+      diags.Append(mm.FromApi(ctx, vv)...)
+      return mm
+    }))
+  }
+  return supertypes.NewListNestedObjectValueOfNull[${name}${camelize(attribute.name)}Item](ctx)
+})()`,
+      )
+      .with(
+        { type: "set_nested" },
+        (
+          attribute,
+        ) => `(func() supertypes.SetNestedObjectValueOf[${name}${camelize(attribute.name)}Item] {
+  if v, err := data.${camelize(attribute.name)}.Get(); err == nil {
+    return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.${clientName}${camelize(attribute.name)}Item, _ int) ${name}${camelize(attribute.name)}Item {
+      var mm ${name}${camelize(attribute.name)}Item
+      diags.Append(mm.FromApi(ctx, vv)...)
+      return mm
+    }))
+  }
+  return supertypes.NewSetNestedObjectValueOfNull[${name}${camelize(attribute.name)}Item](ctx)
+})()`,
+      )
+      .otherwise(
+        (attribute) => `nil // TODO: Implement: ${JSON.stringify(attribute)}`,
+      );
+
+    return `m.${camelize(attribute.name)} = ${goValue}`;
+  });
+
+  return `
+func (m *${name}) FromApi(ctx context.Context, data apiclient.${clientName}) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	${fromApiAssignments.join("\n")}
+	${assignments.join("\n")}
 
 	return diags
 }
-
-${
-  config.type === "resource"
-    ? `
-func (m ${name}) ToCreateApi(ctx context.Context) (*apiclient.Create${baseName}, diag.Diagnostics) {
-  var m apiclient.Create${baseName}
-  var diags diag.Diagnostics
-
-  // TODO: Implement ToCreateApi for ${name}
-
-	return &m, diags
-}
-`
-    : ""
+`;
 }
 
-${children.join("\n\n")}
+function generateToApi({
+  action,
+  name,
+  clientName,
+  attributes,
+}: {
+  action: "create" | "update";
+  name: string;
+  clientName: string;
+  attributes: AttributeType[];
+}) {
+  const assignments = attributes.map((attribute) => {
+    if (!attribute.schemas?.[action]) {
+      return `// ${attribute.name} is not available for ${action}`;
+    }
+    const goValue = match(attribute)
+      .with(
+        { type: "string" },
+        (attribute) =>
+          `jsonapitypes.NewNullableFromString(m.${camelize(attribute.name)})`,
+      )
+      .with(
+        { type: "int64" },
+        (attribute) =>
+          `jsonapitypes.NewNullableFromInt64(m.${camelize(attribute.name)})`,
+      )
+      .with(
+        { type: "bool" },
+        (attribute) =>
+          `jsonapitypes.NewNullableFromBool(m.${camelize(attribute.name)})`,
+      )
+      .with(
+        { type: "list" },
+        (attribute) =>
+          `diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromListOf(ctx, m.${camelize(attribute.name)}))(&diags)`,
+      )
+      .with(
+        { type: "set" },
+        (attribute) =>
+          `diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.${camelize(attribute.name)}))(&diags)`,
+      )
+      .with(
+        { type: "list_nested" },
+        { type: "set_nested" },
+        (
+          attribute,
+        ) => `func () jsonapi.NullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item] {
+  if m.${camelize(attribute.name)}.IsUnknown() {
+    return jsonapi.NullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item]{}
+  }
+  if m.${camelize(attribute.name)}.IsNull() {
+    return jsonapi.NewNullNullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item]()
+  }
+  mm := diagutils.MergeDiagnostics(m.${camelize(attribute.name)}.Get(ctx))(&diags)
+  if diags.HasError() {
+    return jsonapi.NullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item]{}
+  }
+  return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *${name}${camelize(attribute.name)}Item, _ int) apiclient.${clientName}${camelize(attribute.name)}Item {
+		if mmm == nil {
+			diags.AddError("null value", "Cannot convert null item")
+			return apiclient.${clientName}${camelize(attribute.name)}Item{}
+		}
+    mmmm := diagutils.MergeDiagnostics(mmm.ToApiFor${camelize(action)}(ctx))(&diags)
+    if diags.HasError() {
+      return apiclient.${clientName}${camelize(attribute.name)}Item{}
+    } else if mmmm == nil {
+      diags.AddError("null value", "Cannot convert null item")
+      return apiclient.${clientName}${camelize(attribute.name)}Item{}
+    }
+		return *mmmm
+	}))
+}()`,
+      )
+      .otherwise(
+        (attribute) => `nil // TODO: Implement: ${JSON.stringify(attribute)}`,
+      );
+
+    return `data.${camelize(attribute.name)} = ${goValue}`;
+  });
+
+  return `
+func (m *${name}) ToApiFor${camelize(action)}(ctx context.Context) (*apiclient.${clientName}, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+  data := apiclient.${clientName}{}
+	${assignments.join("\n")}
+
+	return &data, diags
+}
 `;
 }

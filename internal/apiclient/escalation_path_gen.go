@@ -13,463 +13,255 @@ import (
 
 type EscalationPath struct {
 	// The ID of the escalation path.
+	// {"type":"string","description":"The ID of the escalation path.","x-go-jsonapi-tag":"primary","x-go-jsonapi-type":"escalation_paths"}
 	Id string `jsonapi:"primary,escalation_paths"`
 	// The name of the escalation path
-	Name string `jsonapi:"attr,name"`
+	// {"type":"string","description":"The name of the escalation path"}
+	Name jsonapi.NullableAttr[string] `jsonapi:"attr,name"`
 	// Whether this escalation path is the default path
-	Default bool `jsonapi:"attr,default"`
+	// {"type":"boolean","description":"Whether this escalation path is the default path"}
+	Default jsonapi.NullableAttr[bool] `jsonapi:"attr,default"`
 	// Notification rule type
-	NotificationType string `jsonapi:"attr,notification_type"`
+	// {"type":"string","description":"Notification rule type"}
+	NotificationType jsonapi.NullableAttr[string] `jsonapi:"attr,notification_type"`
 	// The type of escalation path
-	PathType string `jsonapi:"attr,path_type,omitempty"`
+	// {"type":"string","description":"The type of escalation path","enum":["escalation","deferral"]}
+	PathType jsonapi.NullableAttr[string] `jsonapi:"attr,path_type"`
 	// The ID of the escalation policy
-	EscalationPolicyId string `jsonapi:"attr,escalation_policy_id"`
+	// {"type":"string","description":"The ID of the escalation policy"}
+	EscalationPolicyId jsonapi.NullableAttr[string] `jsonapi:"attr,escalation_policy_id"`
 	// What happens after a deferral path finishes
-	AfterDeferralBehavior jsonapi.NullableAttr[string] `jsonapi:"attr,after_deferral_behavior,omitempty"`
+	// {"type":"string","description":"What happens after a deferral path finishes","enum":["re_evaluate","execute_path"],"nullable":true}
+	AfterDeferralBehavior jsonapi.NullableAttr[string] `jsonapi:"attr,after_deferral_behavior"`
 	// The escalation path to execute after this deferral path when after_deferral_behavior is execute_path
-	AfterDeferralPathId jsonapi.NullableAttr[string] `jsonapi:"attr,after_deferral_path_id,omitempty"`
+	// {"type":"string","description":"The escalation path to execute after this deferral path when after_deferral_behavior is execute_path","nullable":true}
+	AfterDeferralPathId jsonapi.NullableAttr[string] `jsonapi:"attr,after_deferral_path_id"`
 	// How path rules are matched.
-	MatchMode string `jsonapi:"attr,match_mode,omitempty"`
+	// {"type":"string","description":"How path rules are matched.","enum":["match-all-rules","match-any-rule"]}
+	MatchMode jsonapi.NullableAttr[string] `jsonapi:"attr,match_mode"`
 	// The position of this path in the paths for this EP.
-	Position int64 `jsonapi:"attr,position,omitempty"`
+	// {"type":"integer","description":"The position of this path in the paths for this EP."}
+	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position"`
 	// Whether this path should be repeated until someone acknowledges the alert
+	// {"type":"boolean","description":"Whether this path should be repeated until someone acknowledges the alert","nullable":true}
 	Repeat jsonapi.NullableAttr[bool] `jsonapi:"attr,repeat"`
 	// The number of times this path will be executed until someone acknowledges the alert
+	// {"type":"integer","description":"The number of times this path will be executed until someone acknowledges the alert","nullable":true}
 	RepeatCount jsonapi.NullableAttr[int64] `jsonapi:"attr,repeat_count"`
 	// Initial delay for escalation path in minutes. Maximum 1 week (10080).
-	InitialDelay int64 `jsonapi:"attr,initial_delay,omitempty"`
+	// {"type":"integer","description":"Initial delay for escalation path in minutes. Maximum 1 week (10080)."}
+	InitialDelay jsonapi.NullableAttr[int64] `jsonapi:"attr,initial_delay"`
 	// Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.
-	RetriggerTimeoutMinutes jsonapi.NullableAttr[int64] `jsonapi:"attr,retrigger_timeout_minutes,omitempty"`
+	// {"type":"integer","description":"Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.","nullable":true}
+	RetriggerTimeoutMinutes jsonapi.NullableAttr[int64] `jsonapi:"attr,retrigger_timeout_minutes"`
 	// Date of creation
-	CreatedAt string `jsonapi:"attr,created_at,omitempty"`
+	// {"type":"string","description":"Date of creation"}
+	CreatedAt jsonapi.NullableAttr[string] `jsonapi:"attr,created_at"`
 	// Date of last update
-	UpdatedAt string `jsonapi:"attr,updated_at,omitempty"`
+	// {"type":"string","description":"Date of last update"}
+	UpdatedAt jsonapi.NullableAttr[string] `jsonapi:"attr,updated_at"`
 	// Escalation path rules
-	Rules []EscalationPathRulesItem `jsonapi:"attr,rules,omitempty"`
+	// {"type":"array","description":"Escalation path rules","items":{"type":"object","nullable":true,"properties":{"rule_type":{"type":"string","description":"The type of the escalation path rule","enum":["related_incidents"]},"urgency_ids":{"type":"array","description":"Alert urgency ids for which this escalation path should be used","items":{"type":"string"}},"within_working_hour":{"type":"boolean","description":"Whether the escalation path should be used within working hours"},"json_path":{"type":"string","description":"JSON path to extract value from payload"},"operator":{"type":"string","description":"Whether the alert must (or must not) have related incidents","enum":["is_set","is_not_set"]},"value":{"type":"string","description":"Value with which JSON path value should be matched","nullable":true},"values":{"type":"array","description":"Alert source values to match against (e.g., manual, datadog)","items":{"type":"string"}},"fieldable_type":{"type":"string","description":"The type of the fieldable (e.g., AlertField)"},"fieldable_id":{"type":"string","description":"The ID of the alert field"},"service_ids":{"type":"array","description":"Service ids for which this escalation path should be used","items":{"type":"string"}},"time_zone":{"type":"string","description":"Time zone for the deferral window","enum":["International Date Line West","Etc/GMT+12","American Samoa","Pacific/Pago_Pago","Midway Island","Pacific/Midway","Hawaii","Pacific/Honolulu","Alaska","America/Juneau","Pacific Time (US & Canada)","America/Los_Angeles","Tijuana","America/Tijuana","Arizona","America/Phoenix","Mazatlan","America/Mazatlan","Mountain Time (US & Canada)","America/Denver","Central America","America/Guatemala","Central Time (US & Canada)","America/Chicago","Chihuahua","America/Chihuahua","Guadalajara","America/Mexico_City","Mexico City","Monterrey","America/Monterrey","Saskatchewan","America/Regina","Bogota","America/Bogota","Eastern Time (US & Canada)","America/New_York","Indiana (East)","America/Indiana/Indianapolis","Lima","America/Lima","Quito","Atlantic Time (Canada)","America/Halifax","Caracas","America/Caracas","Georgetown","America/Guyana","La Paz","America/La_Paz","Puerto Rico","America/Puerto_Rico","Santiago","America/Santiago","Newfoundland","America/St_Johns","Asuncion","America/Asuncion","Brasilia","America/Sao_Paulo","Buenos Aires","America/Argentina/Buenos_Aires","Montevideo","America/Montevideo","Greenland","America/Nuuk","Mid-Atlantic","Atlantic/South_Georgia","Azores","Atlantic/Azores","Cape Verde Is.","Atlantic/Cape_Verde","Edinburgh","Europe/London","Lisbon","Europe/Lisbon","London","Monrovia","Africa/Monrovia","UTC","Etc/UTC","Amsterdam","Europe/Amsterdam","Belgrade","Europe/Belgrade","Berlin","Europe/Berlin","Bern","Europe/Zurich","Bratislava","Europe/Bratislava","Brussels","Europe/Brussels","Budapest","Europe/Budapest","Casablanca","Africa/Casablanca","Copenhagen","Europe/Copenhagen","Dublin","Europe/Dublin","Ljubljana","Europe/Ljubljana","Madrid","Europe/Madrid","Paris","Europe/Paris","Prague","Europe/Prague","Rome","Europe/Rome","Sarajevo","Europe/Sarajevo","Skopje","Europe/Skopje","Stockholm","Europe/Stockholm","Vienna","Europe/Vienna","Warsaw","Europe/Warsaw","West Central Africa","Africa/Algiers","Zagreb","Europe/Zagreb","Zurich","Athens","Europe/Athens","Bucharest","Europe/Bucharest","Cairo","Africa/Cairo","Harare","Africa/Harare","Helsinki","Europe/Helsinki","Jerusalem","Asia/Jerusalem","Kaliningrad","Europe/Kaliningrad","Kyiv","Europe/Kiev","Pretoria","Africa/Johannesburg","Riga","Europe/Riga","Sofia","Europe/Sofia","Tallinn","Europe/Tallinn","Vilnius","Europe/Vilnius","Baghdad","Asia/Baghdad","Istanbul","Europe/Istanbul","Kuwait","Asia/Kuwait","Minsk","Europe/Minsk","Moscow","Europe/Moscow","Nairobi","Africa/Nairobi","Riyadh","Asia/Riyadh","St. Petersburg","Volgograd","Europe/Volgograd","Tehran","Asia/Tehran","Abu Dhabi","Asia/Muscat","Baku","Asia/Baku","Muscat","Samara","Europe/Samara","Tbilisi","Asia/Tbilisi","Yerevan","Asia/Yerevan","Kabul","Asia/Kabul","Almaty","Asia/Almaty","Astana","Ekaterinburg","Asia/Yekaterinburg","Islamabad","Asia/Karachi","Karachi","Tashkent","Asia/Tashkent","Chennai","Asia/Kolkata","Kolkata","Mumbai","New Delhi","Sri Jayawardenepura","Asia/Colombo","Kathmandu","Asia/Kathmandu","Dhaka","Asia/Dhaka","Urumqi","Asia/Urumqi","Rangoon","Asia/Rangoon","Bangkok","Asia/Bangkok","Hanoi","Jakarta","Asia/Jakarta","Krasnoyarsk","Asia/Krasnoyarsk","Novosibirsk","Asia/Novosibirsk","Beijing","Asia/Shanghai","Chongqing","Asia/Chongqing","Hong Kong","Asia/Hong_Kong","Irkutsk","Asia/Irkutsk","Kuala Lumpur","Asia/Kuala_Lumpur","Perth","Australia/Perth","Singapore","Asia/Singapore","Taipei","Asia/Taipei","Ulaanbaatar","Asia/Ulaanbaatar","Osaka","Asia/Tokyo","Sapporo","Seoul","Asia/Seoul","Tokyo","Yakutsk","Asia/Yakutsk","Adelaide","Australia/Adelaide","Darwin","Australia/Darwin","Brisbane","Australia/Brisbane","Canberra","Australia/Canberra","Guam","Pacific/Guam","Hobart","Australia/Hobart","Melbourne","Australia/Melbourne","Port Moresby","Pacific/Port_Moresby","Sydney","Australia/Sydney","Vladivostok","Asia/Vladivostok","Magadan","Asia/Magadan","New Caledonia","Pacific/Noumea","Solomon Is.","Pacific/Guadalcanal","Srednekolymsk","Asia/Srednekolymsk","Auckland","Pacific/Auckland","Fiji","Pacific/Fiji","Kamchatka","Asia/Kamchatka","Marshall Is.","Pacific/Majuro","Wellington","Chatham Is.","Pacific/Chatham","Nuku'alofa","Pacific/Tongatapu","Samoa","Pacific/Apia","Tokelau Is.","Pacific/Fakaofo","America/Adak","America/Atka","US/Aleutian","America/Vancouver","Canada/Pacific","America/Miquelon","Australia/Eucla","Australia/LHI","Australia/Lord_Howe","Chile/EasterIsland","Pacific/Easter","Pacific/Gambier","Pacific/Pitcairn","Pacific/Marquesas","Pacific/Kiritimati","Pacific/Norfolk"]},"time_blocks":{"type":"array","description":"Time windows during which alerts are deferred","items":{"type":"object","properties":{"id":{"type":"string","description":"Unique ID of the time block","readOnly":true},"monday":{"type":"boolean","default":false},"tuesday":{"type":"boolean","default":false},"wednesday":{"type":"boolean","default":false},"thursday":{"type":"boolean","default":false},"friday":{"type":"boolean","default":false},"saturday":{"type":"boolean","default":false},"sunday":{"type":"boolean","default":false},"start_time":{"type":"string","description":"Formatted as HH:MM"},"end_time":{"type":"string","description":"Formatted as HH:MM"},"all_day":{"type":"boolean","default":false},"position":{"type":"integer","description":"Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.","nullable":true},"ends_next_day":{"type":"boolean","description":"Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.","readOnly":true}}}}}}}
+	Rules jsonapi.NullableAttr[[]EscalationPathRulesItem] `jsonapi:"attr,rules"`
 	// Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team.
-	NotificationTypeRules []EscalationPathNotificationTypeRulesItem `jsonapi:"attr,notification_type_rules,omitempty"`
+	// {"type":"array","maxItems":10,"description":"Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team.","items":{"type":"object","properties":{"notification_type":{"type":"string","description":"Outcome when this rule matches","enum":["audible","quiet"],"default":"audible"},"match_mode":{"type":"string","description":"Whether all or any of the rule's conditions must match","enum":["match-all-rules","match-any-rule"],"default":"match-all-rules"},"conditions":{"type":"array","minItems":1,"maxItems":5,"description":"Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.","items":{"type":"object","properties":{"rule_type":{"type":"string","description":"The type of the escalation path rule","enum":["related_incidents"]},"urgency_ids":{"type":"array","description":"Alert urgency ids for which this escalation path should be used","items":{"type":"string"}},"within_working_hour":{"type":"boolean","description":"Whether the escalation path should be used within working hours"},"json_path":{"type":"string","description":"JSON path to extract value from payload"},"operator":{"type":"string","description":"Whether the alert must (or must not) have related incidents","enum":["is_set","is_not_set"]},"value":{"type":"string","description":"Value with which JSON path value should be matched","nullable":true},"values":{"type":"array","description":"Alert source values to match against (e.g., manual, datadog)","items":{"type":"string"}},"fieldable_type":{"type":"string","description":"The type of the fieldable (e.g., AlertField)"},"fieldable_id":{"type":"string","description":"The ID of the alert field"},"service_ids":{"type":"array","description":"Service ids for which this escalation path should be used","items":{"type":"string"}},"time_zone":{"type":"string","description":"Time zone for the deferral window","enum":["International Date Line West","Etc/GMT+12","American Samoa","Pacific/Pago_Pago","Midway Island","Pacific/Midway","Hawaii","Pacific/Honolulu","Alaska","America/Juneau","Pacific Time (US & Canada)","America/Los_Angeles","Tijuana","America/Tijuana","Arizona","America/Phoenix","Mazatlan","America/Mazatlan","Mountain Time (US & Canada)","America/Denver","Central America","America/Guatemala","Central Time (US & Canada)","America/Chicago","Chihuahua","America/Chihuahua","Guadalajara","America/Mexico_City","Mexico City","Monterrey","America/Monterrey","Saskatchewan","America/Regina","Bogota","America/Bogota","Eastern Time (US & Canada)","America/New_York","Indiana (East)","America/Indiana/Indianapolis","Lima","America/Lima","Quito","Atlantic Time (Canada)","America/Halifax","Caracas","America/Caracas","Georgetown","America/Guyana","La Paz","America/La_Paz","Puerto Rico","America/Puerto_Rico","Santiago","America/Santiago","Newfoundland","America/St_Johns","Asuncion","America/Asuncion","Brasilia","America/Sao_Paulo","Buenos Aires","America/Argentina/Buenos_Aires","Montevideo","America/Montevideo","Greenland","America/Nuuk","Mid-Atlantic","Atlantic/South_Georgia","Azores","Atlantic/Azores","Cape Verde Is.","Atlantic/Cape_Verde","Edinburgh","Europe/London","Lisbon","Europe/Lisbon","London","Monrovia","Africa/Monrovia","UTC","Etc/UTC","Amsterdam","Europe/Amsterdam","Belgrade","Europe/Belgrade","Berlin","Europe/Berlin","Bern","Europe/Zurich","Bratislava","Europe/Bratislava","Brussels","Europe/Brussels","Budapest","Europe/Budapest","Casablanca","Africa/Casablanca","Copenhagen","Europe/Copenhagen","Dublin","Europe/Dublin","Ljubljana","Europe/Ljubljana","Madrid","Europe/Madrid","Paris","Europe/Paris","Prague","Europe/Prague","Rome","Europe/Rome","Sarajevo","Europe/Sarajevo","Skopje","Europe/Skopje","Stockholm","Europe/Stockholm","Vienna","Europe/Vienna","Warsaw","Europe/Warsaw","West Central Africa","Africa/Algiers","Zagreb","Europe/Zagreb","Zurich","Athens","Europe/Athens","Bucharest","Europe/Bucharest","Cairo","Africa/Cairo","Harare","Africa/Harare","Helsinki","Europe/Helsinki","Jerusalem","Asia/Jerusalem","Kaliningrad","Europe/Kaliningrad","Kyiv","Europe/Kiev","Pretoria","Africa/Johannesburg","Riga","Europe/Riga","Sofia","Europe/Sofia","Tallinn","Europe/Tallinn","Vilnius","Europe/Vilnius","Baghdad","Asia/Baghdad","Istanbul","Europe/Istanbul","Kuwait","Asia/Kuwait","Minsk","Europe/Minsk","Moscow","Europe/Moscow","Nairobi","Africa/Nairobi","Riyadh","Asia/Riyadh","St. Petersburg","Volgograd","Europe/Volgograd","Tehran","Asia/Tehran","Abu Dhabi","Asia/Muscat","Baku","Asia/Baku","Muscat","Samara","Europe/Samara","Tbilisi","Asia/Tbilisi","Yerevan","Asia/Yerevan","Kabul","Asia/Kabul","Almaty","Asia/Almaty","Astana","Ekaterinburg","Asia/Yekaterinburg","Islamabad","Asia/Karachi","Karachi","Tashkent","Asia/Tashkent","Chennai","Asia/Kolkata","Kolkata","Mumbai","New Delhi","Sri Jayawardenepura","Asia/Colombo","Kathmandu","Asia/Kathmandu","Dhaka","Asia/Dhaka","Urumqi","Asia/Urumqi","Rangoon","Asia/Rangoon","Bangkok","Asia/Bangkok","Hanoi","Jakarta","Asia/Jakarta","Krasnoyarsk","Asia/Krasnoyarsk","Novosibirsk","Asia/Novosibirsk","Beijing","Asia/Shanghai","Chongqing","Asia/Chongqing","Hong Kong","Asia/Hong_Kong","Irkutsk","Asia/Irkutsk","Kuala Lumpur","Asia/Kuala_Lumpur","Perth","Australia/Perth","Singapore","Asia/Singapore","Taipei","Asia/Taipei","Ulaanbaatar","Asia/Ulaanbaatar","Osaka","Asia/Tokyo","Sapporo","Seoul","Asia/Seoul","Tokyo","Yakutsk","Asia/Yakutsk","Adelaide","Australia/Adelaide","Darwin","Australia/Darwin","Brisbane","Australia/Brisbane","Canberra","Australia/Canberra","Guam","Pacific/Guam","Hobart","Australia/Hobart","Melbourne","Australia/Melbourne","Port Moresby","Pacific/Port_Moresby","Sydney","Australia/Sydney","Vladivostok","Asia/Vladivostok","Magadan","Asia/Magadan","New Caledonia","Pacific/Noumea","Solomon Is.","Pacific/Guadalcanal","Srednekolymsk","Asia/Srednekolymsk","Auckland","Pacific/Auckland","Fiji","Pacific/Fiji","Kamchatka","Asia/Kamchatka","Marshall Is.","Pacific/Majuro","Wellington","Chatham Is.","Pacific/Chatham","Nuku'alofa","Pacific/Tongatapu","Samoa","Pacific/Apia","Tokelau Is.","Pacific/Fakaofo","America/Adak","America/Atka","US/Aleutian","America/Vancouver","Canada/Pacific","America/Miquelon","Australia/Eucla","Australia/LHI","Australia/Lord_Howe","Chile/EasterIsland","Pacific/Easter","Pacific/Gambier","Pacific/Pitcairn","Pacific/Marquesas","Pacific/Kiritimati","Pacific/Norfolk"]},"time_blocks":{"type":"array","description":"Time windows during which alerts are deferred","items":{"type":"object","properties":{"id":{"type":"string","description":"Unique ID of the time block","readOnly":true},"monday":{"type":"boolean","default":false},"tuesday":{"type":"boolean","default":false},"wednesday":{"type":"boolean","default":false},"thursday":{"type":"boolean","default":false},"friday":{"type":"boolean","default":false},"saturday":{"type":"boolean","default":false},"sunday":{"type":"boolean","default":false},"start_time":{"type":"string","description":"Formatted as HH:MM"},"end_time":{"type":"string","description":"Formatted as HH:MM"},"all_day":{"type":"boolean","default":false},"position":{"type":"integer","description":"Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.","nullable":true},"ends_next_day":{"type":"boolean","description":"Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.","readOnly":true}}}}}}}},"required":["conditions"]}}
+	NotificationTypeRules jsonapi.NullableAttr[[]EscalationPathNotificationTypeRulesItem] `jsonapi:"attr,notification_type_rules"`
 	// Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team.
-	NotificationTypeFallback string `jsonapi:"attr,notification_type_fallback,omitempty"`
+	// {"type":"string","description":"Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team.","enum":["audible","quiet"],"default":"audible"}
+	NotificationTypeFallback jsonapi.NullableAttr[string] `jsonapi:"attr,notification_type_fallback"`
 	// Time zone used for time restrictions.
-	TimeRestrictionTimeZone jsonapi.NullableAttr[string] `jsonapi:"attr,time_restriction_time_zone,omitempty"`
+	// {"type":"string","description":"Time zone used for time restrictions.","enum":["International Date Line West","Etc/GMT+12","American Samoa","Pacific/Pago_Pago","Midway Island","Pacific/Midway","Hawaii","Pacific/Honolulu","Alaska","America/Juneau","Pacific Time (US & Canada)","America/Los_Angeles","Tijuana","America/Tijuana","Arizona","America/Phoenix","Mazatlan","America/Mazatlan","Mountain Time (US & Canada)","America/Denver","Central America","America/Guatemala","Central Time (US & Canada)","America/Chicago","Chihuahua","America/Chihuahua","Guadalajara","America/Mexico_City","Mexico City","Monterrey","America/Monterrey","Saskatchewan","America/Regina","Bogota","America/Bogota","Eastern Time (US & Canada)","America/New_York","Indiana (East)","America/Indiana/Indianapolis","Lima","America/Lima","Quito","Atlantic Time (Canada)","America/Halifax","Caracas","America/Caracas","Georgetown","America/Guyana","La Paz","America/La_Paz","Puerto Rico","America/Puerto_Rico","Santiago","America/Santiago","Newfoundland","America/St_Johns","Asuncion","America/Asuncion","Brasilia","America/Sao_Paulo","Buenos Aires","America/Argentina/Buenos_Aires","Montevideo","America/Montevideo","Greenland","America/Nuuk","Mid-Atlantic","Atlantic/South_Georgia","Azores","Atlantic/Azores","Cape Verde Is.","Atlantic/Cape_Verde","Edinburgh","Europe/London","Lisbon","Europe/Lisbon","London","Monrovia","Africa/Monrovia","UTC","Etc/UTC","Amsterdam","Europe/Amsterdam","Belgrade","Europe/Belgrade","Berlin","Europe/Berlin","Bern","Europe/Zurich","Bratislava","Europe/Bratislava","Brussels","Europe/Brussels","Budapest","Europe/Budapest","Casablanca","Africa/Casablanca","Copenhagen","Europe/Copenhagen","Dublin","Europe/Dublin","Ljubljana","Europe/Ljubljana","Madrid","Europe/Madrid","Paris","Europe/Paris","Prague","Europe/Prague","Rome","Europe/Rome","Sarajevo","Europe/Sarajevo","Skopje","Europe/Skopje","Stockholm","Europe/Stockholm","Vienna","Europe/Vienna","Warsaw","Europe/Warsaw","West Central Africa","Africa/Algiers","Zagreb","Europe/Zagreb","Zurich","Athens","Europe/Athens","Bucharest","Europe/Bucharest","Cairo","Africa/Cairo","Harare","Africa/Harare","Helsinki","Europe/Helsinki","Jerusalem","Asia/Jerusalem","Kaliningrad","Europe/Kaliningrad","Kyiv","Europe/Kiev","Pretoria","Africa/Johannesburg","Riga","Europe/Riga","Sofia","Europe/Sofia","Tallinn","Europe/Tallinn","Vilnius","Europe/Vilnius","Baghdad","Asia/Baghdad","Istanbul","Europe/Istanbul","Kuwait","Asia/Kuwait","Minsk","Europe/Minsk","Moscow","Europe/Moscow","Nairobi","Africa/Nairobi","Riyadh","Asia/Riyadh","St. Petersburg","Volgograd","Europe/Volgograd","Tehran","Asia/Tehran","Abu Dhabi","Asia/Muscat","Baku","Asia/Baku","Muscat","Samara","Europe/Samara","Tbilisi","Asia/Tbilisi","Yerevan","Asia/Yerevan","Kabul","Asia/Kabul","Almaty","Asia/Almaty","Astana","Ekaterinburg","Asia/Yekaterinburg","Islamabad","Asia/Karachi","Karachi","Tashkent","Asia/Tashkent","Chennai","Asia/Kolkata","Kolkata","Mumbai","New Delhi","Sri Jayawardenepura","Asia/Colombo","Kathmandu","Asia/Kathmandu","Dhaka","Asia/Dhaka","Urumqi","Asia/Urumqi","Rangoon","Asia/Rangoon","Bangkok","Asia/Bangkok","Hanoi","Jakarta","Asia/Jakarta","Krasnoyarsk","Asia/Krasnoyarsk","Novosibirsk","Asia/Novosibirsk","Beijing","Asia/Shanghai","Chongqing","Asia/Chongqing","Hong Kong","Asia/Hong_Kong","Irkutsk","Asia/Irkutsk","Kuala Lumpur","Asia/Kuala_Lumpur","Perth","Australia/Perth","Singapore","Asia/Singapore","Taipei","Asia/Taipei","Ulaanbaatar","Asia/Ulaanbaatar","Osaka","Asia/Tokyo","Sapporo","Seoul","Asia/Seoul","Tokyo","Yakutsk","Asia/Yakutsk","Adelaide","Australia/Adelaide","Darwin","Australia/Darwin","Brisbane","Australia/Brisbane","Canberra","Australia/Canberra","Guam","Pacific/Guam","Hobart","Australia/Hobart","Melbourne","Australia/Melbourne","Port Moresby","Pacific/Port_Moresby","Sydney","Australia/Sydney","Vladivostok","Asia/Vladivostok","Magadan","Asia/Magadan","New Caledonia","Pacific/Noumea","Solomon Is.","Pacific/Guadalcanal","Srednekolymsk","Asia/Srednekolymsk","Auckland","Pacific/Auckland","Fiji","Pacific/Fiji","Kamchatka","Asia/Kamchatka","Marshall Is.","Pacific/Majuro","Wellington","Chatham Is.","Pacific/Chatham","Nuku'alofa","Pacific/Tongatapu","Samoa","Pacific/Apia","Tokelau Is.","Pacific/Fakaofo","America/Adak","America/Atka","US/Aleutian","America/Vancouver","Canada/Pacific","America/Miquelon","Australia/Eucla","Australia/LHI","Australia/Lord_Howe","Chile/EasterIsland","Pacific/Easter","Pacific/Gambier","Pacific/Pitcairn","Pacific/Marquesas","Pacific/Kiritimati","Pacific/Norfolk"],"nullable":true}
+	TimeRestrictionTimeZone jsonapi.NullableAttr[string] `jsonapi:"attr,time_restriction_time_zone"`
 	// If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.
-	TimeRestrictions []EscalationPathTimeRestrictionsItem `jsonapi:"attr,time_restrictions,omitempty"`
+	// {"type":"array","description":"If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.","items":{"type":"object","properties":{"start_day":{"type":"string","enum":["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]},"start_time":{"type":"string","description":"Formatted as HH:MM"},"end_day":{"type":"string","enum":["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]},"end_time":{"type":"string","description":"Formatted as HH:MM"}}}}
+	TimeRestrictions jsonapi.NullableAttr[[]EscalationPathTimeRestrictionsItem] `jsonapi:"attr,time_restrictions"`
 }
 
 type EscalationPathRulesItem struct {
 	// The type of the escalation path rule
-	RuleType string `jsonapi:"attr,rule_type,omitempty"`
+	// {"type":"string","description":"The type of the escalation path rule","enum":["related_incidents"]}
+	RuleType jsonapi.NullableAttr[string] `jsonapi:"attr,rule_type"`
 	// Alert urgency ids for which this escalation path should be used
-	UrgencyIds []string `jsonapi:"attr,urgency_ids,omitempty"`
+	// {"type":"array","description":"Alert urgency ids for which this escalation path should be used","items":{"type":"string"}}
+	UrgencyIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,urgency_ids"`
 	// Whether the escalation path should be used within working hours
-	WithinWorkingHour bool `jsonapi:"attr,within_working_hour,omitempty"`
+	// {"type":"boolean","description":"Whether the escalation path should be used within working hours"}
+	WithinWorkingHour jsonapi.NullableAttr[bool] `jsonapi:"attr,within_working_hour"`
 	// JSON path to extract value from payload
-	JsonPath string `jsonapi:"attr,json_path,omitempty"`
+	// {"type":"string","description":"JSON path to extract value from payload"}
+	JsonPath jsonapi.NullableAttr[string] `jsonapi:"attr,json_path"`
 	// Whether the alert must (or must not) have related incidents
-	Operator string `jsonapi:"attr,operator,omitempty"`
+	// {"type":"string","description":"Whether the alert must (or must not) have related incidents","enum":["is_set","is_not_set"]}
+	Operator jsonapi.NullableAttr[string] `jsonapi:"attr,operator"`
 	// Value with which JSON path value should be matched
-	Value jsonapi.NullableAttr[string] `jsonapi:"attr,value,omitempty"`
+	// {"type":"string","description":"Value with which JSON path value should be matched","nullable":true}
+	Value jsonapi.NullableAttr[string] `jsonapi:"attr,value"`
 	// Alert source values to match against (e.g., manual, datadog)
-	Values []string `jsonapi:"attr,values,omitempty"`
+	// {"type":"array","description":"Alert source values to match against (e.g., manual, datadog)","items":{"type":"string"}}
+	Values jsonapi.NullableAttr[[]string] `jsonapi:"attr,values"`
 	// The type of the fieldable (e.g., AlertField)
-	FieldableType string `jsonapi:"attr,fieldable_type,omitempty"`
+	// {"type":"string","description":"The type of the fieldable (e.g., AlertField)"}
+	FieldableType jsonapi.NullableAttr[string] `jsonapi:"attr,fieldable_type"`
 	// The ID of the alert field
-	FieldableId string `jsonapi:"attr,fieldable_id,omitempty"`
+	// {"type":"string","description":"The ID of the alert field"}
+	FieldableId jsonapi.NullableAttr[string] `jsonapi:"attr,fieldable_id"`
 	// Service ids for which this escalation path should be used
-	ServiceIds []string `jsonapi:"attr,service_ids,omitempty"`
+	// {"type":"array","description":"Service ids for which this escalation path should be used","items":{"type":"string"}}
+	ServiceIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,service_ids"`
 	// Time zone for the deferral window
-	TimeZone string `jsonapi:"attr,time_zone,omitempty"`
+	// {"type":"string","description":"Time zone for the deferral window","enum":["International Date Line West","Etc/GMT+12","American Samoa","Pacific/Pago_Pago","Midway Island","Pacific/Midway","Hawaii","Pacific/Honolulu","Alaska","America/Juneau","Pacific Time (US & Canada)","America/Los_Angeles","Tijuana","America/Tijuana","Arizona","America/Phoenix","Mazatlan","America/Mazatlan","Mountain Time (US & Canada)","America/Denver","Central America","America/Guatemala","Central Time (US & Canada)","America/Chicago","Chihuahua","America/Chihuahua","Guadalajara","America/Mexico_City","Mexico City","Monterrey","America/Monterrey","Saskatchewan","America/Regina","Bogota","America/Bogota","Eastern Time (US & Canada)","America/New_York","Indiana (East)","America/Indiana/Indianapolis","Lima","America/Lima","Quito","Atlantic Time (Canada)","America/Halifax","Caracas","America/Caracas","Georgetown","America/Guyana","La Paz","America/La_Paz","Puerto Rico","America/Puerto_Rico","Santiago","America/Santiago","Newfoundland","America/St_Johns","Asuncion","America/Asuncion","Brasilia","America/Sao_Paulo","Buenos Aires","America/Argentina/Buenos_Aires","Montevideo","America/Montevideo","Greenland","America/Nuuk","Mid-Atlantic","Atlantic/South_Georgia","Azores","Atlantic/Azores","Cape Verde Is.","Atlantic/Cape_Verde","Edinburgh","Europe/London","Lisbon","Europe/Lisbon","London","Monrovia","Africa/Monrovia","UTC","Etc/UTC","Amsterdam","Europe/Amsterdam","Belgrade","Europe/Belgrade","Berlin","Europe/Berlin","Bern","Europe/Zurich","Bratislava","Europe/Bratislava","Brussels","Europe/Brussels","Budapest","Europe/Budapest","Casablanca","Africa/Casablanca","Copenhagen","Europe/Copenhagen","Dublin","Europe/Dublin","Ljubljana","Europe/Ljubljana","Madrid","Europe/Madrid","Paris","Europe/Paris","Prague","Europe/Prague","Rome","Europe/Rome","Sarajevo","Europe/Sarajevo","Skopje","Europe/Skopje","Stockholm","Europe/Stockholm","Vienna","Europe/Vienna","Warsaw","Europe/Warsaw","West Central Africa","Africa/Algiers","Zagreb","Europe/Zagreb","Zurich","Athens","Europe/Athens","Bucharest","Europe/Bucharest","Cairo","Africa/Cairo","Harare","Africa/Harare","Helsinki","Europe/Helsinki","Jerusalem","Asia/Jerusalem","Kaliningrad","Europe/Kaliningrad","Kyiv","Europe/Kiev","Pretoria","Africa/Johannesburg","Riga","Europe/Riga","Sofia","Europe/Sofia","Tallinn","Europe/Tallinn","Vilnius","Europe/Vilnius","Baghdad","Asia/Baghdad","Istanbul","Europe/Istanbul","Kuwait","Asia/Kuwait","Minsk","Europe/Minsk","Moscow","Europe/Moscow","Nairobi","Africa/Nairobi","Riyadh","Asia/Riyadh","St. Petersburg","Volgograd","Europe/Volgograd","Tehran","Asia/Tehran","Abu Dhabi","Asia/Muscat","Baku","Asia/Baku","Muscat","Samara","Europe/Samara","Tbilisi","Asia/Tbilisi","Yerevan","Asia/Yerevan","Kabul","Asia/Kabul","Almaty","Asia/Almaty","Astana","Ekaterinburg","Asia/Yekaterinburg","Islamabad","Asia/Karachi","Karachi","Tashkent","Asia/Tashkent","Chennai","Asia/Kolkata","Kolkata","Mumbai","New Delhi","Sri Jayawardenepura","Asia/Colombo","Kathmandu","Asia/Kathmandu","Dhaka","Asia/Dhaka","Urumqi","Asia/Urumqi","Rangoon","Asia/Rangoon","Bangkok","Asia/Bangkok","Hanoi","Jakarta","Asia/Jakarta","Krasnoyarsk","Asia/Krasnoyarsk","Novosibirsk","Asia/Novosibirsk","Beijing","Asia/Shanghai","Chongqing","Asia/Chongqing","Hong Kong","Asia/Hong_Kong","Irkutsk","Asia/Irkutsk","Kuala Lumpur","Asia/Kuala_Lumpur","Perth","Australia/Perth","Singapore","Asia/Singapore","Taipei","Asia/Taipei","Ulaanbaatar","Asia/Ulaanbaatar","Osaka","Asia/Tokyo","Sapporo","Seoul","Asia/Seoul","Tokyo","Yakutsk","Asia/Yakutsk","Adelaide","Australia/Adelaide","Darwin","Australia/Darwin","Brisbane","Australia/Brisbane","Canberra","Australia/Canberra","Guam","Pacific/Guam","Hobart","Australia/Hobart","Melbourne","Australia/Melbourne","Port Moresby","Pacific/Port_Moresby","Sydney","Australia/Sydney","Vladivostok","Asia/Vladivostok","Magadan","Asia/Magadan","New Caledonia","Pacific/Noumea","Solomon Is.","Pacific/Guadalcanal","Srednekolymsk","Asia/Srednekolymsk","Auckland","Pacific/Auckland","Fiji","Pacific/Fiji","Kamchatka","Asia/Kamchatka","Marshall Is.","Pacific/Majuro","Wellington","Chatham Is.","Pacific/Chatham","Nuku'alofa","Pacific/Tongatapu","Samoa","Pacific/Apia","Tokelau Is.","Pacific/Fakaofo","America/Adak","America/Atka","US/Aleutian","America/Vancouver","Canada/Pacific","America/Miquelon","Australia/Eucla","Australia/LHI","Australia/Lord_Howe","Chile/EasterIsland","Pacific/Easter","Pacific/Gambier","Pacific/Pitcairn","Pacific/Marquesas","Pacific/Kiritimati","Pacific/Norfolk"]}
+	TimeZone jsonapi.NullableAttr[string] `jsonapi:"attr,time_zone"`
 	// Time windows during which alerts are deferred
-	TimeBlocks []EscalationPathRulesItemTimeBlocksItem `jsonapi:"attr,time_blocks,omitempty"`
+	// {"type":"array","description":"Time windows during which alerts are deferred","items":{"type":"object","properties":{"id":{"type":"string","description":"Unique ID of the time block","readOnly":true},"monday":{"type":"boolean","default":false},"tuesday":{"type":"boolean","default":false},"wednesday":{"type":"boolean","default":false},"thursday":{"type":"boolean","default":false},"friday":{"type":"boolean","default":false},"saturday":{"type":"boolean","default":false},"sunday":{"type":"boolean","default":false},"start_time":{"type":"string","description":"Formatted as HH:MM"},"end_time":{"type":"string","description":"Formatted as HH:MM"},"all_day":{"type":"boolean","default":false},"position":{"type":"integer","description":"Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.","nullable":true},"ends_next_day":{"type":"boolean","description":"Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.","readOnly":true}}}}
+	TimeBlocks jsonapi.NullableAttr[[]EscalationPathRulesItemTimeBlocksItem] `jsonapi:"attr,time_blocks"`
 }
 
 type EscalationPathRulesItemTimeBlocksItem struct {
 	// Unique ID of the time block
-	Id        string `jsonapi:"attr,id,omitempty"`
-	Monday    bool   `jsonapi:"attr,monday,omitempty"`
-	Tuesday   bool   `jsonapi:"attr,tuesday,omitempty"`
-	Wednesday bool   `jsonapi:"attr,wednesday,omitempty"`
-	Thursday  bool   `jsonapi:"attr,thursday,omitempty"`
-	Friday    bool   `jsonapi:"attr,friday,omitempty"`
-	Saturday  bool   `jsonapi:"attr,saturday,omitempty"`
-	Sunday    bool   `jsonapi:"attr,sunday,omitempty"`
+	// {"type":"string","description":"Unique ID of the time block","readOnly":true}
+	Id jsonapi.NullableAttr[string] `jsonapi:"attr,id"`
+	// {"type":"boolean","default":false}
+	Monday jsonapi.NullableAttr[bool] `jsonapi:"attr,monday"`
+	// {"type":"boolean","default":false}
+	Tuesday jsonapi.NullableAttr[bool] `jsonapi:"attr,tuesday"`
+	// {"type":"boolean","default":false}
+	Wednesday jsonapi.NullableAttr[bool] `jsonapi:"attr,wednesday"`
+	// {"type":"boolean","default":false}
+	Thursday jsonapi.NullableAttr[bool] `jsonapi:"attr,thursday"`
+	// {"type":"boolean","default":false}
+	Friday jsonapi.NullableAttr[bool] `jsonapi:"attr,friday"`
+	// {"type":"boolean","default":false}
+	Saturday jsonapi.NullableAttr[bool] `jsonapi:"attr,saturday"`
+	// {"type":"boolean","default":false}
+	Sunday jsonapi.NullableAttr[bool] `jsonapi:"attr,sunday"`
 	// Formatted as HH:MM
-	StartTime string `jsonapi:"attr,start_time,omitempty"`
+	// {"type":"string","description":"Formatted as HH:MM"}
+	StartTime jsonapi.NullableAttr[string] `jsonapi:"attr,start_time"`
 	// Formatted as HH:MM
-	EndTime string `jsonapi:"attr,end_time,omitempty"`
-	AllDay  bool   `jsonapi:"attr,all_day,omitempty"`
+	// {"type":"string","description":"Formatted as HH:MM"}
+	EndTime jsonapi.NullableAttr[string] `jsonapi:"attr,end_time"`
+	// {"type":"boolean","default":false}
+	AllDay jsonapi.NullableAttr[bool] `jsonapi:"attr,all_day"`
 	// Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
-	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position,omitempty"`
+	// {"type":"integer","description":"Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.","nullable":true}
+	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position"`
 	// Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
-	EndsNextDay bool `jsonapi:"attr,ends_next_day,omitempty"`
+	// {"type":"boolean","description":"Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.","readOnly":true}
+	EndsNextDay jsonapi.NullableAttr[bool] `jsonapi:"attr,ends_next_day"`
 }
 
 type EscalationPathNotificationTypeRulesItem struct {
 	// Outcome when this rule matches
-	NotificationType string `jsonapi:"attr,notification_type,omitempty"`
+	// {"type":"string","description":"Outcome when this rule matches","enum":["audible","quiet"],"default":"audible"}
+	NotificationType jsonapi.NullableAttr[string] `jsonapi:"attr,notification_type"`
 	// Whether all or any of the rule's conditions must match
-	MatchMode string `jsonapi:"attr,match_mode,omitempty"`
+	// {"type":"string","description":"Whether all or any of the rule's conditions must match","enum":["match-all-rules","match-any-rule"],"default":"match-all-rules"}
+	MatchMode jsonapi.NullableAttr[string] `jsonapi:"attr,match_mode"`
 	// Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.
-	Conditions []EscalationPathNotificationTypeRulesItemConditionsItem `jsonapi:"attr,conditions"`
+	// {"type":"array","minItems":1,"maxItems":5,"description":"Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.","items":{"type":"object","properties":{"rule_type":{"type":"string","description":"The type of the escalation path rule","enum":["related_incidents"]},"urgency_ids":{"type":"array","description":"Alert urgency ids for which this escalation path should be used","items":{"type":"string"}},"within_working_hour":{"type":"boolean","description":"Whether the escalation path should be used within working hours"},"json_path":{"type":"string","description":"JSON path to extract value from payload"},"operator":{"type":"string","description":"Whether the alert must (or must not) have related incidents","enum":["is_set","is_not_set"]},"value":{"type":"string","description":"Value with which JSON path value should be matched","nullable":true},"values":{"type":"array","description":"Alert source values to match against (e.g., manual, datadog)","items":{"type":"string"}},"fieldable_type":{"type":"string","description":"The type of the fieldable (e.g., AlertField)"},"fieldable_id":{"type":"string","description":"The ID of the alert field"},"service_ids":{"type":"array","description":"Service ids for which this escalation path should be used","items":{"type":"string"}},"time_zone":{"type":"string","description":"Time zone for the deferral window","enum":["International Date Line West","Etc/GMT+12","American Samoa","Pacific/Pago_Pago","Midway Island","Pacific/Midway","Hawaii","Pacific/Honolulu","Alaska","America/Juneau","Pacific Time (US & Canada)","America/Los_Angeles","Tijuana","America/Tijuana","Arizona","America/Phoenix","Mazatlan","America/Mazatlan","Mountain Time (US & Canada)","America/Denver","Central America","America/Guatemala","Central Time (US & Canada)","America/Chicago","Chihuahua","America/Chihuahua","Guadalajara","America/Mexico_City","Mexico City","Monterrey","America/Monterrey","Saskatchewan","America/Regina","Bogota","America/Bogota","Eastern Time (US & Canada)","America/New_York","Indiana (East)","America/Indiana/Indianapolis","Lima","America/Lima","Quito","Atlantic Time (Canada)","America/Halifax","Caracas","America/Caracas","Georgetown","America/Guyana","La Paz","America/La_Paz","Puerto Rico","America/Puerto_Rico","Santiago","America/Santiago","Newfoundland","America/St_Johns","Asuncion","America/Asuncion","Brasilia","America/Sao_Paulo","Buenos Aires","America/Argentina/Buenos_Aires","Montevideo","America/Montevideo","Greenland","America/Nuuk","Mid-Atlantic","Atlantic/South_Georgia","Azores","Atlantic/Azores","Cape Verde Is.","Atlantic/Cape_Verde","Edinburgh","Europe/London","Lisbon","Europe/Lisbon","London","Monrovia","Africa/Monrovia","UTC","Etc/UTC","Amsterdam","Europe/Amsterdam","Belgrade","Europe/Belgrade","Berlin","Europe/Berlin","Bern","Europe/Zurich","Bratislava","Europe/Bratislava","Brussels","Europe/Brussels","Budapest","Europe/Budapest","Casablanca","Africa/Casablanca","Copenhagen","Europe/Copenhagen","Dublin","Europe/Dublin","Ljubljana","Europe/Ljubljana","Madrid","Europe/Madrid","Paris","Europe/Paris","Prague","Europe/Prague","Rome","Europe/Rome","Sarajevo","Europe/Sarajevo","Skopje","Europe/Skopje","Stockholm","Europe/Stockholm","Vienna","Europe/Vienna","Warsaw","Europe/Warsaw","West Central Africa","Africa/Algiers","Zagreb","Europe/Zagreb","Zurich","Athens","Europe/Athens","Bucharest","Europe/Bucharest","Cairo","Africa/Cairo","Harare","Africa/Harare","Helsinki","Europe/Helsinki","Jerusalem","Asia/Jerusalem","Kaliningrad","Europe/Kaliningrad","Kyiv","Europe/Kiev","Pretoria","Africa/Johannesburg","Riga","Europe/Riga","Sofia","Europe/Sofia","Tallinn","Europe/Tallinn","Vilnius","Europe/Vilnius","Baghdad","Asia/Baghdad","Istanbul","Europe/Istanbul","Kuwait","Asia/Kuwait","Minsk","Europe/Minsk","Moscow","Europe/Moscow","Nairobi","Africa/Nairobi","Riyadh","Asia/Riyadh","St. Petersburg","Volgograd","Europe/Volgograd","Tehran","Asia/Tehran","Abu Dhabi","Asia/Muscat","Baku","Asia/Baku","Muscat","Samara","Europe/Samara","Tbilisi","Asia/Tbilisi","Yerevan","Asia/Yerevan","Kabul","Asia/Kabul","Almaty","Asia/Almaty","Astana","Ekaterinburg","Asia/Yekaterinburg","Islamabad","Asia/Karachi","Karachi","Tashkent","Asia/Tashkent","Chennai","Asia/Kolkata","Kolkata","Mumbai","New Delhi","Sri Jayawardenepura","Asia/Colombo","Kathmandu","Asia/Kathmandu","Dhaka","Asia/Dhaka","Urumqi","Asia/Urumqi","Rangoon","Asia/Rangoon","Bangkok","Asia/Bangkok","Hanoi","Jakarta","Asia/Jakarta","Krasnoyarsk","Asia/Krasnoyarsk","Novosibirsk","Asia/Novosibirsk","Beijing","Asia/Shanghai","Chongqing","Asia/Chongqing","Hong Kong","Asia/Hong_Kong","Irkutsk","Asia/Irkutsk","Kuala Lumpur","Asia/Kuala_Lumpur","Perth","Australia/Perth","Singapore","Asia/Singapore","Taipei","Asia/Taipei","Ulaanbaatar","Asia/Ulaanbaatar","Osaka","Asia/Tokyo","Sapporo","Seoul","Asia/Seoul","Tokyo","Yakutsk","Asia/Yakutsk","Adelaide","Australia/Adelaide","Darwin","Australia/Darwin","Brisbane","Australia/Brisbane","Canberra","Australia/Canberra","Guam","Pacific/Guam","Hobart","Australia/Hobart","Melbourne","Australia/Melbourne","Port Moresby","Pacific/Port_Moresby","Sydney","Australia/Sydney","Vladivostok","Asia/Vladivostok","Magadan","Asia/Magadan","New Caledonia","Pacific/Noumea","Solomon Is.","Pacific/Guadalcanal","Srednekolymsk","Asia/Srednekolymsk","Auckland","Pacific/Auckland","Fiji","Pacific/Fiji","Kamchatka","Asia/Kamchatka","Marshall Is.","Pacific/Majuro","Wellington","Chatham Is.","Pacific/Chatham","Nuku'alofa","Pacific/Tongatapu","Samoa","Pacific/Apia","Tokelau Is.","Pacific/Fakaofo","America/Adak","America/Atka","US/Aleutian","America/Vancouver","Canada/Pacific","America/Miquelon","Australia/Eucla","Australia/LHI","Australia/Lord_Howe","Chile/EasterIsland","Pacific/Easter","Pacific/Gambier","Pacific/Pitcairn","Pacific/Marquesas","Pacific/Kiritimati","Pacific/Norfolk"]},"time_blocks":{"type":"array","description":"Time windows during which alerts are deferred","items":{"type":"object","properties":{"id":{"type":"string","description":"Unique ID of the time block","readOnly":true},"monday":{"type":"boolean","default":false},"tuesday":{"type":"boolean","default":false},"wednesday":{"type":"boolean","default":false},"thursday":{"type":"boolean","default":false},"friday":{"type":"boolean","default":false},"saturday":{"type":"boolean","default":false},"sunday":{"type":"boolean","default":false},"start_time":{"type":"string","description":"Formatted as HH:MM"},"end_time":{"type":"string","description":"Formatted as HH:MM"},"all_day":{"type":"boolean","default":false},"position":{"type":"integer","description":"Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.","nullable":true},"ends_next_day":{"type":"boolean","description":"Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.","readOnly":true}}}}}}}
+	Conditions jsonapi.NullableAttr[[]EscalationPathNotificationTypeRulesItemConditionsItem] `jsonapi:"attr,conditions"`
 }
 
 type EscalationPathNotificationTypeRulesItemConditionsItem struct {
 	// The type of the escalation path rule
-	RuleType string `jsonapi:"attr,rule_type,omitempty"`
+	// {"type":"string","description":"The type of the escalation path rule","enum":["related_incidents"]}
+	RuleType jsonapi.NullableAttr[string] `jsonapi:"attr,rule_type"`
 	// Alert urgency ids for which this escalation path should be used
-	UrgencyIds []string `jsonapi:"attr,urgency_ids,omitempty"`
+	// {"type":"array","description":"Alert urgency ids for which this escalation path should be used","items":{"type":"string"}}
+	UrgencyIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,urgency_ids"`
 	// Whether the escalation path should be used within working hours
-	WithinWorkingHour bool `jsonapi:"attr,within_working_hour,omitempty"`
+	// {"type":"boolean","description":"Whether the escalation path should be used within working hours"}
+	WithinWorkingHour jsonapi.NullableAttr[bool] `jsonapi:"attr,within_working_hour"`
 	// JSON path to extract value from payload
-	JsonPath string `jsonapi:"attr,json_path,omitempty"`
+	// {"type":"string","description":"JSON path to extract value from payload"}
+	JsonPath jsonapi.NullableAttr[string] `jsonapi:"attr,json_path"`
 	// Whether the alert must (or must not) have related incidents
-	Operator string `jsonapi:"attr,operator,omitempty"`
+	// {"type":"string","description":"Whether the alert must (or must not) have related incidents","enum":["is_set","is_not_set"]}
+	Operator jsonapi.NullableAttr[string] `jsonapi:"attr,operator"`
 	// Value with which JSON path value should be matched
-	Value jsonapi.NullableAttr[string] `jsonapi:"attr,value,omitempty"`
+	// {"type":"string","description":"Value with which JSON path value should be matched","nullable":true}
+	Value jsonapi.NullableAttr[string] `jsonapi:"attr,value"`
 	// Alert source values to match against (e.g., manual, datadog)
-	Values []string `jsonapi:"attr,values,omitempty"`
+	// {"type":"array","description":"Alert source values to match against (e.g., manual, datadog)","items":{"type":"string"}}
+	Values jsonapi.NullableAttr[[]string] `jsonapi:"attr,values"`
 	// The type of the fieldable (e.g., AlertField)
-	FieldableType string `jsonapi:"attr,fieldable_type,omitempty"`
+	// {"type":"string","description":"The type of the fieldable (e.g., AlertField)"}
+	FieldableType jsonapi.NullableAttr[string] `jsonapi:"attr,fieldable_type"`
 	// The ID of the alert field
-	FieldableId string `jsonapi:"attr,fieldable_id,omitempty"`
+	// {"type":"string","description":"The ID of the alert field"}
+	FieldableId jsonapi.NullableAttr[string] `jsonapi:"attr,fieldable_id"`
 	// Service ids for which this escalation path should be used
-	ServiceIds []string `jsonapi:"attr,service_ids,omitempty"`
+	// {"type":"array","description":"Service ids for which this escalation path should be used","items":{"type":"string"}}
+	ServiceIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,service_ids"`
 	// Time zone for the deferral window
-	TimeZone string `jsonapi:"attr,time_zone,omitempty"`
+	// {"type":"string","description":"Time zone for the deferral window","enum":["International Date Line West","Etc/GMT+12","American Samoa","Pacific/Pago_Pago","Midway Island","Pacific/Midway","Hawaii","Pacific/Honolulu","Alaska","America/Juneau","Pacific Time (US & Canada)","America/Los_Angeles","Tijuana","America/Tijuana","Arizona","America/Phoenix","Mazatlan","America/Mazatlan","Mountain Time (US & Canada)","America/Denver","Central America","America/Guatemala","Central Time (US & Canada)","America/Chicago","Chihuahua","America/Chihuahua","Guadalajara","America/Mexico_City","Mexico City","Monterrey","America/Monterrey","Saskatchewan","America/Regina","Bogota","America/Bogota","Eastern Time (US & Canada)","America/New_York","Indiana (East)","America/Indiana/Indianapolis","Lima","America/Lima","Quito","Atlantic Time (Canada)","America/Halifax","Caracas","America/Caracas","Georgetown","America/Guyana","La Paz","America/La_Paz","Puerto Rico","America/Puerto_Rico","Santiago","America/Santiago","Newfoundland","America/St_Johns","Asuncion","America/Asuncion","Brasilia","America/Sao_Paulo","Buenos Aires","America/Argentina/Buenos_Aires","Montevideo","America/Montevideo","Greenland","America/Nuuk","Mid-Atlantic","Atlantic/South_Georgia","Azores","Atlantic/Azores","Cape Verde Is.","Atlantic/Cape_Verde","Edinburgh","Europe/London","Lisbon","Europe/Lisbon","London","Monrovia","Africa/Monrovia","UTC","Etc/UTC","Amsterdam","Europe/Amsterdam","Belgrade","Europe/Belgrade","Berlin","Europe/Berlin","Bern","Europe/Zurich","Bratislava","Europe/Bratislava","Brussels","Europe/Brussels","Budapest","Europe/Budapest","Casablanca","Africa/Casablanca","Copenhagen","Europe/Copenhagen","Dublin","Europe/Dublin","Ljubljana","Europe/Ljubljana","Madrid","Europe/Madrid","Paris","Europe/Paris","Prague","Europe/Prague","Rome","Europe/Rome","Sarajevo","Europe/Sarajevo","Skopje","Europe/Skopje","Stockholm","Europe/Stockholm","Vienna","Europe/Vienna","Warsaw","Europe/Warsaw","West Central Africa","Africa/Algiers","Zagreb","Europe/Zagreb","Zurich","Athens","Europe/Athens","Bucharest","Europe/Bucharest","Cairo","Africa/Cairo","Harare","Africa/Harare","Helsinki","Europe/Helsinki","Jerusalem","Asia/Jerusalem","Kaliningrad","Europe/Kaliningrad","Kyiv","Europe/Kiev","Pretoria","Africa/Johannesburg","Riga","Europe/Riga","Sofia","Europe/Sofia","Tallinn","Europe/Tallinn","Vilnius","Europe/Vilnius","Baghdad","Asia/Baghdad","Istanbul","Europe/Istanbul","Kuwait","Asia/Kuwait","Minsk","Europe/Minsk","Moscow","Europe/Moscow","Nairobi","Africa/Nairobi","Riyadh","Asia/Riyadh","St. Petersburg","Volgograd","Europe/Volgograd","Tehran","Asia/Tehran","Abu Dhabi","Asia/Muscat","Baku","Asia/Baku","Muscat","Samara","Europe/Samara","Tbilisi","Asia/Tbilisi","Yerevan","Asia/Yerevan","Kabul","Asia/Kabul","Almaty","Asia/Almaty","Astana","Ekaterinburg","Asia/Yekaterinburg","Islamabad","Asia/Karachi","Karachi","Tashkent","Asia/Tashkent","Chennai","Asia/Kolkata","Kolkata","Mumbai","New Delhi","Sri Jayawardenepura","Asia/Colombo","Kathmandu","Asia/Kathmandu","Dhaka","Asia/Dhaka","Urumqi","Asia/Urumqi","Rangoon","Asia/Rangoon","Bangkok","Asia/Bangkok","Hanoi","Jakarta","Asia/Jakarta","Krasnoyarsk","Asia/Krasnoyarsk","Novosibirsk","Asia/Novosibirsk","Beijing","Asia/Shanghai","Chongqing","Asia/Chongqing","Hong Kong","Asia/Hong_Kong","Irkutsk","Asia/Irkutsk","Kuala Lumpur","Asia/Kuala_Lumpur","Perth","Australia/Perth","Singapore","Asia/Singapore","Taipei","Asia/Taipei","Ulaanbaatar","Asia/Ulaanbaatar","Osaka","Asia/Tokyo","Sapporo","Seoul","Asia/Seoul","Tokyo","Yakutsk","Asia/Yakutsk","Adelaide","Australia/Adelaide","Darwin","Australia/Darwin","Brisbane","Australia/Brisbane","Canberra","Australia/Canberra","Guam","Pacific/Guam","Hobart","Australia/Hobart","Melbourne","Australia/Melbourne","Port Moresby","Pacific/Port_Moresby","Sydney","Australia/Sydney","Vladivostok","Asia/Vladivostok","Magadan","Asia/Magadan","New Caledonia","Pacific/Noumea","Solomon Is.","Pacific/Guadalcanal","Srednekolymsk","Asia/Srednekolymsk","Auckland","Pacific/Auckland","Fiji","Pacific/Fiji","Kamchatka","Asia/Kamchatka","Marshall Is.","Pacific/Majuro","Wellington","Chatham Is.","Pacific/Chatham","Nuku'alofa","Pacific/Tongatapu","Samoa","Pacific/Apia","Tokelau Is.","Pacific/Fakaofo","America/Adak","America/Atka","US/Aleutian","America/Vancouver","Canada/Pacific","America/Miquelon","Australia/Eucla","Australia/LHI","Australia/Lord_Howe","Chile/EasterIsland","Pacific/Easter","Pacific/Gambier","Pacific/Pitcairn","Pacific/Marquesas","Pacific/Kiritimati","Pacific/Norfolk"]}
+	TimeZone jsonapi.NullableAttr[string] `jsonapi:"attr,time_zone"`
 	// Time windows during which alerts are deferred
-	TimeBlocks []EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem `jsonapi:"attr,time_blocks,omitempty"`
+	// {"type":"array","description":"Time windows during which alerts are deferred","items":{"type":"object","properties":{"id":{"type":"string","description":"Unique ID of the time block","readOnly":true},"monday":{"type":"boolean","default":false},"tuesday":{"type":"boolean","default":false},"wednesday":{"type":"boolean","default":false},"thursday":{"type":"boolean","default":false},"friday":{"type":"boolean","default":false},"saturday":{"type":"boolean","default":false},"sunday":{"type":"boolean","default":false},"start_time":{"type":"string","description":"Formatted as HH:MM"},"end_time":{"type":"string","description":"Formatted as HH:MM"},"all_day":{"type":"boolean","default":false},"position":{"type":"integer","description":"Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.","nullable":true},"ends_next_day":{"type":"boolean","description":"Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.","readOnly":true}}}}
+	TimeBlocks jsonapi.NullableAttr[[]EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem] `jsonapi:"attr,time_blocks"`
 }
 
 type EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem struct {
 	// Unique ID of the time block
-	Id        string `jsonapi:"attr,id,omitempty"`
-	Monday    bool   `jsonapi:"attr,monday,omitempty"`
-	Tuesday   bool   `jsonapi:"attr,tuesday,omitempty"`
-	Wednesday bool   `jsonapi:"attr,wednesday,omitempty"`
-	Thursday  bool   `jsonapi:"attr,thursday,omitempty"`
-	Friday    bool   `jsonapi:"attr,friday,omitempty"`
-	Saturday  bool   `jsonapi:"attr,saturday,omitempty"`
-	Sunday    bool   `jsonapi:"attr,sunday,omitempty"`
+	// {"type":"string","description":"Unique ID of the time block","readOnly":true}
+	Id jsonapi.NullableAttr[string] `jsonapi:"attr,id"`
+	// {"type":"boolean","default":false}
+	Monday jsonapi.NullableAttr[bool] `jsonapi:"attr,monday"`
+	// {"type":"boolean","default":false}
+	Tuesday jsonapi.NullableAttr[bool] `jsonapi:"attr,tuesday"`
+	// {"type":"boolean","default":false}
+	Wednesday jsonapi.NullableAttr[bool] `jsonapi:"attr,wednesday"`
+	// {"type":"boolean","default":false}
+	Thursday jsonapi.NullableAttr[bool] `jsonapi:"attr,thursday"`
+	// {"type":"boolean","default":false}
+	Friday jsonapi.NullableAttr[bool] `jsonapi:"attr,friday"`
+	// {"type":"boolean","default":false}
+	Saturday jsonapi.NullableAttr[bool] `jsonapi:"attr,saturday"`
+	// {"type":"boolean","default":false}
+	Sunday jsonapi.NullableAttr[bool] `jsonapi:"attr,sunday"`
 	// Formatted as HH:MM
-	StartTime string `jsonapi:"attr,start_time,omitempty"`
+	// {"type":"string","description":"Formatted as HH:MM"}
+	StartTime jsonapi.NullableAttr[string] `jsonapi:"attr,start_time"`
 	// Formatted as HH:MM
-	EndTime string `jsonapi:"attr,end_time,omitempty"`
-	AllDay  bool   `jsonapi:"attr,all_day,omitempty"`
+	// {"type":"string","description":"Formatted as HH:MM"}
+	EndTime jsonapi.NullableAttr[string] `jsonapi:"attr,end_time"`
+	// {"type":"boolean","default":false}
+	AllDay jsonapi.NullableAttr[bool] `jsonapi:"attr,all_day"`
 	// Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
-	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position,omitempty"`
+	// {"type":"integer","description":"Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.","nullable":true}
+	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position"`
 	// Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
-	EndsNextDay bool `jsonapi:"attr,ends_next_day,omitempty"`
+	// {"type":"boolean","description":"Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.","readOnly":true}
+	EndsNextDay jsonapi.NullableAttr[bool] `jsonapi:"attr,ends_next_day"`
 }
 
 type EscalationPathTimeRestrictionsItem struct {
-	StartDay string `jsonapi:"attr,start_day,omitempty"`
+	// {"type":"string","enum":["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]}
+	StartDay jsonapi.NullableAttr[string] `jsonapi:"attr,start_day"`
 	// Formatted as HH:MM
-	StartTime string `jsonapi:"attr,start_time,omitempty"`
-	EndDay    string `jsonapi:"attr,end_day,omitempty"`
+	// {"type":"string","description":"Formatted as HH:MM"}
+	StartTime jsonapi.NullableAttr[string] `jsonapi:"attr,start_time"`
+	// {"type":"string","enum":["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]}
+	EndDay jsonapi.NullableAttr[string] `jsonapi:"attr,end_day"`
 	// Formatted as HH:MM
-	EndTime string `jsonapi:"attr,end_time,omitempty"`
+	// {"type":"string","description":"Formatted as HH:MM"}
+	EndTime jsonapi.NullableAttr[string] `jsonapi:"attr,end_time"`
 }
 
-type CreateEscalationPath struct {
-	// The name of the escalation path
-	Name string `jsonapi:"attr,name"`
-	// Notification rule type to be used
-	NotificationType string `jsonapi:"attr,notification_type,omitempty"`
-	// The type of escalation path to create
-	PathType string `jsonapi:"attr,path_type,omitempty"`
-	// What happens after a deferral path finishes. Required for deferral paths.
-	AfterDeferralBehavior jsonapi.NullableAttr[string] `jsonapi:"attr,after_deferral_behavior,omitempty"`
-	// The escalation path to execute after this deferral path when after_deferral_behavior is execute_path.
-	AfterDeferralPathId jsonapi.NullableAttr[string] `jsonapi:"attr,after_deferral_path_id,omitempty"`
-	// Whether this escalation path is the default path
-	Default jsonapi.NullableAttr[bool] `jsonapi:"attr,default,omitempty"`
-	// How path rules are matched.
-	MatchMode string `jsonapi:"attr,match_mode,omitempty"`
-	// The position of this path in the paths for this EP.
-	Position int64 `jsonapi:"attr,position,omitempty"`
-	// Whether this path should be repeated until someone acknowledges the alert
-	Repeat jsonapi.NullableAttr[bool] `jsonapi:"attr,repeat,omitempty"`
-	// The number of times this path will be executed until someone acknowledges the alert
-	RepeatCount jsonapi.NullableAttr[int64] `jsonapi:"attr,repeat_count,omitempty"`
-	// Initial delay for escalation path in minutes. Maximum 1 week (10080).
-	InitialDelay int64 `jsonapi:"attr,initial_delay,omitempty"`
-	// Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.
-	RetriggerTimeoutMinutes jsonapi.NullableAttr[int64] `jsonapi:"attr,retrigger_timeout_minutes,omitempty"`
-	// Escalation path conditions
-	Rules []CreateEscalationPathRulesItem `jsonapi:"attr,rules,omitempty"`
-	// Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team.
-	NotificationTypeRules []CreateEscalationPathNotificationTypeRulesItem `jsonapi:"attr,notification_type_rules,omitempty"`
-	// Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team.
-	NotificationTypeFallback string `jsonapi:"attr,notification_type_fallback,omitempty"`
-	// Time zone used for time restrictions.
-	TimeRestrictionTimeZone jsonapi.NullableAttr[string] `jsonapi:"attr,time_restriction_time_zone,omitempty"`
-	// If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.
-	TimeRestrictions []CreateEscalationPathTimeRestrictionsItem `jsonapi:"attr,time_restrictions,omitempty"`
-}
+func (c *Client) EscalationPathGet(ctx context.Context, id string, params *rootly.GetEscalationPathParams) (*EscalationPath, error) {
+	resp, err := c.ClientWithResponses.GetEscalationPathWithResponse(ctx, id, params)
+	if err != nil {
+		return nil, err
+	} else if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 
-type CreateEscalationPathRulesItem struct {
-	// The type of the escalation path rule
-	RuleType string `jsonapi:"attr,rule_type,omitempty"`
-	// Alert urgency ids for which this escalation path should be used
-	UrgencyIds []string `jsonapi:"attr,urgency_ids,omitempty"`
-	// Whether the escalation path should be used within working hours
-	WithinWorkingHour bool `jsonapi:"attr,within_working_hour,omitempty"`
-	// JSON path to extract value from payload
-	JsonPath string `jsonapi:"attr,json_path,omitempty"`
-	// Whether the alert must (or must not) have related incidents
-	Operator string `jsonapi:"attr,operator,omitempty"`
-	// Value with which JSON path value should be matched
-	Value jsonapi.NullableAttr[string] `jsonapi:"attr,value,omitempty"`
-	// Alert source values to match against (e.g., manual, datadog)
-	Values []string `jsonapi:"attr,values,omitempty"`
-	// The type of the fieldable (e.g., AlertField)
-	FieldableType string `jsonapi:"attr,fieldable_type,omitempty"`
-	// The ID of the alert field
-	FieldableId string `jsonapi:"attr,fieldable_id,omitempty"`
-	// Service ids for which this escalation path should be used
-	ServiceIds []string `jsonapi:"attr,service_ids,omitempty"`
-	// Time zone for the deferral window
-	TimeZone string `jsonapi:"attr,time_zone,omitempty"`
-	// Time windows during which alerts are deferred
-	TimeBlocks []CreateEscalationPathRulesItemTimeBlocksItem `jsonapi:"attr,time_blocks,omitempty"`
-}
+	var item EscalationPath
+	if err := jsonapi.UnmarshalPayload(bytes.NewReader(resp.Body), &item); err != nil {
+		return nil, err
+	}
 
-type CreateEscalationPathRulesItemTimeBlocksItem struct {
-	// Unique ID of the time block
-	Id        string `jsonapi:"attr,id,omitempty"`
-	Monday    bool   `jsonapi:"attr,monday,omitempty"`
-	Tuesday   bool   `jsonapi:"attr,tuesday,omitempty"`
-	Wednesday bool   `jsonapi:"attr,wednesday,omitempty"`
-	Thursday  bool   `jsonapi:"attr,thursday,omitempty"`
-	Friday    bool   `jsonapi:"attr,friday,omitempty"`
-	Saturday  bool   `jsonapi:"attr,saturday,omitempty"`
-	Sunday    bool   `jsonapi:"attr,sunday,omitempty"`
-	// Formatted as HH:MM
-	StartTime string `jsonapi:"attr,start_time,omitempty"`
-	// Formatted as HH:MM
-	EndTime string `jsonapi:"attr,end_time,omitempty"`
-	AllDay  bool   `jsonapi:"attr,all_day,omitempty"`
-	// Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
-	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position,omitempty"`
-	// Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
-	EndsNextDay bool `jsonapi:"attr,ends_next_day,omitempty"`
-}
-
-type CreateEscalationPathNotificationTypeRulesItem struct {
-	// Outcome when this rule matches
-	NotificationType string `jsonapi:"attr,notification_type,omitempty"`
-	// Whether all or any of the rule's conditions must match
-	MatchMode string `jsonapi:"attr,match_mode,omitempty"`
-	// Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.
-	Conditions []CreateEscalationPathNotificationTypeRulesItemConditionsItem `jsonapi:"attr,conditions"`
-}
-
-type CreateEscalationPathNotificationTypeRulesItemConditionsItem struct {
-	// The type of the escalation path rule
-	RuleType string `jsonapi:"attr,rule_type,omitempty"`
-	// Alert urgency ids for which this escalation path should be used
-	UrgencyIds []string `jsonapi:"attr,urgency_ids,omitempty"`
-	// Whether the escalation path should be used within working hours
-	WithinWorkingHour bool `jsonapi:"attr,within_working_hour,omitempty"`
-	// JSON path to extract value from payload
-	JsonPath string `jsonapi:"attr,json_path,omitempty"`
-	// Whether the alert must (or must not) have related incidents
-	Operator string `jsonapi:"attr,operator,omitempty"`
-	// Value with which JSON path value should be matched
-	Value jsonapi.NullableAttr[string] `jsonapi:"attr,value,omitempty"`
-	// Alert source values to match against (e.g., manual, datadog)
-	Values []string `jsonapi:"attr,values,omitempty"`
-	// The type of the fieldable (e.g., AlertField)
-	FieldableType string `jsonapi:"attr,fieldable_type,omitempty"`
-	// The ID of the alert field
-	FieldableId string `jsonapi:"attr,fieldable_id,omitempty"`
-	// Service ids for which this escalation path should be used
-	ServiceIds []string `jsonapi:"attr,service_ids,omitempty"`
-	// Time zone for the deferral window
-	TimeZone string `jsonapi:"attr,time_zone,omitempty"`
-	// Time windows during which alerts are deferred
-	TimeBlocks []CreateEscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem `jsonapi:"attr,time_blocks,omitempty"`
-}
-
-type CreateEscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem struct {
-	// Unique ID of the time block
-	Id        string `jsonapi:"attr,id,omitempty"`
-	Monday    bool   `jsonapi:"attr,monday,omitempty"`
-	Tuesday   bool   `jsonapi:"attr,tuesday,omitempty"`
-	Wednesday bool   `jsonapi:"attr,wednesday,omitempty"`
-	Thursday  bool   `jsonapi:"attr,thursday,omitempty"`
-	Friday    bool   `jsonapi:"attr,friday,omitempty"`
-	Saturday  bool   `jsonapi:"attr,saturday,omitempty"`
-	Sunday    bool   `jsonapi:"attr,sunday,omitempty"`
-	// Formatted as HH:MM
-	StartTime string `jsonapi:"attr,start_time,omitempty"`
-	// Formatted as HH:MM
-	EndTime string `jsonapi:"attr,end_time,omitempty"`
-	AllDay  bool   `jsonapi:"attr,all_day,omitempty"`
-	// Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
-	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position,omitempty"`
-	// Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
-	EndsNextDay bool `jsonapi:"attr,ends_next_day,omitempty"`
-}
-
-type CreateEscalationPathTimeRestrictionsItem struct {
-	StartDay string `jsonapi:"attr,start_day"`
-	// Formatted as HH:MM
-	StartTime string `jsonapi:"attr,start_time"`
-	EndDay    string `jsonapi:"attr,end_day"`
-	// Formatted as HH:MM
-	EndTime string `jsonapi:"attr,end_time"`
-}
-
-type UpdateEscalationPath struct {
-	// The name of the escalation path
-	Name string `jsonapi:"attr,name,omitempty"`
-	// Position of the escalation policy level
-	NotificationType string `jsonapi:"attr,notification_type,omitempty"`
-	// The type of escalation path. Cannot be changed after creation.
-	PathType string `jsonapi:"attr,path_type,omitempty"`
-	// What happens after a deferral path finishes.
-	AfterDeferralBehavior jsonapi.NullableAttr[string] `jsonapi:"attr,after_deferral_behavior,omitempty"`
-	// The escalation path to execute after this deferral path when after_deferral_behavior is execute_path.
-	AfterDeferralPathId jsonapi.NullableAttr[string] `jsonapi:"attr,after_deferral_path_id,omitempty"`
-	// Whether this escalation path is the default path
-	Default jsonapi.NullableAttr[bool] `jsonapi:"attr,default,omitempty"`
-	// How path rules are matched.
-	MatchMode string `jsonapi:"attr,match_mode,omitempty"`
-	// The position of this path in the paths for this EP.
-	Position int64 `jsonapi:"attr,position,omitempty"`
-	// Whether this path should be repeated until someone acknowledges the alert
-	Repeat jsonapi.NullableAttr[bool] `jsonapi:"attr,repeat,omitempty"`
-	// The number of times this path will be executed until someone acknowledges the alert
-	RepeatCount jsonapi.NullableAttr[int64] `jsonapi:"attr,repeat_count,omitempty"`
-	// Initial delay for escalation path in minutes. Maximum 1 week (10080).
-	InitialDelay int64 `jsonapi:"attr,initial_delay,omitempty"`
-	// Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.
-	RetriggerTimeoutMinutes jsonapi.NullableAttr[int64] `jsonapi:"attr,retrigger_timeout_minutes,omitempty"`
-	// Escalation path conditions
-	Rules []UpdateEscalationPathRulesItem `jsonapi:"attr,rules,omitempty"`
-	// Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team.
-	NotificationTypeRules []UpdateEscalationPathNotificationTypeRulesItem `jsonapi:"attr,notification_type_rules,omitempty"`
-	// Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team.
-	NotificationTypeFallback string `jsonapi:"attr,notification_type_fallback,omitempty"`
-	// Time zone used for time restrictions.
-	TimeRestrictionTimeZone jsonapi.NullableAttr[string] `jsonapi:"attr,time_restriction_time_zone,omitempty"`
-	// If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.
-	TimeRestrictions []UpdateEscalationPathTimeRestrictionsItem `jsonapi:"attr,time_restrictions,omitempty"`
-}
-
-type UpdateEscalationPathRulesItem struct {
-	// The type of the escalation path rule
-	RuleType string `jsonapi:"attr,rule_type,omitempty"`
-	// Alert urgency ids for which this escalation path should be used
-	UrgencyIds []string `jsonapi:"attr,urgency_ids,omitempty"`
-	// Whether the escalation path should be used within working hours
-	WithinWorkingHour bool `jsonapi:"attr,within_working_hour,omitempty"`
-	// JSON path to extract value from payload
-	JsonPath string `jsonapi:"attr,json_path,omitempty"`
-	// Whether the alert must (or must not) have related incidents
-	Operator string `jsonapi:"attr,operator,omitempty"`
-	// Value with which JSON path value should be matched
-	Value jsonapi.NullableAttr[string] `jsonapi:"attr,value,omitempty"`
-	// Alert source values to match against (e.g., manual, datadog)
-	Values []string `jsonapi:"attr,values,omitempty"`
-	// The type of the fieldable (e.g., AlertField)
-	FieldableType string `jsonapi:"attr,fieldable_type,omitempty"`
-	// The ID of the alert field
-	FieldableId string `jsonapi:"attr,fieldable_id,omitempty"`
-	// Service ids for which this escalation path should be used
-	ServiceIds []string `jsonapi:"attr,service_ids,omitempty"`
-	// Time zone for the deferral window
-	TimeZone string `jsonapi:"attr,time_zone,omitempty"`
-	// Time windows during which alerts are deferred
-	TimeBlocks []UpdateEscalationPathRulesItemTimeBlocksItem `jsonapi:"attr,time_blocks,omitempty"`
-}
-
-type UpdateEscalationPathRulesItemTimeBlocksItem struct {
-	// Unique ID of the time block
-	Id        string `jsonapi:"attr,id,omitempty"`
-	Monday    bool   `jsonapi:"attr,monday,omitempty"`
-	Tuesday   bool   `jsonapi:"attr,tuesday,omitempty"`
-	Wednesday bool   `jsonapi:"attr,wednesday,omitempty"`
-	Thursday  bool   `jsonapi:"attr,thursday,omitempty"`
-	Friday    bool   `jsonapi:"attr,friday,omitempty"`
-	Saturday  bool   `jsonapi:"attr,saturday,omitempty"`
-	Sunday    bool   `jsonapi:"attr,sunday,omitempty"`
-	// Formatted as HH:MM
-	StartTime string `jsonapi:"attr,start_time,omitempty"`
-	// Formatted as HH:MM
-	EndTime string `jsonapi:"attr,end_time,omitempty"`
-	AllDay  bool   `jsonapi:"attr,all_day,omitempty"`
-	// Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
-	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position,omitempty"`
-	// Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
-	EndsNextDay bool `jsonapi:"attr,ends_next_day,omitempty"`
-}
-
-type UpdateEscalationPathNotificationTypeRulesItem struct {
-	// Outcome when this rule matches
-	NotificationType string `jsonapi:"attr,notification_type,omitempty"`
-	// Whether all or any of the rule's conditions must match
-	MatchMode string `jsonapi:"attr,match_mode,omitempty"`
-	// Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.
-	Conditions []UpdateEscalationPathNotificationTypeRulesItemConditionsItem `jsonapi:"attr,conditions"`
-}
-
-type UpdateEscalationPathNotificationTypeRulesItemConditionsItem struct {
-	// The type of the escalation path rule
-	RuleType string `jsonapi:"attr,rule_type,omitempty"`
-	// Alert urgency ids for which this escalation path should be used
-	UrgencyIds []string `jsonapi:"attr,urgency_ids,omitempty"`
-	// Whether the escalation path should be used within working hours
-	WithinWorkingHour bool `jsonapi:"attr,within_working_hour,omitempty"`
-	// JSON path to extract value from payload
-	JsonPath string `jsonapi:"attr,json_path,omitempty"`
-	// Whether the alert must (or must not) have related incidents
-	Operator string `jsonapi:"attr,operator,omitempty"`
-	// Value with which JSON path value should be matched
-	Value jsonapi.NullableAttr[string] `jsonapi:"attr,value,omitempty"`
-	// Alert source values to match against (e.g., manual, datadog)
-	Values []string `jsonapi:"attr,values,omitempty"`
-	// The type of the fieldable (e.g., AlertField)
-	FieldableType string `jsonapi:"attr,fieldable_type,omitempty"`
-	// The ID of the alert field
-	FieldableId string `jsonapi:"attr,fieldable_id,omitempty"`
-	// Service ids for which this escalation path should be used
-	ServiceIds []string `jsonapi:"attr,service_ids,omitempty"`
-	// Time zone for the deferral window
-	TimeZone string `jsonapi:"attr,time_zone,omitempty"`
-	// Time windows during which alerts are deferred
-	TimeBlocks []UpdateEscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem `jsonapi:"attr,time_blocks,omitempty"`
-}
-
-type UpdateEscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem struct {
-	// Unique ID of the time block
-	Id        string `jsonapi:"attr,id,omitempty"`
-	Monday    bool   `jsonapi:"attr,monday,omitempty"`
-	Tuesday   bool   `jsonapi:"attr,tuesday,omitempty"`
-	Wednesday bool   `jsonapi:"attr,wednesday,omitempty"`
-	Thursday  bool   `jsonapi:"attr,thursday,omitempty"`
-	Friday    bool   `jsonapi:"attr,friday,omitempty"`
-	Saturday  bool   `jsonapi:"attr,saturday,omitempty"`
-	Sunday    bool   `jsonapi:"attr,sunday,omitempty"`
-	// Formatted as HH:MM
-	StartTime string `jsonapi:"attr,start_time,omitempty"`
-	// Formatted as HH:MM
-	EndTime string `jsonapi:"attr,end_time,omitempty"`
-	AllDay  bool   `jsonapi:"attr,all_day,omitempty"`
-	// Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
-	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position,omitempty"`
-	// Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
-	EndsNextDay bool `jsonapi:"attr,ends_next_day,omitempty"`
-}
-
-type UpdateEscalationPathTimeRestrictionsItem struct {
-	StartDay string `jsonapi:"attr,start_day,omitempty"`
-	// Formatted as HH:MM
-	StartTime string `jsonapi:"attr,start_time,omitempty"`
-	EndDay    string `jsonapi:"attr,end_day,omitempty"`
-	// Formatted as HH:MM
-	EndTime string `jsonapi:"attr,end_time,omitempty"`
+	return &item, nil
 }
 
 func (c *Client) EscalationPathList(ctx context.Context, escalationPolicyId string, params *rootly.ListEscalationPathsParams) (*[]EscalationPath, error) {
@@ -509,25 +301,9 @@ func (c *Client) EscalationPathList(ctx context.Context, escalationPolicyId stri
 	return &items, nil
 }
 
-func (c *Client) EscalationPathGet(ctx context.Context, id string, params *rootly.GetEscalationPathParams) (*EscalationPath, error) {
-	resp, err := c.ClientWithResponses.GetEscalationPathWithResponse(ctx, id, params)
-	if err != nil {
-		return nil, err
-	} else if resp == nil {
-		return nil, fmt.Errorf("empty response")
-	}
-
-	var item EscalationPath
-	if err := jsonapi.UnmarshalPayload(bytes.NewReader(resp.Body), &item); err != nil {
-		return nil, err
-	}
-
-	return &item, nil
-}
-
-func (c *Client) EscalationPathCreate(ctx context.Context, escalationPolicyId string, req CreateEscalationPath) (*EscalationPath, error) {
+func (c *Client) EscalationPathCreate(ctx context.Context, escalationPolicyId string, data EscalationPath) (*EscalationPath, error) {
 	var buf bytes.Buffer
-	if err := jsonapi.MarshalPayload(&buf, &req); err != nil {
+	if err := jsonapi.MarshalPayload(&buf, &data); err != nil {
 		return nil, err
 	}
 
@@ -546,13 +322,29 @@ func (c *Client) EscalationPathCreate(ctx context.Context, escalationPolicyId st
 	return &item, nil
 }
 
-func (c *Client) EscalationPathUpdate(ctx context.Context, id string, req UpdateEscalationPath) (*EscalationPath, error) {
+func (c *Client) EscalationPathUpdate(ctx context.Context, id string, data EscalationPath) (*EscalationPath, error) {
 	var buf bytes.Buffer
-	if err := jsonapi.MarshalPayload(&buf, &req); err != nil {
+	if err := jsonapi.MarshalPayload(&buf, &data); err != nil {
 		return nil, err
 	}
 
 	resp, err := c.ClientWithResponses.UpdateEscalationPathWithBodyWithResponse(ctx, id, "application/vnd.api+json", bytes.NewReader(buf.Bytes()))
+	if err != nil {
+		return nil, err
+	} else if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
+
+	var item EscalationPath
+	if err := jsonapi.UnmarshalPayload(bytes.NewReader(resp.Body), &item); err != nil {
+		return nil, err
+	}
+
+	return &item, nil
+}
+
+func (c *Client) EscalationPathDelete(ctx context.Context, id string) (*EscalationPath, error) {
+	resp, err := c.ClientWithResponses.DeleteEscalationPathWithResponse(ctx, id)
 	if err != nil {
 		return nil, err
 	} else if resp == nil {

@@ -3,10 +3,9 @@ import { oas30 } from "openapi3-ts";
 import { match } from "ts-pattern";
 import type { ResolvedDataSourceConfig } from "./schema";
 import { assertSchemaObject } from "./types";
-import { produce } from "immer";
 import { tfAttributeCustomType, tfAttributeSchemaType } from "./go-types";
-import { getParametersByOperationId, removeReference } from "./openapi";
-import { generateModel } from "./generate-common";
+import { getParametersByOperationId } from "./openapi";
+import { generateModels } from "./generate-common";
 
 export function generateDataSource({
   doc,
@@ -107,7 +106,7 @@ func (d *${config.goNames.struct}) Read(ctx context.Context, req datasource.Read
   resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-${generateModel({
+${generateModels({
   config,
   schema: config.schemas.resolved,
   baseName: camelize(singularize(config.name)),

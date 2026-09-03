@@ -1,149 +1,139 @@
 import { camelize } from "inflection";
-import type { oas30 } from "openapi3-ts";
 import { match, P } from "ts-pattern";
+import type { AttributeType } from "./schema";
 
 export function tfAttributeSchemaType({
-  schema,
+  attribute,
+  type,
 }: {
-  schema: oas30.SchemaObject;
+  attribute: AttributeType;
+  type: "attribute" | "block";
 }) {
-  return match(schema)
-    .with({ type: "string" }, () => "schema.StringAttribute")
-    .with({ type: "boolean" }, () => "schema.BoolAttribute")
-    .with({ type: "integer" }, () => "schema.Int64Attribute")
-    .with({ type: "object" }, () => "schema.SingleNestedAttribute")
+  return match([attribute, type])
+    .with([{ type: "string" }, P.any], () => "schema.StringAttribute")
+    .with([{ type: "bool" }, P.any], () => "schema.BoolAttribute")
+    .with([{ type: "int64" }, P.any], () => "schema.Int64Attribute")
+    .with([{ type: "object" }, P.any], () => "schema.SingleNestedAttribute")
+    .with([{ type: "list" }, P.any], () => "schema.ListAttribute")
     .with(
-      {
-        type: "array",
-        items: { type: P.union("string", "integer") },
-        "x-tf-collection-type": P.union("list", "set"),
-      },
-      (schema) => `schema.${camelize(schema["x-tf-collection-type"])}Attribute`,
+      [{ type: "list_nested" }, "attribute"],
+      () => "schema.ListNestedAttribute",
     )
+    .with([{ type: "list_nested" }, "block"], () => "schema.ListNestedBlock")
+    .with([{ type: "set" }, P.any], () => "schema.SetAttribute")
     .with(
-      {
-        type: "array",
-        items: { type: "object" },
-        "x-tf-collection-type": P.union("list", "set"),
-      },
-      (schema) =>
-        `schema.${camelize(schema["x-tf-collection-type"])}NestedAttribute`,
+      [{ type: "set_nested" }, "attribute"],
+      () => "schema.SetNestedAttribute",
     )
+    .with([{ type: "set_nested" }, "block"], () => "schema.SetNestedBlock")
     .exhaustive();
 }
 
 export function tfAttributeValidatorType({
-  schema,
+  attribute,
 }: {
-  schema: oas30.SchemaObject;
+  attribute: AttributeType;
 }) {
-  return match(schema)
+  return match(attribute)
     .with({ type: "string" }, () => "validator.String")
-    .with({ type: "boolean" }, () => "validator.Bool")
-    .with({ type: "integer" }, () => "validator.Int64")
+    .with({ type: "bool" }, () => "validator.Bool")
+    .with({ type: "int64" }, () => "validator.Int64")
     .with({ type: "object" }, () => "validator.Object")
-    .with({ type: "array" }, () => "validator.Set")
+    .with({ type: "list" }, () => "validator.List")
+    .with({ type: "list_nested" }, () => "validator.List")
+    .with({ type: "set" }, () => "validator.Set")
+    .with({ type: "set_nested" }, () => "validator.Set")
+    .exhaustive();
+}
+
+export function tfAttributePlanModifierType({
+  attribute,
+}: {
+  attribute: AttributeType;
+}) {
+  return match(attribute)
+    .with({ type: "string" }, () => "planmodifier.String")
+    .with({ type: "int64" }, () => "planmodifier.Int64")
+    .with({ type: "bool" }, () => "planmodifier.Bool")
     .exhaustive();
 }
 
 export function tfAttributeValueType({
-  schema,
+  attribute,
   parent,
-  name,
 }: {
-  schema: oas30.SchemaObject;
+  attribute: AttributeType;
   parent: string;
-  name: string;
 }) {
-  return match(schema)
+  return match(attribute)
     .with({ type: "string" }, () => "types.String")
-    .with({ type: "boolean" }, () => "types.Bool")
-    .with({ type: "integer" }, () => "types.Int64")
+    .with({ type: "bool" }, () => "types.Bool")
+    .with({ type: "int64" }, () => "types.Int64")
     .with(
-      { type: "object" },
-      () => `supertypes.SingleNestedObjectValueOf[${parent}${name}]`,
+      { type: "list" },
+      (attribute) => `supertypes.ListValueOf[${attribute.elementType}]`,
     )
     .with(
-      {
-        type: "array",
-        items: { type: "string" },
-        "x-tf-collection-type": P.union("list", "set"),
-      },
-      (schema) =>
-        `supertypes.${camelize(schema["x-tf-collection-type"])}ValueOf[string]`,
+      { type: "set" },
+      (attribute) => `supertypes.SetValueOf[${attribute.elementType}]`,
     )
     .with(
-      {
-        type: "array",
-        items: { type: "integer" },
-        "x-tf-collection-type": P.union("list", "set"),
-      },
-      (schema) =>
-        `supertypes.${camelize(schema["x-tf-collection-type"])}ValueOf[int64]`,
+      { type: "set_nested" },
+      (attribute) =>
+        `supertypes.SetNestedObjectValueOf[${parent}${camelize(attribute.name)}Item]`,
     )
     .with(
-      {
-        type: "array",
-        items: { type: "object" },
-        "x-tf-collection-type": P.union("list", "set"),
-      },
-      (schema) =>
-        `supertypes.${camelize(schema["x-tf-collection-type"])}NestedObjectValueOf[${parent}${name}Item]`,
+      { type: "list_nested" },
+      (attribute) =>
+        `supertypes.ListNestedObjectValueOf[${parent}${camelize(attribute.name)}Item]`,
     )
     .exhaustive();
 }
 
 export function tfAttributeCustomType({
-  schema,
   parent,
-  name,
+  attribute,
 }: {
-  schema: oas30.SchemaObject;
-  parent: string | null;
-  name: string;
+  parent: string;
+  attribute: AttributeType;
 }) {
-  return match(schema)
+  return match(attribute)
     .with(
       { type: "object" },
-      () =>
-        `supertypes.NewSingleNestedObjectTypeOf[${parent}${camelize(name)}](ctx)`,
+      (value) =>
+        `supertypes.NewSingleNestedObjectTypeOf[${parent}${camelize(value.name)}](ctx)`,
     )
     .with(
-      {
-        type: "array",
-        items: { type: "string" },
-        "x-tf-collection-type": P.union("list", "set"),
-      },
-      (schema) =>
-        `supertypes.New${camelize(schema["x-tf-collection-type"])}TypeOf[string](ctx)`,
+      { type: "list", elementType: P.string },
+      (value) => `supertypes.NewListTypeOf[${value.elementType}](ctx)`,
     )
     .with(
-      {
-        type: "array",
-        items: { type: "integer" },
-        "x-tf-collection-type": P.union("list", "set"),
-      },
-      (schema) =>
-        `supertypes.New${camelize(schema["x-tf-collection-type"])}TypeOf[int64](ctx)`,
+      { type: "set", elementType: "string" },
+      (value) => `supertypes.NewSetTypeOf[${value.elementType}](ctx)`,
     )
     .with(
-      {
-        type: "array",
-        items: { type: "object" },
-        "x-tf-collection-type": P.union("list", "set"),
-      },
-      (schema) =>
-        `supertypes.New${camelize(schema["x-tf-collection-type"])}NestedObjectTypeOf[${parent}${camelize(name)}Item](ctx)`,
+      { type: "list_nested" },
+      (value) =>
+        `supertypes.NewListNestedObjectTypeOf[${parent}${camelize(value.name)}Item](ctx)`,
+    )
+    .with(
+      { type: "set_nested" },
+      (value) =>
+        `supertypes.NewSetNestedObjectTypeOf[${parent}${camelize(value.name)}Item](ctx)`,
     )
     .otherwise(() => null);
 }
 
-export function tfAttributeDefault({ schema }: { schema: oas30.SchemaObject }) {
-  if (!schema.default) {
+export function tfAttributeDefault({
+  attribute,
+}: {
+  attribute: AttributeType;
+}) {
+  if (!("default" in attribute) || !attribute.default) {
     return null;
   }
 
-  return match(schema)
+  return match(attribute)
     .with(
       { type: "string", default: P.string },
       (schema) =>

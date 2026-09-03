@@ -21,7 +21,7 @@ export function getParametersByOperationId({
   operationId: string;
   onlyLocations?: oas30.ParameterLocation[];
   excludeLocations?: oas30.ParameterLocation[];
-}): oas30.ParameterObject[] | null {
+}): oas30.ParameterObject[] {
   for (const [_, pathItem] of Object.entries(doc.paths)) {
     for (const method of HTTP_METHODS) {
       const operation = pathItem[method];
@@ -43,7 +43,8 @@ export function getParametersByOperationId({
       }
     }
   }
-  return null;
+
+  return [];
 }
 
 export function removeReference<T>(value: undefined): undefined;

@@ -9,12 +9,16 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
+	"github.com/rootlyhq/jsonapi"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diagutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/jsonapitypes"
 	"github.com/samber/lo"
 )
@@ -39,10 +43,6 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 	resp.Schema = schema.Schema{
 		MarkdownDescription: "Manages an escalation path.",
 		Attributes: map[string]schema.Attribute{
-			"id": schema.StringAttribute{
-				MarkdownDescription: "The ID of the escalation path.",
-				Computed:            true,
-			},
 			"name": schema.StringAttribute{
 				MarkdownDescription: "The name of the escalation path.",
 				Required:            true,
@@ -66,8 +66,10 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"escalation_policy_id": schema.StringAttribute{
-				MarkdownDescription: "The ID of the escalation policy.",
-				Computed:            true,
+				Required: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.RequiresReplace(),
+				},
 			},
 			"after_deferral_behavior": schema.StringAttribute{
 				MarkdownDescription: "What happens after a deferral path finishes. Value must be one of `re_evaluate`, `execute_path`.",
@@ -123,12 +125,35 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 				MarkdownDescription: "Date of last update.",
 				Computed:            true,
 			},
-			"rules": schema.SetNestedAttribute{
-				MarkdownDescription: "Escalation path rules.",
+			"notification_type_fallback": schema.StringAttribute{
+				MarkdownDescription: "Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team. Value must be one of `audible`, `quiet`.",
 				Optional:            true,
 				Computed:            true,
+				Default:             stringdefault.StaticString("audible"),
+				Validators: []validator.String{
+					stringvalidator.OneOf("audible", "quiet"),
+				},
+			},
+			"time_restriction_time_zone": schema.StringAttribute{
+				MarkdownDescription: "Time zone used for time restrictions. Value must be one of `International Date Line West`, `Etc/GMT+12`, `American Samoa`, `Pacific/Pago_Pago`, `Midway Island`, `Pacific/Midway`, `Hawaii`, `Pacific/Honolulu`, `Alaska`, `America/Juneau`, `Pacific Time (US & Canada)`, `America/Los_Angeles`, `Tijuana`, `America/Tijuana`, `Arizona`, `America/Phoenix`, `Mazatlan`, `America/Mazatlan`, `Mountain Time (US & Canada)`, `America/Denver`, `Central America`, `America/Guatemala`, `Central Time (US & Canada)`, `America/Chicago`, `Chihuahua`, `America/Chihuahua`, `Guadalajara`, `America/Mexico_City`, `Mexico City`, `Monterrey`, `America/Monterrey`, `Saskatchewan`, `America/Regina`, `Bogota`, `America/Bogota`, `Eastern Time (US & Canada)`, `America/New_York`, `Indiana (East)`, `America/Indiana/Indianapolis`, `Lima`, `America/Lima`, `Quito`, `Atlantic Time (Canada)`, `America/Halifax`, `Caracas`, `America/Caracas`, `Georgetown`, `America/Guyana`, `La Paz`, `America/La_Paz`, `Puerto Rico`, `America/Puerto_Rico`, `Santiago`, `America/Santiago`, `Newfoundland`, `America/St_Johns`, `Asuncion`, `America/Asuncion`, `Brasilia`, `America/Sao_Paulo`, `Buenos Aires`, `America/Argentina/Buenos_Aires`, `Montevideo`, `America/Montevideo`, `Greenland`, `America/Nuuk`, `Mid-Atlantic`, `Atlantic/South_Georgia`, `Azores`, `Atlantic/Azores`, `Cape Verde Is.`, `Atlantic/Cape_Verde`, `Edinburgh`, `Europe/London`, `Lisbon`, `Europe/Lisbon`, `London`, `Monrovia`, `Africa/Monrovia`, `UTC`, `Etc/UTC`, `Amsterdam`, `Europe/Amsterdam`, `Belgrade`, `Europe/Belgrade`, `Berlin`, `Europe/Berlin`, `Bern`, `Europe/Zurich`, `Bratislava`, `Europe/Bratislava`, `Brussels`, `Europe/Brussels`, `Budapest`, `Europe/Budapest`, `Casablanca`, `Africa/Casablanca`, `Copenhagen`, `Europe/Copenhagen`, `Dublin`, `Europe/Dublin`, `Ljubljana`, `Europe/Ljubljana`, `Madrid`, `Europe/Madrid`, `Paris`, `Europe/Paris`, `Prague`, `Europe/Prague`, `Rome`, `Europe/Rome`, `Sarajevo`, `Europe/Sarajevo`, `Skopje`, `Europe/Skopje`, `Stockholm`, `Europe/Stockholm`, `Vienna`, `Europe/Vienna`, `Warsaw`, `Europe/Warsaw`, `West Central Africa`, `Africa/Algiers`, `Zagreb`, `Europe/Zagreb`, `Zurich`, `Athens`, `Europe/Athens`, `Bucharest`, `Europe/Bucharest`, `Cairo`, `Africa/Cairo`, `Harare`, `Africa/Harare`, `Helsinki`, `Europe/Helsinki`, `Jerusalem`, `Asia/Jerusalem`, `Kaliningrad`, `Europe/Kaliningrad`, `Kyiv`, `Europe/Kiev`, `Pretoria`, `Africa/Johannesburg`, `Riga`, `Europe/Riga`, `Sofia`, `Europe/Sofia`, `Tallinn`, `Europe/Tallinn`, `Vilnius`, `Europe/Vilnius`, `Baghdad`, `Asia/Baghdad`, `Istanbul`, `Europe/Istanbul`, `Kuwait`, `Asia/Kuwait`, `Minsk`, `Europe/Minsk`, `Moscow`, `Europe/Moscow`, `Nairobi`, `Africa/Nairobi`, `Riyadh`, `Asia/Riyadh`, `St. Petersburg`, `Volgograd`, `Europe/Volgograd`, `Tehran`, `Asia/Tehran`, `Abu Dhabi`, `Asia/Muscat`, `Baku`, `Asia/Baku`, `Muscat`, `Samara`, `Europe/Samara`, `Tbilisi`, `Asia/Tbilisi`, `Yerevan`, `Asia/Yerevan`, `Kabul`, `Asia/Kabul`, `Almaty`, `Asia/Almaty`, `Astana`, `Ekaterinburg`, `Asia/Yekaterinburg`, `Islamabad`, `Asia/Karachi`, `Karachi`, `Tashkent`, `Asia/Tashkent`, `Chennai`, `Asia/Kolkata`, `Kolkata`, `Mumbai`, `New Delhi`, `Sri Jayawardenepura`, `Asia/Colombo`, `Kathmandu`, `Asia/Kathmandu`, `Dhaka`, `Asia/Dhaka`, `Urumqi`, `Asia/Urumqi`, `Rangoon`, `Asia/Rangoon`, `Bangkok`, `Asia/Bangkok`, `Hanoi`, `Jakarta`, `Asia/Jakarta`, `Krasnoyarsk`, `Asia/Krasnoyarsk`, `Novosibirsk`, `Asia/Novosibirsk`, `Beijing`, `Asia/Shanghai`, `Chongqing`, `Asia/Chongqing`, `Hong Kong`, `Asia/Hong_Kong`, `Irkutsk`, `Asia/Irkutsk`, `Kuala Lumpur`, `Asia/Kuala_Lumpur`, `Perth`, `Australia/Perth`, `Singapore`, `Asia/Singapore`, `Taipei`, `Asia/Taipei`, `Ulaanbaatar`, `Asia/Ulaanbaatar`, `Osaka`, `Asia/Tokyo`, `Sapporo`, `Seoul`, `Asia/Seoul`, `Tokyo`, `Yakutsk`, `Asia/Yakutsk`, `Adelaide`, `Australia/Adelaide`, `Darwin`, `Australia/Darwin`, `Brisbane`, `Australia/Brisbane`, `Canberra`, `Australia/Canberra`, `Guam`, `Pacific/Guam`, `Hobart`, `Australia/Hobart`, `Melbourne`, `Australia/Melbourne`, `Port Moresby`, `Pacific/Port_Moresby`, `Sydney`, `Australia/Sydney`, `Vladivostok`, `Asia/Vladivostok`, `Magadan`, `Asia/Magadan`, `New Caledonia`, `Pacific/Noumea`, `Solomon Is.`, `Pacific/Guadalcanal`, `Srednekolymsk`, `Asia/Srednekolymsk`, `Auckland`, `Pacific/Auckland`, `Fiji`, `Pacific/Fiji`, `Kamchatka`, `Asia/Kamchatka`, `Marshall Is.`, `Pacific/Majuro`, `Wellington`, `Chatham Is.`, `Pacific/Chatham`, `Nuku'alofa`, `Pacific/Tongatapu`, `Samoa`, `Pacific/Apia`, `Tokelau Is.`, `Pacific/Fakaofo`, `America/Adak`, `America/Atka`, `US/Aleutian`, `America/Vancouver`, `Canada/Pacific`, `America/Miquelon`, `Australia/Eucla`, `Australia/LHI`, `Australia/Lord_Howe`, `Chile/EasterIsland`, `Pacific/Easter`, `Pacific/Gambier`, `Pacific/Pitcairn`, `Pacific/Marquesas`, `Pacific/Kiritimati`, `Pacific/Norfolk`.",
+				Optional:            true,
+				Computed:            true,
+				Validators: []validator.String{
+					stringvalidator.OneOf("International Date Line West", "Etc/GMT+12", "American Samoa", "Pacific/Pago_Pago", "Midway Island", "Pacific/Midway", "Hawaii", "Pacific/Honolulu", "Alaska", "America/Juneau", "Pacific Time (US & Canada)", "America/Los_Angeles", "Tijuana", "America/Tijuana", "Arizona", "America/Phoenix", "Mazatlan", "America/Mazatlan", "Mountain Time (US & Canada)", "America/Denver", "Central America", "America/Guatemala", "Central Time (US & Canada)", "America/Chicago", "Chihuahua", "America/Chihuahua", "Guadalajara", "America/Mexico_City", "Mexico City", "Monterrey", "America/Monterrey", "Saskatchewan", "America/Regina", "Bogota", "America/Bogota", "Eastern Time (US & Canada)", "America/New_York", "Indiana (East)", "America/Indiana/Indianapolis", "Lima", "America/Lima", "Quito", "Atlantic Time (Canada)", "America/Halifax", "Caracas", "America/Caracas", "Georgetown", "America/Guyana", "La Paz", "America/La_Paz", "Puerto Rico", "America/Puerto_Rico", "Santiago", "America/Santiago", "Newfoundland", "America/St_Johns", "Asuncion", "America/Asuncion", "Brasilia", "America/Sao_Paulo", "Buenos Aires", "America/Argentina/Buenos_Aires", "Montevideo", "America/Montevideo", "Greenland", "America/Nuuk", "Mid-Atlantic", "Atlantic/South_Georgia", "Azores", "Atlantic/Azores", "Cape Verde Is.", "Atlantic/Cape_Verde", "Edinburgh", "Europe/London", "Lisbon", "Europe/Lisbon", "London", "Monrovia", "Africa/Monrovia", "UTC", "Etc/UTC", "Amsterdam", "Europe/Amsterdam", "Belgrade", "Europe/Belgrade", "Berlin", "Europe/Berlin", "Bern", "Europe/Zurich", "Bratislava", "Europe/Bratislava", "Brussels", "Europe/Brussels", "Budapest", "Europe/Budapest", "Casablanca", "Africa/Casablanca", "Copenhagen", "Europe/Copenhagen", "Dublin", "Europe/Dublin", "Ljubljana", "Europe/Ljubljana", "Madrid", "Europe/Madrid", "Paris", "Europe/Paris", "Prague", "Europe/Prague", "Rome", "Europe/Rome", "Sarajevo", "Europe/Sarajevo", "Skopje", "Europe/Skopje", "Stockholm", "Europe/Stockholm", "Vienna", "Europe/Vienna", "Warsaw", "Europe/Warsaw", "West Central Africa", "Africa/Algiers", "Zagreb", "Europe/Zagreb", "Zurich", "Athens", "Europe/Athens", "Bucharest", "Europe/Bucharest", "Cairo", "Africa/Cairo", "Harare", "Africa/Harare", "Helsinki", "Europe/Helsinki", "Jerusalem", "Asia/Jerusalem", "Kaliningrad", "Europe/Kaliningrad", "Kyiv", "Europe/Kiev", "Pretoria", "Africa/Johannesburg", "Riga", "Europe/Riga", "Sofia", "Europe/Sofia", "Tallinn", "Europe/Tallinn", "Vilnius", "Europe/Vilnius", "Baghdad", "Asia/Baghdad", "Istanbul", "Europe/Istanbul", "Kuwait", "Asia/Kuwait", "Minsk", "Europe/Minsk", "Moscow", "Europe/Moscow", "Nairobi", "Africa/Nairobi", "Riyadh", "Asia/Riyadh", "St. Petersburg", "Volgograd", "Europe/Volgograd", "Tehran", "Asia/Tehran", "Abu Dhabi", "Asia/Muscat", "Baku", "Asia/Baku", "Muscat", "Samara", "Europe/Samara", "Tbilisi", "Asia/Tbilisi", "Yerevan", "Asia/Yerevan", "Kabul", "Asia/Kabul", "Almaty", "Asia/Almaty", "Astana", "Ekaterinburg", "Asia/Yekaterinburg", "Islamabad", "Asia/Karachi", "Karachi", "Tashkent", "Asia/Tashkent", "Chennai", "Asia/Kolkata", "Kolkata", "Mumbai", "New Delhi", "Sri Jayawardenepura", "Asia/Colombo", "Kathmandu", "Asia/Kathmandu", "Dhaka", "Asia/Dhaka", "Urumqi", "Asia/Urumqi", "Rangoon", "Asia/Rangoon", "Bangkok", "Asia/Bangkok", "Hanoi", "Jakarta", "Asia/Jakarta", "Krasnoyarsk", "Asia/Krasnoyarsk", "Novosibirsk", "Asia/Novosibirsk", "Beijing", "Asia/Shanghai", "Chongqing", "Asia/Chongqing", "Hong Kong", "Asia/Hong_Kong", "Irkutsk", "Asia/Irkutsk", "Kuala Lumpur", "Asia/Kuala_Lumpur", "Perth", "Australia/Perth", "Singapore", "Asia/Singapore", "Taipei", "Asia/Taipei", "Ulaanbaatar", "Asia/Ulaanbaatar", "Osaka", "Asia/Tokyo", "Sapporo", "Seoul", "Asia/Seoul", "Tokyo", "Yakutsk", "Asia/Yakutsk", "Adelaide", "Australia/Adelaide", "Darwin", "Australia/Darwin", "Brisbane", "Australia/Brisbane", "Canberra", "Australia/Canberra", "Guam", "Pacific/Guam", "Hobart", "Australia/Hobart", "Melbourne", "Australia/Melbourne", "Port Moresby", "Pacific/Port_Moresby", "Sydney", "Australia/Sydney", "Vladivostok", "Asia/Vladivostok", "Magadan", "Asia/Magadan", "New Caledonia", "Pacific/Noumea", "Solomon Is.", "Pacific/Guadalcanal", "Srednekolymsk", "Asia/Srednekolymsk", "Auckland", "Pacific/Auckland", "Fiji", "Pacific/Fiji", "Kamchatka", "Asia/Kamchatka", "Marshall Is.", "Pacific/Majuro", "Wellington", "Chatham Is.", "Pacific/Chatham", "Nuku'alofa", "Pacific/Tongatapu", "Samoa", "Pacific/Apia", "Tokelau Is.", "Pacific/Fakaofo", "America/Adak", "America/Atka", "US/Aleutian", "America/Vancouver", "Canada/Pacific", "America/Miquelon", "Australia/Eucla", "Australia/LHI", "Australia/Lord_Howe", "Chile/EasterIsland", "Pacific/Easter", "Pacific/Gambier", "Pacific/Pitcairn", "Pacific/Marquesas", "Pacific/Kiritimati", "Pacific/Norfolk"),
+				},
+			},
+			"id": schema.StringAttribute{
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+		},
+		Blocks: map[string]schema.Block{
+			"rules": schema.SetNestedBlock{
+				MarkdownDescription: "Escalation path rules.",
 				CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelRulesItem](ctx),
-				NestedObject: schema.NestedAttributeObject{
+				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"rule_type": schema.StringAttribute{
 							MarkdownDescription: "The type of the escalation path rule. Value must be one of `related_incidents`.",
@@ -197,12 +222,12 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 								stringvalidator.OneOf("International Date Line West", "Etc/GMT+12", "American Samoa", "Pacific/Pago_Pago", "Midway Island", "Pacific/Midway", "Hawaii", "Pacific/Honolulu", "Alaska", "America/Juneau", "Pacific Time (US & Canada)", "America/Los_Angeles", "Tijuana", "America/Tijuana", "Arizona", "America/Phoenix", "Mazatlan", "America/Mazatlan", "Mountain Time (US & Canada)", "America/Denver", "Central America", "America/Guatemala", "Central Time (US & Canada)", "America/Chicago", "Chihuahua", "America/Chihuahua", "Guadalajara", "America/Mexico_City", "Mexico City", "Monterrey", "America/Monterrey", "Saskatchewan", "America/Regina", "Bogota", "America/Bogota", "Eastern Time (US & Canada)", "America/New_York", "Indiana (East)", "America/Indiana/Indianapolis", "Lima", "America/Lima", "Quito", "Atlantic Time (Canada)", "America/Halifax", "Caracas", "America/Caracas", "Georgetown", "America/Guyana", "La Paz", "America/La_Paz", "Puerto Rico", "America/Puerto_Rico", "Santiago", "America/Santiago", "Newfoundland", "America/St_Johns", "Asuncion", "America/Asuncion", "Brasilia", "America/Sao_Paulo", "Buenos Aires", "America/Argentina/Buenos_Aires", "Montevideo", "America/Montevideo", "Greenland", "America/Nuuk", "Mid-Atlantic", "Atlantic/South_Georgia", "Azores", "Atlantic/Azores", "Cape Verde Is.", "Atlantic/Cape_Verde", "Edinburgh", "Europe/London", "Lisbon", "Europe/Lisbon", "London", "Monrovia", "Africa/Monrovia", "UTC", "Etc/UTC", "Amsterdam", "Europe/Amsterdam", "Belgrade", "Europe/Belgrade", "Berlin", "Europe/Berlin", "Bern", "Europe/Zurich", "Bratislava", "Europe/Bratislava", "Brussels", "Europe/Brussels", "Budapest", "Europe/Budapest", "Casablanca", "Africa/Casablanca", "Copenhagen", "Europe/Copenhagen", "Dublin", "Europe/Dublin", "Ljubljana", "Europe/Ljubljana", "Madrid", "Europe/Madrid", "Paris", "Europe/Paris", "Prague", "Europe/Prague", "Rome", "Europe/Rome", "Sarajevo", "Europe/Sarajevo", "Skopje", "Europe/Skopje", "Stockholm", "Europe/Stockholm", "Vienna", "Europe/Vienna", "Warsaw", "Europe/Warsaw", "West Central Africa", "Africa/Algiers", "Zagreb", "Europe/Zagreb", "Zurich", "Athens", "Europe/Athens", "Bucharest", "Europe/Bucharest", "Cairo", "Africa/Cairo", "Harare", "Africa/Harare", "Helsinki", "Europe/Helsinki", "Jerusalem", "Asia/Jerusalem", "Kaliningrad", "Europe/Kaliningrad", "Kyiv", "Europe/Kiev", "Pretoria", "Africa/Johannesburg", "Riga", "Europe/Riga", "Sofia", "Europe/Sofia", "Tallinn", "Europe/Tallinn", "Vilnius", "Europe/Vilnius", "Baghdad", "Asia/Baghdad", "Istanbul", "Europe/Istanbul", "Kuwait", "Asia/Kuwait", "Minsk", "Europe/Minsk", "Moscow", "Europe/Moscow", "Nairobi", "Africa/Nairobi", "Riyadh", "Asia/Riyadh", "St. Petersburg", "Volgograd", "Europe/Volgograd", "Tehran", "Asia/Tehran", "Abu Dhabi", "Asia/Muscat", "Baku", "Asia/Baku", "Muscat", "Samara", "Europe/Samara", "Tbilisi", "Asia/Tbilisi", "Yerevan", "Asia/Yerevan", "Kabul", "Asia/Kabul", "Almaty", "Asia/Almaty", "Astana", "Ekaterinburg", "Asia/Yekaterinburg", "Islamabad", "Asia/Karachi", "Karachi", "Tashkent", "Asia/Tashkent", "Chennai", "Asia/Kolkata", "Kolkata", "Mumbai", "New Delhi", "Sri Jayawardenepura", "Asia/Colombo", "Kathmandu", "Asia/Kathmandu", "Dhaka", "Asia/Dhaka", "Urumqi", "Asia/Urumqi", "Rangoon", "Asia/Rangoon", "Bangkok", "Asia/Bangkok", "Hanoi", "Jakarta", "Asia/Jakarta", "Krasnoyarsk", "Asia/Krasnoyarsk", "Novosibirsk", "Asia/Novosibirsk", "Beijing", "Asia/Shanghai", "Chongqing", "Asia/Chongqing", "Hong Kong", "Asia/Hong_Kong", "Irkutsk", "Asia/Irkutsk", "Kuala Lumpur", "Asia/Kuala_Lumpur", "Perth", "Australia/Perth", "Singapore", "Asia/Singapore", "Taipei", "Asia/Taipei", "Ulaanbaatar", "Asia/Ulaanbaatar", "Osaka", "Asia/Tokyo", "Sapporo", "Seoul", "Asia/Seoul", "Tokyo", "Yakutsk", "Asia/Yakutsk", "Adelaide", "Australia/Adelaide", "Darwin", "Australia/Darwin", "Brisbane", "Australia/Brisbane", "Canberra", "Australia/Canberra", "Guam", "Pacific/Guam", "Hobart", "Australia/Hobart", "Melbourne", "Australia/Melbourne", "Port Moresby", "Pacific/Port_Moresby", "Sydney", "Australia/Sydney", "Vladivostok", "Asia/Vladivostok", "Magadan", "Asia/Magadan", "New Caledonia", "Pacific/Noumea", "Solomon Is.", "Pacific/Guadalcanal", "Srednekolymsk", "Asia/Srednekolymsk", "Auckland", "Pacific/Auckland", "Fiji", "Pacific/Fiji", "Kamchatka", "Asia/Kamchatka", "Marshall Is.", "Pacific/Majuro", "Wellington", "Chatham Is.", "Pacific/Chatham", "Nuku'alofa", "Pacific/Tongatapu", "Samoa", "Pacific/Apia", "Tokelau Is.", "Pacific/Fakaofo", "America/Adak", "America/Atka", "US/Aleutian", "America/Vancouver", "Canada/Pacific", "America/Miquelon", "Australia/Eucla", "Australia/LHI", "Australia/Lord_Howe", "Chile/EasterIsland", "Pacific/Easter", "Pacific/Gambier", "Pacific/Pitcairn", "Pacific/Marquesas", "Pacific/Kiritimati", "Pacific/Norfolk"),
 							},
 						},
-						"time_blocks": schema.SetNestedAttribute{
+					},
+					Blocks: map[string]schema.Block{
+						"time_blocks": schema.SetNestedBlock{
 							MarkdownDescription: "Time windows during which alerts are deferred.",
-							Optional:            true,
-							Computed:            true,
 							CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelRulesItemTimeBlocksItem](ctx),
-							NestedObject: schema.NestedAttributeObject{
+							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"id": schema.StringAttribute{
 										MarkdownDescription: "Unique ID of the time block.",
@@ -267,12 +292,10 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 					},
 				},
 			},
-			"notification_type_rules": schema.SetNestedAttribute{
+			"notification_type_rules": schema.SetNestedBlock{
 				MarkdownDescription: "Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team.",
-				Optional:            true,
-				Computed:            true,
 				CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItem](ctx),
-				NestedObject: schema.NestedAttributeObject{
+				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"notification_type": schema.StringAttribute{
 							MarkdownDescription: "Outcome when this rule matches. Value must be one of `audible`, `quiet`.",
@@ -292,11 +315,12 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 								stringvalidator.OneOf("match-all-rules", "match-any-rule"),
 							},
 						},
-						"conditions": schema.SetNestedAttribute{
+					},
+					Blocks: map[string]schema.Block{
+						"conditions": schema.SetNestedBlock{
 							MarkdownDescription: "Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.",
-							Required:            true,
 							CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem](ctx),
-							NestedObject: schema.NestedAttributeObject{
+							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"rule_type": schema.StringAttribute{
 										MarkdownDescription: "The type of the escalation path rule. Value must be one of `related_incidents`.",
@@ -365,12 +389,12 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 											stringvalidator.OneOf("International Date Line West", "Etc/GMT+12", "American Samoa", "Pacific/Pago_Pago", "Midway Island", "Pacific/Midway", "Hawaii", "Pacific/Honolulu", "Alaska", "America/Juneau", "Pacific Time (US & Canada)", "America/Los_Angeles", "Tijuana", "America/Tijuana", "Arizona", "America/Phoenix", "Mazatlan", "America/Mazatlan", "Mountain Time (US & Canada)", "America/Denver", "Central America", "America/Guatemala", "Central Time (US & Canada)", "America/Chicago", "Chihuahua", "America/Chihuahua", "Guadalajara", "America/Mexico_City", "Mexico City", "Monterrey", "America/Monterrey", "Saskatchewan", "America/Regina", "Bogota", "America/Bogota", "Eastern Time (US & Canada)", "America/New_York", "Indiana (East)", "America/Indiana/Indianapolis", "Lima", "America/Lima", "Quito", "Atlantic Time (Canada)", "America/Halifax", "Caracas", "America/Caracas", "Georgetown", "America/Guyana", "La Paz", "America/La_Paz", "Puerto Rico", "America/Puerto_Rico", "Santiago", "America/Santiago", "Newfoundland", "America/St_Johns", "Asuncion", "America/Asuncion", "Brasilia", "America/Sao_Paulo", "Buenos Aires", "America/Argentina/Buenos_Aires", "Montevideo", "America/Montevideo", "Greenland", "America/Nuuk", "Mid-Atlantic", "Atlantic/South_Georgia", "Azores", "Atlantic/Azores", "Cape Verde Is.", "Atlantic/Cape_Verde", "Edinburgh", "Europe/London", "Lisbon", "Europe/Lisbon", "London", "Monrovia", "Africa/Monrovia", "UTC", "Etc/UTC", "Amsterdam", "Europe/Amsterdam", "Belgrade", "Europe/Belgrade", "Berlin", "Europe/Berlin", "Bern", "Europe/Zurich", "Bratislava", "Europe/Bratislava", "Brussels", "Europe/Brussels", "Budapest", "Europe/Budapest", "Casablanca", "Africa/Casablanca", "Copenhagen", "Europe/Copenhagen", "Dublin", "Europe/Dublin", "Ljubljana", "Europe/Ljubljana", "Madrid", "Europe/Madrid", "Paris", "Europe/Paris", "Prague", "Europe/Prague", "Rome", "Europe/Rome", "Sarajevo", "Europe/Sarajevo", "Skopje", "Europe/Skopje", "Stockholm", "Europe/Stockholm", "Vienna", "Europe/Vienna", "Warsaw", "Europe/Warsaw", "West Central Africa", "Africa/Algiers", "Zagreb", "Europe/Zagreb", "Zurich", "Athens", "Europe/Athens", "Bucharest", "Europe/Bucharest", "Cairo", "Africa/Cairo", "Harare", "Africa/Harare", "Helsinki", "Europe/Helsinki", "Jerusalem", "Asia/Jerusalem", "Kaliningrad", "Europe/Kaliningrad", "Kyiv", "Europe/Kiev", "Pretoria", "Africa/Johannesburg", "Riga", "Europe/Riga", "Sofia", "Europe/Sofia", "Tallinn", "Europe/Tallinn", "Vilnius", "Europe/Vilnius", "Baghdad", "Asia/Baghdad", "Istanbul", "Europe/Istanbul", "Kuwait", "Asia/Kuwait", "Minsk", "Europe/Minsk", "Moscow", "Europe/Moscow", "Nairobi", "Africa/Nairobi", "Riyadh", "Asia/Riyadh", "St. Petersburg", "Volgograd", "Europe/Volgograd", "Tehran", "Asia/Tehran", "Abu Dhabi", "Asia/Muscat", "Baku", "Asia/Baku", "Muscat", "Samara", "Europe/Samara", "Tbilisi", "Asia/Tbilisi", "Yerevan", "Asia/Yerevan", "Kabul", "Asia/Kabul", "Almaty", "Asia/Almaty", "Astana", "Ekaterinburg", "Asia/Yekaterinburg", "Islamabad", "Asia/Karachi", "Karachi", "Tashkent", "Asia/Tashkent", "Chennai", "Asia/Kolkata", "Kolkata", "Mumbai", "New Delhi", "Sri Jayawardenepura", "Asia/Colombo", "Kathmandu", "Asia/Kathmandu", "Dhaka", "Asia/Dhaka", "Urumqi", "Asia/Urumqi", "Rangoon", "Asia/Rangoon", "Bangkok", "Asia/Bangkok", "Hanoi", "Jakarta", "Asia/Jakarta", "Krasnoyarsk", "Asia/Krasnoyarsk", "Novosibirsk", "Asia/Novosibirsk", "Beijing", "Asia/Shanghai", "Chongqing", "Asia/Chongqing", "Hong Kong", "Asia/Hong_Kong", "Irkutsk", "Asia/Irkutsk", "Kuala Lumpur", "Asia/Kuala_Lumpur", "Perth", "Australia/Perth", "Singapore", "Asia/Singapore", "Taipei", "Asia/Taipei", "Ulaanbaatar", "Asia/Ulaanbaatar", "Osaka", "Asia/Tokyo", "Sapporo", "Seoul", "Asia/Seoul", "Tokyo", "Yakutsk", "Asia/Yakutsk", "Adelaide", "Australia/Adelaide", "Darwin", "Australia/Darwin", "Brisbane", "Australia/Brisbane", "Canberra", "Australia/Canberra", "Guam", "Pacific/Guam", "Hobart", "Australia/Hobart", "Melbourne", "Australia/Melbourne", "Port Moresby", "Pacific/Port_Moresby", "Sydney", "Australia/Sydney", "Vladivostok", "Asia/Vladivostok", "Magadan", "Asia/Magadan", "New Caledonia", "Pacific/Noumea", "Solomon Is.", "Pacific/Guadalcanal", "Srednekolymsk", "Asia/Srednekolymsk", "Auckland", "Pacific/Auckland", "Fiji", "Pacific/Fiji", "Kamchatka", "Asia/Kamchatka", "Marshall Is.", "Pacific/Majuro", "Wellington", "Chatham Is.", "Pacific/Chatham", "Nuku'alofa", "Pacific/Tongatapu", "Samoa", "Pacific/Apia", "Tokelau Is.", "Pacific/Fakaofo", "America/Adak", "America/Atka", "US/Aleutian", "America/Vancouver", "Canada/Pacific", "America/Miquelon", "Australia/Eucla", "Australia/LHI", "Australia/Lord_Howe", "Chile/EasterIsland", "Pacific/Easter", "Pacific/Gambier", "Pacific/Pitcairn", "Pacific/Marquesas", "Pacific/Kiritimati", "Pacific/Norfolk"),
 										},
 									},
-									"time_blocks": schema.SetNestedAttribute{
+								},
+								Blocks: map[string]schema.Block{
+									"time_blocks": schema.SetNestedBlock{
 										MarkdownDescription: "Time windows during which alerts are deferred.",
-										Optional:            true,
-										Computed:            true,
 										CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem](ctx),
-										NestedObject: schema.NestedAttributeObject{
+										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"id": schema.StringAttribute{
 													MarkdownDescription: "Unique ID of the time block.",
@@ -438,49 +462,36 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 					},
 				},
 			},
-			"notification_type_fallback": schema.StringAttribute{
-				MarkdownDescription: "Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team. Value must be one of `audible`, `quiet`.",
-				Optional:            true,
-				Computed:            true,
-				Default:             stringdefault.StaticString("audible"),
-				Validators: []validator.String{
-					stringvalidator.OneOf("audible", "quiet"),
-				},
-			},
-			"time_restriction_time_zone": schema.StringAttribute{
-				MarkdownDescription: "Time zone used for time restrictions. Value must be one of `International Date Line West`, `Etc/GMT+12`, `American Samoa`, `Pacific/Pago_Pago`, `Midway Island`, `Pacific/Midway`, `Hawaii`, `Pacific/Honolulu`, `Alaska`, `America/Juneau`, `Pacific Time (US & Canada)`, `America/Los_Angeles`, `Tijuana`, `America/Tijuana`, `Arizona`, `America/Phoenix`, `Mazatlan`, `America/Mazatlan`, `Mountain Time (US & Canada)`, `America/Denver`, `Central America`, `America/Guatemala`, `Central Time (US & Canada)`, `America/Chicago`, `Chihuahua`, `America/Chihuahua`, `Guadalajara`, `America/Mexico_City`, `Mexico City`, `Monterrey`, `America/Monterrey`, `Saskatchewan`, `America/Regina`, `Bogota`, `America/Bogota`, `Eastern Time (US & Canada)`, `America/New_York`, `Indiana (East)`, `America/Indiana/Indianapolis`, `Lima`, `America/Lima`, `Quito`, `Atlantic Time (Canada)`, `America/Halifax`, `Caracas`, `America/Caracas`, `Georgetown`, `America/Guyana`, `La Paz`, `America/La_Paz`, `Puerto Rico`, `America/Puerto_Rico`, `Santiago`, `America/Santiago`, `Newfoundland`, `America/St_Johns`, `Asuncion`, `America/Asuncion`, `Brasilia`, `America/Sao_Paulo`, `Buenos Aires`, `America/Argentina/Buenos_Aires`, `Montevideo`, `America/Montevideo`, `Greenland`, `America/Nuuk`, `Mid-Atlantic`, `Atlantic/South_Georgia`, `Azores`, `Atlantic/Azores`, `Cape Verde Is.`, `Atlantic/Cape_Verde`, `Edinburgh`, `Europe/London`, `Lisbon`, `Europe/Lisbon`, `London`, `Monrovia`, `Africa/Monrovia`, `UTC`, `Etc/UTC`, `Amsterdam`, `Europe/Amsterdam`, `Belgrade`, `Europe/Belgrade`, `Berlin`, `Europe/Berlin`, `Bern`, `Europe/Zurich`, `Bratislava`, `Europe/Bratislava`, `Brussels`, `Europe/Brussels`, `Budapest`, `Europe/Budapest`, `Casablanca`, `Africa/Casablanca`, `Copenhagen`, `Europe/Copenhagen`, `Dublin`, `Europe/Dublin`, `Ljubljana`, `Europe/Ljubljana`, `Madrid`, `Europe/Madrid`, `Paris`, `Europe/Paris`, `Prague`, `Europe/Prague`, `Rome`, `Europe/Rome`, `Sarajevo`, `Europe/Sarajevo`, `Skopje`, `Europe/Skopje`, `Stockholm`, `Europe/Stockholm`, `Vienna`, `Europe/Vienna`, `Warsaw`, `Europe/Warsaw`, `West Central Africa`, `Africa/Algiers`, `Zagreb`, `Europe/Zagreb`, `Zurich`, `Athens`, `Europe/Athens`, `Bucharest`, `Europe/Bucharest`, `Cairo`, `Africa/Cairo`, `Harare`, `Africa/Harare`, `Helsinki`, `Europe/Helsinki`, `Jerusalem`, `Asia/Jerusalem`, `Kaliningrad`, `Europe/Kaliningrad`, `Kyiv`, `Europe/Kiev`, `Pretoria`, `Africa/Johannesburg`, `Riga`, `Europe/Riga`, `Sofia`, `Europe/Sofia`, `Tallinn`, `Europe/Tallinn`, `Vilnius`, `Europe/Vilnius`, `Baghdad`, `Asia/Baghdad`, `Istanbul`, `Europe/Istanbul`, `Kuwait`, `Asia/Kuwait`, `Minsk`, `Europe/Minsk`, `Moscow`, `Europe/Moscow`, `Nairobi`, `Africa/Nairobi`, `Riyadh`, `Asia/Riyadh`, `St. Petersburg`, `Volgograd`, `Europe/Volgograd`, `Tehran`, `Asia/Tehran`, `Abu Dhabi`, `Asia/Muscat`, `Baku`, `Asia/Baku`, `Muscat`, `Samara`, `Europe/Samara`, `Tbilisi`, `Asia/Tbilisi`, `Yerevan`, `Asia/Yerevan`, `Kabul`, `Asia/Kabul`, `Almaty`, `Asia/Almaty`, `Astana`, `Ekaterinburg`, `Asia/Yekaterinburg`, `Islamabad`, `Asia/Karachi`, `Karachi`, `Tashkent`, `Asia/Tashkent`, `Chennai`, `Asia/Kolkata`, `Kolkata`, `Mumbai`, `New Delhi`, `Sri Jayawardenepura`, `Asia/Colombo`, `Kathmandu`, `Asia/Kathmandu`, `Dhaka`, `Asia/Dhaka`, `Urumqi`, `Asia/Urumqi`, `Rangoon`, `Asia/Rangoon`, `Bangkok`, `Asia/Bangkok`, `Hanoi`, `Jakarta`, `Asia/Jakarta`, `Krasnoyarsk`, `Asia/Krasnoyarsk`, `Novosibirsk`, `Asia/Novosibirsk`, `Beijing`, `Asia/Shanghai`, `Chongqing`, `Asia/Chongqing`, `Hong Kong`, `Asia/Hong_Kong`, `Irkutsk`, `Asia/Irkutsk`, `Kuala Lumpur`, `Asia/Kuala_Lumpur`, `Perth`, `Australia/Perth`, `Singapore`, `Asia/Singapore`, `Taipei`, `Asia/Taipei`, `Ulaanbaatar`, `Asia/Ulaanbaatar`, `Osaka`, `Asia/Tokyo`, `Sapporo`, `Seoul`, `Asia/Seoul`, `Tokyo`, `Yakutsk`, `Asia/Yakutsk`, `Adelaide`, `Australia/Adelaide`, `Darwin`, `Australia/Darwin`, `Brisbane`, `Australia/Brisbane`, `Canberra`, `Australia/Canberra`, `Guam`, `Pacific/Guam`, `Hobart`, `Australia/Hobart`, `Melbourne`, `Australia/Melbourne`, `Port Moresby`, `Pacific/Port_Moresby`, `Sydney`, `Australia/Sydney`, `Vladivostok`, `Asia/Vladivostok`, `Magadan`, `Asia/Magadan`, `New Caledonia`, `Pacific/Noumea`, `Solomon Is.`, `Pacific/Guadalcanal`, `Srednekolymsk`, `Asia/Srednekolymsk`, `Auckland`, `Pacific/Auckland`, `Fiji`, `Pacific/Fiji`, `Kamchatka`, `Asia/Kamchatka`, `Marshall Is.`, `Pacific/Majuro`, `Wellington`, `Chatham Is.`, `Pacific/Chatham`, `Nuku'alofa`, `Pacific/Tongatapu`, `Samoa`, `Pacific/Apia`, `Tokelau Is.`, `Pacific/Fakaofo`, `America/Adak`, `America/Atka`, `US/Aleutian`, `America/Vancouver`, `Canada/Pacific`, `America/Miquelon`, `Australia/Eucla`, `Australia/LHI`, `Australia/Lord_Howe`, `Chile/EasterIsland`, `Pacific/Easter`, `Pacific/Gambier`, `Pacific/Pitcairn`, `Pacific/Marquesas`, `Pacific/Kiritimati`, `Pacific/Norfolk`.",
-				Optional:            true,
-				Computed:            true,
-				Validators: []validator.String{
-					stringvalidator.OneOf("International Date Line West", "Etc/GMT+12", "American Samoa", "Pacific/Pago_Pago", "Midway Island", "Pacific/Midway", "Hawaii", "Pacific/Honolulu", "Alaska", "America/Juneau", "Pacific Time (US & Canada)", "America/Los_Angeles", "Tijuana", "America/Tijuana", "Arizona", "America/Phoenix", "Mazatlan", "America/Mazatlan", "Mountain Time (US & Canada)", "America/Denver", "Central America", "America/Guatemala", "Central Time (US & Canada)", "America/Chicago", "Chihuahua", "America/Chihuahua", "Guadalajara", "America/Mexico_City", "Mexico City", "Monterrey", "America/Monterrey", "Saskatchewan", "America/Regina", "Bogota", "America/Bogota", "Eastern Time (US & Canada)", "America/New_York", "Indiana (East)", "America/Indiana/Indianapolis", "Lima", "America/Lima", "Quito", "Atlantic Time (Canada)", "America/Halifax", "Caracas", "America/Caracas", "Georgetown", "America/Guyana", "La Paz", "America/La_Paz", "Puerto Rico", "America/Puerto_Rico", "Santiago", "America/Santiago", "Newfoundland", "America/St_Johns", "Asuncion", "America/Asuncion", "Brasilia", "America/Sao_Paulo", "Buenos Aires", "America/Argentina/Buenos_Aires", "Montevideo", "America/Montevideo", "Greenland", "America/Nuuk", "Mid-Atlantic", "Atlantic/South_Georgia", "Azores", "Atlantic/Azores", "Cape Verde Is.", "Atlantic/Cape_Verde", "Edinburgh", "Europe/London", "Lisbon", "Europe/Lisbon", "London", "Monrovia", "Africa/Monrovia", "UTC", "Etc/UTC", "Amsterdam", "Europe/Amsterdam", "Belgrade", "Europe/Belgrade", "Berlin", "Europe/Berlin", "Bern", "Europe/Zurich", "Bratislava", "Europe/Bratislava", "Brussels", "Europe/Brussels", "Budapest", "Europe/Budapest", "Casablanca", "Africa/Casablanca", "Copenhagen", "Europe/Copenhagen", "Dublin", "Europe/Dublin", "Ljubljana", "Europe/Ljubljana", "Madrid", "Europe/Madrid", "Paris", "Europe/Paris", "Prague", "Europe/Prague", "Rome", "Europe/Rome", "Sarajevo", "Europe/Sarajevo", "Skopje", "Europe/Skopje", "Stockholm", "Europe/Stockholm", "Vienna", "Europe/Vienna", "Warsaw", "Europe/Warsaw", "West Central Africa", "Africa/Algiers", "Zagreb", "Europe/Zagreb", "Zurich", "Athens", "Europe/Athens", "Bucharest", "Europe/Bucharest", "Cairo", "Africa/Cairo", "Harare", "Africa/Harare", "Helsinki", "Europe/Helsinki", "Jerusalem", "Asia/Jerusalem", "Kaliningrad", "Europe/Kaliningrad", "Kyiv", "Europe/Kiev", "Pretoria", "Africa/Johannesburg", "Riga", "Europe/Riga", "Sofia", "Europe/Sofia", "Tallinn", "Europe/Tallinn", "Vilnius", "Europe/Vilnius", "Baghdad", "Asia/Baghdad", "Istanbul", "Europe/Istanbul", "Kuwait", "Asia/Kuwait", "Minsk", "Europe/Minsk", "Moscow", "Europe/Moscow", "Nairobi", "Africa/Nairobi", "Riyadh", "Asia/Riyadh", "St. Petersburg", "Volgograd", "Europe/Volgograd", "Tehran", "Asia/Tehran", "Abu Dhabi", "Asia/Muscat", "Baku", "Asia/Baku", "Muscat", "Samara", "Europe/Samara", "Tbilisi", "Asia/Tbilisi", "Yerevan", "Asia/Yerevan", "Kabul", "Asia/Kabul", "Almaty", "Asia/Almaty", "Astana", "Ekaterinburg", "Asia/Yekaterinburg", "Islamabad", "Asia/Karachi", "Karachi", "Tashkent", "Asia/Tashkent", "Chennai", "Asia/Kolkata", "Kolkata", "Mumbai", "New Delhi", "Sri Jayawardenepura", "Asia/Colombo", "Kathmandu", "Asia/Kathmandu", "Dhaka", "Asia/Dhaka", "Urumqi", "Asia/Urumqi", "Rangoon", "Asia/Rangoon", "Bangkok", "Asia/Bangkok", "Hanoi", "Jakarta", "Asia/Jakarta", "Krasnoyarsk", "Asia/Krasnoyarsk", "Novosibirsk", "Asia/Novosibirsk", "Beijing", "Asia/Shanghai", "Chongqing", "Asia/Chongqing", "Hong Kong", "Asia/Hong_Kong", "Irkutsk", "Asia/Irkutsk", "Kuala Lumpur", "Asia/Kuala_Lumpur", "Perth", "Australia/Perth", "Singapore", "Asia/Singapore", "Taipei", "Asia/Taipei", "Ulaanbaatar", "Asia/Ulaanbaatar", "Osaka", "Asia/Tokyo", "Sapporo", "Seoul", "Asia/Seoul", "Tokyo", "Yakutsk", "Asia/Yakutsk", "Adelaide", "Australia/Adelaide", "Darwin", "Australia/Darwin", "Brisbane", "Australia/Brisbane", "Canberra", "Australia/Canberra", "Guam", "Pacific/Guam", "Hobart", "Australia/Hobart", "Melbourne", "Australia/Melbourne", "Port Moresby", "Pacific/Port_Moresby", "Sydney", "Australia/Sydney", "Vladivostok", "Asia/Vladivostok", "Magadan", "Asia/Magadan", "New Caledonia", "Pacific/Noumea", "Solomon Is.", "Pacific/Guadalcanal", "Srednekolymsk", "Asia/Srednekolymsk", "Auckland", "Pacific/Auckland", "Fiji", "Pacific/Fiji", "Kamchatka", "Asia/Kamchatka", "Marshall Is.", "Pacific/Majuro", "Wellington", "Chatham Is.", "Pacific/Chatham", "Nuku'alofa", "Pacific/Tongatapu", "Samoa", "Pacific/Apia", "Tokelau Is.", "Pacific/Fakaofo", "America/Adak", "America/Atka", "US/Aleutian", "America/Vancouver", "Canada/Pacific", "America/Miquelon", "Australia/Eucla", "Australia/LHI", "Australia/Lord_Howe", "Chile/EasterIsland", "Pacific/Easter", "Pacific/Gambier", "Pacific/Pitcairn", "Pacific/Marquesas", "Pacific/Kiritimati", "Pacific/Norfolk"),
-				},
-			},
-			"time_restrictions": schema.SetNestedAttribute{
+			"time_restrictions": schema.SetNestedBlock{
 				MarkdownDescription: "If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.",
-				Optional:            true,
-				Computed:            true,
 				CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelTimeRestrictionsItem](ctx),
-				NestedObject: schema.NestedAttributeObject{
+				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"start_day": schema.StringAttribute{
-							Required: true,
+							MarkdownDescription: "Value must be one of `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.",
+							Optional:            true,
+							Computed:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"),
 							},
 						},
 						"start_time": schema.StringAttribute{
 							MarkdownDescription: "Formatted as HH:MM.",
-							Required:            true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"end_day": schema.StringAttribute{
-							Required: true,
+							MarkdownDescription: "Value must be one of `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.",
+							Optional:            true,
+							Computed:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"),
 							},
 						},
 						"end_time": schema.StringAttribute{
 							MarkdownDescription: "Formatted as HH:MM.",
-							Required:            true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
@@ -490,7 +501,40 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 }
 
 func (r *EscalationPathResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	// Create logic will be generated here
+	var data EscalationPathResourceModel
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	reqItem := diagutils.MergeDiagnostics(data.ToApiForCreate(ctx))(&resp.Diagnostics)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	res, err := r.client.EscalationPathCreate(ctx, data.EscalationPolicyId.ValueString(), *reqItem)
+	if err != nil {
+		resp.Diagnostics.AddError("Unable to create Escalation path", err.Error())
+	} else if res == nil {
+		resp.Diagnostics.AddError("Unable to create Escalation path", "Unable to create, got nil response")
+	}
+
+	data.Id = types.StringValue(res.Id)
+
+	item, err := r.client.EscalationPathGet(ctx, data.Id.ValueString(), nil)
+	if err != nil {
+		resp.Diagnostics.AddError("Unable to read Escalation path", err.Error())
+	} else if item == nil {
+		resp.Diagnostics.AddError("Unable to read Escalation path", "Unable to read, got nil response")
+	}
+
+	resp.Diagnostics.Append(data.FromApi(ctx, *item)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *EscalationPathResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
@@ -501,7 +545,7 @@ func (r *EscalationPathResource) Read(ctx context.Context, req resource.ReadRequ
 		return
 	}
 
-	item, err := r.client.EscalationPathGet(ctx, data.Id.ValueString())
+	item, err := r.client.EscalationPathGet(ctx, data.Id.ValueString(), nil)
 	if err != nil {
 		if errors.Is(err, client.NotFoundError{}) {
 			resp.Diagnostics.AddWarning("Unable to read Escalation path", "Resource not found, it may have been deleted")
@@ -524,7 +568,40 @@ func (r *EscalationPathResource) Read(ctx context.Context, req resource.ReadRequ
 }
 
 func (r *EscalationPathResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	// Update logic will be generated here
+	var data EscalationPathResourceModel
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	reqItem := diagutils.MergeDiagnostics(data.ToApiForUpdate(ctx))(&resp.Diagnostics)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	res, err := r.client.EscalationPathUpdate(ctx, data.Id.ValueString(), *reqItem)
+	if err != nil {
+		resp.Diagnostics.AddError("Unable to update Escalation path", err.Error())
+	} else if res == nil {
+		resp.Diagnostics.AddError("Unable to update Escalation path", "Unable to update, got nil response")
+	}
+
+	data.Id = types.StringValue(res.Id)
+
+	item, err := r.client.EscalationPathGet(ctx, data.Id.ValueString(), nil)
+	if err != nil {
+		resp.Diagnostics.AddError("Unable to read Escalation path", err.Error())
+	} else if item == nil {
+		resp.Diagnostics.AddError("Unable to read Escalation path", "Unable to read, got nil response")
+	}
+
+	resp.Diagnostics.Append(data.FromApi(ctx, *item)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *EscalationPathResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
@@ -535,7 +612,7 @@ func (r *EscalationPathResource) Delete(ctx context.Context, req resource.Delete
 		return
 	}
 
-	err := r.legacyClient.DeleteEscalationPath(data.Id.ValueString())
+	_, err := r.client.EscalationPathDelete(ctx, data.Id.ValueString())
 	if err != nil {
 		if errors.Is(err, client.NotFoundError{}) {
 			return
@@ -549,7 +626,6 @@ func (r *EscalationPathResource) ImportState(ctx context.Context, req resource.I
 }
 
 type EscalationPathResourceModel struct {
-	Id                       types.String                                                                            `tfsdk:"id"`
 	Name                     types.String                                                                            `tfsdk:"name"`
 	Default                  types.Bool                                                                              `tfsdk:"default"`
 	NotificationType         types.String                                                                            `tfsdk:"notification_type"`
@@ -565,66 +641,275 @@ type EscalationPathResourceModel struct {
 	RetriggerTimeoutMinutes  types.Int64                                                                             `tfsdk:"retrigger_timeout_minutes"`
 	CreatedAt                types.String                                                                            `tfsdk:"created_at"`
 	UpdatedAt                types.String                                                                            `tfsdk:"updated_at"`
-	Rules                    supertypes.SetNestedObjectValueOf[EscalationPathResourceModelRulesItem]                 `tfsdk:"rules"`
-	NotificationTypeRules    supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItem] `tfsdk:"notification_type_rules"`
 	NotificationTypeFallback types.String                                                                            `tfsdk:"notification_type_fallback"`
 	TimeRestrictionTimeZone  types.String                                                                            `tfsdk:"time_restriction_time_zone"`
+	Id                       types.String                                                                            `tfsdk:"id"`
+	Rules                    supertypes.SetNestedObjectValueOf[EscalationPathResourceModelRulesItem]                 `tfsdk:"rules"`
+	NotificationTypeRules    supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItem] `tfsdk:"notification_type_rules"`
 	TimeRestrictions         supertypes.SetNestedObjectValueOf[EscalationPathResourceModelTimeRestrictionsItem]      `tfsdk:"time_restrictions"`
 }
 
 func (m *EscalationPathResourceModel) FromApi(ctx context.Context, data apiclient.EscalationPath) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.Id = types.StringValue(data.Id)
-	m.Name = types.StringValue(data.Name)
-	m.Default = types.BoolValue(data.Default)
-	m.NotificationType = types.StringValue(data.NotificationType)
-	m.PathType = types.StringValue(data.PathType)
-	m.EscalationPolicyId = types.StringValue(data.EscalationPolicyId)
+	m.Name = jsonapitypes.NullableStringValue(data.Name)
+	m.Default = jsonapitypes.NullableBoolValue(data.Default)
+	m.NotificationType = jsonapitypes.NullableStringValue(data.NotificationType)
+	m.PathType = jsonapitypes.NullableStringValue(data.PathType)
+	// escalation_policy_id is not returned
 	m.AfterDeferralBehavior = jsonapitypes.NullableStringValue(data.AfterDeferralBehavior)
 	m.AfterDeferralPathId = jsonapitypes.NullableStringValue(data.AfterDeferralPathId)
-	m.MatchMode = types.StringValue(data.MatchMode)
-	m.Position = types.Int64Value(data.Position)
+	m.MatchMode = jsonapitypes.NullableStringValue(data.MatchMode)
+	m.Position = jsonapitypes.NullableInt64Value(data.Position)
 	m.Repeat = jsonapitypes.NullableBoolValue(data.Repeat)
 	m.RepeatCount = jsonapitypes.NullableInt64Value(data.RepeatCount)
-	m.InitialDelay = types.Int64Value(data.InitialDelay)
+	m.InitialDelay = jsonapitypes.NullableInt64Value(data.InitialDelay)
 	m.RetriggerTimeoutMinutes = jsonapitypes.NullableInt64Value(data.RetriggerTimeoutMinutes)
-	m.CreatedAt = types.StringValue(data.CreatedAt)
-	m.UpdatedAt = types.StringValue(data.UpdatedAt)
+	m.CreatedAt = jsonapitypes.NullableStringValue(data.CreatedAt)
+	m.UpdatedAt = jsonapitypes.NullableStringValue(data.UpdatedAt)
+	m.NotificationTypeFallback = jsonapitypes.NullableStringValue(data.NotificationTypeFallback)
+	m.TimeRestrictionTimeZone = jsonapitypes.NullableStringValue(data.TimeRestrictionTimeZone)
+	// id is not returned
 	m.Rules = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelRulesItem] {
-		return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.Rules, func(vv apiclient.EscalationPathRulesItem, _ int) EscalationPathResourceModelRulesItem {
-			var mm EscalationPathResourceModelRulesItem
-			diags.Append(mm.FromApi(ctx, vv)...)
-			return mm
-		}))
+		if v, err := data.Rules.Get(); err == nil {
+			return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathRulesItem, _ int) EscalationPathResourceModelRulesItem {
+				var mm EscalationPathResourceModelRulesItem
+				diags.Append(mm.FromApi(ctx, vv)...)
+				return mm
+			}))
+		}
+		return supertypes.NewSetNestedObjectValueOfNull[EscalationPathResourceModelRulesItem](ctx)
 	})()
 	m.NotificationTypeRules = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItem] {
-		return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.NotificationTypeRules, func(vv apiclient.EscalationPathNotificationTypeRulesItem, _ int) EscalationPathResourceModelNotificationTypeRulesItem {
-			var mm EscalationPathResourceModelNotificationTypeRulesItem
-			diags.Append(mm.FromApi(ctx, vv)...)
-			return mm
-		}))
+		if v, err := data.NotificationTypeRules.Get(); err == nil {
+			return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathNotificationTypeRulesItem, _ int) EscalationPathResourceModelNotificationTypeRulesItem {
+				var mm EscalationPathResourceModelNotificationTypeRulesItem
+				diags.Append(mm.FromApi(ctx, vv)...)
+				return mm
+			}))
+		}
+		return supertypes.NewSetNestedObjectValueOfNull[EscalationPathResourceModelNotificationTypeRulesItem](ctx)
 	})()
-	m.NotificationTypeFallback = types.StringValue(data.NotificationTypeFallback)
-	m.TimeRestrictionTimeZone = jsonapitypes.NullableStringValue(data.TimeRestrictionTimeZone)
 	m.TimeRestrictions = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelTimeRestrictionsItem] {
-		return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.TimeRestrictions, func(vv apiclient.EscalationPathTimeRestrictionsItem, _ int) EscalationPathResourceModelTimeRestrictionsItem {
-			var mm EscalationPathResourceModelTimeRestrictionsItem
-			diags.Append(mm.FromApi(ctx, vv)...)
-			return mm
-		}))
+		if v, err := data.TimeRestrictions.Get(); err == nil {
+			return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathTimeRestrictionsItem, _ int) EscalationPathResourceModelTimeRestrictionsItem {
+				var mm EscalationPathResourceModelTimeRestrictionsItem
+				diags.Append(mm.FromApi(ctx, vv)...)
+				return mm
+			}))
+		}
+		return supertypes.NewSetNestedObjectValueOfNull[EscalationPathResourceModelTimeRestrictionsItem](ctx)
 	})()
 
 	return diags
 }
 
-func (m EscalationPathResourceModel) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPath, diag.Diagnostics) {
-	var m apiclient.CreateEscalationPath
+func (m *EscalationPathResourceModel) ToApiForCreate(ctx context.Context) (*apiclient.EscalationPath, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	// TODO: Implement ToCreateApi for EscalationPathResourceModel
+	data := apiclient.EscalationPath{}
+	data.Name = jsonapitypes.NewNullableFromString(m.Name)
+	data.Default = jsonapitypes.NewNullableFromBool(m.Default)
+	data.NotificationType = jsonapitypes.NewNullableFromString(m.NotificationType)
+	data.PathType = jsonapitypes.NewNullableFromString(m.PathType)
+	// escalation_policy_id is not available for create
+	data.AfterDeferralBehavior = jsonapitypes.NewNullableFromString(m.AfterDeferralBehavior)
+	data.AfterDeferralPathId = jsonapitypes.NewNullableFromString(m.AfterDeferralPathId)
+	data.MatchMode = jsonapitypes.NewNullableFromString(m.MatchMode)
+	data.Position = jsonapitypes.NewNullableFromInt64(m.Position)
+	data.Repeat = jsonapitypes.NewNullableFromBool(m.Repeat)
+	data.RepeatCount = jsonapitypes.NewNullableFromInt64(m.RepeatCount)
+	data.InitialDelay = jsonapitypes.NewNullableFromInt64(m.InitialDelay)
+	data.RetriggerTimeoutMinutes = jsonapitypes.NewNullableFromInt64(m.RetriggerTimeoutMinutes)
+	// created_at is not available for create
+	// updated_at is not available for create
+	data.NotificationTypeFallback = jsonapitypes.NewNullableFromString(m.NotificationTypeFallback)
+	data.TimeRestrictionTimeZone = jsonapitypes.NewNullableFromString(m.TimeRestrictionTimeZone)
+	// id is not available for create
+	data.Rules = func() jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem] {
+		if m.Rules.IsUnknown() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem]{}
+		}
+		if m.Rules.IsNull() {
+			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathRulesItem]()
+		}
+		mm := diagutils.MergeDiagnostics(m.Rules.Get(ctx))(&diags)
+		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem]{}
+		}
+		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelRulesItem, _ int) apiclient.EscalationPathRulesItem {
+			if mmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathRulesItem{}
+			}
+			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForCreate(ctx))(&diags)
+			if diags.HasError() {
+				return apiclient.EscalationPathRulesItem{}
+			} else if mmmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathRulesItem{}
+			}
+			return *mmmm
+		}))
+	}()
+	data.NotificationTypeRules = func() jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem] {
+		if m.NotificationTypeRules.IsUnknown() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
+		}
+		if m.NotificationTypeRules.IsNull() {
+			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]()
+		}
+		mm := diagutils.MergeDiagnostics(m.NotificationTypeRules.Get(ctx))(&diags)
+		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
+		}
+		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItem, _ int) apiclient.EscalationPathNotificationTypeRulesItem {
+			if mmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathNotificationTypeRulesItem{}
+			}
+			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForCreate(ctx))(&diags)
+			if diags.HasError() {
+				return apiclient.EscalationPathNotificationTypeRulesItem{}
+			} else if mmmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathNotificationTypeRulesItem{}
+			}
+			return *mmmm
+		}))
+	}()
+	data.TimeRestrictions = func() jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem] {
+		if m.TimeRestrictions.IsUnknown() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]{}
+		}
+		if m.TimeRestrictions.IsNull() {
+			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]()
+		}
+		mm := diagutils.MergeDiagnostics(m.TimeRestrictions.Get(ctx))(&diags)
+		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]{}
+		}
+		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelTimeRestrictionsItem, _ int) apiclient.EscalationPathTimeRestrictionsItem {
+			if mmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathTimeRestrictionsItem{}
+			}
+			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForCreate(ctx))(&diags)
+			if diags.HasError() {
+				return apiclient.EscalationPathTimeRestrictionsItem{}
+			} else if mmmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathTimeRestrictionsItem{}
+			}
+			return *mmmm
+		}))
+	}()
 
-	return &m, diags
+	return &data, diags
+}
+
+func (m *EscalationPathResourceModel) ToApiForUpdate(ctx context.Context) (*apiclient.EscalationPath, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	data := apiclient.EscalationPath{}
+	data.Name = jsonapitypes.NewNullableFromString(m.Name)
+	data.Default = jsonapitypes.NewNullableFromBool(m.Default)
+	data.NotificationType = jsonapitypes.NewNullableFromString(m.NotificationType)
+	data.PathType = jsonapitypes.NewNullableFromString(m.PathType)
+	// escalation_policy_id is not available for update
+	data.AfterDeferralBehavior = jsonapitypes.NewNullableFromString(m.AfterDeferralBehavior)
+	data.AfterDeferralPathId = jsonapitypes.NewNullableFromString(m.AfterDeferralPathId)
+	data.MatchMode = jsonapitypes.NewNullableFromString(m.MatchMode)
+	data.Position = jsonapitypes.NewNullableFromInt64(m.Position)
+	data.Repeat = jsonapitypes.NewNullableFromBool(m.Repeat)
+	data.RepeatCount = jsonapitypes.NewNullableFromInt64(m.RepeatCount)
+	data.InitialDelay = jsonapitypes.NewNullableFromInt64(m.InitialDelay)
+	data.RetriggerTimeoutMinutes = jsonapitypes.NewNullableFromInt64(m.RetriggerTimeoutMinutes)
+	// created_at is not available for update
+	// updated_at is not available for update
+	data.NotificationTypeFallback = jsonapitypes.NewNullableFromString(m.NotificationTypeFallback)
+	data.TimeRestrictionTimeZone = jsonapitypes.NewNullableFromString(m.TimeRestrictionTimeZone)
+	// id is not available for update
+	data.Rules = func() jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem] {
+		if m.Rules.IsUnknown() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem]{}
+		}
+		if m.Rules.IsNull() {
+			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathRulesItem]()
+		}
+		mm := diagutils.MergeDiagnostics(m.Rules.Get(ctx))(&diags)
+		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem]{}
+		}
+		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelRulesItem, _ int) apiclient.EscalationPathRulesItem {
+			if mmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathRulesItem{}
+			}
+			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForUpdate(ctx))(&diags)
+			if diags.HasError() {
+				return apiclient.EscalationPathRulesItem{}
+			} else if mmmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathRulesItem{}
+			}
+			return *mmmm
+		}))
+	}()
+	data.NotificationTypeRules = func() jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem] {
+		if m.NotificationTypeRules.IsUnknown() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
+		}
+		if m.NotificationTypeRules.IsNull() {
+			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]()
+		}
+		mm := diagutils.MergeDiagnostics(m.NotificationTypeRules.Get(ctx))(&diags)
+		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
+		}
+		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItem, _ int) apiclient.EscalationPathNotificationTypeRulesItem {
+			if mmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathNotificationTypeRulesItem{}
+			}
+			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForUpdate(ctx))(&diags)
+			if diags.HasError() {
+				return apiclient.EscalationPathNotificationTypeRulesItem{}
+			} else if mmmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathNotificationTypeRulesItem{}
+			}
+			return *mmmm
+		}))
+	}()
+	data.TimeRestrictions = func() jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem] {
+		if m.TimeRestrictions.IsUnknown() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]{}
+		}
+		if m.TimeRestrictions.IsNull() {
+			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]()
+		}
+		mm := diagutils.MergeDiagnostics(m.TimeRestrictions.Get(ctx))(&diags)
+		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]{}
+		}
+		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelTimeRestrictionsItem, _ int) apiclient.EscalationPathTimeRestrictionsItem {
+			if mmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathTimeRestrictionsItem{}
+			}
+			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForUpdate(ctx))(&diags)
+			if diags.HasError() {
+				return apiclient.EscalationPathTimeRestrictionsItem{}
+			} else if mmmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathTimeRestrictionsItem{}
+			}
+			return *mmmm
+		}))
+	}()
+
+	return &data, diags
 }
 
 type EscalationPathResourceModelRulesItem struct {
@@ -645,35 +930,119 @@ type EscalationPathResourceModelRulesItem struct {
 func (m *EscalationPathResourceModelRulesItem) FromApi(ctx context.Context, data apiclient.EscalationPathRulesItem) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.RuleType = types.StringValue(data.RuleType)
-	m.UrgencyIds = supertypes.NewSetValueOfSlice(ctx, data.UrgencyIds)
-	m.WithinWorkingHour = types.BoolValue(data.WithinWorkingHour)
-	m.JsonPath = types.StringValue(data.JsonPath)
-	m.Operator = types.StringValue(data.Operator)
+	m.RuleType = jsonapitypes.NullableStringValue(data.RuleType)
+	m.UrgencyIds = jsonapitypes.NullableSetValueOfSlice(ctx, data.UrgencyIds)
+	m.WithinWorkingHour = jsonapitypes.NullableBoolValue(data.WithinWorkingHour)
+	m.JsonPath = jsonapitypes.NullableStringValue(data.JsonPath)
+	m.Operator = jsonapitypes.NullableStringValue(data.Operator)
 	m.Value = jsonapitypes.NullableStringValue(data.Value)
-	m.Values = supertypes.NewSetValueOfSlice(ctx, data.Values)
-	m.FieldableType = types.StringValue(data.FieldableType)
-	m.FieldableId = types.StringValue(data.FieldableId)
-	m.ServiceIds = supertypes.NewSetValueOfSlice(ctx, data.ServiceIds)
-	m.TimeZone = types.StringValue(data.TimeZone)
+	m.Values = jsonapitypes.NullableSetValueOfSlice(ctx, data.Values)
+	m.FieldableType = jsonapitypes.NullableStringValue(data.FieldableType)
+	m.FieldableId = jsonapitypes.NullableStringValue(data.FieldableId)
+	m.ServiceIds = jsonapitypes.NullableSetValueOfSlice(ctx, data.ServiceIds)
+	m.TimeZone = jsonapitypes.NullableStringValue(data.TimeZone)
 	m.TimeBlocks = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelRulesItemTimeBlocksItem] {
-		return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.TimeBlocks, func(vv apiclient.EscalationPathRulesItemTimeBlocksItem, _ int) EscalationPathResourceModelRulesItemTimeBlocksItem {
-			var mm EscalationPathResourceModelRulesItemTimeBlocksItem
-			diags.Append(mm.FromApi(ctx, vv)...)
-			return mm
-		}))
+		if v, err := data.TimeBlocks.Get(); err == nil {
+			return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathRulesItemTimeBlocksItem, _ int) EscalationPathResourceModelRulesItemTimeBlocksItem {
+				var mm EscalationPathResourceModelRulesItemTimeBlocksItem
+				diags.Append(mm.FromApi(ctx, vv)...)
+				return mm
+			}))
+		}
+		return supertypes.NewSetNestedObjectValueOfNull[EscalationPathResourceModelRulesItemTimeBlocksItem](ctx)
 	})()
 
 	return diags
 }
 
-func (m EscalationPathResourceModelRulesItem) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPathRulesItem, diag.Diagnostics) {
-	var m apiclient.CreateEscalationPathRulesItem
+func (m *EscalationPathResourceModelRulesItem) ToApiForCreate(ctx context.Context) (*apiclient.EscalationPathRulesItem, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	// TODO: Implement ToCreateApi for EscalationPathResourceModelRulesItem
+	data := apiclient.EscalationPathRulesItem{}
+	data.RuleType = jsonapitypes.NewNullableFromString(m.RuleType)
+	data.UrgencyIds = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.UrgencyIds))(&diags)
+	data.WithinWorkingHour = jsonapitypes.NewNullableFromBool(m.WithinWorkingHour)
+	data.JsonPath = jsonapitypes.NewNullableFromString(m.JsonPath)
+	data.Operator = jsonapitypes.NewNullableFromString(m.Operator)
+	data.Value = jsonapitypes.NewNullableFromString(m.Value)
+	data.Values = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.Values))(&diags)
+	data.FieldableType = jsonapitypes.NewNullableFromString(m.FieldableType)
+	data.FieldableId = jsonapitypes.NewNullableFromString(m.FieldableId)
+	data.ServiceIds = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.ServiceIds))(&diags)
+	data.TimeZone = jsonapitypes.NewNullableFromString(m.TimeZone)
+	data.TimeBlocks = func() jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem] {
+		if m.TimeBlocks.IsUnknown() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]{}
+		}
+		if m.TimeBlocks.IsNull() {
+			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]()
+		}
+		mm := diagutils.MergeDiagnostics(m.TimeBlocks.Get(ctx))(&diags)
+		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]{}
+		}
+		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelRulesItemTimeBlocksItem, _ int) apiclient.EscalationPathRulesItemTimeBlocksItem {
+			if mmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathRulesItemTimeBlocksItem{}
+			}
+			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForCreate(ctx))(&diags)
+			if diags.HasError() {
+				return apiclient.EscalationPathRulesItemTimeBlocksItem{}
+			} else if mmmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathRulesItemTimeBlocksItem{}
+			}
+			return *mmmm
+		}))
+	}()
 
-	return &m, diags
+	return &data, diags
+}
+
+func (m *EscalationPathResourceModelRulesItem) ToApiForUpdate(ctx context.Context) (*apiclient.EscalationPathRulesItem, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	data := apiclient.EscalationPathRulesItem{}
+	data.RuleType = jsonapitypes.NewNullableFromString(m.RuleType)
+	data.UrgencyIds = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.UrgencyIds))(&diags)
+	data.WithinWorkingHour = jsonapitypes.NewNullableFromBool(m.WithinWorkingHour)
+	data.JsonPath = jsonapitypes.NewNullableFromString(m.JsonPath)
+	data.Operator = jsonapitypes.NewNullableFromString(m.Operator)
+	data.Value = jsonapitypes.NewNullableFromString(m.Value)
+	data.Values = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.Values))(&diags)
+	data.FieldableType = jsonapitypes.NewNullableFromString(m.FieldableType)
+	data.FieldableId = jsonapitypes.NewNullableFromString(m.FieldableId)
+	data.ServiceIds = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.ServiceIds))(&diags)
+	data.TimeZone = jsonapitypes.NewNullableFromString(m.TimeZone)
+	data.TimeBlocks = func() jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem] {
+		if m.TimeBlocks.IsUnknown() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]{}
+		}
+		if m.TimeBlocks.IsNull() {
+			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]()
+		}
+		mm := diagutils.MergeDiagnostics(m.TimeBlocks.Get(ctx))(&diags)
+		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]{}
+		}
+		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelRulesItemTimeBlocksItem, _ int) apiclient.EscalationPathRulesItemTimeBlocksItem {
+			if mmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathRulesItemTimeBlocksItem{}
+			}
+			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForUpdate(ctx))(&diags)
+			if diags.HasError() {
+				return apiclient.EscalationPathRulesItemTimeBlocksItem{}
+			} else if mmmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathRulesItemTimeBlocksItem{}
+			}
+			return *mmmm
+		}))
+	}()
+
+	return &data, diags
 }
 
 type EscalationPathResourceModelRulesItemTimeBlocksItem struct {
@@ -695,30 +1064,63 @@ type EscalationPathResourceModelRulesItemTimeBlocksItem struct {
 func (m *EscalationPathResourceModelRulesItemTimeBlocksItem) FromApi(ctx context.Context, data apiclient.EscalationPathRulesItemTimeBlocksItem) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.Id = types.StringValue(data.Id)
-	m.Monday = types.BoolValue(data.Monday)
-	m.Tuesday = types.BoolValue(data.Tuesday)
-	m.Wednesday = types.BoolValue(data.Wednesday)
-	m.Thursday = types.BoolValue(data.Thursday)
-	m.Friday = types.BoolValue(data.Friday)
-	m.Saturday = types.BoolValue(data.Saturday)
-	m.Sunday = types.BoolValue(data.Sunday)
-	m.StartTime = types.StringValue(data.StartTime)
-	m.EndTime = types.StringValue(data.EndTime)
-	m.AllDay = types.BoolValue(data.AllDay)
+	m.Id = jsonapitypes.NullableStringValue(data.Id)
+	m.Monday = jsonapitypes.NullableBoolValue(data.Monday)
+	m.Tuesday = jsonapitypes.NullableBoolValue(data.Tuesday)
+	m.Wednesday = jsonapitypes.NullableBoolValue(data.Wednesday)
+	m.Thursday = jsonapitypes.NullableBoolValue(data.Thursday)
+	m.Friday = jsonapitypes.NullableBoolValue(data.Friday)
+	m.Saturday = jsonapitypes.NullableBoolValue(data.Saturday)
+	m.Sunday = jsonapitypes.NullableBoolValue(data.Sunday)
+	m.StartTime = jsonapitypes.NullableStringValue(data.StartTime)
+	m.EndTime = jsonapitypes.NullableStringValue(data.EndTime)
+	m.AllDay = jsonapitypes.NullableBoolValue(data.AllDay)
 	m.Position = jsonapitypes.NullableInt64Value(data.Position)
-	m.EndsNextDay = types.BoolValue(data.EndsNextDay)
+	m.EndsNextDay = jsonapitypes.NullableBoolValue(data.EndsNextDay)
 
 	return diags
 }
 
-func (m EscalationPathResourceModelRulesItemTimeBlocksItem) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPathRulesItemTimeBlocksItem, diag.Diagnostics) {
-	var m apiclient.CreateEscalationPathRulesItemTimeBlocksItem
+func (m *EscalationPathResourceModelRulesItemTimeBlocksItem) ToApiForCreate(ctx context.Context) (*apiclient.EscalationPathRulesItemTimeBlocksItem, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	// TODO: Implement ToCreateApi for EscalationPathResourceModelRulesItemTimeBlocksItem
+	data := apiclient.EscalationPathRulesItemTimeBlocksItem{}
+	data.Id = jsonapitypes.NewNullableFromString(m.Id)
+	data.Monday = jsonapitypes.NewNullableFromBool(m.Monday)
+	data.Tuesday = jsonapitypes.NewNullableFromBool(m.Tuesday)
+	data.Wednesday = jsonapitypes.NewNullableFromBool(m.Wednesday)
+	data.Thursday = jsonapitypes.NewNullableFromBool(m.Thursday)
+	data.Friday = jsonapitypes.NewNullableFromBool(m.Friday)
+	data.Saturday = jsonapitypes.NewNullableFromBool(m.Saturday)
+	data.Sunday = jsonapitypes.NewNullableFromBool(m.Sunday)
+	data.StartTime = jsonapitypes.NewNullableFromString(m.StartTime)
+	data.EndTime = jsonapitypes.NewNullableFromString(m.EndTime)
+	data.AllDay = jsonapitypes.NewNullableFromBool(m.AllDay)
+	data.Position = jsonapitypes.NewNullableFromInt64(m.Position)
+	data.EndsNextDay = jsonapitypes.NewNullableFromBool(m.EndsNextDay)
 
-	return &m, diags
+	return &data, diags
+}
+
+func (m *EscalationPathResourceModelRulesItemTimeBlocksItem) ToApiForUpdate(ctx context.Context) (*apiclient.EscalationPathRulesItemTimeBlocksItem, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	data := apiclient.EscalationPathRulesItemTimeBlocksItem{}
+	data.Id = jsonapitypes.NewNullableFromString(m.Id)
+	data.Monday = jsonapitypes.NewNullableFromBool(m.Monday)
+	data.Tuesday = jsonapitypes.NewNullableFromBool(m.Tuesday)
+	data.Wednesday = jsonapitypes.NewNullableFromBool(m.Wednesday)
+	data.Thursday = jsonapitypes.NewNullableFromBool(m.Thursday)
+	data.Friday = jsonapitypes.NewNullableFromBool(m.Friday)
+	data.Saturday = jsonapitypes.NewNullableFromBool(m.Saturday)
+	data.Sunday = jsonapitypes.NewNullableFromBool(m.Sunday)
+	data.StartTime = jsonapitypes.NewNullableFromString(m.StartTime)
+	data.EndTime = jsonapitypes.NewNullableFromString(m.EndTime)
+	data.AllDay = jsonapitypes.NewNullableFromBool(m.AllDay)
+	data.Position = jsonapitypes.NewNullableFromInt64(m.Position)
+	data.EndsNextDay = jsonapitypes.NewNullableFromBool(m.EndsNextDay)
+
+	return &data, diags
 }
 
 type EscalationPathResourceModelNotificationTypeRulesItem struct {
@@ -730,26 +1132,92 @@ type EscalationPathResourceModelNotificationTypeRulesItem struct {
 func (m *EscalationPathResourceModelNotificationTypeRulesItem) FromApi(ctx context.Context, data apiclient.EscalationPathNotificationTypeRulesItem) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.NotificationType = types.StringValue(data.NotificationType)
-	m.MatchMode = types.StringValue(data.MatchMode)
+	m.NotificationType = jsonapitypes.NullableStringValue(data.NotificationType)
+	m.MatchMode = jsonapitypes.NullableStringValue(data.MatchMode)
 	m.Conditions = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem] {
-		return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.Conditions, func(vv apiclient.EscalationPathNotificationTypeRulesItemConditionsItem, _ int) EscalationPathResourceModelNotificationTypeRulesItemConditionsItem {
-			var mm EscalationPathResourceModelNotificationTypeRulesItemConditionsItem
-			diags.Append(mm.FromApi(ctx, vv)...)
-			return mm
-		}))
+		if v, err := data.Conditions.Get(); err == nil {
+			return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathNotificationTypeRulesItemConditionsItem, _ int) EscalationPathResourceModelNotificationTypeRulesItemConditionsItem {
+				var mm EscalationPathResourceModelNotificationTypeRulesItemConditionsItem
+				diags.Append(mm.FromApi(ctx, vv)...)
+				return mm
+			}))
+		}
+		return supertypes.NewSetNestedObjectValueOfNull[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem](ctx)
 	})()
 
 	return diags
 }
 
-func (m EscalationPathResourceModelNotificationTypeRulesItem) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPathNotificationTypeRulesItem, diag.Diagnostics) {
-	var m apiclient.CreateEscalationPathNotificationTypeRulesItem
+func (m *EscalationPathResourceModelNotificationTypeRulesItem) ToApiForCreate(ctx context.Context) (*apiclient.EscalationPathNotificationTypeRulesItem, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	// TODO: Implement ToCreateApi for EscalationPathResourceModelNotificationTypeRulesItem
+	data := apiclient.EscalationPathNotificationTypeRulesItem{}
+	data.NotificationType = jsonapitypes.NewNullableFromString(m.NotificationType)
+	data.MatchMode = jsonapitypes.NewNullableFromString(m.MatchMode)
+	data.Conditions = func() jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem] {
+		if m.Conditions.IsUnknown() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]{}
+		}
+		if m.Conditions.IsNull() {
+			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]()
+		}
+		mm := diagutils.MergeDiagnostics(m.Conditions.Get(ctx))(&diags)
+		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]{}
+		}
+		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem, _ int) apiclient.EscalationPathNotificationTypeRulesItemConditionsItem {
+			if mmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
+			}
+			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForCreate(ctx))(&diags)
+			if diags.HasError() {
+				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
+			} else if mmmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
+			}
+			return *mmmm
+		}))
+	}()
 
-	return &m, diags
+	return &data, diags
+}
+
+func (m *EscalationPathResourceModelNotificationTypeRulesItem) ToApiForUpdate(ctx context.Context) (*apiclient.EscalationPathNotificationTypeRulesItem, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	data := apiclient.EscalationPathNotificationTypeRulesItem{}
+	data.NotificationType = jsonapitypes.NewNullableFromString(m.NotificationType)
+	data.MatchMode = jsonapitypes.NewNullableFromString(m.MatchMode)
+	data.Conditions = func() jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem] {
+		if m.Conditions.IsUnknown() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]{}
+		}
+		if m.Conditions.IsNull() {
+			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]()
+		}
+		mm := diagutils.MergeDiagnostics(m.Conditions.Get(ctx))(&diags)
+		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]{}
+		}
+		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem, _ int) apiclient.EscalationPathNotificationTypeRulesItemConditionsItem {
+			if mmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
+			}
+			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForUpdate(ctx))(&diags)
+			if diags.HasError() {
+				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
+			} else if mmmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
+			}
+			return *mmmm
+		}))
+	}()
+
+	return &data, diags
 }
 
 type EscalationPathResourceModelNotificationTypeRulesItemConditionsItem struct {
@@ -770,35 +1238,119 @@ type EscalationPathResourceModelNotificationTypeRulesItemConditionsItem struct {
 func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) FromApi(ctx context.Context, data apiclient.EscalationPathNotificationTypeRulesItemConditionsItem) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.RuleType = types.StringValue(data.RuleType)
-	m.UrgencyIds = supertypes.NewSetValueOfSlice(ctx, data.UrgencyIds)
-	m.WithinWorkingHour = types.BoolValue(data.WithinWorkingHour)
-	m.JsonPath = types.StringValue(data.JsonPath)
-	m.Operator = types.StringValue(data.Operator)
+	m.RuleType = jsonapitypes.NullableStringValue(data.RuleType)
+	m.UrgencyIds = jsonapitypes.NullableSetValueOfSlice(ctx, data.UrgencyIds)
+	m.WithinWorkingHour = jsonapitypes.NullableBoolValue(data.WithinWorkingHour)
+	m.JsonPath = jsonapitypes.NullableStringValue(data.JsonPath)
+	m.Operator = jsonapitypes.NullableStringValue(data.Operator)
 	m.Value = jsonapitypes.NullableStringValue(data.Value)
-	m.Values = supertypes.NewSetValueOfSlice(ctx, data.Values)
-	m.FieldableType = types.StringValue(data.FieldableType)
-	m.FieldableId = types.StringValue(data.FieldableId)
-	m.ServiceIds = supertypes.NewSetValueOfSlice(ctx, data.ServiceIds)
-	m.TimeZone = types.StringValue(data.TimeZone)
+	m.Values = jsonapitypes.NullableSetValueOfSlice(ctx, data.Values)
+	m.FieldableType = jsonapitypes.NullableStringValue(data.FieldableType)
+	m.FieldableId = jsonapitypes.NullableStringValue(data.FieldableId)
+	m.ServiceIds = jsonapitypes.NullableSetValueOfSlice(ctx, data.ServiceIds)
+	m.TimeZone = jsonapitypes.NullableStringValue(data.TimeZone)
 	m.TimeBlocks = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem] {
-		return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.TimeBlocks, func(vv apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem, _ int) EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem {
-			var mm EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem
-			diags.Append(mm.FromApi(ctx, vv)...)
-			return mm
-		}))
+		if v, err := data.TimeBlocks.Get(); err == nil {
+			return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem, _ int) EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem {
+				var mm EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem
+				diags.Append(mm.FromApi(ctx, vv)...)
+				return mm
+			}))
+		}
+		return supertypes.NewSetNestedObjectValueOfNull[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem](ctx)
 	})()
 
 	return diags
 }
 
-func (m EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPathNotificationTypeRulesItemConditionsItem, diag.Diagnostics) {
-	var m apiclient.CreateEscalationPathNotificationTypeRulesItemConditionsItem
+func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) ToApiForCreate(ctx context.Context) (*apiclient.EscalationPathNotificationTypeRulesItemConditionsItem, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	// TODO: Implement ToCreateApi for EscalationPathResourceModelNotificationTypeRulesItemConditionsItem
+	data := apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
+	data.RuleType = jsonapitypes.NewNullableFromString(m.RuleType)
+	data.UrgencyIds = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.UrgencyIds))(&diags)
+	data.WithinWorkingHour = jsonapitypes.NewNullableFromBool(m.WithinWorkingHour)
+	data.JsonPath = jsonapitypes.NewNullableFromString(m.JsonPath)
+	data.Operator = jsonapitypes.NewNullableFromString(m.Operator)
+	data.Value = jsonapitypes.NewNullableFromString(m.Value)
+	data.Values = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.Values))(&diags)
+	data.FieldableType = jsonapitypes.NewNullableFromString(m.FieldableType)
+	data.FieldableId = jsonapitypes.NewNullableFromString(m.FieldableId)
+	data.ServiceIds = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.ServiceIds))(&diags)
+	data.TimeZone = jsonapitypes.NewNullableFromString(m.TimeZone)
+	data.TimeBlocks = func() jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem] {
+		if m.TimeBlocks.IsUnknown() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]{}
+		}
+		if m.TimeBlocks.IsNull() {
+			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]()
+		}
+		mm := diagutils.MergeDiagnostics(m.TimeBlocks.Get(ctx))(&diags)
+		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]{}
+		}
+		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem, _ int) apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem {
+			if mmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
+			}
+			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForCreate(ctx))(&diags)
+			if diags.HasError() {
+				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
+			} else if mmmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
+			}
+			return *mmmm
+		}))
+	}()
 
-	return &m, diags
+	return &data, diags
+}
+
+func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) ToApiForUpdate(ctx context.Context) (*apiclient.EscalationPathNotificationTypeRulesItemConditionsItem, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	data := apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
+	data.RuleType = jsonapitypes.NewNullableFromString(m.RuleType)
+	data.UrgencyIds = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.UrgencyIds))(&diags)
+	data.WithinWorkingHour = jsonapitypes.NewNullableFromBool(m.WithinWorkingHour)
+	data.JsonPath = jsonapitypes.NewNullableFromString(m.JsonPath)
+	data.Operator = jsonapitypes.NewNullableFromString(m.Operator)
+	data.Value = jsonapitypes.NewNullableFromString(m.Value)
+	data.Values = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.Values))(&diags)
+	data.FieldableType = jsonapitypes.NewNullableFromString(m.FieldableType)
+	data.FieldableId = jsonapitypes.NewNullableFromString(m.FieldableId)
+	data.ServiceIds = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.ServiceIds))(&diags)
+	data.TimeZone = jsonapitypes.NewNullableFromString(m.TimeZone)
+	data.TimeBlocks = func() jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem] {
+		if m.TimeBlocks.IsUnknown() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]{}
+		}
+		if m.TimeBlocks.IsNull() {
+			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]()
+		}
+		mm := diagutils.MergeDiagnostics(m.TimeBlocks.Get(ctx))(&diags)
+		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]{}
+		}
+		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem, _ int) apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem {
+			if mmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
+			}
+			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForUpdate(ctx))(&diags)
+			if diags.HasError() {
+				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
+			} else if mmmm == nil {
+				diags.AddError("null value", "Cannot convert null item")
+				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
+			}
+			return *mmmm
+		}))
+	}()
+
+	return &data, diags
 }
 
 type EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem struct {
@@ -820,30 +1372,63 @@ type EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlock
 func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem) FromApi(ctx context.Context, data apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.Id = types.StringValue(data.Id)
-	m.Monday = types.BoolValue(data.Monday)
-	m.Tuesday = types.BoolValue(data.Tuesday)
-	m.Wednesday = types.BoolValue(data.Wednesday)
-	m.Thursday = types.BoolValue(data.Thursday)
-	m.Friday = types.BoolValue(data.Friday)
-	m.Saturday = types.BoolValue(data.Saturday)
-	m.Sunday = types.BoolValue(data.Sunday)
-	m.StartTime = types.StringValue(data.StartTime)
-	m.EndTime = types.StringValue(data.EndTime)
-	m.AllDay = types.BoolValue(data.AllDay)
+	m.Id = jsonapitypes.NullableStringValue(data.Id)
+	m.Monday = jsonapitypes.NullableBoolValue(data.Monday)
+	m.Tuesday = jsonapitypes.NullableBoolValue(data.Tuesday)
+	m.Wednesday = jsonapitypes.NullableBoolValue(data.Wednesday)
+	m.Thursday = jsonapitypes.NullableBoolValue(data.Thursday)
+	m.Friday = jsonapitypes.NullableBoolValue(data.Friday)
+	m.Saturday = jsonapitypes.NullableBoolValue(data.Saturday)
+	m.Sunday = jsonapitypes.NullableBoolValue(data.Sunday)
+	m.StartTime = jsonapitypes.NullableStringValue(data.StartTime)
+	m.EndTime = jsonapitypes.NullableStringValue(data.EndTime)
+	m.AllDay = jsonapitypes.NullableBoolValue(data.AllDay)
 	m.Position = jsonapitypes.NullableInt64Value(data.Position)
-	m.EndsNextDay = types.BoolValue(data.EndsNextDay)
+	m.EndsNextDay = jsonapitypes.NullableBoolValue(data.EndsNextDay)
 
 	return diags
 }
 
-func (m EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem, diag.Diagnostics) {
-	var m apiclient.CreateEscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem
+func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem) ToApiForCreate(ctx context.Context) (*apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	// TODO: Implement ToCreateApi for EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem
+	data := apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
+	data.Id = jsonapitypes.NewNullableFromString(m.Id)
+	data.Monday = jsonapitypes.NewNullableFromBool(m.Monday)
+	data.Tuesday = jsonapitypes.NewNullableFromBool(m.Tuesday)
+	data.Wednesday = jsonapitypes.NewNullableFromBool(m.Wednesday)
+	data.Thursday = jsonapitypes.NewNullableFromBool(m.Thursday)
+	data.Friday = jsonapitypes.NewNullableFromBool(m.Friday)
+	data.Saturday = jsonapitypes.NewNullableFromBool(m.Saturday)
+	data.Sunday = jsonapitypes.NewNullableFromBool(m.Sunday)
+	data.StartTime = jsonapitypes.NewNullableFromString(m.StartTime)
+	data.EndTime = jsonapitypes.NewNullableFromString(m.EndTime)
+	data.AllDay = jsonapitypes.NewNullableFromBool(m.AllDay)
+	data.Position = jsonapitypes.NewNullableFromInt64(m.Position)
+	data.EndsNextDay = jsonapitypes.NewNullableFromBool(m.EndsNextDay)
 
-	return &m, diags
+	return &data, diags
+}
+
+func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem) ToApiForUpdate(ctx context.Context) (*apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	data := apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
+	data.Id = jsonapitypes.NewNullableFromString(m.Id)
+	data.Monday = jsonapitypes.NewNullableFromBool(m.Monday)
+	data.Tuesday = jsonapitypes.NewNullableFromBool(m.Tuesday)
+	data.Wednesday = jsonapitypes.NewNullableFromBool(m.Wednesday)
+	data.Thursday = jsonapitypes.NewNullableFromBool(m.Thursday)
+	data.Friday = jsonapitypes.NewNullableFromBool(m.Friday)
+	data.Saturday = jsonapitypes.NewNullableFromBool(m.Saturday)
+	data.Sunday = jsonapitypes.NewNullableFromBool(m.Sunday)
+	data.StartTime = jsonapitypes.NewNullableFromString(m.StartTime)
+	data.EndTime = jsonapitypes.NewNullableFromString(m.EndTime)
+	data.AllDay = jsonapitypes.NewNullableFromBool(m.AllDay)
+	data.Position = jsonapitypes.NewNullableFromInt64(m.Position)
+	data.EndsNextDay = jsonapitypes.NewNullableFromBool(m.EndsNextDay)
+
+	return &data, diags
 }
 
 type EscalationPathResourceModelTimeRestrictionsItem struct {
@@ -856,19 +1441,34 @@ type EscalationPathResourceModelTimeRestrictionsItem struct {
 func (m *EscalationPathResourceModelTimeRestrictionsItem) FromApi(ctx context.Context, data apiclient.EscalationPathTimeRestrictionsItem) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.StartDay = types.StringValue(data.StartDay)
-	m.StartTime = types.StringValue(data.StartTime)
-	m.EndDay = types.StringValue(data.EndDay)
-	m.EndTime = types.StringValue(data.EndTime)
+	m.StartDay = jsonapitypes.NullableStringValue(data.StartDay)
+	m.StartTime = jsonapitypes.NullableStringValue(data.StartTime)
+	m.EndDay = jsonapitypes.NullableStringValue(data.EndDay)
+	m.EndTime = jsonapitypes.NullableStringValue(data.EndTime)
 
 	return diags
 }
 
-func (m EscalationPathResourceModelTimeRestrictionsItem) ToCreateApi(ctx context.Context) (*apiclient.CreateEscalationPathTimeRestrictionsItem, diag.Diagnostics) {
-	var m apiclient.CreateEscalationPathTimeRestrictionsItem
+func (m *EscalationPathResourceModelTimeRestrictionsItem) ToApiForCreate(ctx context.Context) (*apiclient.EscalationPathTimeRestrictionsItem, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	// TODO: Implement ToCreateApi for EscalationPathResourceModelTimeRestrictionsItem
+	data := apiclient.EscalationPathTimeRestrictionsItem{}
+	data.StartDay = jsonapitypes.NewNullableFromString(m.StartDay)
+	data.StartTime = jsonapitypes.NewNullableFromString(m.StartTime)
+	data.EndDay = jsonapitypes.NewNullableFromString(m.EndDay)
+	data.EndTime = jsonapitypes.NewNullableFromString(m.EndTime)
 
-	return &m, diags
+	return &data, diags
+}
+
+func (m *EscalationPathResourceModelTimeRestrictionsItem) ToApiForUpdate(ctx context.Context) (*apiclient.EscalationPathTimeRestrictionsItem, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	data := apiclient.EscalationPathTimeRestrictionsItem{}
+	data.StartDay = jsonapitypes.NewNullableFromString(m.StartDay)
+	data.StartTime = jsonapitypes.NewNullableFromString(m.StartTime)
+	data.EndDay = jsonapitypes.NewNullableFromString(m.EndDay)
+	data.EndTime = jsonapitypes.NewNullableFromString(m.EndTime)
+
+	return &data, diags
 }
