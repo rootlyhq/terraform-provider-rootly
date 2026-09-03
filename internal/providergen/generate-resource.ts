@@ -103,8 +103,10 @@ func (r *${def.goNames.struct}) Create(ctx context.Context, req resource.CreateR
   res, err := r.client.${clientBase}Create(${createClientArgs.join(", ")})
   if err != nil {
     resp.Diagnostics.AddError("Unable to create ${humanize(def.name)}", err.Error())
+    return
   } else if res == nil {
     resp.Diagnostics.AddError("Unable to create ${humanize(def.name)}", "Unable to create, got nil response")
+    return
   }
 
   data.Id = types.StringValue(res.Id)
@@ -112,8 +114,10 @@ func (r *${def.goNames.struct}) Create(ctx context.Context, req resource.CreateR
   item, err := r.client.${clientBase}Get(${readClientArgs.join(", ")})
   if err != nil {
     resp.Diagnostics.AddError("Unable to read ${humanize(def.name)}", err.Error())
+    return
   } else if item == nil {
     resp.Diagnostics.AddError("Unable to read ${humanize(def.name)}", "Unable to read, got nil response")
+    return
   }
 
   resp.Diagnostics.Append(data.FromApi(ctx, *item)...)
@@ -170,8 +174,10 @@ func (r *${def.goNames.struct}) Update(ctx context.Context, req resource.UpdateR
   res, err := r.client.${clientBase}Update(${updateClientArgs.join(", ")})
   if err != nil {
     resp.Diagnostics.AddError("Unable to update ${humanize(def.name)}", err.Error())
+    return
   } else if res == nil {
     resp.Diagnostics.AddError("Unable to update ${humanize(def.name)}", "Unable to update, got nil response")
+    return
   }
 
   data.Id = types.StringValue(res.Id)
@@ -179,8 +185,10 @@ func (r *${def.goNames.struct}) Update(ctx context.Context, req resource.UpdateR
   item, err := r.client.${clientBase}Get(${readClientArgs.join(", ")})
   if err != nil {
     resp.Diagnostics.AddError("Unable to read ${humanize(def.name)}", err.Error())
+    return
   } else if item == nil {
     resp.Diagnostics.AddError("Unable to read ${humanize(def.name)}", "Unable to read, got nil response")
+    return
   }
 
   resp.Diagnostics.Append(data.FromApi(ctx, *item)...)

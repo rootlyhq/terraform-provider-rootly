@@ -20,11 +20,13 @@ interface DataSourceSingleConfig {
 export type DataSourceConfig = {
   name: string;
   description?: string;
+  modifyDef?: (def: DataSourceDef) => DataSourceDef;
 } & (DataSourceListConfig | DataSourceSingleConfig);
 
 export type ResourceConfig = {
   name: string;
   description?: string;
+  modifyDef?: (def: ResourceDef) => ResourceDef;
 };
 
 declare module "openapi3-ts/oas30" {
@@ -111,12 +113,28 @@ export interface AttributeListNested extends AttributeBase {
   type: "list_nested";
   attributes: AttributeType[];
   blocks: (AttributeListNested | AttributeSetNested)[];
+  hacks?: {
+    /** The behavior for unknown values. Default is "omit" */
+    unknownBehavior?: "omit" | "empty" | "null";
+    /** The behavior for null values. Default is "null" */
+    nullBehavior?: "omit" | "empty" | "null";
+    /** The behavior for empty values. Default is "empty" */
+    emptyBehavior?: "omit" | "empty" | "null";
+  };
 }
 
 export interface AttributeSetNested extends AttributeBase {
   type: "set_nested";
   attributes: AttributeType[];
   blocks: (AttributeListNested | AttributeSetNested)[];
+  hacks?: {
+    /** The behavior for unknown values. Default is "omit" */
+    unknownBehavior?: "omit" | "empty" | "null";
+    /** The behavior for null values. Default is "null" */
+    nullBehavior?: "omit" | "empty" | "null";
+    /** The behavior for empty values. Default is "empty" */
+    emptyBehavior?: "omit" | "empty" | "null";
+  };
 }
 
 export type AttributeType =

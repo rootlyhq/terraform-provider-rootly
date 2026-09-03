@@ -129,7 +129,6 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 				MarkdownDescription: "Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team. Value must be one of `audible`, `quiet`.",
 				Optional:            true,
 				Computed:            true,
-				Default:             stringdefault.StaticString("audible"),
 				Validators: []validator.String{
 					stringvalidator.OneOf("audible", "quiet"),
 				},
@@ -516,8 +515,10 @@ func (r *EscalationPathResource) Create(ctx context.Context, req resource.Create
 	res, err := r.client.EscalationPathCreate(ctx, data.EscalationPolicyId.ValueString(), *reqItem)
 	if err != nil {
 		resp.Diagnostics.AddError("Unable to create Escalation path", err.Error())
+		return
 	} else if res == nil {
 		resp.Diagnostics.AddError("Unable to create Escalation path", "Unable to create, got nil response")
+		return
 	}
 
 	data.Id = types.StringValue(res.Id)
@@ -525,8 +526,10 @@ func (r *EscalationPathResource) Create(ctx context.Context, req resource.Create
 	item, err := r.client.EscalationPathGet(ctx, data.Id.ValueString(), nil)
 	if err != nil {
 		resp.Diagnostics.AddError("Unable to read Escalation path", err.Error())
+		return
 	} else if item == nil {
 		resp.Diagnostics.AddError("Unable to read Escalation path", "Unable to read, got nil response")
+		return
 	}
 
 	resp.Diagnostics.Append(data.FromApi(ctx, *item)...)
@@ -583,8 +586,10 @@ func (r *EscalationPathResource) Update(ctx context.Context, req resource.Update
 	res, err := r.client.EscalationPathUpdate(ctx, data.Id.ValueString(), *reqItem)
 	if err != nil {
 		resp.Diagnostics.AddError("Unable to update Escalation path", err.Error())
+		return
 	} else if res == nil {
 		resp.Diagnostics.AddError("Unable to update Escalation path", "Unable to update, got nil response")
+		return
 	}
 
 	data.Id = types.StringValue(res.Id)
@@ -592,8 +597,10 @@ func (r *EscalationPathResource) Update(ctx context.Context, req resource.Update
 	item, err := r.client.EscalationPathGet(ctx, data.Id.ValueString(), nil)
 	if err != nil {
 		resp.Diagnostics.AddError("Unable to read Escalation path", err.Error())
+		return
 	} else if item == nil {
 		resp.Diagnostics.AddError("Unable to read Escalation path", "Unable to read, got nil response")
+		return
 	}
 
 	resp.Diagnostics.Append(data.FromApi(ctx, *item)...)
@@ -731,11 +738,13 @@ func (m *EscalationPathResourceModel) ToApiForCreate(ctx context.Context) (*apic
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem]{}
 		}
 		if m.Rules.IsNull() {
-			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathRulesItem]()
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathRulesItem{})
 		}
 		mm := diagutils.MergeDiagnostics(m.Rules.Get(ctx))(&diags)
 		if diags.HasError() {
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem]{}
+		} else if len(mm) == 0 {
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathRulesItem{})
 		}
 		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelRulesItem, _ int) apiclient.EscalationPathRulesItem {
 			if mmm == nil {
@@ -757,10 +766,12 @@ func (m *EscalationPathResourceModel) ToApiForCreate(ctx context.Context) (*apic
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
 		}
 		if m.NotificationTypeRules.IsNull() {
-			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]()
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
 		}
 		mm := diagutils.MergeDiagnostics(m.NotificationTypeRules.Get(ctx))(&diags)
 		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
+		} else if len(mm) == 0 {
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
 		}
 		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItem, _ int) apiclient.EscalationPathNotificationTypeRulesItem {
@@ -783,11 +794,13 @@ func (m *EscalationPathResourceModel) ToApiForCreate(ctx context.Context) (*apic
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]{}
 		}
 		if m.TimeRestrictions.IsNull() {
-			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]()
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathTimeRestrictionsItem{})
 		}
 		mm := diagutils.MergeDiagnostics(m.TimeRestrictions.Get(ctx))(&diags)
 		if diags.HasError() {
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]{}
+		} else if len(mm) == 0 {
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathTimeRestrictionsItem{})
 		}
 		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelTimeRestrictionsItem, _ int) apiclient.EscalationPathTimeRestrictionsItem {
 			if mmm == nil {
@@ -835,11 +848,13 @@ func (m *EscalationPathResourceModel) ToApiForUpdate(ctx context.Context) (*apic
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem]{}
 		}
 		if m.Rules.IsNull() {
-			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathRulesItem]()
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathRulesItem{})
 		}
 		mm := diagutils.MergeDiagnostics(m.Rules.Get(ctx))(&diags)
 		if diags.HasError() {
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem]{}
+		} else if len(mm) == 0 {
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathRulesItem{})
 		}
 		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelRulesItem, _ int) apiclient.EscalationPathRulesItem {
 			if mmm == nil {
@@ -861,10 +876,12 @@ func (m *EscalationPathResourceModel) ToApiForUpdate(ctx context.Context) (*apic
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
 		}
 		if m.NotificationTypeRules.IsNull() {
-			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]()
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
 		}
 		mm := diagutils.MergeDiagnostics(m.NotificationTypeRules.Get(ctx))(&diags)
 		if diags.HasError() {
+			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
+		} else if len(mm) == 0 {
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
 		}
 		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItem, _ int) apiclient.EscalationPathNotificationTypeRulesItem {
@@ -887,11 +904,13 @@ func (m *EscalationPathResourceModel) ToApiForUpdate(ctx context.Context) (*apic
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]{}
 		}
 		if m.TimeRestrictions.IsNull() {
-			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]()
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathTimeRestrictionsItem{})
 		}
 		mm := diagutils.MergeDiagnostics(m.TimeRestrictions.Get(ctx))(&diags)
 		if diags.HasError() {
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]{}
+		} else if len(mm) == 0 {
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathTimeRestrictionsItem{})
 		}
 		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelTimeRestrictionsItem, _ int) apiclient.EscalationPathTimeRestrictionsItem {
 			if mmm == nil {
@@ -980,6 +999,8 @@ func (m *EscalationPathResourceModelRulesItem) ToApiForCreate(ctx context.Contex
 		mm := diagutils.MergeDiagnostics(m.TimeBlocks.Get(ctx))(&diags)
 		if diags.HasError() {
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]{}
+		} else if len(mm) == 0 {
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathRulesItemTimeBlocksItem{})
 		}
 		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelRulesItemTimeBlocksItem, _ int) apiclient.EscalationPathRulesItemTimeBlocksItem {
 			if mmm == nil {
@@ -1025,6 +1046,8 @@ func (m *EscalationPathResourceModelRulesItem) ToApiForUpdate(ctx context.Contex
 		mm := diagutils.MergeDiagnostics(m.TimeBlocks.Get(ctx))(&diags)
 		if diags.HasError() {
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]{}
+		} else if len(mm) == 0 {
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathRulesItemTimeBlocksItem{})
 		}
 		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelRulesItemTimeBlocksItem, _ int) apiclient.EscalationPathRulesItemTimeBlocksItem {
 			if mmm == nil {
@@ -1164,6 +1187,8 @@ func (m *EscalationPathResourceModelNotificationTypeRulesItem) ToApiForCreate(ct
 		mm := diagutils.MergeDiagnostics(m.Conditions.Get(ctx))(&diags)
 		if diags.HasError() {
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]{}
+		} else if len(mm) == 0 {
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{})
 		}
 		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem, _ int) apiclient.EscalationPathNotificationTypeRulesItemConditionsItem {
 			if mmm == nil {
@@ -1200,6 +1225,8 @@ func (m *EscalationPathResourceModelNotificationTypeRulesItem) ToApiForUpdate(ct
 		mm := diagutils.MergeDiagnostics(m.Conditions.Get(ctx))(&diags)
 		if diags.HasError() {
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]{}
+		} else if len(mm) == 0 {
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{})
 		}
 		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem, _ int) apiclient.EscalationPathNotificationTypeRulesItemConditionsItem {
 			if mmm == nil {
@@ -1288,6 +1315,8 @@ func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) ToA
 		mm := diagutils.MergeDiagnostics(m.TimeBlocks.Get(ctx))(&diags)
 		if diags.HasError() {
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]{}
+		} else if len(mm) == 0 {
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{})
 		}
 		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem, _ int) apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem {
 			if mmm == nil {
@@ -1333,6 +1362,8 @@ func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) ToA
 		mm := diagutils.MergeDiagnostics(m.TimeBlocks.Get(ctx))(&diags)
 		if diags.HasError() {
 			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]{}
+		} else if len(mm) == 0 {
+			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{})
 		}
 		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem, _ int) apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem {
 			if mmm == nil {

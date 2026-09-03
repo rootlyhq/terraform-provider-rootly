@@ -201,21 +201,41 @@ function generateToApi({
         (attribute) =>
           `diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.${camelize(attribute.name)}))(&diags)`,
       )
-      .with(
-        { type: "list_nested" },
-        { type: "set_nested" },
-        (
-          attribute,
-        ) => `func () jsonapi.NullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item] {
+      .with({ type: "list_nested" }, { type: "set_nested" }, (attribute) => {
+        const unknownBehavior = attribute.hacks?.unknownBehavior ?? "omit";
+        const nullBehavior = attribute.hacks?.nullBehavior ?? "null";
+        const emptyBehavior = attribute.hacks?.emptyBehavior ?? "empty";
+        const getValueFor = (action: "omit" | "null" | "empty"): string =>
+          match(action)
+            .with(
+              "omit",
+              () =>
+                `jsonapi.NullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item]{}`,
+            )
+            .with(
+              "null",
+              () =>
+                `jsonapi.NewNullNullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item]()`,
+            )
+            .with(
+              "empty",
+              () =>
+                `jsonapi.NewNullableAttrWithValue([]apiclient.${clientName}${camelize(attribute.name)}Item{})`,
+            )
+            .exhaustive();
+
+        return `func () jsonapi.NullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item] {
   if m.${camelize(attribute.name)}.IsUnknown() {
-    return jsonapi.NullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item]{}
+    return ${getValueFor(unknownBehavior)}
   }
   if m.${camelize(attribute.name)}.IsNull() {
-    return jsonapi.NewNullNullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item]()
+    return ${getValueFor(nullBehavior)}
   }
   mm := diagutils.MergeDiagnostics(m.${camelize(attribute.name)}.Get(ctx))(&diags)
   if diags.HasError() {
-    return jsonapi.NullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item]{}
+    return ${getValueFor("omit")}
+  } else if len(mm) == 0 {
+    return ${getValueFor(emptyBehavior)}
   }
   return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *${name}${camelize(attribute.name)}Item, _ int) apiclient.${clientName}${camelize(attribute.name)}Item {
 		if mmm == nil {
@@ -231,8 +251,8 @@ function generateToApi({
     }
 		return *mmmm
 	}))
-}()`,
-      )
+}()`;
+      })
       .otherwise(
         (attribute) => `nil // TODO: Implement: ${JSON.stringify(attribute)}`,
       );
