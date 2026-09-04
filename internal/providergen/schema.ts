@@ -2,26 +2,18 @@ import type { oas30 } from "openapi3-ts";
 import { match, P } from "ts-pattern";
 import { getParametersByOperationId, removeReference } from "./openapi";
 import assert from "node:assert";
-import { camelize } from "inflection";
+import { camelize, pluralize, singularize } from "inflection";
 
 export interface ClientConfig {
   name: string;
 }
 
-interface DataSourceListConfig {
-  strategy: "list";
-  resourceName: string;
-}
-
-interface DataSourceSingleConfig {
-  strategy: "single";
-}
-
 export type DataSourceConfig = {
   name: string;
   description?: string;
+  strategy: "list" | "single";
   modifyDef?: (def: DataSourceDef) => DataSourceDef;
-} & (DataSourceListConfig | DataSourceSingleConfig);
+};
 
 export type ResourceConfig = {
   name: string;
@@ -81,6 +73,10 @@ export interface AttributeString extends AttributeBase {
   type: "string";
   enum?: string[];
   default?: string;
+  hints?: {
+    /** Indicates that this attribute is an ID from OpenAPI. */
+    isOpenApiId?: boolean;
+  };
 }
 
 export interface AttributeBool extends AttributeBase {
@@ -93,8 +89,8 @@ export interface AttributeInt64 extends AttributeBase {
   default?: number;
 }
 
-export interface AttributeObject extends AttributeBase {
-  type: "object";
+export interface AttributeSingleNested extends AttributeBase {
+  type: "single_nested";
   attributes: AttributeType[];
   blocks: AttributeBlockType[];
 }
@@ -113,6 +109,10 @@ export interface AttributeListNested extends AttributeBase {
   type: "list_nested";
   attributes: AttributeType[];
   blocks: AttributeBlockType[];
+  hints?: {
+    /** Only used for data sources. Indicates that this is the list of the top level item type. */
+    isTopLevelCollection?: boolean;
+  };
   hacks?: {
     /** The behavior for unknown values. Default is "omit" */
     unknownBehavior?: "omit" | "empty" | "null";
@@ -127,6 +127,10 @@ export interface AttributeSetNested extends AttributeBase {
   type: "set_nested";
   attributes: AttributeType[];
   blocks: AttributeBlockType[];
+  hints?: {
+    /** Only used for data sources. Indicates that this is the list of the top level item type. */
+    isTopLevelCollection?: boolean;
+  };
   hacks?: {
     /** The behavior for unknown values. Default is "omit" */
     unknownBehavior?: "omit" | "empty" | "null";
@@ -141,7 +145,7 @@ export type AttributeType =
   | AttributeString
   | AttributeBool
   | AttributeInt64
-  | AttributeObject
+  | AttributeSingleNested
   | AttributeList
   | AttributeSet
   | AttributeListNested
@@ -158,8 +162,8 @@ export type ComputedOptionalRequired =
 export interface DataSourceDef {
   name: string;
   description?: string;
+  strategy: "single" | "list";
   attributes: AttributeType[];
-  blocks: AttributeBlockType[];
   goNames: {
     /** Name of the struct that represents the base client. */
     clientBase: string;
@@ -277,7 +281,7 @@ function openapiSchemaToAttribute({
         },
         options,
       });
-      assert(tmpAttr.type === "object");
+      assert(tmpAttr.type === "single_nested");
       return {
         ...common,
         type: options.defaultNestedCollectionType,
@@ -319,7 +323,7 @@ function openapiSchemaToAttribute({
 
         return {
           ...common,
-          type: "object",
+          type: "single_nested",
           attributes,
           blocks,
         };
@@ -334,29 +338,29 @@ function openapiParametersToAttributes({
   params,
 }: {
   params: {
-    read: oas30.ParameterObject[];
+    read?: oas30.ParameterObject[];
     list?: oas30.ParameterObject[];
-    create: oas30.ParameterObject[];
-    update: oas30.ParameterObject[];
-    delete: oas30.ParameterObject[];
+    create?: oas30.ParameterObject[];
+    update?: oas30.ParameterObject[];
+    delete?: oas30.ParameterObject[];
   };
 }): AttributeType[] {
   const allParamNames = Array.from(
     new Set([
-      ...params.read.map((param) => param.name),
+      ...(params.read?.map((param) => param.name) ?? []),
       ...(params.list?.map((param) => param.name) ?? []),
-      ...params.create.map((param) => param.name),
-      ...params.update.map((param) => param.name),
-      ...params.delete.map((param) => param.name),
+      ...(params.create?.map((param) => param.name) ?? []),
+      ...(params.update?.map((param) => param.name) ?? []),
+      ...(params.delete?.map((param) => param.name) ?? []),
     ]),
   );
 
   return allParamNames.map((name) => {
-    const readParam = params.read.find((param) => param.name === name);
+    const readParam = params.read?.find((param) => param.name === name);
     const listParam = params.list?.find((param) => param.name === name);
-    const createParam = params.create.find((param) => param.name === name);
-    const updateParam = params.update.find((param) => param.name === name);
-    const deleteParam = params.delete.find((param) => param.name === name);
+    const createParam = params.create?.find((param) => param.name === name);
+    const updateParam = params.update?.find((param) => param.name === name);
+    const deleteParam = params.delete?.find((param) => param.name === name);
 
     const baseParam =
       readParam ?? listParam ?? createParam ?? updateParam ?? deleteParam!;
@@ -367,23 +371,39 @@ function openapiParametersToAttributes({
       `Parameter ${name} has no string type`,
     );
 
-    const {
-      computedOptionalRequired,
-      planModifiers,
-    }: {
-      computedOptionalRequired: ComputedOptionalRequired;
-      planModifiers?: string[];
-    } = (() => {
-      // TODO: Handle listParam
+    const computedParam: Pick<
+      AttributeType,
+      "computedOptionalRequired" | "planModifiers"
+    > = (() => {
+      if (
+        !createParam &&
+        (readParam || listParam) &&
+        !updateParam &&
+        !deleteParam
+      ) {
+        return {
+          computedOptionalRequired: "required",
+        };
+      }
 
-      if (createParam && !readParam && !updateParam && !deleteParam) {
+      if (
+        createParam &&
+        (!readParam || !listParam) &&
+        !updateParam &&
+        !deleteParam
+      ) {
         return {
           computedOptionalRequired: "required",
           planModifiers: ["stringplanmodifier.RequiresReplace()"],
         };
       }
 
-      if (!createParam && readParam && updateParam && deleteParam) {
+      if (
+        !createParam &&
+        (readParam || listParam) &&
+        updateParam &&
+        deleteParam
+      ) {
         return {
           computedOptionalRequired: "computed",
           planModifiers: ["stringplanmodifier.UseStateForUnknown()"],
@@ -395,13 +415,20 @@ function openapiParametersToAttributes({
       );
     })();
 
+    const defaultDescription = match(name)
+      .with("id", () => "The ID of the resource.")
+      .otherwise(() => undefined);
+
     return {
       type: "string",
       name,
-      computedOptionalRequired,
-      description: baseParam.description ?? baseParamSchema.description,
+      computedOptionalRequired: computedParam.computedOptionalRequired,
+      description:
+        baseParam.description ??
+        baseParamSchema.description ??
+        defaultDescription,
       enum: baseParamSchema.enum,
-      planModifiers,
+      planModifiers: computedParam.planModifiers,
       paramSchemas: {
         read: readParam,
         list: listParam,
@@ -420,24 +447,48 @@ export function generateDataSourceDef({
   doc: oas30.OpenAPIObject;
   config: DataSourceConfig;
 }): DataSourceDef {
-  const isSingle = config.strategy === "single";
-  const operationId = `${isSingle ? "get" : "list"}${camelize(config.name)}`;
+  return match(config)
+    .returnType<DataSourceDef>()
+    .with({ strategy: "single" }, (config) =>
+      generateDataSourceDefSingle({
+        doc,
+        config,
+      }),
+    )
+    .with({ strategy: "list" }, (config) =>
+      generateDataSourceDefList({
+        doc,
+        config,
+      }),
+    )
+    .exhaustive();
+}
 
+export function generateDataSourceDefSingle({
+  doc,
+  config,
+}: {
+  doc: oas30.OpenAPIObject;
+  config: DataSourceConfig & { strategy: "single" };
+}): DataSourceDef {
   // Get read schema
-  const readSchemaKey = isSingle ? config.name : config.resourceName;
-  const readSchema = removeReference(doc.components?.schemas?.[readSchemaKey]);
+  const readSchema = removeReference(doc.components?.schemas?.[config.name]);
   if (!readSchema) {
-    throw new Error(`Read schema "${readSchemaKey}" not found`);
+    throw new Error(`Read schema "${config.name}" not found`);
   }
 
-  // Get path params
-  const pathParams = getParametersByOperationId({
+  // Get read path params
+  const readPathParams = getParametersByOperationId({
     doc,
-    operationId,
+    operationId: `get${camelize(config.name)}`,
     onlyLocations: ["path"],
   });
 
-  // TODO: Add support for path params
+  const tmpPathAttrs = openapiParametersToAttributes({
+    params: {
+      read: readPathParams,
+    },
+  });
 
   const tmpAttr = openapiSchemaToAttribute({
     name: config.name,
@@ -452,15 +503,93 @@ export function generateDataSourceDef({
       readOnly: true,
     },
   });
-  assert(tmpAttr.type === "object");
+  assert(tmpAttr.type === "single_nested");
+  assert(tmpAttr.blocks.length === 0);
 
   return {
     name: config.name,
-    description: config.description ?? tmpAttr.description,
-    attributes: tmpAttr.attributes,
-    blocks: tmpAttr.blocks,
+    description: cleanDescription(config.description ?? tmpAttr.description),
+    strategy: config.strategy,
+    attributes: mergeAttributeTypes(tmpAttr.attributes, tmpPathAttrs),
     goNames: {
-      clientBase: camelize(readSchemaKey),
+      clientBase: camelize(config.name),
+      struct: `${camelize(config.name)}DataSource`,
+      model: `${camelize(config.name)}DataSourceModel`,
+    },
+  };
+}
+
+export function generateDataSourceDefList({
+  doc,
+  config,
+}: {
+  doc: oas30.OpenAPIObject;
+  config: DataSourceConfig & { strategy: "list" };
+}): DataSourceDef {
+  const singularName = singularize(config.name);
+  const pluralName = pluralize(config.name);
+
+  // Get read schema
+  const readSchema = removeReference(doc.components?.schemas?.[singularName]);
+  if (!readSchema) {
+    throw new Error(`Read schema "${singularName}" not found`);
+  }
+
+  // Get list path params
+  const listPathParams = getParametersByOperationId({
+    doc,
+    operationId: `list${camelize(pluralName)}`,
+    onlyLocations: ["path"],
+  });
+
+  const tmpPathAttrs = openapiParametersToAttributes({
+    params: {
+      list: listPathParams,
+    },
+  });
+
+  const tmpAttr = openapiSchemaToAttribute({
+    name: config.name,
+    computedOptionalRequired: "computed",
+    schemas: {
+      read: readSchema,
+    },
+    options: {
+      defaultCollectionType: "list",
+      defaultNestedCollectionType: "list_nested",
+      collectionsAsBlocks: false,
+      readOnly: true,
+    },
+  });
+  assert(tmpAttr.type === "single_nested");
+  assert(tmpAttr.blocks.length === 0);
+
+  // TODO: Generalize
+  const itemIdAttribute = {
+    type: "string",
+    name: "id",
+    computedOptionalRequired: "computed",
+    description: "The ID of the resource.",
+    hints: { isOpenApiId: true },
+  } satisfies AttributeString;
+
+  const collectionAttribute = {
+    ...tmpAttr,
+    type: "list_nested",
+    name: config.name,
+    attributes: mergeAttributeTypes([itemIdAttribute], tmpAttr.attributes),
+    hints: {
+      isTopLevelCollection: true,
+    },
+  } satisfies AttributeListNested;
+
+  return {
+    name: config.name,
+    description: cleanDescription(config.description ?? tmpAttr.description),
+    strategy: config.strategy,
+    attributes: mergeAttributeTypes(tmpPathAttrs, [collectionAttribute]),
+    goNames: {
+      clientBase: camelize(singularName),
       struct: `${camelize(config.name)}DataSource`,
       model: `${camelize(config.name)}DataSourceModel`,
     },
@@ -509,7 +638,7 @@ export function generateResourceDef({
     onlyLocations: ["path"],
   });
 
-  // Get read path params
+  // Get list path params
   const listPathParams = getParametersByOperationId({
     doc,
     operationId: `list${camelize(config.name)}`,
@@ -561,7 +690,7 @@ export function generateResourceDef({
       collectionsAsBlocks: true,
     },
   });
-  assert(tmpAttr.type === "object");
+  assert(tmpAttr.type === "single_nested");
 
   return {
     name: config.name,
@@ -669,9 +798,9 @@ export function mergeAttributeTypes(
 
 function isNestedAttribute(
   attr: AttributeType,
-): attr is AttributeObject | AttributeListNested | AttributeSetNested {
+): attr is AttributeSingleNested | AttributeListNested | AttributeSetNested {
   return (
-    attr.type === "object" ||
+    attr.type === "single_nested" ||
     attr.type === "list_nested" ||
     attr.type === "set_nested"
   );

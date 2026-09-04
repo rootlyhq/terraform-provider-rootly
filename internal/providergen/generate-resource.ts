@@ -1,22 +1,7 @@
 import type { oas30 } from "openapi3-ts";
-import {
-  buildValidators,
-  withEnumDescription,
-  type AttributeListNested,
-  type AttributeSetNested,
-  type AttributeType,
-  type ResourceDef,
-} from "./schema";
+import { type ResourceDef } from "./schema";
 import { camelize, humanize, singularize } from "inflection";
-import { match, P } from "ts-pattern";
-import {
-  tfAttributeCustomType,
-  tfAttributeDefault,
-  tfAttributePlanModifierType,
-  tfAttributeSchemaType,
-  tfAttributeValidatorType,
-} from "./go-types";
-import { generateModels } from "./generate-common";
+import { generateModels, generateSchemaAttributes } from "./generate-common";
 import { getParametersByOperationId } from "./openapi";
 import assert from "node:assert";
 
@@ -85,7 +70,11 @@ func (r *${def.goNames.struct}) Metadata(ctx context.Context, req resource.Metad
 func (r *${def.goNames.struct}) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
   resp.Schema = schema.Schema{
     ${def.description ? `MarkdownDescription: ${JSON.stringify(def.description)},` : ""}
-    ${generateSchemaAttributes({ parent: def.goNames.model, attributes: def.attributes, blocks: def.blocks })}
+    ${generateSchemaAttributes({
+      parent: def.goNames.model,
+      attributes: def.attributes,
+      blocks: def.blocks,
+    })}
   }
 }
 
@@ -222,144 +211,20 @@ func (r *${def.goNames.struct}) ImportState(ctx context.Context, req resource.Im
   // Import logic will be generated here
 }
 
-${generateModels({ def, name: def.goNames.model, clientName: def.goNames.clientBase, attributes: [...def.attributes, ...def.blocks] })}
+${generateModels({
+  def,
+  name: def.goNames.model,
+  clientName: def.goNames.clientBase,
+  attributes: [...def.attributes, ...def.blocks],
+  level: 0,
+  options: {
+    rootIsCollection: false,
+    generateFromApi: true,
+    generateToApiForCreate: true,
+    generateToApiForUpdate: true,
+  },
+})}
 `;
-}
-
-function generateSchemaAttributes({
-  parent,
-  attributes,
-  blocks,
-}: {
-  parent: string;
-  attributes: AttributeType[];
-  blocks: (AttributeListNested | AttributeSetNested)[];
-}) {
-  const lines: string[] = [];
-
-  if (attributes.length > 0) {
-    lines.push("Attributes: map[string]schema.Attribute{");
-    for (const attribute of attributes) {
-      lines.push(
-        `"${attribute.name}": ${generateSchemaAttribute({ parent, attribute, type: "attribute" })},`,
-      );
-    }
-    lines.push("},");
-  }
-
-  if (blocks.length > 0) {
-    lines.push("Blocks: map[string]schema.Block{");
-    for (const block of blocks) {
-      lines.push(
-        `"${block.name}": ${generateSchemaAttribute({ parent, attribute: block, type: "block" })},`,
-      );
-    }
-    lines.push("},");
-  }
-
-  return lines.join("\n");
-}
-
-function generateSchemaAttribute({
-  parent,
-  attribute,
-  type,
-}: {
-  parent: string;
-  attribute: AttributeType;
-  type: "attribute" | "block";
-}) {
-  const parts: string[] = [];
-  parts.push(`${tfAttributeSchemaType({ attribute, type })}{`);
-
-  let description: string | undefined = attribute.description;
-  if ("enum" in attribute) {
-    description = withEnumDescription(description, attribute.enum);
-  }
-  if (description) {
-    parts.push(`MarkdownDescription: ${JSON.stringify(description)},`);
-  }
-
-  if (type === "attribute") {
-    parts.push(
-      ...match(attribute.computedOptionalRequired)
-        .with("required", () => ["Required: true,"])
-        .with("computed", () => ["Computed: true,"])
-        .with("computed_optional", () => ["Optional: true,", "Computed: true,"])
-        .with("optional", () => ["Optional: true,"])
-        .exhaustive(),
-    );
-  }
-
-  const tfCustomType = tfAttributeCustomType({ parent, attribute });
-  if (tfCustomType) {
-    parts.push(`CustomType: ${tfCustomType},`);
-  }
-
-  const tfDefault = tfAttributeDefault({ attribute });
-  if (tfDefault) {
-    parts.push(`Default: ${tfDefault},`);
-  }
-
-  const validators = buildValidators(attribute);
-  if (validators.length > 0) {
-    const tfValidatorType = tfAttributeValidatorType({ attribute });
-    parts.push(`Validators: []${tfValidatorType}{`);
-    parts.push(...validators.map((v) => `${v},`));
-    parts.push(`},`);
-  }
-
-  if (attribute.planModifiers && attribute.planModifiers.length > 0) {
-    const tfPlanModifierType = tfAttributePlanModifierType({ attribute });
-    parts.push(`PlanModifiers: []${tfPlanModifierType}{`);
-    parts.push(...attribute.planModifiers.map((v) => `${v},`));
-    parts.push(`},`);
-  }
-
-  match([attribute, type])
-    .with([{ type: "object" }, P.any], ([value]) => {
-      parts.push(
-        generateSchemaAttributes({
-          parent: `${parent}${camelize(value.name)}`,
-          attributes: value.attributes,
-          blocks: value.blocks,
-        }),
-      );
-    })
-    .with(
-      [{ type: "list_nested" }, "attribute"],
-      [{ type: "set_nested" }, "attribute"],
-      ([value]) => {
-        parts.push("NestedObject: schema.NestedAttributeObject{");
-        parts.push(
-          generateSchemaAttributes({
-            parent: `${parent}${camelize(value.name)}Item`,
-            attributes: value.attributes,
-            blocks: value.blocks,
-          }),
-        );
-        parts.push("},");
-      },
-    )
-    .with(
-      [{ type: "list_nested" }, "block"],
-      [{ type: "set_nested" }, "block"],
-      ([value]) => {
-        parts.push("NestedObject: schema.NestedBlockObject{");
-        parts.push(
-          generateSchemaAttributes({
-            parent: `${parent}${camelize(value.name)}Item`,
-            attributes: value.attributes,
-            blocks: value.blocks,
-          }),
-        );
-        parts.push("},");
-      },
-    );
-
-  parts.push(`}`);
-
-  return parts.join("\n");
 }
 
 function getClientArgs({

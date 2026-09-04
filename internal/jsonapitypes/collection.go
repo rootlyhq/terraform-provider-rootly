@@ -158,3 +158,20 @@ func ConvertToSetModel[T any, U any](
 		supertypes.NewSetNestedObjectValueOfValueSlice[T],
 	)
 }
+
+func ConvertToSingleModel[T any, U any](
+	ctx context.Context,
+	apiAttr jsonapi.NullableAttr[U],
+	fromApi func(ctx context.Context, item *T, apiItem U) diag.Diagnostics,
+) (supertypes.SingleNestedObjectValueOf[T], diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	v, err := apiAttr.Get()
+	if err != nil {
+		return supertypes.NewSingleNestedObjectValueOfNull[T](ctx), diags
+	}
+
+	var item T
+	diags.Append(fromApi(ctx, &item, v)...)
+	return supertypes.NewSingleNestedObjectValueOf(ctx, &item), diags
+}

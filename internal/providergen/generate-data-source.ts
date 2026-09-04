@@ -1,29 +1,26 @@
-import { camelize, humanize, pluralize, singularize } from "inflection";
+import { camelize, pluralize, singularize } from "inflection";
 import { oas30 } from "openapi3-ts";
-import { match } from "ts-pattern";
-import type { ResolvedDataSourceConfig } from "./schema";
-import { assertSchemaObject } from "./types";
-import { tfAttributeCustomType, tfAttributeSchemaType } from "./go-types";
+import type { DataSourceDef } from "./schema";
 import { getParametersByOperationId } from "./openapi";
-import { generateModels } from "./generate-common";
+import { generateModels, generateSchemaAttributes } from "./generate-common";
 
 export function generateDataSource({
   doc,
-  config,
+  def,
 }: {
   doc: oas30.OpenAPIObject;
-  config: ResolvedDataSourceConfig;
+  def: DataSourceDef;
 }) {
-  console.log(`Generating data source: ${config.name}`);
+  console.log(`Generating data source: ${def.name}`);
 
-  const isSingle = config.strategy === "single";
+  const isSingle = def.strategy === "single";
 
-  const clientBase = camelize(singularize(config.name));
+  const clientBase = camelize(singularize(def.name));
   const resultVar = isSingle ? "item" : "items";
   const clientMethod = isSingle ? "Get" : "List";
   const operationId = isSingle
-    ? `get${camelize(singularize(config.name))}`
-    : `list${camelize(pluralize(config.name))}`;
+    ? `get${camelize(singularize(def.name))}`
+    : `list${camelize(pluralize(def.name))}`;
   const nonPathParams = getParametersByOperationId({
     doc,
     operationId,
@@ -52,44 +49,47 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
+  "github.com/rootlyhq/jsonapi"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/jsonapitypes"
 	"github.com/samber/lo"
 )
 
-var _ datasource.DataSource = &${config.goNames.struct}{}
-var _ datasource.DataSourceWithConfigure = &${config.goNames.struct}{}
+var _ datasource.DataSource = &${def.goNames.struct}{}
+var _ datasource.DataSourceWithConfigure = &${def.goNames.struct}{}
 
-func New${config.goNames.struct}() datasource.DataSource {
-  return &${config.goNames.struct}{}
+func New${def.goNames.struct}() datasource.DataSource {
+  return &${def.goNames.struct}{}
 }
 
-type ${config.goNames.struct} struct {
+type ${def.goNames.struct} struct {
   baseDataSource
 }
 
-func (d *${config.goNames.struct}) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-  resp.TypeName = req.ProviderTypeName + "_${config.name}"
+func (d *${def.goNames.struct}) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+  resp.TypeName = req.ProviderTypeName + "_${def.name}"
 }
 
-func (d *${config.goNames.struct}) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *${def.goNames.struct}) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
   resp.Schema = schema.Schema{
-    MarkdownDescription: ${JSON.stringify(config.description ?? config.schemas.resolved.description ?? "")},
-    Attributes: map[string]schema.Attribute{
-      ${generateSchemaAttributes({ parent: config.goNames.model, schema: config.schemas.resolved })}
-    },
+    ${def.description ? `MarkdownDescription: ${JSON.stringify(def.description)},` : ""}
+    ${generateSchemaAttributes({
+      parent: def.goNames.model,
+      attributes: def.attributes,
+      blocks: [],
+    })}
   }
 }
 
-func (d *${config.goNames.struct}) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-  var data ${config.goNames.model}
+func (d *${def.goNames.struct}) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+  var data ${def.goNames.model}
 
   resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
   if resp.Diagnostics.HasError() {
     return
   }
 
-	${resultVar}, err := d.client.${clientBase}${clientMethod}(${clientArgs.join(",")})
+	${resultVar}, err := d.client.${clientBase}${clientMethod}(${clientArgs.join(", ")})
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read, got error: %s", err))
 		return
@@ -107,98 +107,17 @@ func (d *${config.goNames.struct}) Read(ctx context.Context, req datasource.Read
 }
 
 ${generateModels({
-  config,
-  schema: config.schemas.resolved,
-  baseName: camelize(singularize(config.name)),
-  name: config.goNames.model,
-  isTopLevel: true,
+  def,
+  name: def.goNames.model,
+  clientName: def.goNames.clientBase,
+  attributes: def.attributes,
+  level: 0,
+  options: {
+    rootIsCollection: def.strategy === "list",
+    generateFromApi: true,
+    generateToApiForCreate: false,
+    generateToApiForUpdate: false,
+  },
 })}
 `;
-}
-
-function generateSchemaAttributes({
-  parent,
-  schema,
-}: {
-  parent: string | null;
-  schema: oas30.SchemaObject;
-}) {
-  if (!schema.properties) {
-    throw new Error(`Schema does not have properties`);
-  }
-
-  const lines: string[] = [];
-
-  for (const [key, value] of Object.entries(schema.properties)) {
-    assertSchemaObject(value);
-    lines.push(
-      `"${key}": ${generateSchemaAttribute({ parent, name: key, schema: value })},`,
-    );
-  }
-
-  return lines.join("\n");
-}
-
-function generateSchemaAttribute({
-  parent,
-  name,
-  schema,
-}: {
-  parent: string | null;
-  name: string;
-  schema: oas30.SchemaObject;
-}) {
-  if (!schema.type) {
-    throw new Error(`Schema does not have a type`);
-  }
-
-  const tfCustomType = tfAttributeCustomType({ schema, parent, name });
-
-  const parts: string[] = [];
-  parts.push(`${tfAttributeSchemaType({ schema })}{`);
-
-  if (schema.description) {
-    parts.push(`MarkdownDescription: ${JSON.stringify(schema.description)},`);
-  }
-
-  parts.push(
-    ...match(schema["x-tf-computed-optional-required"])
-      .with("required", () => ["Required: true,"])
-      .with("computed", () => ["Computed: true,"])
-      .with("computed_optional", () => ["Optional: true,", "Computed: true,"])
-      .with("optional", () => ["Optional: true,"])
-      .otherwise(() => ["Computed: true,"]),
-  );
-
-  if (tfCustomType) {
-    parts.push(`CustomType: ${tfCustomType},`);
-  }
-
-  match(schema)
-    .with({ type: "object" }, (value) => {
-      parts.push("Attributes: map[string]schema.Attribute{");
-      parts.push(
-        generateSchemaAttributes({
-          parent: `${parent}${camelize(name)}`,
-          schema: value,
-        }),
-      );
-      parts.push("},");
-    })
-    .with({ type: "array", items: { type: "object" } }, (value) => {
-      parts.push("NestedObject: schema.NestedAttributeObject{");
-      parts.push("Attributes: map[string]schema.Attribute{");
-      parts.push(
-        generateSchemaAttributes({
-          parent: `${parent}${camelize(name)}Item`,
-          schema: value.items,
-        }),
-      );
-      parts.push("},");
-      parts.push("},");
-    });
-
-  parts.push(`}`);
-
-  return parts.join("\n");
 }

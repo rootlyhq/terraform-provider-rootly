@@ -13,7 +13,10 @@ export function tfAttributeSchemaType({
     .with([{ type: "string" }, P.any], () => "schema.StringAttribute")
     .with([{ type: "bool" }, P.any], () => "schema.BoolAttribute")
     .with([{ type: "int64" }, P.any], () => "schema.Int64Attribute")
-    .with([{ type: "object" }, P.any], () => "schema.SingleNestedAttribute")
+    .with(
+      [{ type: "single_nested" }, P.any],
+      () => "schema.SingleNestedAttribute",
+    )
     .with([{ type: "list" }, P.any], () => "schema.ListAttribute")
     .with(
       [{ type: "list_nested" }, "attribute"],
@@ -38,7 +41,7 @@ export function tfAttributeValidatorType({
     .with({ type: "string" }, () => "validator.String")
     .with({ type: "bool" }, () => "validator.Bool")
     .with({ type: "int64" }, () => "validator.Int64")
-    .with({ type: "object" }, () => "validator.Object")
+    .with({ type: "single_nested" }, () => "validator.Object")
     .with({ type: "list" }, () => "validator.List")
     .with({ type: "list_nested" }, () => "validator.List")
     .with({ type: "set" }, () => "validator.Set")
@@ -70,6 +73,11 @@ export function tfAttributeValueType({
     .with({ type: "bool" }, () => "types.Bool")
     .with({ type: "int64" }, () => "types.Int64")
     .with(
+      { type: "single_nested" },
+      () =>
+        `supertypes.SingleNestedObjectValueOf[${parent}${camelize(attribute.name)}]`,
+    )
+    .with(
       { type: "list" },
       (attribute) => `supertypes.ListValueOf[${attribute.elementType}]`,
     )
@@ -99,7 +107,7 @@ export function tfAttributeCustomType({
 }) {
   return match(attribute)
     .with(
-      { type: "object" },
+      { type: "single_nested" },
       (value) =>
         `supertypes.NewSingleNestedObjectTypeOf[${parent}${camelize(value.name)}](ctx)`,
     )

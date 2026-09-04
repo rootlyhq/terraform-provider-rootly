@@ -140,7 +140,8 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"id": schema.StringAttribute{
-				Computed: true,
+				MarkdownDescription: "The ID of the resource.",
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},

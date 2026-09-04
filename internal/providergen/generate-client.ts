@@ -193,7 +193,7 @@ func (c *Client) ${camelize(config.name)}List(${funcArgs.join(", ")}) (*[]${came
 			return nil, fmt.Errorf("empty response")
 		}
 
-		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(resp.Body), reflect.TypeFor[${camelize(config.name)}]())
+		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(resp.Body), reflect.TypeFor[*${camelize(config.name)}]())
 		if err != nil {
 			return nil, fmt.Errorf("failed to unmarshal response body: %w", err)
 		}

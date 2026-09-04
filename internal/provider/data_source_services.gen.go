@@ -5,14 +5,17 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
+	"github.com/rootlyhq/jsonapi"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diagutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/jsonapitypes"
-	"github.com/samber/lo"
 )
 
 var _ datasource.DataSource = &ServicesDataSource{}
@@ -40,190 +43,193 @@ func (d *ServicesDataSource) Schema(ctx context.Context, req datasource.SchemaRe
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							MarkdownDescription: "The ID of the service.",
+							MarkdownDescription: "The ID of the resource.",
 							Computed:            true,
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "The name of the service",
+							MarkdownDescription: "The name of the service.",
 							Computed:            true,
 						},
 						"slug": schema.StringAttribute{
-							MarkdownDescription: "The slug of the service",
+							MarkdownDescription: "The slug of the service.",
 							Computed:            true,
 						},
 						"managed_by": schema.StringAttribute{
-							MarkdownDescription: "How this service is managed (provenance): web, api, terraform, etc. Read-only.",
+							MarkdownDescription: "How this service is managed (provenance): web, api, terraform, etc. Read-only. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.",
 							Computed:            true,
+							Validators: []validator.String{
+								stringvalidator.OneOf("web", "admin_web", "api", "terraform", "pulumi", "backstage", "catalog_sync"),
+							},
 						},
 						"description": schema.StringAttribute{
-							MarkdownDescription: "The description of the service",
+							MarkdownDescription: "The description of the service.",
 							Computed:            true,
 						},
 						"public_description": schema.StringAttribute{
-							MarkdownDescription: "The status page description of the service",
+							MarkdownDescription: "The status page description of the service.",
 							Computed:            true,
 						},
 						"notify_emails": schema.ListAttribute{
-							MarkdownDescription: "Emails attached to the service",
+							MarkdownDescription: "Emails attached to the service.",
 							Computed:            true,
 							CustomType:          supertypes.NewListTypeOf[string](ctx),
 						},
 						"color": schema.StringAttribute{
-							MarkdownDescription: "The hex color of the service",
+							MarkdownDescription: "The hex color of the service.",
 							Computed:            true,
 						},
 						"position": schema.Int64Attribute{
-							MarkdownDescription: "Position of the service",
+							MarkdownDescription: "Position of the service.",
 							Computed:            true,
 						},
 						"backstage_id": schema.StringAttribute{
-							MarkdownDescription: "The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name",
+							MarkdownDescription: "The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name.",
 							Computed:            true,
 						},
 						"external_id": schema.StringAttribute{
-							MarkdownDescription: "The external id associated to this service",
+							MarkdownDescription: "The external id associated to this service.",
 							Computed:            true,
 						},
 						"pagerduty_id": schema.StringAttribute{
-							MarkdownDescription: "The PagerDuty service id associated to this service",
+							MarkdownDescription: "The PagerDuty service id associated to this service.",
 							Computed:            true,
 						},
 						"opsgenie_id": schema.StringAttribute{
-							MarkdownDescription: "The Opsgenie service id associated to this service",
+							MarkdownDescription: "The Opsgenie service id associated to this service.",
 							Computed:            true,
 						},
 						"cortex_id": schema.StringAttribute{
-							MarkdownDescription: "The Cortex group id associated to this service",
+							MarkdownDescription: "The Cortex group id associated to this service.",
 							Computed:            true,
 						},
 						"service_now_ci_sys_id": schema.StringAttribute{
-							MarkdownDescription: "The Service Now CI sys id associated to this service",
+							MarkdownDescription: "The Service Now CI sys id associated to this service.",
 							Computed:            true,
 						},
 						"github_repository_name": schema.StringAttribute{
-							MarkdownDescription: "The GitHub repository name associated to this service. eg: rootlyhq/my-service",
+							MarkdownDescription: "The GitHub repository name associated to this service. eg: rootlyhq/my-service.",
 							Computed:            true,
 						},
 						"github_repository_branch": schema.StringAttribute{
-							MarkdownDescription: "The GitHub repository branch associated to this service. eg: main",
+							MarkdownDescription: "The GitHub repository branch associated to this service. eg: main.",
 							Computed:            true,
 						},
 						"gitlab_repository_name": schema.StringAttribute{
-							MarkdownDescription: "The GitLab repository name associated to this service. eg: rootlyhq/my-service",
+							MarkdownDescription: "The GitLab repository name associated to this service. eg: rootlyhq/my-service.",
 							Computed:            true,
 						},
 						"gitlab_repository_branch": schema.StringAttribute{
-							MarkdownDescription: "The GitLab repository branch associated to this service. eg: main",
+							MarkdownDescription: "The GitLab repository branch associated to this service. eg: main.",
 							Computed:            true,
 						},
 						"kubernetes_deployment_name": schema.StringAttribute{
-							MarkdownDescription: "The Kubernetes deployment name associated to this service. eg: namespace/deployment-name",
+							MarkdownDescription: "The Kubernetes deployment name associated to this service. eg: namespace/deployment-name.",
 							Computed:            true,
 						},
 						"environment_ids": schema.ListAttribute{
-							MarkdownDescription: "Environments associated with this service",
+							MarkdownDescription: "Environments associated with this service.",
 							Computed:            true,
 							CustomType:          supertypes.NewListTypeOf[string](ctx),
 						},
 						"service_ids": schema.ListAttribute{
-							MarkdownDescription: "Services dependent on this service",
+							MarkdownDescription: "Services dependent on this service.",
 							Computed:            true,
 							CustomType:          supertypes.NewListTypeOf[string](ctx),
 						},
 						"owner_group_ids": schema.ListAttribute{
-							MarkdownDescription: "Owner Teams associated with this service",
+							MarkdownDescription: "Owner Teams associated with this service.",
 							Computed:            true,
 							CustomType:          supertypes.NewListTypeOf[string](ctx),
 						},
 						"owner_user_ids": schema.ListAttribute{
-							MarkdownDescription: "Owner Users associated with this service",
+							MarkdownDescription: "Owner Users associated with this service.",
 							Computed:            true,
 							CustomType:          supertypes.NewListTypeOf[int64](ctx),
 						},
 						"alert_urgency_id": schema.StringAttribute{
-							MarkdownDescription: "The alert urgency id of the service",
+							MarkdownDescription: "The alert urgency id of the service.",
 							Computed:            true,
 						},
 						"escalation_policy_id": schema.StringAttribute{
-							MarkdownDescription: "The escalation policy id of the service",
+							MarkdownDescription: "The escalation policy id of the service.",
 							Computed:            true,
 						},
 						"alerts_email_enabled": schema.BoolAttribute{
-							MarkdownDescription: "Enable alerts through email",
+							MarkdownDescription: "Enable alerts through email.",
 							Computed:            true,
 						},
 						"alerts_email_address": schema.StringAttribute{
-							MarkdownDescription: "Email generated to send alerts to",
+							MarkdownDescription: "Email generated to send alerts to.",
 							Computed:            true,
 						},
 						"slack_channels": schema.ListNestedAttribute{
-							MarkdownDescription: "Slack Channels associated with this service",
+							MarkdownDescription: "Slack Channels associated with this service.",
 							Computed:            true,
 							CustomType:          supertypes.NewListNestedObjectTypeOf[ServicesDataSourceModelServicesItemSlackChannelsItem](ctx),
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"id": schema.StringAttribute{
-										MarkdownDescription: "Slack channel ID",
+										MarkdownDescription: "Slack channel ID.",
 										Computed:            true,
 									},
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Slack channel name",
+										MarkdownDescription: "Slack channel name.",
 										Computed:            true,
 									},
 								},
 							},
 						},
 						"slack_aliases": schema.ListNestedAttribute{
-							MarkdownDescription: "Slack Aliases associated with this service",
+							MarkdownDescription: "Slack Aliases associated with this service.",
 							Computed:            true,
 							CustomType:          supertypes.NewListNestedObjectTypeOf[ServicesDataSourceModelServicesItemSlackAliasesItem](ctx),
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"id": schema.StringAttribute{
-										MarkdownDescription: "Slack alias ID",
+										MarkdownDescription: "Slack alias ID.",
 										Computed:            true,
 									},
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Slack alias name",
+										MarkdownDescription: "Slack alias name.",
 										Computed:            true,
 									},
 								},
 							},
 						},
 						"alert_broadcast_enabled": schema.BoolAttribute{
-							MarkdownDescription: "Enable alerts to be broadcasted to a specific channel",
+							MarkdownDescription: "Enable alerts to be broadcasted to a specific channel.",
 							Computed:            true,
 						},
 						"alert_broadcast_channel": schema.SingleNestedAttribute{
-							MarkdownDescription: "Slack channel to broadcast alerts to",
+							MarkdownDescription: "Slack channel to broadcast alerts to.",
 							Computed:            true,
 							CustomType:          supertypes.NewSingleNestedObjectTypeOf[ServicesDataSourceModelServicesItemAlertBroadcastChannel](ctx),
 							Attributes: map[string]schema.Attribute{
 								"id": schema.StringAttribute{
-									MarkdownDescription: "Slack channel ID",
+									MarkdownDescription: "Slack channel ID.",
 									Computed:            true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Slack channel name",
+									MarkdownDescription: "Slack channel name.",
 									Computed:            true,
 								},
 							},
 						},
 						"incident_broadcast_enabled": schema.BoolAttribute{
-							MarkdownDescription: "Enable incidents to be broadcasted to a specific channel",
+							MarkdownDescription: "Enable incidents to be broadcasted to a specific channel.",
 							Computed:            true,
 						},
 						"incident_broadcast_channel": schema.SingleNestedAttribute{
-							MarkdownDescription: "Slack channel to broadcast incidents to",
+							MarkdownDescription: "Slack channel to broadcast incidents to.",
 							Computed:            true,
 							CustomType:          supertypes.NewSingleNestedObjectTypeOf[ServicesDataSourceModelServicesItemIncidentBroadcastChannel](ctx),
 							Attributes: map[string]schema.Attribute{
 								"id": schema.StringAttribute{
-									MarkdownDescription: "Slack channel ID",
+									MarkdownDescription: "Slack channel ID.",
 									Computed:            true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Slack channel name",
+									MarkdownDescription: "Slack channel name.",
 									Computed:            true,
 								},
 							},
@@ -235,22 +241,22 @@ func (d *ServicesDataSource) Schema(ctx context.Context, req datasource.SchemaRe
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"catalog_property_id": schema.StringAttribute{
-										MarkdownDescription: "Catalog property ID",
+										MarkdownDescription: "Catalog property ID.",
 										Computed:            true,
 									},
 									"value": schema.StringAttribute{
-										MarkdownDescription: "The property value",
+										MarkdownDescription: "The property value.",
 										Computed:            true,
 									},
 								},
 							},
 						},
 						"created_at": schema.StringAttribute{
-							MarkdownDescription: "Date of creation",
+							MarkdownDescription: "Date of creation.",
 							Computed:            true,
 						},
 						"updated_at": schema.StringAttribute{
-							MarkdownDescription: "Date of last update",
+							MarkdownDescription: "Date of last update.",
 							Computed:            true,
 						},
 					},
@@ -292,13 +298,13 @@ type ServicesDataSourceModel struct {
 func (m *ServicesDataSourceModel) FromApi(ctx context.Context, data []apiclient.Service) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.Services = (func() supertypes.ListNestedObjectValueOf[ServicesDataSourceModelServicesItem] {
-		return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(data, func(vv apiclient.Service, _ int) ServicesDataSourceModelServicesItem {
-			var mm ServicesDataSourceModelServicesItem
-			diags.Append(mm.FromApi(ctx, vv)...)
-			return mm
-		}))
-	})()
+	m.Services = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+		ctx,
+		jsonapi.NewNullableAttrWithValue(data),
+		func(ctx context.Context, item *ServicesDataSourceModelServicesItem, apiItem apiclient.Service) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
 
 	return diags
 }
@@ -346,10 +352,10 @@ type ServicesDataSourceModelServicesItem struct {
 func (m *ServicesDataSourceModelServicesItem) FromApi(ctx context.Context, data apiclient.Service) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.Id = types.StringValue(data.Id)
-	m.Name = types.StringValue(data.Name)
-	m.Slug = types.StringValue(data.Slug)
-	m.ManagedBy = types.StringValue(data.ManagedBy)
+	// id is not returned
+	m.Name = jsonapitypes.NullableStringValue(data.Name)
+	m.Slug = jsonapitypes.NullableStringValue(data.Slug)
+	m.ManagedBy = jsonapitypes.NullableStringValue(data.ManagedBy)
 	m.Description = jsonapitypes.NullableStringValue(data.Description)
 	m.PublicDescription = jsonapitypes.NullableStringValue(data.PublicDescription)
 	m.NotifyEmails = jsonapitypes.NullableListValueOfSlice(ctx, data.NotifyEmails)
@@ -374,56 +380,45 @@ func (m *ServicesDataSourceModelServicesItem) FromApi(ctx context.Context, data 
 	m.EscalationPolicyId = jsonapitypes.NullableStringValue(data.EscalationPolicyId)
 	m.AlertsEmailEnabled = jsonapitypes.NullableBoolValue(data.AlertsEmailEnabled)
 	m.AlertsEmailAddress = jsonapitypes.NullableStringValue(data.AlertsEmailAddress)
-	m.SlackChannels = (func() supertypes.ListNestedObjectValueOf[ServicesDataSourceModelServicesItemSlackChannelsItem] {
-		if v, err := data.SlackChannels.Get(); err == nil {
-			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.ServiceSlackChannelsItem, _ int) ServicesDataSourceModelServicesItemSlackChannelsItem {
-				var mm ServicesDataSourceModelServicesItemSlackChannelsItem
-				diags.Append(mm.FromApi(ctx, vv)...)
-				return mm
-			}))
-		}
-		return supertypes.NewListNestedObjectValueOfNull[ServicesDataSourceModelServicesItemSlackChannelsItem](ctx)
-	})()
-	m.SlackAliases = (func() supertypes.ListNestedObjectValueOf[ServicesDataSourceModelServicesItemSlackAliasesItem] {
-		if v, err := data.SlackAliases.Get(); err == nil {
-			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.ServiceSlackAliasesItem, _ int) ServicesDataSourceModelServicesItemSlackAliasesItem {
-				var mm ServicesDataSourceModelServicesItemSlackAliasesItem
-				diags.Append(mm.FromApi(ctx, vv)...)
-				return mm
-			}))
-		}
-		return supertypes.NewListNestedObjectValueOfNull[ServicesDataSourceModelServicesItemSlackAliasesItem](ctx)
-	})()
+	m.SlackChannels = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+		ctx,
+		data.SlackChannels,
+		func(ctx context.Context, item *ServicesDataSourceModelServicesItemSlackChannelsItem, apiItem apiclient.ServiceSlackChannelsItem) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
+	m.SlackAliases = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+		ctx,
+		data.SlackAliases,
+		func(ctx context.Context, item *ServicesDataSourceModelServicesItemSlackAliasesItem, apiItem apiclient.ServiceSlackAliasesItem) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
 	m.AlertBroadcastEnabled = jsonapitypes.NullableBoolValue(data.AlertBroadcastEnabled)
-	m.AlertBroadcastChannel = (func() supertypes.SingleNestedObjectValueOf[ServicesDataSourceModelServicesItemAlertBroadcastChannel] {
-		if v, err := data.AlertBroadcastChannel.Get(); err == nil {
-			var mm ServicesDataSourceModelServicesItemAlertBroadcastChannel
-			diags.Append(mm.FromApi(ctx, v)...)
-			return supertypes.NewSingleNestedObjectValueOf(ctx, &mm)
-		}
-		return supertypes.NewSingleNestedObjectValueOfNull[ServicesDataSourceModelServicesItemAlertBroadcastChannel](ctx)
-	})()
+	m.AlertBroadcastChannel = diagutils.MergeDiagnostics(jsonapitypes.ConvertToSingleModel(
+		ctx,
+		data.AlertBroadcastChannel,
+		func(ctx context.Context, item *ServicesDataSourceModelServicesItemAlertBroadcastChannel, apiItem apiclient.ServiceAlertBroadcastChannel) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
 	m.IncidentBroadcastEnabled = jsonapitypes.NullableBoolValue(data.IncidentBroadcastEnabled)
-	m.IncidentBroadcastChannel = (func() supertypes.SingleNestedObjectValueOf[ServicesDataSourceModelServicesItemIncidentBroadcastChannel] {
-		if v, err := data.IncidentBroadcastChannel.Get(); err == nil {
-			var mm ServicesDataSourceModelServicesItemIncidentBroadcastChannel
-			diags.Append(mm.FromApi(ctx, v)...)
-			return supertypes.NewSingleNestedObjectValueOf(ctx, &mm)
-		}
-		return supertypes.NewSingleNestedObjectValueOfNull[ServicesDataSourceModelServicesItemIncidentBroadcastChannel](ctx)
-	})()
-	m.Properties = (func() supertypes.ListNestedObjectValueOf[ServicesDataSourceModelServicesItemPropertiesItem] {
-		if v, err := data.Properties.Get(); err == nil {
-			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.ServicePropertiesItem, _ int) ServicesDataSourceModelServicesItemPropertiesItem {
-				var mm ServicesDataSourceModelServicesItemPropertiesItem
-				diags.Append(mm.FromApi(ctx, vv)...)
-				return mm
-			}))
-		}
-		return supertypes.NewListNestedObjectValueOfNull[ServicesDataSourceModelServicesItemPropertiesItem](ctx)
-	})()
-	m.CreatedAt = types.StringValue(data.CreatedAt)
-	m.UpdatedAt = types.StringValue(data.UpdatedAt)
+	m.IncidentBroadcastChannel = diagutils.MergeDiagnostics(jsonapitypes.ConvertToSingleModel(
+		ctx,
+		data.IncidentBroadcastChannel,
+		func(ctx context.Context, item *ServicesDataSourceModelServicesItemIncidentBroadcastChannel, apiItem apiclient.ServiceIncidentBroadcastChannel) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
+	m.Properties = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+		ctx,
+		data.Properties,
+		func(ctx context.Context, item *ServicesDataSourceModelServicesItemPropertiesItem, apiItem apiclient.ServicePropertiesItem) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
+	m.CreatedAt = jsonapitypes.NullableStringValue(data.CreatedAt)
+	m.UpdatedAt = jsonapitypes.NullableStringValue(data.UpdatedAt)
 
 	return diags
 }
@@ -436,8 +431,8 @@ type ServicesDataSourceModelServicesItemSlackChannelsItem struct {
 func (m *ServicesDataSourceModelServicesItemSlackChannelsItem) FromApi(ctx context.Context, data apiclient.ServiceSlackChannelsItem) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.Id = types.StringValue(data.Id)
-	m.Name = types.StringValue(data.Name)
+	m.Id = jsonapitypes.NullableStringValue(data.Id)
+	m.Name = jsonapitypes.NullableStringValue(data.Name)
 
 	return diags
 }
@@ -450,8 +445,8 @@ type ServicesDataSourceModelServicesItemSlackAliasesItem struct {
 func (m *ServicesDataSourceModelServicesItemSlackAliasesItem) FromApi(ctx context.Context, data apiclient.ServiceSlackAliasesItem) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.Id = types.StringValue(data.Id)
-	m.Name = types.StringValue(data.Name)
+	m.Id = jsonapitypes.NullableStringValue(data.Id)
+	m.Name = jsonapitypes.NullableStringValue(data.Name)
 
 	return diags
 }
@@ -464,8 +459,8 @@ type ServicesDataSourceModelServicesItemAlertBroadcastChannel struct {
 func (m *ServicesDataSourceModelServicesItemAlertBroadcastChannel) FromApi(ctx context.Context, data apiclient.ServiceAlertBroadcastChannel) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.Id = types.StringValue(data.Id)
-	m.Name = types.StringValue(data.Name)
+	m.Id = jsonapitypes.NullableStringValue(data.Id)
+	m.Name = jsonapitypes.NullableStringValue(data.Name)
 
 	return diags
 }
@@ -478,8 +473,8 @@ type ServicesDataSourceModelServicesItemIncidentBroadcastChannel struct {
 func (m *ServicesDataSourceModelServicesItemIncidentBroadcastChannel) FromApi(ctx context.Context, data apiclient.ServiceIncidentBroadcastChannel) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.Id = types.StringValue(data.Id)
-	m.Name = types.StringValue(data.Name)
+	m.Id = jsonapitypes.NullableStringValue(data.Id)
+	m.Name = jsonapitypes.NullableStringValue(data.Name)
 
 	return diags
 }
@@ -492,8 +487,8 @@ type ServicesDataSourceModelServicesItemPropertiesItem struct {
 func (m *ServicesDataSourceModelServicesItemPropertiesItem) FromApi(ctx context.Context, data apiclient.ServicePropertiesItem) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	m.CatalogPropertyId = types.StringValue(data.CatalogPropertyId)
-	m.Value = types.StringValue(data.Value)
+	m.CatalogPropertyId = jsonapitypes.NullableStringValue(data.CatalogPropertyId)
+	m.Value = jsonapitypes.NullableStringValue(data.Value)
 
 	return diags
 }

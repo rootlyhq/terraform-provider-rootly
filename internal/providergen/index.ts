@@ -6,6 +6,7 @@ import { generateProvider } from "./generate-provider";
 import { CLIENTS, DATA_SOURCES, RESOURCES } from "./settings";
 import { generateDataSourceDef, generateResourceDef } from "./schema";
 import { generateResource } from "./generate-resource";
+import { generateDataSource } from "./generate-data-source";
 
 async function parseArguments() {
   const { values } = parseArgs({
@@ -62,10 +63,19 @@ async function main() {
   }
 
   for (const config of DATA_SOURCES) {
-    const def = generateDataSourceDef({ doc, config });
+    let def = generateDataSourceDef({ doc, config });
+    if (config.modifyDef) {
+      def = config.modifyDef(def);
+    }
     await Bun.write(
       new URL(`dist/data_source_def_${config.name}.json`, import.meta.url),
       JSON.stringify(def, null, 2),
+    );
+
+    const code = generateDataSource({ doc, def });
+    await writeAndFormatGoFile(
+      new URL(`../provider/data_source_${def.name}.gen.go`, import.meta.url),
+      code,
     );
   }
 
