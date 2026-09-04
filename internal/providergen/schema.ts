@@ -96,7 +96,7 @@ export interface AttributeInt64 extends AttributeBase {
 export interface AttributeObject extends AttributeBase {
   type: "object";
   attributes: AttributeType[];
-  blocks: (AttributeListNested | AttributeSetNested)[];
+  blocks: AttributeBlockType[];
 }
 
 export interface AttributeList extends AttributeBase {
@@ -112,7 +112,7 @@ export interface AttributeSet extends AttributeBase {
 export interface AttributeListNested extends AttributeBase {
   type: "list_nested";
   attributes: AttributeType[];
-  blocks: (AttributeListNested | AttributeSetNested)[];
+  blocks: AttributeBlockType[];
   hacks?: {
     /** The behavior for unknown values. Default is "omit" */
     unknownBehavior?: "omit" | "empty" | "null";
@@ -126,7 +126,7 @@ export interface AttributeListNested extends AttributeBase {
 export interface AttributeSetNested extends AttributeBase {
   type: "set_nested";
   attributes: AttributeType[];
-  blocks: (AttributeListNested | AttributeSetNested)[];
+  blocks: AttributeBlockType[];
   hacks?: {
     /** The behavior for unknown values. Default is "omit" */
     unknownBehavior?: "omit" | "empty" | "null";
@@ -147,6 +147,8 @@ export type AttributeType =
   | AttributeListNested
   | AttributeSetNested;
 
+export type AttributeBlockType = AttributeListNested | AttributeSetNested;
+
 export type ComputedOptionalRequired =
   | "computed"
   | "optional"
@@ -157,7 +159,7 @@ export interface DataSourceDef {
   name: string;
   description?: string;
   attributes: AttributeType[];
-  blocks: (AttributeListNested | AttributeSetNested)[];
+  blocks: AttributeBlockType[];
   goNames: {
     /** Name of the struct that represents the base client. */
     clientBase: string;
@@ -172,7 +174,7 @@ export interface ResourceDef {
   name: string;
   description?: string;
   attributes: AttributeType[];
-  blocks: (AttributeListNested | AttributeSetNested)[];
+  blocks: AttributeBlockType[];
   goNames: {
     /** Name of the struct that represents the base client. */
     clientBase: string;
@@ -682,10 +684,10 @@ export function isCollectionAttribute(
 }
 
 function mergeNestedBlocks(
-  existingBlocks: (AttributeListNested | AttributeSetNested)[],
-  newBlocks: (AttributeListNested | AttributeSetNested)[],
-): (AttributeListNested | AttributeSetNested)[] {
-  const blockMap = new Map<string, AttributeListNested | AttributeSetNested>();
+  existingBlocks: AttributeBlockType[],
+  newBlocks: AttributeBlockType[],
+): AttributeBlockType[] {
+  const blockMap = new Map<string, AttributeBlockType>();
 
   for (const block of [...existingBlocks, ...newBlocks]) {
     const existing = blockMap.get(block.name);
