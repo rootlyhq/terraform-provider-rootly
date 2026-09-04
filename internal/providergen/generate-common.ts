@@ -278,8 +278,8 @@ function generateModelFromApi({
 
   const assignments = attributes.map((attribute) => {
     if (
-      !attribute.schemas?.read
-      // !(attribute.type === "string" && !attribute.hints?.isOpenApiId)
+      !attribute.schemas?.read &&
+      !(attribute.type === "string" && attribute.hints?.isOpenApiId)
     ) {
       return `// ${attribute.name} is not returned`;
     }

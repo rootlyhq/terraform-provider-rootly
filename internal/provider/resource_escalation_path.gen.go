@@ -659,7 +659,7 @@ func (m *EscalationPathResourceModel) FromApi(ctx context.Context, data apiclien
 	m.Default = jsonapitypes.NullableBoolValue(data.Default)
 	m.NotificationType = jsonapitypes.NullableStringValue(data.NotificationType)
 	m.PathType = jsonapitypes.NullableStringValue(data.PathType)
-	// escalation_policy_id is not returned
+	// escalation_policy_id is not returned {"type":"string","name":"escalation_policy_id","computedOptionalRequired":"required","planModifiers":["stringplanmodifier.RequiresReplace()"],"paramSchemas":{"create":{"name":"escalation_policy_id","in":"path","required":true,"schema":{"type":"string"}}}}
 	m.AfterDeferralBehavior = jsonapitypes.NullableStringValue(data.AfterDeferralBehavior)
 	m.AfterDeferralPathId = jsonapitypes.NullableStringValue(data.AfterDeferralPathId)
 	m.MatchMode = jsonapitypes.NullableStringValue(data.MatchMode)
@@ -672,7 +672,7 @@ func (m *EscalationPathResourceModel) FromApi(ctx context.Context, data apiclien
 	m.UpdatedAt = jsonapitypes.NullableStringValue(data.UpdatedAt)
 	m.NotificationTypeFallback = jsonapitypes.NullableStringValue(data.NotificationTypeFallback)
 	m.TimeRestrictionTimeZone = jsonapitypes.NullableStringValue(data.TimeRestrictionTimeZone)
-	// id is not returned
+	// id is not returned {"type":"string","name":"id","computedOptionalRequired":"computed","description":"The ID of the resource.","planModifiers":["stringplanmodifier.UseStateForUnknown()"],"paramSchemas":{"read":{"name":"id","in":"path","required":true,"schema":{"type":"string"}},"update":{"name":"id","in":"path","required":true,"schema":{"type":"string"}},"delete":{"name":"id","in":"path","required":true,"schema":{"type":"string"}}}}
 	m.Rules = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
 		ctx,
 		data.Rules,

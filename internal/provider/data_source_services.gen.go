@@ -352,7 +352,7 @@ type ServicesDataSourceModelServicesItem struct {
 func (m *ServicesDataSourceModelServicesItem) FromApi(ctx context.Context, data apiclient.Service) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	// id is not returned
+	m.Id = types.StringValue(data.Id)
 	m.Name = jsonapitypes.NullableStringValue(data.Name)
 	m.Slug = jsonapitypes.NullableStringValue(data.Slug)
 	m.ManagedBy = jsonapitypes.NullableStringValue(data.ManagedBy)
