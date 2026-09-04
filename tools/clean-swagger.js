@@ -162,6 +162,19 @@ function annotateNullableRelationships(schemas) {
     schemas.status_page_component.properties.status_page_component_group_id.tf_nullable = true;
   }
 }
+
+// escalation_level.delay is serialized without omitempty (see excluded.clients
+// in tools/generate.js) so an explicit 0 reaches the API. Because the field is
+// therefore sent on every update, Update must always populate it from state:
+// guarding it behind d.HasChange leaves it at Go's zero value and silently
+// resets the level's delay to 0 whenever some other field changes.
+// TODO: emit tf_include_unchanged from the API's swagger generator instead.
+function annotateAlwaysSentFields(schemas) {
+  if (schemas.escalation_level) {
+    schemas.escalation_level.properties.delay.tf_include_unchanged = true;
+  }
+}
+
 // Bulk upsert/delete endpoints are not exposed via Terraform and their
 // *_response schema names collide with oapi-codegen's generated operation
 // response types (e.g. BulkUpsertServicesResponse redeclared).
@@ -193,5 +206,6 @@ renameEscalationPolicyLevelSchemas(swagger);
 renameEscalationPolicyPathSchemas(swagger);
 addNestedRouteParentIds(swagger.components.schemas);
 annotateNullableRelationships(swagger.components.schemas);
+annotateAlwaysSentFields(swagger.components.schemas);
 stripBulkOperations(swagger);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));
