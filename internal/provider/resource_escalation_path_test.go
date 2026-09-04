@@ -58,7 +58,7 @@ func TestAccResourceEscalationPath_UpgradeFromVersion(t *testing.T) {
 				ExternalProviders: map[string]resource.ExternalProvider{
 					"rootly": {
 						Source:            "rootlyhq/rootly",
-						VersionConstraint: "5.20.1",
+						VersionConstraint: "5.21.0",
 					},
 				},
 				Config:            config,
