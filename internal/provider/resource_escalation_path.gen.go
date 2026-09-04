@@ -74,7 +74,7 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"after_deferral_behavior": schema.StringAttribute{
-				MarkdownDescription: "What happens after a deferral path finishes. Value must be one of `re_evaluate`, `execute_path`.",
+				MarkdownDescription: "What happens after a deferral path finishes. Required for deferral paths. Value must be one of `re_evaluate`, `execute_path`.",
 				Optional:            true,
 				Computed:            true,
 				Validators: []validator.String{
@@ -182,7 +182,7 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 							Computed:            true,
 						},
 						"operator": schema.StringAttribute{
-							MarkdownDescription: "Whether the alert must (or must not) have related incidents. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`, `is_set`, `is_not_set`.",
+							MarkdownDescription: "How the value should be matched. For `json_path` rule type: `is`, `is_not`, `contains`, `does_not_contain`. For `field` rule type: `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`. For `source` rule type: `is`, `is_not`, `is_one_of`, `is_not_one_of`. For `related_incidents` rule type: `is_set`, `is_not_set`. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`, `is_set`, `is_not_set`.",
 							Optional:            true,
 							Computed:            true,
 							Validators: []validator.String{
@@ -195,13 +195,13 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 							Computed:            true,
 						},
 						"values": schema.SetAttribute{
-							MarkdownDescription: "Alert source values to match against (e.g., manual, datadog).",
+							MarkdownDescription: "Values to match against. Used with `field` and `source` rule types.",
 							Optional:            true,
 							Computed:            true,
 							CustomType:          supertypes.NewSetTypeOf[string](ctx),
 						},
 						"fieldable_type": schema.StringAttribute{
-							MarkdownDescription: "The type of the fieldable (e.g., AlertField). Value must be one of `AlertField`.",
+							MarkdownDescription: "The type of the fieldable. Only used with `field` rule type. Value must be one of `AlertField`.",
 							Optional:            true,
 							Computed:            true,
 							Validators: []validator.String{
@@ -209,12 +209,12 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 							},
 						},
 						"fieldable_id": schema.StringAttribute{
-							MarkdownDescription: "The ID of the alert field.",
+							MarkdownDescription: "The ID of the alert field. Only used with `field` rule type.",
 							Optional:            true,
 							Computed:            true,
 						},
 						"service_ids": schema.SetAttribute{
-							MarkdownDescription: "Service ids for which this escalation path should be used.",
+							MarkdownDescription: "Service ids for which this escalation path should be used. Only used with `service` rule type.",
 							Optional:            true,
 							Computed:            true,
 							CustomType:          supertypes.NewSetTypeOf[string](ctx),
@@ -230,7 +230,7 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 					},
 					Blocks: map[string]schema.Block{
 						"time_blocks": schema.ListNestedBlock{
-							MarkdownDescription: "Time windows during which alerts are deferred.",
+							MarkdownDescription: "Time windows during which alerts are deferred. Only used with `deferral_window` rule type.",
 							CustomType:          supertypes.NewListNestedObjectTypeOf[EscalationPathResourceModelRulesItemTimeBlocksItem](ctx),
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
@@ -352,7 +352,7 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 										Computed:            true,
 									},
 									"operator": schema.StringAttribute{
-										MarkdownDescription: "Whether the alert must (or must not) have related incidents. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`, `is_set`, `is_not_set`.",
+										MarkdownDescription: "How the value should be matched. For `json_path` rule type: `is`, `is_not`, `contains`, `does_not_contain`. For `field` rule type: `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`. For `source` rule type: `is`, `is_not`, `is_one_of`, `is_not_one_of`. For `related_incidents` rule type: `is_set`, `is_not_set`. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`, `is_set`, `is_not_set`.",
 										Optional:            true,
 										Computed:            true,
 										Validators: []validator.String{
@@ -365,13 +365,13 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 										Computed:            true,
 									},
 									"values": schema.SetAttribute{
-										MarkdownDescription: "Alert source values to match against (e.g., manual, datadog).",
+										MarkdownDescription: "Values to match against. Used with `field` and `source` rule types.",
 										Optional:            true,
 										Computed:            true,
 										CustomType:          supertypes.NewSetTypeOf[string](ctx),
 									},
 									"fieldable_type": schema.StringAttribute{
-										MarkdownDescription: "The type of the fieldable (e.g., AlertField). Value must be one of `AlertField`.",
+										MarkdownDescription: "The type of the fieldable. Only used with `field` rule type. Value must be one of `AlertField`.",
 										Optional:            true,
 										Computed:            true,
 										Validators: []validator.String{
@@ -379,12 +379,12 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 										},
 									},
 									"fieldable_id": schema.StringAttribute{
-										MarkdownDescription: "The ID of the alert field.",
+										MarkdownDescription: "The ID of the alert field. Only used with `field` rule type.",
 										Optional:            true,
 										Computed:            true,
 									},
 									"service_ids": schema.SetAttribute{
-										MarkdownDescription: "Service ids for which this escalation path should be used.",
+										MarkdownDescription: "Service ids for which this escalation path should be used. Only used with `service` rule type.",
 										Optional:            true,
 										Computed:            true,
 										CustomType:          supertypes.NewSetTypeOf[string](ctx),
@@ -400,7 +400,7 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 								},
 								Blocks: map[string]schema.Block{
 									"time_blocks": schema.ListNestedBlock{
-										MarkdownDescription: "Time windows during which alerts are deferred.",
+										MarkdownDescription: "Time windows during which alerts are deferred. Only used with `deferral_window` rule type.",
 										CustomType:          supertypes.NewListNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem](ctx),
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
