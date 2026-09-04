@@ -27,20 +27,6 @@ declare module "openapi3-ts/oas30" {
     "x-go-jsonapi-tag"?: "primary" | "attr";
     /** Defines the jsonapi type. */
     "x-go-jsonapi-type"?: string;
-    /** Overrides the nested object type name. Only used for nested objects. */
-    "x-go-nested-type"?: string;
-    /** Defines if the property is computed, optional or required. */
-    "x-tf-computed-optional-required"?: ComputedOptionalRequired;
-    /** Indicates this is the top level item type for the data source. Only used for plural data sources. */
-    "x-tf-top-level-item-type"?: boolean;
-    /** The type of collection to use for arrays. */
-    "x-tf-collection-type"?: "list" | "set";
-    /** The schema to use for reading the property. */
-    "x-schema-read"?: oas30.SchemaObject;
-    /** The schema to use for creating the property. */
-    "x-schema-create"?: oas30.SchemaObject;
-    /** The schema to use for updating the property. */
-    "x-schema-update"?: oas30.SchemaObject;
     /** Indicates that this property should be ignored. */
     tf_ignore?: boolean;
   }
@@ -854,20 +840,34 @@ function cleanDescription(description: string | undefined): string | undefined {
   return description;
 }
 
-export function withEnumDescription(
-  description: string | undefined,
-  enumValues: (string | number)[] | undefined,
+export function resolveDescription(
+  attribute: AttributeType,
 ): string | undefined {
-  if (!enumValues || enumValues.length === 0) {
-    return description;
+  const parts: string[] = [];
+
+  // Add ForceNew description
+  const hasRequiresReplace =
+    attribute.planModifiers &&
+    attribute.planModifiers.some((planModifier) =>
+      planModifier.includes("RequiresReplace"),
+    );
+  if (hasRequiresReplace) {
+    parts.push(`<i style="color:red;font-weight: bold">(ForceNew)</i>`);
   }
-  if (description) {
-    description += " ";
-  } else {
-    description = "";
+
+  // Add description
+  if (attribute.description) {
+    parts.push(attribute.description);
   }
-  description += `Value must be one of ${enumValues.map((v) => `\`${v}\``).join(", ")}.`;
-  return description;
+
+  // Add enum description
+  if ("enum" in attribute && attribute.enum && attribute.enum.length > 0) {
+    parts.push(
+      `Value must be one of ${attribute.enum.map((v) => `\`${v}\``).join(", ")}.`,
+    );
+  }
+
+  return parts.length > 0 ? parts.join(" ") : undefined;
 }
 
 export function buildValidators(attribute: AttributeType): string[] {

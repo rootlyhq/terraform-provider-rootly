@@ -2,9 +2,12 @@ import { camelize, humanize, pluralize, underscore } from "inflection";
 import { oas30 } from "openapi3-ts";
 import { match } from "ts-pattern";
 import type { ClientConfig } from "./schema";
-import { assertSchemaObject } from "./types";
 import { produce } from "immer";
-import { getParametersByOperationId, removeReference } from "./openapi";
+import {
+  assertSchemaObject,
+  getParametersByOperationId,
+  removeReference,
+} from "./openapi";
 
 export function generateClient({
   doc,

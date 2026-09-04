@@ -391,7 +391,7 @@ func (m *ServiceDataSourceModel) FromApi(ctx context.Context, data apiclient.Ser
 	))(&diags)
 	m.CreatedAt = jsonapitypes.NullableStringValue(data.CreatedAt)
 	m.UpdatedAt = jsonapitypes.NullableStringValue(data.UpdatedAt)
-	// id is not returned {"type":"string","name":"id","computedOptionalRequired":"required","description":"The ID of the resource.","paramSchemas":{"read":{"name":"id","in":"path","schema":{"type":"string"},"required":true}}}
+	// id is not returned
 
 	return diags
 }

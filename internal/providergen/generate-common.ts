@@ -1,6 +1,6 @@
 import {
   buildValidators,
-  withEnumDescription,
+  resolveDescription,
   type AttributeBlockType,
   type AttributeType,
   type DataSourceDef,
@@ -63,10 +63,7 @@ function generateSchemaAttribute({
   const parts: string[] = [];
   parts.push(`${tfAttributeSchemaType({ attribute, type })}{`);
 
-  let description: string | undefined = attribute.description;
-  if ("enum" in attribute) {
-    description = withEnumDescription(description, attribute.enum);
-  }
+  const description = resolveDescription(attribute);
   if (description) {
     parts.push(`MarkdownDescription: ${JSON.stringify(description)},`);
   }

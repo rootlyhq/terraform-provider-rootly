@@ -56,15 +56,19 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 				Computed:            true,
 			},
 			"path_type": schema.StringAttribute{
-				MarkdownDescription: "The type of escalation path. Value must be one of `escalation`, `deferral`.",
+				MarkdownDescription: "<i style=\"color:red;font-weight: bold\">(ForceNew)</i> The type of escalation path. Value must be one of `escalation`, `deferral`.",
 				Optional:            true,
 				Computed:            true,
 				Validators: []validator.String{
 					stringvalidator.OneOf("escalation", "deferral"),
 				},
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.RequiresReplace(),
+				},
 			},
 			"escalation_policy_id": schema.StringAttribute{
-				Required: true,
+				MarkdownDescription: "<i style=\"color:red;font-weight: bold\">(ForceNew)</i>",
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -154,9 +158,12 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"rule_type": schema.StringAttribute{
-							MarkdownDescription: "The type of the escalation path rule.",
+							MarkdownDescription: "The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`, `service`, `deferral_window`, `source`, `related_incidents`.",
 							Optional:            true,
 							Computed:            true,
+							Validators: []validator.String{
+								stringvalidator.OneOf("alert_urgency", "working_hour", "json_path", "field", "service", "deferral_window", "source", "related_incidents"),
+							},
 						},
 						"urgency_ids": schema.SetAttribute{
 							MarkdownDescription: "Alert urgency ids for which this escalation path should be used.",
@@ -194,9 +201,12 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 							CustomType:          supertypes.NewSetTypeOf[string](ctx),
 						},
 						"fieldable_type": schema.StringAttribute{
-							MarkdownDescription: "The type of the fieldable (e.g., AlertField).",
+							MarkdownDescription: "The type of the fieldable (e.g., AlertField). Value must be one of `AlertField`.",
 							Optional:            true,
 							Computed:            true,
+							Validators: []validator.String{
+								stringvalidator.OneOf("AlertField"),
+							},
 						},
 						"fieldable_id": schema.StringAttribute{
 							MarkdownDescription: "The ID of the alert field.",
@@ -318,11 +328,11 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"rule_type": schema.StringAttribute{
-										MarkdownDescription: "The type of the escalation path rule. Value must be one of `related_incidents`.",
+										MarkdownDescription: "The type of the escalation path rule. Value must be one of `alert_urgency`, `working_hour`, `json_path`, `field`, `service`, `deferral_window`, `source`, `related_incidents`.",
 										Optional:            true,
 										Computed:            true,
 										Validators: []validator.String{
-											stringvalidator.OneOf("related_incidents"),
+											stringvalidator.OneOf("alert_urgency", "working_hour", "json_path", "field", "service", "deferral_window", "source", "related_incidents"),
 										},
 									},
 									"urgency_ids": schema.SetAttribute{
@@ -361,9 +371,12 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 										CustomType:          supertypes.NewSetTypeOf[string](ctx),
 									},
 									"fieldable_type": schema.StringAttribute{
-										MarkdownDescription: "The type of the fieldable (e.g., AlertField).",
+										MarkdownDescription: "The type of the fieldable (e.g., AlertField). Value must be one of `AlertField`.",
 										Optional:            true,
 										Computed:            true,
+										Validators: []validator.String{
+											stringvalidator.OneOf("AlertField"),
+										},
 									},
 									"fieldable_id": schema.StringAttribute{
 										MarkdownDescription: "The ID of the alert field.",
@@ -659,7 +672,7 @@ func (m *EscalationPathResourceModel) FromApi(ctx context.Context, data apiclien
 	m.Default = jsonapitypes.NullableBoolValue(data.Default)
 	m.NotificationType = jsonapitypes.NullableStringValue(data.NotificationType)
 	m.PathType = jsonapitypes.NullableStringValue(data.PathType)
-	// escalation_policy_id is not returned {"type":"string","name":"escalation_policy_id","computedOptionalRequired":"required","planModifiers":["stringplanmodifier.RequiresReplace()"],"paramSchemas":{"create":{"name":"escalation_policy_id","in":"path","required":true,"schema":{"type":"string"}}}}
+	// escalation_policy_id is not returned
 	m.AfterDeferralBehavior = jsonapitypes.NullableStringValue(data.AfterDeferralBehavior)
 	m.AfterDeferralPathId = jsonapitypes.NullableStringValue(data.AfterDeferralPathId)
 	m.MatchMode = jsonapitypes.NullableStringValue(data.MatchMode)
@@ -672,7 +685,7 @@ func (m *EscalationPathResourceModel) FromApi(ctx context.Context, data apiclien
 	m.UpdatedAt = jsonapitypes.NullableStringValue(data.UpdatedAt)
 	m.NotificationTypeFallback = jsonapitypes.NullableStringValue(data.NotificationTypeFallback)
 	m.TimeRestrictionTimeZone = jsonapitypes.NullableStringValue(data.TimeRestrictionTimeZone)
-	// id is not returned {"type":"string","name":"id","computedOptionalRequired":"computed","description":"The ID of the resource.","planModifiers":["stringplanmodifier.UseStateForUnknown()"],"paramSchemas":{"read":{"name":"id","in":"path","required":true,"schema":{"type":"string"}},"update":{"name":"id","in":"path","required":true,"schema":{"type":"string"}},"delete":{"name":"id","in":"path","required":true,"schema":{"type":"string"}}}}
+	// id is not returned
 	m.Rules = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
 		ctx,
 		data.Rules,

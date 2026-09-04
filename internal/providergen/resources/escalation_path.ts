@@ -1,9 +1,5 @@
 import { produce } from "immer";
-import type {
-  AttributeListNested,
-  AttributeString,
-  ResourceConfig,
-} from "../schema";
+import type { ResourceConfig } from "../schema";
 import { findAttribute, findBlock } from "../schema-helpers";
 
 const OPERATOR_ENUM = [
@@ -25,10 +21,26 @@ const OPERATOR_ENUM = [
   "is_not_set",
 ];
 
+const RULE_TYPE_ENUM = [
+  "alert_urgency",
+  "working_hour",
+  "json_path",
+  "field",
+  "service",
+  "deferral_window",
+  "source",
+  "related_incidents",
+];
+
+const FIELDABLE_TYPE_ENUM = ["AlertField"];
+
 export default {
   name: "escalation_path",
   description: "Manages an escalation path.",
   modifyDef: produce((def) => {
+    const pathType = findAttribute(def.attributes, "path_type", "string");
+    pathType.planModifiers = ["stringplanmodifier.RequiresReplace()"];
+
     const rules = findBlock(def.blocks, "rules", "list_nested");
     rules.hacks = { nullBehavior: "empty" };
 
@@ -40,7 +52,14 @@ export default {
       "rule_type",
       "string",
     );
-    rulesRuleType.enum = undefined;
+    rulesRuleType.enum = RULE_TYPE_ENUM;
+
+    const rulesFieldableType = findAttribute(
+      rules.attributes,
+      "fieldable_type",
+      "string",
+    );
+    rulesFieldableType.enum = FIELDABLE_TYPE_ENUM;
 
     const timeRestrictions = findBlock(
       def.blocks,
@@ -59,18 +78,37 @@ export default {
       nullBehavior: "omit",
       emptyBehavior: "omit",
     };
+    notificationTypeRules.validators = ["listvalidator.SizeAtMost(10)"];
 
     const notificationTypeRulesConditions = findBlock(
       notificationTypeRules.blocks,
       "conditions",
       "list_nested",
     );
+    notificationTypeRulesConditions.validators = [
+      "listvalidator.SizeBetween(1, 5)",
+    ];
+
     const notificationTypeRulesConditionsOperator = findAttribute(
       notificationTypeRulesConditions.attributes,
       "operator",
       "string",
-    ) as AttributeString;
+    );
     notificationTypeRulesConditionsOperator.enum = OPERATOR_ENUM;
+
+    const notificationTypeRulesConditionsRuleType = findAttribute(
+      notificationTypeRulesConditions.attributes,
+      "rule_type",
+      "string",
+    );
+    notificationTypeRulesConditionsRuleType.enum = RULE_TYPE_ENUM;
+
+    const notificationTypeRulesConditionsFieldableType = findAttribute(
+      notificationTypeRulesConditions.attributes,
+      "fieldable_type",
+      "string",
+    );
+    notificationTypeRulesConditionsFieldableType.enum = FIELDABLE_TYPE_ENUM;
 
     const notificationTypeFallback = findAttribute(
       def.attributes,
