@@ -208,7 +208,7 @@ func (r *${def.goNames.struct}) Delete(ctx context.Context, req resource.DeleteR
 }
 
 func (r *${def.goNames.struct}) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-  // Import logic will be generated here
+  resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
 }
 
 ${generateModels({

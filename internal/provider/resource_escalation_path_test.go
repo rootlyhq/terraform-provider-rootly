@@ -119,6 +119,7 @@ func TestAccResourceEscalationPath_Basic(t *testing.T) {
 					})),
 				},
 			},
+			// Zero initial delay
 			{
 				Config: testAccResourceEscalationPathConfig(name+"-updated", `
 					initial_delay = 0
@@ -145,6 +146,12 @@ func TestAccResourceEscalationPath_Basic(t *testing.T) {
 						}),
 					})),
 				},
+			},
+			{
+				ResourceName:            addr,
+				ImportState:             true,
+				ImportStateVerify:       true,
+				ImportStateVerifyIgnore: []string{"escalation_policy_id"},
 			},
 		},
 	})
