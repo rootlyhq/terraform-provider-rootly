@@ -405,6 +405,8 @@ func TestAccResourceEscalationPath_AllRuleTypes(t *testing.T) {
 					}
 
 					resource "rootly_escalation_path" "test" {
+						depends_on = [rootly_alert_field.test, rootly_alert_urgency.test]
+
 						name                 = "%[1]s-path"
 						default              = false
 						escalation_policy_id = rootly_escalation_policy.test_rules.id
@@ -464,6 +466,62 @@ func TestAccResourceEscalationPath_AllRuleTypes(t *testing.T) {
 								knownvalue.StringExact("value1"),
 								knownvalue.StringExact("value2"),
 							}),
+						}),
+					})),
+				},
+			},
+			{
+				Config: fmt.Sprintf(`
+					resource "rootly_escalation_policy" "test_rules" {
+						depends_on = [rootly_alert_urgency.test, rootly_alert_field.test]
+
+						name = "%[1]s-ep"
+					}
+
+					resource "rootly_alert_urgency" "test" {
+						name        = "%[1]s-urgency"
+						description = "Test urgency for escalation path rules"
+					}
+
+					resource "rootly_alert_field" "test" {
+						name = "%[1]s-alert-field"
+					}
+
+					resource "rootly_escalation_path" "test" {
+						depends_on = [rootly_alert_field.test, rootly_alert_urgency.test]
+
+						name                 = "%[1]s-path"
+						default              = false
+						escalation_policy_id = rootly_escalation_policy.test_rules.id
+						match_mode           = "match-any-rule"
+
+						rules {
+							rule_type = "json_path"
+							json_path = "$.severity"
+							operator  = "is"
+							value     = "critical"
+						}
+
+						rules {
+							rule_type           = "working_hour"
+							within_working_hour = false
+						}
+					}
+				`, name),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("id"), knownvalue.NotNull()),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name+"-path")),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("match_mode"), knownvalue.StringExact("match-any-rule")),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("rules"), knownvalue.ListExact([]knownvalue.Check{
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{
+							"rule_type": knownvalue.StringExact("json_path"),
+							"json_path": knownvalue.StringExact("$.severity"),
+							"operator":  knownvalue.StringExact("is"),
+							"value":     knownvalue.StringExact("critical"),
+						}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{
+							"rule_type":           knownvalue.StringExact("working_hour"),
+							"within_working_hour": knownvalue.Bool(false),
 						}),
 					})),
 				},
