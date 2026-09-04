@@ -27,49 +27,51 @@ data "rootly_services" "all" {}
 
 Read-Only:
 
-- `alert_broadcast_channel` (Attributes) Slack channel to broadcast alerts to (see [below for nested schema](#nestedatt--services--alert_broadcast_channel))
-- `alert_broadcast_enabled` (Boolean) Enable alerts to be broadcasted to a specific channel
-- `alert_urgency_id` (String) The alert urgency id of the service
-- `alerts_email_address` (String) Email generated to send alerts to
-- `alerts_email_enabled` (Boolean) Enable alerts through email
-- `backstage_id` (String) The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
-- `color` (String) The hex color of the service
-- `cortex_id` (String) The Cortex group id associated to this service
-- `description` (String) The description of the service
-- `environment_ids` (List of String) Environments associated with this service
-- `escalation_policy_id` (String) The escalation policy id of the service
-- `external_id` (String) The external id associated to this service
-- `github_repository_branch` (String) The GitHub repository branch associated to this service. eg: main
-- `github_repository_name` (String) The GitHub repository name associated to this service. eg: rootlyhq/my-service
-- `gitlab_repository_branch` (String) The GitLab repository branch associated to this service. eg: main
-- `gitlab_repository_name` (String) The GitLab repository name associated to this service. eg: rootlyhq/my-service
-- `id` (String) The ID of the service.
-- `incident_broadcast_channel` (Attributes) Slack channel to broadcast incidents to (see [below for nested schema](#nestedatt--services--incident_broadcast_channel))
-- `incident_broadcast_enabled` (Boolean) Enable incidents to be broadcasted to a specific channel
-- `kubernetes_deployment_name` (String) The Kubernetes deployment name associated to this service. eg: namespace/deployment-name
-- `managed_by` (String) How this service is managed (provenance): web, api, terraform, etc. Read-only.
-- `name` (String) The name of the service
-- `notify_emails` (List of String) Emails attached to the service
-- `opsgenie_id` (String) The Opsgenie service id associated to this service
-- `owner_group_ids` (List of String) Owner Teams associated with this service
-- `owner_user_ids` (List of Number) Owner Users associated with this service
-- `pagerduty_id` (String) The PagerDuty service id associated to this service
-- `position` (Number) Position of the service
+- `alert_broadcast_channel` (Attributes) Slack channel to broadcast alerts to. (see [below for nested schema](#nestedatt--services--alert_broadcast_channel))
+- `alert_broadcast_enabled` (Boolean) Enable alerts to be broadcasted to a specific channel.
+- `alert_urgency_id` (String) The alert urgency id of the service.
+- `alerts_email_address` (String) Email generated to send alerts to.
+- `alerts_email_enabled` (Boolean) Enable alerts through email.
+- `backstage_id` (String) The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name.
+- `color` (String) The hex color of the service.
+- `cortex_id` (String) The Cortex group id associated to this service.
+- `created_at` (String) Date of creation.
+- `description` (String) The description of the service.
+- `environment_ids` (List of String) Environments associated with this service.
+- `escalation_policy_id` (String) The escalation policy id of the service.
+- `external_id` (String) The external id associated to this service.
+- `github_repository_branch` (String) The GitHub repository branch associated to this service. eg: main.
+- `github_repository_name` (String) The GitHub repository name associated to this service. eg: rootlyhq/my-service.
+- `gitlab_repository_branch` (String) The GitLab repository branch associated to this service. eg: main.
+- `gitlab_repository_name` (String) The GitLab repository name associated to this service. eg: rootlyhq/my-service.
+- `id` (String) The ID of the resource.
+- `incident_broadcast_channel` (Attributes) Slack channel to broadcast incidents to. (see [below for nested schema](#nestedatt--services--incident_broadcast_channel))
+- `incident_broadcast_enabled` (Boolean) Enable incidents to be broadcasted to a specific channel.
+- `kubernetes_deployment_name` (String) The Kubernetes deployment name associated to this service. eg: namespace/deployment-name.
+- `managed_by` (String) How this service is managed (provenance): web, api, terraform, etc. Read-only. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.
+- `name` (String) The name of the service.
+- `notify_emails` (List of String) Emails attached to the service.
+- `opsgenie_id` (String) The Opsgenie service id associated to this service.
+- `owner_group_ids` (List of String) Owner Teams associated with this service.
+- `owner_user_ids` (List of Number) Owner Users associated with this service.
+- `pagerduty_id` (String) The PagerDuty service id associated to this service.
+- `position` (Number) Position of the service.
 - `properties` (Attributes List) Array of property values for this service. (see [below for nested schema](#nestedatt--services--properties))
-- `public_description` (String) The status page description of the service
-- `service_ids` (List of String) Services dependent on this service
-- `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this service
-- `slack_aliases` (Attributes List) Slack Aliases associated with this service (see [below for nested schema](#nestedatt--services--slack_aliases))
-- `slack_channels` (Attributes List) Slack Channels associated with this service (see [below for nested schema](#nestedatt--services--slack_channels))
-- `slug` (String) The slug of the service
+- `public_description` (String) The status page description of the service.
+- `service_ids` (List of String) Services dependent on this service.
+- `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this service.
+- `slack_aliases` (Attributes List) Slack Aliases associated with this service. (see [below for nested schema](#nestedatt--services--slack_aliases))
+- `slack_channels` (Attributes List) Slack Channels associated with this service. (see [below for nested schema](#nestedatt--services--slack_channels))
+- `slug` (String) The slug of the service.
+- `updated_at` (String) Date of last update.
 
 <a id="nestedatt--services--alert_broadcast_channel"></a>
 ### Nested Schema for `services.alert_broadcast_channel`
 
 Read-Only:
 
-- `id` (String) Slack channel ID
-- `name` (String) Slack channel name
+- `id` (String) Slack channel ID.
+- `name` (String) Slack channel name.
 
 
 <a id="nestedatt--services--incident_broadcast_channel"></a>
@@ -77,8 +79,8 @@ Read-Only:
 
 Read-Only:
 
-- `id` (String) Slack channel ID
-- `name` (String) Slack channel name
+- `id` (String) Slack channel ID.
+- `name` (String) Slack channel name.
 
 
 <a id="nestedatt--services--properties"></a>
@@ -86,8 +88,8 @@ Read-Only:
 
 Read-Only:
 
-- `catalog_property_id` (String) Catalog property ID
-- `value` (String) The property value
+- `catalog_property_id` (String) Catalog property ID.
+- `value` (String) The property value.
 
 
 <a id="nestedatt--services--slack_aliases"></a>
@@ -95,8 +97,8 @@ Read-Only:
 
 Read-Only:
 
-- `id` (String) Slack alias ID
-- `name` (String) Slack alias name
+- `id` (String) Slack alias ID.
+- `name` (String) Slack alias name.
 
 
 <a id="nestedatt--services--slack_channels"></a>
@@ -104,5 +106,5 @@ Read-Only:
 
 Read-Only:
 
-- `id` (String) Slack channel ID
-- `name` (String) Slack channel name
+- `id` (String) Slack channel ID.
+- `name` (String) Slack channel name.

@@ -24,6 +24,7 @@ func TestAccDataSourceServices(t *testing.T) {
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(rn, tfjsonpath.New("services"), knownvalue.SetPartial([]knownvalue.Check{
 						knownvalue.ObjectPartial(map[string]knownvalue.Check{
+							"id":   knownvalue.NotNull(),
 							"name": knownvalue.StringExact(name),
 						}),
 					})),

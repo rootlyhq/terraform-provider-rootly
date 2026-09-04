@@ -1,88 +1,151 @@
 import { camelize } from "inflection";
-import type { oas30 } from "openapi3-ts";
-import { match } from "ts-pattern";
+import { match, P } from "ts-pattern";
+import type { AttributeType } from "./schema";
 
-export function tfSchemaAttributeType({
-  schema,
+export function tfAttributeSchemaType({
+  attribute,
+  type,
 }: {
-  schema: oas30.SchemaObject;
+  attribute: AttributeType;
+  type: "attribute" | "block";
 }) {
-  return match(schema)
-    .with({ type: "string" }, () => "schema.StringAttribute")
-    .with({ type: "boolean" }, () => "schema.BoolAttribute")
-    .with({ type: "integer" }, () => "schema.Int64Attribute")
-    .with({ type: "object" }, () => "schema.SingleNestedAttribute")
+  return match([attribute, type])
+    .with([{ type: "string" }, P.any], () => "schema.StringAttribute")
+    .with([{ type: "bool" }, P.any], () => "schema.BoolAttribute")
+    .with([{ type: "int64" }, P.any], () => "schema.Int64Attribute")
     .with(
-      { type: "array", items: { type: "string" } },
-      { type: "array", items: { type: "integer" } },
-      () => "schema.ListAttribute",
+      [{ type: "single_nested" }, P.any],
+      () => "schema.SingleNestedAttribute",
     )
+    .with([{ type: "list" }, P.any], () => "schema.ListAttribute")
     .with(
-      { type: "array", items: { type: "object" } },
+      [{ type: "list_nested" }, "attribute"],
       () => "schema.ListNestedAttribute",
     )
+    .with([{ type: "list_nested" }, "block"], () => "schema.ListNestedBlock")
+    .with([{ type: "set" }, P.any], () => "schema.SetAttribute")
+    .with(
+      [{ type: "set_nested" }, "attribute"],
+      () => "schema.SetNestedAttribute",
+    )
+    .with([{ type: "set_nested" }, "block"], () => "schema.SetNestedBlock")
+    .exhaustive();
+}
+
+export function tfAttributeValidatorType({
+  attribute,
+}: {
+  attribute: AttributeType;
+}) {
+  return match(attribute)
+    .with({ type: "string" }, () => "validator.String")
+    .with({ type: "bool" }, () => "validator.Bool")
+    .with({ type: "int64" }, () => "validator.Int64")
+    .with({ type: "single_nested" }, () => "validator.Object")
+    .with({ type: "list" }, () => "validator.List")
+    .with({ type: "list_nested" }, () => "validator.List")
+    .with({ type: "set" }, () => "validator.Set")
+    .with({ type: "set_nested" }, () => "validator.Set")
+    .exhaustive();
+}
+
+export function tfAttributePlanModifierType({
+  attribute,
+}: {
+  attribute: AttributeType;
+}) {
+  return match(attribute)
+    .with({ type: "string" }, () => "planmodifier.String")
+    .with({ type: "int64" }, () => "planmodifier.Int64")
+    .with({ type: "bool" }, () => "planmodifier.Bool")
     .exhaustive();
 }
 
 export function tfAttributeValueType({
-  schema,
+  attribute,
   parent,
-  name,
 }: {
-  schema: oas30.SchemaObject;
+  attribute: AttributeType;
   parent: string;
-  name: string;
 }) {
-  return match(schema)
+  return match(attribute)
     .with({ type: "string" }, () => "types.String")
-    .with({ type: "boolean" }, () => "types.Bool")
-    .with({ type: "integer" }, () => "types.Int64")
+    .with({ type: "bool" }, () => "types.Bool")
+    .with({ type: "int64" }, () => "types.Int64")
     .with(
-      { type: "object" },
-      () => `supertypes.SingleNestedObjectValueOf[${parent}${name}]`,
+      { type: "single_nested" },
+      () =>
+        `supertypes.SingleNestedObjectValueOf[${parent}${camelize(attribute.name)}]`,
     )
     .with(
-      { type: "array", items: { type: "string" } },
-      () => "supertypes.ListValueOf[string]",
+      { type: "list" },
+      (attribute) => `supertypes.ListValueOf[${attribute.elementType}]`,
     )
     .with(
-      { type: "array", items: { type: "integer" } },
-      () => "supertypes.ListValueOf[int64]",
+      { type: "set" },
+      (attribute) => `supertypes.SetValueOf[${attribute.elementType}]`,
     )
     .with(
-      { type: "array", items: { type: "object" } },
-      () => `supertypes.ListNestedObjectValueOf[${parent}${name}Item]`,
+      { type: "set_nested" },
+      (attribute) =>
+        `supertypes.SetNestedObjectValueOf[${parent}${camelize(attribute.name)}Item]`,
+    )
+    .with(
+      { type: "list_nested" },
+      (attribute) =>
+        `supertypes.ListNestedObjectValueOf[${parent}${camelize(attribute.name)}Item]`,
     )
     .exhaustive();
 }
 
 export function tfAttributeCustomType({
-  schema,
   parent,
-  name,
+  attribute,
 }: {
-  schema: oas30.SchemaObject;
-  parent: string | null;
-  name: string;
+  parent: string;
+  attribute: AttributeType;
 }) {
-  return match(schema)
+  return match(attribute)
     .with(
-      { type: "object" },
-      () =>
-        `supertypes.NewSingleNestedObjectTypeOf[${parent}${camelize(name)}](ctx)`,
+      { type: "single_nested" },
+      (value) =>
+        `supertypes.NewSingleNestedObjectTypeOf[${parent}${camelize(value.name)}](ctx)`,
     )
     .with(
-      { type: "array", items: { type: "string" } },
-      () => "supertypes.NewListTypeOf[string](ctx)",
+      { type: "list", elementType: P.string },
+      (value) => `supertypes.NewListTypeOf[${value.elementType}](ctx)`,
     )
     .with(
-      { type: "array", items: { type: "integer" } },
-      () => "supertypes.NewListTypeOf[int64](ctx)",
+      { type: "set", elementType: "string" },
+      (value) => `supertypes.NewSetTypeOf[${value.elementType}](ctx)`,
     )
     .with(
-      { type: "array", items: { type: "object" } },
-      () =>
-        `supertypes.NewListNestedObjectTypeOf[${parent}${camelize(name)}Item](ctx)`,
+      { type: "list_nested" },
+      (value) =>
+        `supertypes.NewListNestedObjectTypeOf[${parent}${camelize(value.name)}Item](ctx)`,
+    )
+    .with(
+      { type: "set_nested" },
+      (value) =>
+        `supertypes.NewSetNestedObjectTypeOf[${parent}${camelize(value.name)}Item](ctx)`,
     )
     .otherwise(() => null);
+}
+
+export function tfAttributeDefault({
+  attribute,
+}: {
+  attribute: AttributeType;
+}) {
+  if (!("default" in attribute) || !attribute.default) {
+    return null;
+  }
+
+  return match(attribute)
+    .with(
+      { type: "string", default: P.string },
+      (schema) =>
+        `stringdefault.StaticString(${JSON.stringify(schema.default)})`,
+    )
+    .exhaustive();
 }

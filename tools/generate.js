@@ -93,7 +93,7 @@ const excluded = {
     "custom_field_option",
     "custom_field",
     "dashboard",
-    "escalation_path",
+    "escalation_path", // V2: handled by ./internal/providergen
     "escalation_policy",
     "incident_action_item",
     "incident_custom_field_selection",

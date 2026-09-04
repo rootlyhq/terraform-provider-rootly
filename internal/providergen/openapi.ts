@@ -14,12 +14,14 @@ const HTTP_METHODS = [
 export function getParametersByOperationId({
   doc,
   operationId,
-  notIn,
+  onlyLocations,
+  excludeLocations,
 }: {
   doc: oas30.OpenAPIObject;
   operationId: string;
-  notIn: oas30.ParameterLocation[];
-}): oas30.ParameterObject[] | null {
+  onlyLocations?: oas30.ParameterLocation[];
+  excludeLocations?: oas30.ParameterLocation[];
+}): oas30.ParameterObject[] {
   for (const [_, pathItem] of Object.entries(doc.paths)) {
     for (const method of HTTP_METHODS) {
       const operation = pathItem[method];
@@ -29,9 +31,40 @@ export function getParametersByOperationId({
             ...(pathItem.parameters ?? []),
             ...(operation.parameters ?? []),
           ] as oas30.ParameterObject[]
-        ).filter((param) => !notIn.includes(param.in));
+        ).filter((param) => {
+          if (onlyLocations && !onlyLocations.includes(param.in)) {
+            return false;
+          }
+          if (excludeLocations && excludeLocations.includes(param.in)) {
+            return false;
+          }
+          return true;
+        });
       }
     }
   }
-  return null;
+
+  return [];
+}
+
+export function removeReference<T>(value: undefined): undefined;
+export function removeReference<T>(value: T | oas30.ReferenceObject): T;
+export function removeReference<T>(
+  value: T | oas30.ReferenceObject | undefined,
+): T | undefined;
+export function removeReference<T>(
+  value: T | oas30.ReferenceObject | undefined,
+): T | undefined {
+  if (typeof value === "object" && value !== null && !("$ref" in value)) {
+    return value as T;
+  }
+  return undefined;
+}
+
+export function assertSchemaObject(
+  schema: oas30.SchemaObject | oas30.ReferenceObject,
+): asserts schema is oas30.SchemaObject {
+  if ("$ref" in schema) {
+    throw new Error(`Unsupported: Schema is a reference to ${schema.$ref}`);
+  }
 }
