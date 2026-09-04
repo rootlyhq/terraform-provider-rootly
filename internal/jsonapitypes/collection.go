@@ -117,31 +117,31 @@ func ConvertNullableSet[T any, U any](
 func convertToNestedModel[T any, U any, C any](
 	ctx context.Context,
 	apiAttr jsonapi.NullableAttr[[]U],
-	diags *diag.Diagnostics,
 	fromApi func(ctx context.Context, item *T, apiItem U) diag.Diagnostics,
 	newNull func(ctx context.Context) C,
 	newFromSlice func(ctx context.Context, items []T) C,
-) C {
+) (C, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
 	v, err := apiAttr.Get()
 	if err != nil {
-		return newNull(ctx)
+		return newNull(ctx), diags
 	}
 
 	items := make([]T, len(v))
 	for i, vv := range v {
 		diags.Append(fromApi(ctx, &items[i], vv)...)
 	}
-	return newFromSlice(ctx, items)
+	return newFromSlice(ctx, items), diags
 }
 
 func ConvertToListModel[T any, U any](
 	ctx context.Context,
 	apiAttr jsonapi.NullableAttr[[]U],
-	diags *diag.Diagnostics,
 	fromApi func(ctx context.Context, item *T, apiItem U) diag.Diagnostics,
-) supertypes.ListNestedObjectValueOf[T] {
-	return convertToNestedModel[T, U, supertypes.ListNestedObjectValueOf[T]](
-		ctx, apiAttr, diags, fromApi,
+) (supertypes.ListNestedObjectValueOf[T], diag.Diagnostics) {
+	return convertToNestedModel(
+		ctx, apiAttr, fromApi,
 		supertypes.NewListNestedObjectValueOfNull[T],
 		supertypes.NewListNestedObjectValueOfValueSlice[T],
 	)
@@ -150,11 +150,10 @@ func ConvertToListModel[T any, U any](
 func ConvertToSetModel[T any, U any](
 	ctx context.Context,
 	apiAttr jsonapi.NullableAttr[[]U],
-	diags *diag.Diagnostics,
 	fromApi func(ctx context.Context, item *T, apiItem U) diag.Diagnostics,
-) supertypes.SetNestedObjectValueOf[T] {
-	return convertToNestedModel[T, U, supertypes.SetNestedObjectValueOf[T]](
-		ctx, apiAttr, diags, fromApi,
+) (supertypes.SetNestedObjectValueOf[T], diag.Diagnostics) {
+	return convertToNestedModel(
+		ctx, apiAttr, fromApi,
 		supertypes.NewSetNestedObjectValueOfNull[T],
 		supertypes.NewSetNestedObjectValueOfValueSlice[T],
 	)

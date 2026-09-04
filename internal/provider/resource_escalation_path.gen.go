@@ -19,7 +19,6 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diagutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/jsonapitypes"
-	"github.com/samber/lo"
 )
 
 var _ resource.Resource = &EscalationPathResource{}
@@ -673,36 +672,27 @@ func (m *EscalationPathResourceModel) FromApi(ctx context.Context, data apiclien
 	m.NotificationTypeFallback = jsonapitypes.NullableStringValue(data.NotificationTypeFallback)
 	m.TimeRestrictionTimeZone = jsonapitypes.NullableStringValue(data.TimeRestrictionTimeZone)
 	// id is not returned
-	m.Rules = (func() supertypes.ListNestedObjectValueOf[EscalationPathResourceModelRulesItem] {
-		if v, err := data.Rules.Get(); err == nil {
-			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathRulesItem, _ int) EscalationPathResourceModelRulesItem {
-				var mm EscalationPathResourceModelRulesItem
-				diags.Append(mm.FromApi(ctx, vv)...)
-				return mm
-			}))
-		}
-		return supertypes.NewListNestedObjectValueOfNull[EscalationPathResourceModelRulesItem](ctx)
-	})()
-	m.NotificationTypeRules = (func() supertypes.ListNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItem] {
-		if v, err := data.NotificationTypeRules.Get(); err == nil {
-			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathNotificationTypeRulesItem, _ int) EscalationPathResourceModelNotificationTypeRulesItem {
-				var mm EscalationPathResourceModelNotificationTypeRulesItem
-				diags.Append(mm.FromApi(ctx, vv)...)
-				return mm
-			}))
-		}
-		return supertypes.NewListNestedObjectValueOfNull[EscalationPathResourceModelNotificationTypeRulesItem](ctx)
-	})()
-	m.TimeRestrictions = (func() supertypes.ListNestedObjectValueOf[EscalationPathResourceModelTimeRestrictionsItem] {
-		if v, err := data.TimeRestrictions.Get(); err == nil {
-			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathTimeRestrictionsItem, _ int) EscalationPathResourceModelTimeRestrictionsItem {
-				var mm EscalationPathResourceModelTimeRestrictionsItem
-				diags.Append(mm.FromApi(ctx, vv)...)
-				return mm
-			}))
-		}
-		return supertypes.NewListNestedObjectValueOfNull[EscalationPathResourceModelTimeRestrictionsItem](ctx)
-	})()
+	m.Rules = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+		ctx,
+		data.Rules,
+		func(ctx context.Context, item *EscalationPathResourceModelRulesItem, apiItem apiclient.EscalationPathRulesItem) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
+	m.NotificationTypeRules = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+		ctx,
+		data.NotificationTypeRules,
+		func(ctx context.Context, item *EscalationPathResourceModelNotificationTypeRulesItem, apiItem apiclient.EscalationPathNotificationTypeRulesItem) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
+	m.TimeRestrictions = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+		ctx,
+		data.TimeRestrictions,
+		func(ctx context.Context, item *EscalationPathResourceModelTimeRestrictionsItem, apiItem apiclient.EscalationPathTimeRestrictionsItem) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
 
 	return diags
 }
@@ -860,16 +850,13 @@ func (m *EscalationPathResourceModelRulesItem) FromApi(ctx context.Context, data
 	m.FieldableId = jsonapitypes.NullableStringValue(data.FieldableId)
 	m.ServiceIds = jsonapitypes.NullableSetValueOfSlice(ctx, data.ServiceIds)
 	m.TimeZone = jsonapitypes.NullableStringValue(data.TimeZone)
-	m.TimeBlocks = (func() supertypes.ListNestedObjectValueOf[EscalationPathResourceModelRulesItemTimeBlocksItem] {
-		if v, err := data.TimeBlocks.Get(); err == nil {
-			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathRulesItemTimeBlocksItem, _ int) EscalationPathResourceModelRulesItemTimeBlocksItem {
-				var mm EscalationPathResourceModelRulesItemTimeBlocksItem
-				diags.Append(mm.FromApi(ctx, vv)...)
-				return mm
-			}))
-		}
-		return supertypes.NewListNestedObjectValueOfNull[EscalationPathResourceModelRulesItemTimeBlocksItem](ctx)
-	})()
+	m.TimeBlocks = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+		ctx,
+		data.TimeBlocks,
+		func(ctx context.Context, item *EscalationPathResourceModelRulesItemTimeBlocksItem, apiItem apiclient.EscalationPathRulesItemTimeBlocksItem) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
 
 	return diags
 }
@@ -1025,16 +1012,13 @@ func (m *EscalationPathResourceModelNotificationTypeRulesItem) FromApi(ctx conte
 
 	m.NotificationType = jsonapitypes.NullableStringValue(data.NotificationType)
 	m.MatchMode = jsonapitypes.NullableStringValue(data.MatchMode)
-	m.Conditions = (func() supertypes.ListNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem] {
-		if v, err := data.Conditions.Get(); err == nil {
-			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathNotificationTypeRulesItemConditionsItem, _ int) EscalationPathResourceModelNotificationTypeRulesItemConditionsItem {
-				var mm EscalationPathResourceModelNotificationTypeRulesItemConditionsItem
-				diags.Append(mm.FromApi(ctx, vv)...)
-				return mm
-			}))
-		}
-		return supertypes.NewListNestedObjectValueOfNull[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem](ctx)
-	})()
+	m.Conditions = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+		ctx,
+		data.Conditions,
+		func(ctx context.Context, item *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem, apiItem apiclient.EscalationPathNotificationTypeRulesItemConditionsItem) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
 
 	return diags
 }
@@ -1112,16 +1096,13 @@ func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) Fro
 	m.FieldableId = jsonapitypes.NullableStringValue(data.FieldableId)
 	m.ServiceIds = jsonapitypes.NullableSetValueOfSlice(ctx, data.ServiceIds)
 	m.TimeZone = jsonapitypes.NullableStringValue(data.TimeZone)
-	m.TimeBlocks = (func() supertypes.ListNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem] {
-		if v, err := data.TimeBlocks.Get(); err == nil {
-			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem, _ int) EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem {
-				var mm EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem
-				diags.Append(mm.FromApi(ctx, vv)...)
-				return mm
-			}))
-		}
-		return supertypes.NewListNestedObjectValueOfNull[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem](ctx)
-	})()
+	m.TimeBlocks = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+		ctx,
+		data.TimeBlocks,
+		func(ctx context.Context, item *EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem, apiItem apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
 
 	return diags
 }

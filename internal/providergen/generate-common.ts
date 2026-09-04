@@ -114,33 +114,25 @@ function generateFromApi({
       )
       .with(
         { type: "list_nested" },
-        (
-          attribute,
-        ) => `(func() supertypes.ListNestedObjectValueOf[${name}${camelize(attribute.name)}Item] {
-  if v, err := data.${camelize(attribute.name)}.Get(); err == nil {
-    return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.${clientName}${camelize(attribute.name)}Item, _ int) ${name}${camelize(attribute.name)}Item {
-      var mm ${name}${camelize(attribute.name)}Item
-      diags.Append(mm.FromApi(ctx, vv)...)
-      return mm
-    }))
-  }
-  return supertypes.NewListNestedObjectValueOfNull[${name}${camelize(attribute.name)}Item](ctx)
-})()`,
+        (attribute) =>
+          `diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+  ctx,
+  data.${camelize(attribute.name)},
+  func(ctx context.Context, item *${name}${camelize(attribute.name)}Item, apiItem apiclient.${clientName}${camelize(attribute.name)}Item) diag.Diagnostics {
+    return item.FromApi(ctx, apiItem)
+  },
+))(&diags)`,
       )
       .with(
         { type: "set_nested" },
-        (
-          attribute,
-        ) => `(func() supertypes.SetNestedObjectValueOf[${name}${camelize(attribute.name)}Item] {
-  if v, err := data.${camelize(attribute.name)}.Get(); err == nil {
-    return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.${clientName}${camelize(attribute.name)}Item, _ int) ${name}${camelize(attribute.name)}Item {
-      var mm ${name}${camelize(attribute.name)}Item
-      diags.Append(mm.FromApi(ctx, vv)...)
-      return mm
-    }))
-  }
-  return supertypes.NewSetNestedObjectValueOfNull[${name}${camelize(attribute.name)}Item](ctx)
-})()`,
+        (attribute) =>
+          `diagutils.MergeDiagnostics(jsonapitypes.ConvertToSetModel(
+  ctx,
+  data.${camelize(attribute.name)},
+  func(ctx context.Context, item *${name}${camelize(attribute.name)}Item, apiItem apiclient.${clientName}${camelize(attribute.name)}Item) diag.Diagnostics {
+    return item.FromApi(ctx, apiItem)
+  },
+))(&diags)`,
       )
       .otherwise(
         (attribute) => `nil // TODO: Implement: ${JSON.stringify(attribute)}`,
