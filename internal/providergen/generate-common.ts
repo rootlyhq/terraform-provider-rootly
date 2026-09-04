@@ -205,53 +205,25 @@ function generateToApi({
         const unknownBehavior = attribute.hacks?.unknownBehavior ?? "omit";
         const nullBehavior = attribute.hacks?.nullBehavior ?? "null";
         const emptyBehavior = attribute.hacks?.emptyBehavior ?? "empty";
-        const getValueFor = (action: "omit" | "null" | "empty"): string =>
-          match(action)
-            .with(
-              "omit",
-              () =>
-                `jsonapi.NullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item]{}`,
-            )
-            .with(
-              "null",
-              () =>
-                `jsonapi.NewNullNullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item]()`,
-            )
-            .with(
-              "empty",
-              () =>
-                `jsonapi.NewNullableAttrWithValue([]apiclient.${clientName}${camelize(attribute.name)}Item{})`,
-            )
+        const resolveOutcome = (behavior: "omit" | "null" | "empty"): string =>
+          match(behavior)
+            .with("omit", () => "jsonapitypes.OutcomeOmit")
+            .with("null", () => "jsonapitypes.OutcomeNull")
+            .with("empty", () => "jsonapitypes.OutcomeEmptyList")
             .exhaustive();
 
-        return `func () jsonapi.NullableAttr[[]apiclient.${clientName}${camelize(attribute.name)}Item] {
-  if m.${camelize(attribute.name)}.IsUnknown() {
-    return ${getValueFor(unknownBehavior)}
-  }
-  if m.${camelize(attribute.name)}.IsNull() {
-    return ${getValueFor(nullBehavior)}
-  }
-  mm := diagutils.MergeDiagnostics(m.${camelize(attribute.name)}.Get(ctx))(&diags)
-  if diags.HasError() {
-    return ${getValueFor("omit")}
-  } else if len(mm) == 0 {
-    return ${getValueFor(emptyBehavior)}
-  }
-  return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *${name}${camelize(attribute.name)}Item, _ int) apiclient.${clientName}${camelize(attribute.name)}Item {
-		if mmm == nil {
-			diags.AddError("null value", "Cannot convert null item")
-			return apiclient.${clientName}${camelize(attribute.name)}Item{}
-		}
-    mmmm := diagutils.MergeDiagnostics(mmm.ToApiFor${camelize(action)}(ctx))(&diags)
-    if diags.HasError() {
-      return apiclient.${clientName}${camelize(attribute.name)}Item{}
-    } else if mmmm == nil {
-      diags.AddError("null value", "Cannot convert null item")
-      return apiclient.${clientName}${camelize(attribute.name)}Item{}
-    }
-		return *mmmm
-	}))
-}()`;
+        return `diagutils.MergeDiagnostics(jsonapitypes.ConvertNullableList(
+  ctx,
+  m.${camelize(attribute.name)},
+  jsonapitypes.NullableListConfig{
+    OnUnknown: ${resolveOutcome(unknownBehavior)},
+    OnNull: ${resolveOutcome(nullBehavior)},
+    OnEmpty: ${resolveOutcome(emptyBehavior)},
+  },
+  func(ctx context.Context, item *${name}${camelize(attribute.name)}Item) (*apiclient.${clientName}${camelize(attribute.name)}Item, diag.Diagnostics) {
+    return item.ToApiFor${camelize(action)}(ctx)
+  },
+))(&diags)`;
       })
       .otherwise(
         (attribute) => `nil // TODO: Implement: ${JSON.stringify(attribute)}`,

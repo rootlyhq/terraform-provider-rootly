@@ -229,12 +229,6 @@ function openapiSchemaToAttribute({
         type: "string",
         enum: schema.enum,
         default: schema.default,
-        description: withEnumDescription(common.description, schema.enum),
-        validators: schema.enum
-          ? [
-              `stringvalidator.OneOf(${schema.enum.map((value) => JSON.stringify(value)).join(", ")})`,
-            ]
-          : undefined,
       }),
     )
     .with(
@@ -248,7 +242,6 @@ function openapiSchemaToAttribute({
         type: "int64",
         enum: schema.enum,
         default: schema.default,
-        description: withEnumDescription(common.description, schema.enum),
         validators: schema.enum
           ? [
               `int64validator.OneOf(${schema.enum.map((value) => JSON.stringify(value)).join(", ")})`,
@@ -562,7 +555,7 @@ export function generateResourceDef({
     },
     options: {
       defaultCollectionType: "set",
-      defaultNestedCollectionType: "set_nested",
+      defaultNestedCollectionType: "list_nested",
       collectionsAsBlocks: true,
     },
   });
@@ -730,7 +723,7 @@ function cleanDescription(description: string | undefined): string | undefined {
   return description;
 }
 
-function withEnumDescription(
+export function withEnumDescription(
   description: string | undefined,
   enumValues: (string | number)[] | undefined,
 ): string | undefined {
@@ -744,4 +737,22 @@ function withEnumDescription(
   }
   description += `Value must be one of ${enumValues.map((v) => `\`${v}\``).join(", ")}.`;
   return description;
+}
+
+export function buildValidators(attribute: AttributeType): string[] {
+  if (
+    !("enum" in attribute) ||
+    !attribute.enum ||
+    attribute.enum.length === 0
+  ) {
+    return [];
+  }
+
+  return match(attribute)
+    .returnType<string[]>()
+    .with({ type: "string", enum: P.array(P.string) }, (schema) => [
+      `stringvalidator.OneOf(${schema.enum.map((value) => JSON.stringify(value)).join(", ")})`,
+      ...(schema.validators ?? []),
+    ])
+    .exhaustive();
 }

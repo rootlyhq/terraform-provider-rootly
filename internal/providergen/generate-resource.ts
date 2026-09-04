@@ -1,9 +1,11 @@
 import type { oas30 } from "openapi3-ts";
-import type {
-  AttributeListNested,
-  AttributeSetNested,
-  AttributeType,
-  ResourceDef,
+import {
+  buildValidators,
+  withEnumDescription,
+  type AttributeListNested,
+  type AttributeSetNested,
+  type AttributeType,
+  type ResourceDef,
 } from "./schema";
 import { camelize, humanize, singularize } from "inflection";
 import { match, P } from "ts-pattern";
@@ -270,12 +272,12 @@ function generateSchemaAttribute({
   const parts: string[] = [];
   parts.push(`${tfAttributeSchemaType({ attribute, type })}{`);
 
-  const validators: string[] = attribute.validators ?? [];
-
-  if (attribute.description) {
-    parts.push(
-      `MarkdownDescription: ${JSON.stringify(attribute.description)},`,
-    );
+  let description: string | undefined = attribute.description;
+  if ("enum" in attribute) {
+    description = withEnumDescription(description, attribute.enum);
+  }
+  if (description) {
+    parts.push(`MarkdownDescription: ${JSON.stringify(description)},`);
   }
 
   if (type === "attribute") {
@@ -299,6 +301,7 @@ function generateSchemaAttribute({
     parts.push(`Default: ${tfDefault},`);
   }
 
+  const validators = buildValidators(attribute);
   if (validators.length > 0) {
     const tfValidatorType = tfAttributeValidatorType({ attribute });
     parts.push(`Validators: []${tfValidatorType}{`);

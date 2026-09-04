@@ -15,7 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
-	"github.com/rootlyhq/jsonapi"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diagutils"
@@ -149,18 +148,15 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 			},
 		},
 		Blocks: map[string]schema.Block{
-			"rules": schema.SetNestedBlock{
+			"rules": schema.ListNestedBlock{
 				MarkdownDescription: "Escalation path rules.",
-				CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelRulesItem](ctx),
+				CustomType:          supertypes.NewListNestedObjectTypeOf[EscalationPathResourceModelRulesItem](ctx),
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"rule_type": schema.StringAttribute{
-							MarkdownDescription: "The type of the escalation path rule. Value must be one of `related_incidents`.",
+							MarkdownDescription: "The type of the escalation path rule.",
 							Optional:            true,
 							Computed:            true,
-							Validators: []validator.String{
-								stringvalidator.OneOf("related_incidents"),
-							},
 						},
 						"urgency_ids": schema.SetAttribute{
 							MarkdownDescription: "Alert urgency ids for which this escalation path should be used.",
@@ -179,11 +175,11 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 							Computed:            true,
 						},
 						"operator": schema.StringAttribute{
-							MarkdownDescription: "Whether the alert must (or must not) have related incidents. Value must be one of `is_set`, `is_not_set`.",
+							MarkdownDescription: "Whether the alert must (or must not) have related incidents. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`, `is_set`, `is_not_set`.",
 							Optional:            true,
 							Computed:            true,
 							Validators: []validator.String{
-								stringvalidator.OneOf("is_set", "is_not_set"),
+								stringvalidator.OneOf("is", "is_not", "contains", "does_not_contain", "is_one_of", "is_not_one_of", "is_empty", "is_not_empty", "contains_key", "does_not_contain_key", "starts_with", "does_not_start_with", "matches", "does_not_match", "is_set", "is_not_set"),
 							},
 						},
 						"value": schema.StringAttribute{
@@ -223,9 +219,9 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 						},
 					},
 					Blocks: map[string]schema.Block{
-						"time_blocks": schema.SetNestedBlock{
+						"time_blocks": schema.ListNestedBlock{
 							MarkdownDescription: "Time windows during which alerts are deferred.",
-							CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelRulesItemTimeBlocksItem](ctx),
+							CustomType:          supertypes.NewListNestedObjectTypeOf[EscalationPathResourceModelRulesItemTimeBlocksItem](ctx),
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"id": schema.StringAttribute{
@@ -291,9 +287,9 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 					},
 				},
 			},
-			"notification_type_rules": schema.SetNestedBlock{
+			"notification_type_rules": schema.ListNestedBlock{
 				MarkdownDescription: "Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team.",
-				CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItem](ctx),
+				CustomType:          supertypes.NewListNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItem](ctx),
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"notification_type": schema.StringAttribute{
@@ -316,9 +312,9 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 						},
 					},
 					Blocks: map[string]schema.Block{
-						"conditions": schema.SetNestedBlock{
+						"conditions": schema.ListNestedBlock{
 							MarkdownDescription: "Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.",
-							CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem](ctx),
+							CustomType:          supertypes.NewListNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem](ctx),
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"rule_type": schema.StringAttribute{
@@ -346,11 +342,11 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 										Computed:            true,
 									},
 									"operator": schema.StringAttribute{
-										MarkdownDescription: "Whether the alert must (or must not) have related incidents. Value must be one of `is_set`, `is_not_set`.",
+										MarkdownDescription: "Whether the alert must (or must not) have related incidents. Value must be one of `is`, `is_not`, `contains`, `does_not_contain`, `is_one_of`, `is_not_one_of`, `is_empty`, `is_not_empty`, `contains_key`, `does_not_contain_key`, `starts_with`, `does_not_start_with`, `matches`, `does_not_match`, `is_set`, `is_not_set`.",
 										Optional:            true,
 										Computed:            true,
 										Validators: []validator.String{
-											stringvalidator.OneOf("is_set", "is_not_set"),
+											stringvalidator.OneOf("is", "is_not", "contains", "does_not_contain", "is_one_of", "is_not_one_of", "is_empty", "is_not_empty", "contains_key", "does_not_contain_key", "starts_with", "does_not_start_with", "matches", "does_not_match", "is_set", "is_not_set"),
 										},
 									},
 									"value": schema.StringAttribute{
@@ -390,9 +386,9 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 									},
 								},
 								Blocks: map[string]schema.Block{
-									"time_blocks": schema.SetNestedBlock{
+									"time_blocks": schema.ListNestedBlock{
 										MarkdownDescription: "Time windows during which alerts are deferred.",
-										CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem](ctx),
+										CustomType:          supertypes.NewListNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem](ctx),
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"id": schema.StringAttribute{
@@ -461,9 +457,9 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 					},
 				},
 			},
-			"time_restrictions": schema.SetNestedBlock{
+			"time_restrictions": schema.ListNestedBlock{
 				MarkdownDescription: "If time restrictions are set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.",
-				CustomType:          supertypes.NewSetNestedObjectTypeOf[EscalationPathResourceModelTimeRestrictionsItem](ctx),
+				CustomType:          supertypes.NewListNestedObjectTypeOf[EscalationPathResourceModelTimeRestrictionsItem](ctx),
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"start_day": schema.StringAttribute{
@@ -633,27 +629,27 @@ func (r *EscalationPathResource) ImportState(ctx context.Context, req resource.I
 }
 
 type EscalationPathResourceModel struct {
-	Name                     types.String                                                                            `tfsdk:"name"`
-	Default                  types.Bool                                                                              `tfsdk:"default"`
-	NotificationType         types.String                                                                            `tfsdk:"notification_type"`
-	PathType                 types.String                                                                            `tfsdk:"path_type"`
-	EscalationPolicyId       types.String                                                                            `tfsdk:"escalation_policy_id"`
-	AfterDeferralBehavior    types.String                                                                            `tfsdk:"after_deferral_behavior"`
-	AfterDeferralPathId      types.String                                                                            `tfsdk:"after_deferral_path_id"`
-	MatchMode                types.String                                                                            `tfsdk:"match_mode"`
-	Position                 types.Int64                                                                             `tfsdk:"position"`
-	Repeat                   types.Bool                                                                              `tfsdk:"repeat"`
-	RepeatCount              types.Int64                                                                             `tfsdk:"repeat_count"`
-	InitialDelay             types.Int64                                                                             `tfsdk:"initial_delay"`
-	RetriggerTimeoutMinutes  types.Int64                                                                             `tfsdk:"retrigger_timeout_minutes"`
-	CreatedAt                types.String                                                                            `tfsdk:"created_at"`
-	UpdatedAt                types.String                                                                            `tfsdk:"updated_at"`
-	NotificationTypeFallback types.String                                                                            `tfsdk:"notification_type_fallback"`
-	TimeRestrictionTimeZone  types.String                                                                            `tfsdk:"time_restriction_time_zone"`
-	Id                       types.String                                                                            `tfsdk:"id"`
-	Rules                    supertypes.SetNestedObjectValueOf[EscalationPathResourceModelRulesItem]                 `tfsdk:"rules"`
-	NotificationTypeRules    supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItem] `tfsdk:"notification_type_rules"`
-	TimeRestrictions         supertypes.SetNestedObjectValueOf[EscalationPathResourceModelTimeRestrictionsItem]      `tfsdk:"time_restrictions"`
+	Name                     types.String                                                                             `tfsdk:"name"`
+	Default                  types.Bool                                                                               `tfsdk:"default"`
+	NotificationType         types.String                                                                             `tfsdk:"notification_type"`
+	PathType                 types.String                                                                             `tfsdk:"path_type"`
+	EscalationPolicyId       types.String                                                                             `tfsdk:"escalation_policy_id"`
+	AfterDeferralBehavior    types.String                                                                             `tfsdk:"after_deferral_behavior"`
+	AfterDeferralPathId      types.String                                                                             `tfsdk:"after_deferral_path_id"`
+	MatchMode                types.String                                                                             `tfsdk:"match_mode"`
+	Position                 types.Int64                                                                              `tfsdk:"position"`
+	Repeat                   types.Bool                                                                               `tfsdk:"repeat"`
+	RepeatCount              types.Int64                                                                              `tfsdk:"repeat_count"`
+	InitialDelay             types.Int64                                                                              `tfsdk:"initial_delay"`
+	RetriggerTimeoutMinutes  types.Int64                                                                              `tfsdk:"retrigger_timeout_minutes"`
+	CreatedAt                types.String                                                                             `tfsdk:"created_at"`
+	UpdatedAt                types.String                                                                             `tfsdk:"updated_at"`
+	NotificationTypeFallback types.String                                                                             `tfsdk:"notification_type_fallback"`
+	TimeRestrictionTimeZone  types.String                                                                             `tfsdk:"time_restriction_time_zone"`
+	Id                       types.String                                                                             `tfsdk:"id"`
+	Rules                    supertypes.ListNestedObjectValueOf[EscalationPathResourceModelRulesItem]                 `tfsdk:"rules"`
+	NotificationTypeRules    supertypes.ListNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItem] `tfsdk:"notification_type_rules"`
+	TimeRestrictions         supertypes.ListNestedObjectValueOf[EscalationPathResourceModelTimeRestrictionsItem]      `tfsdk:"time_restrictions"`
 }
 
 func (m *EscalationPathResourceModel) FromApi(ctx context.Context, data apiclient.EscalationPath) diag.Diagnostics {
@@ -677,35 +673,35 @@ func (m *EscalationPathResourceModel) FromApi(ctx context.Context, data apiclien
 	m.NotificationTypeFallback = jsonapitypes.NullableStringValue(data.NotificationTypeFallback)
 	m.TimeRestrictionTimeZone = jsonapitypes.NullableStringValue(data.TimeRestrictionTimeZone)
 	// id is not returned
-	m.Rules = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelRulesItem] {
+	m.Rules = (func() supertypes.ListNestedObjectValueOf[EscalationPathResourceModelRulesItem] {
 		if v, err := data.Rules.Get(); err == nil {
-			return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathRulesItem, _ int) EscalationPathResourceModelRulesItem {
+			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathRulesItem, _ int) EscalationPathResourceModelRulesItem {
 				var mm EscalationPathResourceModelRulesItem
 				diags.Append(mm.FromApi(ctx, vv)...)
 				return mm
 			}))
 		}
-		return supertypes.NewSetNestedObjectValueOfNull[EscalationPathResourceModelRulesItem](ctx)
+		return supertypes.NewListNestedObjectValueOfNull[EscalationPathResourceModelRulesItem](ctx)
 	})()
-	m.NotificationTypeRules = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItem] {
+	m.NotificationTypeRules = (func() supertypes.ListNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItem] {
 		if v, err := data.NotificationTypeRules.Get(); err == nil {
-			return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathNotificationTypeRulesItem, _ int) EscalationPathResourceModelNotificationTypeRulesItem {
+			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathNotificationTypeRulesItem, _ int) EscalationPathResourceModelNotificationTypeRulesItem {
 				var mm EscalationPathResourceModelNotificationTypeRulesItem
 				diags.Append(mm.FromApi(ctx, vv)...)
 				return mm
 			}))
 		}
-		return supertypes.NewSetNestedObjectValueOfNull[EscalationPathResourceModelNotificationTypeRulesItem](ctx)
+		return supertypes.NewListNestedObjectValueOfNull[EscalationPathResourceModelNotificationTypeRulesItem](ctx)
 	})()
-	m.TimeRestrictions = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelTimeRestrictionsItem] {
+	m.TimeRestrictions = (func() supertypes.ListNestedObjectValueOf[EscalationPathResourceModelTimeRestrictionsItem] {
 		if v, err := data.TimeRestrictions.Get(); err == nil {
-			return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathTimeRestrictionsItem, _ int) EscalationPathResourceModelTimeRestrictionsItem {
+			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathTimeRestrictionsItem, _ int) EscalationPathResourceModelTimeRestrictionsItem {
 				var mm EscalationPathResourceModelTimeRestrictionsItem
 				diags.Append(mm.FromApi(ctx, vv)...)
 				return mm
 			}))
 		}
-		return supertypes.NewSetNestedObjectValueOfNull[EscalationPathResourceModelTimeRestrictionsItem](ctx)
+		return supertypes.NewListNestedObjectValueOfNull[EscalationPathResourceModelTimeRestrictionsItem](ctx)
 	})()
 
 	return diags
@@ -733,90 +729,42 @@ func (m *EscalationPathResourceModel) ToApiForCreate(ctx context.Context) (*apic
 	data.NotificationTypeFallback = jsonapitypes.NewNullableFromString(m.NotificationTypeFallback)
 	data.TimeRestrictionTimeZone = jsonapitypes.NewNullableFromString(m.TimeRestrictionTimeZone)
 	// id is not available for create
-	data.Rules = func() jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem] {
-		if m.Rules.IsUnknown() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem]{}
-		}
-		if m.Rules.IsNull() {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathRulesItem{})
-		}
-		mm := diagutils.MergeDiagnostics(m.Rules.Get(ctx))(&diags)
-		if diags.HasError() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem]{}
-		} else if len(mm) == 0 {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathRulesItem{})
-		}
-		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelRulesItem, _ int) apiclient.EscalationPathRulesItem {
-			if mmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathRulesItem{}
-			}
-			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForCreate(ctx))(&diags)
-			if diags.HasError() {
-				return apiclient.EscalationPathRulesItem{}
-			} else if mmmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathRulesItem{}
-			}
-			return *mmmm
-		}))
-	}()
-	data.NotificationTypeRules = func() jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem] {
-		if m.NotificationTypeRules.IsUnknown() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
-		}
-		if m.NotificationTypeRules.IsNull() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
-		}
-		mm := diagutils.MergeDiagnostics(m.NotificationTypeRules.Get(ctx))(&diags)
-		if diags.HasError() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
-		} else if len(mm) == 0 {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
-		}
-		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItem, _ int) apiclient.EscalationPathNotificationTypeRulesItem {
-			if mmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathNotificationTypeRulesItem{}
-			}
-			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForCreate(ctx))(&diags)
-			if diags.HasError() {
-				return apiclient.EscalationPathNotificationTypeRulesItem{}
-			} else if mmmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathNotificationTypeRulesItem{}
-			}
-			return *mmmm
-		}))
-	}()
-	data.TimeRestrictions = func() jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem] {
-		if m.TimeRestrictions.IsUnknown() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]{}
-		}
-		if m.TimeRestrictions.IsNull() {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathTimeRestrictionsItem{})
-		}
-		mm := diagutils.MergeDiagnostics(m.TimeRestrictions.Get(ctx))(&diags)
-		if diags.HasError() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]{}
-		} else if len(mm) == 0 {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathTimeRestrictionsItem{})
-		}
-		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelTimeRestrictionsItem, _ int) apiclient.EscalationPathTimeRestrictionsItem {
-			if mmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathTimeRestrictionsItem{}
-			}
-			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForCreate(ctx))(&diags)
-			if diags.HasError() {
-				return apiclient.EscalationPathTimeRestrictionsItem{}
-			} else if mmmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathTimeRestrictionsItem{}
-			}
-			return *mmmm
-		}))
-	}()
+	data.Rules = diagutils.MergeDiagnostics(jsonapitypes.ConvertNullableList(
+		ctx,
+		m.Rules,
+		jsonapitypes.NullableListConfig{
+			OnUnknown: jsonapitypes.OutcomeOmit,
+			OnNull:    jsonapitypes.OutcomeEmptyList,
+			OnEmpty:   jsonapitypes.OutcomeEmptyList,
+		},
+		func(ctx context.Context, item *EscalationPathResourceModelRulesItem) (*apiclient.EscalationPathRulesItem, diag.Diagnostics) {
+			return item.ToApiForCreate(ctx)
+		},
+	))(&diags)
+	data.NotificationTypeRules = diagutils.MergeDiagnostics(jsonapitypes.ConvertNullableList(
+		ctx,
+		m.NotificationTypeRules,
+		jsonapitypes.NullableListConfig{
+			OnUnknown: jsonapitypes.OutcomeOmit,
+			OnNull:    jsonapitypes.OutcomeOmit,
+			OnEmpty:   jsonapitypes.OutcomeOmit,
+		},
+		func(ctx context.Context, item *EscalationPathResourceModelNotificationTypeRulesItem) (*apiclient.EscalationPathNotificationTypeRulesItem, diag.Diagnostics) {
+			return item.ToApiForCreate(ctx)
+		},
+	))(&diags)
+	data.TimeRestrictions = diagutils.MergeDiagnostics(jsonapitypes.ConvertNullableList(
+		ctx,
+		m.TimeRestrictions,
+		jsonapitypes.NullableListConfig{
+			OnUnknown: jsonapitypes.OutcomeOmit,
+			OnNull:    jsonapitypes.OutcomeEmptyList,
+			OnEmpty:   jsonapitypes.OutcomeEmptyList,
+		},
+		func(ctx context.Context, item *EscalationPathResourceModelTimeRestrictionsItem) (*apiclient.EscalationPathTimeRestrictionsItem, diag.Diagnostics) {
+			return item.ToApiForCreate(ctx)
+		},
+	))(&diags)
 
 	return &data, diags
 }
@@ -843,107 +791,59 @@ func (m *EscalationPathResourceModel) ToApiForUpdate(ctx context.Context) (*apic
 	data.NotificationTypeFallback = jsonapitypes.NewNullableFromString(m.NotificationTypeFallback)
 	data.TimeRestrictionTimeZone = jsonapitypes.NewNullableFromString(m.TimeRestrictionTimeZone)
 	// id is not available for update
-	data.Rules = func() jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem] {
-		if m.Rules.IsUnknown() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem]{}
-		}
-		if m.Rules.IsNull() {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathRulesItem{})
-		}
-		mm := diagutils.MergeDiagnostics(m.Rules.Get(ctx))(&diags)
-		if diags.HasError() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItem]{}
-		} else if len(mm) == 0 {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathRulesItem{})
-		}
-		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelRulesItem, _ int) apiclient.EscalationPathRulesItem {
-			if mmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathRulesItem{}
-			}
-			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForUpdate(ctx))(&diags)
-			if diags.HasError() {
-				return apiclient.EscalationPathRulesItem{}
-			} else if mmmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathRulesItem{}
-			}
-			return *mmmm
-		}))
-	}()
-	data.NotificationTypeRules = func() jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem] {
-		if m.NotificationTypeRules.IsUnknown() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
-		}
-		if m.NotificationTypeRules.IsNull() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
-		}
-		mm := diagutils.MergeDiagnostics(m.NotificationTypeRules.Get(ctx))(&diags)
-		if diags.HasError() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
-		} else if len(mm) == 0 {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItem]{}
-		}
-		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItem, _ int) apiclient.EscalationPathNotificationTypeRulesItem {
-			if mmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathNotificationTypeRulesItem{}
-			}
-			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForUpdate(ctx))(&diags)
-			if diags.HasError() {
-				return apiclient.EscalationPathNotificationTypeRulesItem{}
-			} else if mmmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathNotificationTypeRulesItem{}
-			}
-			return *mmmm
-		}))
-	}()
-	data.TimeRestrictions = func() jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem] {
-		if m.TimeRestrictions.IsUnknown() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]{}
-		}
-		if m.TimeRestrictions.IsNull() {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathTimeRestrictionsItem{})
-		}
-		mm := diagutils.MergeDiagnostics(m.TimeRestrictions.Get(ctx))(&diags)
-		if diags.HasError() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathTimeRestrictionsItem]{}
-		} else if len(mm) == 0 {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathTimeRestrictionsItem{})
-		}
-		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelTimeRestrictionsItem, _ int) apiclient.EscalationPathTimeRestrictionsItem {
-			if mmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathTimeRestrictionsItem{}
-			}
-			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForUpdate(ctx))(&diags)
-			if diags.HasError() {
-				return apiclient.EscalationPathTimeRestrictionsItem{}
-			} else if mmmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathTimeRestrictionsItem{}
-			}
-			return *mmmm
-		}))
-	}()
+	data.Rules = diagutils.MergeDiagnostics(jsonapitypes.ConvertNullableList(
+		ctx,
+		m.Rules,
+		jsonapitypes.NullableListConfig{
+			OnUnknown: jsonapitypes.OutcomeOmit,
+			OnNull:    jsonapitypes.OutcomeEmptyList,
+			OnEmpty:   jsonapitypes.OutcomeEmptyList,
+		},
+		func(ctx context.Context, item *EscalationPathResourceModelRulesItem) (*apiclient.EscalationPathRulesItem, diag.Diagnostics) {
+			return item.ToApiForUpdate(ctx)
+		},
+	))(&diags)
+	data.NotificationTypeRules = diagutils.MergeDiagnostics(jsonapitypes.ConvertNullableList(
+		ctx,
+		m.NotificationTypeRules,
+		jsonapitypes.NullableListConfig{
+			OnUnknown: jsonapitypes.OutcomeOmit,
+			OnNull:    jsonapitypes.OutcomeOmit,
+			OnEmpty:   jsonapitypes.OutcomeOmit,
+		},
+		func(ctx context.Context, item *EscalationPathResourceModelNotificationTypeRulesItem) (*apiclient.EscalationPathNotificationTypeRulesItem, diag.Diagnostics) {
+			return item.ToApiForUpdate(ctx)
+		},
+	))(&diags)
+	data.TimeRestrictions = diagutils.MergeDiagnostics(jsonapitypes.ConvertNullableList(
+		ctx,
+		m.TimeRestrictions,
+		jsonapitypes.NullableListConfig{
+			OnUnknown: jsonapitypes.OutcomeOmit,
+			OnNull:    jsonapitypes.OutcomeEmptyList,
+			OnEmpty:   jsonapitypes.OutcomeEmptyList,
+		},
+		func(ctx context.Context, item *EscalationPathResourceModelTimeRestrictionsItem) (*apiclient.EscalationPathTimeRestrictionsItem, diag.Diagnostics) {
+			return item.ToApiForUpdate(ctx)
+		},
+	))(&diags)
 
 	return &data, diags
 }
 
 type EscalationPathResourceModelRulesItem struct {
-	RuleType          types.String                                                                          `tfsdk:"rule_type"`
-	UrgencyIds        supertypes.SetValueOf[string]                                                         `tfsdk:"urgency_ids"`
-	WithinWorkingHour types.Bool                                                                            `tfsdk:"within_working_hour"`
-	JsonPath          types.String                                                                          `tfsdk:"json_path"`
-	Operator          types.String                                                                          `tfsdk:"operator"`
-	Value             types.String                                                                          `tfsdk:"value"`
-	Values            supertypes.SetValueOf[string]                                                         `tfsdk:"values"`
-	FieldableType     types.String                                                                          `tfsdk:"fieldable_type"`
-	FieldableId       types.String                                                                          `tfsdk:"fieldable_id"`
-	ServiceIds        supertypes.SetValueOf[string]                                                         `tfsdk:"service_ids"`
-	TimeZone          types.String                                                                          `tfsdk:"time_zone"`
-	TimeBlocks        supertypes.SetNestedObjectValueOf[EscalationPathResourceModelRulesItemTimeBlocksItem] `tfsdk:"time_blocks"`
+	RuleType          types.String                                                                           `tfsdk:"rule_type"`
+	UrgencyIds        supertypes.SetValueOf[string]                                                          `tfsdk:"urgency_ids"`
+	WithinWorkingHour types.Bool                                                                             `tfsdk:"within_working_hour"`
+	JsonPath          types.String                                                                           `tfsdk:"json_path"`
+	Operator          types.String                                                                           `tfsdk:"operator"`
+	Value             types.String                                                                           `tfsdk:"value"`
+	Values            supertypes.SetValueOf[string]                                                          `tfsdk:"values"`
+	FieldableType     types.String                                                                           `tfsdk:"fieldable_type"`
+	FieldableId       types.String                                                                           `tfsdk:"fieldable_id"`
+	ServiceIds        supertypes.SetValueOf[string]                                                          `tfsdk:"service_ids"`
+	TimeZone          types.String                                                                           `tfsdk:"time_zone"`
+	TimeBlocks        supertypes.ListNestedObjectValueOf[EscalationPathResourceModelRulesItemTimeBlocksItem] `tfsdk:"time_blocks"`
 }
 
 func (m *EscalationPathResourceModelRulesItem) FromApi(ctx context.Context, data apiclient.EscalationPathRulesItem) diag.Diagnostics {
@@ -960,15 +860,15 @@ func (m *EscalationPathResourceModelRulesItem) FromApi(ctx context.Context, data
 	m.FieldableId = jsonapitypes.NullableStringValue(data.FieldableId)
 	m.ServiceIds = jsonapitypes.NullableSetValueOfSlice(ctx, data.ServiceIds)
 	m.TimeZone = jsonapitypes.NullableStringValue(data.TimeZone)
-	m.TimeBlocks = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelRulesItemTimeBlocksItem] {
+	m.TimeBlocks = (func() supertypes.ListNestedObjectValueOf[EscalationPathResourceModelRulesItemTimeBlocksItem] {
 		if v, err := data.TimeBlocks.Get(); err == nil {
-			return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathRulesItemTimeBlocksItem, _ int) EscalationPathResourceModelRulesItemTimeBlocksItem {
+			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathRulesItemTimeBlocksItem, _ int) EscalationPathResourceModelRulesItemTimeBlocksItem {
 				var mm EscalationPathResourceModelRulesItemTimeBlocksItem
 				diags.Append(mm.FromApi(ctx, vv)...)
 				return mm
 			}))
 		}
-		return supertypes.NewSetNestedObjectValueOfNull[EscalationPathResourceModelRulesItemTimeBlocksItem](ctx)
+		return supertypes.NewListNestedObjectValueOfNull[EscalationPathResourceModelRulesItemTimeBlocksItem](ctx)
 	})()
 
 	return diags
@@ -989,34 +889,18 @@ func (m *EscalationPathResourceModelRulesItem) ToApiForCreate(ctx context.Contex
 	data.FieldableId = jsonapitypes.NewNullableFromString(m.FieldableId)
 	data.ServiceIds = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.ServiceIds))(&diags)
 	data.TimeZone = jsonapitypes.NewNullableFromString(m.TimeZone)
-	data.TimeBlocks = func() jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem] {
-		if m.TimeBlocks.IsUnknown() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]{}
-		}
-		if m.TimeBlocks.IsNull() {
-			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]()
-		}
-		mm := diagutils.MergeDiagnostics(m.TimeBlocks.Get(ctx))(&diags)
-		if diags.HasError() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]{}
-		} else if len(mm) == 0 {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathRulesItemTimeBlocksItem{})
-		}
-		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelRulesItemTimeBlocksItem, _ int) apiclient.EscalationPathRulesItemTimeBlocksItem {
-			if mmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathRulesItemTimeBlocksItem{}
-			}
-			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForCreate(ctx))(&diags)
-			if diags.HasError() {
-				return apiclient.EscalationPathRulesItemTimeBlocksItem{}
-			} else if mmmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathRulesItemTimeBlocksItem{}
-			}
-			return *mmmm
-		}))
-	}()
+	data.TimeBlocks = diagutils.MergeDiagnostics(jsonapitypes.ConvertNullableList(
+		ctx,
+		m.TimeBlocks,
+		jsonapitypes.NullableListConfig{
+			OnUnknown: jsonapitypes.OutcomeOmit,
+			OnNull:    jsonapitypes.OutcomeNull,
+			OnEmpty:   jsonapitypes.OutcomeEmptyList,
+		},
+		func(ctx context.Context, item *EscalationPathResourceModelRulesItemTimeBlocksItem) (*apiclient.EscalationPathRulesItemTimeBlocksItem, diag.Diagnostics) {
+			return item.ToApiForCreate(ctx)
+		},
+	))(&diags)
 
 	return &data, diags
 }
@@ -1036,34 +920,18 @@ func (m *EscalationPathResourceModelRulesItem) ToApiForUpdate(ctx context.Contex
 	data.FieldableId = jsonapitypes.NewNullableFromString(m.FieldableId)
 	data.ServiceIds = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.ServiceIds))(&diags)
 	data.TimeZone = jsonapitypes.NewNullableFromString(m.TimeZone)
-	data.TimeBlocks = func() jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem] {
-		if m.TimeBlocks.IsUnknown() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]{}
-		}
-		if m.TimeBlocks.IsNull() {
-			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]()
-		}
-		mm := diagutils.MergeDiagnostics(m.TimeBlocks.Get(ctx))(&diags)
-		if diags.HasError() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathRulesItemTimeBlocksItem]{}
-		} else if len(mm) == 0 {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathRulesItemTimeBlocksItem{})
-		}
-		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelRulesItemTimeBlocksItem, _ int) apiclient.EscalationPathRulesItemTimeBlocksItem {
-			if mmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathRulesItemTimeBlocksItem{}
-			}
-			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForUpdate(ctx))(&diags)
-			if diags.HasError() {
-				return apiclient.EscalationPathRulesItemTimeBlocksItem{}
-			} else if mmmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathRulesItemTimeBlocksItem{}
-			}
-			return *mmmm
-		}))
-	}()
+	data.TimeBlocks = diagutils.MergeDiagnostics(jsonapitypes.ConvertNullableList(
+		ctx,
+		m.TimeBlocks,
+		jsonapitypes.NullableListConfig{
+			OnUnknown: jsonapitypes.OutcomeOmit,
+			OnNull:    jsonapitypes.OutcomeNull,
+			OnEmpty:   jsonapitypes.OutcomeEmptyList,
+		},
+		func(ctx context.Context, item *EscalationPathResourceModelRulesItemTimeBlocksItem) (*apiclient.EscalationPathRulesItemTimeBlocksItem, diag.Diagnostics) {
+			return item.ToApiForUpdate(ctx)
+		},
+	))(&diags)
 
 	return &data, diags
 }
@@ -1147,9 +1015,9 @@ func (m *EscalationPathResourceModelRulesItemTimeBlocksItem) ToApiForUpdate(ctx 
 }
 
 type EscalationPathResourceModelNotificationTypeRulesItem struct {
-	NotificationType types.String                                                                                          `tfsdk:"notification_type"`
-	MatchMode        types.String                                                                                          `tfsdk:"match_mode"`
-	Conditions       supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem] `tfsdk:"conditions"`
+	NotificationType types.String                                                                                           `tfsdk:"notification_type"`
+	MatchMode        types.String                                                                                           `tfsdk:"match_mode"`
+	Conditions       supertypes.ListNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem] `tfsdk:"conditions"`
 }
 
 func (m *EscalationPathResourceModelNotificationTypeRulesItem) FromApi(ctx context.Context, data apiclient.EscalationPathNotificationTypeRulesItem) diag.Diagnostics {
@@ -1157,15 +1025,15 @@ func (m *EscalationPathResourceModelNotificationTypeRulesItem) FromApi(ctx conte
 
 	m.NotificationType = jsonapitypes.NullableStringValue(data.NotificationType)
 	m.MatchMode = jsonapitypes.NullableStringValue(data.MatchMode)
-	m.Conditions = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem] {
+	m.Conditions = (func() supertypes.ListNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem] {
 		if v, err := data.Conditions.Get(); err == nil {
-			return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathNotificationTypeRulesItemConditionsItem, _ int) EscalationPathResourceModelNotificationTypeRulesItemConditionsItem {
+			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathNotificationTypeRulesItemConditionsItem, _ int) EscalationPathResourceModelNotificationTypeRulesItemConditionsItem {
 				var mm EscalationPathResourceModelNotificationTypeRulesItemConditionsItem
 				diags.Append(mm.FromApi(ctx, vv)...)
 				return mm
 			}))
 		}
-		return supertypes.NewSetNestedObjectValueOfNull[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem](ctx)
+		return supertypes.NewListNestedObjectValueOfNull[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem](ctx)
 	})()
 
 	return diags
@@ -1177,34 +1045,18 @@ func (m *EscalationPathResourceModelNotificationTypeRulesItem) ToApiForCreate(ct
 	data := apiclient.EscalationPathNotificationTypeRulesItem{}
 	data.NotificationType = jsonapitypes.NewNullableFromString(m.NotificationType)
 	data.MatchMode = jsonapitypes.NewNullableFromString(m.MatchMode)
-	data.Conditions = func() jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem] {
-		if m.Conditions.IsUnknown() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]{}
-		}
-		if m.Conditions.IsNull() {
-			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]()
-		}
-		mm := diagutils.MergeDiagnostics(m.Conditions.Get(ctx))(&diags)
-		if diags.HasError() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]{}
-		} else if len(mm) == 0 {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{})
-		}
-		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem, _ int) apiclient.EscalationPathNotificationTypeRulesItemConditionsItem {
-			if mmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
-			}
-			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForCreate(ctx))(&diags)
-			if diags.HasError() {
-				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
-			} else if mmmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
-			}
-			return *mmmm
-		}))
-	}()
+	data.Conditions = diagutils.MergeDiagnostics(jsonapitypes.ConvertNullableList(
+		ctx,
+		m.Conditions,
+		jsonapitypes.NullableListConfig{
+			OnUnknown: jsonapitypes.OutcomeOmit,
+			OnNull:    jsonapitypes.OutcomeNull,
+			OnEmpty:   jsonapitypes.OutcomeEmptyList,
+		},
+		func(ctx context.Context, item *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) (*apiclient.EscalationPathNotificationTypeRulesItemConditionsItem, diag.Diagnostics) {
+			return item.ToApiForCreate(ctx)
+		},
+	))(&diags)
 
 	return &data, diags
 }
@@ -1215,51 +1067,35 @@ func (m *EscalationPathResourceModelNotificationTypeRulesItem) ToApiForUpdate(ct
 	data := apiclient.EscalationPathNotificationTypeRulesItem{}
 	data.NotificationType = jsonapitypes.NewNullableFromString(m.NotificationType)
 	data.MatchMode = jsonapitypes.NewNullableFromString(m.MatchMode)
-	data.Conditions = func() jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem] {
-		if m.Conditions.IsUnknown() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]{}
-		}
-		if m.Conditions.IsNull() {
-			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]()
-		}
-		mm := diagutils.MergeDiagnostics(m.Conditions.Get(ctx))(&diags)
-		if diags.HasError() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem]{}
-		} else if len(mm) == 0 {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{})
-		}
-		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem, _ int) apiclient.EscalationPathNotificationTypeRulesItemConditionsItem {
-			if mmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
-			}
-			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForUpdate(ctx))(&diags)
-			if diags.HasError() {
-				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
-			} else if mmmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItem{}
-			}
-			return *mmmm
-		}))
-	}()
+	data.Conditions = diagutils.MergeDiagnostics(jsonapitypes.ConvertNullableList(
+		ctx,
+		m.Conditions,
+		jsonapitypes.NullableListConfig{
+			OnUnknown: jsonapitypes.OutcomeOmit,
+			OnNull:    jsonapitypes.OutcomeNull,
+			OnEmpty:   jsonapitypes.OutcomeEmptyList,
+		},
+		func(ctx context.Context, item *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) (*apiclient.EscalationPathNotificationTypeRulesItemConditionsItem, diag.Diagnostics) {
+			return item.ToApiForUpdate(ctx)
+		},
+	))(&diags)
 
 	return &data, diags
 }
 
 type EscalationPathResourceModelNotificationTypeRulesItemConditionsItem struct {
-	RuleType          types.String                                                                                                        `tfsdk:"rule_type"`
-	UrgencyIds        supertypes.SetValueOf[string]                                                                                       `tfsdk:"urgency_ids"`
-	WithinWorkingHour types.Bool                                                                                                          `tfsdk:"within_working_hour"`
-	JsonPath          types.String                                                                                                        `tfsdk:"json_path"`
-	Operator          types.String                                                                                                        `tfsdk:"operator"`
-	Value             types.String                                                                                                        `tfsdk:"value"`
-	Values            supertypes.SetValueOf[string]                                                                                       `tfsdk:"values"`
-	FieldableType     types.String                                                                                                        `tfsdk:"fieldable_type"`
-	FieldableId       types.String                                                                                                        `tfsdk:"fieldable_id"`
-	ServiceIds        supertypes.SetValueOf[string]                                                                                       `tfsdk:"service_ids"`
-	TimeZone          types.String                                                                                                        `tfsdk:"time_zone"`
-	TimeBlocks        supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem] `tfsdk:"time_blocks"`
+	RuleType          types.String                                                                                                         `tfsdk:"rule_type"`
+	UrgencyIds        supertypes.SetValueOf[string]                                                                                        `tfsdk:"urgency_ids"`
+	WithinWorkingHour types.Bool                                                                                                           `tfsdk:"within_working_hour"`
+	JsonPath          types.String                                                                                                         `tfsdk:"json_path"`
+	Operator          types.String                                                                                                         `tfsdk:"operator"`
+	Value             types.String                                                                                                         `tfsdk:"value"`
+	Values            supertypes.SetValueOf[string]                                                                                        `tfsdk:"values"`
+	FieldableType     types.String                                                                                                         `tfsdk:"fieldable_type"`
+	FieldableId       types.String                                                                                                         `tfsdk:"fieldable_id"`
+	ServiceIds        supertypes.SetValueOf[string]                                                                                        `tfsdk:"service_ids"`
+	TimeZone          types.String                                                                                                         `tfsdk:"time_zone"`
+	TimeBlocks        supertypes.ListNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem] `tfsdk:"time_blocks"`
 }
 
 func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) FromApi(ctx context.Context, data apiclient.EscalationPathNotificationTypeRulesItemConditionsItem) diag.Diagnostics {
@@ -1276,15 +1112,15 @@ func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) Fro
 	m.FieldableId = jsonapitypes.NullableStringValue(data.FieldableId)
 	m.ServiceIds = jsonapitypes.NullableSetValueOfSlice(ctx, data.ServiceIds)
 	m.TimeZone = jsonapitypes.NullableStringValue(data.TimeZone)
-	m.TimeBlocks = (func() supertypes.SetNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem] {
+	m.TimeBlocks = (func() supertypes.ListNestedObjectValueOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem] {
 		if v, err := data.TimeBlocks.Get(); err == nil {
-			return supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem, _ int) EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem {
+			return supertypes.NewListNestedObjectValueOfValueSlice(ctx, lo.Map(v, func(vv apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem, _ int) EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem {
 				var mm EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem
 				diags.Append(mm.FromApi(ctx, vv)...)
 				return mm
 			}))
 		}
-		return supertypes.NewSetNestedObjectValueOfNull[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem](ctx)
+		return supertypes.NewListNestedObjectValueOfNull[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem](ctx)
 	})()
 
 	return diags
@@ -1305,34 +1141,18 @@ func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) ToA
 	data.FieldableId = jsonapitypes.NewNullableFromString(m.FieldableId)
 	data.ServiceIds = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.ServiceIds))(&diags)
 	data.TimeZone = jsonapitypes.NewNullableFromString(m.TimeZone)
-	data.TimeBlocks = func() jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem] {
-		if m.TimeBlocks.IsUnknown() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]{}
-		}
-		if m.TimeBlocks.IsNull() {
-			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]()
-		}
-		mm := diagutils.MergeDiagnostics(m.TimeBlocks.Get(ctx))(&diags)
-		if diags.HasError() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]{}
-		} else if len(mm) == 0 {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{})
-		}
-		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem, _ int) apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem {
-			if mmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
-			}
-			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForCreate(ctx))(&diags)
-			if diags.HasError() {
-				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
-			} else if mmmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
-			}
-			return *mmmm
-		}))
-	}()
+	data.TimeBlocks = diagutils.MergeDiagnostics(jsonapitypes.ConvertNullableList(
+		ctx,
+		m.TimeBlocks,
+		jsonapitypes.NullableListConfig{
+			OnUnknown: jsonapitypes.OutcomeOmit,
+			OnNull:    jsonapitypes.OutcomeNull,
+			OnEmpty:   jsonapitypes.OutcomeEmptyList,
+		},
+		func(ctx context.Context, item *EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem) (*apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem, diag.Diagnostics) {
+			return item.ToApiForCreate(ctx)
+		},
+	))(&diags)
 
 	return &data, diags
 }
@@ -1352,34 +1172,18 @@ func (m *EscalationPathResourceModelNotificationTypeRulesItemConditionsItem) ToA
 	data.FieldableId = jsonapitypes.NewNullableFromString(m.FieldableId)
 	data.ServiceIds = diagutils.MergeDiagnostics(jsonapitypes.NewNullableFromSetOf(ctx, m.ServiceIds))(&diags)
 	data.TimeZone = jsonapitypes.NewNullableFromString(m.TimeZone)
-	data.TimeBlocks = func() jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem] {
-		if m.TimeBlocks.IsUnknown() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]{}
-		}
-		if m.TimeBlocks.IsNull() {
-			return jsonapi.NewNullNullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]()
-		}
-		mm := diagutils.MergeDiagnostics(m.TimeBlocks.Get(ctx))(&diags)
-		if diags.HasError() {
-			return jsonapi.NullableAttr[[]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem]{}
-		} else if len(mm) == 0 {
-			return jsonapi.NewNullableAttrWithValue([]apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{})
-		}
-		return jsonapi.NewNullableAttrWithValue(lo.Map(mm, func(mmm *EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem, _ int) apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem {
-			if mmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
-			}
-			mmmm := diagutils.MergeDiagnostics(mmm.ToApiForUpdate(ctx))(&diags)
-			if diags.HasError() {
-				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
-			} else if mmmm == nil {
-				diags.AddError("null value", "Cannot convert null item")
-				return apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem{}
-			}
-			return *mmmm
-		}))
-	}()
+	data.TimeBlocks = diagutils.MergeDiagnostics(jsonapitypes.ConvertNullableList(
+		ctx,
+		m.TimeBlocks,
+		jsonapitypes.NullableListConfig{
+			OnUnknown: jsonapitypes.OutcomeOmit,
+			OnNull:    jsonapitypes.OutcomeNull,
+			OnEmpty:   jsonapitypes.OutcomeEmptyList,
+		},
+		func(ctx context.Context, item *EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem) (*apiclient.EscalationPathNotificationTypeRulesItemConditionsItemTimeBlocksItem, diag.Diagnostics) {
+			return item.ToApiForUpdate(ctx)
+		},
+	))(&diags)
 
 	return &data, diags
 }
