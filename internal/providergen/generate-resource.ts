@@ -1,7 +1,11 @@
 import type { oas30 } from "openapi3-ts";
 import { type ResourceDef } from "./schema";
-import { camelize, humanize, singularize } from "inflection";
-import { generateModels, generateSchemaAttributes } from "./generate-common";
+import { camelize, humanize } from "inflection";
+import {
+  generateModels,
+  generateReorderKeys,
+  generateSchemaAttributes,
+} from "./generate-common";
 import { getParametersByOperationId } from "./openapi";
 import assert from "node:assert";
 
@@ -53,7 +57,13 @@ import (
 
 var ${camelize(def.goNames.struct, true)}ReorderKeys = planutils.NewKeyRegistry()
 
-func init() {}
+func init() {
+  ${generateReorderKeys({
+    name: def.goNames.model,
+    baseName: def.goNames.struct,
+    attributes: [...def.attributes, ...def.blocks],
+  })}
+}
 
 var _ resource.Resource = &${def.goNames.struct}{}
 var _ resource.ResourceWithConfigure = &${def.goNames.struct}{}
@@ -216,7 +226,6 @@ func (r *${def.goNames.struct}) ImportState(ctx context.Context, req resource.Im
 }
 
 ${generateModels({
-  def,
   name: def.goNames.model,
   baseName: def.goNames.struct,
   clientName: def.goNames.clientBase,

@@ -15,7 +15,10 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diagutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/jsonapitypes"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/planutils"
 )
+
+var serviceDataSourceReorderKeys = planutils.NewKeyRegistry()
 
 var _ datasource.DataSource = &ServiceDataSource{}
 var _ datasource.DataSourceWithConfigure = &ServiceDataSource{}
@@ -352,20 +355,28 @@ func (m *ServiceDataSourceModel) FromApi(ctx context.Context, data apiclient.Ser
 	m.EscalationPolicyId = jsonapitypes.NullableStringValue(data.EscalationPolicyId)
 	m.AlertsEmailEnabled = jsonapitypes.NullableBoolValue(data.AlertsEmailEnabled)
 	m.AlertsEmailAddress = jsonapitypes.NullableStringValue(data.AlertsEmailAddress)
-	m.SlackChannels = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
-		ctx,
-		data.SlackChannels,
-		func(ctx context.Context, item *ServiceDataSourceModelSlackChannelsItem, apiItem apiclient.ServiceSlackChannelsItem) diag.Diagnostics {
-			return item.FromApi(ctx, apiItem)
-		},
-	))(&diags)
-	m.SlackAliases = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
-		ctx,
-		data.SlackAliases,
-		func(ctx context.Context, item *ServiceDataSourceModelSlackAliasesItem, apiItem apiclient.ServiceSlackAliasesItem) diag.Diagnostics {
-			return item.FromApi(ctx, apiItem)
-		},
-	))(&diags)
+	m.SlackChannels = func() supertypes.ListNestedObjectValueOf[ServiceDataSourceModelSlackChannelsItem] {
+		newItems := diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+			ctx,
+			data.SlackChannels,
+			func(ctx context.Context, item *ServiceDataSourceModelSlackChannelsItem, apiItem apiclient.ServiceSlackChannelsItem) diag.Diagnostics {
+				return item.FromApi(ctx, apiItem)
+			},
+		))(&diags)
+		_ = diagutils.MergeDiagnostics(planutils.SortNested(ctx, serviceDataSourceReorderKeys, &newItems, m.SlackChannels))(&diags)
+		return newItems
+	}()
+	m.SlackAliases = func() supertypes.ListNestedObjectValueOf[ServiceDataSourceModelSlackAliasesItem] {
+		newItems := diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+			ctx,
+			data.SlackAliases,
+			func(ctx context.Context, item *ServiceDataSourceModelSlackAliasesItem, apiItem apiclient.ServiceSlackAliasesItem) diag.Diagnostics {
+				return item.FromApi(ctx, apiItem)
+			},
+		))(&diags)
+		_ = diagutils.MergeDiagnostics(planutils.SortNested(ctx, serviceDataSourceReorderKeys, &newItems, m.SlackAliases))(&diags)
+		return newItems
+	}()
 	m.AlertBroadcastEnabled = jsonapitypes.NullableBoolValue(data.AlertBroadcastEnabled)
 	m.AlertBroadcastChannel = diagutils.MergeDiagnostics(jsonapitypes.ConvertToSingleModel(
 		ctx,
@@ -382,13 +393,17 @@ func (m *ServiceDataSourceModel) FromApi(ctx context.Context, data apiclient.Ser
 			return item.FromApi(ctx, apiItem)
 		},
 	))(&diags)
-	m.Properties = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
-		ctx,
-		data.Properties,
-		func(ctx context.Context, item *ServiceDataSourceModelPropertiesItem, apiItem apiclient.ServicePropertiesItem) diag.Diagnostics {
-			return item.FromApi(ctx, apiItem)
-		},
-	))(&diags)
+	m.Properties = func() supertypes.ListNestedObjectValueOf[ServiceDataSourceModelPropertiesItem] {
+		newItems := diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+			ctx,
+			data.Properties,
+			func(ctx context.Context, item *ServiceDataSourceModelPropertiesItem, apiItem apiclient.ServicePropertiesItem) diag.Diagnostics {
+				return item.FromApi(ctx, apiItem)
+			},
+		))(&diags)
+		_ = diagutils.MergeDiagnostics(planutils.SortNested(ctx, serviceDataSourceReorderKeys, &newItems, m.Properties))(&diags)
+		return newItems
+	}()
 	m.CreatedAt = jsonapitypes.NullableStringValue(data.CreatedAt)
 	m.UpdatedAt = jsonapitypes.NullableStringValue(data.UpdatedAt)
 	// id is not returned

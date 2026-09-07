@@ -67,6 +67,7 @@ function modifyCondition(condition: AttributeListNested) {
   const timeBlocks = findBlock(condition.blocks, "time_blocks", "list_nested");
   timeBlocks.description =
     "Time windows during which alerts are deferred. Only used with `deferral_window` rule type.";
+  timeBlocks.stableAttributes = ["id"];
 
   const values = findAttribute(condition.attributes, "values", "set");
   values.description =

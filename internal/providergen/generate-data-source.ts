@@ -109,7 +109,6 @@ func (d *${def.goNames.struct}) Read(ctx context.Context, req datasource.ReadReq
 }
 
 ${generateModels({
-  def,
   name: def.goNames.model,
   baseName: def.goNames.struct,
   clientName: def.goNames.clientBase,

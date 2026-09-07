@@ -1,10 +1,9 @@
 import {
   buildValidators,
+  isCollectionAttribute,
   resolveDescription,
   type AttributeBlockType,
   type AttributeType,
-  type DataSourceDef,
-  type ResourceDef,
 } from "./schema";
 import {
   tfAttributeCustomType,
@@ -16,6 +15,7 @@ import {
 } from "./go-types";
 import { camelize } from "inflection";
 import { match, P } from "ts-pattern";
+import assert from "node:assert";
 
 export function generateSchemaAttributes({
   parent,
@@ -151,7 +151,6 @@ function generateSchemaAttribute({
 }
 
 export function generateModels({
-  def,
   name,
   baseName,
   clientName,
@@ -159,7 +158,6 @@ export function generateModels({
   level,
   options,
 }: {
-  def: DataSourceDef | ResourceDef;
   name: string;
   baseName: string;
   clientName: string;
@@ -189,7 +187,6 @@ export function generateModels({
       .with({ type: "single_nested" }, (attribute) => {
         children.push(
           generateModels({
-            def,
             name: `${name}${camelize(attribute.name)}`,
             baseName,
             clientName: `${clientName}${camelize(attribute.name)}`,
@@ -202,7 +199,6 @@ export function generateModels({
       .with({ type: "list_nested" }, { type: "set_nested" }, (attribute) => {
         children.push(
           generateModels({
-            def,
             name: `${name}${camelize(attribute.name)}Item`,
             baseName,
             clientName: attribute.hints?.isTopLevelCollection
@@ -456,4 +452,66 @@ func (m *${name}) ToApiFor${camelize(action)}(ctx context.Context) (*apiclient.$
 	return &data, diags
 }
 `;
+}
+
+export function generateReorderKeys({
+  name,
+  baseName,
+  attributes,
+}: {
+  name: string;
+  baseName: string;
+  attributes: AttributeType[];
+}) {
+  const collectionAttributes = attributes.filter((attribute) =>
+    isCollectionAttribute(attribute),
+  );
+
+  const children: string[] = [];
+  for (const attribute of collectionAttributes) {
+    if (isCollectionAttribute(attribute)) {
+      const allAttributes = [...attribute.attributes, ...attribute.blocks];
+
+      if (attribute.stableAttributes && attribute.stableAttributes.length > 0) {
+        const stableAttributes = attribute.stableAttributes.map((name) => {
+          const found = allAttributes.find((attr) => attr.name === name);
+          assert(
+            found,
+            `${name} is not a valid attribute or block in ${name}${camelize(attribute.name)}`,
+          );
+          // TODO: Implement more types
+          assert(
+            found.type === "string",
+            `${name} is not a string attribute in ${name}${camelize(attribute.name)}`,
+          );
+          return found;
+        });
+
+        children.push(
+          `planutils.RegisterKey(${camelize(baseName, true)}ReorderKeys, func(tb ${name}${camelize(attribute.name)}Item) (string, bool) {
+  var key string
+  ${stableAttributes.map(
+    (attr) => `
+if tb.${camelize(attr.name)}.IsUnknown() || tb.${camelize(attr.name)}.IsNull() {
+  return "", false
+}
+key += "|" + tb.${camelize(attr.name)}.ValueString()
+`,
+  )}
+  return key, true
+})`,
+        );
+      }
+
+      children.push(
+        generateReorderKeys({
+          name: `${name}${camelize(attribute.name)}Item`,
+          baseName,
+          attributes: allAttributes,
+        }),
+      );
+    }
+  }
+
+  return children.join("\n");
 }
