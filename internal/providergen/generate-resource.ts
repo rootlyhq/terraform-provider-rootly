@@ -51,6 +51,10 @@ import (
   "github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
 )
 
+var ${camelize(def.goNames.struct, true)}ReorderKeys = planutils.NewKeyRegistry()
+
+func init() {}
+
 var _ resource.Resource = &${def.goNames.struct}{}
 var _ resource.ResourceWithConfigure = &${def.goNames.struct}{}
 var _ resource.ResourceWithImportState = &EscalationPathResource{}
@@ -214,6 +218,7 @@ func (r *${def.goNames.struct}) ImportState(ctx context.Context, req resource.Im
 ${generateModels({
   def,
   name: def.goNames.model,
+  baseName: def.goNames.struct,
   clientName: def.goNames.clientBase,
   attributes: [...def.attributes, ...def.blocks],
   level: 0,

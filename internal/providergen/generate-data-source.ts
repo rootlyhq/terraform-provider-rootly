@@ -55,6 +55,8 @@ import (
 	"github.com/samber/lo"
 )
 
+var ${camelize(def.goNames.struct, true)}ReorderKeys = planutils.NewKeyRegistry()
+
 var _ datasource.DataSource = &${def.goNames.struct}{}
 var _ datasource.DataSourceWithConfigure = &${def.goNames.struct}{}
 
@@ -109,6 +111,7 @@ func (d *${def.goNames.struct}) Read(ctx context.Context, req datasource.ReadReq
 ${generateModels({
   def,
   name: def.goNames.model,
+  baseName: def.goNames.struct,
   clientName: def.goNames.clientBase,
   attributes: def.attributes,
   level: 0,

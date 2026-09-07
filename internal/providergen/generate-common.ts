@@ -153,6 +153,7 @@ function generateSchemaAttribute({
 export function generateModels({
   def,
   name,
+  baseName,
   clientName,
   attributes,
   level,
@@ -160,6 +161,7 @@ export function generateModels({
 }: {
   def: DataSourceDef | ResourceDef;
   name: string;
+  baseName: string;
   clientName: string;
   attributes: AttributeType[];
   level: number;
@@ -189,6 +191,7 @@ export function generateModels({
           generateModels({
             def,
             name: `${name}${camelize(attribute.name)}`,
+            baseName,
             clientName: `${clientName}${camelize(attribute.name)}`,
             attributes: [...attribute.attributes, ...attribute.blocks],
             level: level + 1,
@@ -201,6 +204,7 @@ export function generateModels({
           generateModels({
             def,
             name: `${name}${camelize(attribute.name)}Item`,
+            baseName,
             clientName: attribute.hints?.isTopLevelCollection
               ? clientName
               : `${clientName}${camelize(attribute.name)}Item`,
@@ -221,6 +225,7 @@ ${
   options.generateFromApi
     ? generateModelFromApi({
         name,
+        baseName,
         clientName,
         attributes,
         level,
@@ -257,12 +262,14 @@ ${children.join("\n\n")}
 
 function generateModelFromApi({
   name,
+  baseName,
   clientName,
   attributes,
   level,
   rootIsCollection,
 }: {
   name: string;
+  baseName: string;
   clientName: string;
   attributes: AttributeType[];
   level: number;
@@ -280,51 +287,59 @@ function generateModelFromApi({
     ) {
       return `// ${attribute.name} is not returned`;
     }
-    const goValue = match(attribute)
+
+    const attributeName = camelize(attribute.name);
+
+    return match(attribute)
       .with(
         { type: "string", hints: { isOpenApiId: true } },
-        (attribute) => `types.StringValue(data.${camelize(attribute.name)})`,
+        (attribute) =>
+          `m.${attributeName} = types.StringValue(data.${camelize(attribute.name)})`,
       )
       .with(
         { type: "string" },
         (attribute) =>
-          `jsonapitypes.NullableStringValue(data.${camelize(attribute.name)})`,
+          `m.${attributeName} = jsonapitypes.NullableStringValue(data.${camelize(attribute.name)})`,
       )
       .with(
         { type: "int64" },
         (attribute) =>
-          `jsonapitypes.NullableInt64Value(data.${camelize(attribute.name)})`,
+          `m.${attributeName} = jsonapitypes.NullableInt64Value(data.${camelize(attribute.name)})`,
       )
       .with(
         { type: "bool" },
         (attribute) =>
-          `jsonapitypes.NullableBoolValue(data.${camelize(attribute.name)})`,
+          `m.${attributeName} = jsonapitypes.NullableBoolValue(data.${camelize(attribute.name)})`,
       )
       .with(
         { type: "list" },
         (attribute) =>
-          `jsonapitypes.NullableListValueOfSlice(ctx, data.${camelize(attribute.name)})`,
+          `m.${attributeName} = jsonapitypes.NullableListValueOfSlice(ctx, data.${camelize(attribute.name)})`,
       )
       .with(
         { type: "set" },
         (attribute) =>
-          `jsonapitypes.NullableSetValueOfSlice(ctx, data.${camelize(attribute.name)})`,
+          `m.${attributeName} = jsonapitypes.NullableSetValueOfSlice(ctx, data.${camelize(attribute.name)})`,
       )
       .with(
         { type: "list_nested" },
         (attribute) =>
-          `diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
-  ctx,
-  ${attribute.hints?.isTopLevelCollection ? "jsonapi.NewNullableAttrWithValue(data)" : `data.${camelize(attribute.name)}`},
-  func(ctx context.Context, item *${name}${camelize(attribute.name)}Item, apiItem ${attribute.hints?.isTopLevelCollection ? `apiclient.${clientName}` : `apiclient.${clientName}${camelize(attribute.name)}Item`}) diag.Diagnostics {
-    return item.FromApi(ctx, apiItem)
-  },
-))(&diags)`,
+          `m.${attributeName} = func() supertypes.ListNestedObjectValueOf[${name}${camelize(attribute.name)}Item] {
+  newItems := diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+    ctx,
+    ${attribute.hints?.isTopLevelCollection ? "jsonapi.NewNullableAttrWithValue(data)" : `data.${camelize(attribute.name)}`},
+    func(ctx context.Context, item *${name}${camelize(attribute.name)}Item, apiItem ${attribute.hints?.isTopLevelCollection ? `apiclient.${clientName}` : `apiclient.${clientName}${camelize(attribute.name)}Item`}) diag.Diagnostics {
+      return item.FromApi(ctx, apiItem)
+    },
+  ))(&diags)
+  _ = diagutils.MergeDiagnostics(planutils.SortNested(ctx, ${camelize(baseName, true)}ReorderKeys, &newItems, m.${attributeName}))(&diags)
+  return newItems
+}()`,
       )
       .with(
         { type: "set_nested" },
         (attribute) =>
-          `diagutils.MergeDiagnostics(jsonapitypes.ConvertToSetModel(
+          `m.${attributeName} = diagutils.MergeDiagnostics(jsonapitypes.ConvertToSetModel(
   ctx,
   data.${camelize(attribute.name)},
   func(ctx context.Context, item *${name}${camelize(attribute.name)}Item, apiItem apiclient.${clientName}${camelize(attribute.name)}Item) diag.Diagnostics {
@@ -335,7 +350,7 @@ function generateModelFromApi({
       .with(
         { type: "single_nested" },
         (attribute) =>
-          `diagutils.MergeDiagnostics(jsonapitypes.ConvertToSingleModel(
+          `m.${attributeName} = diagutils.MergeDiagnostics(jsonapitypes.ConvertToSingleModel(
   ctx,
   data.${camelize(attribute.name)},
   func(ctx context.Context, item *${name}${camelize(attribute.name)}, apiItem apiclient.${clientName}${camelize(attribute.name)}) diag.Diagnostics {
@@ -344,10 +359,8 @@ function generateModelFromApi({
 ))(&diags)`,
       )
       .otherwise(
-        (attribute) => `nil // TODO: Implement: ${JSON.stringify(attribute)}`,
+        (attribute) => `// TODO: Implement: ${JSON.stringify(attribute)}`,
       );
-
-    return `m.${camelize(attribute.name)} = ${goValue}`;
   });
 
   return `

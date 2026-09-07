@@ -95,6 +95,9 @@ export interface AttributeListNested extends AttributeBase {
   type: "list_nested";
   attributes: AttributeType[];
   blocks: AttributeBlockType[];
+  /** Used to control sort order of elements in the list */
+  stableAttributes?: string[];
+  /** Hints for this attribute */
   hints?: {
     /** Only used for data sources. Indicates that this is the list of the top level item type. */
     isTopLevelCollection?: boolean;
@@ -113,6 +116,9 @@ export interface AttributeSetNested extends AttributeBase {
   type: "set_nested";
   attributes: AttributeType[];
   blocks: AttributeBlockType[];
+  /** Used to control sort order of elements in the set */
+  stableAttributes?: string[];
+  /** Hints for this attribute */
   hints?: {
     /** Only used for data sources. Indicates that this is the list of the top level item type. */
     isTopLevelCollection?: boolean;
