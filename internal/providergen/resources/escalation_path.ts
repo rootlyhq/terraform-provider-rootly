@@ -68,6 +68,14 @@ function modifyCondition(condition: AttributeListNested) {
   timeBlocks.description =
     "Time windows during which alerts are deferred. Only used with `deferral_window` rule type.";
   timeBlocks.stableAttributes = ["id"];
+  timeBlocks.validators = [`intlistvalidator.UniqueByAttribute("position")`];
+
+  const timeBlocksPosition = findAttribute(
+    timeBlocks.attributes,
+    "position",
+    "int64",
+  );
+  timeBlocksPosition.validators = ["int64validator.AtLeast(1)"];
 
   const values = findAttribute(condition.attributes, "values", "set");
   values.description =

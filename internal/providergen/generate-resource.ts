@@ -53,6 +53,8 @@ import (
   "github.com/hashicorp/terraform-plugin-framework/resource/schema"
   "github.com/rootlyhq/jsonapi"
   "github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
+  intlistvalidator "github.com/rootlyhq/terraform-provider-rootly/v5/internal/validators/listvalidator"
+  intsetvalidator "github.com/rootlyhq/terraform-provider-rootly/v5/internal/validators/setvalidator"
 )
 
 var ${camelize(def.goNames.struct, true)}ReorderKeys = planutils.NewKeyRegistry()

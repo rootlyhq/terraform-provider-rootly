@@ -5,6 +5,8 @@ import (
 	"context"
 	"errors"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -21,6 +23,7 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diagutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/jsonapitypes"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/planutils"
+	intlistvalidator "github.com/rootlyhq/terraform-provider-rootly/v5/internal/validators/listvalidator"
 )
 
 var escalationPathResourceReorderKeys = planutils.NewKeyRegistry()
@@ -261,6 +264,9 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 						"time_blocks": schema.ListNestedBlock{
 							MarkdownDescription: "Time windows during which alerts are deferred. Only used with `deferral_window` rule type.",
 							CustomType:          supertypes.NewListNestedObjectTypeOf[EscalationPathResourceModelRulesItemTimeBlocksItem](ctx),
+							Validators: []validator.List{
+								intlistvalidator.UniqueByAttribute("position"),
+							},
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"id": schema.StringAttribute{
@@ -314,6 +320,9 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 										MarkdownDescription: "Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.",
 										Optional:            true,
 										Computed:            true,
+										Validators: []validator.Int64{
+											int64validator.AtLeast(1),
+										},
 									},
 									"ends_next_day": schema.BoolAttribute{
 										MarkdownDescription: "Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.",
@@ -329,6 +338,9 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 			"notification_type_rules": schema.ListNestedBlock{
 				MarkdownDescription: "Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team.",
 				CustomType:          supertypes.NewListNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItem](ctx),
+				Validators: []validator.List{
+					listvalidator.SizeAtMost(10),
+				},
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"notification_type": schema.StringAttribute{
@@ -354,6 +366,9 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 						"conditions": schema.ListNestedBlock{
 							MarkdownDescription: "Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.",
 							CustomType:          supertypes.NewListNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItem](ctx),
+							Validators: []validator.List{
+								listvalidator.SizeBetween(1, 5),
+							},
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"rule_type": schema.StringAttribute{
@@ -431,6 +446,9 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 									"time_blocks": schema.ListNestedBlock{
 										MarkdownDescription: "Time windows during which alerts are deferred. Only used with `deferral_window` rule type.",
 										CustomType:          supertypes.NewListNestedObjectTypeOf[EscalationPathResourceModelNotificationTypeRulesItemConditionsItemTimeBlocksItem](ctx),
+										Validators: []validator.List{
+											intlistvalidator.UniqueByAttribute("position"),
+										},
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"id": schema.StringAttribute{
@@ -484,6 +502,9 @@ func (r *EscalationPathResource) Schema(ctx context.Context, req resource.Schema
 													MarkdownDescription: "Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.",
 													Optional:            true,
 													Computed:            true,
+													Validators: []validator.Int64{
+														int64validator.AtLeast(1),
+													},
 												},
 												"ends_next_day": schema.BoolAttribute{
 													MarkdownDescription: "Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.",

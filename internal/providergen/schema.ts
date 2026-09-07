@@ -877,19 +877,23 @@ export function resolveDescription(
 }
 
 export function buildValidators(attribute: AttributeType): string[] {
+  const validators = attribute.validators ?? [];
+
   if (
     !("enum" in attribute) ||
     !attribute.enum ||
     attribute.enum.length === 0
   ) {
-    return [];
+    return validators;
   }
 
-  return match(attribute)
-    .returnType<string[]>()
-    .with({ type: "string", enum: P.array(P.string) }, (schema) => [
-      `stringvalidator.OneOf(${schema.enum.map((value) => JSON.stringify(value)).join(", ")})`,
-      ...(schema.validators ?? []),
-    ])
-    .exhaustive();
+  return [
+    ...validators,
+    ...match(attribute)
+      .returnType<string[]>()
+      .with({ type: "string", enum: P.array(P.string) }, (schema) => [
+        `stringvalidator.OneOf(${schema.enum.map((value) => JSON.stringify(value)).join(", ")})`,
+      ])
+      .exhaustive(),
+  ];
 }
