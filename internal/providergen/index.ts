@@ -2,9 +2,11 @@ import { dereferenceSync } from "@trojs/openapi-dereference";
 import { oas30 } from "openapi3-ts";
 import { parseArgs } from "util";
 import { generateClient } from "./generate-client";
-import { generateDataSource } from "./generate-data-source";
 import { generateProvider } from "./generate-provider";
 import { CLIENTS, DATA_SOURCES, RESOURCES } from "./settings";
+import { generateDataSourceDef, generateResourceDef } from "./schema";
+import { generateResource } from "./generate-resource";
+import { generateDataSource } from "./generate-data-source";
 
 async function parseArguments() {
   const { values } = parseArgs({
@@ -61,9 +63,35 @@ async function main() {
   }
 
   for (const config of DATA_SOURCES) {
-    const code = generateDataSource({ doc, config });
+    let def = generateDataSourceDef({ doc, config });
+    if (config.modifyDef) {
+      def = config.modifyDef(def);
+    }
+    await Bun.write(
+      new URL(`dist/data_source_def_${config.name}.json`, import.meta.url),
+      JSON.stringify(def, null, 2),
+    );
+
+    const code = generateDataSource({ doc, def });
     await writeAndFormatGoFile(
-      new URL(`../provider/data_source_${config.name}_gen.go`, import.meta.url),
+      new URL(`../provider/data_source_${def.name}.gen.go`, import.meta.url),
+      code,
+    );
+  }
+
+  for (const config of RESOURCES) {
+    let def = generateResourceDef({ doc, config });
+    if (config.modifyDef) {
+      def = config.modifyDef(def);
+    }
+    await Bun.write(
+      new URL(`dist/resource_def_${config.name}.json`, import.meta.url),
+      JSON.stringify(def, null, 2),
+    );
+
+    const code = generateResource({ doc, def });
+    await writeAndFormatGoFile(
+      new URL(`../provider/resource_${def.name}.gen.go`, import.meta.url),
       code,
     );
   }
@@ -74,7 +102,7 @@ async function main() {
       resources: RESOURCES,
     });
     await writeAndFormatGoFile(
-      new URL(`../provider/provider_gen.go`, import.meta.url),
+      new URL(`../provider/provider.gen.go`, import.meta.url),
       code,
     );
   }

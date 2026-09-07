@@ -13,114 +13,177 @@ import (
 
 type Service struct {
 	// The ID of the service.
+	// {"type":"string","description":"The ID of the service.","x-go-jsonapi-tag":"primary","x-go-jsonapi-type":"services"}
 	Id string `jsonapi:"primary,services"`
 	// The name of the service
-	Name string `jsonapi:"attr,name"`
+	// {"type":"string","description":"The name of the service"}
+	Name jsonapi.NullableAttr[string] `jsonapi:"attr,name"`
 	// The slug of the service
-	Slug string `jsonapi:"attr,slug,omitempty"`
+	// {"type":"string","description":"The slug of the service","readOnly":true,"tf_computed":true}
+	Slug jsonapi.NullableAttr[string] `jsonapi:"attr,slug"`
 	// How this service is managed (provenance): web, api, terraform, etc. Read-only.
-	ManagedBy string `jsonapi:"attr,managed_by,omitempty"`
+	// {"type":"string","enum":["web","admin_web","api","terraform","pulumi","backstage","catalog_sync"],"description":"How this service is managed (provenance): web, api, terraform, etc. Read-only.","tf_computed":true}
+	ManagedBy jsonapi.NullableAttr[string] `jsonapi:"attr,managed_by"`
 	// The description of the service
-	Description jsonapi.NullableAttr[string] `jsonapi:"attr,description,omitempty"`
+	// {"type":"string","description":"The description of the service","nullable":true}
+	Description jsonapi.NullableAttr[string] `jsonapi:"attr,description"`
 	// The status page description of the service
-	PublicDescription jsonapi.NullableAttr[string] `jsonapi:"attr,public_description,omitempty"`
+	// {"type":"string","description":"The status page description of the service","nullable":true}
+	PublicDescription jsonapi.NullableAttr[string] `jsonapi:"attr,public_description"`
 	// Emails attached to the service
-	NotifyEmails jsonapi.NullableAttr[[]string] `jsonapi:"attr,notify_emails,omitempty"`
+	// {"type":"array","description":"Emails attached to the service","items":{"type":"string"},"nullable":true}
+	NotifyEmails jsonapi.NullableAttr[[]string] `jsonapi:"attr,notify_emails"`
 	// The hex color of the service
-	Color jsonapi.NullableAttr[string] `jsonapi:"attr,color,omitempty"`
+	// {"type":"string","description":"The hex color of the service","nullable":true}
+	Color jsonapi.NullableAttr[string] `jsonapi:"attr,color"`
 	// Position of the service
-	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position,omitempty"`
+	// {"type":"integer","description":"Position of the service","nullable":true}
+	Position jsonapi.NullableAttr[int64] `jsonapi:"attr,position"`
 	// The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
-	BackstageId jsonapi.NullableAttr[string] `jsonapi:"attr,backstage_id,omitempty"`
+	// {"type":"string","description":"The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name","nullable":true,"tf_computed":false}
+	BackstageId jsonapi.NullableAttr[string] `jsonapi:"attr,backstage_id"`
 	// The external id associated to this service
-	ExternalId jsonapi.NullableAttr[string] `jsonapi:"attr,external_id,omitempty"`
+	// {"type":"string","description":"The external id associated to this service","nullable":true,"tf_computed":false}
+	ExternalId jsonapi.NullableAttr[string] `jsonapi:"attr,external_id"`
 	// The PagerDuty service id associated to this service
-	PagerdutyId jsonapi.NullableAttr[string] `jsonapi:"attr,pagerduty_id,omitempty"`
+	// {"type":"string","description":"The PagerDuty service id associated to this service","nullable":true,"tf_computed":false}
+	PagerdutyId jsonapi.NullableAttr[string] `jsonapi:"attr,pagerduty_id"`
 	// The Opsgenie service id associated to this service
-	OpsgenieId jsonapi.NullableAttr[string] `jsonapi:"attr,opsgenie_id,omitempty"`
+	// {"type":"string","description":"The Opsgenie service id associated to this service","nullable":true,"tf_computed":false}
+	OpsgenieId jsonapi.NullableAttr[string] `jsonapi:"attr,opsgenie_id"`
 	// The Cortex group id associated to this service
-	CortexId jsonapi.NullableAttr[string] `jsonapi:"attr,cortex_id,omitempty"`
+	// {"type":"string","description":"The Cortex group id associated to this service","nullable":true,"tf_computed":false}
+	CortexId jsonapi.NullableAttr[string] `jsonapi:"attr,cortex_id"`
 	// The Service Now CI sys id associated to this service
-	ServiceNowCiSysId jsonapi.NullableAttr[string] `jsonapi:"attr,service_now_ci_sys_id,omitempty"`
+	// {"type":"string","description":"The Service Now CI sys id associated to this service","nullable":true,"tf_computed":false}
+	ServiceNowCiSysId jsonapi.NullableAttr[string] `jsonapi:"attr,service_now_ci_sys_id"`
 	// The GitHub repository name associated to this service. eg: rootlyhq/my-service
-	GithubRepositoryName jsonapi.NullableAttr[string] `jsonapi:"attr,github_repository_name,omitempty"`
+	// {"type":"string","description":"The GitHub repository name associated to this service. eg: rootlyhq/my-service","nullable":true}
+	GithubRepositoryName jsonapi.NullableAttr[string] `jsonapi:"attr,github_repository_name"`
 	// The GitHub repository branch associated to this service. eg: main
-	GithubRepositoryBranch jsonapi.NullableAttr[string] `jsonapi:"attr,github_repository_branch,omitempty"`
+	// {"type":"string","description":"The GitHub repository branch associated to this service. eg: main","nullable":true}
+	GithubRepositoryBranch jsonapi.NullableAttr[string] `jsonapi:"attr,github_repository_branch"`
 	// The GitLab repository name associated to this service. eg: rootlyhq/my-service
-	GitlabRepositoryName jsonapi.NullableAttr[string] `jsonapi:"attr,gitlab_repository_name,omitempty"`
+	// {"type":"string","description":"The GitLab repository name associated to this service. eg: rootlyhq/my-service","nullable":true}
+	GitlabRepositoryName jsonapi.NullableAttr[string] `jsonapi:"attr,gitlab_repository_name"`
 	// The GitLab repository branch associated to this service. eg: main
-	GitlabRepositoryBranch jsonapi.NullableAttr[string] `jsonapi:"attr,gitlab_repository_branch,omitempty"`
+	// {"type":"string","description":"The GitLab repository branch associated to this service. eg: main","nullable":true}
+	GitlabRepositoryBranch jsonapi.NullableAttr[string] `jsonapi:"attr,gitlab_repository_branch"`
 	// The Kubernetes deployment name associated to this service. eg: namespace/deployment-name
-	KubernetesDeploymentName jsonapi.NullableAttr[string] `jsonapi:"attr,kubernetes_deployment_name,omitempty"`
+	// {"type":"string","description":"The Kubernetes deployment name associated to this service. eg: namespace/deployment-name","nullable":true}
+	KubernetesDeploymentName jsonapi.NullableAttr[string] `jsonapi:"attr,kubernetes_deployment_name"`
 	// Environments associated with this service
-	EnvironmentIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,environment_ids,omitempty"`
+	// {"type":"array","description":"Environments associated with this service","items":{"type":"string"},"nullable":true,"tf_computed":true}
+	EnvironmentIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,environment_ids"`
 	// Services dependent on this service
-	ServiceIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,service_ids,omitempty"`
+	// {"type":"array","description":"Services dependent on this service","items":{"type":"string"},"nullable":true,"tf_computed":true}
+	ServiceIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,service_ids"`
 	// Owner Teams associated with this service
-	OwnerGroupIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,owner_group_ids,omitempty"`
+	// {"type":"array","description":"Owner Teams associated with this service","items":{"type":"string"},"nullable":true,"tf_computed":true}
+	OwnerGroupIds jsonapi.NullableAttr[[]string] `jsonapi:"attr,owner_group_ids"`
 	// Owner Users associated with this service
-	OwnerUserIds jsonapi.NullableAttr[[]int64] `jsonapi:"attr,owner_user_ids,omitempty"`
+	// {"type":"array","description":"Owner Users associated with this service","items":{"type":"integer"},"nullable":true,"tf_computed":true}
+	OwnerUserIds jsonapi.NullableAttr[[]int64] `jsonapi:"attr,owner_user_ids"`
 	// The alert urgency id of the service
-	AlertUrgencyId jsonapi.NullableAttr[string] `jsonapi:"attr,alert_urgency_id,omitempty"`
+	// {"type":"string","description":"The alert urgency id of the service","nullable":true}
+	AlertUrgencyId jsonapi.NullableAttr[string] `jsonapi:"attr,alert_urgency_id"`
 	// The escalation policy id of the service
-	EscalationPolicyId jsonapi.NullableAttr[string] `jsonapi:"attr,escalation_policy_id,omitempty"`
+	// {"type":"string","description":"The escalation policy id of the service","nullable":true}
+	EscalationPolicyId jsonapi.NullableAttr[string] `jsonapi:"attr,escalation_policy_id"`
 	// Enable alerts through email
-	AlertsEmailEnabled jsonapi.NullableAttr[bool] `jsonapi:"attr,alerts_email_enabled,omitempty"`
+	// {"type":"boolean","description":"Enable alerts through email","nullable":true}
+	AlertsEmailEnabled jsonapi.NullableAttr[bool] `jsonapi:"attr,alerts_email_enabled"`
 	// Email generated to send alerts to
-	AlertsEmailAddress jsonapi.NullableAttr[string] `jsonapi:"attr,alerts_email_address,omitempty"`
+	// {"type":"string","description":"Email generated to send alerts to","nullable":true}
+	AlertsEmailAddress jsonapi.NullableAttr[string] `jsonapi:"attr,alerts_email_address"`
 	// Slack Channels associated with this service
-	SlackChannels jsonapi.NullableAttr[[]ServiceSlackChannelsItem] `jsonapi:"attr,slack_channels,omitempty"`
+	// {"type":"array","description":"Slack Channels associated with this service","items":{"type":"object","properties":{"id":{"type":"string","description":"Slack channel ID"},"name":{"type":"string","description":"Slack channel name"}},"required":["id","name"]},"nullable":true}
+	SlackChannels jsonapi.NullableAttr[[]ServiceSlackChannelsItem] `jsonapi:"attr,slack_channels"`
 	// Slack Aliases associated with this service
-	SlackAliases jsonapi.NullableAttr[[]ServiceSlackAliasesItem] `jsonapi:"attr,slack_aliases,omitempty"`
+	// {"type":"array","description":"Slack Aliases associated with this service","items":{"type":"object","properties":{"id":{"type":"string","description":"Slack alias ID"},"name":{"type":"string","description":"Slack alias name"}},"required":["id","name"]},"nullable":true}
+	SlackAliases jsonapi.NullableAttr[[]ServiceSlackAliasesItem] `jsonapi:"attr,slack_aliases"`
 	// Enable alerts to be broadcasted to a specific channel
-	AlertBroadcastEnabled jsonapi.NullableAttr[bool] `jsonapi:"attr,alert_broadcast_enabled,omitempty"`
+	// {"type":"boolean","description":"Enable alerts to be broadcasted to a specific channel","nullable":true}
+	AlertBroadcastEnabled jsonapi.NullableAttr[bool] `jsonapi:"attr,alert_broadcast_enabled"`
 	// Slack channel to broadcast alerts to
-	AlertBroadcastChannel jsonapi.NullableAttr[ServiceAlertBroadcastChannel] `jsonapi:"attr,alert_broadcast_channel,omitempty"`
+	// {"type":"object","description":"Slack channel to broadcast alerts to","properties":{"id":{"type":"string","description":"Slack channel ID"},"name":{"type":"string","description":"Slack channel name"}},"nullable":true}
+	AlertBroadcastChannel jsonapi.NullableAttr[ServiceAlertBroadcastChannel] `jsonapi:"attr,alert_broadcast_channel"`
 	// Enable incidents to be broadcasted to a specific channel
-	IncidentBroadcastEnabled jsonapi.NullableAttr[bool] `jsonapi:"attr,incident_broadcast_enabled,omitempty"`
+	// {"type":"boolean","description":"Enable incidents to be broadcasted to a specific channel","nullable":true}
+	IncidentBroadcastEnabled jsonapi.NullableAttr[bool] `jsonapi:"attr,incident_broadcast_enabled"`
 	// Slack channel to broadcast incidents to
-	IncidentBroadcastChannel jsonapi.NullableAttr[ServiceIncidentBroadcastChannel] `jsonapi:"attr,incident_broadcast_channel,omitempty"`
+	// {"type":"object","description":"Slack channel to broadcast incidents to","properties":{"id":{"type":"string","description":"Slack channel ID"},"name":{"type":"string","description":"Slack channel name"}},"nullable":true}
+	IncidentBroadcastChannel jsonapi.NullableAttr[ServiceIncidentBroadcastChannel] `jsonapi:"attr,incident_broadcast_channel"`
 	// Array of property values for this service.
-	Properties jsonapi.NullableAttr[[]ServicePropertiesItem] `jsonapi:"attr,properties,omitempty"`
+	// {"type":"array","items":{"type":"object","description":"Set a value for a catalog property","properties":{"catalog_property_id":{"type":"string","description":"Catalog property ID"},"value":{"type":"string","description":"The property value"}},"required":["catalog_property_id","value"]},"description":"Array of property values for this service.","nullable":true}
+	Properties jsonapi.NullableAttr[[]ServicePropertiesItem] `jsonapi:"attr,properties"`
 	// Date of creation
-	CreatedAt string `jsonapi:"attr,created_at"`
+	// {"type":"string","description":"Date of creation"}
+	CreatedAt jsonapi.NullableAttr[string] `jsonapi:"attr,created_at"`
 	// Date of last update
-	UpdatedAt string `jsonapi:"attr,updated_at"`
+	// {"type":"string","description":"Date of last update"}
+	UpdatedAt jsonapi.NullableAttr[string] `jsonapi:"attr,updated_at"`
 }
 
 type ServiceSlackChannelsItem struct {
 	// Slack channel ID
-	Id string `jsonapi:"attr,id"`
+	// {"type":"string","description":"Slack channel ID"}
+	Id jsonapi.NullableAttr[string] `jsonapi:"attr,id"`
 	// Slack channel name
-	Name string `jsonapi:"attr,name"`
+	// {"type":"string","description":"Slack channel name"}
+	Name jsonapi.NullableAttr[string] `jsonapi:"attr,name"`
 }
 
 type ServiceSlackAliasesItem struct {
 	// Slack alias ID
-	Id string `jsonapi:"attr,id"`
+	// {"type":"string","description":"Slack alias ID"}
+	Id jsonapi.NullableAttr[string] `jsonapi:"attr,id"`
 	// Slack alias name
-	Name string `jsonapi:"attr,name"`
+	// {"type":"string","description":"Slack alias name"}
+	Name jsonapi.NullableAttr[string] `jsonapi:"attr,name"`
 }
 
 type ServiceAlertBroadcastChannel struct {
 	// Slack channel ID
-	Id string `jsonapi:"attr,id,omitempty"`
+	// {"type":"string","description":"Slack channel ID"}
+	Id jsonapi.NullableAttr[string] `jsonapi:"attr,id"`
 	// Slack channel name
-	Name string `jsonapi:"attr,name,omitempty"`
+	// {"type":"string","description":"Slack channel name"}
+	Name jsonapi.NullableAttr[string] `jsonapi:"attr,name"`
 }
 
 type ServiceIncidentBroadcastChannel struct {
 	// Slack channel ID
-	Id string `jsonapi:"attr,id,omitempty"`
+	// {"type":"string","description":"Slack channel ID"}
+	Id jsonapi.NullableAttr[string] `jsonapi:"attr,id"`
 	// Slack channel name
-	Name string `jsonapi:"attr,name,omitempty"`
+	// {"type":"string","description":"Slack channel name"}
+	Name jsonapi.NullableAttr[string] `jsonapi:"attr,name"`
 }
 
 type ServicePropertiesItem struct {
 	// Catalog property ID
-	CatalogPropertyId string `jsonapi:"attr,catalog_property_id"`
+	// {"type":"string","description":"Catalog property ID"}
+	CatalogPropertyId jsonapi.NullableAttr[string] `jsonapi:"attr,catalog_property_id"`
 	// The property value
-	Value string `jsonapi:"attr,value"`
+	// {"type":"string","description":"The property value"}
+	Value jsonapi.NullableAttr[string] `jsonapi:"attr,value"`
+}
+
+func (c *Client) ServiceGet(ctx context.Context, id string) (*Service, error) {
+	resp, err := c.ClientWithResponses.GetServiceWithResponse(ctx, id)
+	if err != nil {
+		return nil, err
+	} else if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
+
+	var item Service
+	if err := jsonapi.UnmarshalPayload(bytes.NewReader(resp.Body), &item); err != nil {
+		return nil, err
+	}
+
+	return &item, nil
 }
 
 func (c *Client) ServiceList(ctx context.Context, params *rootly.ListServicesParams) (*[]Service, error) {
@@ -137,7 +200,7 @@ func (c *Client) ServiceList(ctx context.Context, params *rootly.ListServicesPar
 			return nil, fmt.Errorf("empty response")
 		}
 
-		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(resp.Body), reflect.TypeOf(new(Service)))
+		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(resp.Body), reflect.TypeFor[*Service]())
 		if err != nil {
 			return nil, fmt.Errorf("failed to unmarshal response body: %w", err)
 		}
@@ -160,8 +223,50 @@ func (c *Client) ServiceList(ctx context.Context, params *rootly.ListServicesPar
 	return &items, nil
 }
 
-func (c *Client) ServiceGet(ctx context.Context, id string) (*Service, error) {
-	resp, err := c.ClientWithResponses.GetServiceWithResponse(ctx, id)
+func (c *Client) ServiceCreate(ctx context.Context, data Service) (*Service, error) {
+	var buf bytes.Buffer
+	if err := jsonapi.MarshalPayload(&buf, &data); err != nil {
+		return nil, err
+	}
+
+	resp, err := c.ClientWithResponses.CreateServiceWithBodyWithResponse(ctx, "application/vnd.api+json", bytes.NewReader(buf.Bytes()))
+	if err != nil {
+		return nil, err
+	} else if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
+
+	var item Service
+	if err := jsonapi.UnmarshalPayload(bytes.NewReader(resp.Body), &item); err != nil {
+		return nil, err
+	}
+
+	return &item, nil
+}
+
+func (c *Client) ServiceUpdate(ctx context.Context, id string, data Service) (*Service, error) {
+	var buf bytes.Buffer
+	if err := jsonapi.MarshalPayload(&buf, &data); err != nil {
+		return nil, err
+	}
+
+	resp, err := c.ClientWithResponses.UpdateServiceWithBodyWithResponse(ctx, id, "application/vnd.api+json", bytes.NewReader(buf.Bytes()))
+	if err != nil {
+		return nil, err
+	} else if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
+
+	var item Service
+	if err := jsonapi.UnmarshalPayload(bytes.NewReader(resp.Body), &item); err != nil {
+		return nil, err
+	}
+
+	return &item, nil
+}
+
+func (c *Client) ServiceDelete(ctx context.Context, id string) (*Service, error) {
+	resp, err := c.ClientWithResponses.DeleteServiceWithResponse(ctx, id)
 	if err != nil {
 		return nil, err
 	} else if resp == nil {

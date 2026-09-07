@@ -178,7 +178,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_dashboard":                                              resourceDashboard(),
 				"rootly_edge_connector":                                         resourceEdgeConnector(),
 				"rootly_edge_connector_action":                                  resourceEdgeConnectorAction(),
-				"rootly_escalation_path":                                        resourceEscalationPath(),
 				"rootly_escalation_policy":                                      resourceEscalationPolicy(),
 				"rootly_retrospective_configuration":                            resourceRetrospectiveConfiguration(),
 				"rootly_retrospective_process":                                  resourceRetrospectiveProcess(),

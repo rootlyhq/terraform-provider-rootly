@@ -1,5 +1,5 @@
 import type { ClientConfig } from "../schema";
 
 export default {
-  name: "service",
+  name: "escalation_path",
 } satisfies ClientConfig;
