@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"sort"
 	"strings"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
@@ -11,29 +12,37 @@ import (
 func EqualIgnoringOrder(key, oldValue, newValue string, d *schema.ResourceData) bool {
 	// For a list, the key is path to the element, rather than the list.
 	// E.g. "node_groups.2.ips.0"
-	dotIndex := strings.Index(key, ".")
-	if dotIndex != -1 {
-		key = string(key[:dotIndex])
-	}
+	key = listPathFromDiffKey(key)
 
 	oldData, newData := d.GetChange(key)
 	if oldData == nil || newData == nil {
 		return false
 	}
 
- 	oldArray := oldData.([]interface{})
- 	newArray := newData.([]interface{})
- 	if len(oldArray) != len(newArray) {
- 		// Items added or removed, always detect as changed
- 		return false
- 	}
+	oldArray, oldOK := oldData.([]interface{})
+	newArray, newOK := newData.([]interface{})
+	if !oldOK || !newOK {
+		return false
+	}
+	if len(oldArray) != len(newArray) {
+		// Items added or removed, always detect as changed
+		return false
+	}
 
- 	// Workaround to detect lists being removed from plan
- 	if oldValue != newValue && newValue == "0" && oldArray[0] != "0" {
- 		return false
- 	}
+	// Workaround to detect lists being removed from plan
+	if len(oldArray) > 0 && oldValue != newValue && newValue == "0" && oldArray[0] != "0" {
+		return false
+	}
 
 	return listsAreEqual(oldArray, newArray)
+}
+
+func listPathFromDiffKey(key string) string {
+	dotIndex := strings.LastIndex(key, ".")
+	if dotIndex != -1 {
+		return key[:dotIndex]
+	}
+	return key
 }
 
 // toString converts any value to a canonical string representation.

@@ -14,16 +14,17 @@ func TestAccDataSourceUser(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataSourceSchedule,
+				Config: testAccDataSourceUser,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.rootly_user.test", "email", "bot+tftests@rootly.com"),
+					resource.TestCheckResourceAttrSet("data.rootly_user.test", "on_call_role_id"),
 				),
 			},
 		},
 	})
 }
 
-const testAccDataSourceSchedule = `
+const testAccDataSourceUser = `
 	data "rootly_user" "test" {
 		email = "bot+tftests@rootly.com"
 	}

@@ -5,8 +5,8 @@ import (
 	"testing"
 	"text/template"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/acctest"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/must"
 )
 
@@ -15,10 +15,8 @@ func TestAccResourceSchedule(t *testing.T) {
 	scheduleName := acctest.RandomWithPrefix("tf-schedule")
 
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck: func() {
-			testAccPreCheck(t)
-		},
-		ProviderFactories: providerFactories,
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccResourceScheduleConfig(testAccResourceScheduleConfigData{

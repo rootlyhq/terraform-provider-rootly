@@ -35,11 +35,12 @@ resource "rootly_cause" "infrastructure_failure" {
 - `description` (String) The description of the cause
 - `position` (Number) Position of the cause
 - `properties` (Block List) Array of property values for this cause. (see [below for nested schema](#nestedblock--properties))
+- `public_description` (String) The status page description of the cause
+- `slug` (String, Deprecated) The slug of the cause
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-- `slug` (String) The slug of the cause
 
 <a id="nestedblock--properties"></a>
 ### Nested Schema for `properties`

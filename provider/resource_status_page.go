@@ -1,5 +1,7 @@
 // Hand-maintained: status_page is excluded from codegen (see tools/generate.js)
-// because section_order needs Computed: true to prevent drift from API-returned defaults.
+// because section_order, service_ids, and functionality_ids need Computed: true to
+// prevent drift from API-returned defaults and from catalog-backed status page
+// components attaching their source to the page server-side.
 
 package provider
 
@@ -40,14 +42,16 @@ func resourceStatusPage() *schema.Resource {
 			},
 
 			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "The slug of the status page",
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "The slug of the status page",
+				Deprecated:       "`slug` is derived from `name` and any configured value is ignored. It will become read-only in the next major version; remove it from your configuration.",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
 			},
 
 			"public_title": &schema.Schema{
@@ -339,7 +343,7 @@ func resourceStatusPage() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         false,
+				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,
@@ -354,7 +358,7 @@ func resourceStatusPage() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				DiffSuppressFunc: tools.EqualIgnoringOrder,
-				Computed:         false,
+				Computed:         true,
 				Required:         false,
 				Optional:         true,
 				Sensitive:        false,
@@ -408,9 +412,6 @@ func resourceStatusPageCreate(ctx context.Context, d *schema.ResourceData, meta 
 
 	if value, ok := d.GetOkExists("title"); ok {
 		s.Title = value.(string)
-	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
 	}
 	if value, ok := d.GetOkExists("public_title"); ok {
 		s.PublicTitle = value.(string)
@@ -572,9 +573,6 @@ func resourceStatusPageUpdate(ctx context.Context, d *schema.ResourceData, meta 
 
 	if d.HasChange("title") {
 		s.Title = d.Get("title").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
 	}
 	if d.HasChange("public_title") {
 		s.PublicTitle = d.Get("public_title").(string)

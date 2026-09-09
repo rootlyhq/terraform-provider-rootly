@@ -4,17 +4,17 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
 )
 
 type baseDataSource struct {
-	client       *rootly.ClientWithResponses
+	client       *apiclient.Client
 	legacyClient *client.Client
 }
 
-func (d *baseDataSource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (d *baseDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	// Prevent panic if the provider has not been configured.
 	if req.ProviderData == nil {
 		return

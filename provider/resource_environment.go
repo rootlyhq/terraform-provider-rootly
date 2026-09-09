@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -37,6 +38,19 @@ func resourceEnvironment() *schema.Resource {
 			},
 
 			"slug": &schema.Schema{
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "The slug of the environment",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
+				Deprecated:       "Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.",
+			},
+
+			"managed_by": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
 				Required:    false,
@@ -44,7 +58,18 @@ func resourceEnvironment() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The slug of the environment",
+				Description: "How this environment is managed (provenance): web, api, terraform, etc. Read-only.. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.",
+			},
+
+			"external_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The external id associated to this environment",
 			},
 
 			"description": &schema.Schema{
@@ -56,6 +81,17 @@ func resourceEnvironment() *schema.Resource {
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "The description of the environment",
+			},
+
+			"public_description": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The status page description of the environment",
 			},
 
 			"notify_emails": &schema.Schema{
@@ -222,8 +258,14 @@ func resourceEnvironmentCreate(ctx context.Context, d *schema.ResourceData, meta
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
 	}
+	if value, ok := d.GetOkExists("external_id"); ok {
+		s.ExternalId = value.(string)
+	}
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
+	}
+	if value, ok := d.GetOkExists("public_description"); ok {
+		s.PublicDescription = value.(string)
 	}
 	if value, ok := d.GetOkExists("notify_emails"); ok {
 		s.NotifyEmails = value.([]interface{})
@@ -274,7 +316,10 @@ func resourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, meta i
 
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
+	d.Set("managed_by", item.ManagedBy)
+	d.Set("external_id", item.ExternalId)
 	d.Set("description", item.Description)
+	d.Set("public_description", item.PublicDescription)
 	d.Set("notify_emails", item.NotifyEmails)
 	d.Set("color", item.Color)
 	d.Set("position", item.Position)
@@ -348,8 +393,14 @@ func resourceEnvironmentUpdate(ctx context.Context, d *schema.ResourceData, meta
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
 	}
+	if d.HasChange("external_id") {
+		s.ExternalId = d.Get("external_id").(string)
+	}
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("public_description") {
+		s.PublicDescription = d.Get("public_description").(string)
 	}
 
 	if d.HasChange("notify_emails") {

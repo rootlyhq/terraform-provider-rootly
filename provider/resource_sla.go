@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -27,14 +28,16 @@ func resourceSLA() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 
 			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "The slug of the SLA",
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "The slug of the SLA",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
+				Deprecated:       "Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.",
 			},
 
 			"name": &schema.Schema{
@@ -384,9 +387,6 @@ func resourceSLACreate(ctx context.Context, d *schema.ResourceData, meta interfa
 
 	s := &client.SLA{}
 
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
 	}
@@ -539,9 +539,6 @@ func resourceSLAUpdate(ctx context.Context, d *schema.ResourceData, meta interfa
 
 	s := &client.SLA{}
 
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
 	}

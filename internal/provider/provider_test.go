@@ -23,7 +23,7 @@ var testAccProtoV6ProviderFactories = map[string]func() (tfprotov6.ProviderServe
 
 		upgradedSdkServer, err := tf5to6server.UpgradeServer(
 			ctx,
-			sdkv2_provider.New("dev")().GRPCProvider,
+			sdkv2_provider.New(meta.GetVersion())().GRPCProvider,
 		)
 		if err != nil {
 			return nil, err

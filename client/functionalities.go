@@ -14,6 +14,7 @@ type Functionality struct {
 	ID                 string        `jsonapi:"primary,functionalities"`
 	Name               string        `jsonapi:"attr,name,omitempty"`
 	Slug               string        `jsonapi:"attr,slug,omitempty"`
+	ManagedBy          string        `jsonapi:"attr,managed_by,omitempty"`
 	Description        string        `jsonapi:"attr,description,omitempty"`
 	PublicDescription  string        `jsonapi:"attr,public_description,omitempty"`
 	NotifyEmails       []interface{} `jsonapi:"attr,notify_emails,omitempty"`

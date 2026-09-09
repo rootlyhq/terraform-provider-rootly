@@ -1,0 +1,55 @@
+# Configuration for Release Drafter: https://github.com/release-drafter/release-drafter
+name-template: v$RESOLVED_VERSION
+tag-template: v$RESOLVED_VERSION
+
+template: |
+  $CHANGES
+
+categories:
+  - title: 🚀 New features and improvements
+    semver-increment: minor
+    when:
+      - conventional:
+          type: feat
+      - label: enhancement
+  - title: 🐛 Bug fixes
+    when:
+      - conventional:
+          type: fix
+      - label: bug
+  - title: 📝 Documentation updates
+    labels:
+      - documentation
+  - title: 👻 Maintenance
+    labels:
+      - chore
+      - maintenance
+  - title: 🚦 Tests
+    labels:
+      - test
+  - title: ✍ Other changes
+  - title: 📦 Dependency updates
+    labels:
+      - dependencies
+    collapse-after: 5
+  - title: 🔐 Security
+    labels:
+      - "🔐 security"
+
+  - type: version-resolver
+    semver-increment: major
+    when:
+      - conventional:
+          breaking: true
+      - label: major
+  - type: version-resolver
+    semver-increment: patch
+
+exclude-labels:
+  - skip-changelog
+  - invalid
+
+autolabeler:
+  - label: documentation
+    files:
+      - "*.md"

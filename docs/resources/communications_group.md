@@ -34,7 +34,7 @@ resource "rootly_communications_group" "executive_stakeholders" {
 - `description` (String) The description of the communications group
 - `email_channel` (Boolean) Email channel enabled. Value must be one of true or false
 - `is_private` (Boolean) Whether the group is private. Value must be one of true or false
-- `slug` (String) The slug of the communications group
+- `slug` (String, Deprecated) The slug of the communications group
 - `sms_channel` (Boolean) SMS channel enabled. Value must be one of true or false
 
 ### Read-Only

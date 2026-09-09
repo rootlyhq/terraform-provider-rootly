@@ -177,6 +177,11 @@ function structAttr(name, resourceSchema) {
   const schema = resourceSchema.properties[name];
   switch (schema.type) {
     case "string":
+      if (schema.tf_nullable) {
+        // Pointer so requests omit the attribute when unset but can send an
+        // explicit blank to clear the value server-side.
+        return `${inflect.camelize(name)} *string \`jsonapi:"attr,${name},omitempty"\``;
+      }
       return `${inflect.camelize(
         name
       )} string \`jsonapi:"attr,${name}${schema.tf_computed === false ? "" : ",omitempty"}"\``;

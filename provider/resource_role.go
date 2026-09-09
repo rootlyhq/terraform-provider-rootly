@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -38,14 +39,16 @@ func resourceRole() *schema.Resource {
 			},
 
 			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    false,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "The role slug.",
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "The role slug.",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
+				Deprecated:       "Deprecated. Custom role slugs remain accepted temporarily. Stop setting `slug`; it will become read-only and be derived from `name` when this property is removed from the request schema in a future version.",
 			},
 
 			"incident_permission_set_id": &schema.Schema{

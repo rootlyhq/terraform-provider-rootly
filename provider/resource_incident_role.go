@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -37,14 +38,16 @@ func resourceIncidentRole() *schema.Resource {
 			},
 
 			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    false,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "The slug of the incident role",
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "The slug of the incident role",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
+				Deprecated:       "Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.",
 			},
 
 			"summary": &schema.Schema{

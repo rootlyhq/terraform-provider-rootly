@@ -6,14 +6,13 @@ import (
 
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/meta"
-	rootly "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
 var (
 	TestApiHost  string
 	TestApiToken string
 
-	SharedClient *rootly.ClientWithResponses
+	SharedClient *apiclient.Client
 )
 
 func init() {

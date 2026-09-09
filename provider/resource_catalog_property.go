@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -47,26 +48,42 @@ func resourceCatalogProperty() *schema.Resource {
 			},
 
 			"slug": &schema.Schema{
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "",
+				Deprecated:       "`slug` is derived from `name` and any configured value is ignored. It will become read-only in the next major version; remove it from your configuration.",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
+			},
+
+			"kind": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
+				Default:     "text",
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "",
-			},
-
-			"kind": &schema.Schema{
-				Type:         schema.TypeString,
-				Default:      "text",
-				Required:     false,
-				Optional:     true,
-				Sensitive:    false,
-				ForceNew:     false,
-				WriteOnly:    false,
-				Description:  "Value must be one of `text`, `reference`.",
-				ValidateFunc: validation.StringInSlice([]string{"text", "reference"}, false),
+				Description: "Value must be one of `text`, `reference`, `boolean`, `service`, `functionality`, `environment`, `group`, `cause`, `incident_type`, `user`.",
+				ValidateFunc: validation.StringInSlice(
+					[]string{
+						"text",
+						"reference",
+						"boolean",
+						"service",
+						"functionality",
+						"environment",
+						"group",
+						"cause",
+						"incident_type",
+						"user",
+					},
+					false,
+				),
 			},
 
 			"kind_catalog_id": &schema.Schema{
@@ -129,9 +146,6 @@ func resourceCatalogPropertyCreate(ctx context.Context, d *schema.ResourceData, 
 	}
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
-	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
 	}
 	if value, ok := d.GetOkExists("kind"); ok {
 		s.Kind = value.(string)
@@ -200,9 +214,6 @@ func resourceCatalogPropertyUpdate(ctx context.Context, d *schema.ResourceData, 
 	}
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
-	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
 	}
 	if d.HasChange("kind") {
 		s.Kind = d.Get("kind").(string)

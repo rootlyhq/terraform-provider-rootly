@@ -55,6 +55,7 @@ const excluded = {
     "meeting_recording", // nested under incidents; list/create require incidentId
     "on_call_pay_report", // not exposed via Terraform
     "oncall",
+    "service", // V2: handled by ./internal/providergen
     "status",
     "post_mortem_template",
     "pulse",
@@ -66,6 +67,7 @@ const excluded = {
     "secret",
     "shift",
     "sla", // manual change: retry logic for eventual consistency on list queries (Searchkick index)
+    "user", // hand-maintained: exposes on_call_role/role relationships
     "user_notification_rule",
     "webhooks_delivery",
     "workflow_run",
@@ -125,7 +127,7 @@ const excluded = {
     "user",
     "user_notification_rule",
     "webhooks_delivery",
-    "status_page", // manual change: section_order set to Computed: true to prevent drift from API-returned defaults
+    "status_page", // manual change: section_order/service_ids/functionality_ids set to Computed: true to prevent drift from API-returned values
     "workflow_alert", // cannot auto-generate because codegen doesn't handle nested objects in trigger_params (alert_payload_conditions requires complex nested schema)
     "workflow_run",
     "workflow_task",
@@ -133,6 +135,7 @@ const excluded = {
   clients: [
     "escalation_level", // manual fix: delay is a nullable *int so it can be both omitted and explicitly 0 (TER-182, #351)
     "escalation_path", // manual fix: initial_delay must not use omitempty so 0 is sent (c74784b)
+    "user", // hand-maintained: exposes on_call_role/role relations + on_call_role update
   ]
 }
 
@@ -317,7 +320,8 @@ function generateResource(name) {
       "workflow_incident",
       resourceSchema(name),
       requiredFields(name),
-      swagger.components.schemas.incident_trigger_params
+      swagger.components.schemas.incident_trigger_params,
+      deprecatedFields(name)
     );
     safeWriteFile(
       path.resolve(__dirname, "..", "provider", `resource_${name}_incident.go`),
@@ -327,7 +331,8 @@ function generateResource(name) {
       "workflow_post_mortem",
       resourceSchema(name),
       requiredFields(name),
-      swagger.components.schemas.post_mortem_trigger_params
+      swagger.components.schemas.post_mortem_trigger_params,
+      deprecatedFields(name)
     );
     safeWriteFile(
       path.resolve(
@@ -342,7 +347,8 @@ function generateResource(name) {
       "workflow_action_item",
       resourceSchema(name),
       requiredFields(name),
-      swagger.components.schemas.action_item_trigger_params
+      swagger.components.schemas.action_item_trigger_params,
+      deprecatedFields(name)
     );
     safeWriteFile(
       path.resolve(
@@ -358,7 +364,8 @@ function generateResource(name) {
         "workflow_alert",
         resourceSchema(name),
         requiredFields(name),
-        swagger.components.schemas.alert_trigger_params
+        swagger.components.schemas.alert_trigger_params,
+        deprecatedFields(name)
       );
       safeWriteFile(
         path.resolve(__dirname, "..", "provider", `resource_${name}_alert.go`),
@@ -369,7 +376,8 @@ function generateResource(name) {
       "workflow_pulse",
       resourceSchema(name),
       requiredFields(name),
-      swagger.components.schemas.pulse_trigger_params
+      swagger.components.schemas.pulse_trigger_params,
+      deprecatedFields(name)
     );
     safeWriteFile(
       path.resolve(__dirname, "..", "provider", `resource_${name}_pulse.go`),
@@ -379,7 +387,8 @@ function generateResource(name) {
       "workflow_simple",
       resourceSchema(name),
       requiredFields(name),
-      swagger.components.schemas.simple_trigger_params
+      swagger.components.schemas.simple_trigger_params,
+      deprecatedFields(name)
     );
     safeWriteFile(
       path.resolve(__dirname, "..", "provider", `resource_${name}_simple.go`),
@@ -391,7 +400,8 @@ function generateResource(name) {
       schema,
       requiredFields(name),
       pathIdField,
-      writableFields(name)
+      writableFields(name),
+      deprecatedFields(name)
     );
     safeWriteFile(
       path.resolve(__dirname, "..", "provider", `resource_${name}.go`),
@@ -416,6 +426,33 @@ function requiredFields(name) {
     return [];
   }
   return schema.properties.data.properties.attributes.required || [];
+}
+
+// Properties the API's create schema marks `deprecated: true` (the standard
+// OpenAPI flag, https://swagger.io/specification/). These are still accepted on
+// write but ignored, so the provider keeps them settable, marks them Deprecated
+// so Terraform warns, and stops sending them.
+function deprecatedFields(name) {
+  const schemaName = `new_${name}`;
+  const schema = swagger.components.schemas[schemaName];
+  const properties =
+    schema &&
+    schema.properties &&
+    schema.properties.data &&
+    schema.properties.data.properties &&
+    schema.properties.data.properties.attributes &&
+    schema.properties.data.properties.attributes.properties;
+  if (!properties) {
+    return {};
+  }
+  return Object.fromEntries(
+    Object.entries(properties)
+      .filter(([, property]) => property && property.deprecated === true)
+      .map(([field, property]) => [
+        field,
+        property.description || "This property is deprecated and is ignored.",
+      ])
+  );
 }
 
 function writableFields(name) {

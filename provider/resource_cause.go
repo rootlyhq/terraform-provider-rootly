@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -37,14 +38,16 @@ func resourceCause() *schema.Resource {
 			},
 
 			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    false,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "The slug of the cause",
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "The slug of the cause",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
+				Deprecated:       "Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.",
 			},
 
 			"description": &schema.Schema{
@@ -56,6 +59,17 @@ func resourceCause() *schema.Resource {
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "The description of the cause",
+			},
+
+			"public_description": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The status page description of the cause",
 			},
 
 			"position": &schema.Schema{
@@ -123,6 +137,9 @@ func resourceCauseCreate(ctx context.Context, d *schema.ResourceData, meta inter
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
 	}
+	if value, ok := d.GetOkExists("public_description"); ok {
+		s.PublicDescription = value.(string)
+	}
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
@@ -161,6 +178,7 @@ func resourceCauseRead(ctx context.Context, d *schema.ResourceData, meta interfa
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
+	d.Set("public_description", item.PublicDescription)
 	d.Set("position", item.Position)
 
 	if item.Properties != nil {
@@ -196,6 +214,9 @@ func resourceCauseUpdate(ctx context.Context, d *schema.ResourceData, meta inter
 	}
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)
+	}
+	if d.HasChange("public_description") {
+		s.PublicDescription = d.Get("public_description").(string)
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)

@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -37,14 +38,16 @@ func resourceOnCallRole() *schema.Resource {
 			},
 
 			"slug": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "The role slug.",
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				Deprecated:       "`slug` is derived from `name` and any configured value is ignored. It will become read-only in the next major version; remove it from your configuration.",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "[DEPRECATED] The role slug. Derived from `name`; any configured value is ignored.",
 			},
 
 			"system_role": &schema.Schema{
@@ -417,9 +420,6 @@ func resourceOnCallRoleCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
 	}
-	if value, ok := d.GetOkExists("slug"); ok {
-		s.Slug = value.(string)
-	}
 	// Always set system_role to "custom" for user-created roles
 	s.SystemRole = "custom"
 	if value, ok := d.GetOkExists("alert_sources_permissions"); ok {
@@ -558,10 +558,6 @@ func resourceOnCallRoleUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
 	}
-	if d.HasChange("slug") {
-		s.Slug = d.Get("slug").(string)
-	}
-
 	if d.HasChange("alert_sources_permissions") {
 		if value, ok := d.GetOk("alert_sources_permissions"); value != nil && ok {
 			s.AlertSourcesPermissions = value.([]interface{})

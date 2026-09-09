@@ -40,6 +40,7 @@ Required:
 
 Optional:
 
+- `max_tokens` (Number) Maximum number of tokens to generate. Defaults to 4000 when omitted
 - `system_prompt` (String) The system prompt to send to Anthropic (optional)
 - `task_type` (String)
 

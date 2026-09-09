@@ -130,7 +130,7 @@ resource "rootly_sla" "compliance" {
 - `manager_user_id` (Number) The ID of the manager user. Exactly one of `manager_role_id` or `manager_user_id` must be provided.
 - `notification_configurations` (Block List) Notification timing configurations (see [below for nested schema](#nestedblock--notification_configurations))
 - `position` (Number) Position of the SLA for ordering
-- `slug` (String) The slug of the SLA
+- `slug` (String, Deprecated) The slug of the SLA
 
 ### Read-Only
 

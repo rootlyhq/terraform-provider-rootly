@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -37,6 +38,19 @@ func resourceService() *schema.Resource {
 			},
 
 			"slug": &schema.Schema{
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "The slug of the service",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
+				Deprecated:       "Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.",
+			},
+
+			"managed_by": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
 				Required:    false,
@@ -44,7 +58,7 @@ func resourceService() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The slug of the service",
+				Description: "How this service is managed (provenance): web, api, terraform, etc. Read-only.. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.",
 			},
 
 			"description": &schema.Schema{
@@ -66,7 +80,7 @@ func resourceService() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The public description of the service",
+				Description: "The status page description of the service",
 			},
 
 			"notify_emails": &schema.Schema{
@@ -696,6 +710,7 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
+	d.Set("managed_by", item.ManagedBy)
 	d.Set("description", item.Description)
 	d.Set("public_description", item.PublicDescription)
 	d.Set("notify_emails", item.NotifyEmails)

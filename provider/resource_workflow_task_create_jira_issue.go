@@ -4,15 +4,18 @@ package provider
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"reflect"
-	"encoding/json"
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -29,115 +32,115 @@ func resourceWorkflowTaskCreateJiraIssue() *schema.Resource {
 		},
 		CustomizeDiff: validateUniqueWorkflowTaskPosition,
 
-		Schema: map[string]*schema.Schema {
+		Schema: map[string]*schema.Schema{
 			"workflow_id": {
-				Description:  "The ID of the parent workflow",
-				Type:         schema.TypeString,
-				Required:     true,
-				ForceNew:     true,
+				Description: "The ID of the parent workflow",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"name": {
-				Description:  "Name of the workflow task",
-				Type:         schema.TypeString,
-				Optional:     true,
-				Computed:     true,
+				Description: "Name of the workflow task",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"position": {
-				Description:  "The position of the workflow task (1 being top of list)",
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Computed:     true,
+				Description: "The position of the workflow task (1 being top of list)",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
 			},
 			"skip_on_failure": {
-				Description:  "Skip workflow task if any failures",
-				Type:         schema.TypeBool,
-				Optional:     true,
-				Default:      false,
+				Description: "Skip workflow task if any failures",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
 			},
 			"enabled": {
-				Description:  "Enable/disable this workflow task",
-				Type:         schema.TypeBool,
-				Optional:     true,
-				Default:      true,
+				Description: "Enable/disable this workflow task",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
 			},
 			"task_params": {
 				Description: "The parameters for this workflow task.",
-				Type: schema.TypeList,
-				Required: true,
-				MinItems: 1,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MinItems:    1,
+				MaxItems:    1,
 				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema {
-						"task_type": &schema.Schema {
-							Type: schema.TypeString,
+					Schema: map[string]*schema.Schema{
+						"task_type": &schema.Schema{
+							Type:     schema.TypeString,
 							Optional: true,
-							Default: "create_jira_issue",
-							ValidateFunc: validation.StringInSlice([]string {
+							Default:  "create_jira_issue",
+							ValidateFunc: validation.StringInSlice([]string{
 								"create_jira_issue",
 							}, false),
 						},
-						"integration": &schema.Schema {
+						"integration": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. Specify integration id if you have more than one Jira instance",
-							Type: schema.TypeMap,
-							Optional: true,
+							Type:        schema.TypeMap,
+							Optional:    true,
 						},
-						"title": &schema.Schema {
+						"title": &schema.Schema{
 							Description: "The issue title",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
-						"description": &schema.Schema {
+						"description": &schema.Schema{
 							Description: "The issue description",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
-						"labels": &schema.Schema {
+						"labels": &schema.Schema{
 							Description: "The issue labels",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
-						"assign_user_email": &schema.Schema {
+						"assign_user_email": &schema.Schema{
 							Description: "The assigned user's email",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
-						"reporter_user_email": &schema.Schema {
+						"reporter_user_email": &schema.Schema{
 							Description: "The reporter user's email",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
-						"project_key": &schema.Schema {
+						"project_key": &schema.Schema{
 							Description: "The project key",
-							Type: schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
 						},
-						"due_date": &schema.Schema {
+						"due_date": &schema.Schema{
 							Description: "The due date",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
-						"issue_type": &schema.Schema {
+						"issue_type": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The issue type id and display name",
-							Type: schema.TypeMap,
-							Required: true,
+							Type:        schema.TypeMap,
+							Required:    true,
 						},
-						"priority": &schema.Schema {
+						"priority": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The priority id and display name",
-							Type: schema.TypeMap,
-							Optional: true,
+							Type:        schema.TypeMap,
+							Optional:    true,
 						},
-						"status": &schema.Schema {
+						"status": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. The status id and display name",
-							Type: schema.TypeMap,
-							Optional: true,
+							Type:        schema.TypeMap,
+							Optional:    true,
 						},
-						"custom_fields_mapping": &schema.Schema {
+						"custom_fields_mapping": &schema.Schema{
 							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
 								var oldJSONAsInterface, newJSONAsInterface interface{}
-							
+
 								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
 									return false
 								}
@@ -150,13 +153,13 @@ func resourceWorkflowTaskCreateJiraIssue() *schema.Resource {
 							},
 							Default: "{}",
 						},
-						"update_payload": &schema.Schema {
+						"update_payload": &schema.Schema{
 							Description: "Update payload. Can contain liquid markup and need to be valid JSON",
-							Type: schema.TypeString,
-							Optional: true,
+							Type:        schema.TypeString,
+							Optional:    true,
 							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
 								var oldJSONAsInterface, newJSONAsInterface interface{}
-							
+
 								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
 									return false
 								}
@@ -169,17 +172,17 @@ func resourceWorkflowTaskCreateJiraIssue() *schema.Resource {
 							},
 							Default: "{}",
 						},
-						"retry_count": &schema.Schema {
+						"retry_count": &schema.Schema{
 							Description: "Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.",
-							Type: schema.TypeInt,
-							Optional: true,
-							Default: nil,
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Default:     nil,
 						},
-						"retry_wait_time": &schema.Schema {
+						"retry_wait_time": &schema.Schema{
 							Description: "Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.",
-							Type: schema.TypeInt,
-							Optional: true,
-							Default: nil,
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Default:     nil,
 						},
 					},
 				},
@@ -201,12 +204,12 @@ func resourceWorkflowTaskCreateJiraIssueCreate(ctx context.Context, d *schema.Re
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Name: name,
-		Position: position,
+		WorkflowId:    workflowId,
+		Name:          name,
+		Position:      position,
 		SkipOnFailure: skipOnFailure,
-		Enabled: enabled,
-		TaskParams: taskParams,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	res, err := c.CreateWorkflowTask(s)
@@ -242,9 +245,9 @@ func resourceWorkflowTaskCreateJiraIssueRead(ctx context.Context, d *schema.Reso
 	d.Set("position", res.Position)
 	d.Set("skip_on_failure", res.SkipOnFailure)
 	d.Set("enabled", res.Enabled)
-	tps := make([]interface{}, 1, 1)
-	tps[0] = res.TaskParams
-	d.Set("task_params", tps)
+	taskParamsSchema := resourceWorkflowTaskCreateJiraIssue().Schema["task_params"].Elem.(*schema.Resource).Schema
+	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)
+	d.Set("task_params", []interface{}{safeTaskParams})
 
 	return nil
 }
@@ -261,12 +264,12 @@ func resourceWorkflowTaskCreateJiraIssueUpdate(ctx context.Context, d *schema.Re
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
 
 	s := &client.WorkflowTask{
-		WorkflowId: workflowId,
-		Name: name,
-		Position: position,
+		WorkflowId:    workflowId,
+		Name:          name,
+		Position:      position,
 		SkipOnFailure: skipOnFailure,
-		Enabled: enabled,
-		TaskParams: taskParams,
+		Enabled:       enabled,
+		TaskParams:    taskParams,
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))

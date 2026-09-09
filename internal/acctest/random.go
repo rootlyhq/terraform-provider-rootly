@@ -1,13 +1,13 @@
 package acctest
 
 import (
-	sdkv2_acctest "github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
+	pluginacctest "github.com/hashicorp/terraform-plugin-testing/helper/acctest"
 )
 
 func RandInt() int {
-	return sdkv2_acctest.RandInt()
+	return pluginacctest.RandInt()
 }
 
 func RandomWithPrefix(name string) string {
-	return sdkv2_acctest.RandomWithPrefix(name)
+	return pluginacctest.RandomWithPrefix(name)
 }

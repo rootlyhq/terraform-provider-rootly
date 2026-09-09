@@ -11,22 +11,24 @@ import (
 )
 
 type EscalationPath struct {
-	ID                      string        `jsonapi:"primary,escalation_paths"`
-	Name                    string        `jsonapi:"attr,name,omitempty"`
-	Default                 *bool         `jsonapi:"attr,default,omitempty"`
-	NotificationType        string        `jsonapi:"attr,notification_type,omitempty"`
-	PathType                string        `jsonapi:"attr,path_type,omitempty"`
-	AfterDeferralBehavior   string        `jsonapi:"attr,after_deferral_behavior,omitempty"`
-	AfterDeferralPathId     string        `jsonapi:"attr,after_deferral_path_id,omitempty"`
-	EscalationPolicyId      string        `jsonapi:"attr,escalation_policy_id,omitempty"`
-	MatchMode               string        `jsonapi:"attr,match_mode,omitempty"`
-	Position                int           `jsonapi:"attr,position,omitempty"`
-	Repeat                  *bool         `jsonapi:"attr,repeat,omitempty"`
-	RepeatCount             int           `jsonapi:"attr,repeat_count,omitempty"`
-	InitialDelay            int           `jsonapi:"attr,initial_delay"`
-	Rules                   []interface{} `jsonapi:"attr,rules,omitempty"`
-	TimeRestrictionTimeZone string        `jsonapi:"attr,time_restriction_time_zone,omitempty"`
-	TimeRestrictions        []interface{} `jsonapi:"attr,time_restrictions,omitempty"`
+	ID                       string        `jsonapi:"primary,escalation_paths"`
+	Name                     string        `jsonapi:"attr,name,omitempty"`
+	Default                  *bool         `jsonapi:"attr,default,omitempty"`
+	NotificationType         string        `jsonapi:"attr,notification_type,omitempty"`
+	PathType                 string        `jsonapi:"attr,path_type,omitempty"`
+	AfterDeferralBehavior    string        `jsonapi:"attr,after_deferral_behavior,omitempty"`
+	AfterDeferralPathId      string        `jsonapi:"attr,after_deferral_path_id,omitempty"`
+	EscalationPolicyId       string        `jsonapi:"attr,escalation_policy_id,omitempty"`
+	MatchMode                string        `jsonapi:"attr,match_mode,omitempty"`
+	Position                 int           `jsonapi:"attr,position,omitempty"`
+	Repeat                   *bool         `jsonapi:"attr,repeat,omitempty"`
+	RepeatCount              int           `jsonapi:"attr,repeat_count,omitempty"`
+	InitialDelay             int           `jsonapi:"attr,initial_delay"`
+	Rules                    []interface{} `jsonapi:"attr,rules,omitempty"`
+	NotificationTypeRules    []interface{} `jsonapi:"attr,notification_type_rules,omitempty"`
+	NotificationTypeFallback string        `jsonapi:"attr,notification_type_fallback,omitempty"`
+	TimeRestrictionTimeZone  string        `jsonapi:"attr,time_restriction_time_zone,omitempty"`
+	TimeRestrictions         []interface{} `jsonapi:"attr,time_restrictions,omitempty"`
 }
 
 func (c *Client) ListEscalationPaths(id string, params *rootlygo.ListEscalationPathsParams) ([]interface{}, error) {

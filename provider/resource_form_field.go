@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -34,8 +35,8 @@ func resourceFormField() *schema.Resource {
 				Sensitive:    false,
 				ForceNew:     false,
 				WriteOnly:    false,
-				Description:  "The kind of the form field. Value must be one of `custom`, `title`, `summary`, `mitigation_message`, `resolution_message`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `in_triage_at`, `started_at`, `detected_at`, `acknowledged_at`, `mitigated_at`, `resolved_at`, `closed_at`, `custom_sub_status`, `manual_starting_datetime_field`.",
-				ValidateFunc: validation.StringInSlice([]string{"custom", "title", "summary", "mitigation_message", "resolution_message", "severity", "environments", "types", "services", "causes", "functionalities", "teams", "visibility", "mark_as_test", "mark_as_backfilled", "labels", "notify_emails", "trigger_manual_workflows", "show_ongoing_incidents", "attach_alerts", "mark_as_in_triage", "in_triage_at", "started_at", "detected_at", "acknowledged_at", "mitigated_at", "resolved_at", "closed_at", "custom_sub_status", "manual_starting_datetime_field"}, false),
+				Description:  "The kind of the form field. Value must be one of `custom`, `title`, `summary`, `mitigation_message`, `resolution_message`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `status`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `in_triage_at`, `started_at`, `detected_at`, `acknowledged_at`, `mitigated_at`, `resolved_at`, `closed_at`, `custom_sub_status`, `manual_starting_datetime_field`.",
+				ValidateFunc: validation.StringInSlice([]string{"custom", "title", "summary", "mitigation_message", "resolution_message", "severity", "environments", "types", "services", "causes", "functionalities", "teams", "status", "visibility", "mark_as_test", "mark_as_backfilled", "labels", "notify_emails", "trigger_manual_workflows", "show_ongoing_incidents", "attach_alerts", "mark_as_in_triage", "in_triage_at", "started_at", "detected_at", "acknowledged_at", "mitigated_at", "resolved_at", "closed_at", "custom_sub_status", "manual_starting_datetime_field"}, false),
 			},
 
 			"input_kind": &schema.Schema{
@@ -85,6 +86,19 @@ func resourceFormField() *schema.Resource {
 			},
 
 			"slug": &schema.Schema{
+				Type:             schema.TypeString,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "The slug of the form field",
+				DiffSuppressFunc: diffsuppressfunc.Skip,
+				Deprecated:       "Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.",
+			},
+
+			"resource_type": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
 				Required:    false,
@@ -92,7 +106,7 @@ func resourceFormField() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The slug of the form field",
+				Description: "The resource type this field belongs to. Value must be one of `incident`, `problem`.",
 			},
 
 			"description": &schema.Schema{
@@ -263,6 +277,7 @@ func resourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta int
 	d.Set("value_kind_catalog_id", item.ValueKindCatalogId)
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
+	d.Set("resource_type", item.ResourceType)
 	d.Set("description", item.Description)
 	d.Set("shown", item.Shown)
 	d.Set("required", item.Required)

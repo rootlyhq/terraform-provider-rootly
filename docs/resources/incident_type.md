@@ -39,13 +39,14 @@ resource "rootly_incident_type" "service_degradation" {
 - `notify_emails` (List of String) Emails to attach to the incident type
 - `position` (Number) Position of the incident type
 - `properties` (Block List) Array of property values for this incident type. (see [below for nested schema](#nestedblock--properties))
+- `public_description` (String) The status page description of the incident type
 - `slack_aliases` (Block List) Slack Aliases associated with this incident type (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this incident type (see [below for nested schema](#nestedblock--slack_channels))
+- `slug` (String, Deprecated) The slug of the incident type
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-- `slug` (String) The slug of the incident type
 
 <a id="nestedblock--properties"></a>
 ### Nested Schema for `properties`

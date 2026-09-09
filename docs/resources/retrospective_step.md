@@ -26,7 +26,7 @@ description: |-
 - `position` (Number) Position of the step
 - `retrospective_process_id` (String)
 - `skippable` (Boolean) Is the step skippable?. Value must be one of true or false
-- `slug` (String) The slug of the step
+- `slug` (String, Deprecated) The slug of the step
 
 ### Read-Only
 

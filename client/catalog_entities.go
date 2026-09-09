@@ -11,15 +11,17 @@ import (
 )
 
 type CatalogEntity struct {
-	ID          string        `jsonapi:"primary,catalog_entities"`
-	Name        string        `jsonapi:"attr,name,omitempty"`
-	Description string        `jsonapi:"attr,description,omitempty"`
-	Position    int           `jsonapi:"attr,position,omitempty"`
-	BackstageId string        `jsonapi:"attr,backstage_id,omitempty"`
-	ExternalId  string        `jsonapi:"attr,external_id,omitempty"`
-	ManagedBy   string        `jsonapi:"attr,managed_by,omitempty"`
-	Properties  []interface{} `jsonapi:"attr,properties,omitempty"`
-	CatalogId   string        `jsonapi:"attr,catalog_id,omitempty"`
+	ID                string        `jsonapi:"primary,catalog_entities"`
+	Name              string        `jsonapi:"attr,name,omitempty"`
+	Slug              string        `jsonapi:"attr,slug,omitempty"`
+	Description       string        `jsonapi:"attr,description,omitempty"`
+	PublicDescription string        `jsonapi:"attr,public_description,omitempty"`
+	Position          int           `jsonapi:"attr,position,omitempty"`
+	BackstageId       string        `jsonapi:"attr,backstage_id,omitempty"`
+	ExternalId        string        `jsonapi:"attr,external_id,omitempty"`
+	ManagedBy         string        `jsonapi:"attr,managed_by,omitempty"`
+	Properties        []interface{} `jsonapi:"attr,properties,omitempty"`
+	CatalogId         string        `jsonapi:"attr,catalog_id,omitempty"`
 }
 
 func (c *Client) ListCatalogEntities(id string, params *rootlygo.ListCatalogEntitiesParams) ([]interface{}, error) {

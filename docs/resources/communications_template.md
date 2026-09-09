@@ -32,7 +32,7 @@ resource "rootly_communications_template" "status_update" {
 - `communication_type` (Block List, Max: 1) Map must contain two fields, `id` and `name`. (see [below for nested schema](#nestedblock--communication_type))
 - `description` (String) The description of the communications template
 - `position` (Number) Position of the communications template
-- `slug` (String) The slug of the communications template
+- `slug` (String, Deprecated) The slug of the communications template
 
 ### Read-Only
 
