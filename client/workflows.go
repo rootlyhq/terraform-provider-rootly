@@ -37,6 +37,8 @@ type Workflow struct {
 	GroupIds                             []interface{}          `jsonapi:"attr,group_ids,omitempty"`
 	CauseIds                             []interface{}          `jsonapi:"attr,cause_ids,omitempty"`
 	SubStatusIds                         []interface{}          `jsonapi:"attr,sub_status_ids,omitempty"`
+	FailureNotificationMode              string                 `jsonapi:"attr,failure_notification_mode,omitempty"`
+	FailureNotificationChannels          []interface{}          `jsonapi:"attr,failure_notification_channels,omitempty"`
 }
 
 func (c *Client) ListWorkflows(params *rootlygo.ListWorkflowsParams) ([]interface{}, error) {
