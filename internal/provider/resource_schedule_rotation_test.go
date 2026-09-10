@@ -285,3 +285,87 @@ resource "rootly_schedule_rotation" "test" {
 }
 `, name, extras)
 }
+
+func TestAccResourceScheduleRotation_MemberUpdate(t *testing.T) {
+	addr := "rootly_schedule_rotation.test"
+	name := acctest.RandomWithPrefix("tf-rotation")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceScheduleRotationMemberUpdateConfig(name, false),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotation_members"), knownvalue.SetSizeExact(1)),
+				},
+			},
+			{
+				Config: testAccResourceScheduleRotationMemberUpdateConfig(name, true),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotation_members"), knownvalue.SetSizeExact(2)),
+				},
+			},
+			{
+				Config: testAccResourceScheduleRotationMemberUpdateConfig(name, false),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotation_members"), knownvalue.SetSizeExact(1)),
+				},
+			},
+		},
+	})
+}
+
+func testAccResourceScheduleRotationMemberUpdateConfig(name string, withSecondMember bool) string {
+	secondMember := ""
+	if withSecondMember {
+		secondMember = `
+	schedule_rotation_members {
+		position    = 2
+		member_type = "Schedule"
+		member_id   = rootly_schedule.nested.id
+	}
+`
+	}
+
+	return fmt.Sprintf(`
+data "rootly_user" "test" {
+	email = "bot+tftests@rootly.com"
+}
+
+resource "rootly_schedule" "test" {
+	name          = "%[1]s"
+	owner_user_id = data.rootly_user.test.id
+}
+
+resource "rootly_schedule" "nested" {
+	name          = "%[1]s-nested"
+	owner_user_id = data.rootly_user.test.id
+}
+
+resource "rootly_schedule_rotation" "test" {
+	schedule_id          = rootly_schedule.test.id
+	name                 = "%[1]s"
+	active_all_week      = true
+	active_time_type     = "all_day"
+	position             = 1
+	start_time           = "2025-06-20T00:00:00Z"
+
+	schedule_rotationable_type       = "ScheduleCustomRotation"
+	schedule_rotationable_attributes = {
+		shift_length      = 7
+		shift_length_unit = "days"
+		handoff_time      = "09:00"
+	}
+
+	time_zone = "UTC"
+
+	schedule_rotation_members {
+		position    = 1
+		member_type = "User"
+		member_id   = data.rootly_user.test.id
+	}
+%[2]s
+}
+`, name, secondMember)
+}
