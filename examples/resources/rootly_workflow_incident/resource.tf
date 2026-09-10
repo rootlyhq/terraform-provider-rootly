@@ -17,8 +17,6 @@ resource "rootly_workflow_incident" "my-workflow" {
   enabled      = true
 }
 
-# Route failure notifications for this workflow to the incident's Slack channel
-# and a dedicated ops channel instead of the account-wide default channel.
 resource "rootly_workflow_incident" "notify-on-failure" {
   name = "Page on-call when incident is created"
   trigger_params {
@@ -36,7 +34,6 @@ resource "rootly_workflow_incident" "notify-on-failure" {
   }
 }
 
-# Suppress failure notifications for a noisy workflow.
 resource "rootly_workflow_incident" "quiet" {
   name = "Best-effort enrichment"
   trigger_params {
