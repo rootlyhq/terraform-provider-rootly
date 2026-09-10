@@ -20,10 +20,11 @@ func TestAccDataSourceServices(t *testing.T) {
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataSourceServicesConfig(name),
+				Config: testAccDataSourceServicesConfig(name, ""),
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(rn, tfjsonpath.New("services"), knownvalue.SetPartial([]knownvalue.Check{
 						knownvalue.ObjectPartial(map[string]knownvalue.Check{
+							"id":   knownvalue.NotNull(),
 							"name": knownvalue.StringExact(name),
 						}),
 					})),
@@ -33,7 +34,32 @@ func TestAccDataSourceServices(t *testing.T) {
 	})
 }
 
-func testAccDataSourceServicesConfig(name string) string {
+func TestAccDataSourceServices_ByName(t *testing.T) {
+	rn := "data.rootly_services.test"
+	name := acctest.RandomWithPrefix("tf-service")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccDataSourceServicesConfig(name, `
+					name = rootly_service.test.name
+				`),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(rn, tfjsonpath.New("services"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{
+							"id":   knownvalue.NotNull(),
+							"name": knownvalue.StringExact(name),
+						}),
+					})),
+				},
+			},
+		},
+	})
+}
+
+func testAccDataSourceServicesConfig(name, extras string) string {
 	return fmt.Sprintf(`
 resource "rootly_service" "test" {
 	name = "%[1]s"
@@ -46,6 +72,7 @@ resource "rootly_service" "test" {
 
 data "rootly_services" "test" {
 	depends_on = [resource.rootly_service.test]
+	%[2]s
 }
-`, name)
+`, name, extras)
 }

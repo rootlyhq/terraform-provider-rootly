@@ -55,7 +55,7 @@ async function main() {
   for (const config of CLIENTS) {
     const code = generateClient({ doc, config });
     await writeAndFormatGoFile(
-      new URL(`../apiclient/${config.name}_gen.go`, import.meta.url),
+      new URL(`../apiclient/${config.name}.gen.go`, import.meta.url),
       code,
     );
   }
@@ -63,7 +63,7 @@ async function main() {
   for (const config of DATA_SOURCES) {
     const code = generateDataSource({ doc, config });
     await writeAndFormatGoFile(
-      new URL(`../provider/data_source_${config.name}_gen.go`, import.meta.url),
+      new URL(`../provider/data_source_${config.name}.gen.go`, import.meta.url),
       code,
     );
   }
@@ -74,7 +74,7 @@ async function main() {
       resources: RESOURCES,
     });
     await writeAndFormatGoFile(
-      new URL(`../provider/provider_gen.go`, import.meta.url),
+      new URL(`../provider/provider.gen.go`, import.meta.url),
       code,
     );
   }

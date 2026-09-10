@@ -1,16 +1,13 @@
-import {
-  camelize,
-  humanize,
-  pluralize,
-  singularize,
-  underscore,
-} from "inflection";
+import { camelize, humanize, pluralize, underscore } from "inflection";
 import { oas30 } from "openapi3-ts";
 import { match } from "ts-pattern";
 import type { ClientConfig } from "./schema";
-import { assertSchemaObject } from "./types";
 import { produce } from "immer";
-import { getParametersByOperationId } from "./openapi";
+import {
+  assertSchemaObject,
+  getParametersByOperationId,
+  removeReference,
+} from "./openapi";
 
 export function generateClient({
   doc,
@@ -20,14 +17,13 @@ export function generateClient({
   config: ClientConfig;
 }) {
   console.log(`Generating client: ${config.name}`);
-  let schema = doc.components?.schemas?.[config.name];
-  if (!schema) {
+  let readSchema = removeReference(doc.components?.schemas?.[config.name]);
+  if (!readSchema) {
     throw new Error(`Cannot find schema: ${config.name} in doc`);
   }
-  assertSchemaObject(schema);
 
   // Add id to the schema and make it the first property
-  schema = produce(schema, (draft) => {
+  readSchema = produce(readSchema, (draft) => {
     draft.properties = {
       id: {
         type: "string",
@@ -55,14 +51,20 @@ import (
 )
 
 ${generateModel({
-  schema,
+  schema: readSchema,
   name: camelize(config.name),
   parents: [],
 })}
 
-${config.actions?.list?.enabled ? generateListAction({ doc, config }) : ""}
+${generateGetAction({ doc, config })}
 
-${config.actions?.get?.enabled ? generateGetAction({ doc, config }) : ""}
+${generateListAction({ doc, config })}
+
+${generateCreateAction({ doc, config })}
+
+${generateUpdateAction({ doc, config })}
+
+${generateDeleteAction({ doc, config })}
 `;
 }
 
@@ -79,25 +81,16 @@ function generateModel({
     throw new Error(`Schema ${name} does not have properties`);
   }
 
-  const required = new Set(schema.required);
-
   const fields: string[] = [];
   const children: string[] = [];
 
   for (const [key, value] of Object.entries(schema.properties)) {
     assertSchemaObject(value);
-    const property = {
-      required: required.has(key),
-      nullable: value.nullable ?? false,
+    const jsonapi = {
+      tag: value["x-go-jsonapi-tag"] ?? "attr",
+      tagName: value["x-go-jsonapi-type"] ?? key,
     };
-
-    const structTagParts = [
-      value["x-go-jsonapi-tag"] ?? "attr",
-      value["x-go-jsonapi-type"] ?? key,
-    ];
-    if (!property.required) {
-      structTagParts.push("omitempty");
-    }
+    const structTagParts = [jsonapi.tag, jsonapi.tagName];
     const structTag = `\`jsonapi:"${structTagParts.join(",")}"\``;
 
     const goType = match(value)
@@ -123,9 +116,10 @@ function generateModel({
         );
       }
 
-      const actualGoType = property.nullable
-        ? `jsonapi.NullableAttr[${goType}]`
-        : goType;
+      fields.push(`// ${JSON.stringify(value)}`);
+
+      const actualGoType =
+        jsonapi.tag === "attr" ? `jsonapi.NullableAttr[${goType}]` : goType;
       fields.push(`${camelize(key)} ${actualGoType} ${structTag}`);
     } else {
       fields.push(
@@ -170,31 +164,23 @@ function generateListAction({
   doc: oas30.OpenAPIObject;
   config: ClientConfig;
 }) {
-  const listSchema = doc.components?.schemas?.[`${config.name}_list`];
-  if (!listSchema) {
-    throw new Error(`Cannot find schema: ${config.name}_list in doc`);
+  const schema = removeReference(
+    doc.components?.schemas?.[`${config.name}_list`],
+  );
+  if (!schema) {
+    return;
   }
-  assertSchemaObject(listSchema);
 
   const operationId = `list${camelize(pluralize(config.name))}`;
-  const params = getParametersByOperationId({
+  const { funcArgs, clientArgs, hasNonPathParams } = buildFuncAndClientArgs({
     doc,
     operationId,
-    notIn: ["path"],
   });
-  const hasParams = Array.isArray(params) && params.length > 0;
-
-  const funcArgs = ["ctx context.Context"];
-  const clientArgs = ["ctx"];
-  if (hasParams) {
-    funcArgs.push(`params *rootly.${camelize(operationId)}Params`);
-    clientArgs.push("params");
-  }
 
   return `
-func (c *Client) ${camelize(config.name)}List(${funcArgs.join(", ")}) (*[]${camelize(singularize(config.name))}, error) {
+func (c *Client) ${camelize(config.name)}List(${funcArgs.join(", ")}) (*[]${camelize(config.name)}, error) {
   ${
-    hasParams
+    hasNonPathParams
       ? `if params == nil {
   params = new(rootly.${camelize(operationId)}Params)
 }`
@@ -210,7 +196,7 @@ func (c *Client) ${camelize(config.name)}List(${funcArgs.join(", ")}) (*[]${came
 			return nil, fmt.Errorf("empty response")
 		}
 
-		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(resp.Body), reflect.TypeOf(new(${camelize(config.name)})))
+		rawItems, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(resp.Body), reflect.TypeFor[*${camelize(config.name)}]())
 		if err != nil {
 			return nil, fmt.Errorf("failed to unmarshal response body: %w", err)
 		}
@@ -242,26 +228,16 @@ function generateGetAction({
   doc: oas30.OpenAPIObject;
   config: ClientConfig;
 }) {
-  const listSchema = doc.components?.schemas?.[config.name];
-  if (!listSchema) {
+  const schema = removeReference(doc.components?.schemas?.[config.name]);
+  if (!schema) {
     throw new Error(`Cannot find schema: ${config.name} in doc`);
   }
-  assertSchemaObject(listSchema);
 
   const operationId = `get${camelize(config.name)}`;
-  const params = getParametersByOperationId({
+  const { funcArgs, clientArgs } = buildFuncAndClientArgs({
     doc,
     operationId,
-    notIn: ["path"],
   });
-  const hasParams = Array.isArray(params) && params.length > 0;
-
-  const funcArgs = ["ctx context.Context", "id string"];
-  const clientArgs = ["ctx", "id"];
-  if (hasParams) {
-    funcArgs.push(`params *rootly.${camelize(operationId)}Params`);
-    clientArgs.push("params");
-  }
 
   return `
 func (c *Client) ${camelize(config.name)}Get(${funcArgs.join(", ")}) (*${camelize(config.name)}, error) {
@@ -280,4 +256,151 @@ func (c *Client) ${camelize(config.name)}Get(${funcArgs.join(", ")}) (*${cameliz
 	return &item, nil
 }
 `;
+}
+
+function generateCreateAction({
+  doc,
+  config,
+}: {
+  doc: oas30.OpenAPIObject;
+  config: ClientConfig;
+}) {
+  const operationId = `create${camelize(config.name)}`;
+  const { funcArgs, clientArgs } = buildFuncAndClientArgs({
+    doc,
+    operationId,
+  });
+
+  funcArgs.push(`data ${camelize(config.name)}`);
+  clientArgs.push(`"application/vnd.api+json"`, "bytes.NewReader(buf.Bytes())");
+
+  return `
+func (c *Client) ${camelize(config.name)}Create(${funcArgs.join(", ")}) (*${camelize(config.name)}, error) {
+  var buf bytes.Buffer
+  if err := jsonapi.MarshalPayload(&buf, &data); err != nil {
+    return nil, err
+  }
+
+  resp, err := c.ClientWithResponses.${camelize(operationId)}WithBodyWithResponse(${clientArgs.join(", ")})
+  if err != nil {
+    return nil, err
+  } else if resp == nil {
+    return nil, fmt.Errorf("empty response")
+  }
+
+  var item ${camelize(config.name)}
+  if err := jsonapi.UnmarshalPayload(bytes.NewReader(resp.Body), &item); err != nil {
+		return nil, err
+	}
+
+	return &item, nil
+}
+`;
+}
+
+function generateUpdateAction({
+  doc,
+  config,
+}: {
+  doc: oas30.OpenAPIObject;
+  config: ClientConfig;
+}) {
+  const operationId = `update${camelize(config.name)}`;
+  const { funcArgs, clientArgs } = buildFuncAndClientArgs({
+    doc,
+    operationId,
+  });
+
+  funcArgs.push(`data ${camelize(config.name)}`);
+  clientArgs.push(`"application/vnd.api+json"`, "bytes.NewReader(buf.Bytes())");
+
+  return `
+func (c *Client) ${camelize(config.name)}Update(${funcArgs.join(", ")}) (*${camelize(config.name)}, error) {
+  var buf bytes.Buffer
+  if err := jsonapi.MarshalPayload(&buf, &data); err != nil {
+    return nil, err
+  }
+
+  resp, err := c.ClientWithResponses.${camelize(operationId)}WithBodyWithResponse(${clientArgs.join(", ")})
+  if err != nil {
+    return nil, err
+  } else if resp == nil {
+    return nil, fmt.Errorf("empty response")
+  }
+
+  var item ${camelize(config.name)}
+  if err := jsonapi.UnmarshalPayload(bytes.NewReader(resp.Body), &item); err != nil {
+		return nil, err
+	}
+
+	return &item, nil
+}
+`;
+}
+
+function generateDeleteAction({
+  doc,
+  config,
+}: {
+  doc: oas30.OpenAPIObject;
+  config: ClientConfig;
+}) {
+  const operationId = `delete${camelize(config.name)}`;
+  const { funcArgs, clientArgs } = buildFuncAndClientArgs({
+    doc,
+    operationId,
+  });
+
+  return `
+func (c *Client) ${camelize(config.name)}Delete(${funcArgs.join(", ")}) (*${camelize(config.name)}, error) {
+  resp, err := c.ClientWithResponses.${camelize(operationId)}WithResponse(${clientArgs.join(", ")})
+  if err != nil {
+    return nil, err
+  } else if resp == nil {
+    return nil, fmt.Errorf("empty response")
+  }
+
+  var item ${camelize(config.name)}
+  if err := jsonapi.UnmarshalPayload(bytes.NewReader(resp.Body), &item); err != nil {
+		return nil, err
+	}
+
+	return &item, nil
+}
+`;
+}
+
+function buildFuncAndClientArgs({
+  doc,
+  operationId,
+}: {
+  doc: oas30.OpenAPIObject;
+  operationId: string;
+}) {
+  const pathParams = getParametersByOperationId({
+    doc,
+    operationId,
+    onlyLocations: ["path"],
+  });
+  const nonPathParams = getParametersByOperationId({
+    doc,
+    operationId,
+    excludeLocations: ["path"],
+  });
+  const hasNonPathParams =
+    Array.isArray(nonPathParams) && nonPathParams.length > 0;
+
+  const funcArgs = ["ctx context.Context"];
+  const clientArgs = ["ctx"];
+  if (pathParams) {
+    for (const param of pathParams) {
+      funcArgs.push(`${camelize(param.name, true)} string`);
+      clientArgs.push(camelize(param.name, true));
+    }
+  }
+  if (hasNonPathParams) {
+    funcArgs.push(`params *rootly.${camelize(operationId)}Params`);
+    clientArgs.push("params");
+  }
+  return { funcArgs, clientArgs, hasNonPathParams };
 }
