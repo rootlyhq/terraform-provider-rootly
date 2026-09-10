@@ -21,12 +21,16 @@ func TestAccResourceWorkflowIncident(t *testing.T) {
 				Config: testAccResourceWorkflowIncidentConfig(rName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "name", rName+"-3"),
+					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "trigger_params.0.incident_visibilities.#", "1"),
+					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "trigger_params.0.incident_visibilities.0", "true"),
 				),
 			},
 			{
 				Config: testAccResourceWorkflowIncidentUpdateConfig(rName),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "name", rName+"-3"),
+					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "trigger_params.0.incident_visibilities.#", "1"),
+					resource.TestCheckResourceAttr("rootly_workflow_incident.foo3", "trigger_params.0.incident_visibilities.0", "false"),
 				),
 			},
 		},
@@ -52,6 +56,7 @@ resource "rootly_workflow_incident" "foo3" {
   name = "%s-3"
 	trigger_params {
 		triggers = ["incident_updated"]
+		incident_visibilities = [true]
 	}
 	depends_on =[rootly_workflow_incident.foo2]
 }
@@ -64,6 +69,7 @@ resource "rootly_workflow_incident" "foo3" {
   name = "%s-3"
 	trigger_params {
 		triggers = ["incident_updated"]
+		incident_visibilities = [false]
 	}
 }
 `, rName)
