@@ -174,7 +174,7 @@ resource "rootly_escalation_level" "second" {
 
 - `name` (String) The name of the schedule rotation.
 - `schedule_id` (String) The ID of parent schedule.
-- `schedule_rotationable_attributes` (Attributes) handoff_time and/or handoff_day may be required, depending on schedule_rotationable_type. Please see API docs for options based on schedule_rotationable_type: https://docs.rootly.com/api-reference/schedulerotations/creates-a-schedule-rotation#response-data-attributes-schedule-rotationable-attributes (see [below for nested schema](#nestedatt--schedule_rotationable_attributes))
+- `schedule_rotationable_attributes` (Map of String) handoff_time and/or handoff_day may be required, depending on schedule_rotationable_type. Please see API docs for options based on schedule_rotationable_type: https://docs.rootly.com/api-reference/schedulerotations/creates-a-schedule-rotation#response-data-attributes-schedule-rotationable-attributes
 
 ### Optional
 
@@ -192,20 +192,6 @@ resource "rootly_escalation_level" "second" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-
-<a id="nestedatt--schedule_rotationable_attributes"></a>
-### Nested Schema for `schedule_rotationable_attributes`
-
-Required:
-
-- `handoff_time` (String) Hand off time. Only applicable for daily, weekly/biweekly, monthly, and custom rotations.
-
-Optional:
-
-- `handoff_day` (String) Hand off day. Only applicable for weekly/biweekly, and monthly.
-- `shift_length` (Number) Shift length for custom rotation.
-- `shift_length_unit` (String) Shift length unit for custom rotation. Value must be one of `hours`, `days`, `weeks`.
-
 
 <a id="nestedblock--active_time_attributes"></a>
 ### Nested Schema for `active_time_attributes`

@@ -10,33 +10,26 @@ import (
 )
 
 type ScheduleRotation struct {
-	ID                             string                                         `jsonapi:"primary,schedule_rotations"`
-	ScheduleId                     string                                         `jsonapi:"attr,schedule_id"`
-	Name                           string                                         `jsonapi:"attr,name"`
-	Position                       int64                                          `jsonapi:"attr,position,omitempty"`
-	ScheduleRotationableType       string                                         `jsonapi:"attr,schedule_rotationable_type"`
-	ActiveAllWeek                  jsonapi.NullableAttr[bool]                     `jsonapi:"attr,active_all_week,omitempty"`
-	ActiveDays                     []string                                       `jsonapi:"attr,active_days,omitempty"`
-	ActiveTimeType                 jsonapi.NullableAttr[string]                   `jsonapi:"attr,active_time_type,omitempty"`
-	TimeZone                       string                                         `jsonapi:"attr,time_zone"`
-	StartTime                      jsonapi.NullableAttr[string]                   `jsonapi:"attr,start_time,omitempty"`
-	EndTime                        jsonapi.NullableAttr[string]                   `jsonapi:"attr,end_time,omitempty"`
-	ScheduleRotationableAttributes ScheduleRotationScheduleRotationableAttributes `jsonapi:"attr,schedule_rotationable_attributes"`
-	ActiveTimeAttributes           []ScheduleRotationActiveTimeAttributes         `jsonapi:"attr,active_time_attributes,omitempty"`
-	ScheduleRotationMembers        []ScheduleRotationMember                       `jsonapi:"attr,schedule_rotation_members,omitempty"`
+	ID                             string                                 `jsonapi:"primary,schedule_rotations"`
+	ScheduleId                     string                                 `jsonapi:"attr,schedule_id"`
+	Name                           string                                 `jsonapi:"attr,name"`
+	Position                       int64                                  `jsonapi:"attr,position,omitempty"`
+	ScheduleRotationableType       string                                 `jsonapi:"attr,schedule_rotationable_type"`
+	ActiveAllWeek                  jsonapi.NullableAttr[bool]             `jsonapi:"attr,active_all_week,omitempty"`
+	ActiveDays                     []string                               `jsonapi:"attr,active_days,omitempty"`
+	ActiveTimeType                 jsonapi.NullableAttr[string]           `jsonapi:"attr,active_time_type,omitempty"`
+	TimeZone                       string                                 `jsonapi:"attr,time_zone"`
+	StartTime                      jsonapi.NullableAttr[string]           `jsonapi:"attr,start_time,omitempty"`
+	EndTime                        jsonapi.NullableAttr[string]           `jsonapi:"attr,end_time,omitempty"`
+	ScheduleRotationableAttributes map[string]any                         `jsonapi:"attr,schedule_rotationable_attributes"`
+	ActiveTimeAttributes           []ScheduleRotationActiveTimeAttributes `jsonapi:"attr,active_time_attributes,omitempty"`
+	ScheduleRotationMembers        []ScheduleRotationMember               `jsonapi:"attr,schedule_rotation_members,omitempty"`
 }
 
 // HACK: Request expects schedule_rotation_members as an attribute, but response returns it as a relationship.
 type scheduleRotationInternal struct {
 	ID                      string                   `jsonapi:"primary,schedule_rotations"`
 	ScheduleRotationMembers []ScheduleRotationMember `jsonapi:"relation,schedule_rotation_members,omitempty"`
-}
-
-type ScheduleRotationScheduleRotationableAttributes struct {
-	HandoffTime     jsonapi.NullableAttr[string] `jsonapi:"attr,handoff_time,omitempty"`
-	HandoffDay      jsonapi.NullableAttr[string] `jsonapi:"attr,handoff_day,omitempty"`
-	ShiftLength     jsonapi.NullableAttr[int64]  `jsonapi:"attr,shift_length,omitempty"`
-	ShiftLengthUnit jsonapi.NullableAttr[string] `jsonapi:"attr,shift_length_unit,omitempty"`
 }
 
 type ScheduleRotationActiveTimeAttributes struct {
