@@ -363,43 +363,63 @@ function schemaField(
 			},
 			`;
     case "array":
-      if (schema.items && schema.items.type === "object") {
-        return `
-				"${name}": &schema.Schema {
-					Type: schema.TypeList,
-					Computed: ${optional},
-					Required: ${required},
-					Optional: ${optional},
-					Description: "${description}",${deprecationFields}
-					Elem: &schema.Resource{
-						Schema: map[string]*schema.Schema {
-							"id": &schema.Schema {
-								Type: schema.TypeString,
-								Required: true,
-							},
-							"name": &schema.Schema {
-								Type: schema.TypeString,
-								Required: true,
+			if (!schema.items) {
+				throw new Error(`Array schema must have items defined, field: ${name}`)
+			}
+			switch (schema.items.type) {
+				case "object":
+					return `
+					"${name}": &schema.Schema {
+						Type: schema.TypeList,
+						Computed: ${optional},
+						Required: ${required},
+						Optional: ${optional},
+						Description: "${description}",${deprecationFields}
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema {
+								"id": &schema.Schema {
+									Type: schema.TypeString,
+									Required: true,
+								},
+								"name": &schema.Schema {
+									Type: schema.TypeString,
+									Required: true,
+								},
 							},
 						},
 					},
-				},
-				`;
-      } else {
-        return `
-				"${name}": &schema.Schema {
-					Type: schema.TypeList,
-					Elem: &schema.Schema {
-						Type: schema.TypeString,
+					`;
+				case "string":
+					return `
+					"${name}": &schema.Schema {
+						Type: schema.TypeList,
+						Elem: &schema.Schema {
+							Type: schema.TypeString,
+						},
+						DiffSuppressFunc: ${isDeprecated ? "diffsuppressfunc.Skip" : "tools.EqualIgnoringOrder"},
+						Computed: ${optional},
+						Required: ${required},
+						Optional: ${optional},
+						Description: "${description}",${isDeprecated ? `\n\t\t\t\t\tDeprecated: "${deprecationMessage.replace(/"/g, '\\"')}",` : ""}
 					},
-					DiffSuppressFunc: ${isDeprecated ? "diffsuppressfunc.Skip" : "tools.EqualIgnoringOrder"},
-					Computed: ${optional},
-					Required: ${required},
-					Optional: ${optional},
-					Description: "${description}",${isDeprecated ? `\n\t\t\t\t\tDeprecated: "${deprecationMessage.replace(/"/g, '\\"')}",` : ""}
-				},
-				`;
-      }
+					`;
+				case "boolean":
+					return `
+					"${name}": &schema.Schema {
+						Type: schema.TypeList,
+						Elem: &schema.Schema {
+							Type: schema.TypeBool,
+						},
+						DiffSuppressFunc: ${isDeprecated ? "diffsuppressfunc.Skip" : "tools.EqualIgnoringOrder"},
+						Computed: ${optional},
+						Required: ${required},
+						Optional: ${optional},
+						Description: "${description}",${isDeprecated ? `\n\t\t\t\t\tDeprecated: "${deprecationMessage.replace(/"/g, '\\"')}",` : ""}
+					},
+					`;
+				default:
+					throw new Error(`Array items type ${schema.items.type} is not supported, field: ${name}`)
+			}
     case "object":
     default:
       if (name === "trigger_params") {
