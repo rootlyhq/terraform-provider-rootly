@@ -412,9 +412,11 @@ function genTaskSchemaProperty(property_name, property_schema, required_props, n
     a = `${a}
 							Default: "${property_schema.default.replace(/"/g, '\\"')}",`;
   }
-  if (property_schema.type === "number" && !isRequired) {
-    a = `${a}
+  if (property_schema.type === "number") {
+    if (!isRequired) {
+      a = `${a}
 							Default: nil,`;
+    }
   }
   if (property_schema.type === "integer" && !isRequired) {
     a = `${a}
