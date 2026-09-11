@@ -59,3 +59,47 @@ test("nested objects opt in without changing flat workflow task maps", () => {
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+
+test("nested JSON fields generate compilable imports without changing flat maps", () => {
+  const previous = process.cwd();
+  const directory = fs.mkdtempSync(path.join(previous, ".workflow-codegen-"));
+  try {
+    fs.mkdirSync(path.join(directory, "provider"));
+    process.chdir(directory);
+    const channel = {type: "object", properties: {
+      id: {type: "string"},
+      name: {type: "string"},
+      settings: {type: "object", tf_nested_object: true, properties: {
+        payload: {type: "string", description: "JSON payload"},
+      }},
+    }, required: ["id", "name"]};
+    generateTasks(["nested_json", "flat_json"], {components: {schemas: {
+      nested_json_task_params: {properties: {channel: {...channel, tf_nested_object: true}}, required: ["channel"]},
+      flat_json_task_params: {properties: {channel}, required: ["channel"]},
+    }}});
+    const nested = fs.readFileSync("provider/resource_workflow_task_nested_json.go", "utf8");
+    const flat = fs.readFileSync("provider/resource_workflow_task_flat_json.go", "utf8");
+    assert.match(nested, /"encoding\/json"/);
+    assert.match(nested, /"reflect"/);
+    assert.match(nested, /json\.Unmarshal/);
+    assert.match(nested, /reflect\.DeepEqual/);
+    assert.doesNotMatch(flat, /"encoding\/json"|"reflect"|json\.Unmarshal|reflect\.DeepEqual/);
+    for (const task of ["nested_json", "flat_json"]) {
+      fs.unlinkSync(`provider/resource_workflow_task_${task}_test.go`);
+    }
+    fs.writeFileSync("provider/validation.go", `package provider
+import (
+  "context"
+  "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+)
+func validateUniqueWorkflowTaskPosition(context.Context, *schema.ResourceDiff, interface{}) error { return nil }
+`);
+    const compiled = spawnSync("go", ["test", `./${path.basename(directory)}/provider`], {cwd: previous, encoding: "utf8"});
+    assert.ifError(compiled.error);
+    assert.equal(compiled.status, 0, compiled.stdout + compiled.stderr);
+  } finally {
+    process.chdir(previous);
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});

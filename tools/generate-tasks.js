@@ -58,7 +58,8 @@ module.exports = function generateWorkflowTaskResources(tasks, swagger) {
 
 function hasJSONProperty(task_schema) {
   return Object.values(task_schema.properties).some(
-    (p) => p.type === "string" && p.description && p.description.match(/JSON/)
+    (p) => (p.type === "string" && p.description && p.description.match(/JSON/)) ||
+      (p.tf_nested_object && hasJSONProperty(p))
   );
 }
 
