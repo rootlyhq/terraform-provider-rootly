@@ -12,17 +12,24 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
-func TestWorkflowTaskSlackCanvasClearsWorkspaceOnWire(t *testing.T) {
+func TestWorkflowTaskSlackCanvasWorkspaceRoundTripOnWire(t *testing.T) {
 	for _, action := range []struct {
-		name     string
-		resource func() *schema.Resource
+		name              string
+		resource          func() *schema.Resource
+		existingWorkspace bool
 	}{
-		{"create_slack_canvas", resourceWorkflowTaskCreateSlackCanvas},
-		{"update_slack_canvas", resourceWorkflowTaskUpdateSlackCanvas},
+		{"create_slack_canvas", resourceWorkflowTaskCreateSlackCanvas, true},
+		{"create_slack_canvas", resourceWorkflowTaskCreateSlackCanvas, false},
+		{"update_slack_canvas", resourceWorkflowTaskUpdateSlackCanvas, true},
+		{"update_slack_canvas", resourceWorkflowTaskUpdateSlackCanvas, false},
 	} {
-		t.Run(action.name, func(t *testing.T) {
+		t.Run(fmt.Sprintf("%s/existing_workspace=%t", action.name, action.existingWorkspace), func(t *testing.T) {
 			updates := 0
-			params := map[string]interface{}{"task_type": action.name, "content": "# Updated {{ incident.title }}", "title": "Incident report"}
+			savedChannel := map[string]interface{}{"id": "C123", "name": "incidents"}
+			if action.existingWorkspace {
+				savedChannel["workspace"] = map[string]interface{}{"id": "T123", "name": "Engineering"}
+			}
+			params := map[string]interface{}{"task_type": action.name, "content": "# Updated {{ incident.title }}", "title": "Incident report", "channel": savedChannel}
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				if r.URL.Path != "/api/v1/workflow_tasks/task-id" {
 					t.Errorf("unexpected request path %s", r.URL.Path)
@@ -83,6 +90,20 @@ func TestWorkflowTaskSlackCanvasClearsWorkspaceOnWire(t *testing.T) {
 				"task_params": []interface{}{values},
 			})
 			data.SetId("task-id")
+			desiredParams := data.Get("task_params")
+			if diagnostics := resource.ReadContext(context.Background(), data, api); diagnostics.HasError() {
+				t.Fatal(diagnostics)
+			}
+			expectedBlocks := 0
+			if action.existingWorkspace {
+				expectedBlocks = 1
+			}
+			if got := data.Get("task_params.0.channel.0.workspace.#"); got != expectedBlocks {
+				t.Fatalf("read did not restore saved workspace state: got %v, want %d", got, expectedBlocks)
+			}
+			if err := data.Set("task_params", desiredParams); err != nil {
+				t.Fatal(err)
+			}
 			if diagnostics := resource.UpdateContext(context.Background(), data, api); diagnostics.HasError() {
 				t.Fatal(diagnostics)
 			}
