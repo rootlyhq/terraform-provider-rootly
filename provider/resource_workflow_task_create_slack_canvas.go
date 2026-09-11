@@ -89,13 +89,13 @@ func resourceWorkflowTaskCreateSlackCanvas() *schema.Resource {
 										Description:  "Slack channel ID.",
 										Type:         schema.TypeString,
 										Required:     true,
-										ValidateFunc: validation.StringIsNotEmpty,
+										ValidateFunc: validation.StringIsNotWhiteSpace,
 									},
 									"name": &schema.Schema{
 										Description:  "Channel display name.",
 										Type:         schema.TypeString,
 										Required:     true,
-										ValidateFunc: validation.StringIsNotEmpty,
+										ValidateFunc: validation.StringIsNotWhiteSpace,
 									},
 
 									"workspace": &schema.Schema{
@@ -110,13 +110,13 @@ func resourceWorkflowTaskCreateSlackCanvas() *schema.Resource {
 													Description:  "Slack workspace ID. Supports Liquid variables.",
 													Type:         schema.TypeString,
 													Required:     true,
-													ValidateFunc: validation.StringIsNotEmpty,
+													ValidateFunc: validation.StringIsNotWhiteSpace,
 												},
 												"name": &schema.Schema{
 													Description:  "Workspace display name.",
 													Type:         schema.TypeString,
 													Required:     true,
-													ValidateFunc: validation.StringIsNotEmpty,
+													ValidateFunc: validation.StringIsNotWhiteSpace,
 												},
 											},
 										},

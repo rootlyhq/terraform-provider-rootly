@@ -12,8 +12,8 @@ test("nested objects opt in without changing flat workflow task maps", () => {
   try {
     fs.mkdirSync(path.join(directory, "provider"));
     process.chdir(directory);
-    const workspace = {type: "object", tf_nested_object: true, description: "API description", tf_description: "Terraform description", properties: {id: {type: "string", minLength: 1}, name: {type: "string", minLength: 1}}, required: ["id", "name"]};
-    const channel = {type: "object", properties: {id: {type: "string", minLength: 1}, name: {type: "string", minLength: 1}}, required: ["id", "name"]};
+    const workspace = {type: "object", tf_nested_object: true, description: "API description", tf_description: "Terraform description", properties: {id: {type: "string", minLength: 1, pattern: "\\S"}, name: {type: "string", minLength: 1, pattern: "\\S"}}, required: ["id", "name"]};
+    const channel = {type: "object", properties: {id: {type: "string", minLength: 1, pattern: "\\S"}, name: {type: "string", minLength: 1, pattern: "\\S"}}, required: ["id", "name"]};
     generateTasks(["flat", "nested"], {components: {schemas: {
       flat_task_params: {properties: {channel}, required: ["channel"]},
       nested_task_params: {properties: {retry_count: {type: "integer", default: 0, minimum: 0, maximum: 4}, retry_wait_time: {type: "integer", default: 1, minimum: 1, maximum: 15}, channel: {...channel, tf_nested_object: true, properties: {...channel.properties, workspace}}}, required: ["channel"]},
@@ -30,8 +30,8 @@ test("nested objects opt in without changing flat workflow task maps", () => {
     assert.doesNotMatch(nested, /Map must contain two fields/);
     assert.match(nested, /_, err = c.UpdateWorkflowTask/);
     assert.match(nested, /Terraform description/);
-    assert.equal((nested.match(/ValidateFunc: validation.StringIsNotEmpty/g) || []).length, 4);
-    assert.doesNotMatch(flat, /validation.StringIsNotEmpty/);
+    assert.equal((nested.match(/ValidateFunc: validation.StringIsNotWhiteSpace/g) || []).length, 4);
+    assert.doesNotMatch(flat, /validation.StringIsNot(?:Empty|WhiteSpace)/);
     assert.match(nested, /"retry_count": &schema.Schema[\s\S]*?Default: 0/);
     assert.match(nested, /"retry_wait_time": &schema.Schema[\s\S]*?Default: 1/);
     assert.match(nested, /"retry_count": &schema.Schema[\s\S]*?ValidateFunc: validation.IntBetween\(0, 4\)/);

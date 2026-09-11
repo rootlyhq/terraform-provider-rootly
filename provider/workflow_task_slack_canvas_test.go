@@ -126,7 +126,7 @@ func TestWorkflowTaskSlackCanvasRetryBounds(t *testing.T) {
 	}
 }
 
-func TestWorkflowTaskSlackCanvasRejectsEmptyTargets(t *testing.T) {
+func TestWorkflowTaskSlackCanvasRejectsBlankTargets(t *testing.T) {
 	for _, resource := range []*schema.Resource{resourceWorkflowTaskCreateSlackCanvas(), resourceWorkflowTaskUpdateSlackCanvas()} {
 		params := resource.Schema["task_params"].Elem.(*schema.Resource).Schema
 		channel := params["channel"].Elem.(*schema.Resource).Schema
@@ -137,8 +137,10 @@ func TestWorkflowTaskSlackCanvasRejectsEmptyTargets(t *testing.T) {
 				if validate == nil {
 					t.Fatalf("%s has no plan-time validator", name)
 				}
-				if _, errors := validate("", name); len(errors) == 0 {
-					t.Errorf("empty %s was accepted", name)
+				for _, blank := range []string{"", " \t\n"} {
+					if _, errors := validate(blank, name); len(errors) == 0 {
+						t.Errorf("blank %s was accepted: %q", name, blank)
+					}
 				}
 				if _, errors := validate("{{ incident.slack_channel_id }}", name); len(errors) != 0 {
 					t.Errorf("Liquid %s was rejected: %v", name, errors)

@@ -390,7 +390,7 @@ function genTaskSchemaProperty(property_name, property_schema, required_props, n
   }
   if (nested_object && property_schema.type === "string" && property_schema.minLength === 1 && !property_schema.enum && !isJSON) {
     a = `${a}
-							ValidateFunc: validation.StringIsNotEmpty,`;
+							ValidateFunc: validation.${property_schema.pattern === "\\S" ? "StringIsNotWhiteSpace" : "StringIsNotEmpty"},`;
   }
   if (property_schema.enum) {
     if (!isRequired) {
