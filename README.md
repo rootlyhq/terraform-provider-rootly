@@ -59,6 +59,14 @@ To run the tests pointed at an API URL of your choice set the `ROOTLY_API_URL` e
 
 To enable debug logs set `TF_LOG=DEBUG`.
 
+The Slack Canvas workflow-action acceptance tests require an organization with that API capability enabled and an explicit `ROOTLY_TEST_SLACK_CANVAS=1` opt-in. Set `ROOTLY_API_URL` and `ROOTLY_API_TOKEN` for that organization, then run:
+
+```bash
+TF_ACC=1 ROOTLY_TEST_SLACK_CANVAS=1 go test ./provider -run '^TestAccResourceWorkflowTask(Create|Update)SlackCanvas$' -v
+```
+
+These tests create disabled workflows and actions, verify configuration updates, import, and workspace clearing, then delete their test resources. They do not execute Slack actions. Shared CI skips these tests until it opts into the capability.
+
 ### Updating provider
 
 `make build` auto-generates code from Rootly's JSON-API schema, compiles provider code, and regenerates docs.
