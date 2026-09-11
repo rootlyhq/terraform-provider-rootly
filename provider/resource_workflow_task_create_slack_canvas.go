@@ -86,14 +86,16 @@ func resourceWorkflowTaskCreateSlackCanvas() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": &schema.Schema{
-										Description: "Slack channel ID.",
-										Type:        schema.TypeString,
-										Required:    true,
+										Description:  "Slack channel ID.",
+										Type:         schema.TypeString,
+										Required:     true,
+										ValidateFunc: validation.StringIsNotEmpty,
 									},
 									"name": &schema.Schema{
-										Description: "Channel display name.",
-										Type:        schema.TypeString,
-										Required:    true,
+										Description:  "Channel display name.",
+										Type:         schema.TypeString,
+										Required:     true,
+										ValidateFunc: validation.StringIsNotEmpty,
 									},
 
 									"workspace": &schema.Schema{
@@ -105,14 +107,16 @@ func resourceWorkflowTaskCreateSlackCanvas() *schema.Resource {
 										Elem: &schema.Resource{
 											Schema: map[string]*schema.Schema{
 												"id": &schema.Schema{
-													Description: "Slack workspace ID. Supports Liquid variables.",
-													Type:        schema.TypeString,
-													Required:    true,
+													Description:  "Slack workspace ID. Supports Liquid variables.",
+													Type:         schema.TypeString,
+													Required:     true,
+													ValidateFunc: validation.StringIsNotEmpty,
 												},
 												"name": &schema.Schema{
-													Description: "Workspace display name.",
-													Type:        schema.TypeString,
-													Required:    true,
+													Description:  "Workspace display name.",
+													Type:         schema.TypeString,
+													Required:     true,
+													ValidateFunc: validation.StringIsNotEmpty,
 												},
 											},
 										},
@@ -131,16 +135,18 @@ func resourceWorkflowTaskCreateSlackCanvas() *schema.Resource {
 							Required:    true,
 						},
 						"retry_count": &schema.Schema{
-							Description: "Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     0,
+							Description:  "Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.",
+							Type:         schema.TypeInt,
+							Optional:     true,
+							Default:      0,
+							ValidateFunc: validation.IntBetween(0, 4),
 						},
 						"retry_wait_time": &schema.Schema{
-							Description: "Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     1,
+							Description:  "Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.",
+							Type:         schema.TypeInt,
+							Optional:     true,
+							Default:      1,
+							ValidateFunc: validation.IntBetween(1, 15),
 						},
 					},
 				},

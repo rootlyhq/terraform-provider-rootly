@@ -342,7 +342,7 @@ function annotatedDescription(schema) {
   return description;
 }
 
-function genTaskSchemaProperty(property_name, property_schema, required_props) {
+function genTaskSchemaProperty(property_name, property_schema, required_props, nested_object = false) {
   const isRequired =
     required_props && required_props.indexOf(property_name) !== -1;
   if (property_schema.tf_nested_object) {
@@ -355,7 +355,7 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
               MaxItems: 1,
               Elem: &schema.Resource{
                 Schema: map[string]*schema.Schema {
-                  ${Object.entries(property_schema.properties).map(([name, property]) => genTaskSchemaProperty(name, property, property_schema.required)).join("\n")}
+                  ${Object.entries(property_schema.properties).map(([name, property]) => genTaskSchemaProperty(name, property, property_schema.required, true)).join("\n")}
                 },
               },
             },`;
@@ -388,6 +388,10 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 							Default: "{}",`;
     }
   }
+  if (nested_object && property_schema.type === "string" && property_schema.minLength === 1 && !property_schema.enum && !isJSON) {
+    a = `${a}
+							ValidateFunc: validation.StringIsNotEmpty,`;
+  }
   if (property_schema.enum) {
     if (!isRequired) {
       if (property_schema?.default) {
@@ -414,6 +418,10 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
   if (property_schema.type === "integer" && !isRequired) {
     a = `${a}
 							Default: ${property_schema.default ?? "nil"},`;
+  }
+  if (property_schema.type === "integer" && Number.isInteger(property_schema.minimum) && Number.isInteger(property_schema.maximum)) {
+    a = `${a}
+							ValidateFunc: validation.IntBetween(${property_schema.minimum}, ${property_schema.maximum}),`;
   }
   if (property_schema.type === "array") {
     if (property_schema.items.type === "string") {
@@ -574,11 +582,19 @@ function genTestParams(task_name, task_schema) {
     });
   }
   Object.entries(task_schema.properties).forEach(([key, prop]) => {
-    if (!required.includes(key) && prop.type === "integer" && (prop.minimum > 0 || prop.default > 0)) {
+    if (!required.includes(key) && (prop.tf_nested_object || (prop.type === "integer" && (prop.minimum > 0 || prop.default > 0)))) {
       required.push(key);
     }
   });
   return required.map((key) => {
+    const property = task_schema.properties[key];
+    if (property.tf_nested_object) {
+      const fields = genTestParams(task_name, property)
+        .map((field) => `  ${field.replace(/\n/g, "\n  ")}`)
+        .join("\n");
+      return `${key} {\n${fields}\n}`;
+    }
+
     let val;
 
     if (task_schema.properties[key].example) {

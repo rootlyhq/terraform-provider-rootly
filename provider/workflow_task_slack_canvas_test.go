@@ -95,3 +95,55 @@ func TestWorkflowTaskSlackCanvasClearsWorkspaceOnWire(t *testing.T) {
 		})
 	}
 }
+
+func TestWorkflowTaskSlackCanvasRetryBounds(t *testing.T) {
+	for _, action := range []struct {
+		name     string
+		resource func() *schema.Resource
+	}{
+		{"create_slack_canvas", resourceWorkflowTaskCreateSlackCanvas},
+		{"update_slack_canvas", resourceWorkflowTaskUpdateSlackCanvas},
+	} {
+		t.Run(action.name, func(t *testing.T) {
+			params := action.resource().Schema["task_params"].Elem.(*schema.Resource).Schema
+			for _, bounds := range []struct {
+				name             string
+				minimum, maximum int
+			}{{"retry_count", 0, 4}, {"retry_wait_time", 1, 15}} {
+				validate := params[bounds.name].ValidateFunc
+				if validate == nil {
+					t.Fatalf("%s has no plan-time validator", bounds.name)
+				}
+				for _, value := range []int{bounds.minimum - 1, bounds.minimum, bounds.maximum, bounds.maximum + 1} {
+					_, errors := validate(value, bounds.name)
+					invalid := value < bounds.minimum || value > bounds.maximum
+					if (len(errors) > 0) != invalid {
+						t.Errorf("%s=%d invalid=%t, errors=%v", bounds.name, value, invalid, errors)
+					}
+				}
+			}
+		})
+	}
+}
+
+func TestWorkflowTaskSlackCanvasRejectsEmptyTargets(t *testing.T) {
+	for _, resource := range []*schema.Resource{resourceWorkflowTaskCreateSlackCanvas(), resourceWorkflowTaskUpdateSlackCanvas()} {
+		params := resource.Schema["task_params"].Elem.(*schema.Resource).Schema
+		channel := params["channel"].Elem.(*schema.Resource).Schema
+		workspace := channel["workspace"].Elem.(*schema.Resource).Schema
+		for _, fields := range []map[string]*schema.Schema{channel, workspace} {
+			for _, name := range []string{"id", "name"} {
+				validate := fields[name].ValidateFunc
+				if validate == nil {
+					t.Fatalf("%s has no plan-time validator", name)
+				}
+				if _, errors := validate("", name); len(errors) == 0 {
+					t.Errorf("empty %s was accepted", name)
+				}
+				if _, errors := validate("{{ incident.slack_channel_id }}", name); len(errors) != 0 {
+					t.Errorf("Liquid %s was rejected: %v", name, errors)
+				}
+			}
+		}
+	}
+}
