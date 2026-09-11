@@ -37,6 +37,20 @@ jobs:
       run: |
         go build -v ./...
 
+    - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      with:
+        node-version: '22'
+
+    - uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+      with:
+        terraform_version: '1.13.*'
+        terraform_wrapper: false
+
+    - name: Canvas regression tests
+      run: |
+        go test ./internal/sdkutils ./provider -run '^(TestProvider$|TestWorkflowTaskSlackCanvas|TestWorkflowTaskObjects)'
+        node --test tools/*.test.js
+
   lint:
     name: Lint
     runs-on: blacksmith-2vcpu-ubuntu-2404

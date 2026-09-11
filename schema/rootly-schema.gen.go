@@ -5284,6 +5284,21 @@ func (e CreateShortcutTaskTaskParamsTaskType) Valid() bool {
 	}
 }
 
+// Defines values for CreateSlackCanvasTaskParamsTaskType.
+const (
+	CreateSlackCanvas CreateSlackCanvasTaskParamsTaskType = "create_slack_canvas"
+)
+
+// Valid indicates whether the value is a known member of the CreateSlackCanvasTaskParamsTaskType enum.
+func (e CreateSlackCanvasTaskParamsTaskType) Valid() bool {
+	switch e {
+	case CreateSlackCanvas:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for CreateSlackChannelTaskParamsPrivate.
 const (
 	CreateSlackChannelTaskParamsPrivateAuto  CreateSlackChannelTaskParamsPrivate = "auto"
@@ -34855,6 +34870,42 @@ func (e UpdateSlaDataType) Valid() bool {
 	}
 }
 
+// Defines values for UpdateSlackCanvasTaskParamsOperation.
+const (
+	UpdateSlackCanvasTaskParamsOperationInsertAtEnd     UpdateSlackCanvasTaskParamsOperation = "insert_at_end"
+	UpdateSlackCanvasTaskParamsOperationManagedSections UpdateSlackCanvasTaskParamsOperation = "managed_sections"
+	UpdateSlackCanvasTaskParamsOperationReplace         UpdateSlackCanvasTaskParamsOperation = "replace"
+)
+
+// Valid indicates whether the value is a known member of the UpdateSlackCanvasTaskParamsOperation enum.
+func (e UpdateSlackCanvasTaskParamsOperation) Valid() bool {
+	switch e {
+	case UpdateSlackCanvasTaskParamsOperationInsertAtEnd:
+		return true
+	case UpdateSlackCanvasTaskParamsOperationManagedSections:
+		return true
+	case UpdateSlackCanvasTaskParamsOperationReplace:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateSlackCanvasTaskParamsTaskType.
+const (
+	UpdateSlackCanvas UpdateSlackCanvasTaskParamsTaskType = "update_slack_canvas"
+)
+
+// Valid indicates whether the value is a known member of the UpdateSlackCanvasTaskParamsTaskType enum.
+func (e UpdateSlackCanvasTaskParamsTaskType) Valid() bool {
+	switch e {
+	case UpdateSlackCanvas:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateSlackChannelTopicTaskParamsTaskType.
 const (
 	UpdateSlackChannelTopic UpdateSlackChannelTopicTaskParamsTaskType = "update_slack_channel_topic"
@@ -42841,6 +42892,43 @@ type CreateShortcutTaskTaskParams struct {
 
 // CreateShortcutTaskTaskParamsTaskType defines model for CreateShortcutTaskTaskParams.TaskType.
 type CreateShortcutTaskTaskParamsTaskType string
+
+// CreateSlackCanvasTaskParams Create a canvas in a Slack channel, preserving an existing canvas. Requires Slack Canvas actions to be enabled for execution and the connected Slack app to have Canvas permissions.
+type CreateSlackCanvasTaskParams struct {
+	// Channel Slack channel containing the canvas. Channel IDs support Liquid variables.
+	Channel struct {
+		// Id Slack channel ID.
+		Id string `json:"id"`
+
+		// Name Channel display name.
+		Name string `json:"name"`
+
+		// Workspace Workspace containing the channel, used for Enterprise Grid. Omit this field on update to retain the saved workspace, or send null to clear it. Typed Go requests omit a nil workspace; use a map or raw JSON to send null.
+		Workspace *struct {
+			// Id Slack workspace ID. Enter a literal ID from Slack.
+			Id string `json:"id"`
+
+			// Name Workspace display name.
+			Name string `json:"name"`
+		} `json:"workspace,omitempty"`
+	} `json:"channel"`
+
+	// Content The initial canvas content in Markdown. Supports Liquid variables. An existing channel canvas is preserved.
+	Content string `json:"content"`
+
+	// RetryCount Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+	RetryCount *int `json:"retry_count,omitempty"`
+
+	// RetryWaitTime Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
+	RetryWaitTime *int                                 `json:"retry_wait_time,omitempty"`
+	TaskType      *CreateSlackCanvasTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// Title The canvas title. Supports Liquid variables.
+	Title string `json:"title"`
+}
+
+// CreateSlackCanvasTaskParamsTaskType defines model for CreateSlackCanvasTaskParams.TaskType.
+type CreateSlackCanvasTaskParamsTaskType string
 
 // CreateSlackChannelTaskParams defines model for create_slack_channel_task_params.
 type CreateSlackChannelTaskParams struct {
@@ -59324,6 +59412,46 @@ type UpdateSlaDataAttributesNotificationConfigurationsOffsetType string
 // UpdateSlaDataType defines model for UpdateSla.Data.Type.
 type UpdateSlaDataType string
 
+// UpdateSlackCanvasTaskParams Update the selected channel canvas using Markdown. Requires Slack Canvas actions to be enabled for execution and the connected Slack app to have Canvas permissions.
+type UpdateSlackCanvasTaskParams struct {
+	// Channel Slack channel containing the canvas. Channel IDs support Liquid variables.
+	Channel struct {
+		// Id Slack channel ID.
+		Id string `json:"id"`
+
+		// Name Channel display name.
+		Name string `json:"name"`
+
+		// Workspace Workspace containing the channel, used for Enterprise Grid. Omit this field on update to retain the saved workspace, or send null to clear it. Typed Go requests omit a nil workspace; use a map or raw JSON to send null.
+		Workspace *struct {
+			// Id Slack workspace ID. Enter a literal ID from Slack.
+			Id string `json:"id"`
+
+			// Name Workspace display name.
+			Name string `json:"name"`
+		} `json:"workspace,omitempty"`
+	} `json:"channel"`
+
+	// Content The canvas content in Markdown. Supports Liquid variables.
+	Content string `json:"content"`
+
+	// Operation Append content, replace all content, or replace only registered tables in a canvas created by Rootly from a managed template while preserving content outside them. Matching labels do not register an existing canvas. Managed sections overwrite edits inside those tables and require Slack reauthorization with canvases:read and canvases:write.
+	Operation *UpdateSlackCanvasTaskParamsOperation `json:"operation,omitempty"`
+
+	// RetryCount Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+	RetryCount *int `json:"retry_count,omitempty"`
+
+	// RetryWaitTime Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
+	RetryWaitTime *int                                 `json:"retry_wait_time,omitempty"`
+	TaskType      *UpdateSlackCanvasTaskParamsTaskType `json:"task_type,omitempty"`
+}
+
+// UpdateSlackCanvasTaskParamsOperation Append content, replace all content, or replace only registered tables in a canvas created by Rootly from a managed template while preserving content outside them. Matching labels do not register an existing canvas. Managed sections overwrite edits inside those tables and require Slack reauthorization with canvases:read and canvases:write.
+type UpdateSlackCanvasTaskParamsOperation string
+
+// UpdateSlackCanvasTaskParamsTaskType defines model for UpdateSlackCanvasTaskParams.TaskType.
+type UpdateSlackCanvasTaskParamsTaskType string
+
 // UpdateSlackChannelTopicTaskParams defines model for update_slack_channel_topic_task_params.
 type UpdateSlackChannelTopicTaskParams struct {
 	Channel struct {
@@ -69165,6 +69293,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateSlackChannelTask
 	return err
 }
 
+// AsCreateSlackCanvasTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a CreateSlackCanvasTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsCreateSlackCanvasTaskParams() (CreateSlackCanvasTaskParams, error) {
+	var body CreateSlackCanvasTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateSlackCanvasTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided CreateSlackCanvasTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromCreateSlackCanvasTaskParams(v CreateSlackCanvasTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateSlackCanvasTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided CreateSlackCanvasTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeCreateSlackCanvasTaskParams(v CreateSlackCanvasTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsSendSlackMessageTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a SendSlackMessageTaskParams
 func (t NewWorkflowTask_Data_Attributes_TaskParams) AsSendSlackMessageTaskParams() (SendSlackMessageTaskParams, error) {
 	var body SendSlackMessageTaskParams
@@ -69675,6 +69829,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromUpdateSlackChannelTopic
 
 // MergeUpdateSlackChannelTopicTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateSlackChannelTopicTaskParams
 func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdateSlackChannelTopicTaskParams(v UpdateSlackChannelTopicTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateSlackCanvasTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a UpdateSlackCanvasTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsUpdateSlackCanvasTaskParams() (UpdateSlackCanvasTaskParams, error) {
+	var body UpdateSlackCanvasTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateSlackCanvasTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided UpdateSlackCanvasTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromUpdateSlackCanvasTaskParams(v UpdateSlackCanvasTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateSlackCanvasTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateSlackCanvasTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeUpdateSlackCanvasTaskParams(v UpdateSlackCanvasTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -74248,6 +74428,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateSlackChannelT
 	return err
 }
 
+// AsCreateSlackCanvasTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a CreateSlackCanvasTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsCreateSlackCanvasTaskParams() (CreateSlackCanvasTaskParams, error) {
+	var body CreateSlackCanvasTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateSlackCanvasTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided CreateSlackCanvasTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromCreateSlackCanvasTaskParams(v CreateSlackCanvasTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateSlackCanvasTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided CreateSlackCanvasTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeCreateSlackCanvasTaskParams(v CreateSlackCanvasTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsSendSlackMessageTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a SendSlackMessageTaskParams
 func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsSendSlackMessageTaskParams() (SendSlackMessageTaskParams, error) {
 	var body SendSlackMessageTaskParams
@@ -74758,6 +74964,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromUpdateSlackChannelTo
 
 // MergeUpdateSlackChannelTopicTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateSlackChannelTopicTaskParams
 func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdateSlackChannelTopicTaskParams(v UpdateSlackChannelTopicTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateSlackCanvasTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a UpdateSlackCanvasTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsUpdateSlackCanvasTaskParams() (UpdateSlackCanvasTaskParams, error) {
+	var body UpdateSlackCanvasTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateSlackCanvasTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided UpdateSlackCanvasTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromUpdateSlackCanvasTaskParams(v UpdateSlackCanvasTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateSlackCanvasTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided UpdateSlackCanvasTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeUpdateSlackCanvasTaskParams(v UpdateSlackCanvasTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -78246,6 +78478,32 @@ func (t *WorkflowTask_TaskParams) MergeCreateSlackChannelTaskParams(v CreateSlac
 	return err
 }
 
+// AsCreateSlackCanvasTaskParams returns the union data inside the WorkflowTask_TaskParams as a CreateSlackCanvasTaskParams
+func (t WorkflowTask_TaskParams) AsCreateSlackCanvasTaskParams() (CreateSlackCanvasTaskParams, error) {
+	var body CreateSlackCanvasTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromCreateSlackCanvasTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided CreateSlackCanvasTaskParams
+func (t *WorkflowTask_TaskParams) FromCreateSlackCanvasTaskParams(v CreateSlackCanvasTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeCreateSlackCanvasTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided CreateSlackCanvasTaskParams
+func (t *WorkflowTask_TaskParams) MergeCreateSlackCanvasTaskParams(v CreateSlackCanvasTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsSendSlackMessageTaskParams returns the union data inside the WorkflowTask_TaskParams as a SendSlackMessageTaskParams
 func (t WorkflowTask_TaskParams) AsSendSlackMessageTaskParams() (SendSlackMessageTaskParams, error) {
 	var body SendSlackMessageTaskParams
@@ -78756,6 +79014,32 @@ func (t *WorkflowTask_TaskParams) FromUpdateSlackChannelTopicTaskParams(v Update
 
 // MergeUpdateSlackChannelTopicTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided UpdateSlackChannelTopicTaskParams
 func (t *WorkflowTask_TaskParams) MergeUpdateSlackChannelTopicTaskParams(v UpdateSlackChannelTopicTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateSlackCanvasTaskParams returns the union data inside the WorkflowTask_TaskParams as a UpdateSlackCanvasTaskParams
+func (t WorkflowTask_TaskParams) AsUpdateSlackCanvasTaskParams() (UpdateSlackCanvasTaskParams, error) {
+	var body UpdateSlackCanvasTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateSlackCanvasTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided UpdateSlackCanvasTaskParams
+func (t *WorkflowTask_TaskParams) FromUpdateSlackCanvasTaskParams(v UpdateSlackCanvasTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateSlackCanvasTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided UpdateSlackCanvasTaskParams
+func (t *WorkflowTask_TaskParams) MergeUpdateSlackCanvasTaskParams(v UpdateSlackCanvasTaskParams) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
