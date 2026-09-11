@@ -19,7 +19,8 @@ func testAccWorkflowTaskSlackCanvas(t *testing.T, action string) {
 	}
 	rName := acctest.RandomWithPrefix("tf-prf449-" + action)
 	address := "rootly_workflow_task_" + action + ".test"
-	initial := testAccWorkflowTaskSlackCanvasConfig(action, rName, false, true)
+	initial := testAccWorkflowTaskSlackCanvasConfig(action, rName, false, false)
+	selected := testAccWorkflowTaskSlackCanvasConfig(action, rName, false, true)
 	updated := testAccWorkflowTaskSlackCanvasConfig(action, rName, true, true)
 	cleared := testAccWorkflowTaskSlackCanvasConfig(action, rName, true, false)
 	resource.Test(t, resource.TestCase{
@@ -57,8 +58,11 @@ func testAccWorkflowTaskSlackCanvas(t *testing.T, action string) {
 				resource.TestCheckResourceAttr(address, "task_params.0.retry_wait_time", "1"),
 				testAccWorkflowTaskSlackCanvasActionCheck(action, address, rName, false),
 				resource.TestCheckResourceAttr(address, "task_params.0.content", "# Incident {{ incident.title }}\nInitial report"),
-				resource.TestCheckResourceAttr(address, "task_params.0.channel.0.workspace.0.id", "T_CANVAS_EAST"),
+				resource.TestCheckResourceAttr(address, "task_params.0.channel.0.workspace.#", "0"),
 			)},
+			{ResourceName: address, ImportState: true, ImportStateVerify: true},
+			{Config: initial, PlanOnly: true},
+			{Config: selected, Check: resource.TestCheckResourceAttr(address, "task_params.0.channel.0.workspace.0.id", "T_CANVAS_EAST")},
 			{Config: updated, Check: resource.ComposeTestCheckFunc(
 				resource.TestCheckResourceAttr(address, "task_params.0.content", "# Incident {{ incident.title }}\nUpdated report"),
 				resource.TestCheckResourceAttr(address, "task_params.0.channel.0.workspace.0.id", "T_CANVAS_WEST"),

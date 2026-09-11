@@ -24,20 +24,28 @@ func TestWorkflowTaskSlackCanvasWorkspaceRoundTripOnWire(t *testing.T) {
 		{"update_slack_canvas", resourceWorkflowTaskUpdateSlackCanvas, false},
 	} {
 		t.Run(fmt.Sprintf("%s/existing_workspace=%t", action.name, action.existingWorkspace), func(t *testing.T) {
-			updates := 0
+			creates, updates := 0, 0
 			savedChannel := map[string]interface{}{"id": "C123", "name": "incidents"}
 			if action.existingWorkspace {
 				savedChannel["workspace"] = map[string]interface{}{"id": "T123", "name": "Engineering"}
 			}
 			params := map[string]interface{}{"task_type": action.name, "content": "# Updated {{ incident.title }}", "title": "Incident report", "channel": savedChannel}
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				if r.URL.Path != "/api/v1/workflow_tasks/task-id" {
+				expectedPath := "/api/v1/workflow_tasks/task-id"
+				if r.Method == http.MethodPost {
+					expectedPath = "/api/v1/workflows/workflow-id/workflow_tasks"
+				}
+				if r.URL.Path != expectedPath {
 					t.Errorf("unexpected request path %s", r.URL.Path)
 					w.WriteHeader(404)
 					return
 				}
-				if r.Method == http.MethodPut {
-					updates++
+				if r.Method == http.MethodPost || r.Method == http.MethodPut {
+					if r.Method == http.MethodPost {
+						creates++
+					} else {
+						updates++
+					}
 					var body struct {
 						Data struct {
 							Attributes struct {
@@ -59,7 +67,7 @@ func TestWorkflowTaskSlackCanvasWorkspaceRoundTripOnWire(t *testing.T) {
 					}
 					workspace, present := channel["workspace"]
 					if !present || workspace != nil {
-						t.Errorf("PUT must contain workspace:null, got %#v", channel)
+						t.Errorf("%s must contain workspace:null, got %#v", r.Method, channel)
 					}
 					delete(channel, "workspace")
 				} else if r.Method != http.MethodGet {
@@ -89,8 +97,22 @@ func TestWorkflowTaskSlackCanvasWorkspaceRoundTripOnWire(t *testing.T) {
 				"workflow_id": "workflow-id", "name": "Canvas", "enabled": false, "position": 1,
 				"task_params": []interface{}{values},
 			})
-			data.SetId("task-id")
 			desiredParams := data.Get("task_params")
+			if !action.existingWorkspace {
+				if diagnostics := resource.CreateContext(context.Background(), data, api); diagnostics.HasError() {
+					t.Fatal(diagnostics)
+				}
+				if creates != 1 || data.Id() != "task-id" {
+					t.Fatalf("expected one POST to create task-id, got %d creates and ID %q", creates, data.Id())
+				}
+			}
+			data = schema.TestResourceDataRaw(t, resource.Schema, nil)
+			data.SetId("task-id")
+			imported, err := resource.Importer.StateContext(context.Background(), data, api)
+			if err != nil || len(imported) != 1 {
+				t.Fatalf("import failed: %v, got %d resources", err, len(imported))
+			}
+			data = imported[0]
 			if diagnostics := resource.ReadContext(context.Background(), data, api); diagnostics.HasError() {
 				t.Fatal(diagnostics)
 			}
