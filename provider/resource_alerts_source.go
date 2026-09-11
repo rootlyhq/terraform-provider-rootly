@@ -592,7 +592,7 @@ func resourceAlertsSource() *schema.Resource {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Required:    false,
-				Optional:    true,
+				Optional:    false,
 				Sensitive:   true,
 				ForceNew:    false,
 				WriteOnly:   false,
