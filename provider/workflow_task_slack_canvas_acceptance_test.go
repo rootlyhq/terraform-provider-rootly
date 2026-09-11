@@ -80,6 +80,10 @@ func testAccWorkflowTaskSlackCanvas(t *testing.T, action string) {
 
 func testAccWorkflowTaskSlackCanvasConfig(action, name string, updated, workspace bool) string {
 	content, suffix := "Initial report", "EAST"
+	trigger := "incident_updated"
+	if action == "create_slack_canvas" {
+		trigger = "slack_channel_created"
+	}
 	if updated {
 		content, suffix = "Updated report", "WEST"
 	}
@@ -105,7 +109,7 @@ func testAccWorkflowTaskSlackCanvasConfig(action, name string, updated, workspac
 resource "rootly_workflow_incident" "test" {
   name = %q
   enabled = false
-  trigger_params { triggers = ["incident_updated"] }
+  trigger_params { triggers = [%q] }
 }
 resource "rootly_workflow_task_%s" "test" {
   workflow_id = rootly_workflow_incident.test.id
@@ -122,7 +126,7 @@ resource "rootly_workflow_task_%s" "test" {
     content = "# Incident {{ incident.title }}\n%s"
   }
 }
-`, name, action, name, specific, suffix, workspaceBlock, content)
+`, name, trigger, action, name, specific, suffix, workspaceBlock, content)
 }
 
 func testAccWorkflowTaskSlackCanvasActionCheck(action, address, name string, updated bool) resource.TestCheckFunc {

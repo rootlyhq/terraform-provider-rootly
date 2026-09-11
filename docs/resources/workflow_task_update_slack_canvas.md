@@ -102,7 +102,7 @@ Optional:
 
 Required:
 
-- `id` (String) Slack workspace ID. Supports Liquid variables.
+- `id` (String) Slack workspace ID. Enter a literal ID from Slack.
 - `name` (String) Workspace display name.
 
 ## Import

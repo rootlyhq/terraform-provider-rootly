@@ -42903,9 +42903,9 @@ type CreateSlackCanvasTaskParams struct {
 		// Name Channel display name.
 		Name string `json:"name"`
 
-		// Workspace Workspace containing the channel, used for Enterprise Grid. Omit this field on update to retain the saved workspace, or send null to clear it.
+		// Workspace Workspace containing the channel, used for Enterprise Grid. Omit this field on update to retain the saved workspace, or send null to clear it. Typed Go requests omit a nil workspace; use a map or raw JSON to send null.
 		Workspace *struct {
-			// Id Slack workspace ID. Supports Liquid variables.
+			// Id Slack workspace ID. Enter a literal ID from Slack.
 			Id string `json:"id"`
 
 			// Name Workspace display name.
@@ -59422,9 +59422,9 @@ type UpdateSlackCanvasTaskParams struct {
 		// Name Channel display name.
 		Name string `json:"name"`
 
-		// Workspace Workspace containing the channel, used for Enterprise Grid. Omit this field on update to retain the saved workspace, or send null to clear it.
+		// Workspace Workspace containing the channel, used for Enterprise Grid. Omit this field on update to retain the saved workspace, or send null to clear it. Typed Go requests omit a nil workspace; use a map or raw JSON to send null.
 		Workspace *struct {
-			// Id Slack workspace ID. Supports Liquid variables.
+			// Id Slack workspace ID. Enter a literal ID from Slack.
 			Id string `json:"id"`
 
 			// Name Workspace display name.

@@ -107,7 +107,7 @@ func resourceWorkflowTaskCreateSlackCanvas() *schema.Resource {
 										Elem: &schema.Resource{
 											Schema: map[string]*schema.Schema{
 												"id": &schema.Schema{
-													Description:  "Slack workspace ID. Supports Liquid variables.",
+													Description:  "Slack workspace ID. Enter a literal ID from Slack.",
 													Type:         schema.TypeString,
 													Required:     true,
 													ValidateFunc: validation.StringIsNotWhiteSpace,
