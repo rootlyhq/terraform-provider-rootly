@@ -685,9 +685,6 @@ func resourceAlertsSourceCreate(ctx context.Context, d *schema.ResourceData, met
 	if value, ok := d.GetOkExists("status"); ok {
 		s.Status = value.(string)
 	}
-	if value, ok := d.GetOkExists("secret"); ok {
-		s.Secret = value.(string)
-	}
 	if value, ok := d.GetOkExists("email"); ok {
 		s.Email = value.(string)
 	}
@@ -924,9 +921,6 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 
 	if d.HasChange("status") {
 		s.Status = d.Get("status").(string)
-	}
-	if d.HasChange("secret") {
-		s.Secret = d.Get("secret").(string)
 	}
 	if d.HasChange("email") {
 		s.Email = d.Get("email").(string)
