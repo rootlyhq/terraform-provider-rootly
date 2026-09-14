@@ -162,6 +162,16 @@ function annotateNullableRelationships(schemas) {
     schemas.status_page_component.properties.status_page_component_group_id.tf_nullable = true;
   }
 }
+
+function clarifyCanvasWorkspaceGoDescriptions(schemas) {
+  const note = "Typed Go requests omit a nil workspace; use a map or raw JSON to send null.";
+  for (const action of ["create_slack_canvas", "update_slack_canvas"]) {
+    const workspace = schemas[`${action}_task_params`]?.properties.channel.properties.workspace;
+    if (workspace && !workspace.description.includes(note)) {
+      workspace.description += ` ${note}`;
+    }
+  }
+}
 // Bulk upsert/delete endpoints are not exposed via Terraform and their
 // *_response schema names collide with oapi-codegen's generated operation
 // response types (e.g. BulkUpsertServicesResponse redeclared).
@@ -193,5 +203,6 @@ renameEscalationPolicyLevelSchemas(swagger);
 renameEscalationPolicyPathSchemas(swagger);
 addNestedRouteParentIds(swagger.components.schemas);
 annotateNullableRelationships(swagger.components.schemas);
+clarifyCanvasWorkspaceGoDescriptions(swagger.components.schemas);
 stripBulkOperations(swagger);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));
