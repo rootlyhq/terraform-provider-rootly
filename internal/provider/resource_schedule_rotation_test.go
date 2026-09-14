@@ -2,14 +2,76 @@ package provider
 
 import (
 	"fmt"
+	"reflect"
 	"testing"
 
+	frameworkresource "github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"github.com/hashicorp/terraform-plugin-testing/knownvalue"
 	"github.com/hashicorp/terraform-plugin-testing/statecheck"
 	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
+	"github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/acctest"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
 )
+
+func TestScheduleRotationResourceScheduleRotationableAttributesSchema(t *testing.T) {
+	var resp frameworkresource.SchemaResponse
+	NewScheduleRotationResource().Schema(t.Context(), frameworkresource.SchemaRequest{}, &resp)
+
+	attribute, ok := resp.Schema.Attributes["schedule_rotationable_attributes"].(schema.MapAttribute)
+	if !ok {
+		t.Fatalf("schedule_rotationable_attributes must be a map, got %T", resp.Schema.Attributes["schedule_rotationable_attributes"])
+	}
+	if !attribute.ElementType.Equal(types.StringType) {
+		t.Fatalf("schedule_rotationable_attributes must contain strings, got %s", attribute.ElementType)
+	}
+}
+
+func TestScheduleRotationResourceScheduleRotationableAttributesConversion(t *testing.T) {
+	ctx := t.Context()
+	want := map[string]string{
+		"handoff_time": "09:00",
+		"end_of_day":   "17:00",
+		"shift_length": "7",
+	}
+	attributes, diags := supertypes.NewMapValueOfMap(ctx, want)
+	if diags.HasError() {
+		t.Fatalf("creating Terraform map: %v", diags)
+	}
+
+	model := ScheduleRotationResourceModel{ScheduleRotationableAttributes: attributes}
+	apiModel, diags := model.ToApi(ctx)
+	if diags.HasError() {
+		t.Fatalf("converting Terraform map to API model: %v", diags)
+	}
+	for key, value := range want {
+		if apiModel.ScheduleRotationableAttributes[key] != value {
+			t.Errorf("API attribute %q = %v, want %q", key, apiModel.ScheduleRotationableAttributes[key], value)
+		}
+	}
+
+	var roundTripped ScheduleRotationResourceModel
+	diags = roundTripped.FromApi(ctx, apiclient.ScheduleRotation{
+		ScheduleRotationableAttributes: map[string]any{
+			"handoff_time": "09:00",
+			"end_of_day":   "17:00",
+			"shift_length": float64(7),
+		},
+	})
+	if diags.HasError() {
+		t.Fatalf("converting API model to Terraform map: %v", diags)
+	}
+	got, diags := roundTripped.ScheduleRotationableAttributes.Get(ctx)
+	if diags.HasError() {
+		t.Fatalf("reading Terraform map: %v", diags)
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("round-tripped attributes = %#v, want %#v", got, want)
+	}
+}
 
 func TestAccResourceScheduleRotation_Validation(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
@@ -97,7 +159,7 @@ func TestAccResourceScheduleRotation_UpgradeFromVersion(t *testing.T) {
 					configStateChecks,
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("active_days"), knownvalue.SetSizeExact(0)),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("end_time"), knownvalue.StringExact("")),
-					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotationable_attributes"), knownvalue.ObjectExact(map[string]knownvalue.Check{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotationable_attributes"), knownvalue.MapExact(map[string]knownvalue.Check{
 						"handoff_time":      knownvalue.StringExact("09:00"),
 						"shift_length":      knownvalue.StringExact("7"),
 						"shift_length_unit": knownvalue.StringExact("days"),
@@ -111,10 +173,9 @@ func TestAccResourceScheduleRotation_UpgradeFromVersion(t *testing.T) {
 					configStateChecks,
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("active_days"), knownvalue.SetSizeExact(0)),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("end_time"), knownvalue.Null()),
-					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotationable_attributes"), knownvalue.ObjectExact(map[string]knownvalue.Check{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotationable_attributes"), knownvalue.MapExact(map[string]knownvalue.Check{
 						"handoff_time":      knownvalue.StringExact("09:00"),
-						"handoff_day":       knownvalue.Null(),
-						"shift_length":      knownvalue.Int64Exact(7),
+						"shift_length":      knownvalue.StringExact("7"),
 						"shift_length_unit": knownvalue.StringExact("days"),
 					})),
 				),
@@ -132,10 +193,9 @@ func TestAccResourceScheduleRotation_UpgradeFromVersion(t *testing.T) {
 						knownvalue.StringExact("W"),
 					})),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("end_time"), knownvalue.Null()),
-					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotationable_attributes"), knownvalue.ObjectExact(map[string]knownvalue.Check{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotationable_attributes"), knownvalue.MapExact(map[string]knownvalue.Check{
 						"handoff_time":      knownvalue.StringExact("09:00"),
-						"handoff_day":       knownvalue.Null(),
-						"shift_length":      knownvalue.Int64Exact(7),
+						"shift_length":      knownvalue.StringExact("7"),
 						"shift_length_unit": knownvalue.StringExact("days"),
 					})),
 				),
@@ -157,10 +217,9 @@ func TestAccResourceScheduleRotation_Basic(t *testing.T) {
 		statecheck.ExpectKnownValue(addr, tfjsonpath.New("active_time_type"), knownvalue.StringExact("all_day")),
 		statecheck.ExpectKnownValue(addr, tfjsonpath.New("time_zone"), knownvalue.StringExact("UTC")),
 		statecheck.ExpectKnownValue(addr, tfjsonpath.New("start_time"), knownvalue.StringExact("2025-06-20T00:00:00Z")),
-		statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotationable_attributes"), knownvalue.ObjectExact(map[string]knownvalue.Check{
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotationable_attributes"), knownvalue.MapExact(map[string]knownvalue.Check{
 			"handoff_time":      knownvalue.StringExact("09:00"),
-			"handoff_day":       knownvalue.Null(),
-			"shift_length":      knownvalue.Int64Exact(7),
+			"shift_length":      knownvalue.StringExact("7"),
 			"shift_length_unit": knownvalue.StringExact("days"),
 		})),
 		statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotation_members"), knownvalue.SetExact([]knownvalue.Check{
