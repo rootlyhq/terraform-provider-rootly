@@ -142,7 +142,7 @@ resource "rootly_escalation_level" "first" {
 resource "rootly_escalation_level" "teams_channel" {
   escalation_policy_path_id = rootly_escalation_path.default.id
   escalation_policy_id      = rootly_escalation_policy.primary.id
-  position                  = 2
+  position                  = 4
   delay                     = 5
   notification_target_params {
     type = "microsoft_teams_channel"
