@@ -105,7 +105,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "When continuously repeat is true, repeat workflows aren't automatically stopped when conditions aren't met. This setting won't override your conditions set by repeat_condition_duration_since_first_run and repeat_condition_number_of_repeats parameters.. Value must be one of true or false",
+				Description: "When continuously repeat is true, repeat workflows aren't automatically stopped when conditions aren't met. This setting won't override your conditions set by repeat_condition_duration_since_first_run and repeat_condition_number_of_repeats parameters. Value must be one of true or false",
 			},
 
 			"repeat_on": &schema.Schema{
@@ -131,7 +131,7 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    true,
-				Description: "Restricts workflow edits to admins when turned on. Only admins can set this field.. Value must be one of true or false",
+				Description: "Restricts workflow edits to admins when turned on. Only admins can set this field. Value must be one of true or false",
 			},
 
 			"position": &schema.Schema{
@@ -601,6 +601,36 @@ func resourceWorkflowActionItem() *schema.Resource {
 				Optional:         true,
 				Description:      "",
 			},
+
+			"failure_notification_mode": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Where failure notifications for this workflow are sent. `inherit` uses the account default channel, `custom` uses `failure_notification_channels`, `off` suppresses them. Value must be one of `inherit`, `custom`, `off`.",
+			},
+
+			"failure_notification_channels": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Slack channels notified when a run of this workflow fails. Used when `failure_notification_mode` is `custom`.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Slack channel ID. Liquid is allowed, for example `{{ incident.slack_channel_id }}` for the incident channel.",
+						},
+						"name": &schema.Schema{
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Slack channel name",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -684,6 +714,12 @@ func resourceWorkflowActionItemCreate(ctx context.Context, d *schema.ResourceDat
 	if value, ok := d.GetOkExists("sub_status_ids"); ok {
 		s.SubStatusIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("failure_notification_mode"); ok {
+		s.FailureNotificationMode = value.(string)
+	}
+	if value, ok := d.GetOkExists("failure_notification_channels"); ok {
+		s.FailureNotificationChannels = value.([]interface{})
+	}
 
 	res, err := c.CreateWorkflow(s)
 	if err != nil {
@@ -742,6 +778,8 @@ func resourceWorkflowActionItemRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("group_ids", item.GroupIds)
 	d.Set("cause_ids", item.CauseIds)
 	d.Set("sub_status_ids", item.SubStatusIds)
+	d.Set("failure_notification_mode", item.FailureNotificationMode)
+	d.Set("failure_notification_channels", item.FailureNotificationChannels)
 
 	return nil
 }
@@ -827,6 +865,12 @@ func resourceWorkflowActionItemUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("sub_status_ids") {
 		s.SubStatusIds = d.Get("sub_status_ids").([]interface{})
+	}
+	if d.HasChange("failure_notification_mode") {
+		s.FailureNotificationMode = d.Get("failure_notification_mode").(string)
+	}
+	if d.HasChange("failure_notification_channels") {
+		s.FailureNotificationChannels = d.Get("failure_notification_channels").([]interface{})
 	}
 
 	_, err := c.UpdateWorkflow(d.Id(), s)
