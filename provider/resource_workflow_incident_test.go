@@ -75,8 +75,6 @@ resource "rootly_workflow_incident" "foo3" {
 `, rName)
 }
 
-// Requires the `per-workflow-failure-notifications` feature flag to be enabled
-// for the test account; the API returns 403 "Feature Not Enabled" otherwise.
 func TestAccResourceWorkflowIncidentFailureNotifications(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-wf-inc-fn")
 
