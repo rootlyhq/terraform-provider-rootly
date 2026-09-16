@@ -210,6 +210,23 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
+						"allow_cross_workflow_threading": &schema.Schema{
+							Description: "When set to true, allows workflows from different sources (e.g. different incidents or alerts) to thread together on the same parent message.. Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+						"retry_count": &schema.Schema{
+							Description: "Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Default:     nil,
+						},
+						"retry_wait_time": &schema.Schema{
+							Description: "Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Default:     nil,
+						},
 					},
 				},
 			},
