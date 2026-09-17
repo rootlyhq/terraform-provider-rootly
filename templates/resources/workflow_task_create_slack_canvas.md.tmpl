@@ -1,0 +1,30 @@
+---
+page_title: "{{.Type}} {{.Name}} - terraform-provider-rootly"
+subcategory: Workflow Tasks
+description: |-
+  Configures a Slack Canvas action in a Rootly workflow.
+---
+
+# {{.Type}} ({{.Name}})
+
+Configures an action that creates an incident channel Canvas. Terraform manages the workflow action configuration; the action writes to Slack when its workflow runs. Your organization needs access to Rootly's Slack Canvas workflow actions and a Slack integration with the required Canvas permissions.
+
+The example starts with both the workflow and action disabled. Replace the workspace values with your Slack workspace, then enable the workflow and action when ready. The optional `channel.workspace` block selects the workspace for an Enterprise Slack installation. Omit it for a regular workspace installation. Removing a previously configured workspace block clears that selection.
+
+The workflow runs after its incident Slack channel is created. Creating a Canvas preserves an existing channel Canvas.
+
+{{ if .HasExample -}}
+## Example Usage
+
+{{ codefile "terraform" .ExampleFile }}
+{{- end }}
+
+{{ .SchemaMarkdown | trimspace }}
+
+## Import
+
+Import the workflow action using its Rootly workflow task ID:
+
+```sh
+terraform import {{.Name}}.report a816421c-6ceb-481a-87c4-585e47451f24
+```
