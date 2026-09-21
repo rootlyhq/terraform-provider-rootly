@@ -45,6 +45,7 @@ resource "rootly_alert_group" "example" {
 - `description` (String) The description of the alert group
 - `group_by_alert_title` (Boolean, Deprecated) [DEPRECATED] Whether the alerts are grouped by title or not. This field is deprecated. Please use the `conditions` field with advanced alert grouping instead.. Value must be one of true or false
 - `group_by_alert_urgency` (Boolean, Deprecated) [DEPRECATED] Whether the alerts are grouped by urgency or not. This field is deprecated. Please use the `conditions` field with advanced alert grouping instead.. Value must be one of true or false
+- `owner_group_ids` (List of String) Teams that own this alert group. Admins of an owning team can manage it, and an owned alert group can only target destinations that belong to its owning teams. Only available when owning teams for alert groups are enabled for the organization.
 - `slug` (String, Deprecated) [DEPRECATED] The slug of the alert group. Derived from `name`; any configured value is ignored.
 - `targets` (Block List) (see [below for nested schema](#nestedblock--targets))
 - `time_window` (Number) Time window for the alert grouping
