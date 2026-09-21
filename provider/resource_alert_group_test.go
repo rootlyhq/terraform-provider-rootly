@@ -43,9 +43,9 @@ func TestAccResourceAlertGroup(t *testing.T) {
 }
 
 func testAccResourceAlertGroupConfig(rName string, withOwnerTeam bool) string {
-	ownerGroupIds := "[]"
+	ownerGroupIds := ""
 	if withOwnerTeam {
-		ownerGroupIds = "[rootly_team.tf.id]"
+		ownerGroupIds = "owner_group_ids = [rootly_team.tf.id]"
 	}
 
 	return fmt.Sprintf(`
@@ -61,7 +61,7 @@ resource "rootly_team" "tf" {
 resource "rootly_alert_group" "tf1" {
 	name = "%s-1"
 	description = "tf"
-	owner_group_ids = %s
+	%s
 	targets {
 		target_type = "Group"
 		target_id = rootly_team.tf.id

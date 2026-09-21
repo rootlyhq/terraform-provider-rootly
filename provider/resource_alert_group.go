@@ -120,7 +120,7 @@ func resourceAlertGroup() *schema.Resource {
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
-				Description:      "Teams that own this alert group. Admins of an owning team can manage it, and an owned alert group can only target destinations that belong to its owning teams. Only available when owning teams for alert groups are enabled for the organization.",
+				Description:      "Teams that own this alert group. Admins of an owning team can manage it, and an owned alert group can only target destinations that belong to its owning teams. Only available when owning teams for alert groups are enabled for the organization. Set this explicitly when the provider uses a team-scoped API key: omitting it makes the API assign that key's own teams, which the key cannot later clear.",
 			},
 
 			"targets": &schema.Schema{
