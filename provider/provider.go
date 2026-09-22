@@ -310,7 +310,6 @@ func New(version string) func() *schema.Provider {
 				"rootly_workflow_task_publish_incident":                                resourceWorkflowTaskPublishIncident(),
 				"rootly_workflow_task_redis_client":                                    resourceWorkflowTaskRedisClient(),
 				"rootly_workflow_task_rename_slack_channel":                            resourceWorkflowTaskRenameSlackChannel(),
-				"rootly_workflow_task_remove_from_slack_channel":                       resourceWorkflowTaskRemoveFromSlackChannel(),
 				"rootly_workflow_task_change_slack_channel_privacy":                    resourceWorkflowTaskChangeSlackChannelPrivacy(),
 				"rootly_workflow_task_run_command_heroku":                              resourceWorkflowTaskRunCommandHeroku(),
 				"rootly_workflow_task_send_email":                                      resourceWorkflowTaskSendEmail(),

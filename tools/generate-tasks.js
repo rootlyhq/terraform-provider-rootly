@@ -43,7 +43,6 @@ const taskCustomizeDiffs = {
 };
 
 const taskTestSkips = {
-  remove_from_slack_channel: "API requires Taskable to exist",
   send_microsoft_teams_blocks: "API returns 500 on workflow task creation",
   update_attached_alerts: "API requires task name but it should be auto-assigned",
 };
