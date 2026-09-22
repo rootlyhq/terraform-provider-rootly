@@ -112,10 +112,11 @@ func resourceWorkflowTaskUpdatePagerdutyIncident() *schema.Resource {
 							Optional:    true,
 						},
 						"escalation_level": &schema.Schema{
-							Description: "Escalation level of policy attached to incident",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     nil,
+							Description:  "Escalation level of policy attached to incident",
+							Type:         schema.TypeInt,
+							Optional:     true,
+							Default:      nil,
+							ValidateFunc: validation.IntBetween(1, 20),
 						},
 						"urgency": &schema.Schema{
 							Description: "PagerDuty incident urgency, selecting auto will let Rootly auto map our incident severity. Value must be one of `high`, `low`, `auto`.",

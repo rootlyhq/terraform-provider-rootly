@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -15,6 +16,12 @@ import (
 
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
+
+var workflowTaskUpdateSlackCanvasObjectFields = sdkutils.WorkflowTaskObjectFields{
+	"channel": sdkutils.WorkflowTaskObjectFields{
+		"workspace": sdkutils.WorkflowTaskObjectFields{},
+	},
+}
 
 func resourceWorkflowTaskUpdateSlackCanvas() *schema.Resource {
 	return &schema.Resource{
@@ -110,7 +117,7 @@ func resourceWorkflowTaskUpdateSlackCanvas() *schema.Resource {
 													Description:  "Slack workspace ID. Enter a literal ID from Slack.",
 													Type:         schema.TypeString,
 													Required:     true,
-													ValidateFunc: validation.StringIsNotWhiteSpace,
+													ValidateFunc: validation.All(validation.StringIsNotWhiteSpace, validation.StringDoesNotContainAny("{}")),
 												},
 												"name": &schema.Schema{
 													Description:  "Workspace display name.",
@@ -130,7 +137,7 @@ func resourceWorkflowTaskUpdateSlackCanvas() *schema.Resource {
 							Required:    true,
 						},
 						"operation": &schema.Schema{
-							Description: "Append content, replace all content, or replace only registered tables in a canvas created by Rootly from a managed template while preserving content outside them. Matching labels do not register an existing canvas. Managed sections overwrite edits inside those tables and require Slack reauthorization with canvases:read and canvases:write.. Value must be one of `insert_at_end`, `replace`, `managed_sections`.",
+							Description: "Append content, replace all content, or replace only registered tables in a canvas created by Rootly from a managed template while preserving content outside them. Matching labels do not register an existing canvas. Managed sections overwrite edits inside those tables and require Slack reauthorization with canvases:read and canvases:write. Value must be one of `insert_at_end`, `replace`, `managed_sections`.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "insert_at_end",
@@ -170,8 +177,7 @@ func resourceWorkflowTaskUpdateSlackCanvasCreate(ctx context.Context, d *schema.
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
-	taskParamsSchema := resourceWorkflowTaskUpdateSlackCanvas().Schema["task_params"].Elem.(*schema.Resource).Schema
-	taskParams, err := sdkutils.FlattenWorkflowTaskObjects(taskParams, taskParamsSchema)
+	taskParams, err := sdkutils.WorkflowTaskBlocksToObjects(taskParams, workflowTaskUpdateSlackCanvasObjectFields)
 	if err != nil {
 		return diag.Errorf("Error preparing workflow task parameters: %s", err)
 	}
@@ -222,7 +228,7 @@ func resourceWorkflowTaskUpdateSlackCanvasRead(ctx context.Context, d *schema.Re
 	d.Set("enabled", res.Enabled)
 	taskParamsSchema := resourceWorkflowTaskUpdateSlackCanvas().Schema["task_params"].Elem.(*schema.Resource).Schema
 	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)
-	safeTaskParams, err = sdkutils.ExpandWorkflowTaskObjects(safeTaskParams, taskParamsSchema)
+	safeTaskParams, err = sdkutils.WorkflowTaskObjectsToBlocks(safeTaskParams, workflowTaskUpdateSlackCanvasObjectFields)
 	if err != nil {
 		return diag.Errorf("Error reading workflow task parameters: %s", err)
 	}
@@ -243,8 +249,7 @@ func resourceWorkflowTaskUpdateSlackCanvasUpdate(ctx context.Context, d *schema.
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
-	taskParamsSchema := resourceWorkflowTaskUpdateSlackCanvas().Schema["task_params"].Elem.(*schema.Resource).Schema
-	taskParams, err := sdkutils.FlattenWorkflowTaskObjects(taskParams, taskParamsSchema)
+	taskParams, err := sdkutils.WorkflowTaskBlocksToObjects(taskParams, workflowTaskUpdateSlackCanvasObjectFields)
 	if err != nil {
 		return diag.Errorf("Error preparing workflow task parameters: %s", err)
 	}

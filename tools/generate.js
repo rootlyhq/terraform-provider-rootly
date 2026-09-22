@@ -112,6 +112,7 @@ const excluded = {
     "on_call_role",
     "oncall",
     "override_shift",
+    "private_agent", // lifecycle uses enrollment-token/revoke endpoints; no create/delete CRUD endpoints
     "post_mortem_template",
     "pulse",
     "retrospective_configuration",
@@ -136,6 +137,9 @@ const excluded = {
     "escalation_level", // manual fix: delay is a nullable *int so it can be both omitted and explicitly 0 (TER-182, #351)
     "escalation_path", // manual fix: initial_delay must not use omitempty so 0 is sent (c74784b)
     "user", // hand-maintained: exposes on_call_role/role relations + on_call_role update
+  ],
+  workflowTasks: [
+    "remove_from_slack_channel", // not ready for Terraform: API rejects an otherwise empty task_params object
   ]
 }
 
@@ -214,6 +218,7 @@ function workflowTaskResources() {
   return Object.keys(swagger.components.schemas)
     .filter((key) => key.match(/_task_params/))
     .map((key) => key.replace("_task_params", ""))
+    .filter((name) => !excluded.workflowTasks.includes(name))
 }
 
 function generateProvider(resources, taskResources, dataSources) {

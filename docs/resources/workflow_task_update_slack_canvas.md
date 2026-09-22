@@ -80,7 +80,7 @@ Required:
 
 Optional:
 
-- `operation` (String) Append content, replace all content, or replace only registered tables in a canvas created by Rootly from a managed template while preserving content outside them. Matching labels do not register an existing canvas. Managed sections overwrite edits inside those tables and require Slack reauthorization with canvases:read and canvases:write.. Value must be one of `insert_at_end`, `replace`, `managed_sections`.
+- `operation` (String) Append content, replace all content, or replace only registered tables in a canvas created by Rootly from a managed template while preserving content outside them. Matching labels do not register an existing canvas. Managed sections overwrite edits inside those tables and require Slack reauthorization with canvases:read and canvases:write. Value must be one of `insert_at_end`, `replace`, `managed_sections`.
 - `retry_count` (Number) Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
 - `retry_wait_time` (Number) Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
 - `task_type` (String)

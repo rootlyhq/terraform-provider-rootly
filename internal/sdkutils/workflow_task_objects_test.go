@@ -3,33 +3,18 @@ package sdkutils
 import (
 	"reflect"
 	"testing"
-
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
-func workflowTaskObjectTestSchema() map[string]*schema.Schema {
-	return map[string]*schema.Schema{
+func workflowTaskObjectTestFields() WorkflowTaskObjectFields {
+	return WorkflowTaskObjectFields{
 		"channel": {
-			Type: schema.TypeList, Required: true, MaxItems: 1,
-			Elem: &schema.Resource{Schema: map[string]*schema.Schema{
-				"id":   {Type: schema.TypeString, Required: true},
-				"name": {Type: schema.TypeString, Required: true},
-				"workspace": {
-					Type: schema.TypeList, Optional: true, MaxItems: 1,
-					Elem: &schema.Resource{Schema: map[string]*schema.Schema{
-						"id":   {Type: schema.TypeString, Required: true},
-						"name": {Type: schema.TypeString, Required: true},
-					}},
-				},
-			}},
+			"workspace": {},
 		},
-		"content": {Type: schema.TypeString, Required: true},
-		"flat":    {Type: schema.TypeMap, Optional: true},
 	}
 }
 
 func TestWorkflowTaskObjectsRoundTrip(t *testing.T) {
-	fields := workflowTaskObjectTestSchema()
+	fields := workflowTaskObjectTestFields()
 	api := map[string]interface{}{
 		"channel": map[string]interface{}{
 			"id": "C123", "name": "incidents",
@@ -38,11 +23,11 @@ func TestWorkflowTaskObjectsRoundTrip(t *testing.T) {
 		"content": "# {{ incident.title }}",
 		"flat":    map[string]interface{}{"id": "unchanged", "name": "flat map"},
 	}
-	state, err := ExpandWorkflowTaskObjects(api, fields)
+	state, err := WorkflowTaskObjectsToBlocks(api, fields)
 	if err != nil {
 		t.Fatal(err)
 	}
-	actual, err := FlattenWorkflowTaskObjects(state, fields)
+	actual, err := WorkflowTaskBlocksToObjects(state, fields)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -58,12 +43,12 @@ func TestWorkflowTaskObjectsRoundTrip(t *testing.T) {
 }
 
 func TestWorkflowTaskObjectsClearWorkspace(t *testing.T) {
-	fields := workflowTaskObjectTestSchema()
+	fields := workflowTaskObjectTestFields()
 	for _, value := range []interface{}{nil, []interface{}{}} {
 		state := map[string]interface{}{"channel": []interface{}{map[string]interface{}{
 			"id": "C123", "name": "incidents", "workspace": value,
 		}}}
-		api, err := FlattenWorkflowTaskObjects(state, fields)
+		api, err := WorkflowTaskBlocksToObjects(state, fields)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -73,7 +58,7 @@ func TestWorkflowTaskObjectsClearWorkspace(t *testing.T) {
 			t.Fatalf("clear must preserve explicit null: %#v", channel)
 		}
 		delete(channel, "workspace")
-		reloaded, err := ExpandWorkflowTaskObjects(api, fields)
+		reloaded, err := WorkflowTaskObjectsToBlocks(api, fields)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -85,13 +70,13 @@ func TestWorkflowTaskObjectsClearWorkspace(t *testing.T) {
 }
 
 func TestWorkflowTaskObjectsRejectInvalidShapes(t *testing.T) {
-	fields := workflowTaskObjectTestSchema()
+	fields := workflowTaskObjectTestFields()
 	for _, value := range []interface{}{"invalid", []interface{}{"invalid"}, []interface{}{map[string]interface{}{}, map[string]interface{}{}}} {
-		if _, err := FlattenWorkflowTaskObjects(map[string]interface{}{"channel": value}, fields); err == nil {
+		if _, err := WorkflowTaskBlocksToObjects(map[string]interface{}{"channel": value}, fields); err == nil {
 			t.Fatalf("accepted invalid block shape: %T", value)
 		}
 	}
-	if _, err := ExpandWorkflowTaskObjects(map[string]interface{}{"channel": "invalid"}, fields); err == nil {
+	if _, err := WorkflowTaskObjectsToBlocks(map[string]interface{}{"channel": "invalid"}, fields); err == nil {
 		t.Fatal("accepted invalid API object")
 	}
 }

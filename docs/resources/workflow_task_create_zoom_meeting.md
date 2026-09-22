@@ -48,6 +48,8 @@ Optional:
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `record_meeting` (Boolean) Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting. Value must be one of true or false
 - `recording_mode` (String) The video layout for the bot's recording (e.g. speaker_view, gallery_view, gallery_view_v2, audio_only). Value must be one of `speaker_view`, `gallery_view`, `gallery_view_v2`, `audio_only`.
+- `retry_count` (Number) Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+- `retry_wait_time` (Number) Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
 - `task_type` (String)
 
 <a id="nestedblock--task_params--post_to_slack_channels"></a>

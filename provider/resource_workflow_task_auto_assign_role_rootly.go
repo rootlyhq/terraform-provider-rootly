@@ -77,11 +77,6 @@ func resourceWorkflowTaskAutoAssignRoleRootly() *schema.Resource {
 								"auto_assign_role_rootly",
 							}, false),
 						},
-						"incident_role_id": &schema.Schema{
-							Description: "The role id",
-							Type:        schema.TypeString,
-							Required:    true,
-						},
 						"escalation_policy_target": &schema.Schema{
 							Description: "Map must contain two fields, `id` and `name`. ",
 							Type:        schema.TypeMap,
@@ -106,6 +101,11 @@ func resourceWorkflowTaskAutoAssignRoleRootly() *schema.Resource {
 							Description: "Map must contain two fields, `id` and `name`. ",
 							Type:        schema.TypeMap,
 							Optional:    true,
+						},
+						"incident_role_id": &schema.Schema{
+							Description: "The role id",
+							Type:        schema.TypeString,
+							Required:    true,
 						},
 					},
 				},

@@ -163,7 +163,6 @@ func resourceSchedule() *schema.Resource {
 				ForceNew:    false,
 				Description: "A valid IANA time zone name. Only applicable when config_one_timezone_per_schedule_enabled is true for the organization.",
 			},
-
 		},
 	}
 }

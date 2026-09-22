@@ -42,6 +42,11 @@ const taskCustomizeDiffs = {
   publish_incident: "validatePublishIncidentWorkflowTaskDiff",
 };
 
+const taskTestSkips = {
+  send_microsoft_teams_blocks: "API returns 500 on workflow task creation",
+  update_attached_alerts: "API requires task name but it should be auto-assigned",
+};
+
 module.exports = function generateWorkflowTaskResources(tasks, swagger) {
 	tasks.forEach((taskName) => {
 		const taskSchema = swagger.components.schemas[`${taskName}_task_params`]
@@ -56,11 +61,27 @@ module.exports = function generateWorkflowTaskResources(tasks, swagger) {
 	})
 };
 
+function isJSONProperty(property) {
+  return property.type === "string" && property.description && property.description.match(/JSON/);
+}
+
 function hasJSONProperty(task_schema) {
   return Object.values(task_schema.properties).some(
-    (p) => (p.type === "string" && p.description && p.description.match(/JSON/)) ||
-      (p.tf_nested_object && hasJSONProperty(p))
+    (property) => isJSONProperty(property) ||
+      (property.tf_nested_object && hasJSONProperty(property))
   );
+}
+
+function genWorkflowTaskObjectFields(task_schema, indentation = "") {
+  const fields = Object.entries(task_schema.properties)
+    .filter(([, property]) => property.tf_nested_object);
+  if (fields.length === 0) {
+    return "sdkutils.WorkflowTaskObjectFields{}";
+  }
+  const childIndentation = `${indentation}\t`;
+  return `sdkutils.WorkflowTaskObjectFields{\n${fields
+    .map(([name, property]) => `${childIndentation}"${name}": ${genWorkflowTaskObjectFields(property, childIndentation)},`)
+    .join("\n")}\n${indentation}}`;
 }
 
 function genResourceFile(task_name, task_schema) {
@@ -94,7 +115,9 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
-func resourceWorkflowTask${task_name_camel}() *schema.Resource {
+${hasNestedObjects ? `var workflowTask${task_name_camel}ObjectFields = ${genWorkflowTaskObjectFields(task_schema)}
+
+` : ""}func resourceWorkflowTask${task_name_camel}() *schema.Resource {
 	return &schema.Resource{
 		Description: "Manages workflow ${task_name} task.",
 
@@ -188,8 +211,7 @@ func resourceWorkflowTask${task_name_camel}Create(ctx context.Context, d *schema
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})${hasNestedObjects ? `
-	taskParamsSchema := resourceWorkflowTask${task_name_camel}().Schema["task_params"].Elem.(*schema.Resource).Schema
-	taskParams, err := sdkutils.FlattenWorkflowTaskObjects(taskParams, taskParamsSchema)
+	taskParams, err := sdkutils.WorkflowTaskBlocksToObjects(taskParams, workflowTask${task_name_camel}ObjectFields)
 	if err != nil {
 		return diag.Errorf("Error preparing workflow task parameters: %s", err)
 	}` : ""}
@@ -240,7 +262,7 @@ func resourceWorkflowTask${task_name_camel}Read(ctx context.Context, d *schema.R
 	d.Set("enabled", res.Enabled)
 	taskParamsSchema := resourceWorkflowTask${task_name_camel}().Schema["task_params"].Elem.(*schema.Resource).Schema
 	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)${hasNestedObjects ? `
-	safeTaskParams, err = sdkutils.ExpandWorkflowTaskObjects(safeTaskParams, taskParamsSchema)
+	safeTaskParams, err = sdkutils.WorkflowTaskObjectsToBlocks(safeTaskParams, workflowTask${task_name_camel}ObjectFields)
 	if err != nil {
 		return diag.Errorf("Error reading workflow task parameters: %s", err)
 	}` : ""}
@@ -261,8 +283,7 @@ func resourceWorkflowTask${task_name_camel}Update(ctx context.Context, d *schema
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})${hasNestedObjects ? `
-	taskParamsSchema := resourceWorkflowTask${task_name_camel}().Schema["task_params"].Elem.(*schema.Resource).Schema
-	taskParams, err := sdkutils.FlattenWorkflowTaskObjects(taskParams, taskParamsSchema)
+	taskParams, err := sdkutils.WorkflowTaskBlocksToObjects(taskParams, workflowTask${task_name_camel}ObjectFields)
 	if err != nil {
 		return diag.Errorf("Error preparing workflow task parameters: %s", err)
 	}` : ""}
@@ -313,16 +334,12 @@ function annotatedDescription(schema) {
     .replace(/"/g, '\\"')
     .replace(/ex. .+$/, "");
   if (schema.enum) {
-    return `${
-      !!description ? `${description}. ` : ""
-    }Value must be one of ${schema.enum
+    return `${descriptionConstraintPrefix(description)}Value must be one of ${schema.enum
       .map((val) => `\`${val}\``)
       .join(", ")}.`;
   }
   if (schema.type === "array" && schema.items && schema.items.enum) {
-    return `${
-      !!description ? `${description}. ` : ""
-    }Value must be one of ${schema.items.enum
+    return `${descriptionConstraintPrefix(description)}Value must be one of ${schema.items.enum
       .map((val) => `\`${val}\``)
       .join(", ")}.`;
   }
@@ -336,11 +353,14 @@ function annotatedDescription(schema) {
     return `Map must contain two fields, \`id\` and \`name\`. ${description}`;
   }
   if (schema.type === "boolean") {
-    return `${
-      !!description ? `${description}. ` : ""
-    }Value must be one of true or false`;
+    return `${descriptionConstraintPrefix(description)}Value must be one of true or false`;
   }
   return description;
+}
+
+function descriptionConstraintPrefix(description) {
+  if (!description) return "";
+  return `${description}${/[.!?]$/.test(description) ? "" : "."} `;
 }
 
 function genTaskSchemaProperty(property_name, property_schema, required_props, nested_object = false) {
@@ -361,10 +381,7 @@ function genTaskSchemaProperty(property_name, property_schema, required_props, n
               },
             },`;
   }
-  const isJSON =
-    property_schema.type === "string" &&
-    property_schema.description &&
-    property_schema.description.match(/JSON/);
+  const isJSON = isJSONProperty(property_schema);
   let a = `						"${property_name}": &schema.Schema {
 							Description: "${annotatedDescription(property_schema)}",
 							Type: ${genTaskSchemaPropertyType(property_schema.type)},
@@ -390,8 +407,12 @@ function genTaskSchemaProperty(property_name, property_schema, required_props, n
     }
   }
   if (nested_object && property_schema.type === "string" && property_schema.minLength === 1 && !property_schema.enum && !isJSON) {
+    const notBlank = `validation.${property_schema.pattern === "\\S" ? "StringIsNotWhiteSpace" : "StringIsNotEmpty"}`;
+    const validator = property_schema.tf_no_liquid
+      ? `validation.All(${notBlank}, validation.StringDoesNotContainAny("{}"))`
+      : notBlank;
     a = `${a}
-							ValidateFunc: validation.${property_schema.pattern === "\\S" ? "StringIsNotWhiteSpace" : "StringIsNotEmpty"},`;
+							ValidateFunc: ${validator},`;
   }
   if (property_schema.enum) {
     if (!isRequired) {
@@ -516,7 +537,7 @@ import (
 )
 
 func TestAccResourceWorkflowTask${task_name_camel}(t *testing.T) {
-	t.Parallel()
+	${taskTestSkips[task_name] ? `t.Skip("${taskTestSkips[task_name]}")` : "t.Parallel()"}
 	rName := acctest.RandomWithPrefix("tf-wf-task")
 
 	resource.UnitTest(t, resource.TestCase{

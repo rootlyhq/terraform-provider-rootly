@@ -11,15 +11,16 @@ import (
 )
 
 type AlertUrgency struct {
-	ID          string `jsonapi:"primary,alert_urgencies"`
-	Id          string `jsonapi:"attr,id,omitempty"`
-	Name        string `jsonapi:"attr,name,omitempty"`
-	Description string `jsonapi:"attr,description,omitempty"`
-	Position    int    `jsonapi:"attr,position,omitempty"`
-	Urgency     string `jsonapi:"attr,urgency,omitempty"`
-	Color       string `jsonapi:"attr,color,omitempty"`
-	TeamId      int    `jsonapi:"attr,team_id,omitempty"`
-	DeletedAt   string `jsonapi:"attr,deleted_at,omitempty"`
+	ID                      string `jsonapi:"primary,alert_urgencies"`
+	Id                      string `jsonapi:"attr,id,omitempty"`
+	Name                    string `jsonapi:"attr,name,omitempty"`
+	Description             string `jsonapi:"attr,description,omitempty"`
+	Position                int    `jsonapi:"attr,position,omitempty"`
+	RetriggerTimeoutMinutes int    `jsonapi:"attr,retrigger_timeout_minutes,omitempty"`
+	Urgency                 string `jsonapi:"attr,urgency,omitempty"`
+	Color                   string `jsonapi:"attr,color,omitempty"`
+	TeamId                  int    `jsonapi:"attr,team_id,omitempty"`
+	DeletedAt               string `jsonapi:"attr,deleted_at,omitempty"`
 }
 
 func (c *Client) ListAlertUrgencies(params *rootlygo.ListAlertUrgenciesParams) ([]interface{}, error) {
@@ -116,10 +117,11 @@ func (c *Client) DeleteAlertUrgency(id string) error {
 		return fmt.Errorf("Error building request: %w", err)
 	}
 
-	_, err = c.Do(req)
+	resp, err := c.Do(req)
 	if err != nil {
 		return fmt.Errorf("Failed to make request to delete alert_urgency: %w", err)
 	}
+	resp.Body.Close()
 
 	return nil
 }

@@ -124,10 +124,11 @@ func (c *Client) Delete${nameCamel}(id string) error {
 		return fmt.Errorf("Error building request: %w", err)
 	}
 
-	_, err = c.Do(req)
+	resp, err := c.Do(req)
 	if err != nil {
 		return fmt.Errorf("Failed to make request to delete ${name}: %w", err)
 	}
+	resp.Body.Close()
 
 	return nil
 }

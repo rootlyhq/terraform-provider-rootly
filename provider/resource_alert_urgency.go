@@ -68,6 +68,17 @@ func resourceAlertUrgency() *schema.Resource {
 				Description: "Position of the alert urgency",
 			},
 
+			"retrigger_timeout_minutes": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, negative = never.",
+			},
+
 			"urgency": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -134,6 +145,9 @@ func resourceAlertUrgencyCreate(ctx context.Context, d *schema.ResourceData, met
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
+	if value, ok := d.GetOkExists("retrigger_timeout_minutes"); ok {
+		s.RetriggerTimeoutMinutes = value.(int)
+	}
 	if value, ok := d.GetOkExists("urgency"); ok {
 		s.Urgency = value.(string)
 	}
@@ -179,6 +193,7 @@ func resourceAlertUrgencyRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("name", item.Name)
 	d.Set("description", item.Description)
 	d.Set("position", item.Position)
+	d.Set("retrigger_timeout_minutes", item.RetriggerTimeoutMinutes)
 	d.Set("urgency", item.Urgency)
 	d.Set("color", item.Color)
 	d.Set("team_id", item.TeamId)
@@ -204,6 +219,9 @@ func resourceAlertUrgencyUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
+	}
+	if d.HasChange("retrigger_timeout_minutes") {
+		s.RetriggerTimeoutMinutes = d.Get("retrigger_timeout_minutes").(int)
 	}
 	if d.HasChange("urgency") {
 		s.Urgency = d.Get("urgency").(string)

@@ -139,6 +139,7 @@ function setResourceFields(name, resourceSchema) {
 
   return Object.entries(resourceSchema.properties)
     .filter(excludeIgnoredProperties)
+    .filter(([, schema]) => !schema.tf_create_only)
     .map(([field]) => {
       const schema = resourceSchema.properties[field];
 
@@ -301,6 +302,7 @@ function updateResourceFields(name, resourceSchema, writableFields, deprecatedFi
 
   return Object.entries(resourceSchema.properties)
     .filter(excludeIgnoredProperties)
+    .filter(([, schema]) => !schema.tf_create_only)
     .filter(([field, schema]) => !(schema.tf_computed && writableFields && !writableFields.includes(field)))
     // Deprecated properties are ignored by the API, so stop sending them.
     .filter(([field]) => !(deprecatedFields && deprecatedFields[field]))
@@ -524,8 +526,9 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
   const description = annotatedDescription(schema);
   const sensitive = schema.tf_sensitive ? "true" : "false";
   const forceNew =
-    name === pathIdField || schema.tf_force_new ? "true" : "false";
+    name === pathIdField || schema.tf_force_new || schema.tf_create_only ? "true" : "false";
   const writeOnly = schema.tf_write_only ? "true" : "false";
+  const computed = schema.tf_computed ? "true" : optional;
 
   // A property the create schema marks `deprecated: true` is accepted on write
   // but ignored by the API. Keep it settable so no configuration breaks, warn
@@ -575,7 +578,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
       return `
       "${name}": &schema.Schema {
         Type: schema.TypeInt,
-        Computed: ${optional},
+        Computed: ${computed},
         Required: ${required},
         Optional: ${optional},
         Sensitive: ${sensitive},
@@ -589,7 +592,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
       return `
 			"${name}": &schema.Schema {
 				Type: schema.TypeFloat,
-				Computed: ${optional},
+				Computed: ${computed},
 				Required: ${required},
 				Optional: ${optional},
         Sensitive: ${sensitive},
@@ -630,7 +633,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
       return `
         "${name}": &schema.Schema {
           Type: schema.TypeBool,
-          Computed: ${optional},
+          Computed: ${computed},
           Required: ${required},
           Optional: ${optional},
           Sensitive: ${sensitive},
@@ -737,11 +740,11 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
     default:
       if (schema.properties && !forceMapFor(name)) {
         return `
-   			"${name}": &schema.Schema {
-	 				Type: schema.TypeList,
-	 				Computed: ${optional},
-	 				Required: ${required},
-	 				Optional: ${optional},
+      "${name}": &schema.Schema {
+        Type: schema.TypeList,
+        Computed: ${computed},
+        Required: ${required},
+        Optional: ${optional},
           Sensitive: ${sensitive},
           ForceNew: ${forceNew},
           WriteOnly: ${writeOnly},
@@ -771,7 +774,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
 				Elem: &schema.Schema {
 					Type: schema.TypeString,
 				},
-				Computed: ${optional},
+				Computed: ${computed},
 				Required: ${required},
 				Optional: ${optional},
 				Description: "${description}",

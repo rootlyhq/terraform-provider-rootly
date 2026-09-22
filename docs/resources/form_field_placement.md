@@ -18,7 +18,7 @@ description: |-
 
 - `form` (String) The form this field is placed on.
 - `form_field_id` (String) The form field that is placed.
-- `form_set_id` (String) The form set this field is placed in.
+- `form_set_id` (String) The form set this field is placed in. The form set must have the same `resource_type` as the form field, otherwise the request is rejected with 422.
 
 ### Optional
 

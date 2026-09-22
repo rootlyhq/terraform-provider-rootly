@@ -105,9 +105,10 @@ func resourceWorkflowTaskCreateOutlookEvent() *schema.Resource {
 							Optional:    true,
 						},
 						"days_until_meeting": &schema.Schema{
-							Description: "The days until meeting",
-							Type:        schema.TypeInt,
-							Required:    true,
+							Description:  "The days until meeting",
+							Type:         schema.TypeInt,
+							Required:     true,
+							ValidateFunc: validation.IntBetween(0, 31),
 						},
 						"time_of_meeting": &schema.Schema{
 							Description: "Time of meeting in format HH:MM",

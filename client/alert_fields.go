@@ -11,10 +11,11 @@ import (
 )
 
 type AlertField struct {
-	ID   string `jsonapi:"primary,alert_fields"`
-	Slug string `jsonapi:"attr,slug,omitempty"`
-	Name string `jsonapi:"attr,name,omitempty"`
-	Kind string `jsonapi:"attr,kind,omitempty"`
+	ID            string        `jsonapi:"primary,alert_fields"`
+	Slug          string        `jsonapi:"attr,slug,omitempty"`
+	Name          string        `jsonapi:"attr,name,omitempty"`
+	Kind          string        `jsonapi:"attr,kind,omitempty"`
+	OwnerGroupIds []interface{} `jsonapi:"attr,owner_group_ids,omitempty"`
 }
 
 func (c *Client) ListAlertFields(params *rootlygo.ListAlertFieldsParams) ([]interface{}, error) {
@@ -111,10 +112,11 @@ func (c *Client) DeleteAlertField(id string) error {
 		return fmt.Errorf("Error building request: %w", err)
 	}
 
-	_, err = c.Do(req)
+	resp, err := c.Do(req)
 	if err != nil {
 		return fmt.Errorf("Failed to make request to delete alert_field: %w", err)
 	}
+	resp.Body.Close()
 
 	return nil
 }

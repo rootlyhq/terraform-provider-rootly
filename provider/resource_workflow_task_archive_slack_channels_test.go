@@ -5,6 +5,7 @@ package provider
 import (
 	"fmt"
 	"testing"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
@@ -14,11 +15,11 @@ func TestAccResourceWorkflowTaskArchiveSlackChannels(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-wf-task")
 
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck:          func() {
+		PreCheck: func() {
 			testAccPreCheck(t)
 		},
 		ProviderFactories: providerFactories,
-		Steps: []resource.TestStep {
+		Steps: []resource.TestStep{
 			{
 				Config: testAccResourceWorkflowTaskArchiveSlackChannelsConfig(rName),
 				Check: resource.ComposeTestCheckFunc(
@@ -48,6 +49,7 @@ resource "rootly_workflow_task_archive_slack_channels" "foo" {
 						id = "foo"
 						name = "bar"
 					}
+retry_wait_time = 1
 	}
 }
 `, name)
@@ -69,6 +71,7 @@ resource "rootly_workflow_task_archive_slack_channels" "foo" {
 						id = "foo"
 						name = "bar"
 					}
+retry_wait_time = 1
 	}
 }
 `, name)

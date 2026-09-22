@@ -7,6 +7,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -1273,46 +1274,195 @@ func (e AlertStatus) Valid() bool {
 	}
 }
 
+// Defines values for AlertConfigurationAlertAcknowledgmentTimeoutMinutes.
+const (
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN10   AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 10
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN120  AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 120
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN1440 AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 1440
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN180  AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 180
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN20   AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 20
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN240  AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 240
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN30   AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 30
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN300  AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 300
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN360  AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 360
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN40   AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 40
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN50   AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 50
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN60   AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 60
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN720  AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 720
+	AlertConfigurationAlertAcknowledgmentTimeoutMinutesN90   AlertConfigurationAlertAcknowledgmentTimeoutMinutes = 90
+)
+
+// Valid indicates whether the value is a known member of the AlertConfigurationAlertAcknowledgmentTimeoutMinutes enum.
+func (e AlertConfigurationAlertAcknowledgmentTimeoutMinutes) Valid() bool {
+	switch e {
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN10:
+		return true
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN120:
+		return true
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN1440:
+		return true
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN180:
+		return true
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN20:
+		return true
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN240:
+		return true
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN30:
+		return true
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN300:
+		return true
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN360:
+		return true
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN40:
+		return true
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN50:
+		return true
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN60:
+		return true
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN720:
+		return true
+	case AlertConfigurationAlertAcknowledgmentTimeoutMinutesN90:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypes.
+const (
+	AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypesCall   AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypes = "call"
+	AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypesDevice AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypes = "device"
+	AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypesEmail  AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypes = "email"
+	AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypesSms    AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypes = "sms"
+)
+
+// Valid indicates whether the value is a known member of the AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypes enum.
+func (e AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypes) Valid() bool {
+	switch e {
+	case AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypesCall:
+		return true
+	case AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypesDevice:
+		return true
+	case AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypesEmail:
+		return true
+	case AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypesSms:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AlertConfigurationDefaultUserNotificationSettingsQuietContactTypes.
+const (
+	AlertConfigurationDefaultUserNotificationSettingsQuietContactTypesCall              AlertConfigurationDefaultUserNotificationSettingsQuietContactTypes = "call"
+	AlertConfigurationDefaultUserNotificationSettingsQuietContactTypesEmail             AlertConfigurationDefaultUserNotificationSettingsQuietContactTypes = "email"
+	AlertConfigurationDefaultUserNotificationSettingsQuietContactTypesNonCriticalDevice AlertConfigurationDefaultUserNotificationSettingsQuietContactTypes = "non_critical_device"
+	AlertConfigurationDefaultUserNotificationSettingsQuietContactTypesSms               AlertConfigurationDefaultUserNotificationSettingsQuietContactTypes = "sms"
+)
+
+// Valid indicates whether the value is a known member of the AlertConfigurationDefaultUserNotificationSettingsQuietContactTypes enum.
+func (e AlertConfigurationDefaultUserNotificationSettingsQuietContactTypes) Valid() bool {
+	switch e {
+	case AlertConfigurationDefaultUserNotificationSettingsQuietContactTypesCall:
+		return true
+	case AlertConfigurationDefaultUserNotificationSettingsQuietContactTypesEmail:
+		return true
+	case AlertConfigurationDefaultUserNotificationSettingsQuietContactTypesNonCriticalDevice:
+		return true
+	case AlertConfigurationDefaultUserNotificationSettingsQuietContactTypesSms:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AlertConfigurationManualPagingFormSettings.
+const (
+	AlertConfigurationManualPagingFormSettingsEscalationPolicy AlertConfigurationManualPagingFormSettings = "escalation_policy"
+	AlertConfigurationManualPagingFormSettingsFunctionality    AlertConfigurationManualPagingFormSettings = "functionality"
+	AlertConfigurationManualPagingFormSettingsService          AlertConfigurationManualPagingFormSettings = "service"
+	AlertConfigurationManualPagingFormSettingsTeam             AlertConfigurationManualPagingFormSettings = "team"
+	AlertConfigurationManualPagingFormSettingsUser             AlertConfigurationManualPagingFormSettings = "user"
+)
+
+// Valid indicates whether the value is a known member of the AlertConfigurationManualPagingFormSettings enum.
+func (e AlertConfigurationManualPagingFormSettings) Valid() bool {
+	switch e {
+	case AlertConfigurationManualPagingFormSettingsEscalationPolicy:
+		return true
+	case AlertConfigurationManualPagingFormSettingsFunctionality:
+		return true
+	case AlertConfigurationManualPagingFormSettingsService:
+		return true
+	case AlertConfigurationManualPagingFormSettingsTeam:
+		return true
+	case AlertConfigurationManualPagingFormSettingsUser:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AlertConfigurationResponseDataType.
+const (
+	AlertConfigurationResponseDataTypeAlertConfigurations AlertConfigurationResponseDataType = "alert_configurations"
+)
+
+// Valid indicates whether the value is a known member of the AlertConfigurationResponseDataType enum.
+func (e AlertConfigurationResponseDataType) Valid() bool {
+	switch e {
+	case AlertConfigurationResponseDataTypeAlertConfigurations:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AlertEventAction.
 const (
-	AlertEventActionAcknowledged          AlertEventAction = "acknowledged"
-	AlertEventActionAdded                 AlertEventAction = "added"
-	AlertEventActionAnswered              AlertEventAction = "answered"
-	AlertEventActionAttached              AlertEventAction = "attached"
-	AlertEventActionCallLifecycle         AlertEventAction = "call_lifecycle"
-	AlertEventActionCalled                AlertEventAction = "called"
-	AlertEventActionCleared               AlertEventAction = "cleared"
-	AlertEventActionCreated               AlertEventAction = "created"
-	AlertEventActionDeferred              AlertEventAction = "deferred"
-	AlertEventActionEmailed               AlertEventAction = "emailed"
-	AlertEventActionEscalated             AlertEventAction = "escalated"
-	AlertEventActionEscalationPolicyPaged AlertEventAction = "escalation_policy_paged"
-	AlertEventActionGoogleChatMessaged    AlertEventAction = "google_chat_messaged"
-	AlertEventActionIgnoredAlertRequest   AlertEventAction = "ignored_alert_request"
-	AlertEventActionLevelSkipped          AlertEventAction = "level_skipped"
-	AlertEventActionMarked                AlertEventAction = "marked"
-	AlertEventActionMsTeamsMessaged       AlertEventAction = "ms_teams_messaged"
-	AlertEventActionMuted                 AlertEventAction = "muted"
-	AlertEventActionNotMarked             AlertEventAction = "not_marked"
-	AlertEventActionNotified              AlertEventAction = "notified"
-	AlertEventActionOpen                  AlertEventAction = "open"
-	AlertEventActionOpened                AlertEventAction = "opened"
-	AlertEventActionPaged                 AlertEventAction = "paged"
-	AlertEventActionRemoved               AlertEventAction = "removed"
-	AlertEventActionResolved              AlertEventAction = "resolved"
-	AlertEventActionRetriggerSuppressed   AlertEventAction = "retrigger_suppressed"
-	AlertEventActionRetriggered           AlertEventAction = "retriggered"
-	AlertEventActionSkipped               AlertEventAction = "skipped"
-	AlertEventActionSlacked               AlertEventAction = "slacked"
-	AlertEventActionSnoozed               AlertEventAction = "snoozed"
-	AlertEventActionTexted                AlertEventAction = "texted"
-	AlertEventActionTriggered             AlertEventAction = "triggered"
-	AlertEventActionUpdated               AlertEventAction = "updated"
+	AlertEventActionAckTimeoutRetriggered   AlertEventAction = "ack_timeout_retriggered"
+	AlertEventActionAcknowledged            AlertEventAction = "acknowledged"
+	AlertEventActionAdded                   AlertEventAction = "added"
+	AlertEventActionAnswered                AlertEventAction = "answered"
+	AlertEventActionAttached                AlertEventAction = "attached"
+	AlertEventActionCallLifecycle           AlertEventAction = "call_lifecycle"
+	AlertEventActionCalled                  AlertEventAction = "called"
+	AlertEventActionCleared                 AlertEventAction = "cleared"
+	AlertEventActionCreated                 AlertEventAction = "created"
+	AlertEventActionDeferred                AlertEventAction = "deferred"
+	AlertEventActionEmailed                 AlertEventAction = "emailed"
+	AlertEventActionEscalated               AlertEventAction = "escalated"
+	AlertEventActionEscalationPolicyPaged   AlertEventAction = "escalation_policy_paged"
+	AlertEventActionGoogleChatMessaged      AlertEventAction = "google_chat_messaged"
+	AlertEventActionIgnoredAlertRequest     AlertEventAction = "ignored_alert_request"
+	AlertEventActionLevelSkipped            AlertEventAction = "level_skipped"
+	AlertEventActionMarked                  AlertEventAction = "marked"
+	AlertEventActionMsTeamsMessaged         AlertEventAction = "ms_teams_messaged"
+	AlertEventActionMuted                   AlertEventAction = "muted"
+	AlertEventActionNotMarked               AlertEventAction = "not_marked"
+	AlertEventActionNotified                AlertEventAction = "notified"
+	AlertEventActionOpen                    AlertEventAction = "open"
+	AlertEventActionOpened                  AlertEventAction = "opened"
+	AlertEventActionPaged                   AlertEventAction = "paged"
+	AlertEventActionRemoved                 AlertEventAction = "removed"
+	AlertEventActionResolved                AlertEventAction = "resolved"
+	AlertEventActionRetriggerSuppressed     AlertEventAction = "retrigger_suppressed"
+	AlertEventActionRetriggered             AlertEventAction = "retriggered"
+	AlertEventActionSkipped                 AlertEventAction = "skipped"
+	AlertEventActionSlacked                 AlertEventAction = "slacked"
+	AlertEventActionSnoozed                 AlertEventAction = "snoozed"
+	AlertEventActionTeamAttachedFromPayload AlertEventAction = "team_attached_from_payload"
+	AlertEventActionTexted                  AlertEventAction = "texted"
+	AlertEventActionTriggered               AlertEventAction = "triggered"
+	AlertEventActionUpdated                 AlertEventAction = "updated"
+	AlertEventActionUserPaged               AlertEventAction = "user_paged"
 )
 
 // Valid indicates whether the value is a known member of the AlertEventAction enum.
 func (e AlertEventAction) Valid() bool {
 	switch e {
+	case AlertEventActionAckTimeoutRetriggered:
+		return true
 	case AlertEventActionAcknowledged:
 		return true
 	case AlertEventActionAdded:
@@ -1373,11 +1523,15 @@ func (e AlertEventAction) Valid() bool {
 		return true
 	case AlertEventActionSnoozed:
 		return true
+	case AlertEventActionTeamAttachedFromPayload:
+		return true
 	case AlertEventActionTexted:
 		return true
 	case AlertEventActionTriggered:
 		return true
 	case AlertEventActionUpdated:
+		return true
+	case AlertEventActionUserPaged:
 		return true
 	default:
 		return false
@@ -1426,6 +1580,21 @@ func (e AlertEventKind) Valid() bool {
 	case AlertEventKindRecording:
 		return true
 	case AlertEventKindStatusUpdate:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AlertEventPageReason.
+const (
+	ManualReassignment AlertEventPageReason = "manual_reassignment"
+)
+
+// Valid indicates whether the value is a known member of the AlertEventPageReason enum.
+func (e AlertEventPageReason) Valid() bool {
+	switch e {
+	case ManualReassignment:
 		return true
 	default:
 		return false
@@ -1660,123 +1829,6 @@ const (
 func (e AlertResponseDataType) Valid() bool {
 	switch e {
 	case AlertResponseDataTypeAlerts:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for AlertRetriggerRuleConditionsKind.
-const (
-	AlertRetriggerRuleConditionsKindAlertField AlertRetriggerRuleConditionsKind = "alert_field"
-	AlertRetriggerRuleConditionsKindGroup      AlertRetriggerRuleConditionsKind = "group"
-	AlertRetriggerRuleConditionsKindPayload    AlertRetriggerRuleConditionsKind = "payload"
-	AlertRetriggerRuleConditionsKindService    AlertRetriggerRuleConditionsKind = "service"
-	AlertRetriggerRuleConditionsKindSource     AlertRetriggerRuleConditionsKind = "source"
-	AlertRetriggerRuleConditionsKindUrgency    AlertRetriggerRuleConditionsKind = "urgency"
-)
-
-// Valid indicates whether the value is a known member of the AlertRetriggerRuleConditionsKind enum.
-func (e AlertRetriggerRuleConditionsKind) Valid() bool {
-	switch e {
-	case AlertRetriggerRuleConditionsKindAlertField:
-		return true
-	case AlertRetriggerRuleConditionsKindGroup:
-		return true
-	case AlertRetriggerRuleConditionsKindPayload:
-		return true
-	case AlertRetriggerRuleConditionsKindService:
-		return true
-	case AlertRetriggerRuleConditionsKindSource:
-		return true
-	case AlertRetriggerRuleConditionsKindUrgency:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for AlertRetriggerRuleConditionsOperator.
-const (
-	AlertRetriggerRuleConditionsOperatorContains       AlertRetriggerRuleConditionsOperator = "contains"
-	AlertRetriggerRuleConditionsOperatorDoesNotContain AlertRetriggerRuleConditionsOperator = "does_not_contain"
-	AlertRetriggerRuleConditionsOperatorEndsWith       AlertRetriggerRuleConditionsOperator = "ends_with"
-	AlertRetriggerRuleConditionsOperatorIsNotOneOf     AlertRetriggerRuleConditionsOperator = "is_not_one_of"
-	AlertRetriggerRuleConditionsOperatorIsNotSet       AlertRetriggerRuleConditionsOperator = "is_not_set"
-	AlertRetriggerRuleConditionsOperatorIsOneOf        AlertRetriggerRuleConditionsOperator = "is_one_of"
-	AlertRetriggerRuleConditionsOperatorIsSet          AlertRetriggerRuleConditionsOperator = "is_set"
-	AlertRetriggerRuleConditionsOperatorMatchesRegex   AlertRetriggerRuleConditionsOperator = "matches_regex"
-	AlertRetriggerRuleConditionsOperatorStartsWith     AlertRetriggerRuleConditionsOperator = "starts_with"
-)
-
-// Valid indicates whether the value is a known member of the AlertRetriggerRuleConditionsOperator enum.
-func (e AlertRetriggerRuleConditionsOperator) Valid() bool {
-	switch e {
-	case AlertRetriggerRuleConditionsOperatorContains:
-		return true
-	case AlertRetriggerRuleConditionsOperatorDoesNotContain:
-		return true
-	case AlertRetriggerRuleConditionsOperatorEndsWith:
-		return true
-	case AlertRetriggerRuleConditionsOperatorIsNotOneOf:
-		return true
-	case AlertRetriggerRuleConditionsOperatorIsNotSet:
-		return true
-	case AlertRetriggerRuleConditionsOperatorIsOneOf:
-		return true
-	case AlertRetriggerRuleConditionsOperatorIsSet:
-		return true
-	case AlertRetriggerRuleConditionsOperatorMatchesRegex:
-		return true
-	case AlertRetriggerRuleConditionsOperatorStartsWith:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for AlertRetriggerRuleMatchMode.
-const (
-	AlertRetriggerRuleMatchModeMatchAllRules AlertRetriggerRuleMatchMode = "match-all-rules"
-	AlertRetriggerRuleMatchModeMatchAnyRule  AlertRetriggerRuleMatchMode = "match-any-rule"
-)
-
-// Valid indicates whether the value is a known member of the AlertRetriggerRuleMatchMode enum.
-func (e AlertRetriggerRuleMatchMode) Valid() bool {
-	switch e {
-	case AlertRetriggerRuleMatchModeMatchAllRules:
-		return true
-	case AlertRetriggerRuleMatchModeMatchAnyRule:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for AlertRetriggerRuleListDataType.
-const (
-	AlertRetriggerRuleListDataTypeAlertRetriggerRules AlertRetriggerRuleListDataType = "alert_retrigger_rules"
-)
-
-// Valid indicates whether the value is a known member of the AlertRetriggerRuleListDataType enum.
-func (e AlertRetriggerRuleListDataType) Valid() bool {
-	switch e {
-	case AlertRetriggerRuleListDataTypeAlertRetriggerRules:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for AlertRetriggerRuleResponseDataType.
-const (
-	AlertRetriggerRuleResponseDataTypeAlertRetriggerRules AlertRetriggerRuleResponseDataType = "alert_retrigger_rules"
-)
-
-// Valid indicates whether the value is a known member of the AlertRetriggerRuleResponseDataType enum.
-func (e AlertRetriggerRuleResponseDataType) Valid() bool {
-	switch e {
-	case AlertRetriggerRuleResponseDataTypeAlertRetriggerRules:
 		return true
 	default:
 		return false
@@ -5566,6 +5618,24 @@ func (e CustomFieldRequired) Valid() bool {
 	}
 }
 
+// Defines values for CustomFieldResourceType.
+const (
+	CustomFieldResourceTypeIncident CustomFieldResourceType = "incident"
+	CustomFieldResourceTypeProblem  CustomFieldResourceType = "problem"
+)
+
+// Valid indicates whether the value is a known member of the CustomFieldResourceType enum.
+func (e CustomFieldResourceType) Valid() bool {
+	switch e {
+	case CustomFieldResourceTypeIncident:
+		return true
+	case CustomFieldResourceTypeProblem:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for CustomFieldShown.
 const (
 	CustomFieldShownIncidentForm                CustomFieldShown = "incident_form"
@@ -5896,6 +5966,42 @@ func (e EscalationLevelNotificationTargetParamsType) Valid() bool {
 	}
 }
 
+// Defines values for EscalationLevelPagingStrategyConfigurationRepeatsMode.
+const (
+	EscalationLevelPagingStrategyConfigurationRepeatsModeAll   EscalationLevelPagingStrategyConfigurationRepeatsMode = "all"
+	EscalationLevelPagingStrategyConfigurationRepeatsModeUsers EscalationLevelPagingStrategyConfigurationRepeatsMode = "users"
+)
+
+// Valid indicates whether the value is a known member of the EscalationLevelPagingStrategyConfigurationRepeatsMode enum.
+func (e EscalationLevelPagingStrategyConfigurationRepeatsMode) Valid() bool {
+	switch e {
+	case EscalationLevelPagingStrategyConfigurationRepeatsModeAll:
+		return true
+	case EscalationLevelPagingStrategyConfigurationRepeatsModeUsers:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EscalationLevelPagingStrategyConfigurationRotationScope.
+const (
+	EscalationLevelPagingStrategyConfigurationRotationScopeActiveRotation EscalationLevelPagingStrategyConfigurationRotationScope = "active_rotation"
+	EscalationLevelPagingStrategyConfigurationRotationScopeEntireSchedule EscalationLevelPagingStrategyConfigurationRotationScope = "entire_schedule"
+)
+
+// Valid indicates whether the value is a known member of the EscalationLevelPagingStrategyConfigurationRotationScope enum.
+func (e EscalationLevelPagingStrategyConfigurationRotationScope) Valid() bool {
+	switch e {
+	case EscalationLevelPagingStrategyConfigurationRotationScopeActiveRotation:
+		return true
+	case EscalationLevelPagingStrategyConfigurationRotationScopeEntireSchedule:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for EscalationLevelPagingStrategyConfigurationScheduleStrategy.
 const (
 	EscalationLevelPagingStrategyConfigurationScheduleStrategyEveryone   EscalationLevelPagingStrategyConfigurationScheduleStrategy = "everyone"
@@ -5983,6 +6089,1020 @@ func (e EscalationPathMatchMode) Valid() bool {
 	case EscalationPathMatchModeMatchAllRules:
 		return true
 	case EscalationPathMatchModeMatchAnyRule:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EscalationPathNotificationTypeFallback.
+const (
+	EscalationPathNotificationTypeFallbackAudible EscalationPathNotificationTypeFallback = "audible"
+	EscalationPathNotificationTypeFallbackQuiet   EscalationPathNotificationTypeFallback = "quiet"
+)
+
+// Valid indicates whether the value is a known member of the EscalationPathNotificationTypeFallback enum.
+func (e EscalationPathNotificationTypeFallback) Valid() bool {
+	switch e {
+	case EscalationPathNotificationTypeFallbackAudible:
+		return true
+	case EscalationPathNotificationTypeFallbackQuiet:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EscalationPathNotificationTypeRulesConditionsOperator.
+const (
+	EscalationPathNotificationTypeRulesConditionsOperatorIsNotSet EscalationPathNotificationTypeRulesConditionsOperator = "is_not_set"
+	EscalationPathNotificationTypeRulesConditionsOperatorIsSet    EscalationPathNotificationTypeRulesConditionsOperator = "is_set"
+)
+
+// Valid indicates whether the value is a known member of the EscalationPathNotificationTypeRulesConditionsOperator enum.
+func (e EscalationPathNotificationTypeRulesConditionsOperator) Valid() bool {
+	switch e {
+	case EscalationPathNotificationTypeRulesConditionsOperatorIsNotSet:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsOperatorIsSet:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EscalationPathNotificationTypeRulesConditionsRuleType.
+const (
+	EscalationPathNotificationTypeRulesConditionsRuleTypeRelatedIncidents EscalationPathNotificationTypeRulesConditionsRuleType = "related_incidents"
+)
+
+// Valid indicates whether the value is a known member of the EscalationPathNotificationTypeRulesConditionsRuleType enum.
+func (e EscalationPathNotificationTypeRulesConditionsRuleType) Valid() bool {
+	switch e {
+	case EscalationPathNotificationTypeRulesConditionsRuleTypeRelatedIncidents:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EscalationPathNotificationTypeRulesConditionsTimeZone.
+const (
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAbuDhabi                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Abu Dhabi"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAdelaide                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Adelaide"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaAlgiers               EscalationPathNotificationTypeRulesConditionsTimeZone = "Africa/Algiers"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaCairo                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Africa/Cairo"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaCasablanca            EscalationPathNotificationTypeRulesConditionsTimeZone = "Africa/Casablanca"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaHarare                EscalationPathNotificationTypeRulesConditionsTimeZone = "Africa/Harare"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaJohannesburg          EscalationPathNotificationTypeRulesConditionsTimeZone = "Africa/Johannesburg"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaMonrovia              EscalationPathNotificationTypeRulesConditionsTimeZone = "Africa/Monrovia"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaNairobi               EscalationPathNotificationTypeRulesConditionsTimeZone = "Africa/Nairobi"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAlaska                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Alaska"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAlmaty                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Almaty"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaAdak                 EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Adak"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaArgentinaBuenosAires EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Argentina/Buenos_Aires"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaAsuncion             EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Asuncion"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaAtka                 EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Atka"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaBogota               EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Bogota"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaCaracas              EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Caracas"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaChicago              EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Chicago"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaChihuahua            EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Chihuahua"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaDenver               EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Denver"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaGuatemala            EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Guatemala"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaGuyana               EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Guyana"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaHalifax              EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Halifax"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaIndianaIndianapolis  EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Indiana/Indianapolis"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaJuneau               EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Juneau"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaLaPaz                EscalationPathNotificationTypeRulesConditionsTimeZone = "America/La_Paz"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaLima                 EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Lima"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaLosAngeles           EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Los_Angeles"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaMazatlan             EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Mazatlan"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaMexicoCity           EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Mexico_City"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaMiquelon             EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Miquelon"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaMonterrey            EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Monterrey"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaMontevideo           EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Montevideo"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaNewYork              EscalationPathNotificationTypeRulesConditionsTimeZone = "America/New_York"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaNuuk                 EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Nuuk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaPhoenix              EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Phoenix"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaPuertoRico           EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Puerto_Rico"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaRegina               EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Regina"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaSantiago             EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Santiago"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaSaoPaulo             EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Sao_Paulo"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaStJohns              EscalationPathNotificationTypeRulesConditionsTimeZone = "America/St_Johns"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaTijuana              EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Tijuana"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaVancouver            EscalationPathNotificationTypeRulesConditionsTimeZone = "America/Vancouver"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmericanSamoa               EscalationPathNotificationTypeRulesConditionsTimeZone = "American Samoa"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAmsterdam                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Amsterdam"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneArizona                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Arizona"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaAlmaty                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Almaty"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaBaghdad                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Baghdad"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaBaku                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Baku"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaBangkok                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Bangkok"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaChongqing               EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Chongqing"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaColombo                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Colombo"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaDhaka                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Dhaka"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaHongKong                EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Hong_Kong"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaIrkutsk                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Irkutsk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaJakarta                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Jakarta"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaJerusalem               EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Jerusalem"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKabul                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Kabul"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKamchatka               EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Kamchatka"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKarachi                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Karachi"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKathmandu               EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Kathmandu"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKolkata                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Kolkata"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKrasnoyarsk             EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Krasnoyarsk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKualaLumpur             EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Kuala_Lumpur"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKuwait                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Kuwait"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaMagadan                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Magadan"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaMuscat                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Muscat"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaNovosibirsk             EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Novosibirsk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaRangoon                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Rangoon"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaRiyadh                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Riyadh"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaSeoul                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Seoul"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaShanghai                EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Shanghai"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaSingapore               EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Singapore"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaSrednekolymsk           EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Srednekolymsk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaTaipei                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Taipei"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaTashkent                EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Tashkent"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaTbilisi                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Tbilisi"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaTehran                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Tehran"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaTokyo                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Tokyo"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaUlaanbaatar             EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Ulaanbaatar"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaUrumqi                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Urumqi"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaVladivostok             EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Vladivostok"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYakutsk                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Yakutsk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYekaterinburg           EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Yekaterinburg"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYerevan                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Yerevan"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAstana                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Astana"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsuncion                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Asuncion"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAthens                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Athens"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAtlanticAzores              EscalationPathNotificationTypeRulesConditionsTimeZone = "Atlantic/Azores"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAtlanticCapeVerde           EscalationPathNotificationTypeRulesConditionsTimeZone = "Atlantic/Cape_Verde"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAtlanticSouthGeorgia        EscalationPathNotificationTypeRulesConditionsTimeZone = "Atlantic/South_Georgia"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAtlanticTimeCanada          EscalationPathNotificationTypeRulesConditionsTimeZone = "Atlantic Time (Canada)"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAuckland                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Auckland"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaAdelaide           EscalationPathNotificationTypeRulesConditionsTimeZone = "Australia/Adelaide"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaBrisbane           EscalationPathNotificationTypeRulesConditionsTimeZone = "Australia/Brisbane"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaCanberra           EscalationPathNotificationTypeRulesConditionsTimeZone = "Australia/Canberra"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaDarwin             EscalationPathNotificationTypeRulesConditionsTimeZone = "Australia/Darwin"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaEucla              EscalationPathNotificationTypeRulesConditionsTimeZone = "Australia/Eucla"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaHobart             EscalationPathNotificationTypeRulesConditionsTimeZone = "Australia/Hobart"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaLHI                EscalationPathNotificationTypeRulesConditionsTimeZone = "Australia/LHI"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaLordHowe           EscalationPathNotificationTypeRulesConditionsTimeZone = "Australia/Lord_Howe"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaMelbourne          EscalationPathNotificationTypeRulesConditionsTimeZone = "Australia/Melbourne"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaPerth              EscalationPathNotificationTypeRulesConditionsTimeZone = "Australia/Perth"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaSydney             EscalationPathNotificationTypeRulesConditionsTimeZone = "Australia/Sydney"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAzores                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Azores"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBaghdad                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Baghdad"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBaku                        EscalationPathNotificationTypeRulesConditionsTimeZone = "Baku"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBangkok                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Bangkok"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBeijing                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Beijing"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBelgrade                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Belgrade"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBerlin                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Berlin"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBern                        EscalationPathNotificationTypeRulesConditionsTimeZone = "Bern"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBogota                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Bogota"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBrasilia                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Brasilia"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBratislava                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Bratislava"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBrisbane                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Brisbane"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBrussels                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Brussels"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBucharest                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Bucharest"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBudapest                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Budapest"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneBuenosAires                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Buenos Aires"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneCairo                       EscalationPathNotificationTypeRulesConditionsTimeZone = "Cairo"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneCanadaPacific               EscalationPathNotificationTypeRulesConditionsTimeZone = "Canada/Pacific"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneCanberra                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Canberra"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneCapeVerdeIs                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Cape Verde Is."
+	EscalationPathNotificationTypeRulesConditionsTimeZoneCaracas                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Caracas"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneCasablanca                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Casablanca"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneCentralAmerica              EscalationPathNotificationTypeRulesConditionsTimeZone = "Central America"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneCentralTimeUSCanada         EscalationPathNotificationTypeRulesConditionsTimeZone = "Central Time (US & Canada)"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneChathamIs                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Chatham Is."
+	EscalationPathNotificationTypeRulesConditionsTimeZoneChennai                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Chennai"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneChihuahua                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Chihuahua"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneChileEasterIsland           EscalationPathNotificationTypeRulesConditionsTimeZone = "Chile/EasterIsland"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneChongqing                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Chongqing"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneCopenhagen                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Copenhagen"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneDarwin                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Darwin"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneDhaka                       EscalationPathNotificationTypeRulesConditionsTimeZone = "Dhaka"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneDublin                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Dublin"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEasternTimeUSCanada         EscalationPathNotificationTypeRulesConditionsTimeZone = "Eastern Time (US & Canada)"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEdinburgh                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Edinburgh"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEkaterinburg                EscalationPathNotificationTypeRulesConditionsTimeZone = "Ekaterinburg"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEtcGMT12                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Etc/GMT+12"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEtcUTC                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Etc/UTC"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeAmsterdam             EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Amsterdam"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeAthens                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Athens"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeBelgrade              EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Belgrade"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeBerlin                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Berlin"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeBratislava            EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Bratislava"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeBrussels              EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Brussels"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeBucharest             EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Bucharest"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeBudapest              EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Budapest"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeCopenhagen            EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Copenhagen"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeDublin                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Dublin"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeHelsinki              EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Helsinki"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeIstanbul              EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Istanbul"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeKaliningrad           EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Kaliningrad"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeKiev                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Kiev"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeLisbon                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Lisbon"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeLjubljana             EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Ljubljana"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeLondon                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/London"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeMadrid                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Madrid"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeMinsk                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Minsk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeMoscow                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Moscow"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeParis                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Paris"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropePrague                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Prague"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeRiga                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Riga"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeRome                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Rome"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeSamara                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Samara"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeSarajevo              EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Sarajevo"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeSkopje                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Skopje"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeSofia                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Sofia"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeStockholm             EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Stockholm"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeTallinn               EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Tallinn"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeVienna                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Vienna"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeVilnius               EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Vilnius"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeVolgograd             EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Volgograd"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeWarsaw                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Warsaw"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeZagreb                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Zagreb"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeZurich                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Zurich"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneFiji                        EscalationPathNotificationTypeRulesConditionsTimeZone = "Fiji"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneGeorgetown                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Georgetown"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneGreenland                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Greenland"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneGuadalajara                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Guadalajara"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneGuam                        EscalationPathNotificationTypeRulesConditionsTimeZone = "Guam"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneHanoi                       EscalationPathNotificationTypeRulesConditionsTimeZone = "Hanoi"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneHarare                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Harare"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneHawaii                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Hawaii"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneHelsinki                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Helsinki"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneHobart                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Hobart"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneHongKong                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Hong Kong"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneIndianaEast                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Indiana (East)"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneInternationalDateLineWest   EscalationPathNotificationTypeRulesConditionsTimeZone = "International Date Line West"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneIrkutsk                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Irkutsk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneIslamabad                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Islamabad"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneIstanbul                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Istanbul"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneJakarta                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Jakarta"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneJerusalem                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Jerusalem"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneKabul                       EscalationPathNotificationTypeRulesConditionsTimeZone = "Kabul"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneKaliningrad                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Kaliningrad"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneKamchatka                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Kamchatka"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneKarachi                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Karachi"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneKathmandu                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Kathmandu"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneKolkata                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Kolkata"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneKrasnoyarsk                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Krasnoyarsk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneKualaLumpur                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Kuala Lumpur"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneKuwait                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Kuwait"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneKyiv                        EscalationPathNotificationTypeRulesConditionsTimeZone = "Kyiv"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneLaPaz                       EscalationPathNotificationTypeRulesConditionsTimeZone = "La Paz"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneLima                        EscalationPathNotificationTypeRulesConditionsTimeZone = "Lima"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneLisbon                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Lisbon"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneLjubljana                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Ljubljana"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneLondon                      EscalationPathNotificationTypeRulesConditionsTimeZone = "London"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMadrid                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Madrid"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMagadan                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Magadan"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMarshallIs                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Marshall Is."
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMazatlan                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Mazatlan"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMelbourne                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Melbourne"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMexicoCity                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Mexico City"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMidAtlantic                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Mid-Atlantic"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMidwayIsland                EscalationPathNotificationTypeRulesConditionsTimeZone = "Midway Island"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMinsk                       EscalationPathNotificationTypeRulesConditionsTimeZone = "Minsk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMonrovia                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Monrovia"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMonterrey                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Monterrey"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMontevideo                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Montevideo"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMoscow                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Moscow"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMountainTimeUSCanada        EscalationPathNotificationTypeRulesConditionsTimeZone = "Mountain Time (US & Canada)"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMumbai                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Mumbai"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneMuscat                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Muscat"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneNairobi                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Nairobi"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneNewCaledonia                EscalationPathNotificationTypeRulesConditionsTimeZone = "New Caledonia"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneNewDelhi                    EscalationPathNotificationTypeRulesConditionsTimeZone = "New Delhi"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneNewfoundland                EscalationPathNotificationTypeRulesConditionsTimeZone = "Newfoundland"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneNovosibirsk                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Novosibirsk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneNukualofa                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Nuku'alofa"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneOsaka                       EscalationPathNotificationTypeRulesConditionsTimeZone = "Osaka"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificApia                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Apia"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificAuckland             EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Auckland"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificChatham              EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Chatham"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificEaster               EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Easter"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificFakaofo              EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Fakaofo"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificFiji                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Fiji"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificGambier              EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Gambier"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificGuadalcanal          EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Guadalcanal"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificGuam                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Guam"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificHonolulu             EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Honolulu"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificKiritimati           EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Kiritimati"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificMajuro               EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Majuro"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificMarquesas            EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Marquesas"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificMidway               EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Midway"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificNorfolk              EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Norfolk"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificNoumea               EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Noumea"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificPagoPago             EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Pago_Pago"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificPitcairn             EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Pitcairn"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificPortMoresby          EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Port_Moresby"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificTimeUSCanada         EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific Time (US & Canada)"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePacificTongatapu            EscalationPathNotificationTypeRulesConditionsTimeZone = "Pacific/Tongatapu"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneParis                       EscalationPathNotificationTypeRulesConditionsTimeZone = "Paris"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePerth                       EscalationPathNotificationTypeRulesConditionsTimeZone = "Perth"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePortMoresby                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Port Moresby"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePrague                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Prague"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePretoria                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Pretoria"
+	EscalationPathNotificationTypeRulesConditionsTimeZonePuertoRico                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Puerto Rico"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneQuito                       EscalationPathNotificationTypeRulesConditionsTimeZone = "Quito"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneRangoon                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Rangoon"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneRiga                        EscalationPathNotificationTypeRulesConditionsTimeZone = "Riga"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneRiyadh                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Riyadh"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneRome                        EscalationPathNotificationTypeRulesConditionsTimeZone = "Rome"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSamara                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Samara"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSamoa                       EscalationPathNotificationTypeRulesConditionsTimeZone = "Samoa"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSantiago                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Santiago"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSapporo                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Sapporo"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSarajevo                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Sarajevo"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSaskatchewan                EscalationPathNotificationTypeRulesConditionsTimeZone = "Saskatchewan"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSeoul                       EscalationPathNotificationTypeRulesConditionsTimeZone = "Seoul"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSingapore                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Singapore"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSkopje                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Skopje"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSofia                       EscalationPathNotificationTypeRulesConditionsTimeZone = "Sofia"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSolomonIs                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Solomon Is."
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSrednekolymsk               EscalationPathNotificationTypeRulesConditionsTimeZone = "Srednekolymsk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSriJayawardenepura          EscalationPathNotificationTypeRulesConditionsTimeZone = "Sri Jayawardenepura"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneStPetersburg                EscalationPathNotificationTypeRulesConditionsTimeZone = "St. Petersburg"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneStockholm                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Stockholm"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneSydney                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Sydney"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneTaipei                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Taipei"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneTallinn                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Tallinn"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneTashkent                    EscalationPathNotificationTypeRulesConditionsTimeZone = "Tashkent"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneTbilisi                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Tbilisi"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneTehran                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Tehran"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneTijuana                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Tijuana"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneTokelauIs                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Tokelau Is."
+	EscalationPathNotificationTypeRulesConditionsTimeZoneTokyo                       EscalationPathNotificationTypeRulesConditionsTimeZone = "Tokyo"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneUSAleutian                  EscalationPathNotificationTypeRulesConditionsTimeZone = "US/Aleutian"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneUTC                         EscalationPathNotificationTypeRulesConditionsTimeZone = "UTC"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneUlaanbaatar                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Ulaanbaatar"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneUrumqi                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Urumqi"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneVienna                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Vienna"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneVilnius                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Vilnius"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneVladivostok                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Vladivostok"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneVolgograd                   EscalationPathNotificationTypeRulesConditionsTimeZone = "Volgograd"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneWarsaw                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Warsaw"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneWellington                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Wellington"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneWestCentralAfrica           EscalationPathNotificationTypeRulesConditionsTimeZone = "West Central Africa"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneYakutsk                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Yakutsk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneYerevan                     EscalationPathNotificationTypeRulesConditionsTimeZone = "Yerevan"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneZagreb                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Zagreb"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneZurich                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Zurich"
+)
+
+// Valid indicates whether the value is a known member of the EscalationPathNotificationTypeRulesConditionsTimeZone enum.
+func (e EscalationPathNotificationTypeRulesConditionsTimeZone) Valid() bool {
+	switch e {
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAbuDhabi:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAdelaide:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaAlgiers:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaCairo:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaCasablanca:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaHarare:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaJohannesburg:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaMonrovia:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAfricaNairobi:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAlaska:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAlmaty:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaAdak:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaArgentinaBuenosAires:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaAsuncion:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaAtka:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaBogota:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaCaracas:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaChicago:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaChihuahua:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaDenver:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaGuatemala:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaGuyana:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaHalifax:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaIndianaIndianapolis:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaJuneau:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaLaPaz:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaLima:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaLosAngeles:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaMazatlan:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaMexicoCity:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaMiquelon:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaMonterrey:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaMontevideo:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaNewYork:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaNuuk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaPhoenix:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaPuertoRico:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaRegina:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaSantiago:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaSaoPaulo:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaStJohns:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaTijuana:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericaVancouver:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmericanSamoa:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAmsterdam:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneArizona:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaAlmaty:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaBaghdad:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaBaku:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaBangkok:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaChongqing:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaColombo:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaDhaka:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaHongKong:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaIrkutsk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaJakarta:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaJerusalem:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKabul:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKamchatka:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKarachi:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKathmandu:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKolkata:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKrasnoyarsk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKualaLumpur:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaKuwait:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaMagadan:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaMuscat:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaNovosibirsk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaRangoon:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaRiyadh:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaSeoul:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaShanghai:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaSingapore:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaSrednekolymsk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaTaipei:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaTashkent:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaTbilisi:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaTehran:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaTokyo:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaUlaanbaatar:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaUrumqi:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaVladivostok:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYakutsk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYekaterinburg:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYerevan:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAstana:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsuncion:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAthens:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAtlanticAzores:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAtlanticCapeVerde:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAtlanticSouthGeorgia:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAtlanticTimeCanada:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAuckland:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaAdelaide:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaBrisbane:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaCanberra:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaDarwin:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaEucla:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaHobart:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaLHI:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaLordHowe:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaMelbourne:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaPerth:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAustraliaSydney:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAzores:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBaghdad:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBaku:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBangkok:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBeijing:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBelgrade:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBerlin:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBern:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBogota:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBrasilia:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBratislava:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBrisbane:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBrussels:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBucharest:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBudapest:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneBuenosAires:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneCairo:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneCanadaPacific:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneCanberra:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneCapeVerdeIs:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneCaracas:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneCasablanca:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneCentralAmerica:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneCentralTimeUSCanada:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneChathamIs:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneChennai:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneChihuahua:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneChileEasterIsland:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneChongqing:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneCopenhagen:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneDarwin:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneDhaka:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneDublin:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEasternTimeUSCanada:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEdinburgh:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEkaterinburg:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEtcGMT12:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEtcUTC:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeAmsterdam:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeAthens:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeBelgrade:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeBerlin:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeBratislava:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeBrussels:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeBucharest:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeBudapest:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeCopenhagen:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeDublin:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeHelsinki:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeIstanbul:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeKaliningrad:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeKiev:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeLisbon:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeLjubljana:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeLondon:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeMadrid:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeMinsk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeMoscow:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeParis:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropePrague:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeRiga:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeRome:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeSamara:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeSarajevo:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeSkopje:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeSofia:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeStockholm:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeTallinn:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeVienna:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeVilnius:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeVolgograd:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeWarsaw:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeZagreb:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeZurich:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneFiji:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneGeorgetown:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneGreenland:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneGuadalajara:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneGuam:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneHanoi:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneHarare:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneHawaii:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneHelsinki:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneHobart:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneHongKong:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneIndianaEast:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneInternationalDateLineWest:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneIrkutsk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneIslamabad:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneIstanbul:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneJakarta:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneJerusalem:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneKabul:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneKaliningrad:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneKamchatka:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneKarachi:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneKathmandu:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneKolkata:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneKrasnoyarsk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneKualaLumpur:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneKuwait:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneKyiv:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneLaPaz:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneLima:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneLisbon:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneLjubljana:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneLondon:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMadrid:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMagadan:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMarshallIs:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMazatlan:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMelbourne:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMexicoCity:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMidAtlantic:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMidwayIsland:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMinsk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMonrovia:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMonterrey:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMontevideo:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMoscow:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMountainTimeUSCanada:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMumbai:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneMuscat:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneNairobi:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneNewCaledonia:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneNewDelhi:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneNewfoundland:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneNovosibirsk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneNukualofa:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneOsaka:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificApia:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificAuckland:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificChatham:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificEaster:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificFakaofo:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificFiji:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificGambier:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificGuadalcanal:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificGuam:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificHonolulu:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificKiritimati:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificMajuro:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificMarquesas:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificMidway:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificNorfolk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificNoumea:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificPagoPago:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificPitcairn:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificPortMoresby:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificTimeUSCanada:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePacificTongatapu:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneParis:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePerth:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePortMoresby:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePrague:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePretoria:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZonePuertoRico:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneQuito:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneRangoon:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneRiga:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneRiyadh:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneRome:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSamara:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSamoa:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSantiago:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSapporo:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSarajevo:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSaskatchewan:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSeoul:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSingapore:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSkopje:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSofia:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSolomonIs:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSrednekolymsk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSriJayawardenepura:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneStPetersburg:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneStockholm:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneSydney:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneTaipei:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneTallinn:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneTashkent:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneTbilisi:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneTehran:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneTijuana:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneTokelauIs:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneTokyo:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneUSAleutian:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneUTC:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneUlaanbaatar:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneUrumqi:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneVienna:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneVilnius:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneVladivostok:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneVolgograd:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneWarsaw:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneWellington:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneWestCentralAfrica:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneYakutsk:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneYerevan:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneZagreb:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneZurich:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EscalationPathNotificationTypeRulesMatchMode.
+const (
+	EscalationPathNotificationTypeRulesMatchModeMatchAllRules EscalationPathNotificationTypeRulesMatchMode = "match-all-rules"
+	EscalationPathNotificationTypeRulesMatchModeMatchAnyRule  EscalationPathNotificationTypeRulesMatchMode = "match-any-rule"
+)
+
+// Valid indicates whether the value is a known member of the EscalationPathNotificationTypeRulesMatchMode enum.
+func (e EscalationPathNotificationTypeRulesMatchMode) Valid() bool {
+	switch e {
+	case EscalationPathNotificationTypeRulesMatchModeMatchAllRules:
+		return true
+	case EscalationPathNotificationTypeRulesMatchModeMatchAnyRule:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EscalationPathNotificationTypeRulesNotificationType.
+const (
+	EscalationPathNotificationTypeRulesNotificationTypeAudible EscalationPathNotificationTypeRulesNotificationType = "audible"
+	EscalationPathNotificationTypeRulesNotificationTypeQuiet   EscalationPathNotificationTypeRulesNotificationType = "quiet"
+)
+
+// Valid indicates whether the value is a known member of the EscalationPathNotificationTypeRulesNotificationType enum.
+func (e EscalationPathNotificationTypeRulesNotificationType) Valid() bool {
+	switch e {
+	case EscalationPathNotificationTypeRulesNotificationTypeAudible:
+		return true
+	case EscalationPathNotificationTypeRulesNotificationTypeQuiet:
 		return true
 	default:
 		return false
@@ -9011,6 +10131,7 @@ func (e FormFieldInputKind) Valid() bool {
 const (
 	FormFieldKindAcknowledgedAt              FormFieldKind = "acknowledged_at"
 	FormFieldKindAttachAlerts                FormFieldKind = "attach_alerts"
+	FormFieldKindCancellationMessage         FormFieldKind = "cancellation_message"
 	FormFieldKindCauses                      FormFieldKind = "causes"
 	FormFieldKindClosedAt                    FormFieldKind = "closed_at"
 	FormFieldKindCustom                      FormFieldKind = "custom"
@@ -9048,6 +10169,8 @@ func (e FormFieldKind) Valid() bool {
 	case FormFieldKindAcknowledgedAt:
 		return true
 	case FormFieldKindAttachAlerts:
+		return true
+	case FormFieldKindCancellationMessage:
 		return true
 	case FormFieldKindCauses:
 		return true
@@ -9106,6 +10229,24 @@ func (e FormFieldKind) Valid() bool {
 	case FormFieldKindTypes:
 		return true
 	case FormFieldKindVisibility:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for FormFieldResourceType.
+const (
+	FormFieldResourceTypeIncident FormFieldResourceType = "incident"
+	FormFieldResourceTypeProblem  FormFieldResourceType = "problem"
+)
+
+// Valid indicates whether the value is a known member of the FormFieldResourceType enum.
+func (e FormFieldResourceType) Valid() bool {
+	switch e {
+	case FormFieldResourceTypeIncident:
+		return true
+	case FormFieldResourceTypeProblem:
 		return true
 	default:
 		return false
@@ -10687,6 +11828,30 @@ func (e IncidentStatusPageEventStatus) Valid() bool {
 	case IncidentStatusPageEventStatusResolved:
 		return true
 	case IncidentStatusPageEventStatusScheduled:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for IncidentStatusPageEventStatusPageComponentsStatus.
+const (
+	IncidentStatusPageEventStatusPageComponentsStatusDegradedPerformance IncidentStatusPageEventStatusPageComponentsStatus = "degraded_performance"
+	IncidentStatusPageEventStatusPageComponentsStatusMajorOutage         IncidentStatusPageEventStatusPageComponentsStatus = "major_outage"
+	IncidentStatusPageEventStatusPageComponentsStatusOperational         IncidentStatusPageEventStatusPageComponentsStatus = "operational"
+	IncidentStatusPageEventStatusPageComponentsStatusPartialOutage       IncidentStatusPageEventStatusPageComponentsStatus = "partial_outage"
+)
+
+// Valid indicates whether the value is a known member of the IncidentStatusPageEventStatusPageComponentsStatus enum.
+func (e IncidentStatusPageEventStatusPageComponentsStatus) Valid() bool {
+	switch e {
+	case IncidentStatusPageEventStatusPageComponentsStatusDegradedPerformance:
+		return true
+	case IncidentStatusPageEventStatusPageComponentsStatusMajorOutage:
+		return true
+	case IncidentStatusPageEventStatusPageComponentsStatusOperational:
+		return true
+	case IncidentStatusPageEventStatusPageComponentsStatusPartialOutage:
 		return true
 	default:
 		return false
@@ -12316,162 +13481,6 @@ func (e NewAlertGroupDataType) Valid() bool {
 	}
 }
 
-// Defines values for NewAlertRetriggerRuleDataAttributesConditionsKind.
-const (
-	NewAlertRetriggerRuleDataAttributesConditionsKindAlertField NewAlertRetriggerRuleDataAttributesConditionsKind = "alert_field"
-	NewAlertRetriggerRuleDataAttributesConditionsKindGroup      NewAlertRetriggerRuleDataAttributesConditionsKind = "group"
-	NewAlertRetriggerRuleDataAttributesConditionsKindPayload    NewAlertRetriggerRuleDataAttributesConditionsKind = "payload"
-	NewAlertRetriggerRuleDataAttributesConditionsKindService    NewAlertRetriggerRuleDataAttributesConditionsKind = "service"
-	NewAlertRetriggerRuleDataAttributesConditionsKindSource     NewAlertRetriggerRuleDataAttributesConditionsKind = "source"
-	NewAlertRetriggerRuleDataAttributesConditionsKindUrgency    NewAlertRetriggerRuleDataAttributesConditionsKind = "urgency"
-)
-
-// Valid indicates whether the value is a known member of the NewAlertRetriggerRuleDataAttributesConditionsKind enum.
-func (e NewAlertRetriggerRuleDataAttributesConditionsKind) Valid() bool {
-	switch e {
-	case NewAlertRetriggerRuleDataAttributesConditionsKindAlertField:
-		return true
-	case NewAlertRetriggerRuleDataAttributesConditionsKindGroup:
-		return true
-	case NewAlertRetriggerRuleDataAttributesConditionsKindPayload:
-		return true
-	case NewAlertRetriggerRuleDataAttributesConditionsKindService:
-		return true
-	case NewAlertRetriggerRuleDataAttributesConditionsKindSource:
-		return true
-	case NewAlertRetriggerRuleDataAttributesConditionsKindUrgency:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for NewAlertRetriggerRuleDataAttributesConditionsOperator.
-const (
-	NewAlertRetriggerRuleDataAttributesConditionsOperatorContains       NewAlertRetriggerRuleDataAttributesConditionsOperator = "contains"
-	NewAlertRetriggerRuleDataAttributesConditionsOperatorDoesNotContain NewAlertRetriggerRuleDataAttributesConditionsOperator = "does_not_contain"
-	NewAlertRetriggerRuleDataAttributesConditionsOperatorEndsWith       NewAlertRetriggerRuleDataAttributesConditionsOperator = "ends_with"
-	NewAlertRetriggerRuleDataAttributesConditionsOperatorIsNotOneOf     NewAlertRetriggerRuleDataAttributesConditionsOperator = "is_not_one_of"
-	NewAlertRetriggerRuleDataAttributesConditionsOperatorIsNotSet       NewAlertRetriggerRuleDataAttributesConditionsOperator = "is_not_set"
-	NewAlertRetriggerRuleDataAttributesConditionsOperatorIsOneOf        NewAlertRetriggerRuleDataAttributesConditionsOperator = "is_one_of"
-	NewAlertRetriggerRuleDataAttributesConditionsOperatorIsSet          NewAlertRetriggerRuleDataAttributesConditionsOperator = "is_set"
-	NewAlertRetriggerRuleDataAttributesConditionsOperatorMatchesRegex   NewAlertRetriggerRuleDataAttributesConditionsOperator = "matches_regex"
-	NewAlertRetriggerRuleDataAttributesConditionsOperatorStartsWith     NewAlertRetriggerRuleDataAttributesConditionsOperator = "starts_with"
-)
-
-// Valid indicates whether the value is a known member of the NewAlertRetriggerRuleDataAttributesConditionsOperator enum.
-func (e NewAlertRetriggerRuleDataAttributesConditionsOperator) Valid() bool {
-	switch e {
-	case NewAlertRetriggerRuleDataAttributesConditionsOperatorContains:
-		return true
-	case NewAlertRetriggerRuleDataAttributesConditionsOperatorDoesNotContain:
-		return true
-	case NewAlertRetriggerRuleDataAttributesConditionsOperatorEndsWith:
-		return true
-	case NewAlertRetriggerRuleDataAttributesConditionsOperatorIsNotOneOf:
-		return true
-	case NewAlertRetriggerRuleDataAttributesConditionsOperatorIsNotSet:
-		return true
-	case NewAlertRetriggerRuleDataAttributesConditionsOperatorIsOneOf:
-		return true
-	case NewAlertRetriggerRuleDataAttributesConditionsOperatorIsSet:
-		return true
-	case NewAlertRetriggerRuleDataAttributesConditionsOperatorMatchesRegex:
-		return true
-	case NewAlertRetriggerRuleDataAttributesConditionsOperatorStartsWith:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for NewAlertRetriggerRuleDataAttributesMatchMode.
-const (
-	NewAlertRetriggerRuleDataAttributesMatchModeMatchAllRules NewAlertRetriggerRuleDataAttributesMatchMode = "match-all-rules"
-	NewAlertRetriggerRuleDataAttributesMatchModeMatchAnyRule  NewAlertRetriggerRuleDataAttributesMatchMode = "match-any-rule"
-)
-
-// Valid indicates whether the value is a known member of the NewAlertRetriggerRuleDataAttributesMatchMode enum.
-func (e NewAlertRetriggerRuleDataAttributesMatchMode) Valid() bool {
-	switch e {
-	case NewAlertRetriggerRuleDataAttributesMatchModeMatchAllRules:
-		return true
-	case NewAlertRetriggerRuleDataAttributesMatchModeMatchAnyRule:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for NewAlertRetriggerRuleDataAttributesTimeoutMinutes.
-const (
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN10   NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 10
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN120  NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 120
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN1440 NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 1440
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN180  NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 180
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN20   NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 20
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN240  NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 240
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN30   NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 30
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN300  NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 300
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN360  NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 360
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN40   NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 40
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN50   NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 50
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN60   NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 60
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN720  NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 720
-	NewAlertRetriggerRuleDataAttributesTimeoutMinutesN90   NewAlertRetriggerRuleDataAttributesTimeoutMinutes = 90
-)
-
-// Valid indicates whether the value is a known member of the NewAlertRetriggerRuleDataAttributesTimeoutMinutes enum.
-func (e NewAlertRetriggerRuleDataAttributesTimeoutMinutes) Valid() bool {
-	switch e {
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN10:
-		return true
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN120:
-		return true
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN1440:
-		return true
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN180:
-		return true
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN20:
-		return true
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN240:
-		return true
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN30:
-		return true
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN300:
-		return true
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN360:
-		return true
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN40:
-		return true
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN50:
-		return true
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN60:
-		return true
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN720:
-		return true
-	case NewAlertRetriggerRuleDataAttributesTimeoutMinutesN90:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for NewAlertRetriggerRuleDataType.
-const (
-	NewAlertRetriggerRuleDataTypeAlertRetriggerRules NewAlertRetriggerRuleDataType = "alert_retrigger_rules"
-)
-
-// Valid indicates whether the value is a known member of the NewAlertRetriggerRuleDataType enum.
-func (e NewAlertRetriggerRuleDataType) Valid() bool {
-	switch e {
-	case NewAlertRetriggerRuleDataTypeAlertRetriggerRules:
-		return true
-	default:
-		return false
-	}
-}
-
 // Defines values for NewAlertRouteDataAttributesRulesConditionGroupsConditionsConditionableType.
 const (
 	NewAlertRouteDataAttributesRulesConditionGroupsConditionsConditionableTypeAlertField NewAlertRouteDataAttributesRulesConditionGroupsConditionsConditionableType = "AlertField"
@@ -13897,6 +14906,42 @@ func (e NewEscalationLevelDataAttributesNotificationTargetParamsType) Valid() bo
 	}
 }
 
+// Defines values for NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode.
+const (
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeAll   NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode = "all"
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeUsers NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode = "users"
+)
+
+// Valid indicates whether the value is a known member of the NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode enum.
+func (e NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode) Valid() bool {
+	switch e {
+	case NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeAll:
+		return true
+	case NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeUsers:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope.
+const (
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScopeActiveRotation NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope = "active_rotation"
+	NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScopeEntireSchedule NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope = "entire_schedule"
+)
+
+// Valid indicates whether the value is a known member of the NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope enum.
+func (e NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope) Valid() bool {
+	switch e {
+	case NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScopeActiveRotation:
+		return true
+	case NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScopeEntireSchedule:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy.
 const (
 	NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategyEveryone   NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy = "everyone"
@@ -14002,6 +15047,1020 @@ func (e NewEscalationPathDataAttributesNotificationType) Valid() bool {
 	case NewEscalationPathDataAttributesNotificationTypeAudible:
 		return true
 	case NewEscalationPathDataAttributesNotificationTypeQuiet:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewEscalationPathDataAttributesNotificationTypeFallback.
+const (
+	NewEscalationPathDataAttributesNotificationTypeFallbackAudible NewEscalationPathDataAttributesNotificationTypeFallback = "audible"
+	NewEscalationPathDataAttributesNotificationTypeFallbackQuiet   NewEscalationPathDataAttributesNotificationTypeFallback = "quiet"
+)
+
+// Valid indicates whether the value is a known member of the NewEscalationPathDataAttributesNotificationTypeFallback enum.
+func (e NewEscalationPathDataAttributesNotificationTypeFallback) Valid() bool {
+	switch e {
+	case NewEscalationPathDataAttributesNotificationTypeFallbackAudible:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeFallbackQuiet:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewEscalationPathDataAttributesNotificationTypeRulesConditionsOperator.
+const (
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsOperatorIsNotSet NewEscalationPathDataAttributesNotificationTypeRulesConditionsOperator = "is_not_set"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsOperatorIsSet    NewEscalationPathDataAttributesNotificationTypeRulesConditionsOperator = "is_set"
+)
+
+// Valid indicates whether the value is a known member of the NewEscalationPathDataAttributesNotificationTypeRulesConditionsOperator enum.
+func (e NewEscalationPathDataAttributesNotificationTypeRulesConditionsOperator) Valid() bool {
+	switch e {
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsOperatorIsNotSet:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsOperatorIsSet:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType.
+const (
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsRuleTypeRelatedIncidents NewEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType = "related_incidents"
+)
+
+// Valid indicates whether the value is a known member of the NewEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType enum.
+func (e NewEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType) Valid() bool {
+	switch e {
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsRuleTypeRelatedIncidents:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone.
+const (
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAbuDhabi                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Abu Dhabi"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAdelaide                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Adelaide"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaAlgiers               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Algiers"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaCairo                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Cairo"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaCasablanca            NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Casablanca"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaHarare                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Harare"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaJohannesburg          NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Johannesburg"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaMonrovia              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Monrovia"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaNairobi               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Nairobi"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAlaska                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Alaska"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAlmaty                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Almaty"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaAdak                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Adak"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaArgentinaBuenosAires NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Argentina/Buenos_Aires"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaAsuncion             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Asuncion"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaAtka                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Atka"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaBogota               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Bogota"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaCaracas              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Caracas"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaChicago              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Chicago"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaChihuahua            NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Chihuahua"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaDenver               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Denver"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaGuatemala            NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Guatemala"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaGuyana               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Guyana"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaHalifax              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Halifax"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaIndianaIndianapolis  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Indiana/Indianapolis"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaJuneau               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Juneau"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaLaPaz                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/La_Paz"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaLima                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Lima"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaLosAngeles           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Los_Angeles"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMazatlan             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Mazatlan"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMexicoCity           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Mexico_City"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMiquelon             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Miquelon"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMonterrey            NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Monterrey"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMontevideo           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Montevideo"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaNewYork              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/New_York"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaNuuk                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Nuuk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaPhoenix              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Phoenix"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaPuertoRico           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Puerto_Rico"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaRegina               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Regina"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaSantiago             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Santiago"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaSaoPaulo             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Sao_Paulo"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaStJohns              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/St_Johns"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaTijuana              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Tijuana"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaVancouver            NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Vancouver"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericanSamoa               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "American Samoa"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmsterdam                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Amsterdam"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneArizona                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Arizona"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaAlmaty                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Almaty"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaBaghdad                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Baghdad"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaBaku                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Baku"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaBangkok                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Bangkok"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaChongqing               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Chongqing"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaColombo                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Colombo"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaDhaka                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Dhaka"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaHongKong                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Hong_Kong"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaIrkutsk                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Irkutsk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaJakarta                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Jakarta"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaJerusalem               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Jerusalem"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKabul                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Kabul"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKamchatka               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Kamchatka"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKarachi                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Karachi"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKathmandu               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Kathmandu"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKolkata                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Kolkata"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKrasnoyarsk             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Krasnoyarsk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKualaLumpur             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Kuala_Lumpur"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKuwait                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Kuwait"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaMagadan                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Magadan"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaMuscat                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Muscat"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaNovosibirsk             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Novosibirsk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaRangoon                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Rangoon"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaRiyadh                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Riyadh"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaSeoul                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Seoul"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaShanghai                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Shanghai"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaSingapore               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Singapore"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaSrednekolymsk           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Srednekolymsk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTaipei                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Taipei"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTashkent                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Tashkent"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTbilisi                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Tbilisi"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTehran                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Tehran"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTokyo                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Tokyo"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaUlaanbaatar             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Ulaanbaatar"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaUrumqi                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Urumqi"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaVladivostok             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Vladivostok"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYakutsk                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yakutsk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYekaterinburg           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yekaterinburg"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYerevan                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yerevan"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAstana                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Astana"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsuncion                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asuncion"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAthens                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Athens"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticAzores              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Atlantic/Azores"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticCapeVerde           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Atlantic/Cape_Verde"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticSouthGeorgia        NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Atlantic/South_Georgia"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticTimeCanada          NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Atlantic Time (Canada)"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAuckland                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Auckland"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaAdelaide           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Adelaide"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaBrisbane           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Brisbane"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaCanberra           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Canberra"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaDarwin             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Darwin"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaEucla              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Eucla"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaHobart             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Hobart"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaLHI                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/LHI"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaLordHowe           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Lord_Howe"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaMelbourne          NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Melbourne"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaPerth              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Perth"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaSydney             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Sydney"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAzores                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Azores"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBaghdad                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Baghdad"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBaku                        NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Baku"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBangkok                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Bangkok"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBeijing                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Beijing"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBelgrade                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Belgrade"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBerlin                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Berlin"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBern                        NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Bern"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBogota                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Bogota"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBrasilia                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Brasilia"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBratislava                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Bratislava"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBrisbane                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Brisbane"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBrussels                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Brussels"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBucharest                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Bucharest"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBudapest                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Budapest"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBuenosAires                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Buenos Aires"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCairo                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Cairo"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCanadaPacific               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Canada/Pacific"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCanberra                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Canberra"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCapeVerdeIs                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Cape Verde Is."
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCaracas                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Caracas"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCasablanca                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Casablanca"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCentralAmerica              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Central America"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCentralTimeUSCanada         NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Central Time (US & Canada)"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChathamIs                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Chatham Is."
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChennai                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Chennai"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChihuahua                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Chihuahua"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChileEasterIsland           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Chile/EasterIsland"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChongqing                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Chongqing"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCopenhagen                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Copenhagen"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneDarwin                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Darwin"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneDhaka                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Dhaka"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneDublin                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Dublin"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEasternTimeUSCanada         NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Eastern Time (US & Canada)"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEdinburgh                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Edinburgh"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEkaterinburg                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Ekaterinburg"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEtcGMT12                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Etc/GMT+12"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEtcUTC                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Etc/UTC"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeAmsterdam             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Amsterdam"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeAthens                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Athens"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBelgrade              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Belgrade"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBerlin                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Berlin"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBratislava            NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Bratislava"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBrussels              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Brussels"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBucharest             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Bucharest"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBudapest              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Budapest"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeCopenhagen            NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Copenhagen"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeDublin                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Dublin"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeHelsinki              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Helsinki"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeIstanbul              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Istanbul"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKaliningrad           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Kaliningrad"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKiev                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Kiev"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLisbon                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Lisbon"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLjubljana             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Ljubljana"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLondon                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/London"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeMadrid                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Madrid"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeMinsk                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Minsk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeMoscow                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Moscow"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeParis                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Paris"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropePrague                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Prague"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeRiga                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Riga"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeRome                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Rome"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSamara                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Samara"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSarajevo              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Sarajevo"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSkopje                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Skopje"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSofia                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Sofia"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeStockholm             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Stockholm"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeTallinn               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Tallinn"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeVienna                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Vienna"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeVilnius               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Vilnius"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeVolgograd             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Volgograd"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeWarsaw                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Warsaw"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeZagreb                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Zagreb"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeZurich                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Zurich"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneFiji                        NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Fiji"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGeorgetown                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Georgetown"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGreenland                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Greenland"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGuadalajara                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Guadalajara"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGuam                        NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Guam"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHanoi                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Hanoi"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHarare                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Harare"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHawaii                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Hawaii"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHelsinki                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Helsinki"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHobart                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Hobart"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHongKong                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Hong Kong"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIndianaEast                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Indiana (East)"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneInternationalDateLineWest   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "International Date Line West"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIrkutsk                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Irkutsk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIslamabad                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Islamabad"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIstanbul                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Istanbul"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneJakarta                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Jakarta"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneJerusalem                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Jerusalem"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKabul                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kabul"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKaliningrad                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kaliningrad"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKamchatka                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kamchatka"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKarachi                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Karachi"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKathmandu                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kathmandu"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKolkata                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kolkata"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKrasnoyarsk                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Krasnoyarsk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKualaLumpur                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kuala Lumpur"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKuwait                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kuwait"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKyiv                        NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kyiv"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLaPaz                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "La Paz"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLima                        NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Lima"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLisbon                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Lisbon"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLjubljana                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Ljubljana"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLondon                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "London"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMadrid                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Madrid"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMagadan                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Magadan"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMarshallIs                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Marshall Is."
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMazatlan                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Mazatlan"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMelbourne                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Melbourne"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMexicoCity                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Mexico City"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMidAtlantic                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Mid-Atlantic"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMidwayIsland                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Midway Island"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMinsk                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Minsk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMonrovia                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Monrovia"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMonterrey                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Monterrey"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMontevideo                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Montevideo"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMoscow                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Moscow"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMountainTimeUSCanada        NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Mountain Time (US & Canada)"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMumbai                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Mumbai"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMuscat                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Muscat"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNairobi                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Nairobi"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNewCaledonia                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "New Caledonia"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNewDelhi                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "New Delhi"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNewfoundland                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Newfoundland"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNovosibirsk                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Novosibirsk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNukualofa                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Nuku'alofa"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneOsaka                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Osaka"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificApia                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Apia"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificAuckland             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Auckland"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificChatham              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Chatham"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificEaster               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Easter"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificFakaofo              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Fakaofo"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificFiji                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Fiji"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificGambier              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Gambier"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificGuadalcanal          NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Guadalcanal"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificGuam                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Guam"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificHonolulu             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Honolulu"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificKiritimati           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Kiritimati"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificMajuro               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Majuro"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificMarquesas            NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Marquesas"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificMidway               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Midway"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificNorfolk              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Norfolk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificNoumea               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Noumea"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificPagoPago             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Pago_Pago"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificPitcairn             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Pitcairn"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificPortMoresby          NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Port_Moresby"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificTimeUSCanada         NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific Time (US & Canada)"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificTongatapu            NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Tongatapu"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneParis                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Paris"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePerth                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Perth"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePortMoresby                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Port Moresby"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePrague                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Prague"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePretoria                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pretoria"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePuertoRico                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Puerto Rico"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneQuito                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Quito"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRangoon                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Rangoon"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRiga                        NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Riga"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRiyadh                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Riyadh"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRome                        NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Rome"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSamara                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Samara"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSamoa                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Samoa"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSantiago                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Santiago"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSapporo                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Sapporo"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSarajevo                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Sarajevo"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSaskatchewan                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Saskatchewan"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSeoul                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Seoul"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSingapore                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Singapore"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSkopje                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Skopje"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSofia                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Sofia"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSolomonIs                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Solomon Is."
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSrednekolymsk               NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Srednekolymsk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSriJayawardenepura          NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Sri Jayawardenepura"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneStPetersburg                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "St. Petersburg"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneStockholm                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Stockholm"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSydney                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Sydney"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTaipei                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Taipei"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTallinn                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tallinn"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTashkent                    NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tashkent"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTbilisi                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tbilisi"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTehran                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tehran"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTijuana                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tijuana"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTokelauIs                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tokelau Is."
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTokyo                       NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tokyo"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUSAleutian                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "US/Aleutian"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUTC                         NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "UTC"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUlaanbaatar                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Ulaanbaatar"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUrumqi                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Urumqi"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVienna                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Vienna"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVilnius                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Vilnius"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVladivostok                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Vladivostok"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVolgograd                   NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Volgograd"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneWarsaw                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Warsaw"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneWellington                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Wellington"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneWestCentralAfrica           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "West Central Africa"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneYakutsk                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Yakutsk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneYerevan                     NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Yerevan"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneZagreb                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Zagreb"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneZurich                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Zurich"
+)
+
+// Valid indicates whether the value is a known member of the NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone enum.
+func (e NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone) Valid() bool {
+	switch e {
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAbuDhabi:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAdelaide:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaAlgiers:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaCairo:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaCasablanca:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaHarare:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaJohannesburg:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaMonrovia:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaNairobi:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAlaska:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAlmaty:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaAdak:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaArgentinaBuenosAires:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaAsuncion:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaAtka:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaBogota:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaCaracas:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaChicago:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaChihuahua:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaDenver:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaGuatemala:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaGuyana:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaHalifax:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaIndianaIndianapolis:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaJuneau:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaLaPaz:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaLima:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaLosAngeles:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMazatlan:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMexicoCity:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMiquelon:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMonterrey:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMontevideo:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaNewYork:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaNuuk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaPhoenix:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaPuertoRico:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaRegina:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaSantiago:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaSaoPaulo:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaStJohns:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaTijuana:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaVancouver:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericanSamoa:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmsterdam:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneArizona:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaAlmaty:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaBaghdad:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaBaku:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaBangkok:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaChongqing:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaColombo:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaDhaka:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaHongKong:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaIrkutsk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaJakarta:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaJerusalem:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKabul:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKamchatka:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKarachi:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKathmandu:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKolkata:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKrasnoyarsk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKualaLumpur:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKuwait:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaMagadan:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaMuscat:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaNovosibirsk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaRangoon:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaRiyadh:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaSeoul:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaShanghai:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaSingapore:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaSrednekolymsk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTaipei:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTashkent:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTbilisi:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTehran:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTokyo:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaUlaanbaatar:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaUrumqi:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaVladivostok:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYakutsk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYekaterinburg:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYerevan:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAstana:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsuncion:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAthens:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticAzores:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticCapeVerde:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticSouthGeorgia:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticTimeCanada:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAuckland:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaAdelaide:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaBrisbane:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaCanberra:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaDarwin:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaEucla:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaHobart:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaLHI:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaLordHowe:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaMelbourne:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaPerth:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaSydney:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAzores:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBaghdad:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBaku:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBangkok:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBeijing:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBelgrade:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBerlin:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBern:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBogota:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBrasilia:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBratislava:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBrisbane:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBrussels:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBucharest:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBudapest:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBuenosAires:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCairo:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCanadaPacific:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCanberra:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCapeVerdeIs:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCaracas:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCasablanca:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCentralAmerica:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCentralTimeUSCanada:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChathamIs:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChennai:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChihuahua:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChileEasterIsland:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChongqing:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCopenhagen:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneDarwin:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneDhaka:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneDublin:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEasternTimeUSCanada:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEdinburgh:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEkaterinburg:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEtcGMT12:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEtcUTC:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeAmsterdam:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeAthens:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBelgrade:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBerlin:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBratislava:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBrussels:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBucharest:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBudapest:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeCopenhagen:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeDublin:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeHelsinki:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeIstanbul:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKaliningrad:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKiev:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLisbon:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLjubljana:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLondon:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeMadrid:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeMinsk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeMoscow:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeParis:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropePrague:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeRiga:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeRome:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSamara:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSarajevo:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSkopje:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSofia:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeStockholm:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeTallinn:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeVienna:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeVilnius:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeVolgograd:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeWarsaw:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeZagreb:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeZurich:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneFiji:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGeorgetown:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGreenland:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGuadalajara:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGuam:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHanoi:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHarare:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHawaii:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHelsinki:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHobart:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHongKong:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIndianaEast:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneInternationalDateLineWest:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIrkutsk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIslamabad:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIstanbul:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneJakarta:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneJerusalem:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKabul:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKaliningrad:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKamchatka:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKarachi:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKathmandu:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKolkata:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKrasnoyarsk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKualaLumpur:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKuwait:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKyiv:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLaPaz:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLima:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLisbon:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLjubljana:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLondon:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMadrid:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMagadan:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMarshallIs:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMazatlan:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMelbourne:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMexicoCity:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMidAtlantic:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMidwayIsland:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMinsk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMonrovia:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMonterrey:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMontevideo:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMoscow:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMountainTimeUSCanada:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMumbai:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMuscat:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNairobi:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNewCaledonia:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNewDelhi:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNewfoundland:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNovosibirsk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNukualofa:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneOsaka:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificApia:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificAuckland:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificChatham:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificEaster:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificFakaofo:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificFiji:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificGambier:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificGuadalcanal:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificGuam:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificHonolulu:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificKiritimati:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificMajuro:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificMarquesas:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificMidway:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificNorfolk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificNoumea:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificPagoPago:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificPitcairn:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificPortMoresby:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificTimeUSCanada:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificTongatapu:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneParis:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePerth:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePortMoresby:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePrague:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePretoria:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePuertoRico:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneQuito:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRangoon:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRiga:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRiyadh:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRome:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSamara:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSamoa:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSantiago:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSapporo:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSarajevo:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSaskatchewan:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSeoul:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSingapore:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSkopje:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSofia:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSolomonIs:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSrednekolymsk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSriJayawardenepura:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneStPetersburg:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneStockholm:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSydney:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTaipei:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTallinn:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTashkent:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTbilisi:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTehran:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTijuana:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTokelauIs:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTokyo:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUSAleutian:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUTC:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUlaanbaatar:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUrumqi:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVienna:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVilnius:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVladivostok:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVolgograd:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneWarsaw:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneWellington:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneWestCentralAfrica:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneYakutsk:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneYerevan:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneZagreb:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneZurich:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewEscalationPathDataAttributesNotificationTypeRulesMatchMode.
+const (
+	NewEscalationPathDataAttributesNotificationTypeRulesMatchModeMatchAllRules NewEscalationPathDataAttributesNotificationTypeRulesMatchMode = "match-all-rules"
+	NewEscalationPathDataAttributesNotificationTypeRulesMatchModeMatchAnyRule  NewEscalationPathDataAttributesNotificationTypeRulesMatchMode = "match-any-rule"
+)
+
+// Valid indicates whether the value is a known member of the NewEscalationPathDataAttributesNotificationTypeRulesMatchMode enum.
+func (e NewEscalationPathDataAttributesNotificationTypeRulesMatchMode) Valid() bool {
+	switch e {
+	case NewEscalationPathDataAttributesNotificationTypeRulesMatchModeMatchAllRules:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesMatchModeMatchAnyRule:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewEscalationPathDataAttributesNotificationTypeRulesNotificationType.
+const (
+	NewEscalationPathDataAttributesNotificationTypeRulesNotificationTypeAudible NewEscalationPathDataAttributesNotificationTypeRulesNotificationType = "audible"
+	NewEscalationPathDataAttributesNotificationTypeRulesNotificationTypeQuiet   NewEscalationPathDataAttributesNotificationTypeRulesNotificationType = "quiet"
+)
+
+// Valid indicates whether the value is a known member of the NewEscalationPathDataAttributesNotificationTypeRulesNotificationType enum.
+func (e NewEscalationPathDataAttributesNotificationTypeRulesNotificationType) Valid() bool {
+	switch e {
+	case NewEscalationPathDataAttributesNotificationTypeRulesNotificationTypeAudible:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesNotificationTypeQuiet:
 		return true
 	default:
 		return false
@@ -17015,6 +19074,7 @@ func (e NewFormFieldDataAttributesInputKind) Valid() bool {
 const (
 	NewFormFieldDataAttributesKindAcknowledgedAt              NewFormFieldDataAttributesKind = "acknowledged_at"
 	NewFormFieldDataAttributesKindAttachAlerts                NewFormFieldDataAttributesKind = "attach_alerts"
+	NewFormFieldDataAttributesKindCancellationMessage         NewFormFieldDataAttributesKind = "cancellation_message"
 	NewFormFieldDataAttributesKindCauses                      NewFormFieldDataAttributesKind = "causes"
 	NewFormFieldDataAttributesKindClosedAt                    NewFormFieldDataAttributesKind = "closed_at"
 	NewFormFieldDataAttributesKindCustom                      NewFormFieldDataAttributesKind = "custom"
@@ -17052,6 +19112,8 @@ func (e NewFormFieldDataAttributesKind) Valid() bool {
 	case NewFormFieldDataAttributesKindAcknowledgedAt:
 		return true
 	case NewFormFieldDataAttributesKindAttachAlerts:
+		return true
+	case NewFormFieldDataAttributesKindCancellationMessage:
 		return true
 	case NewFormFieldDataAttributesKindCauses:
 		return true
@@ -18130,6 +20192,30 @@ func (e NewIncidentStatusPageEventDataAttributesStatus) Valid() bool {
 	}
 }
 
+// Defines values for NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus.
+const (
+	NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusDegradedPerformance NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus = "degraded_performance"
+	NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusMajorOutage         NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus = "major_outage"
+	NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusOperational         NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus = "operational"
+	NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusPartialOutage       NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus = "partial_outage"
+)
+
+// Valid indicates whether the value is a known member of the NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus enum.
+func (e NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus) Valid() bool {
+	switch e {
+	case NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusDegradedPerformance:
+		return true
+	case NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusMajorOutage:
+		return true
+	case NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusOperational:
+		return true
+	case NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatusPartialOutage:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NewIncidentStatusPageEventDataType.
 const (
 	NewIncidentStatusPageEventDataTypeIncidentStatusPageEvents NewIncidentStatusPageEventDataType = "incident_status_page_events"
@@ -18757,6 +20843,27 @@ func (e NewOnCallRoleDataAttributesLiveCallRoutingPermissions) Valid() bool {
 	case NewOnCallRoleDataAttributesLiveCallRoutingPermissionsRead:
 		return true
 	case NewOnCallRoleDataAttributesLiveCallRoutingPermissionsUpdate:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewOnCallRoleDataAttributesMembersPermissions.
+const (
+	NewOnCallRoleDataAttributesMembersPermissionsDelete NewOnCallRoleDataAttributesMembersPermissions = "delete"
+	NewOnCallRoleDataAttributesMembersPermissionsRead   NewOnCallRoleDataAttributesMembersPermissions = "read"
+	NewOnCallRoleDataAttributesMembersPermissionsUpdate NewOnCallRoleDataAttributesMembersPermissions = "update"
+)
+
+// Valid indicates whether the value is a known member of the NewOnCallRoleDataAttributesMembersPermissions enum.
+func (e NewOnCallRoleDataAttributesMembersPermissions) Valid() bool {
+	switch e {
+	case NewOnCallRoleDataAttributesMembersPermissionsDelete:
+		return true
+	case NewOnCallRoleDataAttributesMembersPermissionsRead:
+		return true
+	case NewOnCallRoleDataAttributesMembersPermissionsUpdate:
 		return true
 	default:
 		return false
@@ -19618,6 +21725,30 @@ func (e NewRoleDataAttributesPlaybooksPermissions) Valid() bool {
 	}
 }
 
+// Defines values for NewRoleDataAttributesPrivateAgentPermissions.
+const (
+	NewRoleDataAttributesPrivateAgentPermissionsCreate NewRoleDataAttributesPrivateAgentPermissions = "create"
+	NewRoleDataAttributesPrivateAgentPermissionsDelete NewRoleDataAttributesPrivateAgentPermissions = "delete"
+	NewRoleDataAttributesPrivateAgentPermissionsRead   NewRoleDataAttributesPrivateAgentPermissions = "read"
+	NewRoleDataAttributesPrivateAgentPermissionsUpdate NewRoleDataAttributesPrivateAgentPermissions = "update"
+)
+
+// Valid indicates whether the value is a known member of the NewRoleDataAttributesPrivateAgentPermissions enum.
+func (e NewRoleDataAttributesPrivateAgentPermissions) Valid() bool {
+	switch e {
+	case NewRoleDataAttributesPrivateAgentPermissionsCreate:
+		return true
+	case NewRoleDataAttributesPrivateAgentPermissionsDelete:
+		return true
+	case NewRoleDataAttributesPrivateAgentPermissionsRead:
+		return true
+	case NewRoleDataAttributesPrivateAgentPermissionsUpdate:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NewRoleDataAttributesPrivateIncidentsPermissions.
 const (
 	NewRoleDataAttributesPrivateIncidentsPermissionsCreate NewRoleDataAttributesPrivateIncidentsPermissions = "create"
@@ -19801,6 +21932,30 @@ func (e NewRoleDataAttributesSlasPermissions) Valid() bool {
 	case NewRoleDataAttributesSlasPermissionsRead:
 		return true
 	case NewRoleDataAttributesSlasPermissionsUpdate:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewRoleDataAttributesStatusPageUpdatesPermissions.
+const (
+	NewRoleDataAttributesStatusPageUpdatesPermissionsCreate NewRoleDataAttributesStatusPageUpdatesPermissions = "create"
+	NewRoleDataAttributesStatusPageUpdatesPermissionsDelete NewRoleDataAttributesStatusPageUpdatesPermissions = "delete"
+	NewRoleDataAttributesStatusPageUpdatesPermissionsRead   NewRoleDataAttributesStatusPageUpdatesPermissions = "read"
+	NewRoleDataAttributesStatusPageUpdatesPermissionsUpdate NewRoleDataAttributesStatusPageUpdatesPermissions = "update"
+)
+
+// Valid indicates whether the value is a known member of the NewRoleDataAttributesStatusPageUpdatesPermissions enum.
+func (e NewRoleDataAttributesStatusPageUpdatesPermissions) Valid() bool {
+	switch e {
+	case NewRoleDataAttributesStatusPageUpdatesPermissionsCreate:
+		return true
+	case NewRoleDataAttributesStatusPageUpdatesPermissionsDelete:
+		return true
+	case NewRoleDataAttributesStatusPageUpdatesPermissionsRead:
+		return true
+	case NewRoleDataAttributesStatusPageUpdatesPermissionsUpdate:
 		return true
 	default:
 		return false
@@ -20668,6 +22823,21 @@ func (e NewStatusPageDataType) Valid() bool {
 	}
 }
 
+// Defines values for NewStatusPageAnnouncementDataType.
+const (
+	NewStatusPageAnnouncementDataTypeStatusPageAnnouncements NewStatusPageAnnouncementDataType = "status_page_announcements"
+)
+
+// Valid indicates whether the value is a known member of the NewStatusPageAnnouncementDataType enum.
+func (e NewStatusPageAnnouncementDataType) Valid() bool {
+	switch e {
+	case NewStatusPageAnnouncementDataTypeStatusPageAnnouncements:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NewStatusPageComponentDataAttributesSourceType.
 const (
 	NewStatusPageComponentDataAttributesSourceTypeFunctionality NewStatusPageComponentDataAttributesSourceType = "Functionality"
@@ -20767,6 +22937,27 @@ func (e NewTeamDataAttributesAutoAddMembersScope) Valid() bool {
 	case NewTeamDataAttributesAutoAddMembersScopePublicAndTest:
 		return true
 	case NewTeamDataAttributesAutoAddMembersScopePublicOnly:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewTeamDataAttributesScheduleOverridePolicy.
+const (
+	NewTeamDataAttributesScheduleOverridePolicyAdmins   NewTeamDataAttributesScheduleOverridePolicy = "admins"
+	NewTeamDataAttributesScheduleOverridePolicyEveryone NewTeamDataAttributesScheduleOverridePolicy = "everyone"
+	NewTeamDataAttributesScheduleOverridePolicyMembers  NewTeamDataAttributesScheduleOverridePolicy = "members"
+)
+
+// Valid indicates whether the value is a known member of the NewTeamDataAttributesScheduleOverridePolicy enum.
+func (e NewTeamDataAttributesScheduleOverridePolicy) Valid() bool {
+	switch e {
+	case NewTeamDataAttributesScheduleOverridePolicyAdmins:
+		return true
+	case NewTeamDataAttributesScheduleOverridePolicyEveryone:
+		return true
+	case NewTeamDataAttributesScheduleOverridePolicyMembers:
 		return true
 	default:
 		return false
@@ -20917,6 +23108,7 @@ const (
 	NewWebhooksEndpointDataAttributesEventTypesIncidentStatusPageEventUpdated NewWebhooksEndpointDataAttributesEventTypes = "incident_status_page_event.updated"
 	NewWebhooksEndpointDataAttributesEventTypesIncidentUpdated                NewWebhooksEndpointDataAttributesEventTypes = "incident.updated"
 	NewWebhooksEndpointDataAttributesEventTypesPulseCreated                   NewWebhooksEndpointDataAttributesEventTypes = "pulse.created"
+	NewWebhooksEndpointDataAttributesEventTypesShiftEnded                     NewWebhooksEndpointDataAttributesEventTypes = "shift.ended"
 	NewWebhooksEndpointDataAttributesEventTypesShiftStarted                   NewWebhooksEndpointDataAttributesEventTypes = "shift.started"
 )
 
@@ -20985,6 +23177,8 @@ func (e NewWebhooksEndpointDataAttributesEventTypes) Valid() bool {
 		return true
 	case NewWebhooksEndpointDataAttributesEventTypesPulseCreated:
 		return true
+	case NewWebhooksEndpointDataAttributesEventTypesShiftEnded:
+		return true
 	case NewWebhooksEndpointDataAttributesEventTypesShiftStarted:
 		return true
 	default:
@@ -21001,6 +23195,27 @@ const (
 func (e NewWebhooksEndpointDataType) Valid() bool {
 	switch e {
 	case NewWebhooksEndpointDataTypeWebhooksEndpoints:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewWorkflowDataAttributesFailureNotificationMode.
+const (
+	NewWorkflowDataAttributesFailureNotificationModeCustom  NewWorkflowDataAttributesFailureNotificationMode = "custom"
+	NewWorkflowDataAttributesFailureNotificationModeInherit NewWorkflowDataAttributesFailureNotificationMode = "inherit"
+	NewWorkflowDataAttributesFailureNotificationModeOff     NewWorkflowDataAttributesFailureNotificationMode = "off"
+)
+
+// Valid indicates whether the value is a known member of the NewWorkflowDataAttributesFailureNotificationMode enum.
+func (e NewWorkflowDataAttributesFailureNotificationMode) Valid() bool {
+	switch e {
+	case NewWorkflowDataAttributesFailureNotificationModeCustom:
+		return true
+	case NewWorkflowDataAttributesFailureNotificationModeInherit:
+		return true
+	case NewWorkflowDataAttributesFailureNotificationModeOff:
 		return true
 	default:
 		return false
@@ -21244,6 +23459,7 @@ const (
 	NewWorkflowGroupDataAttributesKindAlert      NewWorkflowGroupDataAttributesKind = "alert"
 	NewWorkflowGroupDataAttributesKindIncident   NewWorkflowGroupDataAttributesKind = "incident"
 	NewWorkflowGroupDataAttributesKindPostMortem NewWorkflowGroupDataAttributesKind = "post_mortem"
+	NewWorkflowGroupDataAttributesKindProblem    NewWorkflowGroupDataAttributesKind = "problem"
 	NewWorkflowGroupDataAttributesKindPulse      NewWorkflowGroupDataAttributesKind = "pulse"
 	NewWorkflowGroupDataAttributesKindSimple     NewWorkflowGroupDataAttributesKind = "simple"
 )
@@ -21258,6 +23474,8 @@ func (e NewWorkflowGroupDataAttributesKind) Valid() bool {
 	case NewWorkflowGroupDataAttributesKindIncident:
 		return true
 	case NewWorkflowGroupDataAttributesKindPostMortem:
+		return true
+	case NewWorkflowGroupDataAttributesKindProblem:
 		return true
 	case NewWorkflowGroupDataAttributesKindPulse:
 		return true
@@ -21307,6 +23525,21 @@ const (
 func (e NewWorkflowTaskDataType) Valid() bool {
 	switch e {
 	case NewWorkflowTaskDataTypeWorkflowTasks:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NullableSeverityResponseDataType.
+const (
+	NullableSeverityResponseDataTypeSeverities NullableSeverityResponseDataType = "severities"
+)
+
+// Valid indicates whether the value is a known member of the NullableSeverityResponseDataType enum.
+func (e NullableSeverityResponseDataType) Valid() bool {
+	switch e {
+	case NullableSeverityResponseDataTypeSeverities:
 		return true
 	default:
 		return false
@@ -21775,6 +24008,27 @@ func (e OnCallRoleLiveCallRoutingPermissions) Valid() bool {
 	case OnCallRoleLiveCallRoutingPermissionsRead:
 		return true
 	case OnCallRoleLiveCallRoutingPermissionsUpdate:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for OnCallRoleMembersPermissions.
+const (
+	OnCallRoleMembersPermissionsDelete OnCallRoleMembersPermissions = "delete"
+	OnCallRoleMembersPermissionsRead   OnCallRoleMembersPermissions = "read"
+	OnCallRoleMembersPermissionsUpdate OnCallRoleMembersPermissions = "update"
+)
+
+// Valid indicates whether the value is a known member of the OnCallRoleMembersPermissions enum.
+func (e OnCallRoleMembersPermissions) Valid() bool {
+	switch e {
+	case OnCallRoleMembersPermissionsDelete:
+		return true
+	case OnCallRoleMembersPermissionsRead:
+		return true
+	case OnCallRoleMembersPermissionsUpdate:
 		return true
 	default:
 		return false
@@ -22525,6 +24779,138 @@ func (e PrintTaskParamsTaskType) Valid() bool {
 	}
 }
 
+// Defines values for PrivateAgentAttributesDeploymentMode.
+const (
+	PrivateAgentAttributesDeploymentModeCombined  PrivateAgentAttributesDeploymentMode = "combined"
+	PrivateAgentAttributesDeploymentModeSplitCore PrivateAgentAttributesDeploymentMode = "split-core"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAgentAttributesDeploymentMode enum.
+func (e PrivateAgentAttributesDeploymentMode) Valid() bool {
+	switch e {
+	case PrivateAgentAttributesDeploymentModeCombined:
+		return true
+	case PrivateAgentAttributesDeploymentModeSplitCore:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PrivateAgentAttributesStatus.
+const (
+	PrivateAgentAttributesStatusActive  PrivateAgentAttributesStatus = "active"
+	PrivateAgentAttributesStatusRevoked PrivateAgentAttributesStatus = "revoked"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAgentAttributesStatus enum.
+func (e PrivateAgentAttributesStatus) Valid() bool {
+	switch e {
+	case PrivateAgentAttributesStatusActive:
+		return true
+	case PrivateAgentAttributesStatusRevoked:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PrivateAgentType.
+const (
+	PrivateAgentTypePrivateAgents PrivateAgentType = "private_agents"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAgentType enum.
+func (e PrivateAgentType) Valid() bool {
+	switch e {
+	case PrivateAgentTypePrivateAgents:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PrivateAgentEnrollmentTokenResponseDataType.
+const (
+	PrivateAgentEnrollmentTokens PrivateAgentEnrollmentTokenResponseDataType = "private_agent_enrollment_tokens"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAgentEnrollmentTokenResponseDataType enum.
+func (e PrivateAgentEnrollmentTokenResponseDataType) Valid() bool {
+	switch e {
+	case PrivateAgentEnrollmentTokens:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PrivateAgentSummaryAttributesDeploymentMode.
+const (
+	PrivateAgentSummaryAttributesDeploymentModeCombined  PrivateAgentSummaryAttributesDeploymentMode = "combined"
+	PrivateAgentSummaryAttributesDeploymentModeSplitCore PrivateAgentSummaryAttributesDeploymentMode = "split-core"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAgentSummaryAttributesDeploymentMode enum.
+func (e PrivateAgentSummaryAttributesDeploymentMode) Valid() bool {
+	switch e {
+	case PrivateAgentSummaryAttributesDeploymentModeCombined:
+		return true
+	case PrivateAgentSummaryAttributesDeploymentModeSplitCore:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PrivateAgentSummaryAttributesStatus.
+const (
+	PrivateAgentSummaryAttributesStatusActive  PrivateAgentSummaryAttributesStatus = "active"
+	PrivateAgentSummaryAttributesStatusRevoked PrivateAgentSummaryAttributesStatus = "revoked"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAgentSummaryAttributesStatus enum.
+func (e PrivateAgentSummaryAttributesStatus) Valid() bool {
+	switch e {
+	case PrivateAgentSummaryAttributesStatusActive:
+		return true
+	case PrivateAgentSummaryAttributesStatusRevoked:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PrivateAgentSummaryType.
+const (
+	PrivateAgentSummaryTypePrivateAgents PrivateAgentSummaryType = "private_agents"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAgentSummaryType enum.
+func (e PrivateAgentSummaryType) Valid() bool {
+	switch e {
+	case PrivateAgentSummaryTypePrivateAgents:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PrivateAgentUpdateDataType.
+const (
+	PrivateAgents PrivateAgentUpdateDataType = "private_agents"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAgentUpdateDataType enum.
+func (e PrivateAgentUpdateDataType) Valid() bool {
+	switch e {
+	case PrivateAgents:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for PublishIncidentTaskParamsSelectedComponentStatuses.
 const (
 	PublishIncidentTaskParamsSelectedComponentStatusesDegradedPerformance PublishIncidentTaskParamsSelectedComponentStatuses = "degraded_performance"
@@ -22849,6 +25235,36 @@ const (
 func (e RedisClientTaskParamsTaskType) Valid() bool {
 	switch e {
 	case RedisClient:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RemoveFromSlackChannelTaskParamsTargetKind.
+const (
+	UsersWithoutPrivateIncidentAccess RemoveFromSlackChannelTaskParamsTargetKind = "users_without_private_incident_access"
+)
+
+// Valid indicates whether the value is a known member of the RemoveFromSlackChannelTaskParamsTargetKind enum.
+func (e RemoveFromSlackChannelTaskParamsTargetKind) Valid() bool {
+	switch e {
+	case UsersWithoutPrivateIncidentAccess:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RemoveFromSlackChannelTaskParamsTaskType.
+const (
+	RemoveFromSlackChannel RemoveFromSlackChannelTaskParamsTaskType = "remove_from_slack_channel"
+)
+
+// Valid indicates whether the value is a known member of the RemoveFromSlackChannelTaskParamsTaskType enum.
+func (e RemoveFromSlackChannelTaskParamsTaskType) Valid() bool {
+	switch e {
+	case RemoveFromSlackChannel:
 		return true
 	default:
 		return false
@@ -23665,6 +26081,30 @@ func (e RolePlaybooksPermissions) Valid() bool {
 	}
 }
 
+// Defines values for RolePrivateAgentPermissions.
+const (
+	RolePrivateAgentPermissionsCreate RolePrivateAgentPermissions = "create"
+	RolePrivateAgentPermissionsDelete RolePrivateAgentPermissions = "delete"
+	RolePrivateAgentPermissionsRead   RolePrivateAgentPermissions = "read"
+	RolePrivateAgentPermissionsUpdate RolePrivateAgentPermissions = "update"
+)
+
+// Valid indicates whether the value is a known member of the RolePrivateAgentPermissions enum.
+func (e RolePrivateAgentPermissions) Valid() bool {
+	switch e {
+	case RolePrivateAgentPermissionsCreate:
+		return true
+	case RolePrivateAgentPermissionsDelete:
+		return true
+	case RolePrivateAgentPermissionsRead:
+		return true
+	case RolePrivateAgentPermissionsUpdate:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for RolePrivateIncidentsPermissions.
 const (
 	RolePrivateIncidentsPermissionsCreate RolePrivateIncidentsPermissions = "create"
@@ -23848,6 +26288,30 @@ func (e RoleSlasPermissions) Valid() bool {
 	case RoleSlasPermissionsRead:
 		return true
 	case RoleSlasPermissionsUpdate:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for RoleStatusPageUpdatesPermissions.
+const (
+	RoleStatusPageUpdatesPermissionsCreate RoleStatusPageUpdatesPermissions = "create"
+	RoleStatusPageUpdatesPermissionsDelete RoleStatusPageUpdatesPermissions = "delete"
+	RoleStatusPageUpdatesPermissionsRead   RoleStatusPageUpdatesPermissions = "read"
+	RoleStatusPageUpdatesPermissionsUpdate RoleStatusPageUpdatesPermissions = "update"
+)
+
+// Valid indicates whether the value is a known member of the RoleStatusPageUpdatesPermissions enum.
+func (e RoleStatusPageUpdatesPermissions) Valid() bool {
+	switch e {
+	case RoleStatusPageUpdatesPermissionsCreate:
+		return true
+	case RoleStatusPageUpdatesPermissionsDelete:
+		return true
+	case RoleStatusPageUpdatesPermissionsRead:
+		return true
+	case RoleStatusPageUpdatesPermissionsUpdate:
 		return true
 	default:
 		return false
@@ -25192,6 +27656,36 @@ func (e StatusPageShowUptimeLastDays) Valid() bool {
 	}
 }
 
+// Defines values for StatusPageAnnouncementListDataType.
+const (
+	StatusPageAnnouncementListDataTypeStatusPageAnnouncements StatusPageAnnouncementListDataType = "status_page_announcements"
+)
+
+// Valid indicates whether the value is a known member of the StatusPageAnnouncementListDataType enum.
+func (e StatusPageAnnouncementListDataType) Valid() bool {
+	switch e {
+	case StatusPageAnnouncementListDataTypeStatusPageAnnouncements:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for StatusPageAnnouncementResponseDataType.
+const (
+	StatusPageAnnouncementResponseDataTypeStatusPageAnnouncements StatusPageAnnouncementResponseDataType = "status_page_announcements"
+)
+
+// Valid indicates whether the value is a known member of the StatusPageAnnouncementResponseDataType enum.
+func (e StatusPageAnnouncementResponseDataType) Valid() bool {
+	switch e {
+	case StatusPageAnnouncementResponseDataTypeStatusPageAnnouncements:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for StatusPageComponentStatus.
 const (
 	StatusPageComponentStatusDegradedPerformance StatusPageComponentStatus = "degraded_performance"
@@ -25504,6 +27998,27 @@ func (e TeamManagedBy) Valid() bool {
 	}
 }
 
+// Defines values for TeamScheduleOverridePolicy.
+const (
+	TeamScheduleOverridePolicyAdmins   TeamScheduleOverridePolicy = "admins"
+	TeamScheduleOverridePolicyEveryone TeamScheduleOverridePolicy = "everyone"
+	TeamScheduleOverridePolicyMembers  TeamScheduleOverridePolicy = "members"
+)
+
+// Valid indicates whether the value is a known member of the TeamScheduleOverridePolicy enum.
+func (e TeamScheduleOverridePolicy) Valid() bool {
+	switch e {
+	case TeamScheduleOverridePolicyAdmins:
+		return true
+	case TeamScheduleOverridePolicyEveryone:
+		return true
+	case TeamScheduleOverridePolicyMembers:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for TeamListDataType.
 const (
 	TeamListDataTypeGroups TeamListDataType = "groups"
@@ -25609,6 +28124,7 @@ const (
 	TriggerWorkflowTaskParamsKindAlert      TriggerWorkflowTaskParamsKind = "alert"
 	TriggerWorkflowTaskParamsKindIncident   TriggerWorkflowTaskParamsKind = "incident"
 	TriggerWorkflowTaskParamsKindPostMortem TriggerWorkflowTaskParamsKind = "post_mortem"
+	TriggerWorkflowTaskParamsKindProblem    TriggerWorkflowTaskParamsKind = "problem"
 	TriggerWorkflowTaskParamsKindPulse      TriggerWorkflowTaskParamsKind = "pulse"
 )
 
@@ -25622,6 +28138,8 @@ func (e TriggerWorkflowTaskParamsKind) Valid() bool {
 	case TriggerWorkflowTaskParamsKindIncident:
 		return true
 	case TriggerWorkflowTaskParamsKindPostMortem:
+		return true
+	case TriggerWorkflowTaskParamsKindProblem:
 		return true
 	case TriggerWorkflowTaskParamsKindPulse:
 		return true
@@ -25840,6 +28358,150 @@ func (e UpdateAlertDataType) Valid() bool {
 	}
 }
 
+// Defines values for UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes.
+const (
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN10   UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 10
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN120  UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 120
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN1440 UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 1440
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN180  UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 180
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN20   UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 20
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN240  UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 240
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN30   UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 30
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN300  UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 300
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN360  UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 360
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN40   UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 40
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN50   UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 50
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN60   UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 60
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN720  UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 720
+	UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN90   UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes = 90
+)
+
+// Valid indicates whether the value is a known member of the UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes enum.
+func (e UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes) Valid() bool {
+	switch e {
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN10:
+		return true
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN120:
+		return true
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN1440:
+		return true
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN180:
+		return true
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN20:
+		return true
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN240:
+		return true
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN30:
+		return true
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN300:
+		return true
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN360:
+		return true
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN40:
+		return true
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN50:
+		return true
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN60:
+		return true
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN720:
+		return true
+	case UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutesN90:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypes.
+const (
+	UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypesCall   UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypes = "call"
+	UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypesDevice UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypes = "device"
+	UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypesEmail  UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypes = "email"
+	UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypesSms    UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypes = "sms"
+)
+
+// Valid indicates whether the value is a known member of the UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypes enum.
+func (e UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypes) Valid() bool {
+	switch e {
+	case UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypesCall:
+		return true
+	case UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypesDevice:
+		return true
+	case UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypesEmail:
+		return true
+	case UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypesSms:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypes.
+const (
+	UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypesCall              UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypes = "call"
+	UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypesEmail             UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypes = "email"
+	UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypesNonCriticalDevice UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypes = "non_critical_device"
+	UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypesSms               UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypes = "sms"
+)
+
+// Valid indicates whether the value is a known member of the UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypes enum.
+func (e UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypes) Valid() bool {
+	switch e {
+	case UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypesCall:
+		return true
+	case UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypesEmail:
+		return true
+	case UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypesNonCriticalDevice:
+		return true
+	case UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypesSms:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateAlertConfigurationDataAttributesManualPagingFormSettings.
+const (
+	UpdateAlertConfigurationDataAttributesManualPagingFormSettingsEscalationPolicy UpdateAlertConfigurationDataAttributesManualPagingFormSettings = "escalation_policy"
+	UpdateAlertConfigurationDataAttributesManualPagingFormSettingsFunctionality    UpdateAlertConfigurationDataAttributesManualPagingFormSettings = "functionality"
+	UpdateAlertConfigurationDataAttributesManualPagingFormSettingsService          UpdateAlertConfigurationDataAttributesManualPagingFormSettings = "service"
+	UpdateAlertConfigurationDataAttributesManualPagingFormSettingsTeam             UpdateAlertConfigurationDataAttributesManualPagingFormSettings = "team"
+	UpdateAlertConfigurationDataAttributesManualPagingFormSettingsUser             UpdateAlertConfigurationDataAttributesManualPagingFormSettings = "user"
+)
+
+// Valid indicates whether the value is a known member of the UpdateAlertConfigurationDataAttributesManualPagingFormSettings enum.
+func (e UpdateAlertConfigurationDataAttributesManualPagingFormSettings) Valid() bool {
+	switch e {
+	case UpdateAlertConfigurationDataAttributesManualPagingFormSettingsEscalationPolicy:
+		return true
+	case UpdateAlertConfigurationDataAttributesManualPagingFormSettingsFunctionality:
+		return true
+	case UpdateAlertConfigurationDataAttributesManualPagingFormSettingsService:
+		return true
+	case UpdateAlertConfigurationDataAttributesManualPagingFormSettingsTeam:
+		return true
+	case UpdateAlertConfigurationDataAttributesManualPagingFormSettingsUser:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateAlertConfigurationDataType.
+const (
+	UpdateAlertConfigurationDataTypeAlertConfigurations UpdateAlertConfigurationDataType = "alert_configurations"
+)
+
+// Valid indicates whether the value is a known member of the UpdateAlertConfigurationDataType enum.
+func (e UpdateAlertConfigurationDataType) Valid() bool {
+	switch e {
+	case UpdateAlertConfigurationDataTypeAlertConfigurations:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateAlertEventDataType.
 const (
 	AlertEvents UpdateAlertEventDataType = "alert_events"
@@ -26032,162 +28694,6 @@ const (
 func (e UpdateAlertGroupDataType) Valid() bool {
 	switch e {
 	case UpdateAlertGroupDataTypeAlertGroups:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for UpdateAlertRetriggerRuleDataAttributesConditionsKind.
-const (
-	UpdateAlertRetriggerRuleDataAttributesConditionsKindAlertField UpdateAlertRetriggerRuleDataAttributesConditionsKind = "alert_field"
-	UpdateAlertRetriggerRuleDataAttributesConditionsKindGroup      UpdateAlertRetriggerRuleDataAttributesConditionsKind = "group"
-	UpdateAlertRetriggerRuleDataAttributesConditionsKindPayload    UpdateAlertRetriggerRuleDataAttributesConditionsKind = "payload"
-	UpdateAlertRetriggerRuleDataAttributesConditionsKindService    UpdateAlertRetriggerRuleDataAttributesConditionsKind = "service"
-	UpdateAlertRetriggerRuleDataAttributesConditionsKindSource     UpdateAlertRetriggerRuleDataAttributesConditionsKind = "source"
-	UpdateAlertRetriggerRuleDataAttributesConditionsKindUrgency    UpdateAlertRetriggerRuleDataAttributesConditionsKind = "urgency"
-)
-
-// Valid indicates whether the value is a known member of the UpdateAlertRetriggerRuleDataAttributesConditionsKind enum.
-func (e UpdateAlertRetriggerRuleDataAttributesConditionsKind) Valid() bool {
-	switch e {
-	case UpdateAlertRetriggerRuleDataAttributesConditionsKindAlertField:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesConditionsKindGroup:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesConditionsKindPayload:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesConditionsKindService:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesConditionsKindSource:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesConditionsKindUrgency:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for UpdateAlertRetriggerRuleDataAttributesConditionsOperator.
-const (
-	UpdateAlertRetriggerRuleDataAttributesConditionsOperatorContains       UpdateAlertRetriggerRuleDataAttributesConditionsOperator = "contains"
-	UpdateAlertRetriggerRuleDataAttributesConditionsOperatorDoesNotContain UpdateAlertRetriggerRuleDataAttributesConditionsOperator = "does_not_contain"
-	UpdateAlertRetriggerRuleDataAttributesConditionsOperatorEndsWith       UpdateAlertRetriggerRuleDataAttributesConditionsOperator = "ends_with"
-	UpdateAlertRetriggerRuleDataAttributesConditionsOperatorIsNotOneOf     UpdateAlertRetriggerRuleDataAttributesConditionsOperator = "is_not_one_of"
-	UpdateAlertRetriggerRuleDataAttributesConditionsOperatorIsNotSet       UpdateAlertRetriggerRuleDataAttributesConditionsOperator = "is_not_set"
-	UpdateAlertRetriggerRuleDataAttributesConditionsOperatorIsOneOf        UpdateAlertRetriggerRuleDataAttributesConditionsOperator = "is_one_of"
-	UpdateAlertRetriggerRuleDataAttributesConditionsOperatorIsSet          UpdateAlertRetriggerRuleDataAttributesConditionsOperator = "is_set"
-	UpdateAlertRetriggerRuleDataAttributesConditionsOperatorMatchesRegex   UpdateAlertRetriggerRuleDataAttributesConditionsOperator = "matches_regex"
-	UpdateAlertRetriggerRuleDataAttributesConditionsOperatorStartsWith     UpdateAlertRetriggerRuleDataAttributesConditionsOperator = "starts_with"
-)
-
-// Valid indicates whether the value is a known member of the UpdateAlertRetriggerRuleDataAttributesConditionsOperator enum.
-func (e UpdateAlertRetriggerRuleDataAttributesConditionsOperator) Valid() bool {
-	switch e {
-	case UpdateAlertRetriggerRuleDataAttributesConditionsOperatorContains:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesConditionsOperatorDoesNotContain:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesConditionsOperatorEndsWith:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesConditionsOperatorIsNotOneOf:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesConditionsOperatorIsNotSet:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesConditionsOperatorIsOneOf:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesConditionsOperatorIsSet:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesConditionsOperatorMatchesRegex:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesConditionsOperatorStartsWith:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for UpdateAlertRetriggerRuleDataAttributesMatchMode.
-const (
-	UpdateAlertRetriggerRuleDataAttributesMatchModeMatchAllRules UpdateAlertRetriggerRuleDataAttributesMatchMode = "match-all-rules"
-	UpdateAlertRetriggerRuleDataAttributesMatchModeMatchAnyRule  UpdateAlertRetriggerRuleDataAttributesMatchMode = "match-any-rule"
-)
-
-// Valid indicates whether the value is a known member of the UpdateAlertRetriggerRuleDataAttributesMatchMode enum.
-func (e UpdateAlertRetriggerRuleDataAttributesMatchMode) Valid() bool {
-	switch e {
-	case UpdateAlertRetriggerRuleDataAttributesMatchModeMatchAllRules:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesMatchModeMatchAnyRule:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes.
-const (
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN10   UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 10
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN120  UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 120
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN1440 UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 1440
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN180  UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 180
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN20   UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 20
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN240  UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 240
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN30   UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 30
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN300  UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 300
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN360  UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 360
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN40   UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 40
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN50   UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 50
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN60   UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 60
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN720  UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 720
-	UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN90   UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes = 90
-)
-
-// Valid indicates whether the value is a known member of the UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes enum.
-func (e UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes) Valid() bool {
-	switch e {
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN10:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN120:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN1440:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN180:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN20:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN240:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN30:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN300:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN360:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN40:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN50:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN60:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN720:
-		return true
-	case UpdateAlertRetriggerRuleDataAttributesTimeoutMinutesN90:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for UpdateAlertRetriggerRuleDataType.
-const (
-	UpdateAlertRetriggerRuleDataTypeAlertRetriggerRules UpdateAlertRetriggerRuleDataType = "alert_retrigger_rules"
-)
-
-// Valid indicates whether the value is a known member of the UpdateAlertRetriggerRuleDataType enum.
-func (e UpdateAlertRetriggerRuleDataType) Valid() bool {
-	switch e {
-	case UpdateAlertRetriggerRuleDataTypeAlertRetriggerRules:
 		return true
 	default:
 		return false
@@ -26922,13 +29428,13 @@ func (e UpdateCatalogDataType) Valid() bool {
 
 // Defines values for UpdateCatalogChecklistTemplateDataAttributesFieldsFieldSource.
 const (
-	Custom UpdateCatalogChecklistTemplateDataAttributesFieldsFieldSource = "custom"
+	UpdateCatalogChecklistTemplateDataAttributesFieldsFieldSourceCustom UpdateCatalogChecklistTemplateDataAttributesFieldsFieldSource = "custom"
 )
 
 // Valid indicates whether the value is a known member of the UpdateCatalogChecklistTemplateDataAttributesFieldsFieldSource enum.
 func (e UpdateCatalogChecklistTemplateDataAttributesFieldsFieldSource) Valid() bool {
 	switch e {
-	case Custom:
+	case UpdateCatalogChecklistTemplateDataAttributesFieldsFieldSourceCustom:
 		return true
 	default:
 		return false
@@ -27592,18 +30098,54 @@ func (e UpdateEscalationLevelDataAttributesNotificationTargetParamsType) Valid()
 	}
 }
 
+// Defines values for UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode.
+const (
+	UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeAll   UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode = "all"
+	UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeUsers UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode = "users"
+)
+
+// Valid indicates whether the value is a known member of the UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode enum.
+func (e UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode) Valid() bool {
+	switch e {
+	case UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeAll:
+		return true
+	case UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsModeUsers:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope.
+const (
+	ActiveRotation UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope = "active_rotation"
+	EntireSchedule UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope = "entire_schedule"
+)
+
+// Valid indicates whether the value is a known member of the UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope enum.
+func (e UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope) Valid() bool {
+	switch e {
+	case ActiveRotation:
+		return true
+	case EntireSchedule:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy.
 const (
-	Everyone   UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy = "everyone"
-	OnCallOnly UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy = "on_call_only"
+	UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategyEveryone   UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy = "everyone"
+	UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategyOnCallOnly UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy = "on_call_only"
 )
 
 // Valid indicates whether the value is a known member of the UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy enum.
 func (e UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy) Valid() bool {
 	switch e {
-	case Everyone:
+	case UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategyEveryone:
 		return true
-	case OnCallOnly:
+	case UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategyOnCallOnly:
 		return true
 	default:
 		return false
@@ -27703,6 +30245,1020 @@ func (e UpdateEscalationPathDataAttributesNotificationType) Valid() bool {
 	}
 }
 
+// Defines values for UpdateEscalationPathDataAttributesNotificationTypeFallback.
+const (
+	UpdateEscalationPathDataAttributesNotificationTypeFallbackAudible UpdateEscalationPathDataAttributesNotificationTypeFallback = "audible"
+	UpdateEscalationPathDataAttributesNotificationTypeFallbackQuiet   UpdateEscalationPathDataAttributesNotificationTypeFallback = "quiet"
+)
+
+// Valid indicates whether the value is a known member of the UpdateEscalationPathDataAttributesNotificationTypeFallback enum.
+func (e UpdateEscalationPathDataAttributesNotificationTypeFallback) Valid() bool {
+	switch e {
+	case UpdateEscalationPathDataAttributesNotificationTypeFallbackAudible:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeFallbackQuiet:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsOperator.
+const (
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsOperatorIsNotSet UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsOperator = "is_not_set"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsOperatorIsSet    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsOperator = "is_set"
+)
+
+// Valid indicates whether the value is a known member of the UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsOperator enum.
+func (e UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsOperator) Valid() bool {
+	switch e {
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsOperatorIsNotSet:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsOperatorIsSet:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType.
+const (
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsRuleTypeRelatedIncidents UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType = "related_incidents"
+)
+
+// Valid indicates whether the value is a known member of the UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType enum.
+func (e UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType) Valid() bool {
+	switch e {
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsRuleTypeRelatedIncidents:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone.
+const (
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAbuDhabi                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Abu Dhabi"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAdelaide                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Adelaide"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaAlgiers               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Algiers"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaCairo                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Cairo"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaCasablanca            UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Casablanca"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaHarare                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Harare"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaJohannesburg          UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Johannesburg"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaMonrovia              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Monrovia"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaNairobi               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Africa/Nairobi"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAlaska                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Alaska"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAlmaty                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Almaty"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaAdak                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Adak"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaArgentinaBuenosAires UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Argentina/Buenos_Aires"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaAsuncion             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Asuncion"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaAtka                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Atka"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaBogota               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Bogota"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaCaracas              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Caracas"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaChicago              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Chicago"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaChihuahua            UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Chihuahua"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaDenver               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Denver"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaGuatemala            UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Guatemala"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaGuyana               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Guyana"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaHalifax              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Halifax"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaIndianaIndianapolis  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Indiana/Indianapolis"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaJuneau               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Juneau"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaLaPaz                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/La_Paz"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaLima                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Lima"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaLosAngeles           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Los_Angeles"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMazatlan             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Mazatlan"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMexicoCity           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Mexico_City"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMiquelon             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Miquelon"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMonterrey            UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Monterrey"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMontevideo           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Montevideo"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaNewYork              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/New_York"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaNuuk                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Nuuk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaPhoenix              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Phoenix"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaPuertoRico           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Puerto_Rico"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaRegina               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Regina"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaSantiago             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Santiago"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaSaoPaulo             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Sao_Paulo"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaStJohns              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/St_Johns"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaTijuana              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Tijuana"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaVancouver            UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "America/Vancouver"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericanSamoa               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "American Samoa"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmsterdam                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Amsterdam"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneArizona                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Arizona"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaAlmaty                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Almaty"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaBaghdad                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Baghdad"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaBaku                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Baku"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaBangkok                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Bangkok"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaChongqing               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Chongqing"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaColombo                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Colombo"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaDhaka                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Dhaka"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaHongKong                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Hong_Kong"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaIrkutsk                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Irkutsk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaJakarta                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Jakarta"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaJerusalem               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Jerusalem"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKabul                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Kabul"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKamchatka               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Kamchatka"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKarachi                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Karachi"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKathmandu               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Kathmandu"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKolkata                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Kolkata"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKrasnoyarsk             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Krasnoyarsk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKualaLumpur             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Kuala_Lumpur"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKuwait                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Kuwait"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaMagadan                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Magadan"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaMuscat                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Muscat"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaNovosibirsk             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Novosibirsk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaRangoon                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Rangoon"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaRiyadh                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Riyadh"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaSeoul                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Seoul"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaShanghai                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Shanghai"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaSingapore               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Singapore"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaSrednekolymsk           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Srednekolymsk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTaipei                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Taipei"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTashkent                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Tashkent"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTbilisi                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Tbilisi"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTehran                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Tehran"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTokyo                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Tokyo"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaUlaanbaatar             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Ulaanbaatar"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaUrumqi                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Urumqi"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaVladivostok             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Vladivostok"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYakutsk                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yakutsk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYekaterinburg           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yekaterinburg"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYerevan                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yerevan"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAstana                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Astana"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsuncion                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asuncion"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAthens                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Athens"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticAzores              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Atlantic/Azores"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticCapeVerde           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Atlantic/Cape_Verde"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticSouthGeorgia        UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Atlantic/South_Georgia"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticTimeCanada          UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Atlantic Time (Canada)"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAuckland                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Auckland"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaAdelaide           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Adelaide"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaBrisbane           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Brisbane"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaCanberra           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Canberra"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaDarwin             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Darwin"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaEucla              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Eucla"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaHobart             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Hobart"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaLHI                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/LHI"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaLordHowe           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Lord_Howe"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaMelbourne          UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Melbourne"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaPerth              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Perth"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaSydney             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Australia/Sydney"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAzores                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Azores"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBaghdad                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Baghdad"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBaku                        UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Baku"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBangkok                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Bangkok"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBeijing                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Beijing"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBelgrade                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Belgrade"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBerlin                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Berlin"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBern                        UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Bern"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBogota                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Bogota"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBrasilia                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Brasilia"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBratislava                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Bratislava"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBrisbane                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Brisbane"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBrussels                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Brussels"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBucharest                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Bucharest"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBudapest                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Budapest"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBuenosAires                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Buenos Aires"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCairo                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Cairo"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCanadaPacific               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Canada/Pacific"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCanberra                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Canberra"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCapeVerdeIs                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Cape Verde Is."
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCaracas                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Caracas"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCasablanca                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Casablanca"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCentralAmerica              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Central America"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCentralTimeUSCanada         UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Central Time (US & Canada)"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChathamIs                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Chatham Is."
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChennai                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Chennai"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChihuahua                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Chihuahua"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChileEasterIsland           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Chile/EasterIsland"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChongqing                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Chongqing"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCopenhagen                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Copenhagen"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneDarwin                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Darwin"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneDhaka                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Dhaka"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneDublin                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Dublin"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEasternTimeUSCanada         UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Eastern Time (US & Canada)"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEdinburgh                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Edinburgh"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEkaterinburg                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Ekaterinburg"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEtcGMT12                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Etc/GMT+12"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEtcUTC                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Etc/UTC"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeAmsterdam             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Amsterdam"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeAthens                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Athens"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBelgrade              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Belgrade"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBerlin                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Berlin"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBratislava            UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Bratislava"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBrussels              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Brussels"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBucharest             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Bucharest"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBudapest              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Budapest"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeCopenhagen            UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Copenhagen"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeDublin                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Dublin"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeHelsinki              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Helsinki"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeIstanbul              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Istanbul"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKaliningrad           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Kaliningrad"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKiev                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Kiev"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLisbon                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Lisbon"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLjubljana             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Ljubljana"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLondon                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/London"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeMadrid                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Madrid"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeMinsk                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Minsk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeMoscow                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Moscow"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeParis                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Paris"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropePrague                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Prague"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeRiga                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Riga"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeRome                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Rome"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSamara                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Samara"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSarajevo              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Sarajevo"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSkopje                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Skopje"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSofia                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Sofia"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeStockholm             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Stockholm"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeTallinn               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Tallinn"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeVienna                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Vienna"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeVilnius               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Vilnius"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeVolgograd             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Volgograd"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeWarsaw                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Warsaw"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeZagreb                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Zagreb"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeZurich                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Zurich"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneFiji                        UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Fiji"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGeorgetown                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Georgetown"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGreenland                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Greenland"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGuadalajara                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Guadalajara"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGuam                        UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Guam"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHanoi                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Hanoi"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHarare                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Harare"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHawaii                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Hawaii"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHelsinki                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Helsinki"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHobart                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Hobart"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHongKong                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Hong Kong"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIndianaEast                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Indiana (East)"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneInternationalDateLineWest   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "International Date Line West"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIrkutsk                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Irkutsk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIslamabad                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Islamabad"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIstanbul                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Istanbul"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneJakarta                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Jakarta"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneJerusalem                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Jerusalem"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKabul                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kabul"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKaliningrad                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kaliningrad"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKamchatka                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kamchatka"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKarachi                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Karachi"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKathmandu                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kathmandu"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKolkata                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kolkata"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKrasnoyarsk                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Krasnoyarsk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKualaLumpur                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kuala Lumpur"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKuwait                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kuwait"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKyiv                        UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Kyiv"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLaPaz                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "La Paz"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLima                        UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Lima"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLisbon                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Lisbon"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLjubljana                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Ljubljana"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLondon                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "London"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMadrid                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Madrid"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMagadan                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Magadan"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMarshallIs                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Marshall Is."
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMazatlan                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Mazatlan"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMelbourne                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Melbourne"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMexicoCity                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Mexico City"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMidAtlantic                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Mid-Atlantic"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMidwayIsland                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Midway Island"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMinsk                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Minsk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMonrovia                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Monrovia"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMonterrey                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Monterrey"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMontevideo                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Montevideo"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMoscow                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Moscow"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMountainTimeUSCanada        UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Mountain Time (US & Canada)"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMumbai                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Mumbai"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMuscat                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Muscat"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNairobi                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Nairobi"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNewCaledonia                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "New Caledonia"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNewDelhi                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "New Delhi"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNewfoundland                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Newfoundland"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNovosibirsk                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Novosibirsk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNukualofa                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Nuku'alofa"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneOsaka                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Osaka"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificApia                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Apia"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificAuckland             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Auckland"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificChatham              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Chatham"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificEaster               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Easter"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificFakaofo              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Fakaofo"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificFiji                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Fiji"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificGambier              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Gambier"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificGuadalcanal          UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Guadalcanal"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificGuam                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Guam"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificHonolulu             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Honolulu"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificKiritimati           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Kiritimati"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificMajuro               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Majuro"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificMarquesas            UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Marquesas"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificMidway               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Midway"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificNorfolk              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Norfolk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificNoumea               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Noumea"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificPagoPago             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Pago_Pago"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificPitcairn             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Pitcairn"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificPortMoresby          UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Port_Moresby"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificTimeUSCanada         UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific Time (US & Canada)"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificTongatapu            UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pacific/Tongatapu"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneParis                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Paris"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePerth                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Perth"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePortMoresby                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Port Moresby"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePrague                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Prague"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePretoria                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Pretoria"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePuertoRico                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Puerto Rico"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneQuito                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Quito"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRangoon                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Rangoon"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRiga                        UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Riga"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRiyadh                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Riyadh"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRome                        UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Rome"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSamara                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Samara"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSamoa                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Samoa"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSantiago                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Santiago"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSapporo                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Sapporo"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSarajevo                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Sarajevo"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSaskatchewan                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Saskatchewan"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSeoul                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Seoul"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSingapore                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Singapore"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSkopje                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Skopje"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSofia                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Sofia"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSolomonIs                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Solomon Is."
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSrednekolymsk               UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Srednekolymsk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSriJayawardenepura          UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Sri Jayawardenepura"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneStPetersburg                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "St. Petersburg"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneStockholm                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Stockholm"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSydney                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Sydney"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTaipei                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Taipei"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTallinn                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tallinn"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTashkent                    UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tashkent"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTbilisi                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tbilisi"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTehran                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tehran"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTijuana                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tijuana"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTokelauIs                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tokelau Is."
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTokyo                       UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Tokyo"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUSAleutian                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "US/Aleutian"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUTC                         UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "UTC"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUlaanbaatar                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Ulaanbaatar"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUrumqi                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Urumqi"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVienna                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Vienna"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVilnius                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Vilnius"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVladivostok                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Vladivostok"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVolgograd                   UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Volgograd"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneWarsaw                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Warsaw"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneWellington                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Wellington"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneWestCentralAfrica           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "West Central Africa"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneYakutsk                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Yakutsk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneYerevan                     UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Yerevan"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneZagreb                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Zagreb"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneZurich                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Zurich"
+)
+
+// Valid indicates whether the value is a known member of the UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone enum.
+func (e UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone) Valid() bool {
+	switch e {
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAbuDhabi:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAdelaide:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaAlgiers:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaCairo:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaCasablanca:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaHarare:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaJohannesburg:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaMonrovia:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAfricaNairobi:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAlaska:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAlmaty:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaAdak:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaArgentinaBuenosAires:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaAsuncion:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaAtka:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaBogota:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaCaracas:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaChicago:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaChihuahua:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaDenver:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaGuatemala:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaGuyana:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaHalifax:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaIndianaIndianapolis:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaJuneau:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaLaPaz:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaLima:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaLosAngeles:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMazatlan:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMexicoCity:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMiquelon:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMonterrey:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaMontevideo:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaNewYork:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaNuuk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaPhoenix:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaPuertoRico:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaRegina:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaSantiago:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaSaoPaulo:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaStJohns:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaTijuana:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericaVancouver:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmericanSamoa:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAmsterdam:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneArizona:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaAlmaty:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaBaghdad:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaBaku:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaBangkok:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaChongqing:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaColombo:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaDhaka:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaHongKong:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaIrkutsk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaJakarta:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaJerusalem:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKabul:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKamchatka:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKarachi:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKathmandu:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKolkata:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKrasnoyarsk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKualaLumpur:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaKuwait:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaMagadan:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaMuscat:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaNovosibirsk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaRangoon:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaRiyadh:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaSeoul:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaShanghai:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaSingapore:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaSrednekolymsk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTaipei:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTashkent:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTbilisi:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTehran:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaTokyo:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaUlaanbaatar:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaUrumqi:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaVladivostok:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYakutsk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYekaterinburg:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYerevan:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAstana:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsuncion:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAthens:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticAzores:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticCapeVerde:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticSouthGeorgia:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAtlanticTimeCanada:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAuckland:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaAdelaide:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaBrisbane:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaCanberra:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaDarwin:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaEucla:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaHobart:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaLHI:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaLordHowe:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaMelbourne:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaPerth:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAustraliaSydney:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAzores:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBaghdad:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBaku:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBangkok:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBeijing:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBelgrade:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBerlin:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBern:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBogota:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBrasilia:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBratislava:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBrisbane:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBrussels:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBucharest:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBudapest:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneBuenosAires:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCairo:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCanadaPacific:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCanberra:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCapeVerdeIs:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCaracas:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCasablanca:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCentralAmerica:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCentralTimeUSCanada:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChathamIs:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChennai:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChihuahua:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChileEasterIsland:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneChongqing:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneCopenhagen:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneDarwin:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneDhaka:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneDublin:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEasternTimeUSCanada:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEdinburgh:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEkaterinburg:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEtcGMT12:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEtcUTC:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeAmsterdam:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeAthens:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBelgrade:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBerlin:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBratislava:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBrussels:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBucharest:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeBudapest:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeCopenhagen:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeDublin:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeHelsinki:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeIstanbul:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKaliningrad:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKiev:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLisbon:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLjubljana:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLondon:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeMadrid:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeMinsk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeMoscow:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeParis:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropePrague:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeRiga:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeRome:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSamara:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSarajevo:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSkopje:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeSofia:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeStockholm:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeTallinn:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeVienna:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeVilnius:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeVolgograd:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeWarsaw:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeZagreb:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeZurich:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneFiji:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGeorgetown:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGreenland:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGuadalajara:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneGuam:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHanoi:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHarare:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHawaii:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHelsinki:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHobart:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneHongKong:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIndianaEast:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneInternationalDateLineWest:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIrkutsk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIslamabad:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneIstanbul:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneJakarta:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneJerusalem:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKabul:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKaliningrad:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKamchatka:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKarachi:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKathmandu:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKolkata:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKrasnoyarsk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKualaLumpur:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKuwait:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneKyiv:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLaPaz:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLima:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLisbon:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLjubljana:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneLondon:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMadrid:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMagadan:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMarshallIs:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMazatlan:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMelbourne:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMexicoCity:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMidAtlantic:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMidwayIsland:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMinsk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMonrovia:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMonterrey:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMontevideo:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMoscow:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMountainTimeUSCanada:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMumbai:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneMuscat:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNairobi:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNewCaledonia:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNewDelhi:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNewfoundland:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNovosibirsk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneNukualofa:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneOsaka:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificApia:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificAuckland:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificChatham:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificEaster:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificFakaofo:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificFiji:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificGambier:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificGuadalcanal:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificGuam:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificHonolulu:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificKiritimati:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificMajuro:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificMarquesas:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificMidway:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificNorfolk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificNoumea:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificPagoPago:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificPitcairn:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificPortMoresby:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificTimeUSCanada:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePacificTongatapu:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneParis:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePerth:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePortMoresby:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePrague:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePretoria:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZonePuertoRico:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneQuito:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRangoon:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRiga:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRiyadh:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneRome:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSamara:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSamoa:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSantiago:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSapporo:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSarajevo:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSaskatchewan:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSeoul:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSingapore:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSkopje:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSofia:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSolomonIs:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSrednekolymsk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSriJayawardenepura:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneStPetersburg:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneStockholm:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneSydney:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTaipei:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTallinn:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTashkent:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTbilisi:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTehran:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTijuana:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTokelauIs:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneTokyo:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUSAleutian:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUTC:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUlaanbaatar:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneUrumqi:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVienna:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVilnius:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVladivostok:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneVolgograd:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneWarsaw:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneWellington:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneWestCentralAfrica:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneYakutsk:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneYerevan:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneZagreb:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneZurich:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateEscalationPathDataAttributesNotificationTypeRulesMatchMode.
+const (
+	UpdateEscalationPathDataAttributesNotificationTypeRulesMatchModeMatchAllRules UpdateEscalationPathDataAttributesNotificationTypeRulesMatchMode = "match-all-rules"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesMatchModeMatchAnyRule  UpdateEscalationPathDataAttributesNotificationTypeRulesMatchMode = "match-any-rule"
+)
+
+// Valid indicates whether the value is a known member of the UpdateEscalationPathDataAttributesNotificationTypeRulesMatchMode enum.
+func (e UpdateEscalationPathDataAttributesNotificationTypeRulesMatchMode) Valid() bool {
+	switch e {
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesMatchModeMatchAllRules:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesMatchModeMatchAnyRule:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateEscalationPathDataAttributesNotificationTypeRulesNotificationType.
+const (
+	UpdateEscalationPathDataAttributesNotificationTypeRulesNotificationTypeAudible UpdateEscalationPathDataAttributesNotificationTypeRulesNotificationType = "audible"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesNotificationTypeQuiet   UpdateEscalationPathDataAttributesNotificationTypeRulesNotificationType = "quiet"
+)
+
+// Valid indicates whether the value is a known member of the UpdateEscalationPathDataAttributesNotificationTypeRulesNotificationType enum.
+func (e UpdateEscalationPathDataAttributesNotificationTypeRulesNotificationType) Valid() bool {
+	switch e {
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesNotificationTypeAudible:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesNotificationTypeQuiet:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateEscalationPathDataAttributesPathType.
 const (
 	UpdateEscalationPathDataAttributesPathTypeDeferral   UpdateEscalationPathDataAttributesPathType = "deferral"
@@ -27723,16 +31279,16 @@ func (e UpdateEscalationPathDataAttributesPathType) Valid() bool {
 
 // Defines values for UpdateEscalationPathDataAttributesRulesOperator.
 const (
-	IsNotSet UpdateEscalationPathDataAttributesRulesOperator = "is_not_set"
-	IsSet    UpdateEscalationPathDataAttributesRulesOperator = "is_set"
+	UpdateEscalationPathDataAttributesRulesOperatorIsNotSet UpdateEscalationPathDataAttributesRulesOperator = "is_not_set"
+	UpdateEscalationPathDataAttributesRulesOperatorIsSet    UpdateEscalationPathDataAttributesRulesOperator = "is_set"
 )
 
 // Valid indicates whether the value is a known member of the UpdateEscalationPathDataAttributesRulesOperator enum.
 func (e UpdateEscalationPathDataAttributesRulesOperator) Valid() bool {
 	switch e {
-	case IsNotSet:
+	case UpdateEscalationPathDataAttributesRulesOperatorIsNotSet:
 		return true
-	case IsSet:
+	case UpdateEscalationPathDataAttributesRulesOperatorIsSet:
 		return true
 	default:
 		return false
@@ -27741,13 +31297,13 @@ func (e UpdateEscalationPathDataAttributesRulesOperator) Valid() bool {
 
 // Defines values for UpdateEscalationPathDataAttributesRulesRuleType.
 const (
-	RelatedIncidents UpdateEscalationPathDataAttributesRulesRuleType = "related_incidents"
+	UpdateEscalationPathDataAttributesRulesRuleTypeRelatedIncidents UpdateEscalationPathDataAttributesRulesRuleType = "related_incidents"
 )
 
 // Valid indicates whether the value is a known member of the UpdateEscalationPathDataAttributesRulesRuleType enum.
 func (e UpdateEscalationPathDataAttributesRulesRuleType) Valid() bool {
 	switch e {
-	case RelatedIncidents:
+	case UpdateEscalationPathDataAttributesRulesRuleTypeRelatedIncidents:
 		return true
 	default:
 		return false
@@ -29724,925 +33280,925 @@ func (e UpdateEscalationPolicyDataAttributesBusinessHoursDays) Valid() bool {
 
 // Defines values for UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone.
 const (
-	AbuDhabi                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Abu Dhabi"
-	Adelaide                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Adelaide"
-	AfricaAlgiers               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Algiers"
-	AfricaCairo                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Cairo"
-	AfricaCasablanca            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Casablanca"
-	AfricaHarare                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Harare"
-	AfricaJohannesburg          UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Johannesburg"
-	AfricaMonrovia              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Monrovia"
-	AfricaNairobi               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Nairobi"
-	Alaska                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Alaska"
-	Almaty                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Almaty"
-	AmericaAdak                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Adak"
-	AmericaArgentinaBuenosAires UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Argentina/Buenos_Aires"
-	AmericaAsuncion             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Asuncion"
-	AmericaAtka                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Atka"
-	AmericaBogota               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Bogota"
-	AmericaCaracas              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Caracas"
-	AmericaChicago              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Chicago"
-	AmericaChihuahua            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Chihuahua"
-	AmericaDenver               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Denver"
-	AmericaGuatemala            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Guatemala"
-	AmericaGuyana               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Guyana"
-	AmericaHalifax              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Halifax"
-	AmericaIndianaIndianapolis  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Indiana/Indianapolis"
-	AmericaJuneau               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Juneau"
-	AmericaLaPaz                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/La_Paz"
-	AmericaLima                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Lima"
-	AmericaLosAngeles           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Los_Angeles"
-	AmericaMazatlan             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Mazatlan"
-	AmericaMexicoCity           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Mexico_City"
-	AmericaMiquelon             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Miquelon"
-	AmericaMonterrey            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Monterrey"
-	AmericaMontevideo           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Montevideo"
-	AmericaNewYork              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/New_York"
-	AmericaNuuk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Nuuk"
-	AmericaPhoenix              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Phoenix"
-	AmericaPuertoRico           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Puerto_Rico"
-	AmericaRegina               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Regina"
-	AmericaSantiago             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Santiago"
-	AmericaSaoPaulo             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Sao_Paulo"
-	AmericaStJohns              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/St_Johns"
-	AmericaTijuana              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Tijuana"
-	AmericaVancouver            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Vancouver"
-	AmericanSamoa               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "American Samoa"
-	Amsterdam                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Amsterdam"
-	Arizona                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Arizona"
-	AsiaAlmaty                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Almaty"
-	AsiaBaghdad                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Baghdad"
-	AsiaBaku                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Baku"
-	AsiaBangkok                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Bangkok"
-	AsiaChongqing               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Chongqing"
-	AsiaColombo                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Colombo"
-	AsiaDhaka                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Dhaka"
-	AsiaHongKong                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Hong_Kong"
-	AsiaIrkutsk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Irkutsk"
-	AsiaJakarta                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Jakarta"
-	AsiaJerusalem               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Jerusalem"
-	AsiaKabul                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Kabul"
-	AsiaKamchatka               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Kamchatka"
-	AsiaKarachi                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Karachi"
-	AsiaKathmandu               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Kathmandu"
-	AsiaKolkata                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Kolkata"
-	AsiaKrasnoyarsk             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Krasnoyarsk"
-	AsiaKualaLumpur             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Kuala_Lumpur"
-	AsiaKuwait                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Kuwait"
-	AsiaMagadan                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Magadan"
-	AsiaMuscat                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Muscat"
-	AsiaNovosibirsk             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Novosibirsk"
-	AsiaRangoon                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Rangoon"
-	AsiaRiyadh                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Riyadh"
-	AsiaSeoul                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Seoul"
-	AsiaShanghai                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Shanghai"
-	AsiaSingapore               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Singapore"
-	AsiaSrednekolymsk           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Srednekolymsk"
-	AsiaTaipei                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Taipei"
-	AsiaTashkent                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Tashkent"
-	AsiaTbilisi                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Tbilisi"
-	AsiaTehran                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Tehran"
-	AsiaTokyo                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Tokyo"
-	AsiaUlaanbaatar             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Ulaanbaatar"
-	AsiaUrumqi                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Urumqi"
-	AsiaVladivostok             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Vladivostok"
-	AsiaYakutsk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yakutsk"
-	AsiaYekaterinburg           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yekaterinburg"
-	AsiaYerevan                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yerevan"
-	Astana                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Astana"
-	Asuncion                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asuncion"
-	Athens                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Athens"
-	AtlanticAzores              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Atlantic/Azores"
-	AtlanticCapeVerde           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Atlantic/Cape_Verde"
-	AtlanticSouthGeorgia        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Atlantic/South_Georgia"
-	AtlanticTimeCanada          UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Atlantic Time (Canada)"
-	Auckland                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Auckland"
-	AustraliaAdelaide           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Adelaide"
-	AustraliaBrisbane           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Brisbane"
-	AustraliaCanberra           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Canberra"
-	AustraliaDarwin             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Darwin"
-	AustraliaEucla              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Eucla"
-	AustraliaHobart             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Hobart"
-	AustraliaLHI                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/LHI"
-	AustraliaLordHowe           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Lord_Howe"
-	AustraliaMelbourne          UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Melbourne"
-	AustraliaPerth              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Perth"
-	AustraliaSydney             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Sydney"
-	Azores                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Azores"
-	Baghdad                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Baghdad"
-	Baku                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Baku"
-	Bangkok                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Bangkok"
-	Beijing                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Beijing"
-	Belgrade                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Belgrade"
-	Berlin                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Berlin"
-	Bern                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Bern"
-	Bogota                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Bogota"
-	Brasilia                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Brasilia"
-	Bratislava                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Bratislava"
-	Brisbane                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Brisbane"
-	Brussels                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Brussels"
-	Bucharest                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Bucharest"
-	Budapest                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Budapest"
-	BuenosAires                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Buenos Aires"
-	Cairo                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Cairo"
-	CanadaPacific               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Canada/Pacific"
-	Canberra                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Canberra"
-	CapeVerdeIs                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Cape Verde Is."
-	Caracas                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Caracas"
-	Casablanca                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Casablanca"
-	CentralAmerica              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Central America"
-	CentralTimeUSCanada         UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Central Time (US & Canada)"
-	ChathamIs                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Chatham Is."
-	Chennai                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Chennai"
-	Chihuahua                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Chihuahua"
-	ChileEasterIsland           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Chile/EasterIsland"
-	Chongqing                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Chongqing"
-	Copenhagen                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Copenhagen"
-	Darwin                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Darwin"
-	Dhaka                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Dhaka"
-	Dublin                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Dublin"
-	EasternTimeUSCanada         UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Eastern Time (US & Canada)"
-	Edinburgh                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Edinburgh"
-	Ekaterinburg                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Ekaterinburg"
-	EtcGMT12                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Etc/GMT+12"
-	EtcUTC                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Etc/UTC"
-	EuropeAmsterdam             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Amsterdam"
-	EuropeAthens                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Athens"
-	EuropeBelgrade              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Belgrade"
-	EuropeBerlin                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Berlin"
-	EuropeBratislava            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Bratislava"
-	EuropeBrussels              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Brussels"
-	EuropeBucharest             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Bucharest"
-	EuropeBudapest              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Budapest"
-	EuropeCopenhagen            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Copenhagen"
-	EuropeDublin                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Dublin"
-	EuropeHelsinki              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Helsinki"
-	EuropeIstanbul              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Istanbul"
-	EuropeKaliningrad           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kaliningrad"
-	EuropeKiev                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kiev"
-	EuropeLisbon                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Lisbon"
-	EuropeLjubljana             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Ljubljana"
-	EuropeLondon                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/London"
-	EuropeMadrid                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Madrid"
-	EuropeMinsk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Minsk"
-	EuropeMoscow                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Moscow"
-	EuropeParis                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Paris"
-	EuropePrague                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Prague"
-	EuropeRiga                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Riga"
-	EuropeRome                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Rome"
-	EuropeSamara                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Samara"
-	EuropeSarajevo              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Sarajevo"
-	EuropeSkopje                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Skopje"
-	EuropeSofia                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Sofia"
-	EuropeStockholm             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Stockholm"
-	EuropeTallinn               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Tallinn"
-	EuropeVienna                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Vienna"
-	EuropeVilnius               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Vilnius"
-	EuropeVolgograd             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Volgograd"
-	EuropeWarsaw                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Warsaw"
-	EuropeZagreb                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Zagreb"
-	EuropeZurich                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Zurich"
-	Fiji                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Fiji"
-	Georgetown                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Georgetown"
-	Greenland                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Greenland"
-	Guadalajara                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Guadalajara"
-	Guam                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Guam"
-	Hanoi                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Hanoi"
-	Harare                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Harare"
-	Hawaii                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Hawaii"
-	Helsinki                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Helsinki"
-	Hobart                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Hobart"
-	HongKong                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Hong Kong"
-	IndianaEast                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Indiana (East)"
-	InternationalDateLineWest   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "International Date Line West"
-	Irkutsk                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Irkutsk"
-	Islamabad                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Islamabad"
-	Istanbul                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Istanbul"
-	Jakarta                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Jakarta"
-	Jerusalem                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Jerusalem"
-	Kabul                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kabul"
-	Kaliningrad                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kaliningrad"
-	Kamchatka                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kamchatka"
-	Karachi                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Karachi"
-	Kathmandu                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kathmandu"
-	Kolkata                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kolkata"
-	Krasnoyarsk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Krasnoyarsk"
-	KualaLumpur                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kuala Lumpur"
-	Kuwait                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kuwait"
-	Kyiv                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kyiv"
-	LaPaz                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "La Paz"
-	Lima                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Lima"
-	Lisbon                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Lisbon"
-	Ljubljana                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Ljubljana"
-	London                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "London"
-	Madrid                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Madrid"
-	Magadan                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Magadan"
-	MarshallIs                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Marshall Is."
-	Mazatlan                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Mazatlan"
-	Melbourne                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Melbourne"
-	MexicoCity                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Mexico City"
-	MidAtlantic                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Mid-Atlantic"
-	MidwayIsland                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Midway Island"
-	Minsk                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Minsk"
-	Monrovia                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Monrovia"
-	Monterrey                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Monterrey"
-	Montevideo                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Montevideo"
-	Moscow                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Moscow"
-	MountainTimeUSCanada        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Mountain Time (US & Canada)"
-	Mumbai                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Mumbai"
-	Muscat                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Muscat"
-	Nairobi                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Nairobi"
-	NewCaledonia                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "New Caledonia"
-	NewDelhi                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "New Delhi"
-	Newfoundland                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Newfoundland"
-	Novosibirsk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Novosibirsk"
-	Nukualofa                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Nuku'alofa"
-	Osaka                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Osaka"
-	PacificApia                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Apia"
-	PacificAuckland             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Auckland"
-	PacificChatham              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Chatham"
-	PacificEaster               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Easter"
-	PacificFakaofo              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Fakaofo"
-	PacificFiji                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Fiji"
-	PacificGambier              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Gambier"
-	PacificGuadalcanal          UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Guadalcanal"
-	PacificGuam                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Guam"
-	PacificHonolulu             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Honolulu"
-	PacificKiritimati           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Kiritimati"
-	PacificMajuro               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Majuro"
-	PacificMarquesas            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Marquesas"
-	PacificMidway               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Midway"
-	PacificNorfolk              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Norfolk"
-	PacificNoumea               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Noumea"
-	PacificPagoPago             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Pago_Pago"
-	PacificPitcairn             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Pitcairn"
-	PacificPortMoresby          UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Port_Moresby"
-	PacificTimeUSCanada         UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific Time (US & Canada)"
-	PacificTongatapu            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Tongatapu"
-	Paris                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Paris"
-	Perth                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Perth"
-	PortMoresby                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Port Moresby"
-	Prague                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Prague"
-	Pretoria                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pretoria"
-	PuertoRico                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Puerto Rico"
-	Quito                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Quito"
-	Rangoon                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Rangoon"
-	Riga                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Riga"
-	Riyadh                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Riyadh"
-	Rome                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Rome"
-	Samara                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Samara"
-	Samoa                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Samoa"
-	Santiago                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Santiago"
-	Sapporo                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Sapporo"
-	Sarajevo                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Sarajevo"
-	Saskatchewan                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Saskatchewan"
-	Seoul                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Seoul"
-	Singapore                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Singapore"
-	Skopje                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Skopje"
-	Sofia                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Sofia"
-	SolomonIs                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Solomon Is."
-	Srednekolymsk               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Srednekolymsk"
-	SriJayawardenepura          UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Sri Jayawardenepura"
-	StPetersburg                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "St. Petersburg"
-	Stockholm                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Stockholm"
-	Sydney                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Sydney"
-	Taipei                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Taipei"
-	Tallinn                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tallinn"
-	Tashkent                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tashkent"
-	Tbilisi                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tbilisi"
-	Tehran                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tehran"
-	Tijuana                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tijuana"
-	TokelauIs                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tokelau Is."
-	Tokyo                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tokyo"
-	USAleutian                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "US/Aleutian"
-	UTC                         UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "UTC"
-	Ulaanbaatar                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Ulaanbaatar"
-	Urumqi                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Urumqi"
-	Vienna                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Vienna"
-	Vilnius                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Vilnius"
-	Vladivostok                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Vladivostok"
-	Volgograd                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Volgograd"
-	Warsaw                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Warsaw"
-	Wellington                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Wellington"
-	WestCentralAfrica           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "West Central Africa"
-	Yakutsk                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Yakutsk"
-	Yerevan                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Yerevan"
-	Zagreb                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Zagreb"
-	Zurich                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Zurich"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAbuDhabi                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Abu Dhabi"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAdelaide                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Adelaide"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaAlgiers               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Algiers"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaCairo                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Cairo"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaCasablanca            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Casablanca"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaHarare                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Harare"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaJohannesburg          UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Johannesburg"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaMonrovia              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Monrovia"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaNairobi               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Africa/Nairobi"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAlaska                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Alaska"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAlmaty                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Almaty"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaAdak                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Adak"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaArgentinaBuenosAires UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Argentina/Buenos_Aires"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaAsuncion             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Asuncion"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaAtka                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Atka"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaBogota               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Bogota"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaCaracas              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Caracas"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaChicago              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Chicago"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaChihuahua            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Chihuahua"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaDenver               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Denver"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaGuatemala            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Guatemala"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaGuyana               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Guyana"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaHalifax              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Halifax"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaIndianaIndianapolis  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Indiana/Indianapolis"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaJuneau               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Juneau"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaLaPaz                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/La_Paz"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaLima                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Lima"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaLosAngeles           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Los_Angeles"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaMazatlan             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Mazatlan"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaMexicoCity           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Mexico_City"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaMiquelon             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Miquelon"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaMonterrey            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Monterrey"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaMontevideo           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Montevideo"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaNewYork              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/New_York"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaNuuk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Nuuk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaPhoenix              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Phoenix"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaPuertoRico           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Puerto_Rico"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaRegina               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Regina"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaSantiago             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Santiago"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaSaoPaulo             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Sao_Paulo"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaStJohns              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/St_Johns"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaTijuana              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Tijuana"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaVancouver            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "America/Vancouver"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericanSamoa               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "American Samoa"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmsterdam                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Amsterdam"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneArizona                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Arizona"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaAlmaty                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Almaty"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaBaghdad                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Baghdad"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaBaku                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Baku"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaBangkok                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Bangkok"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaChongqing               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Chongqing"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaColombo                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Colombo"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaDhaka                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Dhaka"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaHongKong                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Hong_Kong"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaIrkutsk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Irkutsk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaJakarta                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Jakarta"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaJerusalem               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Jerusalem"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKabul                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Kabul"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKamchatka               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Kamchatka"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKarachi                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Karachi"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKathmandu               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Kathmandu"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKolkata                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Kolkata"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKrasnoyarsk             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Krasnoyarsk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKualaLumpur             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Kuala_Lumpur"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKuwait                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Kuwait"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaMagadan                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Magadan"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaMuscat                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Muscat"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaNovosibirsk             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Novosibirsk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaRangoon                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Rangoon"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaRiyadh                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Riyadh"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaSeoul                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Seoul"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaShanghai                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Shanghai"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaSingapore               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Singapore"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaSrednekolymsk           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Srednekolymsk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaTaipei                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Taipei"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaTashkent                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Tashkent"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaTbilisi                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Tbilisi"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaTehran                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Tehran"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaTokyo                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Tokyo"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaUlaanbaatar             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Ulaanbaatar"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaUrumqi                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Urumqi"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaVladivostok             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Vladivostok"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYakutsk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yakutsk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYekaterinburg           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yekaterinburg"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYerevan                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yerevan"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAstana                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Astana"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsuncion                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asuncion"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAthens                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Athens"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAtlanticAzores              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Atlantic/Azores"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAtlanticCapeVerde           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Atlantic/Cape_Verde"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAtlanticSouthGeorgia        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Atlantic/South_Georgia"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAtlanticTimeCanada          UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Atlantic Time (Canada)"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAuckland                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Auckland"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaAdelaide           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Adelaide"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaBrisbane           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Brisbane"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaCanberra           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Canberra"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaDarwin             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Darwin"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaEucla              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Eucla"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaHobart             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Hobart"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaLHI                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/LHI"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaLordHowe           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Lord_Howe"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaMelbourne          UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Melbourne"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaPerth              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Perth"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaSydney             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Australia/Sydney"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAzores                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Azores"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBaghdad                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Baghdad"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBaku                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Baku"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBangkok                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Bangkok"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBeijing                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Beijing"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBelgrade                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Belgrade"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBerlin                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Berlin"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBern                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Bern"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBogota                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Bogota"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBrasilia                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Brasilia"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBratislava                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Bratislava"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBrisbane                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Brisbane"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBrussels                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Brussels"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBucharest                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Bucharest"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBudapest                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Budapest"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBuenosAires                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Buenos Aires"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCairo                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Cairo"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCanadaPacific               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Canada/Pacific"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCanberra                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Canberra"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCapeVerdeIs                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Cape Verde Is."
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCaracas                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Caracas"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCasablanca                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Casablanca"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCentralAmerica              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Central America"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCentralTimeUSCanada         UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Central Time (US & Canada)"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneChathamIs                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Chatham Is."
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneChennai                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Chennai"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneChihuahua                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Chihuahua"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneChileEasterIsland           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Chile/EasterIsland"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneChongqing                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Chongqing"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCopenhagen                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Copenhagen"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneDarwin                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Darwin"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneDhaka                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Dhaka"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneDublin                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Dublin"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEasternTimeUSCanada         UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Eastern Time (US & Canada)"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEdinburgh                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Edinburgh"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEkaterinburg                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Ekaterinburg"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEtcGMT12                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Etc/GMT+12"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEtcUTC                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Etc/UTC"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeAmsterdam             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Amsterdam"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeAthens                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Athens"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeBelgrade              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Belgrade"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeBerlin                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Berlin"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeBratislava            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Bratislava"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeBrussels              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Brussels"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeBucharest             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Bucharest"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeBudapest              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Budapest"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeCopenhagen            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Copenhagen"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeDublin                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Dublin"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeHelsinki              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Helsinki"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeIstanbul              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Istanbul"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKaliningrad           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kaliningrad"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKiev                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kiev"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLisbon                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Lisbon"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLjubljana             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Ljubljana"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLondon                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/London"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeMadrid                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Madrid"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeMinsk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Minsk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeMoscow                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Moscow"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeParis                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Paris"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropePrague                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Prague"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeRiga                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Riga"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeRome                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Rome"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeSamara                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Samara"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeSarajevo              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Sarajevo"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeSkopje                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Skopje"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeSofia                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Sofia"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeStockholm             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Stockholm"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeTallinn               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Tallinn"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeVienna                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Vienna"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeVilnius               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Vilnius"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeVolgograd             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Volgograd"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeWarsaw                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Warsaw"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeZagreb                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Zagreb"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeZurich                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Zurich"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneFiji                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Fiji"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneGeorgetown                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Georgetown"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneGreenland                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Greenland"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneGuadalajara                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Guadalajara"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneGuam                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Guam"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneHanoi                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Hanoi"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneHarare                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Harare"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneHawaii                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Hawaii"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneHelsinki                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Helsinki"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneHobart                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Hobart"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneHongKong                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Hong Kong"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneIndianaEast                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Indiana (East)"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneInternationalDateLineWest   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "International Date Line West"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneIrkutsk                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Irkutsk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneIslamabad                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Islamabad"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneIstanbul                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Istanbul"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneJakarta                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Jakarta"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneJerusalem                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Jerusalem"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKabul                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kabul"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKaliningrad                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kaliningrad"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKamchatka                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kamchatka"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKarachi                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Karachi"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKathmandu                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kathmandu"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKolkata                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kolkata"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKrasnoyarsk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Krasnoyarsk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKualaLumpur                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kuala Lumpur"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKuwait                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kuwait"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKyiv                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Kyiv"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneLaPaz                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "La Paz"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneLima                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Lima"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneLisbon                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Lisbon"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneLjubljana                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Ljubljana"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneLondon                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "London"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMadrid                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Madrid"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMagadan                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Magadan"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMarshallIs                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Marshall Is."
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMazatlan                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Mazatlan"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMelbourne                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Melbourne"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMexicoCity                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Mexico City"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMidAtlantic                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Mid-Atlantic"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMidwayIsland                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Midway Island"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMinsk                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Minsk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMonrovia                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Monrovia"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMonterrey                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Monterrey"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMontevideo                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Montevideo"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMoscow                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Moscow"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMountainTimeUSCanada        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Mountain Time (US & Canada)"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMumbai                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Mumbai"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMuscat                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Muscat"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneNairobi                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Nairobi"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneNewCaledonia                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "New Caledonia"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneNewDelhi                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "New Delhi"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneNewfoundland                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Newfoundland"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneNovosibirsk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Novosibirsk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneNukualofa                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Nuku'alofa"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneOsaka                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Osaka"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificApia                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Apia"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificAuckland             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Auckland"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificChatham              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Chatham"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificEaster               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Easter"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificFakaofo              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Fakaofo"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificFiji                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Fiji"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificGambier              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Gambier"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificGuadalcanal          UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Guadalcanal"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificGuam                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Guam"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificHonolulu             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Honolulu"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificKiritimati           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Kiritimati"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificMajuro               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Majuro"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificMarquesas            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Marquesas"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificMidway               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Midway"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificNorfolk              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Norfolk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificNoumea               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Noumea"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificPagoPago             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Pago_Pago"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificPitcairn             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Pitcairn"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificPortMoresby          UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Port_Moresby"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificTimeUSCanada         UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific Time (US & Canada)"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificTongatapu            UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pacific/Tongatapu"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneParis                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Paris"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePerth                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Perth"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePortMoresby                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Port Moresby"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePrague                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Prague"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePretoria                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Pretoria"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePuertoRico                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Puerto Rico"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneQuito                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Quito"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneRangoon                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Rangoon"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneRiga                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Riga"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneRiyadh                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Riyadh"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneRome                        UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Rome"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSamara                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Samara"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSamoa                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Samoa"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSantiago                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Santiago"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSapporo                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Sapporo"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSarajevo                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Sarajevo"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSaskatchewan                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Saskatchewan"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSeoul                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Seoul"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSingapore                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Singapore"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSkopje                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Skopje"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSofia                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Sofia"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSolomonIs                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Solomon Is."
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSrednekolymsk               UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Srednekolymsk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSriJayawardenepura          UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Sri Jayawardenepura"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneStPetersburg                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "St. Petersburg"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneStockholm                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Stockholm"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSydney                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Sydney"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTaipei                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Taipei"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTallinn                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tallinn"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTashkent                    UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tashkent"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTbilisi                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tbilisi"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTehran                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tehran"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTijuana                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tijuana"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTokelauIs                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tokelau Is."
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTokyo                       UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Tokyo"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneUSAleutian                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "US/Aleutian"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneUTC                         UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "UTC"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneUlaanbaatar                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Ulaanbaatar"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneUrumqi                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Urumqi"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneVienna                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Vienna"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneVilnius                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Vilnius"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneVladivostok                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Vladivostok"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneVolgograd                   UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Volgograd"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneWarsaw                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Warsaw"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneWellington                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Wellington"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneWestCentralAfrica           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "West Central Africa"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneYakutsk                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Yakutsk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneYerevan                     UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Yerevan"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneZagreb                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Zagreb"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneZurich                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Zurich"
 )
 
 // Valid indicates whether the value is a known member of the UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone enum.
 func (e UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone) Valid() bool {
 	switch e {
-	case AbuDhabi:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAbuDhabi:
 		return true
-	case Adelaide:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAdelaide:
 		return true
-	case AfricaAlgiers:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaAlgiers:
 		return true
-	case AfricaCairo:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaCairo:
 		return true
-	case AfricaCasablanca:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaCasablanca:
 		return true
-	case AfricaHarare:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaHarare:
 		return true
-	case AfricaJohannesburg:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaJohannesburg:
 		return true
-	case AfricaMonrovia:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaMonrovia:
 		return true
-	case AfricaNairobi:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAfricaNairobi:
 		return true
-	case Alaska:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAlaska:
 		return true
-	case Almaty:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAlmaty:
 		return true
-	case AmericaAdak:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaAdak:
 		return true
-	case AmericaArgentinaBuenosAires:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaArgentinaBuenosAires:
 		return true
-	case AmericaAsuncion:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaAsuncion:
 		return true
-	case AmericaAtka:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaAtka:
 		return true
-	case AmericaBogota:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaBogota:
 		return true
-	case AmericaCaracas:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaCaracas:
 		return true
-	case AmericaChicago:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaChicago:
 		return true
-	case AmericaChihuahua:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaChihuahua:
 		return true
-	case AmericaDenver:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaDenver:
 		return true
-	case AmericaGuatemala:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaGuatemala:
 		return true
-	case AmericaGuyana:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaGuyana:
 		return true
-	case AmericaHalifax:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaHalifax:
 		return true
-	case AmericaIndianaIndianapolis:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaIndianaIndianapolis:
 		return true
-	case AmericaJuneau:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaJuneau:
 		return true
-	case AmericaLaPaz:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaLaPaz:
 		return true
-	case AmericaLima:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaLima:
 		return true
-	case AmericaLosAngeles:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaLosAngeles:
 		return true
-	case AmericaMazatlan:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaMazatlan:
 		return true
-	case AmericaMexicoCity:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaMexicoCity:
 		return true
-	case AmericaMiquelon:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaMiquelon:
 		return true
-	case AmericaMonterrey:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaMonterrey:
 		return true
-	case AmericaMontevideo:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaMontevideo:
 		return true
-	case AmericaNewYork:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaNewYork:
 		return true
-	case AmericaNuuk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaNuuk:
 		return true
-	case AmericaPhoenix:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaPhoenix:
 		return true
-	case AmericaPuertoRico:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaPuertoRico:
 		return true
-	case AmericaRegina:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaRegina:
 		return true
-	case AmericaSantiago:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaSantiago:
 		return true
-	case AmericaSaoPaulo:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaSaoPaulo:
 		return true
-	case AmericaStJohns:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaStJohns:
 		return true
-	case AmericaTijuana:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaTijuana:
 		return true
-	case AmericaVancouver:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericaVancouver:
 		return true
-	case AmericanSamoa:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmericanSamoa:
 		return true
-	case Amsterdam:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAmsterdam:
 		return true
-	case Arizona:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneArizona:
 		return true
-	case AsiaAlmaty:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaAlmaty:
 		return true
-	case AsiaBaghdad:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaBaghdad:
 		return true
-	case AsiaBaku:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaBaku:
 		return true
-	case AsiaBangkok:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaBangkok:
 		return true
-	case AsiaChongqing:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaChongqing:
 		return true
-	case AsiaColombo:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaColombo:
 		return true
-	case AsiaDhaka:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaDhaka:
 		return true
-	case AsiaHongKong:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaHongKong:
 		return true
-	case AsiaIrkutsk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaIrkutsk:
 		return true
-	case AsiaJakarta:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaJakarta:
 		return true
-	case AsiaJerusalem:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaJerusalem:
 		return true
-	case AsiaKabul:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKabul:
 		return true
-	case AsiaKamchatka:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKamchatka:
 		return true
-	case AsiaKarachi:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKarachi:
 		return true
-	case AsiaKathmandu:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKathmandu:
 		return true
-	case AsiaKolkata:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKolkata:
 		return true
-	case AsiaKrasnoyarsk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKrasnoyarsk:
 		return true
-	case AsiaKualaLumpur:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKualaLumpur:
 		return true
-	case AsiaKuwait:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaKuwait:
 		return true
-	case AsiaMagadan:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaMagadan:
 		return true
-	case AsiaMuscat:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaMuscat:
 		return true
-	case AsiaNovosibirsk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaNovosibirsk:
 		return true
-	case AsiaRangoon:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaRangoon:
 		return true
-	case AsiaRiyadh:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaRiyadh:
 		return true
-	case AsiaSeoul:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaSeoul:
 		return true
-	case AsiaShanghai:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaShanghai:
 		return true
-	case AsiaSingapore:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaSingapore:
 		return true
-	case AsiaSrednekolymsk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaSrednekolymsk:
 		return true
-	case AsiaTaipei:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaTaipei:
 		return true
-	case AsiaTashkent:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaTashkent:
 		return true
-	case AsiaTbilisi:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaTbilisi:
 		return true
-	case AsiaTehran:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaTehran:
 		return true
-	case AsiaTokyo:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaTokyo:
 		return true
-	case AsiaUlaanbaatar:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaUlaanbaatar:
 		return true
-	case AsiaUrumqi:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaUrumqi:
 		return true
-	case AsiaVladivostok:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaVladivostok:
 		return true
-	case AsiaYakutsk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYakutsk:
 		return true
-	case AsiaYekaterinburg:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYekaterinburg:
 		return true
-	case AsiaYerevan:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYerevan:
 		return true
-	case Astana:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAstana:
 		return true
-	case Asuncion:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsuncion:
 		return true
-	case Athens:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAthens:
 		return true
-	case AtlanticAzores:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAtlanticAzores:
 		return true
-	case AtlanticCapeVerde:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAtlanticCapeVerde:
 		return true
-	case AtlanticSouthGeorgia:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAtlanticSouthGeorgia:
 		return true
-	case AtlanticTimeCanada:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAtlanticTimeCanada:
 		return true
-	case Auckland:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAuckland:
 		return true
-	case AustraliaAdelaide:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaAdelaide:
 		return true
-	case AustraliaBrisbane:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaBrisbane:
 		return true
-	case AustraliaCanberra:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaCanberra:
 		return true
-	case AustraliaDarwin:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaDarwin:
 		return true
-	case AustraliaEucla:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaEucla:
 		return true
-	case AustraliaHobart:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaHobart:
 		return true
-	case AustraliaLHI:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaLHI:
 		return true
-	case AustraliaLordHowe:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaLordHowe:
 		return true
-	case AustraliaMelbourne:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaMelbourne:
 		return true
-	case AustraliaPerth:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaPerth:
 		return true
-	case AustraliaSydney:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAustraliaSydney:
 		return true
-	case Azores:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAzores:
 		return true
-	case Baghdad:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBaghdad:
 		return true
-	case Baku:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBaku:
 		return true
-	case Bangkok:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBangkok:
 		return true
-	case Beijing:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBeijing:
 		return true
-	case Belgrade:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBelgrade:
 		return true
-	case Berlin:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBerlin:
 		return true
-	case Bern:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBern:
 		return true
-	case Bogota:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBogota:
 		return true
-	case Brasilia:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBrasilia:
 		return true
-	case Bratislava:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBratislava:
 		return true
-	case Brisbane:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBrisbane:
 		return true
-	case Brussels:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBrussels:
 		return true
-	case Bucharest:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBucharest:
 		return true
-	case Budapest:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBudapest:
 		return true
-	case BuenosAires:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneBuenosAires:
 		return true
-	case Cairo:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCairo:
 		return true
-	case CanadaPacific:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCanadaPacific:
 		return true
-	case Canberra:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCanberra:
 		return true
-	case CapeVerdeIs:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCapeVerdeIs:
 		return true
-	case Caracas:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCaracas:
 		return true
-	case Casablanca:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCasablanca:
 		return true
-	case CentralAmerica:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCentralAmerica:
 		return true
-	case CentralTimeUSCanada:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCentralTimeUSCanada:
 		return true
-	case ChathamIs:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneChathamIs:
 		return true
-	case Chennai:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneChennai:
 		return true
-	case Chihuahua:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneChihuahua:
 		return true
-	case ChileEasterIsland:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneChileEasterIsland:
 		return true
-	case Chongqing:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneChongqing:
 		return true
-	case Copenhagen:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneCopenhagen:
 		return true
-	case Darwin:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneDarwin:
 		return true
-	case Dhaka:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneDhaka:
 		return true
-	case Dublin:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneDublin:
 		return true
-	case EasternTimeUSCanada:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEasternTimeUSCanada:
 		return true
-	case Edinburgh:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEdinburgh:
 		return true
-	case Ekaterinburg:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEkaterinburg:
 		return true
-	case EtcGMT12:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEtcGMT12:
 		return true
-	case EtcUTC:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEtcUTC:
 		return true
-	case EuropeAmsterdam:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeAmsterdam:
 		return true
-	case EuropeAthens:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeAthens:
 		return true
-	case EuropeBelgrade:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeBelgrade:
 		return true
-	case EuropeBerlin:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeBerlin:
 		return true
-	case EuropeBratislava:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeBratislava:
 		return true
-	case EuropeBrussels:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeBrussels:
 		return true
-	case EuropeBucharest:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeBucharest:
 		return true
-	case EuropeBudapest:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeBudapest:
 		return true
-	case EuropeCopenhagen:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeCopenhagen:
 		return true
-	case EuropeDublin:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeDublin:
 		return true
-	case EuropeHelsinki:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeHelsinki:
 		return true
-	case EuropeIstanbul:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeIstanbul:
 		return true
-	case EuropeKaliningrad:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKaliningrad:
 		return true
-	case EuropeKiev:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKiev:
 		return true
-	case EuropeLisbon:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLisbon:
 		return true
-	case EuropeLjubljana:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLjubljana:
 		return true
-	case EuropeLondon:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLondon:
 		return true
-	case EuropeMadrid:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeMadrid:
 		return true
-	case EuropeMinsk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeMinsk:
 		return true
-	case EuropeMoscow:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeMoscow:
 		return true
-	case EuropeParis:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeParis:
 		return true
-	case EuropePrague:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropePrague:
 		return true
-	case EuropeRiga:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeRiga:
 		return true
-	case EuropeRome:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeRome:
 		return true
-	case EuropeSamara:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeSamara:
 		return true
-	case EuropeSarajevo:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeSarajevo:
 		return true
-	case EuropeSkopje:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeSkopje:
 		return true
-	case EuropeSofia:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeSofia:
 		return true
-	case EuropeStockholm:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeStockholm:
 		return true
-	case EuropeTallinn:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeTallinn:
 		return true
-	case EuropeVienna:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeVienna:
 		return true
-	case EuropeVilnius:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeVilnius:
 		return true
-	case EuropeVolgograd:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeVolgograd:
 		return true
-	case EuropeWarsaw:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeWarsaw:
 		return true
-	case EuropeZagreb:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeZagreb:
 		return true
-	case EuropeZurich:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeZurich:
 		return true
-	case Fiji:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneFiji:
 		return true
-	case Georgetown:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneGeorgetown:
 		return true
-	case Greenland:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneGreenland:
 		return true
-	case Guadalajara:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneGuadalajara:
 		return true
-	case Guam:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneGuam:
 		return true
-	case Hanoi:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneHanoi:
 		return true
-	case Harare:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneHarare:
 		return true
-	case Hawaii:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneHawaii:
 		return true
-	case Helsinki:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneHelsinki:
 		return true
-	case Hobart:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneHobart:
 		return true
-	case HongKong:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneHongKong:
 		return true
-	case IndianaEast:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneIndianaEast:
 		return true
-	case InternationalDateLineWest:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneInternationalDateLineWest:
 		return true
-	case Irkutsk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneIrkutsk:
 		return true
-	case Islamabad:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneIslamabad:
 		return true
-	case Istanbul:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneIstanbul:
 		return true
-	case Jakarta:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneJakarta:
 		return true
-	case Jerusalem:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneJerusalem:
 		return true
-	case Kabul:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKabul:
 		return true
-	case Kaliningrad:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKaliningrad:
 		return true
-	case Kamchatka:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKamchatka:
 		return true
-	case Karachi:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKarachi:
 		return true
-	case Kathmandu:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKathmandu:
 		return true
-	case Kolkata:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKolkata:
 		return true
-	case Krasnoyarsk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKrasnoyarsk:
 		return true
-	case KualaLumpur:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKualaLumpur:
 		return true
-	case Kuwait:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKuwait:
 		return true
-	case Kyiv:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneKyiv:
 		return true
-	case LaPaz:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneLaPaz:
 		return true
-	case Lima:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneLima:
 		return true
-	case Lisbon:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneLisbon:
 		return true
-	case Ljubljana:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneLjubljana:
 		return true
-	case London:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneLondon:
 		return true
-	case Madrid:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMadrid:
 		return true
-	case Magadan:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMagadan:
 		return true
-	case MarshallIs:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMarshallIs:
 		return true
-	case Mazatlan:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMazatlan:
 		return true
-	case Melbourne:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMelbourne:
 		return true
-	case MexicoCity:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMexicoCity:
 		return true
-	case MidAtlantic:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMidAtlantic:
 		return true
-	case MidwayIsland:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMidwayIsland:
 		return true
-	case Minsk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMinsk:
 		return true
-	case Monrovia:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMonrovia:
 		return true
-	case Monterrey:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMonterrey:
 		return true
-	case Montevideo:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMontevideo:
 		return true
-	case Moscow:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMoscow:
 		return true
-	case MountainTimeUSCanada:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMountainTimeUSCanada:
 		return true
-	case Mumbai:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMumbai:
 		return true
-	case Muscat:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneMuscat:
 		return true
-	case Nairobi:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneNairobi:
 		return true
-	case NewCaledonia:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneNewCaledonia:
 		return true
-	case NewDelhi:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneNewDelhi:
 		return true
-	case Newfoundland:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneNewfoundland:
 		return true
-	case Novosibirsk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneNovosibirsk:
 		return true
-	case Nukualofa:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneNukualofa:
 		return true
-	case Osaka:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneOsaka:
 		return true
-	case PacificApia:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificApia:
 		return true
-	case PacificAuckland:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificAuckland:
 		return true
-	case PacificChatham:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificChatham:
 		return true
-	case PacificEaster:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificEaster:
 		return true
-	case PacificFakaofo:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificFakaofo:
 		return true
-	case PacificFiji:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificFiji:
 		return true
-	case PacificGambier:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificGambier:
 		return true
-	case PacificGuadalcanal:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificGuadalcanal:
 		return true
-	case PacificGuam:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificGuam:
 		return true
-	case PacificHonolulu:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificHonolulu:
 		return true
-	case PacificKiritimati:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificKiritimati:
 		return true
-	case PacificMajuro:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificMajuro:
 		return true
-	case PacificMarquesas:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificMarquesas:
 		return true
-	case PacificMidway:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificMidway:
 		return true
-	case PacificNorfolk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificNorfolk:
 		return true
-	case PacificNoumea:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificNoumea:
 		return true
-	case PacificPagoPago:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificPagoPago:
 		return true
-	case PacificPitcairn:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificPitcairn:
 		return true
-	case PacificPortMoresby:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificPortMoresby:
 		return true
-	case PacificTimeUSCanada:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificTimeUSCanada:
 		return true
-	case PacificTongatapu:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePacificTongatapu:
 		return true
-	case Paris:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneParis:
 		return true
-	case Perth:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePerth:
 		return true
-	case PortMoresby:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePortMoresby:
 		return true
-	case Prague:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePrague:
 		return true
-	case Pretoria:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePretoria:
 		return true
-	case PuertoRico:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZonePuertoRico:
 		return true
-	case Quito:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneQuito:
 		return true
-	case Rangoon:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneRangoon:
 		return true
-	case Riga:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneRiga:
 		return true
-	case Riyadh:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneRiyadh:
 		return true
-	case Rome:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneRome:
 		return true
-	case Samara:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSamara:
 		return true
-	case Samoa:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSamoa:
 		return true
-	case Santiago:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSantiago:
 		return true
-	case Sapporo:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSapporo:
 		return true
-	case Sarajevo:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSarajevo:
 		return true
-	case Saskatchewan:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSaskatchewan:
 		return true
-	case Seoul:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSeoul:
 		return true
-	case Singapore:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSingapore:
 		return true
-	case Skopje:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSkopje:
 		return true
-	case Sofia:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSofia:
 		return true
-	case SolomonIs:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSolomonIs:
 		return true
-	case Srednekolymsk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSrednekolymsk:
 		return true
-	case SriJayawardenepura:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSriJayawardenepura:
 		return true
-	case StPetersburg:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneStPetersburg:
 		return true
-	case Stockholm:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneStockholm:
 		return true
-	case Sydney:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneSydney:
 		return true
-	case Taipei:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTaipei:
 		return true
-	case Tallinn:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTallinn:
 		return true
-	case Tashkent:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTashkent:
 		return true
-	case Tbilisi:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTbilisi:
 		return true
-	case Tehran:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTehran:
 		return true
-	case Tijuana:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTijuana:
 		return true
-	case TokelauIs:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTokelauIs:
 		return true
-	case Tokyo:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneTokyo:
 		return true
-	case USAleutian:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneUSAleutian:
 		return true
-	case UTC:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneUTC:
 		return true
-	case Ulaanbaatar:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneUlaanbaatar:
 		return true
-	case Urumqi:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneUrumqi:
 		return true
-	case Vienna:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneVienna:
 		return true
-	case Vilnius:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneVilnius:
 		return true
-	case Vladivostok:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneVladivostok:
 		return true
-	case Volgograd:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneVolgograd:
 		return true
-	case Warsaw:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneWarsaw:
 		return true
-	case Wellington:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneWellington:
 		return true
-	case WestCentralAfrica:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneWestCentralAfrica:
 		return true
-	case Yakutsk:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneYakutsk:
 		return true
-	case Yerevan:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneYerevan:
 		return true
-	case Zagreb:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneZagreb:
 		return true
-	case Zurich:
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneZurich:
 		return true
 	default:
 		return false
@@ -30710,6 +34266,7 @@ func (e UpdateFormFieldDataAttributesInputKind) Valid() bool {
 const (
 	UpdateFormFieldDataAttributesKindAcknowledgedAt              UpdateFormFieldDataAttributesKind = "acknowledged_at"
 	UpdateFormFieldDataAttributesKindAttachAlerts                UpdateFormFieldDataAttributesKind = "attach_alerts"
+	UpdateFormFieldDataAttributesKindCancellationMessage         UpdateFormFieldDataAttributesKind = "cancellation_message"
 	UpdateFormFieldDataAttributesKindCauses                      UpdateFormFieldDataAttributesKind = "causes"
 	UpdateFormFieldDataAttributesKindClosedAt                    UpdateFormFieldDataAttributesKind = "closed_at"
 	UpdateFormFieldDataAttributesKindCustom                      UpdateFormFieldDataAttributesKind = "custom"
@@ -30747,6 +34304,8 @@ func (e UpdateFormFieldDataAttributesKind) Valid() bool {
 	case UpdateFormFieldDataAttributesKindAcknowledgedAt:
 		return true
 	case UpdateFormFieldDataAttributesKindAttachAlerts:
+		return true
+	case UpdateFormFieldDataAttributesKindCancellationMessage:
 		return true
 	case UpdateFormFieldDataAttributesKindCauses:
 		return true
@@ -31095,13 +34654,13 @@ func (e UpdateFormSetDataType) Valid() bool {
 
 // Defines values for UpdateFormSetConditionDataAttributesComparison.
 const (
-	Equal UpdateFormSetConditionDataAttributesComparison = "equal"
+	UpdateFormSetConditionDataAttributesComparisonEqual UpdateFormSetConditionDataAttributesComparison = "equal"
 )
 
 // Valid indicates whether the value is a known member of the UpdateFormSetConditionDataAttributesComparison enum.
 func (e UpdateFormSetConditionDataAttributesComparison) Valid() bool {
 	switch e {
-	case Equal:
+	case UpdateFormSetConditionDataAttributesComparisonEqual:
 		return true
 	default:
 		return false
@@ -31140,16 +34699,16 @@ func (e UpdateFunctionalityDataType) Valid() bool {
 
 // Defines values for UpdateGithubIssueTaskParamsLabelsMode.
 const (
-	Append  UpdateGithubIssueTaskParamsLabelsMode = "append"
-	Replace UpdateGithubIssueTaskParamsLabelsMode = "replace"
+	UpdateGithubIssueTaskParamsLabelsModeAppend  UpdateGithubIssueTaskParamsLabelsMode = "append"
+	UpdateGithubIssueTaskParamsLabelsModeReplace UpdateGithubIssueTaskParamsLabelsMode = "replace"
 )
 
 // Valid indicates whether the value is a known member of the UpdateGithubIssueTaskParamsLabelsMode enum.
 func (e UpdateGithubIssueTaskParamsLabelsMode) Valid() bool {
 	switch e {
-	case Append:
+	case UpdateGithubIssueTaskParamsLabelsModeAppend:
 		return true
-	case Replace:
+	case UpdateGithubIssueTaskParamsLabelsModeReplace:
 		return true
 	default:
 		return false
@@ -32827,6 +36386,27 @@ func (e UpdateOnCallRoleDataAttributesLiveCallRoutingPermissions) Valid() bool {
 	}
 }
 
+// Defines values for UpdateOnCallRoleDataAttributesMembersPermissions.
+const (
+	UpdateOnCallRoleDataAttributesMembersPermissionsDelete UpdateOnCallRoleDataAttributesMembersPermissions = "delete"
+	UpdateOnCallRoleDataAttributesMembersPermissionsRead   UpdateOnCallRoleDataAttributesMembersPermissions = "read"
+	UpdateOnCallRoleDataAttributesMembersPermissionsUpdate UpdateOnCallRoleDataAttributesMembersPermissions = "update"
+)
+
+// Valid indicates whether the value is a known member of the UpdateOnCallRoleDataAttributesMembersPermissions enum.
+func (e UpdateOnCallRoleDataAttributesMembersPermissions) Valid() bool {
+	switch e {
+	case UpdateOnCallRoleDataAttributesMembersPermissionsDelete:
+		return true
+	case UpdateOnCallRoleDataAttributesMembersPermissionsRead:
+		return true
+	case UpdateOnCallRoleDataAttributesMembersPermissionsUpdate:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateOnCallRoleDataAttributesOnCallReadinessReportPermissions.
 const (
 	UpdateOnCallRoleDataAttributesOnCallReadinessReportPermissionsRead UpdateOnCallRoleDataAttributesOnCallReadinessReportPermissions = "read"
@@ -33937,6 +37517,30 @@ func (e UpdateRoleDataAttributesPlaybooksPermissions) Valid() bool {
 	}
 }
 
+// Defines values for UpdateRoleDataAttributesPrivateAgentPermissions.
+const (
+	UpdateRoleDataAttributesPrivateAgentPermissionsCreate UpdateRoleDataAttributesPrivateAgentPermissions = "create"
+	UpdateRoleDataAttributesPrivateAgentPermissionsDelete UpdateRoleDataAttributesPrivateAgentPermissions = "delete"
+	UpdateRoleDataAttributesPrivateAgentPermissionsRead   UpdateRoleDataAttributesPrivateAgentPermissions = "read"
+	UpdateRoleDataAttributesPrivateAgentPermissionsUpdate UpdateRoleDataAttributesPrivateAgentPermissions = "update"
+)
+
+// Valid indicates whether the value is a known member of the UpdateRoleDataAttributesPrivateAgentPermissions enum.
+func (e UpdateRoleDataAttributesPrivateAgentPermissions) Valid() bool {
+	switch e {
+	case UpdateRoleDataAttributesPrivateAgentPermissionsCreate:
+		return true
+	case UpdateRoleDataAttributesPrivateAgentPermissionsDelete:
+		return true
+	case UpdateRoleDataAttributesPrivateAgentPermissionsRead:
+		return true
+	case UpdateRoleDataAttributesPrivateAgentPermissionsUpdate:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateRoleDataAttributesPrivateIncidentsPermissions.
 const (
 	UpdateRoleDataAttributesPrivateIncidentsPermissionsCreate UpdateRoleDataAttributesPrivateIncidentsPermissions = "create"
@@ -34105,6 +37709,30 @@ func (e UpdateRoleDataAttributesSlasPermissions) Valid() bool {
 	}
 }
 
+// Defines values for UpdateRoleDataAttributesStatusPageUpdatesPermissions.
+const (
+	UpdateRoleDataAttributesStatusPageUpdatesPermissionsCreate UpdateRoleDataAttributesStatusPageUpdatesPermissions = "create"
+	UpdateRoleDataAttributesStatusPageUpdatesPermissionsDelete UpdateRoleDataAttributesStatusPageUpdatesPermissions = "delete"
+	UpdateRoleDataAttributesStatusPageUpdatesPermissionsRead   UpdateRoleDataAttributesStatusPageUpdatesPermissions = "read"
+	UpdateRoleDataAttributesStatusPageUpdatesPermissionsUpdate UpdateRoleDataAttributesStatusPageUpdatesPermissions = "update"
+)
+
+// Valid indicates whether the value is a known member of the UpdateRoleDataAttributesStatusPageUpdatesPermissions enum.
+func (e UpdateRoleDataAttributesStatusPageUpdatesPermissions) Valid() bool {
+	switch e {
+	case UpdateRoleDataAttributesStatusPageUpdatesPermissionsCreate:
+		return true
+	case UpdateRoleDataAttributesStatusPageUpdatesPermissionsDelete:
+		return true
+	case UpdateRoleDataAttributesStatusPageUpdatesPermissionsRead:
+		return true
+	case UpdateRoleDataAttributesStatusPageUpdatesPermissionsUpdate:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateRoleDataAttributesStatusPagesPermissions.
 const (
 	UpdateRoleDataAttributesStatusPagesPermissionsCreate UpdateRoleDataAttributesStatusPagesPermissions = "create"
@@ -34179,22 +37807,22 @@ func (e UpdateRoleDataAttributesWebhooksPermissions) Valid() bool {
 
 // Defines values for UpdateRoleDataAttributesWorkflowsPermissions.
 const (
-	UpdateRoleDataAttributesWorkflowsPermissionsCreate UpdateRoleDataAttributesWorkflowsPermissions = "create"
-	UpdateRoleDataAttributesWorkflowsPermissionsDelete UpdateRoleDataAttributesWorkflowsPermissions = "delete"
-	UpdateRoleDataAttributesWorkflowsPermissionsRead   UpdateRoleDataAttributesWorkflowsPermissions = "read"
-	UpdateRoleDataAttributesWorkflowsPermissionsUpdate UpdateRoleDataAttributesWorkflowsPermissions = "update"
+	Create UpdateRoleDataAttributesWorkflowsPermissions = "create"
+	Delete UpdateRoleDataAttributesWorkflowsPermissions = "delete"
+	Read   UpdateRoleDataAttributesWorkflowsPermissions = "read"
+	Update UpdateRoleDataAttributesWorkflowsPermissions = "update"
 )
 
 // Valid indicates whether the value is a known member of the UpdateRoleDataAttributesWorkflowsPermissions enum.
 func (e UpdateRoleDataAttributesWorkflowsPermissions) Valid() bool {
 	switch e {
-	case UpdateRoleDataAttributesWorkflowsPermissionsCreate:
+	case Create:
 		return true
-	case UpdateRoleDataAttributesWorkflowsPermissionsDelete:
+	case Delete:
 		return true
-	case UpdateRoleDataAttributesWorkflowsPermissionsRead:
+	case Read:
 		return true
-	case UpdateRoleDataAttributesWorkflowsPermissionsUpdate:
+	case Update:
 		return true
 	default:
 		return false
@@ -35023,6 +38651,21 @@ func (e UpdateStatusPageDataType) Valid() bool {
 	}
 }
 
+// Defines values for UpdateStatusPageAnnouncementDataType.
+const (
+	UpdateStatusPageAnnouncementDataTypeStatusPageAnnouncements UpdateStatusPageAnnouncementDataType = "status_page_announcements"
+)
+
+// Valid indicates whether the value is a known member of the UpdateStatusPageAnnouncementDataType enum.
+func (e UpdateStatusPageAnnouncementDataType) Valid() bool {
+	switch e {
+	case UpdateStatusPageAnnouncementDataTypeStatusPageAnnouncements:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateStatusPageComponentDataType.
 const (
 	UpdateStatusPageComponentDataTypeStatusPageComponents UpdateStatusPageComponentDataType = "status_page_components"
@@ -35115,22 +38758,43 @@ func (e UpdateSubStatusDataType) Valid() bool {
 
 // Defines values for UpdateTeamDataAttributesAutoAddMembersScope.
 const (
-	All           UpdateTeamDataAttributesAutoAddMembersScope = "all"
-	Off           UpdateTeamDataAttributesAutoAddMembersScope = "off"
-	PublicAndTest UpdateTeamDataAttributesAutoAddMembersScope = "public_and_test"
-	PublicOnly    UpdateTeamDataAttributesAutoAddMembersScope = "public_only"
+	UpdateTeamDataAttributesAutoAddMembersScopeAll           UpdateTeamDataAttributesAutoAddMembersScope = "all"
+	UpdateTeamDataAttributesAutoAddMembersScopeOff           UpdateTeamDataAttributesAutoAddMembersScope = "off"
+	UpdateTeamDataAttributesAutoAddMembersScopePublicAndTest UpdateTeamDataAttributesAutoAddMembersScope = "public_and_test"
+	UpdateTeamDataAttributesAutoAddMembersScopePublicOnly    UpdateTeamDataAttributesAutoAddMembersScope = "public_only"
 )
 
 // Valid indicates whether the value is a known member of the UpdateTeamDataAttributesAutoAddMembersScope enum.
 func (e UpdateTeamDataAttributesAutoAddMembersScope) Valid() bool {
 	switch e {
-	case All:
+	case UpdateTeamDataAttributesAutoAddMembersScopeAll:
 		return true
-	case Off:
+	case UpdateTeamDataAttributesAutoAddMembersScopeOff:
 		return true
-	case PublicAndTest:
+	case UpdateTeamDataAttributesAutoAddMembersScopePublicAndTest:
 		return true
-	case PublicOnly:
+	case UpdateTeamDataAttributesAutoAddMembersScopePublicOnly:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateTeamDataAttributesScheduleOverridePolicy.
+const (
+	UpdateTeamDataAttributesScheduleOverridePolicyAdmins   UpdateTeamDataAttributesScheduleOverridePolicy = "admins"
+	UpdateTeamDataAttributesScheduleOverridePolicyEveryone UpdateTeamDataAttributesScheduleOverridePolicy = "everyone"
+	UpdateTeamDataAttributesScheduleOverridePolicyMembers  UpdateTeamDataAttributesScheduleOverridePolicy = "members"
+)
+
+// Valid indicates whether the value is a known member of the UpdateTeamDataAttributesScheduleOverridePolicy enum.
+func (e UpdateTeamDataAttributesScheduleOverridePolicy) Valid() bool {
+	switch e {
+	case UpdateTeamDataAttributesScheduleOverridePolicyAdmins:
+		return true
+	case UpdateTeamDataAttributesScheduleOverridePolicyEveryone:
+		return true
+	case UpdateTeamDataAttributesScheduleOverridePolicyMembers:
 		return true
 	default:
 		return false
@@ -35332,6 +38996,7 @@ const (
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentStatusPageEventUpdated UpdateWebhooksEndpointDataAttributesEventTypes = "incident_status_page_event.updated"
 	UpdateWebhooksEndpointDataAttributesEventTypesIncidentUpdated                UpdateWebhooksEndpointDataAttributesEventTypes = "incident.updated"
 	UpdateWebhooksEndpointDataAttributesEventTypesPulseCreated                   UpdateWebhooksEndpointDataAttributesEventTypes = "pulse.created"
+	UpdateWebhooksEndpointDataAttributesEventTypesShiftEnded                     UpdateWebhooksEndpointDataAttributesEventTypes = "shift.ended"
 	UpdateWebhooksEndpointDataAttributesEventTypesShiftStarted                   UpdateWebhooksEndpointDataAttributesEventTypes = "shift.started"
 )
 
@@ -35400,6 +39065,8 @@ func (e UpdateWebhooksEndpointDataAttributesEventTypes) Valid() bool {
 		return true
 	case UpdateWebhooksEndpointDataAttributesEventTypesPulseCreated:
 		return true
+	case UpdateWebhooksEndpointDataAttributesEventTypesShiftEnded:
+		return true
 	case UpdateWebhooksEndpointDataAttributesEventTypesShiftStarted:
 		return true
 	default:
@@ -35416,6 +39083,27 @@ const (
 func (e UpdateWebhooksEndpointDataType) Valid() bool {
 	switch e {
 	case UpdateWebhooksEndpointDataTypeWebhooksEndpoints:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateWorkflowDataAttributesFailureNotificationMode.
+const (
+	UpdateWorkflowDataAttributesFailureNotificationModeCustom  UpdateWorkflowDataAttributesFailureNotificationMode = "custom"
+	UpdateWorkflowDataAttributesFailureNotificationModeInherit UpdateWorkflowDataAttributesFailureNotificationMode = "inherit"
+	UpdateWorkflowDataAttributesFailureNotificationModeOff     UpdateWorkflowDataAttributesFailureNotificationMode = "off"
+)
+
+// Valid indicates whether the value is a known member of the UpdateWorkflowDataAttributesFailureNotificationMode enum.
+func (e UpdateWorkflowDataAttributesFailureNotificationMode) Valid() bool {
+	switch e {
+	case UpdateWorkflowDataAttributesFailureNotificationModeCustom:
+		return true
+	case UpdateWorkflowDataAttributesFailureNotificationModeInherit:
+		return true
+	case UpdateWorkflowDataAttributesFailureNotificationModeOff:
 		return true
 	default:
 		return false
@@ -35605,6 +39293,7 @@ const (
 	UpdateWorkflowGroupDataAttributesKindAlert      UpdateWorkflowGroupDataAttributesKind = "alert"
 	UpdateWorkflowGroupDataAttributesKindIncident   UpdateWorkflowGroupDataAttributesKind = "incident"
 	UpdateWorkflowGroupDataAttributesKindPostMortem UpdateWorkflowGroupDataAttributesKind = "post_mortem"
+	UpdateWorkflowGroupDataAttributesKindProblem    UpdateWorkflowGroupDataAttributesKind = "problem"
 	UpdateWorkflowGroupDataAttributesKindPulse      UpdateWorkflowGroupDataAttributesKind = "pulse"
 	UpdateWorkflowGroupDataAttributesKindSimple     UpdateWorkflowGroupDataAttributesKind = "simple"
 )
@@ -35619,6 +39308,8 @@ func (e UpdateWorkflowGroupDataAttributesKind) Valid() bool {
 	case UpdateWorkflowGroupDataAttributesKindIncident:
 		return true
 	case UpdateWorkflowGroupDataAttributesKindPostMortem:
+		return true
+	case UpdateWorkflowGroupDataAttributesKindProblem:
 		return true
 	case UpdateWorkflowGroupDataAttributesKindPulse:
 		return true
@@ -36007,6 +39698,7 @@ const (
 	IncidentStatusPageEventUpdated WebhooksEndpointEventTypes = "incident_status_page_event.updated"
 	IncidentUpdated                WebhooksEndpointEventTypes = "incident.updated"
 	PulseCreated                   WebhooksEndpointEventTypes = "pulse.created"
+	ShiftEnded                     WebhooksEndpointEventTypes = "shift.ended"
 	ShiftStarted                   WebhooksEndpointEventTypes = "shift.started"
 )
 
@@ -36075,6 +39767,8 @@ func (e WebhooksEndpointEventTypes) Valid() bool {
 		return true
 	case PulseCreated:
 		return true
+	case ShiftEnded:
+		return true
 	case ShiftStarted:
 		return true
 	default:
@@ -36106,6 +39800,27 @@ const (
 func (e WebhooksEndpointResponseDataType) Valid() bool {
 	switch e {
 	case WebhooksEndpointResponseDataTypeWebhooksEndpoints:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WorkflowFailureNotificationMode.
+const (
+	Custom  WorkflowFailureNotificationMode = "custom"
+	Inherit WorkflowFailureNotificationMode = "inherit"
+	Off     WorkflowFailureNotificationMode = "off"
+)
+
+// Valid indicates whether the value is a known member of the WorkflowFailureNotificationMode enum.
+func (e WorkflowFailureNotificationMode) Valid() bool {
+	switch e {
+	case Custom:
+		return true
+	case Inherit:
+		return true
+	case Off:
 		return true
 	default:
 		return false
@@ -36358,6 +40073,7 @@ const (
 	WorkflowGroupKindAlert      WorkflowGroupKind = "alert"
 	WorkflowGroupKindIncident   WorkflowGroupKind = "incident"
 	WorkflowGroupKindPostMortem WorkflowGroupKind = "post_mortem"
+	WorkflowGroupKindProblem    WorkflowGroupKind = "problem"
 	WorkflowGroupKindPulse      WorkflowGroupKind = "pulse"
 	WorkflowGroupKindSimple     WorkflowGroupKind = "simple"
 )
@@ -36372,6 +40088,8 @@ func (e WorkflowGroupKind) Valid() bool {
 	case WorkflowGroupKindIncident:
 		return true
 	case WorkflowGroupKindPostMortem:
+		return true
+	case WorkflowGroupKindProblem:
 		return true
 	case WorkflowGroupKindPulse:
 		return true
@@ -36621,44 +40339,49 @@ func (e ListAlertEventsFeedParamsFilterKind) Valid() bool {
 
 // Defines values for ListAlertEventsFeedParamsFilterAction.
 const (
-	Acknowledged          ListAlertEventsFeedParamsFilterAction = "acknowledged"
-	Added                 ListAlertEventsFeedParamsFilterAction = "added"
-	Answered              ListAlertEventsFeedParamsFilterAction = "answered"
-	Attached              ListAlertEventsFeedParamsFilterAction = "attached"
-	CallLifecycle         ListAlertEventsFeedParamsFilterAction = "call_lifecycle"
-	Called                ListAlertEventsFeedParamsFilterAction = "called"
-	Cleared               ListAlertEventsFeedParamsFilterAction = "cleared"
-	Created               ListAlertEventsFeedParamsFilterAction = "created"
-	Deferred              ListAlertEventsFeedParamsFilterAction = "deferred"
-	Emailed               ListAlertEventsFeedParamsFilterAction = "emailed"
-	Escalated             ListAlertEventsFeedParamsFilterAction = "escalated"
-	EscalationPolicyPaged ListAlertEventsFeedParamsFilterAction = "escalation_policy_paged"
-	GoogleChatMessaged    ListAlertEventsFeedParamsFilterAction = "google_chat_messaged"
-	IgnoredAlertRequest   ListAlertEventsFeedParamsFilterAction = "ignored_alert_request"
-	LevelSkipped          ListAlertEventsFeedParamsFilterAction = "level_skipped"
-	Marked                ListAlertEventsFeedParamsFilterAction = "marked"
-	MsTeamsMessaged       ListAlertEventsFeedParamsFilterAction = "ms_teams_messaged"
-	Muted                 ListAlertEventsFeedParamsFilterAction = "muted"
-	NotMarked             ListAlertEventsFeedParamsFilterAction = "not_marked"
-	Notified              ListAlertEventsFeedParamsFilterAction = "notified"
-	Open                  ListAlertEventsFeedParamsFilterAction = "open"
-	Opened                ListAlertEventsFeedParamsFilterAction = "opened"
-	Paged                 ListAlertEventsFeedParamsFilterAction = "paged"
-	Removed               ListAlertEventsFeedParamsFilterAction = "removed"
-	Resolved              ListAlertEventsFeedParamsFilterAction = "resolved"
-	RetriggerSuppressed   ListAlertEventsFeedParamsFilterAction = "retrigger_suppressed"
-	Retriggered           ListAlertEventsFeedParamsFilterAction = "retriggered"
-	Skipped               ListAlertEventsFeedParamsFilterAction = "skipped"
-	Slacked               ListAlertEventsFeedParamsFilterAction = "slacked"
-	Snoozed               ListAlertEventsFeedParamsFilterAction = "snoozed"
-	Texted                ListAlertEventsFeedParamsFilterAction = "texted"
-	Triggered             ListAlertEventsFeedParamsFilterAction = "triggered"
-	Updated               ListAlertEventsFeedParamsFilterAction = "updated"
+	AckTimeoutRetriggered   ListAlertEventsFeedParamsFilterAction = "ack_timeout_retriggered"
+	Acknowledged            ListAlertEventsFeedParamsFilterAction = "acknowledged"
+	Added                   ListAlertEventsFeedParamsFilterAction = "added"
+	Answered                ListAlertEventsFeedParamsFilterAction = "answered"
+	Attached                ListAlertEventsFeedParamsFilterAction = "attached"
+	CallLifecycle           ListAlertEventsFeedParamsFilterAction = "call_lifecycle"
+	Called                  ListAlertEventsFeedParamsFilterAction = "called"
+	Cleared                 ListAlertEventsFeedParamsFilterAction = "cleared"
+	Created                 ListAlertEventsFeedParamsFilterAction = "created"
+	Deferred                ListAlertEventsFeedParamsFilterAction = "deferred"
+	Emailed                 ListAlertEventsFeedParamsFilterAction = "emailed"
+	Escalated               ListAlertEventsFeedParamsFilterAction = "escalated"
+	EscalationPolicyPaged   ListAlertEventsFeedParamsFilterAction = "escalation_policy_paged"
+	GoogleChatMessaged      ListAlertEventsFeedParamsFilterAction = "google_chat_messaged"
+	IgnoredAlertRequest     ListAlertEventsFeedParamsFilterAction = "ignored_alert_request"
+	LevelSkipped            ListAlertEventsFeedParamsFilterAction = "level_skipped"
+	Marked                  ListAlertEventsFeedParamsFilterAction = "marked"
+	MsTeamsMessaged         ListAlertEventsFeedParamsFilterAction = "ms_teams_messaged"
+	Muted                   ListAlertEventsFeedParamsFilterAction = "muted"
+	NotMarked               ListAlertEventsFeedParamsFilterAction = "not_marked"
+	Notified                ListAlertEventsFeedParamsFilterAction = "notified"
+	Open                    ListAlertEventsFeedParamsFilterAction = "open"
+	Opened                  ListAlertEventsFeedParamsFilterAction = "opened"
+	Paged                   ListAlertEventsFeedParamsFilterAction = "paged"
+	Removed                 ListAlertEventsFeedParamsFilterAction = "removed"
+	Resolved                ListAlertEventsFeedParamsFilterAction = "resolved"
+	RetriggerSuppressed     ListAlertEventsFeedParamsFilterAction = "retrigger_suppressed"
+	Retriggered             ListAlertEventsFeedParamsFilterAction = "retriggered"
+	Skipped                 ListAlertEventsFeedParamsFilterAction = "skipped"
+	Slacked                 ListAlertEventsFeedParamsFilterAction = "slacked"
+	Snoozed                 ListAlertEventsFeedParamsFilterAction = "snoozed"
+	TeamAttachedFromPayload ListAlertEventsFeedParamsFilterAction = "team_attached_from_payload"
+	Texted                  ListAlertEventsFeedParamsFilterAction = "texted"
+	Triggered               ListAlertEventsFeedParamsFilterAction = "triggered"
+	Updated                 ListAlertEventsFeedParamsFilterAction = "updated"
+	UserPaged               ListAlertEventsFeedParamsFilterAction = "user_paged"
 )
 
 // Valid indicates whether the value is a known member of the ListAlertEventsFeedParamsFilterAction enum.
 func (e ListAlertEventsFeedParamsFilterAction) Valid() bool {
 	switch e {
+	case AckTimeoutRetriggered:
+		return true
 	case Acknowledged:
 		return true
 	case Added:
@@ -36719,11 +40442,15 @@ func (e ListAlertEventsFeedParamsFilterAction) Valid() bool {
 		return true
 	case Snoozed:
 		return true
+	case TeamAttachedFromPayload:
+		return true
 	case Texted:
 		return true
 	case Triggered:
 		return true
 	case Updated:
+		return true
+	case UserPaged:
 		return true
 	default:
 		return false
@@ -37058,8 +40785,10 @@ func (e ListCatalogEntitiesParamsInclude) Valid() bool {
 const (
 	ListCatalogEntitiesParamsSortCreatedAt      ListCatalogEntitiesParamsSort = "created_at"
 	ListCatalogEntitiesParamsSortMinusCreatedAt ListCatalogEntitiesParamsSort = "-created_at"
+	ListCatalogEntitiesParamsSortMinusName      ListCatalogEntitiesParamsSort = "-name"
 	ListCatalogEntitiesParamsSortMinusPosition  ListCatalogEntitiesParamsSort = "-position"
 	ListCatalogEntitiesParamsSortMinusUpdatedAt ListCatalogEntitiesParamsSort = "-updated_at"
+	ListCatalogEntitiesParamsSortName           ListCatalogEntitiesParamsSort = "name"
 	ListCatalogEntitiesParamsSortPosition       ListCatalogEntitiesParamsSort = "position"
 	ListCatalogEntitiesParamsSortUpdatedAt      ListCatalogEntitiesParamsSort = "updated_at"
 )
@@ -37071,9 +40800,13 @@ func (e ListCatalogEntitiesParamsSort) Valid() bool {
 		return true
 	case ListCatalogEntitiesParamsSortMinusCreatedAt:
 		return true
+	case ListCatalogEntitiesParamsSortMinusName:
+		return true
 	case ListCatalogEntitiesParamsSortMinusPosition:
 		return true
 	case ListCatalogEntitiesParamsSortMinusUpdatedAt:
+		return true
+	case ListCatalogEntitiesParamsSortName:
 		return true
 	case ListCatalogEntitiesParamsSortPosition:
 		return true
@@ -38871,8 +42604,14 @@ type AddSlackBookmarkTaskParams struct {
 	Link *string `json:"link,omitempty"`
 
 	// PlaybookId The playbook id if bookmark is of an incident playbook
-	PlaybookId *string                             `json:"playbook_id,omitempty"`
-	TaskType   *AddSlackBookmarkTaskParamsTaskType `json:"task_type,omitempty"`
+	PlaybookId *string `json:"playbook_id,omitempty"`
+
+	// RetryCount Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+	RetryCount *int `json:"retry_count,omitempty"`
+
+	// RetryWaitTime Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
+	RetryWaitTime *int                                `json:"retry_wait_time,omitempty"`
+	TaskType      *AddSlackBookmarkTaskParamsTaskType `json:"task_type,omitempty"`
 
 	// Title The bookmark title. Required if not a playbook bookmark
 	Title *string `json:"title,omitempty"`
@@ -38990,6 +42729,9 @@ type AiChatSessionMessageList struct {
 
 // Alert defines model for alert.
 type Alert struct {
+	// AcknowledgedAt When the alert was first acknowledged. Null if it has never been acknowledged. An alert that is retriggered and acknowledged again keeps its original acknowledgement timestamp.
+	AcknowledgedAt *time.Time `json:"acknowledged_at,omitempty"`
+
 	// AlertFieldValues Custom alert field values associated with the alert. Only present when the enable_alert_fields feature flag is enabled for the team.
 	AlertFieldValues *[]struct {
 		// AlertFieldId ID of the custom alert field
@@ -39088,6 +42830,9 @@ type Alert struct {
 	// NotifiedUsers Users who were notified about the alert. Included on all non-list responses (show, create, update, resolve, etc.); on list responses only when `include=notified_users` is requested.
 	NotifiedUsers *[]User `json:"notified_users,omitempty"`
 
+	// ResolvedAt When the alert was first resolved. Null if it has never been resolved. Like `acknowledged_at`, an alert that is retriggered and resolved again keeps its original resolution timestamp; use `ended_at` for the current resolution state.
+	ResolvedAt *time.Time `json:"resolved_at,omitempty"`
+
 	// Responders Users who responded to the alert. Included on all non-list responses (show, create, update, resolve, etc.); on list responses only when `include=responders` is requested.
 	Responders *[]UserFlatResponse `json:"responders,omitempty"`
 
@@ -39142,6 +42887,64 @@ type AlertNotificationTargetType string
 // AlertStatus The status of the alert
 type AlertStatus string
 
+// AlertConfiguration defines model for alert_configuration.
+type AlertConfiguration struct {
+	// AlertAcknowledgment Re-trigger behaviour for acknowledged alerts. Replaces the stored object as a whole.
+	AlertAcknowledgment *struct {
+		// RetriggerManualAlerts Whether alerts created from a manual page also re-trigger. Changing it is rejected with 422 until the manual page re-trigger opt-out is enabled for the team.
+		RetriggerManualAlerts *bool `json:"retrigger_manual_alerts,omitempty"`
+
+		// TimeoutEnabled Re-trigger an acknowledged alert after the timeout.
+		TimeoutEnabled *bool `json:"timeout_enabled,omitempty"`
+
+		// TimeoutMinutes Minutes before an acknowledged alert re-triggers.
+		TimeoutMinutes *AlertConfigurationAlertAcknowledgmentTimeoutMinutes `json:"timeout_minutes,omitempty"`
+	} `json:"alert_acknowledgment,omitempty"`
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// DefaultUserNotificationSettings Channel defaults for new users, per urgency level. Omitted levels keep the built-in defaults; existing users are never changed. Present and accepted only while org-default-notification-settings is on for the team.
+	DefaultUserNotificationSettings *struct {
+		// AudibleContactTypes Channels enabled on a newly created user's audible notification rule. At least one channel is required.
+		AudibleContactTypes *[]AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypes `json:"audible_contact_types,omitempty"`
+
+		// QuietContactTypes Channels enabled on a newly created user's quiet notification rule. At least one channel is required.
+		QuietContactTypes *[]AlertConfigurationDefaultUserNotificationSettingsQuietContactTypes `json:"quiet_contact_types,omitempty"`
+	} `json:"default_user_notification_settings,omitempty"`
+
+	// ManualPagingFormSettings Stored entity types for the manual paging form, as configured; at least one is required. The form itself may hide a type the team cannot use yet, such as functionality.
+	ManualPagingFormSettings *[]AlertConfigurationManualPagingFormSettings `json:"manual_paging_form_settings,omitempty"`
+
+	// ManualPagingUrgencyIds Alert urgency ids allowed when manually paging. Empty means all; deleted urgencies are left out. Present and accepted only while the manual-page-urgency-allowlist feature is on for the team.
+	ManualPagingUrgencyIds *[]openapi_types.UUID `json:"manual_paging_urgency_ids,omitempty"`
+	UpdatedAt              *time.Time            `json:"updated_at,omitempty"`
+}
+
+// AlertConfigurationAlertAcknowledgmentTimeoutMinutes Minutes before an acknowledged alert re-triggers.
+type AlertConfigurationAlertAcknowledgmentTimeoutMinutes int
+
+// AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypes defines model for AlertConfiguration.DefaultUserNotificationSettings.AudibleContactTypes.
+type AlertConfigurationDefaultUserNotificationSettingsAudibleContactTypes string
+
+// AlertConfigurationDefaultUserNotificationSettingsQuietContactTypes defines model for AlertConfiguration.DefaultUserNotificationSettings.QuietContactTypes.
+type AlertConfigurationDefaultUserNotificationSettingsQuietContactTypes string
+
+// AlertConfigurationManualPagingFormSettings defines model for AlertConfiguration.ManualPagingFormSettings.
+type AlertConfigurationManualPagingFormSettings string
+
+// AlertConfigurationResponse defines model for alert_configuration_response.
+type AlertConfigurationResponse struct {
+	Data struct {
+		Attributes AlertConfiguration `json:"attributes"`
+
+		// Id Unique ID of the alert_configuration
+		Id   string                             `json:"id"`
+		Type AlertConfigurationResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// AlertConfigurationResponseDataType defines model for AlertConfigurationResponse.Data.Type.
+type AlertConfigurationResponseDataType string
+
 // AlertEvent defines model for alert_event.
 type AlertEvent struct {
 	Action AlertEventAction `json:"action"`
@@ -39186,7 +42989,10 @@ type AlertEvent struct {
 	} `json:"incident,omitempty"`
 	IncidentIds *[]string      `json:"incident_ids,omitempty"`
 	Kind        AlertEventKind `json:"kind"`
-	Schedule    *struct {
+
+	// PageReason Present on paged events when a user explicitly reassigns the alert to another notification target.
+	PageReason *AlertEventPageReason `json:"page_reason,omitempty"`
+	Schedule   *struct {
 		CreatedAt          *string `json:"created_at,omitempty"`
 		Description        *string `json:"description,omitempty"`
 		EscalationPolicies *[]struct {
@@ -39213,6 +43019,9 @@ type AlertEventAction string
 
 // AlertEventKind defines model for AlertEvent.Kind.
 type AlertEventKind string
+
+// AlertEventPageReason Present on paged events when a user explicitly reassigns the alert to another notification target.
+type AlertEventPageReason string
 
 // AlertEventFeedList defines model for alert_event_feed_list.
 type AlertEventFeedList struct {
@@ -39299,6 +43108,9 @@ type AlertField struct {
 
 	// Name The name of the alert field
 	Name string `json:"name"`
+
+	// OwnerGroupIds IDs of the teams that own the alert field. Empty for org-wide fields.
+	OwnerGroupIds *[]string `json:"owner_group_ids,omitempty"`
 
 	// Slug The slug of the alert field
 	Slug *string `json:"slug,omitempty"`
@@ -39505,85 +43317,6 @@ type AlertResponse struct {
 // AlertResponseDataType defines model for AlertResponse.Data.Type.
 type AlertResponseDataType string
 
-// AlertRetriggerRule defines model for alert_retrigger_rule.
-type AlertRetriggerRule struct {
-	// Conditions The conditions for the rule
-	Conditions *[]struct {
-		// Id Unique ID of the condition
-		Id openapi_types.UUID `json:"id"`
-
-		// Kind The operand the condition matches on. Native operands (urgency, source, service, group) match by record; alert_field/payload match a field value.
-		Kind AlertRetriggerRuleConditionsKind `json:"kind"`
-
-		// Operator How the operand is compared. Native operands support is_one_of/is_not_one_of/is_set/is_not_set; alert_field/payload additionally support the string/regex operators.
-		Operator AlertRetriggerRuleConditionsOperator `json:"operator"`
-
-		// PropertyFieldName For alert_field conditions: the alert field id. For payload conditions: a JSON Path (e.g. $.priority).
-		PropertyFieldName *string `json:"property_field_name,omitempty"`
-
-		// RecordIds For urgency/service/group/source conditions: the IDs of the matched records (AlertUrgency, Service, Group, or Alerts::Source).
-		RecordIds *[]openapi_types.UUID `json:"record_ids,omitempty"`
-
-		// Values For source conditions: non-integration source aliases (e.g. manual, api). For alert_field/payload conditions: the values to compare against.
-		Values *[]string `json:"values,omitempty"`
-	} `json:"conditions,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-
-	// MatchMode Whether all or any of the conditions must match
-	MatchMode *AlertRetriggerRuleMatchMode `json:"match_mode,omitempty"`
-
-	// Name A human-readable name for the rule
-	Name *string `json:"name,omitempty"`
-
-	// Position The position of the rule for ordering evaluation
-	Position *int `json:"position,omitempty"`
-
-	// TimeoutMinutes Minutes after acknowledgment to re-trigger. Null means never re-trigger.
-	TimeoutMinutes *int       `json:"timeout_minutes,omitempty"`
-	UpdatedAt      *time.Time `json:"updated_at,omitempty"`
-}
-
-// AlertRetriggerRuleConditionsKind The operand the condition matches on. Native operands (urgency, source, service, group) match by record; alert_field/payload match a field value.
-type AlertRetriggerRuleConditionsKind string
-
-// AlertRetriggerRuleConditionsOperator How the operand is compared. Native operands support is_one_of/is_not_one_of/is_set/is_not_set; alert_field/payload additionally support the string/regex operators.
-type AlertRetriggerRuleConditionsOperator string
-
-// AlertRetriggerRuleMatchMode Whether all or any of the conditions must match
-type AlertRetriggerRuleMatchMode string
-
-// AlertRetriggerRuleList defines model for alert_retrigger_rule_list.
-type AlertRetriggerRuleList struct {
-	Data []struct {
-		Attributes AlertRetriggerRule `json:"attributes"`
-
-		// Id Unique ID of the alert_retrigger_rule
-		Id   string                         `json:"id"`
-		Type AlertRetriggerRuleListDataType `json:"type"`
-	} `json:"data"`
-	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
-	Links    Links                      `json:"links"`
-	Meta     Meta                       `json:"meta"`
-}
-
-// AlertRetriggerRuleListDataType defines model for AlertRetriggerRuleList.Data.Type.
-type AlertRetriggerRuleListDataType string
-
-// AlertRetriggerRuleResponse defines model for alert_retrigger_rule_response.
-type AlertRetriggerRuleResponse struct {
-	Data struct {
-		Attributes AlertRetriggerRule `json:"attributes"`
-
-		// Id Unique ID of the alert_retrigger_rule
-		Id   string                             `json:"id"`
-		Type AlertRetriggerRuleResponseDataType `json:"type"`
-	} `json:"data"`
-	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
-}
-
-// AlertRetriggerRuleResponseDataType defines model for AlertRetriggerRuleResponse.Data.Type.
-type AlertRetriggerRuleResponseDataType string
-
 // AlertRoute defines model for alert_route.
 type AlertRoute struct {
 	AlertsSourceIds []openapi_types.UUID `json:"alerts_source_ids"`
@@ -39598,22 +43331,22 @@ type AlertRoute struct {
 		ConditionGroups []struct {
 			Conditions []struct {
 				// AlertUrgencyIds The Alert Urgency IDs to check in the condition
-				AlertUrgencyIds *[]string `json:"alert_urgency_ids,omitempty"`
+				AlertUrgencyIds *[]string `json:"alert_urgency_ids"`
 
 				// ConditionableId The ID of the conditionable
-				ConditionableId *openapi_types.UUID `json:"conditionable_id,omitempty"`
+				ConditionableId *openapi_types.UUID `json:"conditionable_id"`
 
 				// ConditionableType The type of the conditionable
-				ConditionableType          *AlertRouteRulesConditionGroupsConditionsConditionableType         `json:"conditionable_type,omitempty"`
+				ConditionableType          *AlertRouteRulesConditionGroupsConditionsConditionableType         `json:"conditionable_type"`
 				PropertyFieldConditionType AlertRouteRulesConditionGroupsConditionsPropertyFieldConditionType `json:"property_field_condition_type"`
 
 				// PropertyFieldName The name of the property field
-				PropertyFieldName *string                                                   `json:"property_field_name,omitempty"`
+				PropertyFieldName string                                                    `json:"property_field_name"`
 				PropertyFieldType AlertRouteRulesConditionGroupsConditionsPropertyFieldType `json:"property_field_type"`
 
 				// PropertyFieldValue The value of the property field
-				PropertyFieldValue  *string   `json:"property_field_value,omitempty"`
-				PropertyFieldValues *[]string `json:"property_field_values,omitempty"`
+				PropertyFieldValue  *string   `json:"property_field_value"`
+				PropertyFieldValues *[]string `json:"property_field_values"`
 			} `json:"conditions"`
 
 			// Position The position of the condition group
@@ -40094,7 +43827,7 @@ type AlertsSource struct {
 	// SourceType The alert source type
 	SourceType *AlertsSourceSourceType `json:"source_type,omitempty"`
 
-	// SourceableAttributes Provide additional attributes for generic_webhook alerts source
+	// SourceableAttributes Provide additional attributes for the underlying source. `auto_resolve`, `resolve_state` and `field_mappings_attributes` apply to generic_webhook sources; `accept_threaded_emails` applies to email sources.
 	SourceableAttributes *struct {
 		// AcceptThreadedEmails Set this to false to reject threaded emails
 		AcceptThreadedEmails *bool `json:"accept_threaded_emails,omitempty"`
@@ -40110,6 +43843,9 @@ type AlertsSource struct {
 			// JsonPath JSON path expression to extract a specific value from the alert's payload for evaluation. For `notification_target_id` only: if your account has opted in to Dynamic Notification Targets, this may also be a Liquid template that resolves to a notification target id at routing time.
 			JsonPath *string `json:"json_path,omitempty"`
 		} `json:"field_mappings_attributes,omitempty"`
+
+		// Id Unique ID of the underlying source. Read-only; it is resolved from the alert source itself on update.
+		Id *openapi_types.UUID `json:"id,omitempty"`
 
 		// ResolveState This value is matched with the value extracted from alerts payload using JSON path in field_mappings_attributes
 		ResolveState *string `json:"resolve_state,omitempty"`
@@ -40349,7 +44085,13 @@ type ArchiveSlackChannelsTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"channels"`
-	TaskType *ArchiveSlackChannelsTaskParamsTaskType `json:"task_type,omitempty"`
+
+	// RetryCount Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+	RetryCount *int `json:"retry_count,omitempty"`
+
+	// RetryWaitTime Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
+	RetryWaitTime *int                                    `json:"retry_wait_time,omitempty"`
+	TaskType      *ArchiveSlackChannelsTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
 // ArchiveSlackChannelsTaskParamsTaskType defines model for ArchiveSlackChannelsTaskParams.TaskType.
@@ -40440,8 +44182,11 @@ type Audit struct {
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
 
-	// Event Describes the action that was taken.
+	// Event The raw stored action that was taken. Rows written before IR-6875 may carry a trailing `!` for status transitions (e.g. `mark_as_resolved!`); prefer `event_display` for presentation.
 	Event string `json:"event"`
+
+	// EventDisplay Human-friendly display name for the action, normalized so a status change reads the same regardless of the surface it came from
+	EventDisplay *string `json:"event_display,omitempty"`
 
 	// Id ID of audit
 	Id *int `json:"id,omitempty"`
@@ -40626,6 +44371,9 @@ type AutoAssignRoleRootlyTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"group_target,omitempty"`
+
+	// IncidentRoleId The role id
+	IncidentRoleId string `json:"incident_role_id"`
 	ScheduleTarget *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -40675,6 +44423,9 @@ type CancelIncident struct {
 			// CancellationMessage Why was the incident cancelled?
 			CancellationMessage *string `json:"cancellation_message,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                `json:"id,omitempty"`
 		Type CancelIncidentDataType `json:"type"`
 	} `json:"data"`
 }
@@ -40696,8 +44447,11 @@ type Catalog struct {
 	Name      string            `json:"name"`
 
 	// Position Default position of the catalog when displayed in a list.
-	Position  *int   `json:"position"`
-	UpdatedAt string `json:"updated_at"`
+	Position *int `json:"position"`
+
+	// Slug The slug of the catalog. Derived from `name`.
+	Slug      *string `json:"slug,omitempty"`
+	UpdatedAt string  `json:"updated_at"`
 }
 
 // CatalogIcon defines model for Catalog.Icon.
@@ -40826,7 +44580,13 @@ type CatalogEntity struct {
 		// Value The value for this property
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
-	UpdatedAt string `json:"updated_at"`
+
+	// PublicDescription The status page description of the catalog entity
+	PublicDescription *string `json:"public_description,omitempty"`
+
+	// Slug The slug of the catalog entity. Derived from `name`.
+	Slug      *string `json:"slug,omitempty"`
+	UpdatedAt string  `json:"updated_at"`
 }
 
 // CatalogEntityManagedBy Which source manages this resource (read-only).
@@ -41171,6 +44931,9 @@ type Cause struct {
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
 
+	// PublicDescription The status page description of the cause
+	PublicDescription *string `json:"public_description,omitempty"`
+
 	// Slug The slug of the cause
 	Slug *string `json:"slug,omitempty"`
 
@@ -41230,8 +44993,14 @@ type ChangeSlackChannelPrivacyTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"channel"`
-	Privacy  ChangeSlackChannelPrivacyTaskParamsPrivacy   `json:"privacy"`
-	TaskType *ChangeSlackChannelPrivacyTaskParamsTaskType `json:"task_type,omitempty"`
+	Privacy ChangeSlackChannelPrivacyTaskParamsPrivacy `json:"privacy"`
+
+	// RetryCount Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+	RetryCount *int `json:"retry_count,omitempty"`
+
+	// RetryWaitTime Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
+	RetryWaitTime *int                                         `json:"retry_wait_time,omitempty"`
+	TaskType      *ChangeSlackChannelPrivacyTaskParamsTaskType `json:"task_type,omitempty"`
 }
 
 // ChangeSlackChannelPrivacyTaskParamsPrivacy defines model for ChangeSlackChannelPrivacyTaskParams.Privacy.
@@ -41593,6 +45362,9 @@ type CreateAirtableTableRecordTaskParamsTaskType string
 
 // CreateAnthropicChatCompletionTaskParams defines model for create_anthropic_chat_completion_task_params.
 type CreateAnthropicChatCompletionTaskParams struct {
+	// MaxTokens Maximum number of tokens to generate. Defaults to 4000 when omitted
+	MaxTokens *int `json:"max_tokens,omitempty"`
+
 	// Model The Anthropic model. eg: claude-3-5-sonnet-20241022
 	Model struct {
 		Id   *string `json:"id,omitempty"`
@@ -42076,6 +45848,12 @@ type CreateGoogleMeetingTaskParams struct {
 
 	// RecordingMode The video layout for the bot's recording (e.g. speaker_view, gallery_view, gallery_view_v2, audio_only)
 	RecordingMode *CreateGoogleMeetingTaskParamsRecordingMode `json:"recording_mode,omitempty"`
+
+	// RetryCount Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+	RetryCount *int `json:"retry_count,omitempty"`
+
+	// RetryWaitTime Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
+	RetryWaitTime *int `json:"retry_wait_time,omitempty"`
 
 	// Summary [DEPRECATED] The meeting summary
 	Summary  *string                                `json:"summary"`
@@ -42896,7 +46674,7 @@ type CreateShortcutTaskTaskParams struct {
 // CreateShortcutTaskTaskParamsTaskType defines model for CreateShortcutTaskTaskParams.TaskType.
 type CreateShortcutTaskTaskParamsTaskType string
 
-// CreateSlackCanvasTaskParams Create a canvas in a Slack channel, preserving an existing canvas. Requires Slack Canvas actions to be enabled for execution and the connected Slack app to have Canvas permissions.
+// CreateSlackCanvasTaskParams Create a canvas in a Slack channel, preserving an existing canvas. The connected Slack app must have Canvas permissions.
 type CreateSlackCanvasTaskParams struct {
 	// Channel Slack channel containing the canvas. Channel IDs support Liquid variables.
 	Channel struct {
@@ -42935,8 +46713,14 @@ type CreateSlackCanvasTaskParamsTaskType string
 
 // CreateSlackChannelTaskParams defines model for create_slack_channel_task_params.
 type CreateSlackChannelTaskParams struct {
-	Private  *CreateSlackChannelTaskParamsPrivate  `json:"private,omitempty"`
-	TaskType *CreateSlackChannelTaskParamsTaskType `json:"task_type,omitempty"`
+	Private *CreateSlackChannelTaskParamsPrivate `json:"private,omitempty"`
+
+	// RetryCount Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+	RetryCount *int `json:"retry_count,omitempty"`
+
+	// RetryWaitTime Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
+	RetryWaitTime *int                                  `json:"retry_wait_time,omitempty"`
+	TaskType      *CreateSlackChannelTaskParamsTaskType `json:"task_type,omitempty"`
 
 	// Title Slack channel title
 	Title     string `json:"title"`
@@ -43128,7 +46912,13 @@ type CreateZoomMeetingTaskParams struct {
 
 	// RecordingMode The video layout for the bot's recording (e.g. speaker_view, gallery_view, gallery_view_v2, audio_only)
 	RecordingMode *CreateZoomMeetingTaskParamsRecordingMode `json:"recording_mode,omitempty"`
-	TaskType      *CreateZoomMeetingTaskParamsTaskType      `json:"task_type,omitempty"`
+
+	// RetryCount Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+	RetryCount *int `json:"retry_count,omitempty"`
+
+	// RetryWaitTime Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
+	RetryWaitTime *int                                 `json:"retry_wait_time,omitempty"`
+	TaskType      *CreateZoomMeetingTaskParamsTaskType `json:"task_type,omitempty"`
 
 	// Topic The meeting topic
 	Topic string `json:"topic"`
@@ -43166,7 +46956,10 @@ type CustomField struct {
 	// Position The position of the custom_field
 	Position int                    `json:"position"`
 	Required *[]CustomFieldRequired `json:"required"`
-	Shown    []CustomFieldShown     `json:"shown"`
+
+	// ResourceType The resource type this field belongs to
+	ResourceType *CustomFieldResourceType `json:"resource_type,omitempty"`
+	Shown        []CustomFieldShown       `json:"shown"`
 
 	// Slug The slug of the custom_field
 	Slug *string `json:"slug,omitempty"`
@@ -43177,6 +46970,9 @@ type CustomField struct {
 
 // CustomFieldRequired Where the custom_field is required
 type CustomFieldRequired string
+
+// CustomFieldResourceType The resource type this field belongs to
+type CustomFieldResourceType string
 
 // CustomFieldShown Where the custom_field is shown
 type CustomFieldShown string
@@ -43434,6 +47230,9 @@ type Environment struct {
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
 
+	// PublicDescription The status page description of the environment
+	PublicDescription *string `json:"public_description,omitempty"`
+
 	// SlackAliases Slack Aliases associated with this environment
 	SlackAliases *[]struct {
 		// Id Slack alias ID
@@ -43546,6 +47345,18 @@ type EscalationLevel struct {
 		// Type The type of the notification target
 		Type EscalationLevelNotificationTargetParamsType `json:"type"`
 	} `json:"notification_target_params"`
+
+	// PagingStrategyConfigurationPageUsersCount Number of users to page at a time (cycle-based round robin).
+	PagingStrategyConfigurationPageUsersCount *int `json:"paging_strategy_configuration_page_users_count,omitempty"`
+
+	// PagingStrategyConfigurationRepeats Number of times to rotate through the roster (cycle-based round robin).
+	PagingStrategyConfigurationRepeats *int `json:"paging_strategy_configuration_repeats,omitempty"`
+
+	// PagingStrategyConfigurationRepeatsMode Controls how repeats are interpreted: 'users' pages exactly N users, 'all' pages everyone once.
+	PagingStrategyConfigurationRepeatsMode *EscalationLevelPagingStrategyConfigurationRepeatsMode `json:"paging_strategy_configuration_repeats_mode,omitempty"`
+
+	// PagingStrategyConfigurationRotationScope Scope of rotation ordering: active rotation members only, or entire schedule.
+	PagingStrategyConfigurationRotationScope    *EscalationLevelPagingStrategyConfigurationRotationScope    `json:"paging_strategy_configuration_rotation_scope,omitempty"`
 	PagingStrategyConfigurationScheduleStrategy *EscalationLevelPagingStrategyConfigurationScheduleStrategy `json:"paging_strategy_configuration_schedule_strategy,omitempty"`
 	PagingStrategyConfigurationStrategy         *EscalationLevelPagingStrategyConfigurationStrategy         `json:"paging_strategy_configuration_strategy,omitempty"`
 
@@ -43561,6 +47372,12 @@ type EscalationLevelNotificationTargetParamsTeamMembers string
 
 // EscalationLevelNotificationTargetParamsType The type of the notification target
 type EscalationLevelNotificationTargetParamsType string
+
+// EscalationLevelPagingStrategyConfigurationRepeatsMode Controls how repeats are interpreted: 'users' pages exactly N users, 'all' pages everyone once.
+type EscalationLevelPagingStrategyConfigurationRepeatsMode string
+
+// EscalationLevelPagingStrategyConfigurationRotationScope Scope of rotation ordering: active rotation members only, or entire schedule.
+type EscalationLevelPagingStrategyConfigurationRotationScope string
 
 // EscalationLevelPagingStrategyConfigurationScheduleStrategy defines model for EscalationLevel.PagingStrategyConfigurationScheduleStrategy.
 type EscalationLevelPagingStrategyConfigurationScheduleStrategy string
@@ -43625,6 +47442,81 @@ type EscalationPath struct {
 	// NotificationType Notification rule type
 	NotificationType string `json:"notification_type"`
 
+	// NotificationTypeFallback Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team.
+	NotificationTypeFallback *EscalationPathNotificationTypeFallback `json:"notification_type_fallback,omitempty"`
+
+	// NotificationTypeRules Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team.
+	NotificationTypeRules *[]struct {
+		// Conditions Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.
+		Conditions []struct {
+			// FieldableId The ID of the alert field
+			FieldableId *string `json:"fieldable_id,omitempty"`
+
+			// FieldableType The type of the fieldable (e.g., AlertField)
+			FieldableType *string `json:"fieldable_type,omitempty"`
+
+			// JsonPath JSON path to extract value from payload
+			JsonPath *string `json:"json_path,omitempty"`
+
+			// Operator Whether the alert must (or must not) have related incidents
+			Operator *EscalationPathNotificationTypeRulesConditionsOperator `json:"operator,omitempty"`
+
+			// RuleType The type of the escalation path rule
+			RuleType *EscalationPathNotificationTypeRulesConditionsRuleType `json:"rule_type,omitempty"`
+
+			// ServiceIds Service ids for which this escalation path should be used
+			ServiceIds *[]string `json:"service_ids,omitempty"`
+
+			// TimeBlocks Time windows during which alerts are deferred
+			TimeBlocks *[]struct {
+				AllDay *bool `json:"all_day,omitempty"`
+
+				// EndTime Formatted as HH:MM
+				EndTime *string `json:"end_time,omitempty"`
+
+				// EndsNextDay Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
+				EndsNextDay *bool `json:"ends_next_day,omitempty"`
+				Friday      *bool `json:"friday,omitempty"`
+
+				// Id Unique ID of the time block
+				Id     *string `json:"id,omitempty"`
+				Monday *bool   `json:"monday,omitempty"`
+
+				// Position Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
+				Position *int  `json:"position,omitempty"`
+				Saturday *bool `json:"saturday,omitempty"`
+
+				// StartTime Formatted as HH:MM
+				StartTime *string `json:"start_time,omitempty"`
+				Sunday    *bool   `json:"sunday,omitempty"`
+				Thursday  *bool   `json:"thursday,omitempty"`
+				Tuesday   *bool   `json:"tuesday,omitempty"`
+				Wednesday *bool   `json:"wednesday,omitempty"`
+			} `json:"time_blocks,omitempty"`
+
+			// TimeZone Time zone for the deferral window
+			TimeZone *EscalationPathNotificationTypeRulesConditionsTimeZone `json:"time_zone,omitempty"`
+
+			// UrgencyIds Alert urgency ids for which this escalation path should be used
+			UrgencyIds *[]string `json:"urgency_ids,omitempty"`
+
+			// Value Value with which JSON path value should be matched
+			Value *string `json:"value,omitempty"`
+
+			// Values Alert source values to match against (e.g., manual, datadog)
+			Values *[]string `json:"values,omitempty"`
+
+			// WithinWorkingHour Whether the escalation path should be used within working hours
+			WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
+		} `json:"conditions"`
+
+		// MatchMode Whether all or any of the rule's conditions must match
+		MatchMode *EscalationPathNotificationTypeRulesMatchMode `json:"match_mode,omitempty"`
+
+		// NotificationType Outcome when this rule matches
+		NotificationType *EscalationPathNotificationTypeRulesNotificationType `json:"notification_type,omitempty"`
+	} `json:"notification_type_rules,omitempty"`
+
 	// PathType The type of escalation path
 	PathType *EscalationPathPathType `json:"path_type,omitempty"`
 
@@ -43665,11 +47557,19 @@ type EscalationPath struct {
 			AllDay *bool `json:"all_day,omitempty"`
 
 			// EndTime Formatted as HH:MM
-			EndTime  *string `json:"end_time,omitempty"`
-			Friday   *bool   `json:"friday,omitempty"`
-			Monday   *bool   `json:"monday,omitempty"`
-			Position *int    `json:"position,omitempty"`
-			Saturday *bool   `json:"saturday,omitempty"`
+			EndTime *string `json:"end_time,omitempty"`
+
+			// EndsNextDay Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
+			EndsNextDay *bool `json:"ends_next_day,omitempty"`
+			Friday      *bool `json:"friday,omitempty"`
+
+			// Id Unique ID of the time block
+			Id     *string `json:"id,omitempty"`
+			Monday *bool   `json:"monday,omitempty"`
+
+			// Position Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
+			Position *int  `json:"position,omitempty"`
+			Saturday *bool `json:"saturday,omitempty"`
 
 			// StartTime Formatted as HH:MM
 			StartTime *string `json:"start_time,omitempty"`
@@ -43719,6 +47619,24 @@ type EscalationPathAfterDeferralBehavior string
 
 // EscalationPathMatchMode How path rules are matched.
 type EscalationPathMatchMode string
+
+// EscalationPathNotificationTypeFallback Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team.
+type EscalationPathNotificationTypeFallback string
+
+// EscalationPathNotificationTypeRulesConditionsOperator Whether the alert must (or must not) have related incidents
+type EscalationPathNotificationTypeRulesConditionsOperator string
+
+// EscalationPathNotificationTypeRulesConditionsRuleType The type of the escalation path rule
+type EscalationPathNotificationTypeRulesConditionsRuleType string
+
+// EscalationPathNotificationTypeRulesConditionsTimeZone Time zone for the deferral window
+type EscalationPathNotificationTypeRulesConditionsTimeZone string
+
+// EscalationPathNotificationTypeRulesMatchMode Whether all or any of the rule's conditions must match
+type EscalationPathNotificationTypeRulesMatchMode string
+
+// EscalationPathNotificationTypeRulesNotificationType Outcome when this rule matches
+type EscalationPathNotificationTypeRulesNotificationType string
 
 // EscalationPathPathType The type of escalation path
 type EscalationPathPathType string
@@ -43877,6 +47795,9 @@ type FormField struct {
 	Name     string   `json:"name"`
 	Required []string `json:"required"`
 
+	// ResourceType The resource type this field belongs to
+	ResourceType *FormFieldResourceType `json:"resource_type,omitempty"`
+
 	// ShowOnIncidentDetails Whether the form field is shown on the incident details panel
 	ShowOnIncidentDetails *bool    `json:"show_on_incident_details,omitempty"`
 	Shown                 []string `json:"shown"`
@@ -43899,6 +47820,9 @@ type FormFieldInputKind string
 
 // FormFieldKind The kind of the form field
 type FormFieldKind string
+
+// FormFieldResourceType The resource type this field belongs to
+type FormFieldResourceType string
 
 // FormFieldValueKind The value kind of the form field
 type FormFieldValueKind string
@@ -43985,7 +47909,7 @@ type FormFieldPlacement struct {
 	// FormFieldId The form field that is placed.
 	FormFieldId string `json:"form_field_id"`
 
-	// FormSetId The form set this field is placed in.
+	// FormSetId The form set this field is placed in. The form set must have the same `resource_type` as the form field, otherwise the request is rejected with 422.
 	FormSetId string `json:"form_set_id"`
 
 	// NonEditable Whether the field is read-only and cannot be edited by users.
@@ -44328,7 +48252,7 @@ type Functionality struct {
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
 
-	// PublicDescription The public description of the functionality
+	// PublicDescription The status page description of the functionality
 	PublicDescription *string `json:"public_description,omitempty"`
 
 	// ServiceIds Services associated with this functionality
@@ -44541,12 +48465,12 @@ type Heartbeat struct {
 	// Enabled Whether to trigger alerts when heartbeat is expired.
 	Enabled bool `json:"enabled"`
 
-	// ExpiresAt When heartbeat expires
+	// ExpiresAt Persisted expiry deadline, including up to 30 seconds of coalescing grace.
 	ExpiresAt    *string               `json:"expires_at,omitempty"`
 	Interval     int                   `json:"interval"`
 	IntervalUnit HeartbeatIntervalUnit `json:"interval_unit"`
 
-	// LastPingedAt When the heartbeat was last pinged.
+	// LastPingedAt Last persisted heartbeat ping timestamp. Accepted pings may be coalesced for up to 30 seconds.
 	LastPingedAt *string `json:"last_pinged_at,omitempty"`
 
 	// Name The name of the heartbeat
@@ -44618,6 +48542,12 @@ type HttpClientTaskParams struct {
 	EventMessage *string `json:"event_message,omitempty"`
 	EventUrl     *string `json:"event_url,omitempty"`
 
+	// ExpectedResponseHeaders Map of valid HTTP header names to regexp patterns. Header names must use HTTP token characters. Task fails if any header value does not match its pattern (case-insensitive). Leave empty to skip validation.
+	ExpectedResponseHeaders *map[string]string `json:"expected_response_headers,omitempty"`
+
+	// FollowRedirects Whether to follow HTTP 3xx redirects. Defaults to true. Set to false to treat redirect responses as-is.
+	FollowRedirects *bool `json:"follow_redirects,omitempty"`
+
 	// Headers JSON map of HTTP headers
 	Headers *string `json:"headers,omitempty"`
 
@@ -44682,6 +48612,8 @@ type ImportMeetingRecordingSource string
 // InTriageIncident defines model for in_triage_incident.
 type InTriageIncident struct {
 	Data struct {
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                  `json:"id,omitempty"`
 		Type InTriageIncidentDataType `json:"type"`
 	} `json:"data"`
 }
@@ -44850,6 +48782,9 @@ type Incident struct {
 	// LinearIssueId Linear issue ID
 	LinearIssueId *string `json:"linear_issue_id,omitempty"`
 
+	// LinearIssueKey Linear issue key
+	LinearIssueKey *string `json:"linear_issue_key,omitempty"`
+
 	// LinearIssueUrl Linear issue URL
 	LinearIssueUrl *string `json:"linear_issue_url,omitempty"`
 
@@ -44976,8 +48911,8 @@ type Incident struct {
 	// Services The Services of the incident
 	Services *[]ServiceResponse `json:"services,omitempty"`
 
-	// Severity The Severity of the incident
-	Severity *SeverityResponse `json:"severity,omitempty"`
+	// Severity The severity assigned to an incident, or null when no severity is assigned
+	Severity *NullableSeverityResponse `json:"severity,omitempty"`
 
 	// SharepointPageId SharePoint page ID
 	SharepointPageId *string `json:"sharepoint_page_id,omitempty"`
@@ -45945,6 +49880,15 @@ type IncidentStatusPageEvent struct {
 	// Status The status of the incident event
 	Status *IncidentStatusPageEventStatus `json:"status,omitempty"`
 
+	// StatusPageComponents Affected status page components recorded on the event and their statuses
+	StatusPageComponents *[]struct {
+		// Status The status recorded for the component
+		Status *IncidentStatusPageEventStatusPageComponentsStatus `json:"status,omitempty"`
+
+		// StatusPageComponentId Unique ID of a component on the event's status page
+		StatusPageComponentId string `json:"status_page_component_id"`
+	} `json:"status_page_components,omitempty"`
+
 	// StatusPageId Unique ID of the status page you wish to post the event to
 	StatusPageId *string `json:"status_page_id,omitempty"`
 
@@ -45954,6 +49898,9 @@ type IncidentStatusPageEvent struct {
 
 // IncidentStatusPageEventStatus The status of the incident event
 type IncidentStatusPageEventStatus string
+
+// IncidentStatusPageEventStatusPageComponentsStatus The status recorded for the component
+type IncidentStatusPageEventStatusPageComponentsStatus string
 
 // IncidentStatusPageEventList defines model for incident_status_page_event_list.
 type IncidentStatusPageEventList struct {
@@ -46170,6 +50117,9 @@ type IncidentType struct {
 		// Value The property value
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
+
+	// PublicDescription The status page description of the incident type
+	PublicDescription *string `json:"public_description,omitempty"`
 
 	// SlackAliases Slack Aliases associated with this incident type
 	SlackAliases *[]struct {
@@ -46733,6 +50683,9 @@ type MitigateIncident struct {
 			// MitigationMessage How was the incident mitigated?
 			MitigationMessage *string `json:"mitigation_message,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                  `json:"id,omitempty"`
 		Type MitigateIncidentDataType `json:"type"`
 	} `json:"data"`
 }
@@ -46884,6 +50837,13 @@ type NewAlertField struct {
 		Attributes struct {
 			// Name The name of the alert field
 			Name string `json:"name"`
+
+			// OwnerGroupIds IDs of the teams that own the alert field. Callers with org-wide alert field permissions may omit it or pass an empty list to create an org-wide field. Callers without them (team admins, team-scoped API keys) get their administered teams by default when it is omitted, and must otherwise pass at least one team they administer; an explicit empty list or null is rejected.
+			OwnerGroupIds *[]string `json:"owner_group_ids,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewAlertFieldDataType `json:"type"`
 	} `json:"data"`
@@ -46948,6 +50908,9 @@ type NewAlertGroup struct {
 			// OwnerGroupIds Teams that own this alert group. Admins of an owning team can manage it, and an owned alert group can only target destinations that belong to its owning teams. Only available when owning teams for alert groups are enabled for the organization.
 			OwnerGroupIds *[]openapi_types.UUID `json:"owner_group_ids,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug    *string `json:"slug,omitempty"`
 			Targets *[]struct {
 				// TargetId id for the Group, Service, EscalationPolicy or Functionality
 				TargetId openapi_types.UUID `json:"target_id"`
@@ -46986,59 +50949,6 @@ type NewAlertGroupDataAttributesTargetsTargetType string
 
 // NewAlertGroupDataType defines model for NewAlertGroup.Data.Type.
 type NewAlertGroupDataType string
-
-// NewAlertRetriggerRule defines model for new_alert_retrigger_rule.
-type NewAlertRetriggerRule struct {
-	Data struct {
-		Attributes struct {
-			// Conditions The conditions that determine which alerts this rule applies to. An empty array applies to every alert.
-			Conditions *[]struct {
-				// Kind The operand the condition matches on. Native operands (urgency, source, service, group) match by record; alert_field/payload match a field value.
-				Kind NewAlertRetriggerRuleDataAttributesConditionsKind `json:"kind"`
-
-				// Operator How the operand is compared. Native operands support is_one_of/is_not_one_of/is_set/is_not_set; alert_field/payload additionally support the string/regex operators.
-				Operator NewAlertRetriggerRuleDataAttributesConditionsOperator `json:"operator"`
-
-				// PropertyFieldName For alert_field conditions: the alert field id. For payload conditions: a JSON Path (e.g. $.priority).
-				PropertyFieldName *string `json:"property_field_name,omitempty"`
-
-				// RecordIds For urgency/service/group/source conditions: the IDs of the matched records (AlertUrgency, Service, Group, or Alerts::Source).
-				RecordIds *[]openapi_types.UUID `json:"record_ids,omitempty"`
-
-				// Values For source conditions: non-integration source aliases (e.g. manual, api). For alert_field/payload conditions: the values to compare against.
-				Values *[]string `json:"values,omitempty"`
-			} `json:"conditions,omitempty"`
-
-			// MatchMode Whether all or any of the conditions must match
-			MatchMode *NewAlertRetriggerRuleDataAttributesMatchMode `json:"match_mode,omitempty"`
-
-			// Name A human-readable name for the rule
-			Name string `json:"name"`
-
-			// Position The position of the rule; the first matching rule (by position) decides the outcome
-			Position *int `json:"position,omitempty"`
-
-			// TimeoutMinutes Re-trigger the alert this many minutes after acknowledgment. Null means never re-trigger.
-			TimeoutMinutes *NewAlertRetriggerRuleDataAttributesTimeoutMinutes `json:"timeout_minutes,omitempty"`
-		} `json:"attributes"`
-		Type NewAlertRetriggerRuleDataType `json:"type"`
-	} `json:"data"`
-}
-
-// NewAlertRetriggerRuleDataAttributesConditionsKind The operand the condition matches on. Native operands (urgency, source, service, group) match by record; alert_field/payload match a field value.
-type NewAlertRetriggerRuleDataAttributesConditionsKind string
-
-// NewAlertRetriggerRuleDataAttributesConditionsOperator How the operand is compared. Native operands support is_one_of/is_not_one_of/is_set/is_not_set; alert_field/payload additionally support the string/regex operators.
-type NewAlertRetriggerRuleDataAttributesConditionsOperator string
-
-// NewAlertRetriggerRuleDataAttributesMatchMode Whether all or any of the conditions must match
-type NewAlertRetriggerRuleDataAttributesMatchMode string
-
-// NewAlertRetriggerRuleDataAttributesTimeoutMinutes Re-trigger the alert this many minutes after acknowledgment. Null means never re-trigger.
-type NewAlertRetriggerRuleDataAttributesTimeoutMinutes int
-
-// NewAlertRetriggerRuleDataType defines model for NewAlertRetriggerRule.Data.Type.
-type NewAlertRetriggerRuleDataType string
 
 // NewAlertRoute defines model for new_alert_route.
 type NewAlertRoute struct {
@@ -47320,7 +51230,7 @@ type NewAlertsSource struct {
 			// SourceType The alert source type
 			SourceType *NewAlertsSourceDataAttributesSourceType `json:"source_type,omitempty"`
 
-			// SourceableAttributes Provide additional attributes for generic_webhook alerts source
+			// SourceableAttributes Provide additional attributes for the underlying source. `auto_resolve`, `resolve_state` and `field_mappings_attributes` apply to generic_webhook sources; `accept_threaded_emails` applies to email sources.
 			SourceableAttributes *struct {
 				// AcceptThreadedEmails Set this to false to reject threaded emails
 				AcceptThreadedEmails *bool `json:"accept_threaded_emails,omitempty"`
@@ -47465,6 +51375,10 @@ type NewCatalog struct {
 
 			// Position Default position of the catalog when displayed in a list.
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCatalogDataType `json:"type"`
 	} `json:"data"`
@@ -47513,6 +51427,10 @@ type NewCatalogChecklistTemplate struct {
 
 			// ScopeType The scope type
 			ScopeType NewCatalogChecklistTemplateDataAttributesScopeType `json:"scope_type"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCatalogChecklistTemplateDataType `json:"type"`
 	} `json:"data"`
@@ -47556,6 +51474,13 @@ type NewCatalogEntity struct {
 				// Value The value for this property
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
+
+			// PublicDescription The status page description of the catalog entity
+			PublicDescription *string `json:"public_description,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCatalogEntityDataType `json:"type"`
 	} `json:"data"`
@@ -47607,6 +51532,10 @@ type NewCatalogField struct {
 
 			// Required Whether the field is required.
 			Required *bool `json:"required,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCatalogFieldDataType `json:"type"`
 	} `json:"data"`
@@ -47644,6 +51573,10 @@ type NewCatalogProperty struct {
 
 			// Required Whether the property is required.
 			Required *bool `json:"required,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCatalogPropertyDataType `json:"type"`
 	} `json:"data"`
@@ -47679,6 +51612,13 @@ type NewCause struct {
 				// Value The property value
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
+
+			// PublicDescription The status page description of the cause
+			PublicDescription *string `json:"public_description,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCauseDataType `json:"type"`
 	} `json:"data"`
@@ -47776,6 +51716,10 @@ type NewCommunicationsStage struct {
 
 			// Position Position of the communications stage
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCommunicationsStageDataType `json:"type"`
 	} `json:"data"`
@@ -47840,6 +51784,10 @@ type NewCommunicationsType struct {
 
 			// Position Position of the communications type
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCommunicationsTypeDataType `json:"type"`
 	} `json:"data"`
@@ -47911,6 +51859,10 @@ type NewCustomForm struct {
 
 			// Name The name of the custom form.
 			Name string `json:"name"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewCustomFormDataType `json:"type"`
 	} `json:"data"`
@@ -47997,6 +51949,9 @@ type NewEnvironment struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
+			// PublicDescription The status page description of the environment
+			PublicDescription *string `json:"public_description,omitempty"`
+
 			// SlackAliases Slack Aliases associated with this environment
 			SlackAliases *[]struct {
 				// Id Slack alias ID
@@ -48014,6 +51969,10 @@ type NewEnvironment struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewEnvironmentDataType `json:"type"`
 	} `json:"data"`
@@ -48043,6 +52002,18 @@ type NewEscalationLevel struct {
 				// Type The type of the notification target
 				Type NewEscalationLevelDataAttributesNotificationTargetParamsType `json:"type"`
 			} `json:"notification_target_params"`
+
+			// PagingStrategyConfigurationPageUsersCount Number of users to page at a time (cycle-based round robin).
+			PagingStrategyConfigurationPageUsersCount *int `json:"paging_strategy_configuration_page_users_count,omitempty"`
+
+			// PagingStrategyConfigurationRepeats Number of times to rotate through the roster (cycle-based round robin).
+			PagingStrategyConfigurationRepeats *int `json:"paging_strategy_configuration_repeats,omitempty"`
+
+			// PagingStrategyConfigurationRepeatsMode Controls how repeats are interpreted: 'users' pages exactly N users, 'all' pages everyone once.
+			PagingStrategyConfigurationRepeatsMode *NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode `json:"paging_strategy_configuration_repeats_mode,omitempty"`
+
+			// PagingStrategyConfigurationRotationScope Scope of rotation ordering: active rotation members only, or entire schedule.
+			PagingStrategyConfigurationRotationScope    *NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope    `json:"paging_strategy_configuration_rotation_scope,omitempty"`
 			PagingStrategyConfigurationScheduleStrategy *NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy `json:"paging_strategy_configuration_schedule_strategy,omitempty"`
 			PagingStrategyConfigurationStrategy         *NewEscalationLevelDataAttributesPagingStrategyConfigurationStrategy         `json:"paging_strategy_configuration_strategy,omitempty"`
 
@@ -48058,6 +52029,12 @@ type NewEscalationLevelDataAttributesNotificationTargetParamsTeamMembers string
 
 // NewEscalationLevelDataAttributesNotificationTargetParamsType The type of the notification target
 type NewEscalationLevelDataAttributesNotificationTargetParamsType string
+
+// NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode Controls how repeats are interpreted: 'users' pages exactly N users, 'all' pages everyone once.
+type NewEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode string
+
+// NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope Scope of rotation ordering: active rotation members only, or entire schedule.
+type NewEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope string
 
 // NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy defines model for NewEscalationLevel.Data.Attributes.PagingStrategyConfigurationScheduleStrategy.
 type NewEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy string
@@ -48092,6 +52069,81 @@ type NewEscalationPath struct {
 
 			// NotificationType Notification rule type to be used
 			NotificationType *NewEscalationPathDataAttributesNotificationType `json:"notification_type,omitempty"`
+
+			// NotificationTypeFallback Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team.
+			NotificationTypeFallback *NewEscalationPathDataAttributesNotificationTypeFallback `json:"notification_type_fallback,omitempty"`
+
+			// NotificationTypeRules Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team.
+			NotificationTypeRules *[]struct {
+				// Conditions Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.
+				Conditions []struct {
+					// FieldableId The ID of the alert field
+					FieldableId *string `json:"fieldable_id,omitempty"`
+
+					// FieldableType The type of the fieldable (e.g., AlertField)
+					FieldableType *string `json:"fieldable_type,omitempty"`
+
+					// JsonPath JSON path to extract value from payload
+					JsonPath *string `json:"json_path,omitempty"`
+
+					// Operator Whether the alert must (or must not) have related incidents
+					Operator *NewEscalationPathDataAttributesNotificationTypeRulesConditionsOperator `json:"operator,omitempty"`
+
+					// RuleType The type of the escalation path rule
+					RuleType *NewEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType `json:"rule_type,omitempty"`
+
+					// ServiceIds Service ids for which this escalation path should be used
+					ServiceIds *[]string `json:"service_ids,omitempty"`
+
+					// TimeBlocks Time windows during which alerts are deferred
+					TimeBlocks *[]struct {
+						AllDay *bool `json:"all_day,omitempty"`
+
+						// EndTime Formatted as HH:MM
+						EndTime *string `json:"end_time,omitempty"`
+
+						// EndsNextDay Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
+						EndsNextDay *bool `json:"ends_next_day,omitempty"`
+						Friday      *bool `json:"friday,omitempty"`
+
+						// Id Unique ID of the time block
+						Id     *string `json:"id,omitempty"`
+						Monday *bool   `json:"monday,omitempty"`
+
+						// Position Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
+						Position *int  `json:"position,omitempty"`
+						Saturday *bool `json:"saturday,omitempty"`
+
+						// StartTime Formatted as HH:MM
+						StartTime *string `json:"start_time,omitempty"`
+						Sunday    *bool   `json:"sunday,omitempty"`
+						Thursday  *bool   `json:"thursday,omitempty"`
+						Tuesday   *bool   `json:"tuesday,omitempty"`
+						Wednesday *bool   `json:"wednesday,omitempty"`
+					} `json:"time_blocks,omitempty"`
+
+					// TimeZone Time zone for the deferral window
+					TimeZone *NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone `json:"time_zone,omitempty"`
+
+					// UrgencyIds Alert urgency ids for which this escalation path should be used
+					UrgencyIds *[]string `json:"urgency_ids,omitempty"`
+
+					// Value Value with which JSON path value should be matched
+					Value *string `json:"value,omitempty"`
+
+					// Values Alert source values to match against (e.g., manual, datadog)
+					Values *[]string `json:"values,omitempty"`
+
+					// WithinWorkingHour Whether the escalation path should be used within working hours
+					WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
+				} `json:"conditions"`
+
+				// MatchMode Whether all or any of the rule's conditions must match
+				MatchMode *NewEscalationPathDataAttributesNotificationTypeRulesMatchMode `json:"match_mode,omitempty"`
+
+				// NotificationType Outcome when this rule matches
+				NotificationType *NewEscalationPathDataAttributesNotificationTypeRulesNotificationType `json:"notification_type,omitempty"`
+			} `json:"notification_type_rules,omitempty"`
 
 			// PathType The type of escalation path to create
 			PathType *NewEscalationPathDataAttributesPathType `json:"path_type,omitempty"`
@@ -48133,11 +52185,19 @@ type NewEscalationPath struct {
 					AllDay *bool `json:"all_day,omitempty"`
 
 					// EndTime Formatted as HH:MM
-					EndTime  *string `json:"end_time,omitempty"`
-					Friday   *bool   `json:"friday,omitempty"`
-					Monday   *bool   `json:"monday,omitempty"`
-					Position *int    `json:"position,omitempty"`
-					Saturday *bool   `json:"saturday,omitempty"`
+					EndTime *string `json:"end_time,omitempty"`
+
+					// EndsNextDay Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
+					EndsNextDay *bool `json:"ends_next_day,omitempty"`
+					Friday      *bool `json:"friday,omitempty"`
+
+					// Id Unique ID of the time block
+					Id     *string `json:"id,omitempty"`
+					Monday *bool   `json:"monday,omitempty"`
+
+					// Position Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
+					Position *int  `json:"position,omitempty"`
+					Saturday *bool `json:"saturday,omitempty"`
 
 					// StartTime Formatted as HH:MM
 					StartTime *string `json:"start_time,omitempty"`
@@ -48190,6 +52250,24 @@ type NewEscalationPathDataAttributesMatchMode string
 
 // NewEscalationPathDataAttributesNotificationType Notification rule type to be used
 type NewEscalationPathDataAttributesNotificationType string
+
+// NewEscalationPathDataAttributesNotificationTypeFallback Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team.
+type NewEscalationPathDataAttributesNotificationTypeFallback string
+
+// NewEscalationPathDataAttributesNotificationTypeRulesConditionsOperator Whether the alert must (or must not) have related incidents
+type NewEscalationPathDataAttributesNotificationTypeRulesConditionsOperator string
+
+// NewEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType The type of the escalation path rule
+type NewEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType string
+
+// NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone Time zone for the deferral window
+type NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone string
+
+// NewEscalationPathDataAttributesNotificationTypeRulesMatchMode Whether all or any of the rule's conditions must match
+type NewEscalationPathDataAttributesNotificationTypeRulesMatchMode string
+
+// NewEscalationPathDataAttributesNotificationTypeRulesNotificationType Outcome when this rule matches
+type NewEscalationPathDataAttributesNotificationTypeRulesNotificationType string
 
 // NewEscalationPathDataAttributesPathType The type of escalation path to create
 type NewEscalationPathDataAttributesPathType string
@@ -48290,6 +52368,10 @@ type NewFormField struct {
 			ShowOnIncidentDetails *bool     `json:"show_on_incident_details,omitempty"`
 			Shown                 *[]string `json:"shown,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// ValueKind The value kind of the form field
 			ValueKind *NewFormFieldDataAttributesValueKind `json:"value_kind,omitempty"`
 
@@ -48343,7 +52425,7 @@ type NewFormFieldPlacement struct {
 			// Form The form this field is placed on.
 			Form string `json:"form"`
 
-			// FormSetId The form set this field is placed in.
+			// FormSetId The form set this field is placed in. The form set must have the same `resource_type` as the form field, otherwise the request is rejected with 422.
 			FormSetId string `json:"form_set_id"`
 
 			// NonEditable Whether the field is read-only and cannot be edited by users.
@@ -48438,6 +52520,10 @@ type NewFormSet struct {
 
 			// Name The name of the form set
 			Name string `json:"name"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewFormSetDataType `json:"type"`
 	} `json:"data"`
@@ -48527,7 +52613,7 @@ type NewFunctionality struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
-			// PublicDescription The public description of the functionality
+			// PublicDescription The status page description of the functionality
 			PublicDescription *string `json:"public_description,omitempty"`
 
 			// ServiceIds Services associated with this functionality
@@ -48559,6 +52645,10 @@ type NewFunctionality struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewFunctionalityDataType `json:"type"`
 	} `json:"data"`
@@ -48674,6 +52764,15 @@ type NewIncident struct {
 
 			// Labels Labels to attach to the incidents. eg: {"platform":"osx", "version": "1.29"}
 			Labels *map[string]interface{} `json:"labels,omitempty"`
+
+			// LinearIssueId Linear issue ID
+			LinearIssueId *string `json:"linear_issue_id,omitempty"`
+
+			// LinearIssueKey Linear issue key
+			LinearIssueKey *string `json:"linear_issue_key,omitempty"`
+
+			// LinearIssueUrl Linear issue URL
+			LinearIssueUrl *string `json:"linear_issue_url,omitempty"`
 
 			// MitigatedAt Date of mitigation
 			MitigatedAt *string `json:"mitigated_at,omitempty"`
@@ -49002,6 +53101,10 @@ type NewIncidentPermissionSet struct {
 			Name                       string                                                              `json:"name"`
 			PrivateIncidentPermissions *[]NewIncidentPermissionSetDataAttributesPrivateIncidentPermissions `json:"private_incident_permissions,omitempty"`
 			PublicIncidentPermissions  *[]NewIncidentPermissionSetDataAttributesPublicIncidentPermissions  `json:"public_incident_permissions,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewIncidentPermissionSetDataType `json:"type"`
 	} `json:"data"`
@@ -49098,6 +53201,10 @@ type NewIncidentRole struct {
 			// Position Position of the incident role
 			Position *int `json:"position,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// Summary The summary of the incident role
 			Summary *string `json:"summary,omitempty"`
 		} `json:"attributes"`
@@ -49151,6 +53258,15 @@ type NewIncidentStatusPageEvent struct {
 			// Status The status of the incident event
 			Status *NewIncidentStatusPageEventDataAttributesStatus `json:"status,omitempty"`
 
+			// StatusPageComponents Affected status page components and their statuses. This field is in Early Access and is not generally available; contact Rootly Support to request access. Ignored for terminal event statuses (resolved, completed), which clear component impact. A status is required per component except for scheduled maintenance incidents.
+			StatusPageComponents *[]struct {
+				// Status The status to record for the component
+				Status *NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus `json:"status,omitempty"`
+
+				// StatusPageComponentId Unique ID of a component on the event's status page
+				StatusPageComponentId string `json:"status_page_component_id"`
+			} `json:"status_page_components,omitempty"`
+
 			// StatusPageId Unique ID of the status page you wish to post the event to
 			StatusPageId *string `json:"status_page_id,omitempty"`
 		} `json:"attributes"`
@@ -49160,6 +53276,9 @@ type NewIncidentStatusPageEvent struct {
 
 // NewIncidentStatusPageEventDataAttributesStatus The status of the incident event
 type NewIncidentStatusPageEventDataAttributesStatus string
+
+// NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus The status to record for the component
+type NewIncidentStatusPageEventDataAttributesStatusPageComponentsStatus string
 
 // NewIncidentStatusPageEventDataType defines model for NewIncidentStatusPageEvent.Data.Type.
 type NewIncidentStatusPageEventDataType string
@@ -49209,6 +53328,9 @@ type NewIncidentType struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
+			// PublicDescription The status page description of the incident type
+			PublicDescription *string `json:"public_description,omitempty"`
+
 			// SlackAliases Slack Aliases associated with this incident type
 			SlackAliases *[]struct {
 				// Id Slack alias ID
@@ -49226,6 +53348,10 @@ type NewIncidentType struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewIncidentTypeDataType `json:"type"`
 	} `json:"data"`
@@ -49389,6 +53515,7 @@ type NewOnCallRole struct {
 			IntegrationsPermissions       *[]NewOnCallRoleDataAttributesIntegrationsPermissions       `json:"integrations_permissions,omitempty"`
 			InvitationsPermissions        *[]NewOnCallRoleDataAttributesInvitationsPermissions        `json:"invitations_permissions,omitempty"`
 			LiveCallRoutingPermissions    *[]NewOnCallRoleDataAttributesLiveCallRoutingPermissions    `json:"live_call_routing_permissions,omitempty"`
+			MembersPermissions            *[]NewOnCallRoleDataAttributesMembersPermissions            `json:"members_permissions,omitempty"`
 
 			// Name The role name.
 			Name                             string                                                         `json:"name"`
@@ -49397,6 +53524,10 @@ type NewOnCallRole struct {
 			ScheduleOverridePermissions      *[]NewOnCallRoleDataAttributesScheduleOverridePermissions      `json:"schedule_override_permissions,omitempty"`
 			SchedulesPermissions             *[]NewOnCallRoleDataAttributesSchedulesPermissions             `json:"schedules_permissions,omitempty"`
 			ServicesPermissions              *[]NewOnCallRoleDataAttributesServicesPermissions              `json:"services_permissions,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 
 			// SystemRole The kind of role (user and custom type roles are only editable)
 			SystemRole           *string                                            `json:"system_role,omitempty"`
@@ -49457,6 +53588,9 @@ type NewOnCallRoleDataAttributesInvitationsPermissions string
 
 // NewOnCallRoleDataAttributesLiveCallRoutingPermissions defines model for NewOnCallRole.Data.Attributes.LiveCallRoutingPermissions.
 type NewOnCallRoleDataAttributesLiveCallRoutingPermissions string
+
+// NewOnCallRoleDataAttributesMembersPermissions defines model for NewOnCallRole.Data.Attributes.MembersPermissions.
+type NewOnCallRoleDataAttributesMembersPermissions string
 
 // NewOnCallRoleDataAttributesOnCallReadinessReportPermissions defines model for NewOnCallRole.Data.Attributes.OnCallReadinessReportPermissions.
 type NewOnCallRoleDataAttributesOnCallReadinessReportPermissions string
@@ -49602,6 +53736,10 @@ type NewPostMortemTemplate struct {
 
 			// Name The name of the postmortem template
 			Name string `json:"name"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewPostMortemTemplateDataType `json:"type"`
 	} `json:"data"`
@@ -49739,6 +53877,10 @@ type NewRetrospectiveStep struct {
 			// Skippable Is the step skippable?
 			Skippable *bool `json:"skippable,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `title`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// Title The name of the step
 			Title string `json:"title"`
 		} `json:"attributes"`
@@ -49777,9 +53919,12 @@ type NewRole struct {
 			InvitationsPermissions   *[]NewRoleDataAttributesInvitationsPermissions   `json:"invitations_permissions,omitempty"`
 
 			// Name The role name.
-			Name                        string                                              `json:"name"`
-			PagingPermissions           *[]NewRoleDataAttributesPagingPermissions           `json:"paging_permissions,omitempty"`
-			PlaybooksPermissions        *[]NewRoleDataAttributesPlaybooksPermissions        `json:"playbooks_permissions,omitempty"`
+			Name                 string                                       `json:"name"`
+			PagingPermissions    *[]NewRoleDataAttributesPagingPermissions    `json:"paging_permissions,omitempty"`
+			PlaybooksPermissions *[]NewRoleDataAttributesPlaybooksPermissions `json:"playbooks_permissions,omitempty"`
+
+			// PrivateAgentPermissions Private Agent management permissions: create issues enrollment tokens, read views agent inventory and details, and delete revokes agent credentials. Create and delete can be used independently through the API; browser inventory requires read.
+			PrivateAgentPermissions     *[]NewRoleDataAttributesPrivateAgentPermissions     `json:"private_agent_permissions,omitempty"`
 			PrivateIncidentsPermissions *[]NewRoleDataAttributesPrivateIncidentsPermissions `json:"private_incidents_permissions,omitempty"`
 			PulsesPermissions           *[]NewRoleDataAttributesPulsesPermissions           `json:"pulses_permissions,omitempty"`
 			RetrospectivePermissions    *[]NewRoleDataAttributesRetrospectivePermissions    `json:"retrospective_permissions,omitempty"`
@@ -49788,10 +53933,15 @@ type NewRole struct {
 			ServicesPermissions         *[]NewRoleDataAttributesServicesPermissions         `json:"services_permissions,omitempty"`
 			SeveritiesPermissions       *[]NewRoleDataAttributesSeveritiesPermissions       `json:"severities_permissions,omitempty"`
 			SlasPermissions             *[]NewRoleDataAttributesSlasPermissions             `json:"slas_permissions,omitempty"`
-			StatusPagesPermissions      *[]NewRoleDataAttributesStatusPagesPermissions      `json:"status_pages_permissions,omitempty"`
-			SubStatusesPermissions      *[]NewRoleDataAttributesSubStatusesPermissions      `json:"sub_statuses_permissions,omitempty"`
-			WebhooksPermissions         *[]NewRoleDataAttributesWebhooksPermissions         `json:"webhooks_permissions,omitempty"`
-			WorkflowsPermissions        *[]NewRoleDataAttributesWorkflowsPermissions        `json:"workflows_permissions,omitempty"`
+
+			// Slug Deprecated. Custom role slugs remain accepted temporarily. Stop setting `slug`; it will become read-only and be derived from `name` when this property is removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug                         *string                                              `json:"slug,omitempty"`
+			StatusPageUpdatesPermissions *[]NewRoleDataAttributesStatusPageUpdatesPermissions `json:"status_page_updates_permissions,omitempty"`
+			StatusPagesPermissions       *[]NewRoleDataAttributesStatusPagesPermissions       `json:"status_pages_permissions,omitempty"`
+			SubStatusesPermissions       *[]NewRoleDataAttributesSubStatusesPermissions       `json:"sub_statuses_permissions,omitempty"`
+			WebhooksPermissions          *[]NewRoleDataAttributesWebhooksPermissions          `json:"webhooks_permissions,omitempty"`
+			WorkflowsPermissions         *[]NewRoleDataAttributesWorkflowsPermissions         `json:"workflows_permissions,omitempty"`
 		} `json:"attributes"`
 		Type NewRoleDataType `json:"type"`
 	} `json:"data"`
@@ -49860,6 +54010,9 @@ type NewRoleDataAttributesPagingPermissions string
 // NewRoleDataAttributesPlaybooksPermissions defines model for NewRole.Data.Attributes.PlaybooksPermissions.
 type NewRoleDataAttributesPlaybooksPermissions string
 
+// NewRoleDataAttributesPrivateAgentPermissions defines model for NewRole.Data.Attributes.PrivateAgentPermissions.
+type NewRoleDataAttributesPrivateAgentPermissions string
+
 // NewRoleDataAttributesPrivateIncidentsPermissions defines model for NewRole.Data.Attributes.PrivateIncidentsPermissions.
 type NewRoleDataAttributesPrivateIncidentsPermissions string
 
@@ -49883,6 +54036,9 @@ type NewRoleDataAttributesSeveritiesPermissions string
 
 // NewRoleDataAttributesSlasPermissions defines model for NewRole.Data.Attributes.SlasPermissions.
 type NewRoleDataAttributesSlasPermissions string
+
+// NewRoleDataAttributesStatusPageUpdatesPermissions defines model for NewRole.Data.Attributes.StatusPageUpdatesPermissions.
+type NewRoleDataAttributesStatusPageUpdatesPermissions string
 
 // NewRoleDataAttributesStatusPagesPermissions defines model for NewRole.Data.Attributes.StatusPagesPermissions.
 type NewRoleDataAttributesStatusPagesPermissions string
@@ -49955,6 +54111,9 @@ type NewSchedule struct {
 
 			// SyncLinearEnabled Whether the schedule is synced with Linear
 			SyncLinearEnabled *bool `json:"sync_linear_enabled,omitempty"`
+
+			// TimeZone IANA time zone the schedule's rotations are rendered in. Only writable for organizations configured with one timezone per schedule; otherwise it is derived from the rotations.
+			TimeZone *string `json:"time_zone,omitempty"`
 		} `json:"attributes"`
 		Type NewScheduleDataType `json:"type"`
 	} `json:"data"`
@@ -50024,7 +54183,7 @@ type NewScheduleRotation struct {
 			// StartTime RFC3339 date-time when rotation starts. Shifts will only be created after this time.
 			StartTime *time.Time `json:"start_time,omitempty"`
 
-			// TimeZone A valid IANA time zone name.
+			// TimeZone A valid IANA time zone name. Organizations with one timezone per schedule manage this on the schedule; a value differing from the schedule's is rejected.
 			TimeZone *string `json:"time_zone,omitempty"`
 		} `json:"attributes"`
 		Type NewScheduleRotationDataType `json:"type"`
@@ -50110,6 +54269,9 @@ type NewSecret struct {
 
 			// Name The name of the secret
 			Name string `json:"name"`
+
+			// OwnerGroupIds IDs of the teams whose members can see and pick this secret; their team admins can manage it. Empty means only users with the org Secrets permission can. Ignored unless team scoping is enabled for the organization.
+			OwnerGroupIds *[]string `json:"owner_group_ids,omitempty"`
 
 			// Secret The secret
 			Secret string `json:"secret"`
@@ -50227,7 +54389,7 @@ type NewService struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
-			// PublicDescription The public description of the service
+			// PublicDescription The status page description of the service
 			PublicDescription *string `json:"public_description,omitempty"`
 
 			// ServiceIds Services dependent on this service
@@ -50259,6 +54421,10 @@ type NewService struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewServiceDataType `json:"type"`
 	} `json:"data"`
@@ -50309,6 +54475,10 @@ type NewSeverity struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewSeverityDataType `json:"type"`
 	} `json:"data"`
@@ -50415,6 +54585,10 @@ type NewSla struct {
 
 			// Position Position of the SLA for ordering
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewSlaDataType `json:"type"`
 	} `json:"data"`
@@ -50521,6 +54695,10 @@ type NewStatusPage struct {
 			// ShowUptimeLastDays Show uptime over x days
 			ShowUptimeLastDays *NewStatusPageDataAttributesShowUptimeLastDays `json:"show_uptime_last_days,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `title`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// SuccessMessage Message showing when all components are operational
 			SuccessMessage *string `json:"success_message,omitempty"`
 
@@ -50557,6 +54735,26 @@ type NewStatusPageDataAttributesShowUptimeLastDays int
 
 // NewStatusPageDataType defines model for NewStatusPage.Data.Type.
 type NewStatusPageDataType string
+
+// NewStatusPageAnnouncement defines model for new_status_page_announcement.
+type NewStatusPageAnnouncement struct {
+	Data struct {
+		Attributes struct {
+			// Body Body of the announcement
+			Body string `json:"body"`
+
+			// NotifySubscribers Controls if status page subscribers should be notified. Defaults to true
+			NotifySubscribers *bool `json:"notify_subscribers,omitempty"`
+
+			// Title Title of the announcement
+			Title string `json:"title"`
+		} `json:"attributes"`
+		Type NewStatusPageAnnouncementDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewStatusPageAnnouncementDataType defines model for NewStatusPageAnnouncement.Data.Type.
+type NewStatusPageAnnouncementDataType string
 
 // NewStatusPageComponent defines model for new_status_page_component.
 type NewStatusPageComponent struct {
@@ -50621,6 +54819,10 @@ type NewSubStatus struct {
 			Name         string                                 `json:"name"`
 			ParentStatus NewSubStatusDataAttributesParentStatus `json:"parent_status"`
 			Position     *int                                   `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewSubStatusDataType `json:"type"`
 	} `json:"data"`
@@ -50723,6 +54925,18 @@ type NewTeam struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
+			// PublicDescription The status page description of the team
+			PublicDescription *string `json:"public_description,omitempty"`
+
+			// ScheduleOverridePolicy Who can create and update overrides for schedules owned by this team: `everyone` in the organization, only team `members`, or only team `admins`. Users still need override permission from their on-call role. Only available when the team-level schedule override policy feature is enabled for the organization. Requests that set it while that feature is disabled are rejected.
+			ScheduleOverridePolicy *NewTeamDataAttributesScheduleOverridePolicy `json:"schedule_override_policy,omitempty"`
+
+			// ScimGroupExternalId Link by the SCIM group's externalId from your identity provider instead of scim_group_id. Write-only. Rejected when it names a different SCIM group than scim_group_id.
+			ScimGroupExternalId *string `json:"scim_group_external_id,omitempty"`
+
+			// ScimGroupId The SCIM group id linked to this team. Membership syncs from the SCIM group while the team keeps its own name.
+			ScimGroupId *string `json:"scim_group_id,omitempty"`
+
 			// ServiceNowCiSysId The Service Now CI sys id associated to this team
 			ServiceNowCiSysId *string `json:"service_now_ci_sys_id,omitempty"`
 
@@ -50744,6 +54958,10 @@ type NewTeam struct {
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// UserIds The user ids of the members of this team.
 			UserIds *[]int `json:"user_ids,omitempty"`
 
@@ -50756,6 +54974,9 @@ type NewTeam struct {
 
 // NewTeamDataAttributesAutoAddMembersScope Visibility-scoped auto-add behavior. Only present when the `enable_scoped_incident_channel_auto_add` feature flag is on for the organization. When set, it overrides `auto_add_members_when_attached`.
 type NewTeamDataAttributesAutoAddMembersScope string
+
+// NewTeamDataAttributesScheduleOverridePolicy Who can create and update overrides for schedules owned by this team: `everyone` in the organization, only team `members`, or only team `admins`. Users still need override permission from their on-call role. Only available when the team-level schedule override policy feature is enabled for the organization. Requests that set it while that feature is disabled are rejected.
+type NewTeamDataAttributesScheduleOverridePolicy string
 
 // NewTeamDataType defines model for NewTeam.Data.Type.
 type NewTeamDataType string
@@ -50855,6 +55076,10 @@ type NewWebhooksEndpoint struct {
 			// Secret The webhook signing secret used to verify webhook requests.
 			Secret *string `json:"secret,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// Url The URL of the endpoint.
 			Url string `json:"url"`
 		} `json:"attributes"`
@@ -50884,13 +55109,25 @@ type NewWorkflow struct {
 			ContinuouslyRepeat *bool `json:"continuously_repeat,omitempty"`
 
 			// Description The description of the workflow
-			Description      *string   `json:"description,omitempty"`
-			Enabled          *bool     `json:"enabled,omitempty"`
-			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
-			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
-			GroupIds         *[]string `json:"group_ids,omitempty"`
-			IncidentRoleIds  *[]string `json:"incident_role_ids,omitempty"`
-			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
+			Description    *string   `json:"description,omitempty"`
+			Enabled        *bool     `json:"enabled,omitempty"`
+			EnvironmentIds *[]string `json:"environment_ids,omitempty"`
+
+			// FailureNotificationChannels Slack channels notified when a run of this workflow fails. Used when `failure_notification_mode` is `custom`.
+			FailureNotificationChannels *[]struct {
+				// Id Slack channel ID. Liquid is allowed, for example `{{ incident.slack_channel_id }}` for the incident channel.
+				Id string `json:"id"`
+
+				// Name Slack channel name
+				Name string `json:"name"`
+			} `json:"failure_notification_channels,omitempty"`
+
+			// FailureNotificationMode Where failure notifications for this workflow are sent. `inherit` uses the account default channel, `custom` uses `failure_notification_channels`, `off` suppresses them.
+			FailureNotificationMode *NewWorkflowDataAttributesFailureNotificationMode `json:"failure_notification_mode,omitempty"`
+			FunctionalityIds        *[]string                                         `json:"functionality_ids,omitempty"`
+			GroupIds                *[]string                                         `json:"group_ids,omitempty"`
+			IncidentRoleIds         *[]string                                         `json:"incident_role_ids,omitempty"`
+			IncidentTypeIds         *[]string                                         `json:"incident_type_ids,omitempty"`
 
 			// Locked Restricts workflow edits to admins when turned on. Only admins can set this field.
 			Locked *bool `json:"locked,omitempty"`
@@ -50911,12 +55148,16 @@ type NewWorkflow struct {
 			RepeatConditionNumberOfRepeats *int `json:"repeat_condition_number_of_repeats,omitempty"`
 
 			// RepeatEveryDuration Repeat workflow every duration
-			RepeatEveryDuration *string                                    `json:"repeat_every_duration,omitempty"`
-			RepeatOn            *[]NewWorkflowDataAttributesRepeatOn       `json:"repeat_on,omitempty"`
-			ServiceIds          *[]string                                  `json:"service_ids,omitempty"`
-			SeverityIds         *[]string                                  `json:"severity_ids,omitempty"`
-			SubStatusIds        *[]string                                  `json:"sub_status_ids,omitempty"`
-			TriggerParams       *NewWorkflow_Data_Attributes_TriggerParams `json:"trigger_params,omitempty"`
+			RepeatEveryDuration *string                              `json:"repeat_every_duration,omitempty"`
+			RepeatOn            *[]NewWorkflowDataAttributesRepeatOn `json:"repeat_on,omitempty"`
+			ServiceIds          *[]string                            `json:"service_ids,omitempty"`
+			SeverityIds         *[]string                            `json:"severity_ids,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug          *string                                    `json:"slug,omitempty"`
+			SubStatusIds  *[]string                                  `json:"sub_status_ids,omitempty"`
+			TriggerParams *NewWorkflow_Data_Attributes_TriggerParams `json:"trigger_params,omitempty"`
 
 			// Wait Wait this duration before executing
 			Wait *string `json:"wait,omitempty"`
@@ -50927,6 +55168,9 @@ type NewWorkflow struct {
 		Type NewWorkflowDataType `json:"type"`
 	} `json:"data"`
 }
+
+// NewWorkflowDataAttributesFailureNotificationMode Where failure notifications for this workflow are sent. `inherit` uses the account default channel, `custom` uses `failure_notification_channels`, `off` suppresses them.
+type NewWorkflowDataAttributesFailureNotificationMode string
 
 // NewWorkflowDataAttributesPriority Priority
 type NewWorkflowDataAttributesPriority string
@@ -51051,6 +55295,10 @@ type NewWorkflowGroup struct {
 
 			// Position The position of the workflow group
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name` and `kind`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
 		Type NewWorkflowGroupDataType `json:"type"`
 	} `json:"data"`
@@ -51174,11 +55422,26 @@ type NewWorkflowTask_Data_Attributes_TaskParams struct {
 // NewWorkflowTaskDataType defines model for NewWorkflowTask.Data.Type.
 type NewWorkflowTaskDataType string
 
+// NullableSeverityResponse The severity assigned to an incident, or null when no severity is assigned
+type NullableSeverityResponse struct {
+	Data struct {
+		Attributes Severity `json:"attributes"`
+
+		// Id Unique ID of the severity
+		Id   string                           `json:"id"`
+		Type NullableSeverityResponseDataType `json:"type"`
+	} `json:"data"`
+	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
+}
+
+// NullableSeverityResponseDataType defines model for NullableSeverityResponse.Data.Type.
+type NullableSeverityResponseDataType string
+
 // OnCallPayReport defines model for on_call_pay_report.
 type OnCallPayReport struct {
 	CreatedAt time.Time `json:"created_at"`
 
-	// CsvFileUrl Download URL for the generated CSV report. Null until the report is generated.
+	// CsvFileUrl Short-lived, presigned download URL for the generated CSV report. Fetch the report again if the URL expires. Null until the report is generated.
 	CsvFileUrl *string `json:"csv_file_url,omitempty"`
 
 	// Currency The currency code for monetary values.
@@ -51233,7 +55496,7 @@ type OnCallPayReport struct {
 	// UsersCount Number of users included in the report.
 	UsersCount *int `json:"users_count,omitempty"`
 
-	// XlsxFileUrl Download URL for the generated XLSX report. Null until the report is generated.
+	// XlsxFileUrl Short-lived, presigned download URL for the generated XLSX report. Fetch the report again if the URL expires. Null until the report is generated.
 	XlsxFileUrl *string `json:"xlsx_file_url,omitempty"`
 }
 
@@ -51295,6 +55558,7 @@ type OnCallRole struct {
 	IntegrationsPermissions       *[]OnCallRoleIntegrationsPermissions       `json:"integrations_permissions,omitempty"`
 	InvitationsPermissions        *[]OnCallRoleInvitationsPermissions        `json:"invitations_permissions,omitempty"`
 	LiveCallRoutingPermissions    *[]OnCallRoleLiveCallRoutingPermissions    `json:"live_call_routing_permissions,omitempty"`
+	MembersPermissions            *[]OnCallRoleMembersPermissions            `json:"members_permissions,omitempty"`
 
 	// Name The role name.
 	Name                             string                                        `json:"name"`
@@ -51364,6 +55628,9 @@ type OnCallRoleInvitationsPermissions string
 
 // OnCallRoleLiveCallRoutingPermissions defines model for OnCallRole.LiveCallRoutingPermissions.
 type OnCallRoleLiveCallRoutingPermissions string
+
+// OnCallRoleMembersPermissions defines model for OnCallRole.MembersPermissions.
+type OnCallRoleMembersPermissions string
 
 // OnCallRoleOnCallReadinessReportPermissions defines model for OnCallRole.OnCallReadinessReportPermissions.
 type OnCallRoleOnCallReadinessReportPermissions string
@@ -51885,6 +56152,9 @@ type PatchAlertRoute struct {
 				Position *int `json:"position,omitempty"`
 			} `json:"rules,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                 `json:"id,omitempty"`
 		Type PatchAlertRouteDataType `json:"type"`
 	} `json:"data"`
 }
@@ -52098,6 +56368,168 @@ type PrintTaskParams struct {
 // PrintTaskParamsTaskType defines model for PrintTaskParams.TaskType.
 type PrintTaskParamsTaskType string
 
+// PrivateAgent defines model for private_agent.
+type PrivateAgent struct {
+	Attributes struct {
+		AgentVersion   string                               `json:"agent_version"`
+		CreatedAt      time.Time                            `json:"created_at"`
+		DeploymentMode PrivateAgentAttributesDeploymentMode `json:"deployment_mode"`
+
+		// Description Non-sensitive routing metadata. Do not include secrets or personal data.
+		Description *string    `json:"description"`
+		LastSeenAt  *time.Time `json:"last_seen_at"`
+		Name        string     `json:"name"`
+
+		// Online Active agent seen within two minutes; does not imply all providers are healthy.
+		Online    bool `json:"online"`
+		Providers []struct {
+			Capabilities []struct {
+				Description *string `json:"description,omitempty"`
+				Name        string  `json:"name"`
+				Sensitivity *string `json:"sensitivity,omitempty"`
+				Version     string  `json:"version"`
+			} `json:"capabilities"`
+
+			// Health Last reported provider health; may be stale when the agent is offline. Invalid or absent fields are omitted.
+			Health *struct {
+				Message    *string `json:"message,omitempty"`
+				ObservedAt *string `json:"observed_at,omitempty"`
+				Status     *string `json:"status,omitempty"`
+			} `json:"health"`
+			Id string `json:"id"`
+
+			// Policy Reported local policy, not credentials or provider connection configuration. Fields are provider-type specific: Kubernetes reports namespace scope; search providers report index scope; databases report database/schema scope; HTTP reports method/path/header scope; and each provider family normally reports only its applicable numeric limits. Management responses may preserve legacy cross-family fields for backwards compatibility; capability catalog and dispatch use provider-scoped execution metadata. Invalid or absent fields are omitted.
+			Policy *struct {
+				AllowedIndices         *[]string `json:"allowed_indices,omitempty"`
+				AllowedMethods         *[]string `json:"allowed_methods,omitempty"`
+				AllowedPathPrefixes    *[]string `json:"allowed_path_prefixes,omitempty"`
+				AllowedRequestHeaders  *[]string `json:"allowed_request_headers,omitempty"`
+				AllowedSchemas         *[]string `json:"allowed_schemas,omitempty"`
+				ClusterScoped          *bool     `json:"cluster_scoped,omitempty"`
+				Database               *string   `json:"database,omitempty"`
+				Digest                 *string   `json:"digest,omitempty"`
+				ExposedResponseHeaders *[]string `json:"exposed_response_headers,omitempty"`
+				MaximumAttributeValues *int      `json:"maximum_attribute_values,omitempty"`
+				MaximumConcurrency     *int      `json:"maximum_concurrency,omitempty"`
+				MaximumDocuments       *int      `json:"maximum_documents,omitempty"`
+				MaximumEntries         *int      `json:"maximum_entries,omitempty"`
+				MaximumExemplars       *int      `json:"maximum_exemplars,omitempty"`
+				MaximumIndices         *int      `json:"maximum_indices,omitempty"`
+				MaximumPatternPoints   *int      `json:"maximum_pattern_points,omitempty"`
+				MaximumPointsPerSeries *int      `json:"maximum_points_per_series,omitempty"`
+				MaximumQueryBytes      *int      `json:"maximum_query_bytes,omitempty"`
+				MaximumRangeSeconds    *int      `json:"maximum_range_seconds,omitempty"`
+				MaximumRequestBytes    *int      `json:"maximum_request_bytes,omitempty"`
+				MaximumResponseBytes   *int      `json:"maximum_response_bytes,omitempty"`
+				MaximumResultBytes     *int      `json:"maximum_result_bytes,omitempty"`
+				MaximumRows            *int      `json:"maximum_rows,omitempty"`
+				MaximumScanBytes       *int      `json:"maximum_scan_bytes,omitempty"`
+				MaximumSeries          *int      `json:"maximum_series,omitempty"`
+				MaximumShards          *int      `json:"maximum_shards,omitempty"`
+				MaximumSpansPerSpanSet *int      `json:"maximum_spans_per_span_set,omitempty"`
+				MaximumStaleValues     *int      `json:"maximum_stale_values,omitempty"`
+				MaximumTimeoutSeconds  *int      `json:"maximum_timeout_seconds,omitempty"`
+				MaximumTraces          *int      `json:"maximum_traces,omitempty"`
+				Namespaces             *[]string `json:"namespaces,omitempty"`
+				PodLogs                *bool     `json:"pod_logs,omitempty"`
+				TimestampField         *string   `json:"timestamp_field,omitempty"`
+			} `json:"policy"`
+
+			// Type Provider adapter type, such as kubernetes, prometheus, loki, tempo, elasticsearch, opensearch, postgresql, mysql, mcp, or http.
+			Type    string  `json:"type"`
+			Version *string `json:"version"`
+		} `json:"providers"`
+		SchemaDigest *string                      `json:"schema_digest"`
+		Status       PrivateAgentAttributesStatus `json:"status"`
+		UpdatedAt    time.Time                    `json:"updated_at"`
+	} `json:"attributes"`
+	Id   openapi_types.UUID `json:"id"`
+	Type PrivateAgentType   `json:"type"`
+}
+
+// PrivateAgentAttributesDeploymentMode defines model for PrivateAgent.Attributes.DeploymentMode.
+type PrivateAgentAttributesDeploymentMode string
+
+// PrivateAgentAttributesStatus defines model for PrivateAgent.Attributes.Status.
+type PrivateAgentAttributesStatus string
+
+// PrivateAgentType defines model for PrivateAgent.Type.
+type PrivateAgentType string
+
+// PrivateAgentEnrollmentTokenResponse defines model for private_agent_enrollment_token_response.
+type PrivateAgentEnrollmentTokenResponse struct {
+	Data struct {
+		Attributes struct {
+			ExpiresAt time.Time `json:"expires_at"`
+
+			// Token One-time secret. Returned only on creation; do not log or store in source control.
+			Token string `json:"token"`
+		} `json:"attributes"`
+		Id   openapi_types.UUID                          `json:"id"`
+		Type PrivateAgentEnrollmentTokenResponseDataType `json:"type"`
+	} `json:"data"`
+}
+
+// PrivateAgentEnrollmentTokenResponseDataType defines model for PrivateAgentEnrollmentTokenResponse.Data.Type.
+type PrivateAgentEnrollmentTokenResponseDataType string
+
+// PrivateAgentList defines model for private_agent_list.
+type PrivateAgentList struct {
+	Data []PrivateAgentSummary  `json:"data"`
+	Meta map[string]interface{} `json:"meta"`
+}
+
+// PrivateAgentResponse defines model for private_agent_response.
+type PrivateAgentResponse struct {
+	Data PrivateAgent `json:"data"`
+}
+
+// PrivateAgentSummary defines model for private_agent_summary.
+type PrivateAgentSummary struct {
+	Attributes struct {
+		AgentVersion   string                                      `json:"agent_version"`
+		CreatedAt      time.Time                                   `json:"created_at"`
+		DeploymentMode PrivateAgentSummaryAttributesDeploymentMode `json:"deployment_mode"`
+
+		// Description Non-sensitive routing metadata. Do not include secrets or personal data.
+		Description *string    `json:"description"`
+		LastSeenAt  *time.Time `json:"last_seen_at"`
+		Name        string     `json:"name"`
+
+		// Online Active agent seen within two minutes; does not imply all providers are healthy.
+		Online       bool                                `json:"online"`
+		SchemaDigest *string                             `json:"schema_digest"`
+		Status       PrivateAgentSummaryAttributesStatus `json:"status"`
+		UpdatedAt    time.Time                           `json:"updated_at"`
+	} `json:"attributes"`
+	Id   openapi_types.UUID      `json:"id"`
+	Type PrivateAgentSummaryType `json:"type"`
+}
+
+// PrivateAgentSummaryAttributesDeploymentMode defines model for PrivateAgentSummary.Attributes.DeploymentMode.
+type PrivateAgentSummaryAttributesDeploymentMode string
+
+// PrivateAgentSummaryAttributesStatus defines model for PrivateAgentSummary.Attributes.Status.
+type PrivateAgentSummaryAttributesStatus string
+
+// PrivateAgentSummaryType defines model for PrivateAgentSummary.Type.
+type PrivateAgentSummaryType string
+
+// PrivateAgentUpdate defines model for private_agent_update.
+type PrivateAgentUpdate struct {
+	Data struct {
+		Attributes struct {
+			// Description Non-sensitive routing metadata. Do not include secrets or personal data.
+			Description *string `json:"description,omitempty"`
+			Name        *string `json:"name,omitempty"`
+		} `json:"attributes"`
+		Type PrivateAgentUpdateDataType `json:"type"`
+	} `json:"data"`
+}
+
+// PrivateAgentUpdateDataType defines model for PrivateAgentUpdate.Data.Type.
+type PrivateAgentUpdateDataType string
+
 // PublishIncidentTaskParams defines model for publish_incident_task_params.
 type PublishIncidentTaskParams struct {
 	// Event Incident event description
@@ -52114,7 +56546,7 @@ type PublishIncidentTaskParams struct {
 	NotifySubscribers *bool  `json:"notify_subscribers,omitempty"`
 	PublicTitle       string `json:"public_title"`
 
-	// SelectedComponentKeys Composite "SourceType:<id>" keys of the status page components affected by the publish (requires the status-page-v3-phase-1 feature).
+	// SelectedComponentKeys Composite "SourceType:<id>" keys of the status page components affected by the publish. This field is in Early Access and is not generally available; contact Rootly Support to request access.
 	SelectedComponentKeys *[]string `json:"selected_component_keys,omitempty"`
 
 	// SelectedComponentStatuses Impact status to publish for each selected component key. Keys must match selected_component_keys entries.
@@ -52125,7 +56557,7 @@ type PublishIncidentTaskParams struct {
 	Status       PublishIncidentTaskParamsStatus `json:"status"`
 	StatusPageId string                          `json:"status_page_id"`
 
-	// StatusPageIds Publishes the update to every listed status page (requires the status-page-v3-limited-bulk-publish feature). When set, it takes precedence over status_page_id and the first entry becomes status_page_id.
+	// StatusPageIds Publishes the update to every listed status page. This field is in limited Early Access; contact Rootly Support to request access. When set, it takes precedence over status_page_id and the first entry becomes status_page_id.
 	StatusPageIds      *[]string `json:"status_page_ids,omitempty"`
 	StatusPageTemplate *struct {
 		Id   *string `json:"id,omitempty"`
@@ -52291,6 +56723,19 @@ type RedisClientTaskParams struct {
 // RedisClientTaskParamsTaskType defines model for RedisClientTaskParams.TaskType.
 type RedisClientTaskParamsTaskType string
 
+// RemoveFromSlackChannelTaskParams defines model for remove_from_slack_channel_task_params.
+type RemoveFromSlackChannelTaskParams struct {
+	DryRun     *bool                                       `json:"dry_run,omitempty"`
+	TargetKind *RemoveFromSlackChannelTaskParamsTargetKind `json:"target_kind,omitempty"`
+	TaskType   *RemoveFromSlackChannelTaskParamsTaskType   `json:"task_type,omitempty"`
+}
+
+// RemoveFromSlackChannelTaskParamsTargetKind defines model for RemoveFromSlackChannelTaskParams.TargetKind.
+type RemoveFromSlackChannelTaskParamsTargetKind string
+
+// RemoveFromSlackChannelTaskParamsTaskType defines model for RemoveFromSlackChannelTaskParams.TaskType.
+type RemoveFromSlackChannelTaskParamsTaskType string
+
 // RemoveGoogleDocsPermissionsTaskParams defines model for remove_google_docs_permissions_task_params.
 type RemoveGoogleDocsPermissionsTaskParams struct {
 	AttributeToQueryBy RemoveGoogleDocsPermissionsTaskParamsAttributeToQueryBy `json:"attribute_to_query_by"`
@@ -52360,8 +56805,14 @@ type RenameSlackChannelTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"channel"`
-	TaskType *RenameSlackChannelTaskParamsTaskType `json:"task_type,omitempty"`
-	Title    string                                `json:"title"`
+
+	// RetryCount Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+	RetryCount *int `json:"retry_count,omitempty"`
+
+	// RetryWaitTime Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
+	RetryWaitTime *int                                  `json:"retry_wait_time,omitempty"`
+	TaskType      *RenameSlackChannelTaskParamsTaskType `json:"task_type,omitempty"`
+	Title         string                                `json:"title"`
 }
 
 // RenameSlackChannelTaskParamsTaskType defines model for RenameSlackChannelTaskParams.TaskType.
@@ -52391,6 +56842,9 @@ type ResolveIncident struct {
 			// ResolutionMessage How was the incident resolved?
 			ResolutionMessage *string `json:"resolution_message,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                 `json:"id,omitempty"`
 		Type ResolveIncidentDataType `json:"type"`
 	} `json:"data"`
 }
@@ -52402,7 +56856,10 @@ type ResolveIncidentDataType string
 type RestartIncident struct {
 	Data struct {
 		Attributes *map[string]interface{} `json:"attributes,omitempty"`
-		Type       RestartIncidentDataType `json:"type"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                 `json:"id,omitempty"`
+		Type RestartIncidentDataType `json:"type"`
 	} `json:"data"`
 }
 
@@ -52697,9 +57154,12 @@ type Role struct {
 	IsEditable *bool `json:"is_editable,omitempty"`
 
 	// Name The role name.
-	Name                        string                             `json:"name"`
-	PagingPermissions           *[]RolePagingPermissions           `json:"paging_permissions,omitempty"`
-	PlaybooksPermissions        *[]RolePlaybooksPermissions        `json:"playbooks_permissions,omitempty"`
+	Name                 string                      `json:"name"`
+	PagingPermissions    *[]RolePagingPermissions    `json:"paging_permissions,omitempty"`
+	PlaybooksPermissions *[]RolePlaybooksPermissions `json:"playbooks_permissions,omitempty"`
+
+	// PrivateAgentPermissions Private Agent management permissions: create issues enrollment tokens, read views agent inventory and details, and delete revokes agent credentials. Create and delete can be used independently through the API; browser inventory requires read.
+	PrivateAgentPermissions     *[]RolePrivateAgentPermissions     `json:"private_agent_permissions,omitempty"`
 	PrivateIncidentsPermissions *[]RolePrivateIncidentsPermissions `json:"private_incidents_permissions,omitempty"`
 	PulsesPermissions           *[]RolePulsesPermissions           `json:"pulses_permissions,omitempty"`
 	RetrospectivePermissions    *[]RoleRetrospectivePermissions    `json:"retrospective_permissions,omitempty"`
@@ -52710,12 +57170,13 @@ type Role struct {
 	SlasPermissions             *[]RoleSlasPermissions             `json:"slas_permissions,omitempty"`
 
 	// Slug The role slug.
-	Slug                   *string                       `json:"slug,omitempty"`
-	StatusPagesPermissions *[]RoleStatusPagesPermissions `json:"status_pages_permissions,omitempty"`
-	SubStatusesPermissions *[]RoleSubStatusesPermissions `json:"sub_statuses_permissions,omitempty"`
-	UpdatedAt              string                        `json:"updated_at"`
-	WebhooksPermissions    *[]RoleWebhooksPermissions    `json:"webhooks_permissions,omitempty"`
-	WorkflowsPermissions   *[]RoleWorkflowsPermissions   `json:"workflows_permissions,omitempty"`
+	Slug                         *string                             `json:"slug,omitempty"`
+	StatusPageUpdatesPermissions *[]RoleStatusPageUpdatesPermissions `json:"status_page_updates_permissions,omitempty"`
+	StatusPagesPermissions       *[]RoleStatusPagesPermissions       `json:"status_pages_permissions,omitempty"`
+	SubStatusesPermissions       *[]RoleSubStatusesPermissions       `json:"sub_statuses_permissions,omitempty"`
+	UpdatedAt                    string                              `json:"updated_at"`
+	WebhooksPermissions          *[]RoleWebhooksPermissions          `json:"webhooks_permissions,omitempty"`
+	WorkflowsPermissions         *[]RoleWorkflowsPermissions         `json:"workflows_permissions,omitempty"`
 }
 
 // RoleAlertsPermissions defines model for Role.AlertsPermissions.
@@ -52781,6 +57242,9 @@ type RolePagingPermissions string
 // RolePlaybooksPermissions defines model for Role.PlaybooksPermissions.
 type RolePlaybooksPermissions string
 
+// RolePrivateAgentPermissions defines model for Role.PrivateAgentPermissions.
+type RolePrivateAgentPermissions string
+
 // RolePrivateIncidentsPermissions defines model for Role.PrivateIncidentsPermissions.
 type RolePrivateIncidentsPermissions string
 
@@ -52804,6 +57268,9 @@ type RoleSeveritiesPermissions string
 
 // RoleSlasPermissions defines model for Role.SlasPermissions.
 type RoleSlasPermissions string
+
+// RoleStatusPageUpdatesPermissions defines model for Role.StatusPageUpdatesPermissions.
+type RoleStatusPageUpdatesPermissions string
 
 // RoleStatusPagesPermissions defines model for Role.StatusPagesPermissions.
 type RoleStatusPagesPermissions string
@@ -52958,6 +57425,9 @@ type Schedule struct {
 	// SyncLinearEnabled Whether the schedule is synced with Linear
 	SyncLinearEnabled *bool `json:"sync_linear_enabled,omitempty"`
 
+	// TimeZone IANA time zone the schedule's rotations are rendered in
+	TimeZone *string `json:"time_zone,omitempty"`
+
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
@@ -53044,7 +57514,7 @@ type ScheduleRotation struct {
 	// StartTime RFC3339 date-time when rotation starts. Shifts will only be created after this time.
 	StartTime *time.Time `json:"start_time,omitempty"`
 
-	// TimeZone A valid IANA time zone name.
+	// TimeZone A valid IANA time zone name. Organizations with one timezone per schedule manage this on the schedule; a value differing from the schedule's is rejected.
 	TimeZone *string `json:"time_zone,omitempty"`
 }
 
@@ -53213,6 +57683,9 @@ type Secret struct {
 
 	// Name The name of the secret
 	Name string `json:"name"`
+
+	// OwnerGroupIds IDs of the teams whose members can see and pick this secret; their team admins can manage it. Empty means only users with the org Secrets permission can. Ignored unless team scoping is enabled for the organization.
+	OwnerGroupIds *[]string `json:"owner_group_ids,omitempty"`
 
 	// Secret The redacted secret
 	Secret *string `json:"secret,omitempty"`
@@ -53393,6 +57866,9 @@ type SendMicrosoftTeamsMessageTaskParams0 struct {
 
 // SendSlackBlocksTaskParams defines model for send_slack_blocks_task_params.
 type SendSlackBlocksTaskParams struct {
+	// AllowCrossWorkflowThreading When set to true, allows workflows from different sources (e.g. different incidents or alerts) to thread together on the same parent message.
+	AllowCrossWorkflowThreading *bool `json:"allow_cross_workflow_threading,omitempty"`
+
 	// Attachments Support liquid markup. Needs to be a valid JSON string after liquid is parsed
 	Attachments *string `json:"attachments,omitempty"`
 
@@ -53410,7 +57886,13 @@ type SendSlackBlocksTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"parent_message_thread_task,omitempty"`
-	PinToChannel    *bool `json:"pin_to_channel,omitempty"`
+	PinToChannel *bool `json:"pin_to_channel,omitempty"`
+
+	// RetryCount Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+	RetryCount *int `json:"retry_count,omitempty"`
+
+	// RetryWaitTime Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
+	RetryWaitTime   *int  `json:"retry_wait_time,omitempty"`
 	SendAsEphemeral *bool `json:"send_as_ephemeral,omitempty"`
 
 	// SendOnlyAsThreadedMessage When set to true, if the parent for this threaded message cannot be found the message will be skipped.
@@ -53460,8 +57942,11 @@ type SendSlackBlocksTaskParams2 struct {
 
 // SendSlackMessageTaskParams defines model for send_slack_message_task_params.
 type SendSlackMessageTaskParams struct {
-	Actionables                   *[]SendSlackMessageTaskParamsActionables `json:"actionables,omitempty"`
-	BroadcastThreadReplyToChannel *bool                                    `json:"broadcast_thread_reply_to_channel,omitempty"`
+	Actionables *[]SendSlackMessageTaskParamsActionables `json:"actionables,omitempty"`
+
+	// AllowCrossWorkflowThreading When set to true, allows workflows from different sources (e.g. different incidents or alerts) to thread together on the same parent message.
+	AllowCrossWorkflowThreading   *bool `json:"allow_cross_workflow_threading,omitempty"`
+	BroadcastThreadReplyToChannel *bool `json:"broadcast_thread_reply_to_channel,omitempty"`
 	Channels                      *[]struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
@@ -53475,7 +57960,13 @@ type SendSlackMessageTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"parent_message_thread_task,omitempty"`
-	PinToChannel    *bool `json:"pin_to_channel,omitempty"`
+	PinToChannel *bool `json:"pin_to_channel,omitempty"`
+
+	// RetryCount Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+	RetryCount *int `json:"retry_count,omitempty"`
+
+	// RetryWaitTime Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
+	RetryWaitTime   *int  `json:"retry_wait_time,omitempty"`
 	SendAsEphemeral *bool `json:"send_as_ephemeral,omitempty"`
 
 	// SendOnlyAsThreadedMessage When set to true, if the parent for this threaded message cannot be found the message will be skipped.
@@ -53664,7 +58155,7 @@ type Service struct {
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
 
-	// PublicDescription The public description of the service
+	// PublicDescription The status page description of the service
 	PublicDescription *string `json:"public_description,omitempty"`
 
 	// ServiceIds Services dependent on this service
@@ -54411,6 +58902,65 @@ type StatusPageSectionOrder string
 // StatusPageShowUptimeLastDays Show uptime over x days
 type StatusPageShowUptimeLastDays int
 
+// StatusPageAnnouncement defines model for status_page_announcement.
+type StatusPageAnnouncement struct {
+	// Body Body of the announcement
+	Body string `json:"body"`
+
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// NotifySubscribers Controls if status page subscribers should be notified. Defaults to true
+	NotifySubscribers *bool `json:"notify_subscribers,omitempty"`
+
+	// PublishedAt Date the announcement was published
+	PublishedAt string `json:"published_at"`
+
+	// StatusPageId ID of the status page the announcement was posted to
+	StatusPageId string `json:"status_page_id"`
+
+	// Title Title of the announcement
+	Title string `json:"title"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+
+	// UserId ID of the user who posted the announcement
+	UserId *int `json:"user_id,omitempty"`
+}
+
+// StatusPageAnnouncementList defines model for status_page_announcement_list.
+type StatusPageAnnouncementList struct {
+	Data []struct {
+		Attributes StatusPageAnnouncement `json:"attributes"`
+
+		// Id Unique ID of the status page announcement
+		Id   string                             `json:"id"`
+		Type StatusPageAnnouncementListDataType `json:"type"`
+	} `json:"data"`
+	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
+	Links    Links                      `json:"links"`
+	Meta     Meta                       `json:"meta"`
+}
+
+// StatusPageAnnouncementListDataType defines model for StatusPageAnnouncementList.Data.Type.
+type StatusPageAnnouncementListDataType string
+
+// StatusPageAnnouncementResponse defines model for status_page_announcement_response.
+type StatusPageAnnouncementResponse struct {
+	Data struct {
+		Attributes StatusPageAnnouncement `json:"attributes"`
+
+		// Id Unique ID of the status page announcement
+		Id   string                                 `json:"id"`
+		Type StatusPageAnnouncementResponseDataType `json:"type"`
+	} `json:"data"`
+	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
+}
+
+// StatusPageAnnouncementResponseDataType defines model for StatusPageAnnouncementResponse.Data.Type.
+type StatusPageAnnouncementResponseDataType string
+
 // StatusPageComponent defines model for status_page_component.
 type StatusPageComponent struct {
 	// CreatedAt Date of creation
@@ -54788,6 +59338,15 @@ type Team struct {
 		Value string `json:"value"`
 	} `json:"properties,omitempty"`
 
+	// PublicDescription The status page description of the team
+	PublicDescription *string `json:"public_description,omitempty"`
+
+	// ScheduleOverridePolicy Who can create and update overrides for schedules owned by this team: `everyone` in the organization, only team `members`, or only team `admins`. Users still need override permission from their on-call role. Only available when the team-level schedule override policy feature is enabled for the organization. Requests that set it while that feature is disabled are rejected.
+	ScheduleOverridePolicy *TeamScheduleOverridePolicy `json:"schedule_override_policy,omitempty"`
+
+	// ScimGroupId The SCIM group id linked to this team
+	ScimGroupId *string `json:"scim_group_id,omitempty"`
+
 	// ServiceNowCiSysId The Service Now CI sys id associated to this team
 	ServiceNowCiSysId *string `json:"service_now_ci_sys_id,omitempty"`
 
@@ -54826,6 +59385,9 @@ type TeamAutoAddMembersScope string
 // TeamManagedBy How this team is managed (provenance): web, api, terraform, etc. Read-only.
 type TeamManagedBy string
 
+// TeamScheduleOverridePolicy Who can create and update overrides for schedules owned by this team: `everyone` in the organization, only team `members`, or only team `admins`. Users still need override permission from their on-call role. Only available when the team-level schedule override policy feature is enabled for the organization. Requests that set it while that feature is disabled are rejected.
+type TeamScheduleOverridePolicy string
+
 // TeamList defines model for team_list.
 type TeamList struct {
 	Data []struct {
@@ -54860,7 +59422,7 @@ type TeamResponseDataType string
 
 // TriggerWorkflowTaskParams defines model for trigger_workflow_task_params.
 type TriggerWorkflowTaskParams struct {
-	// AttributeToQueryBy ["(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(post_mortem) kind can only match [:id]", "(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(pulse) kind can only match [:id]", "(alert) kind can only match [:id]"]
+	// AttributeToQueryBy ["(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(post_mortem) kind can only match [:id]", "(pulse) kind can only match [:id]", "(alert) kind can only match [:id]", "(problem) kind can only match [:id]"]
 	AttributeToQueryBy      TriggerWorkflowTaskParamsAttributeToQueryBy `json:"attribute_to_query_by"`
 	CheckWorkflowConditions *bool                                       `json:"check_workflow_conditions,omitempty"`
 	Kind                    TriggerWorkflowTaskParamsKind               `json:"kind"`
@@ -54875,7 +59437,7 @@ type TriggerWorkflowTaskParams struct {
 	} `json:"workflow"`
 }
 
-// TriggerWorkflowTaskParamsAttributeToQueryBy ["(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(post_mortem) kind can only match [:id]", "(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(pulse) kind can only match [:id]", "(alert) kind can only match [:id]"]
+// TriggerWorkflowTaskParamsAttributeToQueryBy ["(incident) kind can only match [:id, :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(action_item) kind can only match [:id, :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id, :freshservice_task_id, :clickup_task_id]", "(post_mortem) kind can only match [:id]", "(pulse) kind can only match [:id]", "(alert) kind can only match [:id]", "(problem) kind can only match [:id]"]
 type TriggerWorkflowTaskParamsAttributeToQueryBy string
 
 // TriggerWorkflowTaskParamsKind defines model for TriggerWorkflowTaskParams.Kind.
@@ -55043,6 +59605,9 @@ type UpdateAlert struct {
 			// Summary The summary of the alert
 			Summary *string `json:"summary,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string             `json:"id,omitempty"`
 		Type UpdateAlertDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55067,6 +59632,60 @@ type UpdateAlertDataAttributesNoise string
 // UpdateAlertDataType defines model for UpdateAlert.Data.Type.
 type UpdateAlertDataType string
 
+// UpdateAlertConfiguration defines model for update_alert_configuration.
+type UpdateAlertConfiguration struct {
+	Data struct {
+		// Attributes Every attribute is optional and replaces its stored value. An attribute whose feature is not enabled for the team is refused with 403.
+		Attributes struct {
+			// AlertAcknowledgment Re-trigger behaviour for acknowledged alerts. Replaces the stored object as a whole.
+			AlertAcknowledgment *struct {
+				// RetriggerManualAlerts Whether alerts created from a manual page also re-trigger. Changing it is rejected with 422 until the manual page re-trigger opt-out is enabled for the team.
+				RetriggerManualAlerts *bool `json:"retrigger_manual_alerts,omitempty"`
+
+				// TimeoutEnabled Re-trigger an acknowledged alert after the timeout.
+				TimeoutEnabled *bool `json:"timeout_enabled,omitempty"`
+
+				// TimeoutMinutes Minutes before an acknowledged alert re-triggers.
+				TimeoutMinutes *UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes `json:"timeout_minutes,omitempty"`
+			} `json:"alert_acknowledgment,omitempty"`
+
+			// DefaultUserNotificationSettings Channel defaults for new users, per urgency level. Omitted levels keep the built-in defaults; existing users are never changed. Present and accepted only while org-default-notification-settings is on for the team.
+			DefaultUserNotificationSettings *struct {
+				// AudibleContactTypes Channels enabled on a newly created user's audible notification rule. At least one channel is required.
+				AudibleContactTypes *[]UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypes `json:"audible_contact_types,omitempty"`
+
+				// QuietContactTypes Channels enabled on a newly created user's quiet notification rule. At least one channel is required.
+				QuietContactTypes *[]UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypes `json:"quiet_contact_types,omitempty"`
+			} `json:"default_user_notification_settings,omitempty"`
+
+			// ManualPagingFormSettings Stored entity types for the manual paging form, as configured; at least one is required. The form itself may hide a type the team cannot use yet, such as functionality.
+			ManualPagingFormSettings *[]UpdateAlertConfigurationDataAttributesManualPagingFormSettings `json:"manual_paging_form_settings,omitempty"`
+
+			// ManualPagingUrgencyIds Alert urgency ids allowed when manually paging. Empty means all; deleted urgencies are left out. Present and accepted only while the manual-page-urgency-allowlist feature is on for the team.
+			ManualPagingUrgencyIds *[]openapi_types.UUID `json:"manual_paging_urgency_ids,omitempty"`
+		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. Each team has a single alert configuration, so no id is needed.
+		Id   *string                          `json:"id,omitempty"`
+		Type UpdateAlertConfigurationDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes Minutes before an acknowledged alert re-triggers.
+type UpdateAlertConfigurationDataAttributesAlertAcknowledgmentTimeoutMinutes int
+
+// UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypes defines model for UpdateAlertConfiguration.Data.Attributes.DefaultUserNotificationSettings.AudibleContactTypes.
+type UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsAudibleContactTypes string
+
+// UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypes defines model for UpdateAlertConfiguration.Data.Attributes.DefaultUserNotificationSettings.QuietContactTypes.
+type UpdateAlertConfigurationDataAttributesDefaultUserNotificationSettingsQuietContactTypes string
+
+// UpdateAlertConfigurationDataAttributesManualPagingFormSettings defines model for UpdateAlertConfiguration.Data.Attributes.ManualPagingFormSettings.
+type UpdateAlertConfigurationDataAttributesManualPagingFormSettings string
+
+// UpdateAlertConfigurationDataType defines model for UpdateAlertConfiguration.Data.Type.
+type UpdateAlertConfigurationDataType string
+
 // UpdateAlertEvent Update an alert event. Note: Only alert events with kind='note' can be updated. You cannot change the kind field.
 type UpdateAlertEvent struct {
 	Data struct {
@@ -55077,6 +59696,9 @@ type UpdateAlertEvent struct {
 			// UserId Author of the note.
 			UserId *int `json:"user_id,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                  `json:"id,omitempty"`
 		Type UpdateAlertEventDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55090,7 +59712,17 @@ type UpdateAlertField struct {
 		Attributes struct {
 			// Name The name of the alert field
 			Name *string `json:"name,omitempty"`
+
+			// OwnerGroupIds IDs of the teams that own the alert field. Callers with org-wide alert field permissions replace the full set. Callers without them may only add teams they administer, must leave at least one owner, and owners they do not administer are preserved.
+			OwnerGroupIds *[]string `json:"owner_group_ids,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                  `json:"id,omitempty"`
 		Type UpdateAlertFieldDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55154,6 +59786,9 @@ type UpdateAlertGroup struct {
 			// OwnerGroupIds Teams that own this alert group. Admins of an owning team can manage it, and an owned alert group can only target destinations that belong to its owning teams. Only available when owning teams for alert groups are enabled for the organization.
 			OwnerGroupIds *[]openapi_types.UUID `json:"owner_group_ids,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug    *string `json:"slug,omitempty"`
 			Targets *[]struct {
 				// TargetId id for the Group, Service, EscalationPolicy or Functionality
 				TargetId openapi_types.UUID `json:"target_id"`
@@ -55165,6 +59800,9 @@ type UpdateAlertGroup struct {
 			// TimeWindow The length of time an Alert Group should stay open and accept new alerts
 			TimeWindow *int `json:"time_window,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                  `json:"id,omitempty"`
 		Type UpdateAlertGroupDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55192,59 +59830,6 @@ type UpdateAlertGroupDataAttributesTargetsTargetType string
 
 // UpdateAlertGroupDataType defines model for UpdateAlertGroup.Data.Type.
 type UpdateAlertGroupDataType string
-
-// UpdateAlertRetriggerRule defines model for update_alert_retrigger_rule.
-type UpdateAlertRetriggerRule struct {
-	Data struct {
-		Attributes struct {
-			// Conditions The full desired set of conditions; replaces the rule's existing conditions. An empty array applies to every alert.
-			Conditions *[]struct {
-				// Kind The operand the condition matches on. Native operands (urgency, source, service, group) match by record; alert_field/payload match a field value.
-				Kind UpdateAlertRetriggerRuleDataAttributesConditionsKind `json:"kind"`
-
-				// Operator How the operand is compared. Native operands support is_one_of/is_not_one_of/is_set/is_not_set; alert_field/payload additionally support the string/regex operators.
-				Operator UpdateAlertRetriggerRuleDataAttributesConditionsOperator `json:"operator"`
-
-				// PropertyFieldName For alert_field conditions: the alert field id. For payload conditions: a JSON Path (e.g. $.priority).
-				PropertyFieldName *string `json:"property_field_name,omitempty"`
-
-				// RecordIds For urgency/service/group/source conditions: the IDs of the matched records (AlertUrgency, Service, Group, or Alerts::Source).
-				RecordIds *[]openapi_types.UUID `json:"record_ids,omitempty"`
-
-				// Values For source conditions: non-integration source aliases (e.g. manual, api). For alert_field/payload conditions: the values to compare against.
-				Values *[]string `json:"values,omitempty"`
-			} `json:"conditions,omitempty"`
-
-			// MatchMode Whether all or any of the conditions must match
-			MatchMode *UpdateAlertRetriggerRuleDataAttributesMatchMode `json:"match_mode,omitempty"`
-
-			// Name A human-readable name for the rule
-			Name *string `json:"name,omitempty"`
-
-			// Position The position of the rule for ordering evaluation
-			Position *int `json:"position,omitempty"`
-
-			// TimeoutMinutes Re-trigger the alert this many minutes after acknowledgment. Null means never re-trigger.
-			TimeoutMinutes *UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes `json:"timeout_minutes,omitempty"`
-		} `json:"attributes"`
-		Type UpdateAlertRetriggerRuleDataType `json:"type"`
-	} `json:"data"`
-}
-
-// UpdateAlertRetriggerRuleDataAttributesConditionsKind The operand the condition matches on. Native operands (urgency, source, service, group) match by record; alert_field/payload match a field value.
-type UpdateAlertRetriggerRuleDataAttributesConditionsKind string
-
-// UpdateAlertRetriggerRuleDataAttributesConditionsOperator How the operand is compared. Native operands support is_one_of/is_not_one_of/is_set/is_not_set; alert_field/payload additionally support the string/regex operators.
-type UpdateAlertRetriggerRuleDataAttributesConditionsOperator string
-
-// UpdateAlertRetriggerRuleDataAttributesMatchMode Whether all or any of the conditions must match
-type UpdateAlertRetriggerRuleDataAttributesMatchMode string
-
-// UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes Re-trigger the alert this many minutes after acknowledgment. Null means never re-trigger.
-type UpdateAlertRetriggerRuleDataAttributesTimeoutMinutes int
-
-// UpdateAlertRetriggerRuleDataType defines model for UpdateAlertRetriggerRule.Data.Type.
-type UpdateAlertRetriggerRuleDataType string
 
 // UpdateAlertRoute defines model for update_alert_route.
 type UpdateAlertRoute struct {
@@ -55301,6 +59886,9 @@ type UpdateAlertRoute struct {
 				Position *int `json:"position,omitempty"`
 			} `json:"rules,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                  `json:"id,omitempty"`
 		Type UpdateAlertRouteDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55368,6 +59956,9 @@ type UpdateAlertRoutingRule struct {
 			// Position The position of the alert routing rule for ordering evaluation
 			Position *int `json:"position,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                        `json:"id,omitempty"`
 		Type UpdateAlertRoutingRuleDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55403,6 +59994,9 @@ type UpdateAlertUrgency struct {
 			// RetriggerTimeoutMinutes Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, negative = never.
 			RetriggerTimeoutMinutes *int `json:"retrigger_timeout_minutes,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                    `json:"id,omitempty"`
 		Type UpdateAlertUrgencyDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55416,7 +60010,10 @@ type UpdateAlertsSource struct {
 		Attributes struct {
 			// AlertSourceFieldsAttributes List of alert fields to be added to the alert source. Note: This attribute requires the alert field feature to be enabled on your account. Contact Rootly customer support if you need assistance with this feature.
 			AlertSourceFieldsAttributes *[]struct {
-				// AlertFieldId The ID of the alert field
+				// UnderscoreDestroy Set to true to unbind the alert field from the alert source. Built-in fields cannot be unbound (422)
+				UnderscoreDestroy *bool `json:"_destroy,omitempty"`
+
+				// AlertFieldId The ID of the alert field. Must be visible to the caller; unknown or hidden IDs return 404
 				AlertFieldId *string `json:"alert_field_id,omitempty"`
 
 				// TemplateBody Liquid expression to extract a specific value from the alert's payload for evaluation
@@ -55529,7 +60126,7 @@ type UpdateAlertsSource struct {
 			// SourceType The alert source type
 			SourceType *UpdateAlertsSourceDataAttributesSourceType `json:"source_type,omitempty"`
 
-			// SourceableAttributes Provide additional attributes for generic_webhook alerts source
+			// SourceableAttributes Provide additional attributes for the underlying source. `auto_resolve`, `resolve_state` and `field_mappings_attributes` apply to generic_webhook sources; `accept_threaded_emails` applies to email sources.
 			SourceableAttributes *struct {
 				// AcceptThreadedEmails Set this to false to reject threaded emails
 				AcceptThreadedEmails *bool `json:"accept_threaded_emails,omitempty"`
@@ -55550,6 +60147,9 @@ type UpdateAlertsSource struct {
 				ResolveState *string `json:"resolve_state,omitempty"`
 			} `json:"sourceable_attributes,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                    `json:"id,omitempty"`
 		Type UpdateAlertsSourceDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55606,6 +60206,9 @@ type UpdateApiKey struct {
 			// Name The name of the API key
 			Name *string `json:"name,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string              `json:"id,omitempty"`
 		Type UpdateApiKeyDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55665,6 +60268,9 @@ type UpdateAuthorization struct {
 		Attributes struct {
 			Permissions *[]UpdateAuthorizationDataAttributesPermissions `json:"permissions,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                     `json:"id,omitempty"`
 		Type UpdateAuthorizationDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55688,7 +60294,14 @@ type UpdateCatalog struct {
 
 			// Position Default position of the catalog when displayed in a list.
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string               `json:"id,omitempty"`
 		Type UpdateCatalogDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55727,7 +60340,14 @@ type UpdateCatalogChecklistTemplate struct {
 				// Type Type of owner
 				Type UpdateCatalogChecklistTemplateDataAttributesOwnersType `json:"type"`
 			} `json:"owners,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                `json:"id,omitempty"`
 		Type UpdateCatalogChecklistTemplateDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55764,7 +60384,17 @@ type UpdateCatalogEntity struct {
 				// Value The value for this property
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
+
+			// PublicDescription The status page description of the catalog entity
+			PublicDescription *string `json:"public_description,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                     `json:"id,omitempty"`
 		Type UpdateCatalogEntityDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55779,6 +60409,9 @@ type UpdateCatalogEntityProperty struct {
 			Key   *UpdateCatalogEntityPropertyDataAttributesKey `json:"key,omitempty"`
 			Value *string                                       `json:"value,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                             `json:"id,omitempty"`
 		Type UpdateCatalogEntityPropertyDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55809,7 +60442,14 @@ type UpdateCatalogField struct {
 
 			// Required Whether the field is required.
 			Required *bool `json:"required,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                    `json:"id,omitempty"`
 		Type UpdateCatalogFieldDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55844,7 +60484,17 @@ type UpdateCause struct {
 				// Value The property value
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
+
+			// PublicDescription The status page description of the cause
+			PublicDescription *string `json:"public_description,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string             `json:"id,omitempty"`
 		Type UpdateCauseDataType `json:"type"`
 	} `json:"data"`
 }
@@ -55983,6 +60633,9 @@ type UpdateCommunicationsGroup struct {
 			// SmsChannel SMS channel enabled
 			SmsChannel *bool `json:"sms_channel,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                           `json:"id,omitempty"`
 		Type UpdateCommunicationsGroupDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56008,7 +60661,14 @@ type UpdateCommunicationsStage struct {
 
 			// Position Position of the communications stage
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                           `json:"id,omitempty"`
 		Type UpdateCommunicationsStageDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56050,6 +60710,9 @@ type UpdateCommunicationsTemplate struct {
 			// Position Position of the communications template
 			Position *int `json:"position,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                              `json:"id,omitempty"`
 		Type UpdateCommunicationsTemplateDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56072,7 +60735,14 @@ type UpdateCommunicationsType struct {
 
 			// Position Position of the communications type
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                          `json:"id,omitempty"`
 		Type UpdateCommunicationsTypeDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56132,6 +60802,9 @@ type UpdateCustomField struct {
 			Required *[]UpdateCustomFieldDataAttributesRequired `json:"required,omitempty"`
 			Shown    *[]UpdateCustomFieldDataAttributesShown    `json:"shown,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                   `json:"id,omitempty"`
 		Type UpdateCustomFieldDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56159,6 +60832,9 @@ type UpdateCustomFieldOption struct {
 			// Value The value of the custom_field_option
 			Value *string `json:"value,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                         `json:"id,omitempty"`
 		Type UpdateCustomFieldOptionDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56177,7 +60853,14 @@ type UpdateCustomForm struct {
 
 			// Name The name of the custom form.
 			Name *string `json:"name,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                  `json:"id,omitempty"`
 		Type UpdateCustomFormDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56216,6 +60899,9 @@ type UpdateDashboard struct {
 			// Range The date range for dashboard panel data
 			Range *string `json:"range,omitempty"`
 		} `json:"attributes,omitempty"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                  `json:"id,omitempty"`
 		Type *UpdateDashboardDataType `json:"type,omitempty"`
 	} `json:"data"`
 }
@@ -56313,6 +60999,9 @@ type UpdateEnvironment struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
+			// PublicDescription The status page description of the environment
+			PublicDescription *string `json:"public_description,omitempty"`
+
 			// SlackAliases Slack Aliases associated with this environment
 			SlackAliases *[]struct {
 				// Id Slack alias ID
@@ -56330,7 +61019,14 @@ type UpdateEnvironment struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                   `json:"id,omitempty"`
 		Type UpdateEnvironmentDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56359,12 +61055,27 @@ type UpdateEscalationLevel struct {
 				// Type The type of the notification target
 				Type UpdateEscalationLevelDataAttributesNotificationTargetParamsType `json:"type"`
 			} `json:"notification_target_params,omitempty"`
+
+			// PagingStrategyConfigurationPageUsersCount Number of users to page at a time (cycle-based round robin).
+			PagingStrategyConfigurationPageUsersCount *int `json:"paging_strategy_configuration_page_users_count,omitempty"`
+
+			// PagingStrategyConfigurationRepeats Number of times to rotate through the roster (cycle-based round robin).
+			PagingStrategyConfigurationRepeats *int `json:"paging_strategy_configuration_repeats,omitempty"`
+
+			// PagingStrategyConfigurationRepeatsMode Controls how repeats are interpreted: 'users' pages exactly N users, 'all' pages everyone once.
+			PagingStrategyConfigurationRepeatsMode *UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode `json:"paging_strategy_configuration_repeats_mode,omitempty"`
+
+			// PagingStrategyConfigurationRotationScope Scope of rotation ordering: active rotation members only, or entire schedule.
+			PagingStrategyConfigurationRotationScope    *UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope    `json:"paging_strategy_configuration_rotation_scope,omitempty"`
 			PagingStrategyConfigurationScheduleStrategy *UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy `json:"paging_strategy_configuration_schedule_strategy,omitempty"`
 			PagingStrategyConfigurationStrategy         *UpdateEscalationLevelDataAttributesPagingStrategyConfigurationStrategy         `json:"paging_strategy_configuration_strategy,omitempty"`
 
 			// Position Position of the escalation policy level
 			Position *int `json:"position,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                       `json:"id,omitempty"`
 		Type UpdateEscalationLevelDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56374,6 +61085,12 @@ type UpdateEscalationLevelDataAttributesNotificationTargetParamsTeamMembers stri
 
 // UpdateEscalationLevelDataAttributesNotificationTargetParamsType The type of the notification target
 type UpdateEscalationLevelDataAttributesNotificationTargetParamsType string
+
+// UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode Controls how repeats are interpreted: 'users' pages exactly N users, 'all' pages everyone once.
+type UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRepeatsMode string
+
+// UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope Scope of rotation ordering: active rotation members only, or entire schedule.
+type UpdateEscalationLevelDataAttributesPagingStrategyConfigurationRotationScope string
 
 // UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy defines model for UpdateEscalationLevel.Data.Attributes.PagingStrategyConfigurationScheduleStrategy.
 type UpdateEscalationLevelDataAttributesPagingStrategyConfigurationScheduleStrategy string
@@ -56408,6 +61125,81 @@ type UpdateEscalationPath struct {
 
 			// NotificationType Position of the escalation policy level
 			NotificationType *UpdateEscalationPathDataAttributesNotificationType `json:"notification_type,omitempty"`
+
+			// NotificationTypeFallback Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team.
+			NotificationTypeFallback *UpdateEscalationPathDataAttributesNotificationTypeFallback `json:"notification_type_fallback,omitempty"`
+
+			// NotificationTypeRules Rules deciding whether an alert pages audible or quiet, evaluated in order — the first matching rule's notification_type wins, otherwise notification_type_fallback applies. When present, the path's notification_type is aligned to notification_type_fallback. Only available when notification type conditions are enabled for the team.
+			NotificationTypeRules *[]struct {
+				// Conditions Conditions combined per match_mode, at least one per rule. A deferral_window condition matches when the alert falls inside its time blocks.
+				Conditions []struct {
+					// FieldableId The ID of the alert field
+					FieldableId *string `json:"fieldable_id,omitempty"`
+
+					// FieldableType The type of the fieldable (e.g., AlertField)
+					FieldableType *string `json:"fieldable_type,omitempty"`
+
+					// JsonPath JSON path to extract value from payload
+					JsonPath *string `json:"json_path,omitempty"`
+
+					// Operator Whether the alert must (or must not) have related incidents
+					Operator *UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsOperator `json:"operator,omitempty"`
+
+					// RuleType The type of the escalation path rule
+					RuleType *UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType `json:"rule_type,omitempty"`
+
+					// ServiceIds Service ids for which this escalation path should be used
+					ServiceIds *[]string `json:"service_ids,omitempty"`
+
+					// TimeBlocks Time windows during which alerts are deferred
+					TimeBlocks *[]struct {
+						AllDay *bool `json:"all_day,omitempty"`
+
+						// EndTime Formatted as HH:MM
+						EndTime *string `json:"end_time,omitempty"`
+
+						// EndsNextDay Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
+						EndsNextDay *bool `json:"ends_next_day,omitempty"`
+						Friday      *bool `json:"friday,omitempty"`
+
+						// Id Unique ID of the time block
+						Id     *string `json:"id,omitempty"`
+						Monday *bool   `json:"monday,omitempty"`
+
+						// Position Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
+						Position *int  `json:"position,omitempty"`
+						Saturday *bool `json:"saturday,omitempty"`
+
+						// StartTime Formatted as HH:MM
+						StartTime *string `json:"start_time,omitempty"`
+						Sunday    *bool   `json:"sunday,omitempty"`
+						Thursday  *bool   `json:"thursday,omitempty"`
+						Tuesday   *bool   `json:"tuesday,omitempty"`
+						Wednesday *bool   `json:"wednesday,omitempty"`
+					} `json:"time_blocks,omitempty"`
+
+					// TimeZone Time zone for the deferral window
+					TimeZone *UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone `json:"time_zone,omitempty"`
+
+					// UrgencyIds Alert urgency ids for which this escalation path should be used
+					UrgencyIds *[]string `json:"urgency_ids,omitempty"`
+
+					// Value Value with which JSON path value should be matched
+					Value *string `json:"value,omitempty"`
+
+					// Values Alert source values to match against (e.g., manual, datadog)
+					Values *[]string `json:"values,omitempty"`
+
+					// WithinWorkingHour Whether the escalation path should be used within working hours
+					WithinWorkingHour *bool `json:"within_working_hour,omitempty"`
+				} `json:"conditions"`
+
+				// MatchMode Whether all or any of the rule's conditions must match
+				MatchMode *UpdateEscalationPathDataAttributesNotificationTypeRulesMatchMode `json:"match_mode,omitempty"`
+
+				// NotificationType Outcome when this rule matches
+				NotificationType *UpdateEscalationPathDataAttributesNotificationTypeRulesNotificationType `json:"notification_type,omitempty"`
+			} `json:"notification_type_rules,omitempty"`
 
 			// PathType The type of escalation path. Cannot be changed after creation.
 			PathType *UpdateEscalationPathDataAttributesPathType `json:"path_type,omitempty"`
@@ -56449,11 +61241,19 @@ type UpdateEscalationPath struct {
 					AllDay *bool `json:"all_day,omitempty"`
 
 					// EndTime Formatted as HH:MM
-					EndTime  *string `json:"end_time,omitempty"`
-					Friday   *bool   `json:"friday,omitempty"`
-					Monday   *bool   `json:"monday,omitempty"`
-					Position *int    `json:"position,omitempty"`
-					Saturday *bool   `json:"saturday,omitempty"`
+					EndTime *string `json:"end_time,omitempty"`
+
+					// EndsNextDay Whether the window crosses midnight. Derived from start_time and end_time; accepted and ignored on write.
+					EndsNextDay *bool `json:"ends_next_day,omitempty"`
+					Friday      *bool `json:"friday,omitempty"`
+
+					// Id Unique ID of the time block
+					Id     *string `json:"id,omitempty"`
+					Monday *bool   `json:"monday,omitempty"`
+
+					// Position Order of this time block, starting at 1. Defaults to the block's 1-based position in time_blocks when omitted.
+					Position *int  `json:"position,omitempty"`
+					Saturday *bool `json:"saturday,omitempty"`
 
 					// StartTime Formatted as HH:MM
 					StartTime *string `json:"start_time,omitempty"`
@@ -56494,6 +61294,9 @@ type UpdateEscalationPath struct {
 				StartTime *string `json:"start_time,omitempty"`
 			} `json:"time_restrictions,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                      `json:"id,omitempty"`
 		Type UpdateEscalationPathDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56506,6 +61309,24 @@ type UpdateEscalationPathDataAttributesMatchMode string
 
 // UpdateEscalationPathDataAttributesNotificationType Position of the escalation policy level
 type UpdateEscalationPathDataAttributesNotificationType string
+
+// UpdateEscalationPathDataAttributesNotificationTypeFallback Paged when no notification type rule matches. Considered only when notification_type_rules are present — the path's notification_type is aligned to it; without rules it is aligned to notification_type instead. Only available when notification type conditions are enabled for the team.
+type UpdateEscalationPathDataAttributesNotificationTypeFallback string
+
+// UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsOperator Whether the alert must (or must not) have related incidents
+type UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsOperator string
+
+// UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType The type of the escalation path rule
+type UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsRuleType string
+
+// UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone Time zone for the deferral window
+type UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone string
+
+// UpdateEscalationPathDataAttributesNotificationTypeRulesMatchMode Whether all or any of the rule's conditions must match
+type UpdateEscalationPathDataAttributesNotificationTypeRulesMatchMode string
+
+// UpdateEscalationPathDataAttributesNotificationTypeRulesNotificationType Outcome when this rule matches
+type UpdateEscalationPathDataAttributesNotificationTypeRulesNotificationType string
 
 // UpdateEscalationPathDataAttributesPathType The type of escalation path. Cannot be changed after creation.
 type UpdateEscalationPathDataAttributesPathType string
@@ -56565,6 +61386,9 @@ type UpdateEscalationPolicy struct {
 			// ServiceIds Associated services (alerting the service will trigger escalation policy)
 			ServiceIds *[]string `json:"service_ids,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                        `json:"id,omitempty"`
 		Type UpdateEscalationPolicyDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56606,12 +61430,19 @@ type UpdateFormField struct {
 			ShowOnIncidentDetails *bool     `json:"show_on_incident_details,omitempty"`
 			Shown                 *[]string `json:"shown,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// ValueKind The value kind of the form field
 			ValueKind *UpdateFormFieldDataAttributesValueKind `json:"value_kind,omitempty"`
 
 			// ValueKindCatalogId The ID of the catalog used when value_kind is `catalog_entity`
 			ValueKindCatalogId *string `json:"value_kind_catalog_id,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                 `json:"id,omitempty"`
 		Type UpdateFormFieldDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56642,6 +61473,9 @@ type UpdateFormFieldOption struct {
 			// Value The value of the form field option
 			Value *string `json:"value,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                       `json:"id,omitempty"`
 		Type UpdateFormFieldOptionDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56656,7 +61490,7 @@ type UpdateFormFieldPlacement struct {
 			// Form The form this field is placed on.
 			Form *string `json:"form,omitempty"`
 
-			// FormSetId The form set this field is placed in.
+			// FormSetId The form set this field is placed in. The form set must have the same `resource_type` as the form field, otherwise the request is rejected with 422.
 			FormSetId *string `json:"form_set_id,omitempty"`
 
 			// NonEditable Whether the field is read-only and cannot be edited by users.
@@ -56674,6 +61508,9 @@ type UpdateFormFieldPlacement struct {
 			// RequiredOperator Logical operator when evaluating multiple form_field_placement_conditions with conditioned=required
 			RequiredOperator *UpdateFormFieldPlacementDataAttributesRequiredOperator `json:"required_operator,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                          `json:"id,omitempty"`
 		Type UpdateFormFieldPlacementDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56706,6 +61543,9 @@ type UpdateFormFieldPlacementCondition struct {
 			// Values The values for comparison.
 			Values *[]string `json:"values,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                   `json:"id,omitempty"`
 		Type UpdateFormFieldPlacementConditionDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56732,6 +61572,9 @@ type UpdateFormFieldPosition struct {
 			// Position The position of the form_field_position
 			Position *int `json:"position,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                         `json:"id,omitempty"`
 		Type UpdateFormFieldPositionDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56751,7 +61594,14 @@ type UpdateFormSet struct {
 
 			// Name The name of the form set
 			Name *string `json:"name,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string               `json:"id,omitempty"`
 		Type UpdateFormSetDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56772,6 +61622,9 @@ type UpdateFormSetCondition struct {
 			// Values The values for comparison.
 			Values *[]string `json:"values,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                        `json:"id,omitempty"`
 		Type UpdateFormSetConditionDataType `json:"type"`
 	} `json:"data"`
 }
@@ -56819,10 +61672,10 @@ type UpdateFunctionality struct {
 			// OpsgenieTeamId The Opsgenie team id associated to this functionality
 			OpsgenieTeamId *string `json:"opsgenie_team_id,omitempty"`
 
-			// OwnerGroupIds Owner Teams associated with this functionality
+			// OwnerGroupIds Owner Teams associated with this functionality. Empty array removes all; omitting or null leaves unchanged.
 			OwnerGroupIds *[]string `json:"owner_group_ids,omitempty"`
 
-			// OwnerUserIds Owner Users associated with this functionality
+			// OwnerUserIds Owner Users associated with this functionality. Empty array removes all; omitting or null leaves unchanged.
 			OwnerUserIds *[]int `json:"owner_user_ids,omitempty"`
 
 			// PagerdutyId The PagerDuty service id associated to this functionality
@@ -56840,7 +61693,7 @@ type UpdateFunctionality struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
-			// PublicDescription The public description of the functionality
+			// PublicDescription The status page description of the functionality
 			PublicDescription *string `json:"public_description,omitempty"`
 
 			// ServiceIds Services associated with this functionality
@@ -56866,7 +61719,14 @@ type UpdateFunctionality struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                     `json:"id,omitempty"`
 		Type UpdateFunctionalityDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57071,6 +61931,9 @@ type UpdateHeartbeat struct {
 			// OwnerGroupIds List of team IDs that own this heartbeat
 			OwnerGroupIds *[]string `json:"owner_group_ids,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                 `json:"id,omitempty"`
 		Type UpdateHeartbeatDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57148,6 +62011,15 @@ type UpdateIncident struct {
 			// Labels Labels to attach to the incidents. eg: {"platform":"osx", "version": "1.29"}
 			Labels *map[string]interface{} `json:"labels,omitempty"`
 
+			// LinearIssueId Linear issue ID
+			LinearIssueId *string `json:"linear_issue_id,omitempty"`
+
+			// LinearIssueKey Linear issue key
+			LinearIssueKey *string `json:"linear_issue_key,omitempty"`
+
+			// LinearIssueUrl Linear issue URL
+			LinearIssueUrl *string `json:"linear_issue_url,omitempty"`
+
 			// MitigatedAt Date of mitigation
 			MitigatedAt *string `json:"mitigated_at,omitempty"`
 
@@ -57208,6 +62080,9 @@ type UpdateIncident struct {
 			// Title The title of the incident
 			Title *string `json:"title,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                `json:"id,omitempty"`
 		Type UpdateIncidentDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57300,6 +62175,9 @@ type UpdateIncidentActionItem struct {
 			// Summary The summary of the action item
 			Summary *string `json:"summary,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                          `json:"id,omitempty"`
 		Type UpdateIncidentActionItemDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57336,6 +62214,9 @@ type UpdateIncidentCustomFieldSelection struct {
 			// Value The selected value for text kind custom fields
 			Value *string `json:"value,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                    `json:"id,omitempty"`
 		Type UpdateIncidentCustomFieldSelectionDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57353,6 +62234,9 @@ type UpdateIncidentEvent struct {
 			// Visibility The visibility of the incident action item
 			Visibility *UpdateIncidentEventDataAttributesVisibility `json:"visibility,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                     `json:"id,omitempty"`
 		Type UpdateIncidentEventDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57370,6 +62254,9 @@ type UpdateIncidentEventFunctionality struct {
 			// Status The status of the affected functionality
 			Status UpdateIncidentEventFunctionalityDataAttributesStatus `json:"status"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                  `json:"id,omitempty"`
 		Type UpdateIncidentEventFunctionalityDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57387,6 +62274,9 @@ type UpdateIncidentEventService struct {
 			// Status The status of the affected service
 			Status UpdateIncidentEventServiceDataAttributesStatus `json:"status"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                            `json:"id,omitempty"`
 		Type UpdateIncidentEventServiceDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57410,6 +62300,9 @@ type UpdateIncidentFeedback struct {
 			// Rating The rating of the incident feedback
 			Rating *UpdateIncidentFeedbackDataAttributesRating `json:"rating,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                        `json:"id,omitempty"`
 		Type UpdateIncidentFeedbackDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57437,6 +62330,9 @@ type UpdateIncidentFormFieldSelection struct {
 			// Value The selected value for text kind custom fields
 			Value *string `json:"value,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                  `json:"id,omitempty"`
 		Type UpdateIncidentFormFieldSelectionDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57455,7 +62351,14 @@ type UpdateIncidentPermissionSet struct {
 			Name                       *string                                                                `json:"name,omitempty"`
 			PrivateIncidentPermissions *[]UpdateIncidentPermissionSetDataAttributesPrivateIncidentPermissions `json:"private_incident_permissions,omitempty"`
 			PublicIncidentPermissions  *[]UpdateIncidentPermissionSetDataAttributesPublicIncidentPermissions  `json:"public_incident_permissions,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                             `json:"id,omitempty"`
 		Type UpdateIncidentPermissionSetDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57490,6 +62393,9 @@ type UpdateIncidentPermissionSetBoolean struct {
 				SeverityIds *[]string `json:"severity_ids,omitempty"`
 			} `json:"severity_params,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                    `json:"id,omitempty"`
 		Type UpdateIncidentPermissionSetBooleanDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57522,6 +62428,9 @@ type UpdateIncidentPermissionSetResource struct {
 				SeverityIds *[]string `json:"severity_ids,omitempty"`
 			} `json:"severity_params,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                     `json:"id,omitempty"`
 		Type UpdateIncidentPermissionSetResourceDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57538,6 +62447,9 @@ type UpdateIncidentPostMortem struct {
 		Attributes struct {
 			// CauseIds The Cause IDs to attach to the incident retrospective
 			CauseIds *[]string `json:"cause_ids,omitempty"`
+
+			// Content The content (body) of the incident retrospective, as HTML. Rejected with a 409 once the retrospective has been opened in the collaborative editor.
+			Content *string `json:"content,omitempty"`
 
 			// MitigatedAt Date of mitigation
 			MitigatedAt *string `json:"mitigated_at,omitempty"`
@@ -57584,6 +62496,9 @@ type UpdateIncidentPostMortem struct {
 			// Title The title of the incident retrospective
 			Title *string `json:"title,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                          `json:"id,omitempty"`
 		Type UpdateIncidentPostMortemDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57630,6 +62545,9 @@ type UpdateIncidentRetrospectiveStep struct {
 			// Title The name of the incident retrospective step
 			Title *string `json:"title,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                 `json:"id,omitempty"`
 		Type UpdateIncidentRetrospectiveStepDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57657,9 +62575,16 @@ type UpdateIncidentRole struct {
 			// Position Position of the incident role
 			Position *int `json:"position,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// Summary The summary of the incident role
 			Summary *string `json:"summary,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                    `json:"id,omitempty"`
 		Type UpdateIncidentRoleDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57680,6 +62605,9 @@ type UpdateIncidentRoleTask struct {
 			// Task The task of the incident task
 			Task *string `json:"task,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                        `json:"id,omitempty"`
 		Type UpdateIncidentRoleTaskDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57712,6 +62640,9 @@ type UpdateIncidentStatusPageEvent struct {
 			// StatusPageId Unique ID of the status page you wish to post the event to
 			StatusPageId *string `json:"status_page_id,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                               `json:"id,omitempty"`
 		Type UpdateIncidentStatusPageEventDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57745,6 +62676,9 @@ type UpdateIncidentSubStatus struct {
 			// SubStatusId Note: To change an incident's sub-status, use the PATCH /incidents/:id endpoint and set the sub_status_id attribute. This endpoint is for modifying the timestamp of when an incident's sub-status was assigned.
 			SubStatusId *string `json:"sub_status_id,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                         `json:"id,omitempty"`
 		Type UpdateIncidentSubStatusDataType `json:"type"`
 	} `json:"data"`
 }
@@ -57823,6 +62757,9 @@ type UpdateIncidentType struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
+			// PublicDescription The status page description of the incident type
+			PublicDescription *string `json:"public_description,omitempty"`
+
 			// SlackAliases Slack Aliases associated with this incident type
 			SlackAliases *[]struct {
 				// Id Slack alias ID
@@ -57840,7 +62777,14 @@ type UpdateIncidentType struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                    `json:"id,omitempty"`
 		Type UpdateIncidentTypeDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58033,6 +62977,9 @@ type UpdateLiveCallRouter struct {
 			// WaitingMusicUrl The waiting music URL of the live_call_router
 			WaitingMusicUrl *UpdateLiveCallRouterDataAttributesWaitingMusicUrl `json:"waiting_music_url,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                      `json:"id,omitempty"`
 		Type UpdateLiveCallRouterDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58127,6 +63074,9 @@ type UpdateOnCallPayReport struct {
 			// UseRespondersTimeZone When true, day and weekend boundaries are computed in each responder's personal timezone instead of the report-wide timezone.
 			UseRespondersTimeZone *bool `json:"use_responders_time_zone,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                       `json:"id,omitempty"`
 		Type UpdateOnCallPayReportDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58155,6 +63105,7 @@ type UpdateOnCallRole struct {
 			IntegrationsPermissions       *[]UpdateOnCallRoleDataAttributesIntegrationsPermissions       `json:"integrations_permissions,omitempty"`
 			InvitationsPermissions        *[]UpdateOnCallRoleDataAttributesInvitationsPermissions        `json:"invitations_permissions,omitempty"`
 			LiveCallRoutingPermissions    *[]UpdateOnCallRoleDataAttributesLiveCallRoutingPermissions    `json:"live_call_routing_permissions,omitempty"`
+			MembersPermissions            *[]UpdateOnCallRoleDataAttributesMembersPermissions            `json:"members_permissions,omitempty"`
 
 			// Name The role name.
 			Name                             *string                                                           `json:"name,omitempty"`
@@ -58164,11 +63115,18 @@ type UpdateOnCallRole struct {
 			SchedulesPermissions             *[]UpdateOnCallRoleDataAttributesSchedulesPermissions             `json:"schedules_permissions,omitempty"`
 			ServicesPermissions              *[]UpdateOnCallRoleDataAttributesServicesPermissions              `json:"services_permissions,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// SystemRole The kind of role (user and custom type roles are only editable)
 			SystemRole           *string                                               `json:"system_role,omitempty"`
 			WebhooksPermissions  *[]UpdateOnCallRoleDataAttributesWebhooksPermissions  `json:"webhooks_permissions,omitempty"`
 			WorkflowsPermissions *[]UpdateOnCallRoleDataAttributesWorkflowsPermissions `json:"workflows_permissions,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                  `json:"id,omitempty"`
 		Type UpdateOnCallRoleDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58224,6 +63182,9 @@ type UpdateOnCallRoleDataAttributesInvitationsPermissions string
 // UpdateOnCallRoleDataAttributesLiveCallRoutingPermissions defines model for UpdateOnCallRole.Data.Attributes.LiveCallRoutingPermissions.
 type UpdateOnCallRoleDataAttributesLiveCallRoutingPermissions string
 
+// UpdateOnCallRoleDataAttributesMembersPermissions defines model for UpdateOnCallRole.Data.Attributes.MembersPermissions.
+type UpdateOnCallRoleDataAttributesMembersPermissions string
+
 // UpdateOnCallRoleDataAttributesOnCallReadinessReportPermissions defines model for UpdateOnCallRole.Data.Attributes.OnCallReadinessReportPermissions.
 type UpdateOnCallRoleDataAttributesOnCallReadinessReportPermissions string
 
@@ -58268,6 +63229,9 @@ type UpdateOnCallShadow struct {
 			// StartsAt Start datetime of shadow shift
 			StartsAt *time.Time `json:"starts_at,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                    `json:"id,omitempty"`
 		Type UpdateOnCallShadowDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58333,6 +63297,9 @@ type UpdateOverrideShift struct {
 			// UserId Override shift user
 			UserId int `json:"user_id"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                     `json:"id,omitempty"`
 		Type UpdateOverrideShiftDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58438,6 +63405,9 @@ type UpdatePlaybook struct {
 			// Title The title of the playbook
 			Title *string `json:"title,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                `json:"id,omitempty"`
 		Type UpdatePlaybookDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58458,6 +63428,9 @@ type UpdatePlaybookTask struct {
 			// Task The task of the task
 			Task *string `json:"task,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                    `json:"id,omitempty"`
 		Type UpdatePlaybookTaskDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58480,7 +63453,14 @@ type UpdatePostMortemTemplate struct {
 
 			// Name The name of the postmortem template
 			Name *string `json:"name,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                          `json:"id,omitempty"`
 		Type UpdatePostMortemTemplateDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58533,6 +63513,9 @@ type UpdatePulse struct {
 			// Summary The summary of the pulse
 			Summary *string `json:"summary,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string             `json:"id,omitempty"`
 		Type UpdatePulseDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58575,6 +63558,9 @@ type UpdateRetrospectiveConfiguration struct {
 			// SeverityIds The Severity IDs to attach to the retrospective configuration
 			SeverityIds *[]string `json:"severity_ids,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                  `json:"id,omitempty"`
 		Type UpdateRetrospectiveConfigurationDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58602,6 +63588,9 @@ type UpdateRetrospectiveProcess struct {
 				SeverityIds *[]string `json:"severity_ids,omitempty"`
 			} `json:"retrospective_process_matching_criteria,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                            `json:"id,omitempty"`
 		Type UpdateRetrospectiveProcessDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58616,6 +63605,9 @@ type UpdateRetrospectiveProcessGroup struct {
 			Position    *int    `json:"position,omitempty"`
 			SubStatusId *string `json:"sub_status_id,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                 `json:"id,omitempty"`
 		Type UpdateRetrospectiveProcessGroupDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58629,6 +63621,9 @@ type UpdateRetrospectiveProcessGroupStep struct {
 		Attributes struct {
 			Position *int `json:"position,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                     `json:"id,omitempty"`
 		Type UpdateRetrospectiveProcessGroupStepDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58655,9 +63650,16 @@ type UpdateRetrospectiveStep struct {
 			// Skippable Is the step skippable?
 			Skippable *bool `json:"skippable,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `title`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// Title The name of the step
 			Title *string `json:"title,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                         `json:"id,omitempty"`
 		Type UpdateRetrospectiveStepDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58698,9 +63700,12 @@ type UpdateRole struct {
 			IsEditable *bool `json:"is_editable,omitempty"`
 
 			// Name The role name.
-			Name                        *string                                                `json:"name,omitempty"`
-			PagingPermissions           *[]UpdateRoleDataAttributesPagingPermissions           `json:"paging_permissions,omitempty"`
-			PlaybooksPermissions        *[]UpdateRoleDataAttributesPlaybooksPermissions        `json:"playbooks_permissions,omitempty"`
+			Name                 *string                                         `json:"name,omitempty"`
+			PagingPermissions    *[]UpdateRoleDataAttributesPagingPermissions    `json:"paging_permissions,omitempty"`
+			PlaybooksPermissions *[]UpdateRoleDataAttributesPlaybooksPermissions `json:"playbooks_permissions,omitempty"`
+
+			// PrivateAgentPermissions Private Agent management permissions: create issues enrollment tokens, read views agent inventory and details, and delete revokes agent credentials. Create and delete can be used independently through the API; browser inventory requires read.
+			PrivateAgentPermissions     *[]UpdateRoleDataAttributesPrivateAgentPermissions     `json:"private_agent_permissions,omitempty"`
 			PrivateIncidentsPermissions *[]UpdateRoleDataAttributesPrivateIncidentsPermissions `json:"private_incidents_permissions,omitempty"`
 			RetrospectivePermissions    *[]UpdateRoleDataAttributesRetrospectivePermissions    `json:"retrospective_permissions,omitempty"`
 			RolesPermissions            *[]UpdateRoleDataAttributesRolesPermissions            `json:"roles_permissions,omitempty"`
@@ -58708,11 +63713,19 @@ type UpdateRole struct {
 			ServicesPermissions         *[]UpdateRoleDataAttributesServicesPermissions         `json:"services_permissions,omitempty"`
 			SeveritiesPermissions       *[]UpdateRoleDataAttributesSeveritiesPermissions       `json:"severities_permissions,omitempty"`
 			SlasPermissions             *[]UpdateRoleDataAttributesSlasPermissions             `json:"slas_permissions,omitempty"`
-			StatusPagesPermissions      *[]UpdateRoleDataAttributesStatusPagesPermissions      `json:"status_pages_permissions,omitempty"`
-			SubStatusesPermissions      *[]UpdateRoleDataAttributesSubStatusesPermissions      `json:"sub_statuses_permissions,omitempty"`
-			WebhooksPermissions         *[]UpdateRoleDataAttributesWebhooksPermissions         `json:"webhooks_permissions,omitempty"`
-			WorkflowsPermissions        *[]UpdateRoleDataAttributesWorkflowsPermissions        `json:"workflows_permissions,omitempty"`
+
+			// Slug Deprecated. Custom role slugs remain accepted temporarily. Stop setting `slug`; it will become read-only and be derived from `name` when this property is removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug                         *string                                                 `json:"slug,omitempty"`
+			StatusPageUpdatesPermissions *[]UpdateRoleDataAttributesStatusPageUpdatesPermissions `json:"status_page_updates_permissions,omitempty"`
+			StatusPagesPermissions       *[]UpdateRoleDataAttributesStatusPagesPermissions       `json:"status_pages_permissions,omitempty"`
+			SubStatusesPermissions       *[]UpdateRoleDataAttributesSubStatusesPermissions       `json:"sub_statuses_permissions,omitempty"`
+			WebhooksPermissions          *[]UpdateRoleDataAttributesWebhooksPermissions          `json:"webhooks_permissions,omitempty"`
+			WorkflowsPermissions         *[]UpdateRoleDataAttributesWorkflowsPermissions         `json:"workflows_permissions,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string            `json:"id,omitempty"`
 		Type UpdateRoleDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58777,6 +63790,9 @@ type UpdateRoleDataAttributesPagingPermissions string
 // UpdateRoleDataAttributesPlaybooksPermissions defines model for UpdateRole.Data.Attributes.PlaybooksPermissions.
 type UpdateRoleDataAttributesPlaybooksPermissions string
 
+// UpdateRoleDataAttributesPrivateAgentPermissions defines model for UpdateRole.Data.Attributes.PrivateAgentPermissions.
+type UpdateRoleDataAttributesPrivateAgentPermissions string
+
 // UpdateRoleDataAttributesPrivateIncidentsPermissions defines model for UpdateRole.Data.Attributes.PrivateIncidentsPermissions.
 type UpdateRoleDataAttributesPrivateIncidentsPermissions string
 
@@ -58797,6 +63813,9 @@ type UpdateRoleDataAttributesSeveritiesPermissions string
 
 // UpdateRoleDataAttributesSlasPermissions defines model for UpdateRole.Data.Attributes.SlasPermissions.
 type UpdateRoleDataAttributesSlasPermissions string
+
+// UpdateRoleDataAttributesStatusPageUpdatesPermissions defines model for UpdateRole.Data.Attributes.StatusPageUpdatesPermissions.
+type UpdateRoleDataAttributesStatusPageUpdatesPermissions string
 
 // UpdateRoleDataAttributesStatusPagesPermissions defines model for UpdateRole.Data.Attributes.StatusPagesPermissions.
 type UpdateRoleDataAttributesStatusPagesPermissions string
@@ -58869,7 +63888,13 @@ type UpdateSchedule struct {
 
 			// SyncLinearEnabled Whether the schedule is synced with Linear
 			SyncLinearEnabled *bool `json:"sync_linear_enabled,omitempty"`
+
+			// TimeZone IANA time zone the schedule's rotations are rendered in. Only writable for organizations configured with one timezone per schedule; otherwise it is derived from the rotations.
+			TimeZone *string `json:"time_zone,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                `json:"id,omitempty"`
 		Type UpdateScheduleDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58938,9 +63963,12 @@ type UpdateScheduleRotation struct {
 			// StartTime RFC3339 date-time when rotation starts. Shifts will only be created after this time.
 			StartTime *time.Time `json:"start_time,omitempty"`
 
-			// TimeZone A valid IANA time zone name.
+			// TimeZone A valid IANA time zone name. Organizations with one timezone per schedule manage this on the schedule; a value differing from the schedule's is rejected.
 			TimeZone *string `json:"time_zone,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                        `json:"id,omitempty"`
 		Type UpdateScheduleRotationDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58979,6 +64007,9 @@ type UpdateScheduleRotationActiveDay struct {
 			// DayName Schedule rotation day name for which active times to be created
 			DayName *UpdateScheduleRotationActiveDayDataAttributesDayName `json:"day_name,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                 `json:"id,omitempty"`
 		Type UpdateScheduleRotationActiveDayDataType `json:"type"`
 	} `json:"data"`
 }
@@ -58999,6 +64030,9 @@ type UpdateScheduleRotationUser struct {
 			// UserId Schedule rotation user
 			UserId *int `json:"user_id,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                            `json:"id,omitempty"`
 		Type UpdateScheduleRotationUserDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59022,9 +64056,15 @@ type UpdateSecret struct {
 			// Name The name of the secret
 			Name string `json:"name"`
 
+			// OwnerGroupIds IDs of the teams whose members can see and pick this secret; their team admins can manage it. Empty means only users with the org Secrets permission can. Ignored unless team scoping is enabled for the organization.
+			OwnerGroupIds *[]string `json:"owner_group_ids,omitempty"`
+
 			// Secret The secret
 			Secret *string `json:"secret,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string              `json:"id,omitempty"`
 		Type UpdateSecretDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59111,10 +64151,10 @@ type UpdateService struct {
 			// OpsgenieId The Opsgenie service id associated to this service
 			OpsgenieId *string `json:"opsgenie_id,omitempty"`
 
-			// OwnerGroupIds Owner Teams associated with this service
+			// OwnerGroupIds Owner Teams associated with this service. Empty array removes all; omitting or null leaves unchanged.
 			OwnerGroupIds *[]string `json:"owner_group_ids,omitempty"`
 
-			// OwnerUserIds Owner Users associated with this service
+			// OwnerUserIds Owner Users associated with this service. Empty array removes all; omitting or null leaves unchanged.
 			OwnerUserIds *[]int `json:"owner_user_ids,omitempty"`
 
 			// PagerdutyId The PagerDuty service id associated to this service
@@ -59132,7 +64172,7 @@ type UpdateService struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
-			// PublicDescription The public description of the service
+			// PublicDescription The status page description of the service
 			PublicDescription *string `json:"public_description,omitempty"`
 
 			// ServiceIds Services dependent on this service
@@ -59158,7 +64198,14 @@ type UpdateService struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string               `json:"id,omitempty"`
 		Type UpdateServiceDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59236,7 +64283,14 @@ type UpdateSeverity struct {
 				// Name Slack channel name
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                `json:"id,omitempty"`
 		Type UpdateSeverityDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59391,7 +64445,14 @@ type UpdateSla struct {
 
 			// Position Position of the SLA for ordering
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string           `json:"id,omitempty"`
 		Type UpdateSlaDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59423,7 +64484,7 @@ type UpdateSlaDataAttributesNotificationConfigurationsOffsetType string
 // UpdateSlaDataType defines model for UpdateSla.Data.Type.
 type UpdateSlaDataType string
 
-// UpdateSlackCanvasTaskParams Update the selected channel canvas using Markdown. Requires Slack Canvas actions to be enabled for execution and the connected Slack app to have Canvas permissions.
+// UpdateSlackCanvasTaskParams Update the selected channel canvas using Markdown. The connected Slack app must have Canvas permissions.
 type UpdateSlackCanvasTaskParams struct {
 	// Channel Slack channel containing the canvas. Channel IDs support Liquid variables.
 	Channel struct {
@@ -59469,8 +64530,14 @@ type UpdateSlackChannelTopicTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"channel"`
-	TaskType *UpdateSlackChannelTopicTaskParamsTaskType `json:"task_type,omitempty"`
-	Topic    string                                     `json:"topic"`
+
+	// RetryCount Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+	RetryCount *int `json:"retry_count,omitempty"`
+
+	// RetryWaitTime Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
+	RetryWaitTime *int                                       `json:"retry_wait_time,omitempty"`
+	TaskType      *UpdateSlackChannelTopicTaskParamsTaskType `json:"task_type,omitempty"`
+	Topic         string                                     `json:"topic"`
 }
 
 // UpdateSlackChannelTopicTaskParamsTaskType defines model for UpdateSlackChannelTopicTaskParams.TaskType.
@@ -59550,6 +64617,10 @@ type UpdateStatusPage struct {
 			// ShowUptimeLastDays Show uptime over x days
 			ShowUptimeLastDays *UpdateStatusPageDataAttributesShowUptimeLastDays `json:"show_uptime_last_days,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `title`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// SuccessMessage Message showing when all components are operational
 			SuccessMessage *string `json:"success_message,omitempty"`
 
@@ -59568,6 +64639,9 @@ type UpdateStatusPage struct {
 			// WebsiteUrl Website URL
 			WebsiteUrl *string `json:"website_url,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                  `json:"id,omitempty"`
 		Type UpdateStatusPageDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59587,6 +64661,26 @@ type UpdateStatusPageDataAttributesShowUptimeLastDays int
 // UpdateStatusPageDataType defines model for UpdateStatusPage.Data.Type.
 type UpdateStatusPageDataType string
 
+// UpdateStatusPageAnnouncement defines model for update_status_page_announcement.
+type UpdateStatusPageAnnouncement struct {
+	Data struct {
+		Attributes struct {
+			// Body Body of the announcement
+			Body *string `json:"body,omitempty"`
+
+			// Title Title of the announcement
+			Title *string `json:"title,omitempty"`
+		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                              `json:"id,omitempty"`
+		Type UpdateStatusPageAnnouncementDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateStatusPageAnnouncementDataType defines model for UpdateStatusPageAnnouncement.Data.Type.
+type UpdateStatusPageAnnouncementDataType string
+
 // UpdateStatusPageComponent defines model for update_status_page_component.
 type UpdateStatusPageComponent struct {
 	Data struct {
@@ -59603,6 +64697,9 @@ type UpdateStatusPageComponent struct {
 			// StatusPageComponentGroupId ID of the component group on the same status page (null moves the component to the top level)
 			StatusPageComponentGroupId *string `json:"status_page_component_group_id,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                           `json:"id,omitempty"`
 		Type UpdateStatusPageComponentDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59626,6 +64723,9 @@ type UpdateStatusPageComponentGroup struct {
 			// Position Position of the group on the status page's top-level list (shared with ungrouped components)
 			Position *int `json:"position,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                `json:"id,omitempty"`
 		Type UpdateStatusPageComponentGroupDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59654,7 +64754,14 @@ type UpdateSubStatus struct {
 			Description *string `json:"description,omitempty"`
 			Name        *string `json:"name,omitempty"`
 			Position    *int    `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                 `json:"id,omitempty"`
 		Type UpdateSubStatusDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59750,6 +64857,18 @@ type UpdateTeam struct {
 				Value string `json:"value"`
 			} `json:"properties,omitempty"`
 
+			// PublicDescription The status page description of the team
+			PublicDescription *string `json:"public_description,omitempty"`
+
+			// ScheduleOverridePolicy Who can create and update overrides for schedules owned by this team: `everyone` in the organization, only team `members`, or only team `admins`. Users still need override permission from their on-call role. Only available when the team-level schedule override policy feature is enabled for the organization. Requests that set it while that feature is disabled are rejected.
+			ScheduleOverridePolicy *UpdateTeamDataAttributesScheduleOverridePolicy `json:"schedule_override_policy,omitempty"`
+
+			// ScimGroupExternalId Link by the SCIM group's externalId from your identity provider instead of scim_group_id. Write-only. Rejected when it names a different SCIM group than scim_group_id.
+			ScimGroupExternalId *string `json:"scim_group_external_id,omitempty"`
+
+			// ScimGroupId The SCIM group id linked to this team. Membership syncs from the SCIM group while the team keeps its own name. Set to null to unlink. Sending the current id is a no-op; to pin a name-linked group, unlink then link.
+			ScimGroupId *string `json:"scim_group_id,omitempty"`
+
 			// ServiceNowCiSysId The Service Now CI sys id associated to this team
 			ServiceNowCiSysId *string `json:"service_now_ci_sys_id,omitempty"`
 
@@ -59771,18 +64890,28 @@ type UpdateTeam struct {
 				Name string `json:"name"`
 			} `json:"slack_channels,omitempty"`
 
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
+
 			// UserIds The user ids of the members of this team.
 			UserIds *[]int `json:"user_ids,omitempty"`
 
 			// VictorOpsId The VictorOps group id associated to this team
 			VictorOpsId *string `json:"victor_ops_id,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string            `json:"id,omitempty"`
 		Type UpdateTeamDataType `json:"type"`
 	} `json:"data"`
 }
 
 // UpdateTeamDataAttributesAutoAddMembersScope Visibility-scoped auto-add behavior. Only present when the `enable_scoped_incident_channel_auto_add` feature flag is on for the organization. When set, it overrides `auto_add_members_when_attached`.
 type UpdateTeamDataAttributesAutoAddMembersScope string
+
+// UpdateTeamDataAttributesScheduleOverridePolicy Who can create and update overrides for schedules owned by this team: `everyone` in the organization, only team `members`, or only team `admins`. Users still need override permission from their on-call role. Only available when the team-level schedule override policy feature is enabled for the organization. Requests that set it while that feature is disabled are rejected.
+type UpdateTeamDataAttributesScheduleOverridePolicy string
 
 // UpdateTeamDataType defines model for UpdateTeam.Data.Type.
 type UpdateTeamDataType string
@@ -59844,6 +64973,9 @@ type UpdateUser struct {
 			// RoleId ID of the role to assign
 			RoleId *string `json:"role_id,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string            `json:"id,omitempty"`
 		Type UpdateUserDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59858,6 +64990,9 @@ type UpdateUserEmailAddress struct {
 			// Email Email address
 			Email *string `json:"email,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                        `json:"id,omitempty"`
 		Type UpdateUserEmailAddressDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59890,6 +65025,9 @@ type UpdateUserNotificationRule struct {
 			// UserSmsNumberId User sms number to which notification to be sent
 			UserSmsNumberId *string `json:"user_sms_number_id,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                            `json:"id,omitempty"`
 		Type UpdateUserNotificationRuleDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59907,6 +65045,9 @@ type UpdateUserPhoneNumber struct {
 			// Phone Phone number in international format
 			Phone *string `json:"phone,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                       `json:"id,omitempty"`
 		Type UpdateUserPhoneNumberDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59945,7 +65086,14 @@ type UpdateWebhooksEndpoint struct {
 
 			// Name The name of the endpoint
 			Name *string `json:"name,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                        `json:"id,omitempty"`
 		Type UpdateWebhooksEndpointDataType `json:"type"`
 	} `json:"data"`
 }
@@ -59972,13 +65120,25 @@ type UpdateWorkflow struct {
 			ContinuouslyRepeat *bool `json:"continuously_repeat,omitempty"`
 
 			// Description The description of the workflow
-			Description      *string   `json:"description,omitempty"`
-			Enabled          *bool     `json:"enabled,omitempty"`
-			EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
-			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
-			GroupIds         *[]string `json:"group_ids,omitempty"`
-			IncidentRoleIds  *[]string `json:"incident_role_ids,omitempty"`
-			IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
+			Description    *string   `json:"description,omitempty"`
+			Enabled        *bool     `json:"enabled,omitempty"`
+			EnvironmentIds *[]string `json:"environment_ids,omitempty"`
+
+			// FailureNotificationChannels Slack channels notified when a run of this workflow fails. Used when `failure_notification_mode` is `custom`.
+			FailureNotificationChannels *[]struct {
+				// Id Slack channel ID. Liquid is allowed, for example `{{ incident.slack_channel_id }}` for the incident channel.
+				Id string `json:"id"`
+
+				// Name Slack channel name
+				Name string `json:"name"`
+			} `json:"failure_notification_channels,omitempty"`
+
+			// FailureNotificationMode Where failure notifications for this workflow are sent. `inherit` uses the account default channel, `custom` uses `failure_notification_channels`, `off` suppresses them.
+			FailureNotificationMode *UpdateWorkflowDataAttributesFailureNotificationMode `json:"failure_notification_mode,omitempty"`
+			FunctionalityIds        *[]string                                            `json:"functionality_ids,omitempty"`
+			GroupIds                *[]string                                            `json:"group_ids,omitempty"`
+			IncidentRoleIds         *[]string                                            `json:"incident_role_ids,omitempty"`
+			IncidentTypeIds         *[]string                                            `json:"incident_type_ids,omitempty"`
 
 			// Locked Restricts workflow edits to admins when turned on. Only admins can set this field.
 			Locked *bool `json:"locked,omitempty"`
@@ -59996,11 +65156,15 @@ type UpdateWorkflow struct {
 			RepeatConditionNumberOfRepeats *int `json:"repeat_condition_number_of_repeats,omitempty"`
 
 			// RepeatEveryDuration Repeat workflow every duration
-			RepeatEveryDuration *string                                       `json:"repeat_every_duration,omitempty"`
-			ServiceIds          *[]string                                     `json:"service_ids,omitempty"`
-			SeverityIds         *[]string                                     `json:"severity_ids,omitempty"`
-			SubStatusIds        *[]string                                     `json:"sub_status_ids,omitempty"`
-			TriggerParams       *UpdateWorkflow_Data_Attributes_TriggerParams `json:"trigger_params,omitempty"`
+			RepeatEveryDuration *string   `json:"repeat_every_duration,omitempty"`
+			ServiceIds          *[]string `json:"service_ids,omitempty"`
+			SeverityIds         *[]string `json:"severity_ids,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug          *string                                       `json:"slug,omitempty"`
+			SubStatusIds  *[]string                                     `json:"sub_status_ids,omitempty"`
+			TriggerParams *UpdateWorkflow_Data_Attributes_TriggerParams `json:"trigger_params,omitempty"`
 
 			// Wait Wait this duration before executing
 			Wait *string `json:"wait,omitempty"`
@@ -60008,9 +65172,15 @@ type UpdateWorkflow struct {
 			// WorkflowGroupId The group this workflow belongs to.
 			WorkflowGroupId *string `json:"workflow_group_id,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The workflow to update is identified by the id in the path.
+		Id   *string                `json:"id,omitempty"`
 		Type UpdateWorkflowDataType `json:"type"`
 	} `json:"data"`
 }
+
+// UpdateWorkflowDataAttributesFailureNotificationMode Where failure notifications for this workflow are sent. `inherit` uses the account default channel, `custom` uses `failure_notification_channels`, `off` suppresses them.
+type UpdateWorkflowDataAttributesFailureNotificationMode string
 
 // UpdateWorkflow_Data_Attributes_TriggerParams defines model for UpdateWorkflow.Data.Attributes.TriggerParams.
 type UpdateWorkflow_Data_Attributes_TriggerParams struct {
@@ -60037,6 +65207,9 @@ type UpdateWorkflowActionItemFormFieldCondition struct {
 			SelectedUserIds          *[]int                                                                       `json:"selected_user_ids,omitempty"`
 			Values                   *[]string                                                                    `json:"values,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                            `json:"id,omitempty"`
 		Type UpdateWorkflowActionItemFormFieldConditionDataType `json:"type"`
 	} `json:"data"`
 }
@@ -60056,6 +65229,9 @@ type UpdateWorkflowCustomFieldSelection struct {
 			SelectedOptionIds *[]int                                                             `json:"selected_option_ids,omitempty"`
 			Values            *[]string                                                          `json:"values,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                    `json:"id,omitempty"`
 		Type UpdateWorkflowCustomFieldSelectionDataType `json:"type"`
 	} `json:"data"`
 }
@@ -60083,6 +65259,9 @@ type UpdateWorkflowFormFieldCondition struct {
 			SelectedUserIds          *[]int                                                           `json:"selected_user_ids,omitempty"`
 			Values                   *[]string                                                        `json:"values,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                  `json:"id,omitempty"`
 		Type UpdateWorkflowFormFieldConditionDataType `json:"type"`
 	} `json:"data"`
 }
@@ -60114,7 +65293,14 @@ type UpdateWorkflowGroup struct {
 
 			// Position The position of the workflow group
 			Position *int `json:"position,omitempty"`
+
+			// Slug Deprecated. `slug` is derived from `name` and `kind`; any submitted value is ignored. This property will be removed from the request schema in a future version.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Slug *string `json:"slug,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                     `json:"id,omitempty"`
 		Type UpdateWorkflowGroupDataType `json:"type"`
 	} `json:"data"`
 }
@@ -60142,6 +65328,9 @@ type UpdateWorkflowTask struct {
 			SkipOnFailure *bool                                          `json:"skip_on_failure,omitempty"`
 			TaskParams    *UpdateWorkflowTask_Data_Attributes_TaskParams `json:"task_params,omitempty"`
 		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                    `json:"id,omitempty"`
 		Type UpdateWorkflowTaskDataType `json:"type"`
 	} `json:"data"`
 }
@@ -60690,13 +65879,25 @@ type Workflow struct {
 	CreatedAt string `json:"created_at"`
 
 	// Description The description of the workflow
-	Description      *string   `json:"description,omitempty"`
-	Enabled          *bool     `json:"enabled,omitempty"`
-	EnvironmentIds   *[]string `json:"environment_ids,omitempty"`
-	FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
-	GroupIds         *[]string `json:"group_ids,omitempty"`
-	IncidentRoleIds  *[]string `json:"incident_role_ids,omitempty"`
-	IncidentTypeIds  *[]string `json:"incident_type_ids,omitempty"`
+	Description    *string   `json:"description,omitempty"`
+	Enabled        *bool     `json:"enabled,omitempty"`
+	EnvironmentIds *[]string `json:"environment_ids,omitempty"`
+
+	// FailureNotificationChannels Slack channels notified when a run of this workflow fails. Used when `failure_notification_mode` is `custom`.
+	FailureNotificationChannels *[]struct {
+		// Id Slack channel ID. Liquid is allowed, for example `{{ incident.slack_channel_id }}` for the incident channel.
+		Id string `json:"id"`
+
+		// Name Slack channel name
+		Name string `json:"name"`
+	} `json:"failure_notification_channels,omitempty"`
+
+	// FailureNotificationMode Where failure notifications for this workflow are sent. `inherit` uses the account default channel, `custom` uses `failure_notification_channels`, `off` suppresses them.
+	FailureNotificationMode *WorkflowFailureNotificationMode `json:"failure_notification_mode,omitempty"`
+	FunctionalityIds        *[]string                        `json:"functionality_ids,omitempty"`
+	GroupIds                *[]string                        `json:"group_ids,omitempty"`
+	IncidentRoleIds         *[]string                        `json:"incident_role_ids,omitempty"`
+	IncidentTypeIds         *[]string                        `json:"incident_type_ids,omitempty"`
 
 	// Locked Restricts workflow edits to admins when turned on. Only admins can set this field.
 	Locked *bool `json:"locked,omitempty"`
@@ -60733,6 +65934,9 @@ type Workflow struct {
 	// WorkflowGroupId The group this workflow belongs to.
 	WorkflowGroupId *string `json:"workflow_group_id,omitempty"`
 }
+
+// WorkflowFailureNotificationMode Where failure notifications for this workflow are sent. `inherit` uses the account default channel, `custom` uses `failure_notification_channels`, `off` suppresses them.
+type WorkflowFailureNotificationMode string
 
 // WorkflowRepeatOn Repeat on weekdays
 type WorkflowRepeatOn string
@@ -61958,6 +67162,9 @@ type CreateEdgeConnectorApplicationVndAPIPlusJSONBody struct {
 			// Name Connector name
 			Name string `json:"name"`
 
+			// OwnerGroupIds IDs of the teams (groups) that own this connector
+			OwnerGroupIds *[]openapi_types.UUID `json:"owner_group_ids,omitempty"`
+
 			// Status Connector status
 			Status *CreateEdgeConnectorApplicationVndAPIPlusJSONBodyDataAttributesStatus `json:"status,omitempty"`
 
@@ -62039,8 +67246,11 @@ type UpdateEdgeConnectorApplicationVndAPIPlusJSONBody struct {
 			Description *string `json:"description,omitempty"`
 
 			// Filters Event filters
-			Filters       *map[string]interface{}                                               `json:"filters,omitempty"`
-			Name          *string                                                               `json:"name,omitempty"`
+			Filters *map[string]interface{} `json:"filters,omitempty"`
+			Name    *string                 `json:"name,omitempty"`
+
+			// OwnerGroupIds IDs of the teams (groups) that own this connector
+			OwnerGroupIds *[]openapi_types.UUID                                                 `json:"owner_group_ids,omitempty"`
 			Status        *UpdateEdgeConnectorApplicationVndAPIPlusJSONBodyDataAttributesStatus `json:"status,omitempty"`
 			Subscriptions *[]string                                                             `json:"subscriptions,omitempty"`
 		} `json:"attributes,omitempty"`
@@ -62692,6 +67902,12 @@ type ListIncidentsParamsSort string
 // ListIncidentsParamsInclude defines parameters for ListIncidents.
 type ListIncidentsParamsInclude string
 
+// CreateIncidentParams defines parameters for CreateIncident.
+type CreateIncidentParams struct {
+	// IdempotencyKey Optional client-generated key that makes creation safe to retry. Within 24 hours, a repeat request carrying the same key returns the incident created by the first request with status 200 instead of creating a duplicate. Keys are scoped to the team. Keys longer than 255 characters are rejected with 422.
+	IdempotencyKey *string `json:"Idempotency-Key,omitempty"`
+}
+
 // GetIncidentParams defines parameters for GetIncident.
 type GetIncidentParams struct {
 	// Include comma separated if needed. eg: sub_statuses,causes,subscribers
@@ -63010,6 +68226,12 @@ type ListIncidentPostMortemsParams struct {
 	Sort                 *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
+// ListPrivateAgentsParams defines parameters for ListPrivateAgents.
+type ListPrivateAgentsParams struct {
+	PageNumber *int `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int `form:"page[size],omitempty" json:"page[size],omitempty"`
+}
+
 // ListPulsesParams defines parameters for ListPulses.
 type ListPulsesParams struct {
 	Include                 *string `form:"include,omitempty" json:"include,omitempty"`
@@ -63177,9 +68399,12 @@ type ListScheduleRotationUsersParams struct {
 
 // ListSchedulesParams defines parameters for ListSchedules.
 type ListSchedulesParams struct {
-	Include            *string `form:"include,omitempty" json:"include,omitempty"`
-	FilterSearch       *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
-	FilterName         *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+	Include      *string `form:"include,omitempty" json:"include,omitempty"`
+	FilterSearch *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterName   *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+
+	// FilterTeamIds Filter schedules by owning team IDs. Comma-separate multiple values.
+	FilterTeamIds      *string `form:"filter[team_ids],omitempty" json:"filter[team_ids],omitempty"`
 	FilterCreatedAtGt  *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
 	FilterCreatedAtGte *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
 	FilterCreatedAtLt  *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
@@ -63188,6 +68413,10 @@ type ListSchedulesParams struct {
 	FilterNameNotEq    *string `form:"filter[name][not_eq],omitempty" json:"filter[name][not_eq],omitempty"`
 	FilterNameIn       *string `form:"filter[name][in],omitempty" json:"filter[name][in],omitempty"`
 	FilterNameNotIn    *string `form:"filter[name][not_in],omitempty" json:"filter[name][not_in],omitempty"`
+	FilterTeamIdsEq    *string `form:"filter[team_ids][eq],omitempty" json:"filter[team_ids][eq],omitempty"`
+	FilterTeamIdsNotEq *string `form:"filter[team_ids][not_eq],omitempty" json:"filter[team_ids][not_eq],omitempty"`
+	FilterTeamIdsIn    *string `form:"filter[team_ids][in],omitempty" json:"filter[team_ids][in],omitempty"`
+	FilterTeamIdsNotIn *string `form:"filter[team_ids][not_in],omitempty" json:"filter[team_ids][not_in],omitempty"`
 	PageNumber         *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
 	PageSize           *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
@@ -63336,10 +68565,10 @@ type ListShiftsParams struct {
 	// Include comma separated if needed. eg: shift_override,user. Note: `user` is deprecated, use `assignee` instead.
 	Include *ListShiftsParamsInclude `form:"include,omitempty" json:"include,omitempty"`
 
-	// From Start range for shifts in ISO-8601 format (e.g., 2025-01-01T00:00:00Z or 2025-01-01T00:00:00+00:00)
+	// From Start range for shifts in ISO-8601 format. When omitted with `to`, defaults to `to` for a point-in-time lookup; when both bounds are omitted, defaults to the current time through one month ahead.
 	From *string `form:"from,omitempty" json:"from,omitempty"`
 
-	// To End range for shifts in ISO-8601 format (e.g., 2025-01-01T00:00:00Z or 2025-01-01T00:00:00+00:00)
+	// To End range for shifts in ISO-8601 format. When omitted with `from`, defaults to `from`; when both bounds are omitted, defaults to the current time through one month ahead.
 	To          *string   `form:"to,omitempty" json:"to,omitempty"`
 	UserIds     *[]int    `form:"user_ids[],omitempty" json:"user_ids[],omitempty"`
 	ScheduleIds *[]string `form:"schedule_ids[],omitempty" json:"schedule_ids[],omitempty"`
@@ -63397,6 +68626,13 @@ type ListStatusPagesParams struct {
 	FilterSlugIn       *string `form:"filter[slug][in],omitempty" json:"filter[slug][in],omitempty"`
 	FilterSlugNotIn    *string `form:"filter[slug][not_in],omitempty" json:"filter[slug][not_in],omitempty"`
 	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
+// ListStatusPageAnnouncementsParams defines parameters for ListStatusPageAnnouncements.
+type ListStatusPageAnnouncementsParams struct {
+	Include    *string `form:"include,omitempty" json:"include,omitempty"`
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
 // ListStatusPageComponentGroupsParams defines parameters for ListStatusPageComponentGroups.
@@ -63733,6 +68969,9 @@ type ListWorkflowTasksParams struct {
 // UpdateIncidentActionItemApplicationVndAPIPlusJSONRequestBody defines body for UpdateIncidentActionItem for application/vnd.api+json ContentType.
 type UpdateIncidentActionItemApplicationVndAPIPlusJSONRequestBody = UpdateIncidentActionItem
 
+// UpdateAlertConfigurationApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlertConfiguration for application/vnd.api+json ContentType.
+type UpdateAlertConfigurationApplicationVndAPIPlusJSONRequestBody = UpdateAlertConfiguration
+
 // UpdateAlertEventApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlertEvent for application/vnd.api+json ContentType.
 type UpdateAlertEventApplicationVndAPIPlusJSONRequestBody = UpdateAlertEvent
 
@@ -63747,12 +68986,6 @@ type CreateAlertGroupApplicationVndAPIPlusJSONRequestBody = NewAlertGroup
 
 // UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlertGroup for application/vnd.api+json ContentType.
 type UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody = UpdateAlertGroup
-
-// CreateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody defines body for CreateAlertRetriggerRule for application/vnd.api+json ContentType.
-type CreateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody = NewAlertRetriggerRule
-
-// UpdateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlertRetriggerRule for application/vnd.api+json ContentType.
-type UpdateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody = UpdateAlertRetriggerRule
 
 // CreateAlertRouteApplicationVndAPIPlusJSONRequestBody defines body for CreateAlertRoute for application/vnd.api+json ContentType.
 type CreateAlertRouteApplicationVndAPIPlusJSONRequestBody = NewAlertRoute
@@ -63798,6 +69031,9 @@ type ResolveAlertApplicationVndAPIPlusJSONRequestBody = ResolveAlert
 
 // SnoozeAlertApplicationVndAPIPlusJSONRequestBody defines body for SnoozeAlert for application/vnd.api+json ContentType.
 type SnoozeAlertApplicationVndAPIPlusJSONRequestBody = SnoozeAlert
+
+// UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody defines body for UpdateStatusPageAnnouncement for application/vnd.api+json ContentType.
+type UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody = UpdateStatusPageAnnouncement
 
 // CreateApiKeyApplicationVndAPIPlusJSONRequestBody defines body for CreateApiKey for application/vnd.api+json ContentType.
 type CreateApiKeyApplicationVndAPIPlusJSONRequestBody = NewApiKey
@@ -64201,6 +69437,9 @@ type UpdatePostmortemTemplateApplicationVndAPIPlusJSONRequestBody = UpdatePostMo
 // UpdateIncidentPostmortemApplicationVndAPIPlusJSONRequestBody defines body for UpdateIncidentPostmortem for application/vnd.api+json ContentType.
 type UpdateIncidentPostmortemApplicationVndAPIPlusJSONRequestBody = UpdateIncidentPostMortem
 
+// UpdatePrivateAgentApplicationVndAPIPlusJSONRequestBody defines body for UpdatePrivateAgent for application/vnd.api+json ContentType.
+type UpdatePrivateAgentApplicationVndAPIPlusJSONRequestBody = PrivateAgentUpdate
+
 // CreatePulseApplicationVndAPIPlusJSONRequestBody defines body for CreatePulse for application/vnd.api+json ContentType.
 type CreatePulseApplicationVndAPIPlusJSONRequestBody = NewPulse
 
@@ -64308,6 +69547,9 @@ type CreateStatusPageApplicationVndAPIPlusJSONRequestBody = NewStatusPage
 
 // UpdateStatusPageApplicationVndAPIPlusJSONRequestBody defines body for UpdateStatusPage for application/vnd.api+json ContentType.
 type UpdateStatusPageApplicationVndAPIPlusJSONRequestBody = UpdateStatusPage
+
+// CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody defines body for CreateStatusPageAnnouncement for application/vnd.api+json ContentType.
+type CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody = NewStatusPageAnnouncement
 
 // CreateStatusPageComponentGroupApplicationVndAPIPlusJSONRequestBody defines body for CreateStatusPageComponentGroup for application/vnd.api+json ContentType.
 type CreateStatusPageComponentGroupApplicationVndAPIPlusJSONRequestBody = NewStatusPageComponentGroup
@@ -64649,6 +69891,20 @@ func (t AddSlackBookmarkTaskParams) MarshalJSON() ([]byte, error) {
 		}
 	}
 
+	if t.RetryCount != nil {
+		object["retry_count"], err = json.Marshal(t.RetryCount)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'retry_count': %w", err)
+		}
+	}
+
+	if t.RetryWaitTime != nil {
+		object["retry_wait_time"], err = json.Marshal(t.RetryWaitTime)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'retry_wait_time': %w", err)
+		}
+	}
+
 	if t.TaskType != nil {
 		object["task_type"], err = json.Marshal(t.TaskType)
 		if err != nil {
@@ -64702,6 +69958,20 @@ func (t *AddSlackBookmarkTaskParams) UnmarshalJSON(b []byte) error {
 		err = json.Unmarshal(raw, &t.PlaybookId)
 		if err != nil {
 			return fmt.Errorf("error reading 'playbook_id': %w", err)
+		}
+	}
+
+	if raw, found := object["retry_count"]; found {
+		err = json.Unmarshal(raw, &t.RetryCount)
+		if err != nil {
+			return fmt.Errorf("error reading 'retry_count': %w", err)
+		}
+	}
+
+	if raw, found := object["retry_wait_time"]; found {
+		err = json.Unmarshal(raw, &t.RetryWaitTime)
+		if err != nil {
+			return fmt.Errorf("error reading 'retry_wait_time': %w", err)
 		}
 	}
 
@@ -66043,6 +71313,7 @@ func (t NewWorkflow_Data_Attributes_TriggerParams) AsIncidentTriggerParams() (In
 
 // FromIncidentTriggerParams overwrites any union data inside the NewWorkflow_Data_Attributes_TriggerParams as the provided IncidentTriggerParams
 func (t *NewWorkflow_Data_Attributes_TriggerParams) FromIncidentTriggerParams(v IncidentTriggerParams) error {
+	v.TriggerType = "incident"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -66050,6 +71321,7 @@ func (t *NewWorkflow_Data_Attributes_TriggerParams) FromIncidentTriggerParams(v 
 
 // MergeIncidentTriggerParams performs a merge with any union data inside the NewWorkflow_Data_Attributes_TriggerParams, using the provided IncidentTriggerParams
 func (t *NewWorkflow_Data_Attributes_TriggerParams) MergeIncidentTriggerParams(v IncidentTriggerParams) error {
+	v.TriggerType = "incident"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -66069,6 +71341,7 @@ func (t NewWorkflow_Data_Attributes_TriggerParams) AsActionItemTriggerParams() (
 
 // FromActionItemTriggerParams overwrites any union data inside the NewWorkflow_Data_Attributes_TriggerParams as the provided ActionItemTriggerParams
 func (t *NewWorkflow_Data_Attributes_TriggerParams) FromActionItemTriggerParams(v ActionItemTriggerParams) error {
+	v.TriggerType = "action_item"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -66076,6 +71349,7 @@ func (t *NewWorkflow_Data_Attributes_TriggerParams) FromActionItemTriggerParams(
 
 // MergeActionItemTriggerParams performs a merge with any union data inside the NewWorkflow_Data_Attributes_TriggerParams, using the provided ActionItemTriggerParams
 func (t *NewWorkflow_Data_Attributes_TriggerParams) MergeActionItemTriggerParams(v ActionItemTriggerParams) error {
+	v.TriggerType = "action_item"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -66095,6 +71369,7 @@ func (t NewWorkflow_Data_Attributes_TriggerParams) AsAlertTriggerParams() (Alert
 
 // FromAlertTriggerParams overwrites any union data inside the NewWorkflow_Data_Attributes_TriggerParams as the provided AlertTriggerParams
 func (t *NewWorkflow_Data_Attributes_TriggerParams) FromAlertTriggerParams(v AlertTriggerParams) error {
+	v.TriggerType = "alert"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -66102,6 +71377,7 @@ func (t *NewWorkflow_Data_Attributes_TriggerParams) FromAlertTriggerParams(v Ale
 
 // MergeAlertTriggerParams performs a merge with any union data inside the NewWorkflow_Data_Attributes_TriggerParams, using the provided AlertTriggerParams
 func (t *NewWorkflow_Data_Attributes_TriggerParams) MergeAlertTriggerParams(v AlertTriggerParams) error {
+	v.TriggerType = "alert"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -66121,6 +71397,7 @@ func (t NewWorkflow_Data_Attributes_TriggerParams) AsPulseTriggerParams() (Pulse
 
 // FromPulseTriggerParams overwrites any union data inside the NewWorkflow_Data_Attributes_TriggerParams as the provided PulseTriggerParams
 func (t *NewWorkflow_Data_Attributes_TriggerParams) FromPulseTriggerParams(v PulseTriggerParams) error {
+	v.TriggerType = "pulse"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -66128,6 +71405,7 @@ func (t *NewWorkflow_Data_Attributes_TriggerParams) FromPulseTriggerParams(v Pul
 
 // MergePulseTriggerParams performs a merge with any union data inside the NewWorkflow_Data_Attributes_TriggerParams, using the provided PulseTriggerParams
 func (t *NewWorkflow_Data_Attributes_TriggerParams) MergePulseTriggerParams(v PulseTriggerParams) error {
+	v.TriggerType = "pulse"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -66147,6 +71425,7 @@ func (t NewWorkflow_Data_Attributes_TriggerParams) AsSimpleTriggerParams() (Simp
 
 // FromSimpleTriggerParams overwrites any union data inside the NewWorkflow_Data_Attributes_TriggerParams as the provided SimpleTriggerParams
 func (t *NewWorkflow_Data_Attributes_TriggerParams) FromSimpleTriggerParams(v SimpleTriggerParams) error {
+	v.TriggerType = "simple"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -66154,6 +71433,7 @@ func (t *NewWorkflow_Data_Attributes_TriggerParams) FromSimpleTriggerParams(v Si
 
 // MergeSimpleTriggerParams performs a merge with any union data inside the NewWorkflow_Data_Attributes_TriggerParams, using the provided SimpleTriggerParams
 func (t *NewWorkflow_Data_Attributes_TriggerParams) MergeSimpleTriggerParams(v SimpleTriggerParams) error {
+	v.TriggerType = "simple"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -66162,6 +71442,35 @@ func (t *NewWorkflow_Data_Attributes_TriggerParams) MergeSimpleTriggerParams(v S
 	merged, err := runtime.JSONMerge(t.union, b)
 	t.union = merged
 	return err
+}
+
+func (t NewWorkflow_Data_Attributes_TriggerParams) Discriminator() (string, error) {
+	var discriminator struct {
+		Discriminator string `json:"trigger_type"`
+	}
+	err := json.Unmarshal(t.union, &discriminator)
+	return discriminator.Discriminator, err
+}
+
+func (t NewWorkflow_Data_Attributes_TriggerParams) ValueByDiscriminator() (interface{}, error) {
+	discriminator, err := t.Discriminator()
+	if err != nil {
+		return nil, err
+	}
+	switch discriminator {
+	case "action_item":
+		return t.AsActionItemTriggerParams()
+	case "alert":
+		return t.AsAlertTriggerParams()
+	case "incident":
+		return t.AsIncidentTriggerParams()
+	case "pulse":
+		return t.AsPulseTriggerParams()
+	case "simple":
+		return t.AsSimpleTriggerParams()
+	default:
+		return nil, errors.New("unknown discriminator value: " + discriminator)
+	}
 }
 
 func (t NewWorkflow_Data_Attributes_TriggerParams) MarshalJSON() ([]byte, error) {
@@ -69174,6 +74483,32 @@ func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeRenameSlackChannelTask
 	return err
 }
 
+// AsRemoveFromSlackChannelTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a RemoveFromSlackChannelTaskParams
+func (t NewWorkflowTask_Data_Attributes_TaskParams) AsRemoveFromSlackChannelTaskParams() (RemoveFromSlackChannelTaskParams, error) {
+	var body RemoveFromSlackChannelTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRemoveFromSlackChannelTaskParams overwrites any union data inside the NewWorkflowTask_Data_Attributes_TaskParams as the provided RemoveFromSlackChannelTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) FromRemoveFromSlackChannelTaskParams(v RemoveFromSlackChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeRemoveFromSlackChannelTaskParams performs a merge with any union data inside the NewWorkflowTask_Data_Attributes_TaskParams, using the provided RemoveFromSlackChannelTaskParams
+func (t *NewWorkflowTask_Data_Attributes_TaskParams) MergeRemoveFromSlackChannelTaskParams(v RemoveFromSlackChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsChangeSlackChannelPrivacyTaskParams returns the union data inside the NewWorkflowTask_Data_Attributes_TaskParams as a ChangeSlackChannelPrivacyTaskParams
 func (t NewWorkflowTask_Data_Attributes_TaskParams) AsChangeSlackChannelPrivacyTaskParams() (ChangeSlackChannelPrivacyTaskParams, error) {
 	var body ChangeSlackChannelPrivacyTaskParams
@@ -70672,6 +76007,13 @@ func (t SendSlackBlocksTaskParams) MarshalJSON() ([]byte, error) {
 		}
 	}
 
+	if t.AllowCrossWorkflowThreading != nil {
+		object["allow_cross_workflow_threading"], err = json.Marshal(t.AllowCrossWorkflowThreading)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'allow_cross_workflow_threading': %w", err)
+		}
+	}
+
 	if t.Attachments != nil {
 		object["attachments"], err = json.Marshal(t.Attachments)
 		if err != nil {
@@ -70716,6 +76058,20 @@ func (t SendSlackBlocksTaskParams) MarshalJSON() ([]byte, error) {
 		object["pin_to_channel"], err = json.Marshal(t.PinToChannel)
 		if err != nil {
 			return nil, fmt.Errorf("error marshaling 'pin_to_channel': %w", err)
+		}
+	}
+
+	if t.RetryCount != nil {
+		object["retry_count"], err = json.Marshal(t.RetryCount)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'retry_count': %w", err)
+		}
+	}
+
+	if t.RetryWaitTime != nil {
+		object["retry_wait_time"], err = json.Marshal(t.RetryWaitTime)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'retry_wait_time': %w", err)
 		}
 	}
 
@@ -70782,6 +76138,13 @@ func (t *SendSlackBlocksTaskParams) UnmarshalJSON(b []byte) error {
 		return err
 	}
 
+	if raw, found := object["allow_cross_workflow_threading"]; found {
+		err = json.Unmarshal(raw, &t.AllowCrossWorkflowThreading)
+		if err != nil {
+			return fmt.Errorf("error reading 'allow_cross_workflow_threading': %w", err)
+		}
+	}
+
 	if raw, found := object["attachments"]; found {
 		err = json.Unmarshal(raw, &t.Attachments)
 		if err != nil {
@@ -70828,6 +76191,20 @@ func (t *SendSlackBlocksTaskParams) UnmarshalJSON(b []byte) error {
 		err = json.Unmarshal(raw, &t.PinToChannel)
 		if err != nil {
 			return fmt.Errorf("error reading 'pin_to_channel': %w", err)
+		}
+	}
+
+	if raw, found := object["retry_count"]; found {
+		err = json.Unmarshal(raw, &t.RetryCount)
+		if err != nil {
+			return fmt.Errorf("error reading 'retry_count': %w", err)
+		}
+	}
+
+	if raw, found := object["retry_wait_time"]; found {
+		err = json.Unmarshal(raw, &t.RetryWaitTime)
+		if err != nil {
+			return fmt.Errorf("error reading 'retry_wait_time': %w", err)
 		}
 	}
 
@@ -70981,6 +76358,13 @@ func (t SendSlackMessageTaskParams) MarshalJSON() ([]byte, error) {
 		}
 	}
 
+	if t.AllowCrossWorkflowThreading != nil {
+		object["allow_cross_workflow_threading"], err = json.Marshal(t.AllowCrossWorkflowThreading)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'allow_cross_workflow_threading': %w", err)
+		}
+	}
+
 	if t.BroadcastThreadReplyToChannel != nil {
 		object["broadcast_thread_reply_to_channel"], err = json.Marshal(t.BroadcastThreadReplyToChannel)
 		if err != nil {
@@ -71013,6 +76397,20 @@ func (t SendSlackMessageTaskParams) MarshalJSON() ([]byte, error) {
 		object["pin_to_channel"], err = json.Marshal(t.PinToChannel)
 		if err != nil {
 			return nil, fmt.Errorf("error marshaling 'pin_to_channel': %w", err)
+		}
+	}
+
+	if t.RetryCount != nil {
+		object["retry_count"], err = json.Marshal(t.RetryCount)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'retry_count': %w", err)
+		}
+	}
+
+	if t.RetryWaitTime != nil {
+		object["retry_wait_time"], err = json.Marshal(t.RetryWaitTime)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'retry_wait_time': %w", err)
 		}
 	}
 
@@ -71091,6 +76489,13 @@ func (t *SendSlackMessageTaskParams) UnmarshalJSON(b []byte) error {
 		}
 	}
 
+	if raw, found := object["allow_cross_workflow_threading"]; found {
+		err = json.Unmarshal(raw, &t.AllowCrossWorkflowThreading)
+		if err != nil {
+			return fmt.Errorf("error reading 'allow_cross_workflow_threading': %w", err)
+		}
+	}
+
 	if raw, found := object["broadcast_thread_reply_to_channel"]; found {
 		err = json.Unmarshal(raw, &t.BroadcastThreadReplyToChannel)
 		if err != nil {
@@ -71123,6 +76528,20 @@ func (t *SendSlackMessageTaskParams) UnmarshalJSON(b []byte) error {
 		err = json.Unmarshal(raw, &t.PinToChannel)
 		if err != nil {
 			return fmt.Errorf("error reading 'pin_to_channel': %w", err)
+		}
+	}
+
+	if raw, found := object["retry_count"]; found {
+		err = json.Unmarshal(raw, &t.RetryCount)
+		if err != nil {
+			return fmt.Errorf("error reading 'retry_count': %w", err)
+		}
+	}
+
+	if raw, found := object["retry_wait_time"]; found {
+		err = json.Unmarshal(raw, &t.RetryWaitTime)
+		if err != nil {
+			return fmt.Errorf("error reading 'retry_wait_time': %w", err)
 		}
 	}
 
@@ -71344,6 +76763,7 @@ func (t UpdateWorkflow_Data_Attributes_TriggerParams) AsIncidentTriggerParams() 
 
 // FromIncidentTriggerParams overwrites any union data inside the UpdateWorkflow_Data_Attributes_TriggerParams as the provided IncidentTriggerParams
 func (t *UpdateWorkflow_Data_Attributes_TriggerParams) FromIncidentTriggerParams(v IncidentTriggerParams) error {
+	v.TriggerType = "incident"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -71351,6 +76771,7 @@ func (t *UpdateWorkflow_Data_Attributes_TriggerParams) FromIncidentTriggerParams
 
 // MergeIncidentTriggerParams performs a merge with any union data inside the UpdateWorkflow_Data_Attributes_TriggerParams, using the provided IncidentTriggerParams
 func (t *UpdateWorkflow_Data_Attributes_TriggerParams) MergeIncidentTriggerParams(v IncidentTriggerParams) error {
+	v.TriggerType = "incident"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -71370,6 +76791,7 @@ func (t UpdateWorkflow_Data_Attributes_TriggerParams) AsActionItemTriggerParams(
 
 // FromActionItemTriggerParams overwrites any union data inside the UpdateWorkflow_Data_Attributes_TriggerParams as the provided ActionItemTriggerParams
 func (t *UpdateWorkflow_Data_Attributes_TriggerParams) FromActionItemTriggerParams(v ActionItemTriggerParams) error {
+	v.TriggerType = "action_item"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -71377,6 +76799,7 @@ func (t *UpdateWorkflow_Data_Attributes_TriggerParams) FromActionItemTriggerPara
 
 // MergeActionItemTriggerParams performs a merge with any union data inside the UpdateWorkflow_Data_Attributes_TriggerParams, using the provided ActionItemTriggerParams
 func (t *UpdateWorkflow_Data_Attributes_TriggerParams) MergeActionItemTriggerParams(v ActionItemTriggerParams) error {
+	v.TriggerType = "action_item"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -71396,6 +76819,7 @@ func (t UpdateWorkflow_Data_Attributes_TriggerParams) AsAlertTriggerParams() (Al
 
 // FromAlertTriggerParams overwrites any union data inside the UpdateWorkflow_Data_Attributes_TriggerParams as the provided AlertTriggerParams
 func (t *UpdateWorkflow_Data_Attributes_TriggerParams) FromAlertTriggerParams(v AlertTriggerParams) error {
+	v.TriggerType = "alert"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -71403,6 +76827,7 @@ func (t *UpdateWorkflow_Data_Attributes_TriggerParams) FromAlertTriggerParams(v 
 
 // MergeAlertTriggerParams performs a merge with any union data inside the UpdateWorkflow_Data_Attributes_TriggerParams, using the provided AlertTriggerParams
 func (t *UpdateWorkflow_Data_Attributes_TriggerParams) MergeAlertTriggerParams(v AlertTriggerParams) error {
+	v.TriggerType = "alert"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -71422,6 +76847,7 @@ func (t UpdateWorkflow_Data_Attributes_TriggerParams) AsPulseTriggerParams() (Pu
 
 // FromPulseTriggerParams overwrites any union data inside the UpdateWorkflow_Data_Attributes_TriggerParams as the provided PulseTriggerParams
 func (t *UpdateWorkflow_Data_Attributes_TriggerParams) FromPulseTriggerParams(v PulseTriggerParams) error {
+	v.TriggerType = "pulse"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -71429,6 +76855,7 @@ func (t *UpdateWorkflow_Data_Attributes_TriggerParams) FromPulseTriggerParams(v 
 
 // MergePulseTriggerParams performs a merge with any union data inside the UpdateWorkflow_Data_Attributes_TriggerParams, using the provided PulseTriggerParams
 func (t *UpdateWorkflow_Data_Attributes_TriggerParams) MergePulseTriggerParams(v PulseTriggerParams) error {
+	v.TriggerType = "pulse"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -71448,6 +76875,7 @@ func (t UpdateWorkflow_Data_Attributes_TriggerParams) AsSimpleTriggerParams() (S
 
 // FromSimpleTriggerParams overwrites any union data inside the UpdateWorkflow_Data_Attributes_TriggerParams as the provided SimpleTriggerParams
 func (t *UpdateWorkflow_Data_Attributes_TriggerParams) FromSimpleTriggerParams(v SimpleTriggerParams) error {
+	v.TriggerType = "simple"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -71455,6 +76883,7 @@ func (t *UpdateWorkflow_Data_Attributes_TriggerParams) FromSimpleTriggerParams(v
 
 // MergeSimpleTriggerParams performs a merge with any union data inside the UpdateWorkflow_Data_Attributes_TriggerParams, using the provided SimpleTriggerParams
 func (t *UpdateWorkflow_Data_Attributes_TriggerParams) MergeSimpleTriggerParams(v SimpleTriggerParams) error {
+	v.TriggerType = "simple"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -71463,6 +76892,35 @@ func (t *UpdateWorkflow_Data_Attributes_TriggerParams) MergeSimpleTriggerParams(
 	merged, err := runtime.JSONMerge(t.union, b)
 	t.union = merged
 	return err
+}
+
+func (t UpdateWorkflow_Data_Attributes_TriggerParams) Discriminator() (string, error) {
+	var discriminator struct {
+		Discriminator string `json:"trigger_type"`
+	}
+	err := json.Unmarshal(t.union, &discriminator)
+	return discriminator.Discriminator, err
+}
+
+func (t UpdateWorkflow_Data_Attributes_TriggerParams) ValueByDiscriminator() (interface{}, error) {
+	discriminator, err := t.Discriminator()
+	if err != nil {
+		return nil, err
+	}
+	switch discriminator {
+	case "action_item":
+		return t.AsActionItemTriggerParams()
+	case "alert":
+		return t.AsAlertTriggerParams()
+	case "incident":
+		return t.AsIncidentTriggerParams()
+	case "pulse":
+		return t.AsPulseTriggerParams()
+	case "simple":
+		return t.AsSimpleTriggerParams()
+	default:
+		return nil, errors.New("unknown discriminator value: " + discriminator)
+	}
 }
 
 func (t UpdateWorkflow_Data_Attributes_TriggerParams) MarshalJSON() ([]byte, error) {
@@ -74309,6 +79767,32 @@ func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeRenameSlackChannelT
 	return err
 }
 
+// AsRemoveFromSlackChannelTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a RemoveFromSlackChannelTaskParams
+func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsRemoveFromSlackChannelTaskParams() (RemoveFromSlackChannelTaskParams, error) {
+	var body RemoveFromSlackChannelTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRemoveFromSlackChannelTaskParams overwrites any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as the provided RemoveFromSlackChannelTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) FromRemoveFromSlackChannelTaskParams(v RemoveFromSlackChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeRemoveFromSlackChannelTaskParams performs a merge with any union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams, using the provided RemoveFromSlackChannelTaskParams
+func (t *UpdateWorkflowTask_Data_Attributes_TaskParams) MergeRemoveFromSlackChannelTaskParams(v RemoveFromSlackChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsChangeSlackChannelPrivacyTaskParams returns the union data inside the UpdateWorkflowTask_Data_Attributes_TaskParams as a ChangeSlackChannelPrivacyTaskParams
 func (t UpdateWorkflowTask_Data_Attributes_TaskParams) AsChangeSlackChannelPrivacyTaskParams() (ChangeSlackChannelPrivacyTaskParams, error) {
 	var body ChangeSlackChannelPrivacyTaskParams
@@ -75394,6 +80878,7 @@ func (t Workflow_TriggerParams) AsIncidentTriggerParams() (IncidentTriggerParams
 
 // FromIncidentTriggerParams overwrites any union data inside the Workflow_TriggerParams as the provided IncidentTriggerParams
 func (t *Workflow_TriggerParams) FromIncidentTriggerParams(v IncidentTriggerParams) error {
+	v.TriggerType = "incident"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -75401,6 +80886,7 @@ func (t *Workflow_TriggerParams) FromIncidentTriggerParams(v IncidentTriggerPara
 
 // MergeIncidentTriggerParams performs a merge with any union data inside the Workflow_TriggerParams, using the provided IncidentTriggerParams
 func (t *Workflow_TriggerParams) MergeIncidentTriggerParams(v IncidentTriggerParams) error {
+	v.TriggerType = "incident"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -75420,6 +80906,7 @@ func (t Workflow_TriggerParams) AsActionItemTriggerParams() (ActionItemTriggerPa
 
 // FromActionItemTriggerParams overwrites any union data inside the Workflow_TriggerParams as the provided ActionItemTriggerParams
 func (t *Workflow_TriggerParams) FromActionItemTriggerParams(v ActionItemTriggerParams) error {
+	v.TriggerType = "action_item"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -75427,6 +80914,7 @@ func (t *Workflow_TriggerParams) FromActionItemTriggerParams(v ActionItemTrigger
 
 // MergeActionItemTriggerParams performs a merge with any union data inside the Workflow_TriggerParams, using the provided ActionItemTriggerParams
 func (t *Workflow_TriggerParams) MergeActionItemTriggerParams(v ActionItemTriggerParams) error {
+	v.TriggerType = "action_item"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -75446,6 +80934,7 @@ func (t Workflow_TriggerParams) AsAlertTriggerParams() (AlertTriggerParams, erro
 
 // FromAlertTriggerParams overwrites any union data inside the Workflow_TriggerParams as the provided AlertTriggerParams
 func (t *Workflow_TriggerParams) FromAlertTriggerParams(v AlertTriggerParams) error {
+	v.TriggerType = "alert"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -75453,6 +80942,7 @@ func (t *Workflow_TriggerParams) FromAlertTriggerParams(v AlertTriggerParams) er
 
 // MergeAlertTriggerParams performs a merge with any union data inside the Workflow_TriggerParams, using the provided AlertTriggerParams
 func (t *Workflow_TriggerParams) MergeAlertTriggerParams(v AlertTriggerParams) error {
+	v.TriggerType = "alert"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -75472,6 +80962,7 @@ func (t Workflow_TriggerParams) AsPulseTriggerParams() (PulseTriggerParams, erro
 
 // FromPulseTriggerParams overwrites any union data inside the Workflow_TriggerParams as the provided PulseTriggerParams
 func (t *Workflow_TriggerParams) FromPulseTriggerParams(v PulseTriggerParams) error {
+	v.TriggerType = "pulse"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -75479,6 +80970,7 @@ func (t *Workflow_TriggerParams) FromPulseTriggerParams(v PulseTriggerParams) er
 
 // MergePulseTriggerParams performs a merge with any union data inside the Workflow_TriggerParams, using the provided PulseTriggerParams
 func (t *Workflow_TriggerParams) MergePulseTriggerParams(v PulseTriggerParams) error {
+	v.TriggerType = "pulse"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -75498,6 +80990,7 @@ func (t Workflow_TriggerParams) AsSimpleTriggerParams() (SimpleTriggerParams, er
 
 // FromSimpleTriggerParams overwrites any union data inside the Workflow_TriggerParams as the provided SimpleTriggerParams
 func (t *Workflow_TriggerParams) FromSimpleTriggerParams(v SimpleTriggerParams) error {
+	v.TriggerType = "simple"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -75505,6 +80998,7 @@ func (t *Workflow_TriggerParams) FromSimpleTriggerParams(v SimpleTriggerParams) 
 
 // MergeSimpleTriggerParams performs a merge with any union data inside the Workflow_TriggerParams, using the provided SimpleTriggerParams
 func (t *Workflow_TriggerParams) MergeSimpleTriggerParams(v SimpleTriggerParams) error {
+	v.TriggerType = "simple"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -75513,6 +81007,35 @@ func (t *Workflow_TriggerParams) MergeSimpleTriggerParams(v SimpleTriggerParams)
 	merged, err := runtime.JSONMerge(t.union, b)
 	t.union = merged
 	return err
+}
+
+func (t Workflow_TriggerParams) Discriminator() (string, error) {
+	var discriminator struct {
+		Discriminator string `json:"trigger_type"`
+	}
+	err := json.Unmarshal(t.union, &discriminator)
+	return discriminator.Discriminator, err
+}
+
+func (t Workflow_TriggerParams) ValueByDiscriminator() (interface{}, error) {
+	discriminator, err := t.Discriminator()
+	if err != nil {
+		return nil, err
+	}
+	switch discriminator {
+	case "action_item":
+		return t.AsActionItemTriggerParams()
+	case "alert":
+		return t.AsAlertTriggerParams()
+	case "incident":
+		return t.AsIncidentTriggerParams()
+	case "pulse":
+		return t.AsPulseTriggerParams()
+	case "simple":
+		return t.AsSimpleTriggerParams()
+	default:
+		return nil, errors.New("unknown discriminator value: " + discriminator)
+	}
 }
 
 func (t Workflow_TriggerParams) MarshalJSON() ([]byte, error) {
@@ -78359,6 +83882,32 @@ func (t *WorkflowTask_TaskParams) MergeRenameSlackChannelTaskParams(v RenameSlac
 	return err
 }
 
+// AsRemoveFromSlackChannelTaskParams returns the union data inside the WorkflowTask_TaskParams as a RemoveFromSlackChannelTaskParams
+func (t WorkflowTask_TaskParams) AsRemoveFromSlackChannelTaskParams() (RemoveFromSlackChannelTaskParams, error) {
+	var body RemoveFromSlackChannelTaskParams
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRemoveFromSlackChannelTaskParams overwrites any union data inside the WorkflowTask_TaskParams as the provided RemoveFromSlackChannelTaskParams
+func (t *WorkflowTask_TaskParams) FromRemoveFromSlackChannelTaskParams(v RemoveFromSlackChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeRemoveFromSlackChannelTaskParams performs a merge with any union data inside the WorkflowTask_TaskParams, using the provided RemoveFromSlackChannelTaskParams
+func (t *WorkflowTask_TaskParams) MergeRemoveFromSlackChannelTaskParams(v RemoveFromSlackChannelTaskParams) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsChangeSlackChannelPrivacyTaskParams returns the union data inside the WorkflowTask_TaskParams as a ChangeSlackChannelPrivacyTaskParams
 func (t WorkflowTask_TaskParams) AsChangeSlackChannelPrivacyTaskParams() (ChangeSlackChannelPrivacyTaskParams, error) {
 	var body ChangeSlackChannelPrivacyTaskParams
@@ -79534,6 +85083,14 @@ type ClientInterface interface {
 	// StreamAiChat request
 	StreamAiChat(ctx context.Context, params *StreamAiChatParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GetAlertConfiguration request
+	GetAlertConfiguration(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateAlertConfigurationWithBody request with any body
+	UpdateAlertConfigurationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateAlertConfigurationWithApplicationVndAPIPlusJSONBody(ctx context.Context, body UpdateAlertConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListAlertEventsFeed request
 	ListAlertEventsFeed(ctx context.Context, params *ListAlertEventsFeedParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -79585,25 +85142,6 @@ type ClientInterface interface {
 	UpdateAlertGroupWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	UpdateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// ListAlertRetriggerRules request
-	ListAlertRetriggerRules(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// CreateAlertRetriggerRuleWithBody request with any body
-	CreateAlertRetriggerRuleWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	CreateAlertRetriggerRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// DeleteAlertRetriggerRule request
-	DeleteAlertRetriggerRule(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetAlertRetriggerRule request
-	GetAlertRetriggerRule(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// UpdateAlertRetriggerRuleWithBody request with any body
-	UpdateAlertRetriggerRuleWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	UpdateAlertRetriggerRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListAlertRoutes request
 	ListAlertRoutes(ctx context.Context, params *ListAlertRoutesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -79730,6 +85268,17 @@ type ClientInterface interface {
 	SnoozeAlertWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	SnoozeAlertWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body SnoozeAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteStatusPageAnnouncement request
+	DeleteStatusPageAnnouncement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetStatusPageAnnouncement request
+	GetStatusPageAnnouncement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateStatusPageAnnouncementWithBody request with any body
+	UpdateStatusPageAnnouncementWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListApiKeys request
 	ListApiKeys(ctx context.Context, params *ListApiKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -80677,9 +86226,9 @@ type ClientInterface interface {
 	ListIncidents(ctx context.Context, params *ListIncidentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIncidentWithBody request with any body
-	CreateIncidentWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateIncidentWithBody(ctx context.Context, params *CreateIncidentParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	CreateIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	CreateIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, params *CreateIncidentParams, body CreateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIncident request
 	DeleteIncident(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -80965,6 +86514,12 @@ type ClientInterface interface {
 
 	UpdateUserPhoneNumberWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ResendVerificationUserPhoneNumber request
+	ResendVerificationUserPhoneNumber(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// VerifyUserPhoneNumber request
+	VerifyUserPhoneNumber(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeletePlaybookTask request
 	DeletePlaybookTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -81032,6 +86587,23 @@ type ClientInterface interface {
 	UpdateIncidentPostmortemWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	UpdateIncidentPostmortemWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateIncidentPostmortemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListPrivateAgents request
+	ListPrivateAgents(ctx context.Context, params *ListPrivateAgentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreatePrivateAgentEnrollmentToken request
+	CreatePrivateAgentEnrollmentToken(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetPrivateAgent request
+	GetPrivateAgent(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdatePrivateAgentWithBody request with any body
+	UpdatePrivateAgentWithBody(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdatePrivateAgentWithApplicationVndAPIPlusJSONBody(ctx context.Context, id openapi_types.UUID, body UpdatePrivateAgentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RevokePrivateAgent request
+	RevokePrivateAgent(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListPulses request
 	ListPulses(ctx context.Context, params *ListPulsesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -81386,6 +86958,14 @@ type ClientInterface interface {
 	UpdateStatusPageWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	UpdateStatusPageWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateStatusPageApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListStatusPageAnnouncements request
+	ListStatusPageAnnouncements(ctx context.Context, statusPageId string, params *ListStatusPageAnnouncementsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateStatusPageAnnouncementWithBody request with any body
+	CreateStatusPageAnnouncementWithBody(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBody(ctx context.Context, statusPageId string, body CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListStatusPageComponentGroups request
 	ListStatusPageComponentGroups(ctx context.Context, statusPageId string, params *ListStatusPageComponentGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -81791,6 +87371,42 @@ func (c *Client) StreamAiChat(ctx context.Context, params *StreamAiChatParams, r
 	return c.Client.Do(req)
 }
 
+func (c *Client) GetAlertConfiguration(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAlertConfigurationRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateAlertConfigurationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAlertConfigurationRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateAlertConfigurationWithApplicationVndAPIPlusJSONBody(ctx context.Context, body UpdateAlertConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateAlertConfigurationRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListAlertEventsFeed(ctx context.Context, params *ListAlertEventsFeedParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListAlertEventsFeedRequest(c.Server, params)
 	if err != nil {
@@ -82009,90 +87625,6 @@ func (c *Client) UpdateAlertGroupWithBody(ctx context.Context, id string, conten
 
 func (c *Client) UpdateAlertGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateAlertGroupRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) ListAlertRetriggerRules(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListAlertRetriggerRulesRequest(c.Server)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) CreateAlertRetriggerRuleWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateAlertRetriggerRuleRequestWithBody(c.Server, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) CreateAlertRetriggerRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateAlertRetriggerRuleRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) DeleteAlertRetriggerRule(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteAlertRetriggerRuleRequest(c.Server, id)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetAlertRetriggerRule(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetAlertRetriggerRuleRequest(c.Server, id)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) UpdateAlertRetriggerRuleWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUpdateAlertRetriggerRuleRequestWithBody(c.Server, id, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) UpdateAlertRetriggerRuleWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUpdateAlertRetriggerRuleRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -82657,6 +88189,54 @@ func (c *Client) SnoozeAlertWithBody(ctx context.Context, id string, contentType
 
 func (c *Client) SnoozeAlertWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body SnoozeAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSnoozeAlertRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteStatusPageAnnouncement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteStatusPageAnnouncementRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetStatusPageAnnouncement(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetStatusPageAnnouncementRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateStatusPageAnnouncementWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateStatusPageAnnouncementRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateStatusPageAnnouncementRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -86803,8 +92383,8 @@ func (c *Client) ListIncidents(ctx context.Context, params *ListIncidentsParams,
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateIncidentWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateIncidentRequestWithBody(c.Server, contentType, body)
+func (c *Client) CreateIncidentWithBody(ctx context.Context, params *CreateIncidentParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateIncidentRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -86815,8 +92395,8 @@ func (c *Client) CreateIncidentWithBody(ctx context.Context, contentType string,
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateIncidentRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+func (c *Client) CreateIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, params *CreateIncidentParams, body CreateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateIncidentRequestWithApplicationVndAPIPlusJSONBody(c.Server, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -88087,6 +93667,30 @@ func (c *Client) UpdateUserPhoneNumberWithApplicationVndAPIPlusJSONBody(ctx cont
 	return c.Client.Do(req)
 }
 
+func (c *Client) ResendVerificationUserPhoneNumber(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewResendVerificationUserPhoneNumberRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) VerifyUserPhoneNumber(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewVerifyUserPhoneNumberRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) DeletePlaybookTask(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeletePlaybookTaskRequest(c.Server, id)
 	if err != nil {
@@ -88377,6 +93981,78 @@ func (c *Client) UpdateIncidentPostmortemWithBody(ctx context.Context, id string
 
 func (c *Client) UpdateIncidentPostmortemWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateIncidentPostmortemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIncidentPostmortemRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListPrivateAgents(ctx context.Context, params *ListPrivateAgentsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListPrivateAgentsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreatePrivateAgentEnrollmentToken(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreatePrivateAgentEnrollmentTokenRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetPrivateAgent(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetPrivateAgentRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdatePrivateAgentWithBody(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdatePrivateAgentRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdatePrivateAgentWithApplicationVndAPIPlusJSONBody(ctx context.Context, id openapi_types.UUID, body UpdatePrivateAgentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdatePrivateAgentRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RevokePrivateAgent(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRevokePrivateAgentRequest(c.Server, id)
 	if err != nil {
 		return nil, err
 	}
@@ -89937,6 +95613,42 @@ func (c *Client) UpdateStatusPageWithBody(ctx context.Context, id string, conten
 
 func (c *Client) UpdateStatusPageWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateStatusPageApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateStatusPageRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListStatusPageAnnouncements(ctx context.Context, statusPageId string, params *ListStatusPageAnnouncementsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListStatusPageAnnouncementsRequest(c.Server, statusPageId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateStatusPageAnnouncementWithBody(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateStatusPageAnnouncementRequestWithBody(c.Server, statusPageId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBody(ctx context.Context, statusPageId string, body CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateStatusPageAnnouncementRequestWithApplicationVndAPIPlusJSONBody(c.Server, statusPageId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -92111,6 +97823,73 @@ func NewStreamAiChatRequest(server string, params *StreamAiChatParams) (*http.Re
 	return req, nil
 }
 
+// NewGetAlertConfigurationRequest generates requests for GetAlertConfiguration
+func NewGetAlertConfigurationRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_configuration")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateAlertConfigurationRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateAlertConfiguration builder with application/vnd.api+json body
+func NewUpdateAlertConfigurationRequestWithApplicationVndAPIPlusJSONBody(server string, body UpdateAlertConfigurationApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateAlertConfigurationRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateAlertConfigurationRequestWithBody generates requests for UpdateAlertConfiguration with any type of body
+func NewUpdateAlertConfigurationRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/alert_configuration")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListAlertEventsFeedRequest generates requests for ListAlertEventsFeed
 func NewListAlertEventsFeedRequest(server string, params *ListAlertEventsFeedParams) (*http.Request, error) {
 	var err error
@@ -93121,188 +98900,6 @@ func NewUpdateAlertGroupRequestWithBody(server string, id string, contentType st
 	}
 
 	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewListAlertRetriggerRulesRequest generates requests for ListAlertRetriggerRules
-func NewListAlertRetriggerRulesRequest(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/alert_retrigger_rules")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewCreateAlertRetriggerRuleRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateAlertRetriggerRule builder with application/vnd.api+json body
-func NewCreateAlertRetriggerRuleRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewCreateAlertRetriggerRuleRequestWithBody(server, "application/vnd.api+json", bodyReader)
-}
-
-// NewCreateAlertRetriggerRuleRequestWithBody generates requests for CreateAlertRetriggerRule with any type of body
-func NewCreateAlertRetriggerRuleRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/alert_retrigger_rules")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewDeleteAlertRetriggerRuleRequest generates requests for DeleteAlertRetriggerRule
-func NewDeleteAlertRetriggerRuleRequest(server string, id string) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/alert_retrigger_rules/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetAlertRetriggerRuleRequest generates requests for GetAlertRetriggerRule
-func NewGetAlertRetriggerRuleRequest(server string, id string) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/alert_retrigger_rules/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewUpdateAlertRetriggerRuleRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateAlertRetriggerRule builder with application/vnd.api+json body
-func NewUpdateAlertRetriggerRuleRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewUpdateAlertRetriggerRuleRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
-}
-
-// NewUpdateAlertRetriggerRuleRequestWithBody generates requests for UpdateAlertRetriggerRule with any type of body
-func NewUpdateAlertRetriggerRuleRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/alert_retrigger_rules/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -95941,6 +101538,121 @@ func NewSnoozeAlertRequestWithBody(server string, id string, contentType string,
 	}
 
 	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteStatusPageAnnouncementRequest generates requests for DeleteStatusPageAnnouncement
+func NewDeleteStatusPageAnnouncementRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/announcements/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetStatusPageAnnouncementRequest generates requests for GetStatusPageAnnouncement
+func NewGetStatusPageAnnouncementRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/announcements/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateStatusPageAnnouncementRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateStatusPageAnnouncement builder with application/vnd.api+json body
+func NewUpdateStatusPageAnnouncementRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateStatusPageAnnouncementRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateStatusPageAnnouncementRequestWithBody generates requests for UpdateStatusPageAnnouncement with any type of body
+func NewUpdateStatusPageAnnouncementRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/announcements/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -114771,18 +120483,18 @@ func NewListIncidentsRequest(server string, params *ListIncidentsParams) (*http.
 }
 
 // NewCreateIncidentRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateIncident builder with application/vnd.api+json body
-func NewCreateIncidentRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateIncidentApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+func NewCreateIncidentRequestWithApplicationVndAPIPlusJSONBody(server string, params *CreateIncidentParams, body CreateIncidentApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewCreateIncidentRequestWithBody(server, "application/vnd.api+json", bodyReader)
+	return NewCreateIncidentRequestWithBody(server, params, "application/vnd.api+json", bodyReader)
 }
 
 // NewCreateIncidentRequestWithBody generates requests for CreateIncident with any type of body
-func NewCreateIncidentRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+func NewCreateIncidentRequestWithBody(server string, params *CreateIncidentParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -114806,6 +120518,21 @@ func NewCreateIncidentRequestWithBody(server string, contentType string, body io
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.IdempotencyKey != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "Idempotency-Key", *params.IdempotencyKey, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("Idempotency-Key", headerParam0)
+		}
+
+	}
 
 	return req, nil
 }
@@ -118889,6 +124616,74 @@ func NewUpdateUserPhoneNumberRequestWithBody(server string, id string, contentTy
 	return req, nil
 }
 
+// NewResendVerificationUserPhoneNumberRequest generates requests for ResendVerificationUserPhoneNumber
+func NewResendVerificationUserPhoneNumberRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/phone_numbers/%s/resend_verification", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewVerifyUserPhoneNumberRequest generates requests for VerifyUserPhoneNumber
+func NewVerifyUserPhoneNumberRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/phone_numbers/%s/verify", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewDeletePlaybookTaskRequest generates requests for DeletePlaybookTask
 func NewDeletePlaybookTaskRequest(server string, id string) (*http.Request, error) {
 	var err error
@@ -120192,6 +125987,214 @@ func NewUpdateIncidentPostmortemRequestWithBody(server string, id string, conten
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListPrivateAgentsRequest generates requests for ListPrivateAgents
+func NewListPrivateAgentsRequest(server string, params *ListPrivateAgentsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/private_agents")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[number]", *params.PageNumber, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[size]", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreatePrivateAgentEnrollmentTokenRequest generates requests for CreatePrivateAgentEnrollmentToken
+func NewCreatePrivateAgentEnrollmentTokenRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/private_agents/enrollment_tokens")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetPrivateAgentRequest generates requests for GetPrivateAgent
+func NewGetPrivateAgentRequest(server string, id openapi_types.UUID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/private_agents/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdatePrivateAgentRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdatePrivateAgent builder with application/vnd.api+json body
+func NewUpdatePrivateAgentRequestWithApplicationVndAPIPlusJSONBody(server string, id openapi_types.UUID, body UpdatePrivateAgentApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdatePrivateAgentRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdatePrivateAgentRequestWithBody generates requests for UpdatePrivateAgent with any type of body
+func NewUpdatePrivateAgentRequestWithBody(server string, id openapi_types.UUID, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/private_agents/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewRevokePrivateAgentRequest generates requests for RevokePrivateAgent
+func NewRevokePrivateAgentRequest(server string, id openapi_types.UUID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/private_agents/%s/revoke", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -123211,6 +129214,18 @@ func NewListSchedulesRequest(server string, params *ListSchedulesParams) (*http.
 
 		}
 
+		if params.FilterTeamIds != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[team_ids]", *params.FilterTeamIds, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
 		if params.FilterCreatedAtGt != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][gt]", *params.FilterCreatedAtGt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
@@ -123298,6 +129313,54 @@ func NewListSchedulesRequest(server string, params *ListSchedulesParams) (*http.
 		if params.FilterNameNotIn != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[name][not_in]", *params.FilterNameNotIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterTeamIdsEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[team_ids][eq]", *params.FilterTeamIdsEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterTeamIdsNotEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[team_ids][not_eq]", *params.FilterTeamIdsNotEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterTeamIdsIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[team_ids][in]", *params.FilterTeamIdsIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterTeamIdsNotIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[team_ids][not_in]", *params.FilterTeamIdsNotIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -126903,6 +132966,138 @@ func NewUpdateStatusPageRequestWithBody(server string, id string, contentType st
 	}
 
 	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListStatusPageAnnouncementsRequest generates requests for ListStatusPageAnnouncements
+func NewListStatusPageAnnouncementsRequest(server string, statusPageId string, params *ListStatusPageAnnouncementsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "status_page_id", statusPageId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/status-pages/%s/announcements", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "include", *params.Include, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[number]", *params.PageNumber, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[size]", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateStatusPageAnnouncementRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateStatusPageAnnouncement builder with application/vnd.api+json body
+func NewCreateStatusPageAnnouncementRequestWithApplicationVndAPIPlusJSONBody(server string, statusPageId string, body CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateStatusPageAnnouncementRequestWithBody(server, statusPageId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateStatusPageAnnouncementRequestWithBody generates requests for CreateStatusPageAnnouncement with any type of body
+func NewCreateStatusPageAnnouncementRequestWithBody(server string, statusPageId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "status_page_id", statusPageId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/status-pages/%s/announcements", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -132342,6 +138537,14 @@ type ClientWithResponsesInterface interface {
 	// StreamAiChatWithResponse request
 	StreamAiChatWithResponse(ctx context.Context, params *StreamAiChatParams, reqEditors ...RequestEditorFn) (*StreamAiChatResponse, error)
 
+	// GetAlertConfigurationWithResponse request
+	GetAlertConfigurationWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAlertConfigurationResponse, error)
+
+	// UpdateAlertConfigurationWithBodyWithResponse request with any body
+	UpdateAlertConfigurationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertConfigurationResponse, error)
+
+	UpdateAlertConfigurationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body UpdateAlertConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertConfigurationResponse, error)
+
 	// ListAlertEventsFeedWithResponse request
 	ListAlertEventsFeedWithResponse(ctx context.Context, params *ListAlertEventsFeedParams, reqEditors ...RequestEditorFn) (*ListAlertEventsFeedResponse, error)
 
@@ -132393,25 +138596,6 @@ type ClientWithResponsesInterface interface {
 	UpdateAlertGroupWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertGroupResponse, error)
 
 	UpdateAlertGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertGroupResponse, error)
-
-	// ListAlertRetriggerRulesWithResponse request
-	ListAlertRetriggerRulesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListAlertRetriggerRulesResponse, error)
-
-	// CreateAlertRetriggerRuleWithBodyWithResponse request with any body
-	CreateAlertRetriggerRuleWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertRetriggerRuleResponse, error)
-
-	CreateAlertRetriggerRuleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertRetriggerRuleResponse, error)
-
-	// DeleteAlertRetriggerRuleWithResponse request
-	DeleteAlertRetriggerRuleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertRetriggerRuleResponse, error)
-
-	// GetAlertRetriggerRuleWithResponse request
-	GetAlertRetriggerRuleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertRetriggerRuleResponse, error)
-
-	// UpdateAlertRetriggerRuleWithBodyWithResponse request with any body
-	UpdateAlertRetriggerRuleWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertRetriggerRuleResponse, error)
-
-	UpdateAlertRetriggerRuleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertRetriggerRuleResponse, error)
 
 	// ListAlertRoutesWithResponse request
 	ListAlertRoutesWithResponse(ctx context.Context, params *ListAlertRoutesParams, reqEditors ...RequestEditorFn) (*ListAlertRoutesResponse, error)
@@ -132538,6 +138722,17 @@ type ClientWithResponsesInterface interface {
 	SnoozeAlertWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SnoozeAlertResponse, error)
 
 	SnoozeAlertWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body SnoozeAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*SnoozeAlertResponse, error)
+
+	// DeleteStatusPageAnnouncementWithResponse request
+	DeleteStatusPageAnnouncementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteStatusPageAnnouncementResponse, error)
+
+	// GetStatusPageAnnouncementWithResponse request
+	GetStatusPageAnnouncementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetStatusPageAnnouncementResponse, error)
+
+	// UpdateStatusPageAnnouncementWithBodyWithResponse request with any body
+	UpdateStatusPageAnnouncementWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateStatusPageAnnouncementResponse, error)
+
+	UpdateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateStatusPageAnnouncementResponse, error)
 
 	// ListApiKeysWithResponse request
 	ListApiKeysWithResponse(ctx context.Context, params *ListApiKeysParams, reqEditors ...RequestEditorFn) (*ListApiKeysResponse, error)
@@ -133485,9 +139680,9 @@ type ClientWithResponsesInterface interface {
 	ListIncidentsWithResponse(ctx context.Context, params *ListIncidentsParams, reqEditors ...RequestEditorFn) (*ListIncidentsResponse, error)
 
 	// CreateIncidentWithBodyWithResponse request with any body
-	CreateIncidentWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentResponse, error)
+	CreateIncidentWithBodyWithResponse(ctx context.Context, params *CreateIncidentParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentResponse, error)
 
-	CreateIncidentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIncidentResponse, error)
+	CreateIncidentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, params *CreateIncidentParams, body CreateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIncidentResponse, error)
 
 	// DeleteIncidentWithResponse request
 	DeleteIncidentWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIncidentResponse, error)
@@ -133773,6 +139968,12 @@ type ClientWithResponsesInterface interface {
 
 	UpdateUserPhoneNumberWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateUserPhoneNumberApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateUserPhoneNumberResponse, error)
 
+	// ResendVerificationUserPhoneNumberWithResponse request
+	ResendVerificationUserPhoneNumberWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*ResendVerificationUserPhoneNumberResponse, error)
+
+	// VerifyUserPhoneNumberWithResponse request
+	VerifyUserPhoneNumberWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*VerifyUserPhoneNumberResponse, error)
+
 	// DeletePlaybookTaskWithResponse request
 	DeletePlaybookTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeletePlaybookTaskResponse, error)
 
@@ -133840,6 +140041,23 @@ type ClientWithResponsesInterface interface {
 	UpdateIncidentPostmortemWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentPostmortemResponse, error)
 
 	UpdateIncidentPostmortemWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateIncidentPostmortemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIncidentPostmortemResponse, error)
+
+	// ListPrivateAgentsWithResponse request
+	ListPrivateAgentsWithResponse(ctx context.Context, params *ListPrivateAgentsParams, reqEditors ...RequestEditorFn) (*ListPrivateAgentsResponse, error)
+
+	// CreatePrivateAgentEnrollmentTokenWithResponse request
+	CreatePrivateAgentEnrollmentTokenWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*CreatePrivateAgentEnrollmentTokenResponse, error)
+
+	// GetPrivateAgentWithResponse request
+	GetPrivateAgentWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetPrivateAgentResponse, error)
+
+	// UpdatePrivateAgentWithBodyWithResponse request with any body
+	UpdatePrivateAgentWithBodyWithResponse(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdatePrivateAgentResponse, error)
+
+	UpdatePrivateAgentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id openapi_types.UUID, body UpdatePrivateAgentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdatePrivateAgentResponse, error)
+
+	// RevokePrivateAgentWithResponse request
+	RevokePrivateAgentWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*RevokePrivateAgentResponse, error)
 
 	// ListPulsesWithResponse request
 	ListPulsesWithResponse(ctx context.Context, params *ListPulsesParams, reqEditors ...RequestEditorFn) (*ListPulsesResponse, error)
@@ -134194,6 +140412,14 @@ type ClientWithResponsesInterface interface {
 	UpdateStatusPageWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateStatusPageResponse, error)
 
 	UpdateStatusPageWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateStatusPageApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateStatusPageResponse, error)
+
+	// ListStatusPageAnnouncementsWithResponse request
+	ListStatusPageAnnouncementsWithResponse(ctx context.Context, statusPageId string, params *ListStatusPageAnnouncementsParams, reqEditors ...RequestEditorFn) (*ListStatusPageAnnouncementsResponse, error)
+
+	// CreateStatusPageAnnouncementWithBodyWithResponse request with any body
+	CreateStatusPageAnnouncementWithBodyWithResponse(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateStatusPageAnnouncementResponse, error)
+
+	CreateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, statusPageId string, body CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateStatusPageAnnouncementResponse, error)
 
 	// ListStatusPageComponentGroupsWithResponse request
 	ListStatusPageComponentGroupsWithResponse(ctx context.Context, statusPageId string, params *ListStatusPageComponentGroupsParams, reqEditors ...RequestEditorFn) (*ListStatusPageComponentGroupsResponse, error)
@@ -134732,6 +140958,70 @@ func (r StreamAiChatResponse) ContentType() string {
 	return ""
 }
 
+type GetAlertConfigurationResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertConfigurationResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAlertConfigurationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAlertConfigurationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetAlertConfigurationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateAlertConfigurationResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *AlertConfigurationResponse
+	ApplicationvndApiJSON403 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateAlertConfigurationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateAlertConfigurationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateAlertConfigurationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ListAlertEventsFeedResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -135159,156 +141449,6 @@ func (r UpdateAlertGroupResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r UpdateAlertGroupResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type ListAlertRetriggerRulesResponse struct {
-	Body                     []byte
-	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *AlertRetriggerRuleList
-}
-
-// Status returns HTTPResponse.Status
-func (r ListAlertRetriggerRulesResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r ListAlertRetriggerRulesResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r ListAlertRetriggerRulesResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type CreateAlertRetriggerRuleResponse struct {
-	Body                     []byte
-	HTTPResponse             *http.Response
-	ApplicationvndApiJSON201 *AlertRetriggerRuleResponse
-	ApplicationvndApiJSON422 *ErrorsList
-}
-
-// Status returns HTTPResponse.Status
-func (r CreateAlertRetriggerRuleResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r CreateAlertRetriggerRuleResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r CreateAlertRetriggerRuleResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type DeleteAlertRetriggerRuleResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r DeleteAlertRetriggerRuleResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r DeleteAlertRetriggerRuleResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r DeleteAlertRetriggerRuleResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GetAlertRetriggerRuleResponse struct {
-	Body                     []byte
-	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *AlertRetriggerRuleResponse
-}
-
-// Status returns HTTPResponse.Status
-func (r GetAlertRetriggerRuleResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetAlertRetriggerRuleResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GetAlertRetriggerRuleResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type UpdateAlertRetriggerRuleResponse struct {
-	Body                     []byte
-	HTTPResponse             *http.Response
-	ApplicationvndApiJSON200 *AlertRetriggerRuleResponse
-}
-
-// Status returns HTTPResponse.Status
-func (r UpdateAlertRetriggerRuleResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r UpdateAlertRetriggerRuleResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r UpdateAlertRetriggerRuleResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -135800,6 +141940,7 @@ type UpdateAlertsSourceResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *AlertsSourceResponse
 	ApplicationvndApiJSON404 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -136319,6 +142460,99 @@ func (r SnoozeAlertResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r SnoozeAlertResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DeleteStatusPageAnnouncementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *StatusPageAnnouncementResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteStatusPageAnnouncementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteStatusPageAnnouncementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DeleteStatusPageAnnouncementResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetStatusPageAnnouncementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *StatusPageAnnouncementResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetStatusPageAnnouncementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetStatusPageAnnouncementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetStatusPageAnnouncementResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateStatusPageAnnouncementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *StatusPageAnnouncementResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateStatusPageAnnouncementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateStatusPageAnnouncementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateStatusPageAnnouncementResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -139248,6 +145482,7 @@ type CreateDashboardPanelResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON201 *DashboardPanelResponse
 	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -141156,6 +147391,7 @@ type DeleteFormFieldPlacementResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *FormFieldPlacementResponse
 	ApplicationvndApiJSON404 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -144006,6 +150242,7 @@ func (r ListIncidentsResponse) ContentType() string {
 type CreateIncidentResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *IncidentResponse
 	ApplicationvndApiJSON201 *IncidentResponse
 	ApplicationvndApiJSON401 *ErrorsList
 	ApplicationvndApiJSON422 *ErrorsList
@@ -146319,6 +152556,79 @@ func (r UpdateUserPhoneNumberResponse) ContentType() string {
 	return ""
 }
 
+type ResendVerificationUserPhoneNumberResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		Message string `json:"message"`
+	}
+	JSON429 *struct {
+		Error string `json:"error"`
+	}
+}
+
+// Status returns HTTPResponse.Status
+func (r ResendVerificationUserPhoneNumberResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ResendVerificationUserPhoneNumberResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ResendVerificationUserPhoneNumberResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type VerifyUserPhoneNumberResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		Message string `json:"message"`
+	}
+	JSON429 *struct {
+		Error string `json:"error"`
+	}
+	JSON503 *struct {
+		Error string `json:"error"`
+	}
+}
+
+// Status returns HTTPResponse.Status
+func (r VerifyUserPhoneNumberResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r VerifyUserPhoneNumberResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r VerifyUserPhoneNumberResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type DeletePlaybookTaskResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -146850,6 +153160,8 @@ type UpdateIncidentPostmortemResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *IncidentPostMortemResponse
 	ApplicationvndApiJSON404 *ErrorsList
+	ApplicationvndApiJSON409 *ErrorsList
+	ApplicationvndApiJSON503 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -146870,6 +153182,155 @@ func (r UpdateIncidentPostmortemResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r UpdateIncidentPostmortemResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ListPrivateAgentsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *PrivateAgentList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListPrivateAgentsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListPrivateAgentsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListPrivateAgentsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CreatePrivateAgentEnrollmentTokenResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *PrivateAgentEnrollmentTokenResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r CreatePrivateAgentEnrollmentTokenResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreatePrivateAgentEnrollmentTokenResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreatePrivateAgentEnrollmentTokenResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetPrivateAgentResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *PrivateAgentResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r GetPrivateAgentResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetPrivateAgentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetPrivateAgentResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdatePrivateAgentResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdatePrivateAgentResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdatePrivateAgentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdatePrivateAgentResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type RevokePrivateAgentResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *PrivateAgentResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r RevokePrivateAgentResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RevokePrivateAgentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r RevokePrivateAgentResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -149782,6 +156243,68 @@ func (r UpdateStatusPageResponse) ContentType() string {
 	return ""
 }
 
+type ListStatusPageAnnouncementsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *StatusPageAnnouncementList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListStatusPageAnnouncementsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListStatusPageAnnouncementsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListStatusPageAnnouncementsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CreateStatusPageAnnouncementResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *StatusPageAnnouncementResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateStatusPageAnnouncementResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateStatusPageAnnouncementResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateStatusPageAnnouncementResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ListStatusPageComponentGroupsResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -150220,6 +156743,7 @@ type CreateTeamResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON201 *TeamResponse
 	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON403 *ErrorsList
 	ApplicationvndApiJSON422 *ErrorsList
 }
 
@@ -150375,6 +156899,7 @@ type UpdateTeamResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *TeamResponse
+	ApplicationvndApiJSON403 *ErrorsList
 	ApplicationvndApiJSON404 *ErrorsList
 }
 
@@ -151493,6 +158018,7 @@ type UpdateWorkflowFormFieldConditionResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *WorkflowFormFieldConditionResponse
 	ApplicationvndApiJSON404 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -152081,6 +158607,7 @@ type CreateWorkflowFormFieldConditionResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON201 *WorkflowFormFieldConditionResponse
 	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -152310,6 +158837,32 @@ func (c *ClientWithResponses) StreamAiChatWithResponse(ctx context.Context, para
 	return ParseStreamAiChatResponse(rsp)
 }
 
+// GetAlertConfigurationWithResponse request returning *GetAlertConfigurationResponse
+func (c *ClientWithResponses) GetAlertConfigurationWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAlertConfigurationResponse, error) {
+	rsp, err := c.GetAlertConfiguration(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAlertConfigurationResponse(rsp)
+}
+
+// UpdateAlertConfigurationWithBodyWithResponse request with arbitrary body returning *UpdateAlertConfigurationResponse
+func (c *ClientWithResponses) UpdateAlertConfigurationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertConfigurationResponse, error) {
+	rsp, err := c.UpdateAlertConfigurationWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateAlertConfigurationResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateAlertConfigurationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body UpdateAlertConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertConfigurationResponse, error) {
+	rsp, err := c.UpdateAlertConfigurationWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateAlertConfigurationResponse(rsp)
+}
+
 // ListAlertEventsFeedWithResponse request returning *ListAlertEventsFeedResponse
 func (c *ClientWithResponses) ListAlertEventsFeedWithResponse(ctx context.Context, params *ListAlertEventsFeedParams, reqEditors ...RequestEditorFn) (*ListAlertEventsFeedResponse, error) {
 	rsp, err := c.ListAlertEventsFeed(ctx, params, reqEditors...)
@@ -152474,67 +159027,6 @@ func (c *ClientWithResponses) UpdateAlertGroupWithApplicationVndAPIPlusJSONBodyW
 		return nil, err
 	}
 	return ParseUpdateAlertGroupResponse(rsp)
-}
-
-// ListAlertRetriggerRulesWithResponse request returning *ListAlertRetriggerRulesResponse
-func (c *ClientWithResponses) ListAlertRetriggerRulesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListAlertRetriggerRulesResponse, error) {
-	rsp, err := c.ListAlertRetriggerRules(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseListAlertRetriggerRulesResponse(rsp)
-}
-
-// CreateAlertRetriggerRuleWithBodyWithResponse request with arbitrary body returning *CreateAlertRetriggerRuleResponse
-func (c *ClientWithResponses) CreateAlertRetriggerRuleWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAlertRetriggerRuleResponse, error) {
-	rsp, err := c.CreateAlertRetriggerRuleWithBody(ctx, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreateAlertRetriggerRuleResponse(rsp)
-}
-
-func (c *ClientWithResponses) CreateAlertRetriggerRuleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateAlertRetriggerRuleResponse, error) {
-	rsp, err := c.CreateAlertRetriggerRuleWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreateAlertRetriggerRuleResponse(rsp)
-}
-
-// DeleteAlertRetriggerRuleWithResponse request returning *DeleteAlertRetriggerRuleResponse
-func (c *ClientWithResponses) DeleteAlertRetriggerRuleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteAlertRetriggerRuleResponse, error) {
-	rsp, err := c.DeleteAlertRetriggerRule(ctx, id, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseDeleteAlertRetriggerRuleResponse(rsp)
-}
-
-// GetAlertRetriggerRuleWithResponse request returning *GetAlertRetriggerRuleResponse
-func (c *ClientWithResponses) GetAlertRetriggerRuleWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetAlertRetriggerRuleResponse, error) {
-	rsp, err := c.GetAlertRetriggerRule(ctx, id, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetAlertRetriggerRuleResponse(rsp)
-}
-
-// UpdateAlertRetriggerRuleWithBodyWithResponse request with arbitrary body returning *UpdateAlertRetriggerRuleResponse
-func (c *ClientWithResponses) UpdateAlertRetriggerRuleWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAlertRetriggerRuleResponse, error) {
-	rsp, err := c.UpdateAlertRetriggerRuleWithBody(ctx, id, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseUpdateAlertRetriggerRuleResponse(rsp)
-}
-
-func (c *ClientWithResponses) UpdateAlertRetriggerRuleWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertRetriggerRuleApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertRetriggerRuleResponse, error) {
-	rsp, err := c.UpdateAlertRetriggerRuleWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseUpdateAlertRetriggerRuleResponse(rsp)
 }
 
 // ListAlertRoutesWithResponse request returning *ListAlertRoutesResponse
@@ -152943,6 +159435,41 @@ func (c *ClientWithResponses) SnoozeAlertWithApplicationVndAPIPlusJSONBodyWithRe
 		return nil, err
 	}
 	return ParseSnoozeAlertResponse(rsp)
+}
+
+// DeleteStatusPageAnnouncementWithResponse request returning *DeleteStatusPageAnnouncementResponse
+func (c *ClientWithResponses) DeleteStatusPageAnnouncementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteStatusPageAnnouncementResponse, error) {
+	rsp, err := c.DeleteStatusPageAnnouncement(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteStatusPageAnnouncementResponse(rsp)
+}
+
+// GetStatusPageAnnouncementWithResponse request returning *GetStatusPageAnnouncementResponse
+func (c *ClientWithResponses) GetStatusPageAnnouncementWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetStatusPageAnnouncementResponse, error) {
+	rsp, err := c.GetStatusPageAnnouncement(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetStatusPageAnnouncementResponse(rsp)
+}
+
+// UpdateStatusPageAnnouncementWithBodyWithResponse request with arbitrary body returning *UpdateStatusPageAnnouncementResponse
+func (c *ClientWithResponses) UpdateStatusPageAnnouncementWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateStatusPageAnnouncementResponse, error) {
+	rsp, err := c.UpdateStatusPageAnnouncementWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateStatusPageAnnouncementResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateStatusPageAnnouncementResponse, error) {
+	rsp, err := c.UpdateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateStatusPageAnnouncementResponse(rsp)
 }
 
 // ListApiKeysWithResponse request returning *ListApiKeysResponse
@@ -155955,16 +162482,16 @@ func (c *ClientWithResponses) ListIncidentsWithResponse(ctx context.Context, par
 }
 
 // CreateIncidentWithBodyWithResponse request with arbitrary body returning *CreateIncidentResponse
-func (c *ClientWithResponses) CreateIncidentWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentResponse, error) {
-	rsp, err := c.CreateIncidentWithBody(ctx, contentType, body, reqEditors...)
+func (c *ClientWithResponses) CreateIncidentWithBodyWithResponse(ctx context.Context, params *CreateIncidentParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIncidentResponse, error) {
+	rsp, err := c.CreateIncidentWithBody(ctx, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIncidentResponse(rsp)
 }
 
-func (c *ClientWithResponses) CreateIncidentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIncidentResponse, error) {
-	rsp, err := c.CreateIncidentWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+func (c *ClientWithResponses) CreateIncidentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, params *CreateIncidentParams, body CreateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIncidentResponse, error) {
+	rsp, err := c.CreateIncidentWithApplicationVndAPIPlusJSONBody(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -156885,6 +163412,24 @@ func (c *ClientWithResponses) UpdateUserPhoneNumberWithApplicationVndAPIPlusJSON
 	return ParseUpdateUserPhoneNumberResponse(rsp)
 }
 
+// ResendVerificationUserPhoneNumberWithResponse request returning *ResendVerificationUserPhoneNumberResponse
+func (c *ClientWithResponses) ResendVerificationUserPhoneNumberWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*ResendVerificationUserPhoneNumberResponse, error) {
+	rsp, err := c.ResendVerificationUserPhoneNumber(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseResendVerificationUserPhoneNumberResponse(rsp)
+}
+
+// VerifyUserPhoneNumberWithResponse request returning *VerifyUserPhoneNumberResponse
+func (c *ClientWithResponses) VerifyUserPhoneNumberWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*VerifyUserPhoneNumberResponse, error) {
+	rsp, err := c.VerifyUserPhoneNumber(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseVerifyUserPhoneNumberResponse(rsp)
+}
+
 // DeletePlaybookTaskWithResponse request returning *DeletePlaybookTaskResponse
 func (c *ClientWithResponses) DeletePlaybookTaskWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeletePlaybookTaskResponse, error) {
 	rsp, err := c.DeletePlaybookTask(ctx, id, reqEditors...)
@@ -157101,6 +163646,59 @@ func (c *ClientWithResponses) UpdateIncidentPostmortemWithApplicationVndAPIPlusJ
 		return nil, err
 	}
 	return ParseUpdateIncidentPostmortemResponse(rsp)
+}
+
+// ListPrivateAgentsWithResponse request returning *ListPrivateAgentsResponse
+func (c *ClientWithResponses) ListPrivateAgentsWithResponse(ctx context.Context, params *ListPrivateAgentsParams, reqEditors ...RequestEditorFn) (*ListPrivateAgentsResponse, error) {
+	rsp, err := c.ListPrivateAgents(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListPrivateAgentsResponse(rsp)
+}
+
+// CreatePrivateAgentEnrollmentTokenWithResponse request returning *CreatePrivateAgentEnrollmentTokenResponse
+func (c *ClientWithResponses) CreatePrivateAgentEnrollmentTokenWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*CreatePrivateAgentEnrollmentTokenResponse, error) {
+	rsp, err := c.CreatePrivateAgentEnrollmentToken(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreatePrivateAgentEnrollmentTokenResponse(rsp)
+}
+
+// GetPrivateAgentWithResponse request returning *GetPrivateAgentResponse
+func (c *ClientWithResponses) GetPrivateAgentWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetPrivateAgentResponse, error) {
+	rsp, err := c.GetPrivateAgent(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetPrivateAgentResponse(rsp)
+}
+
+// UpdatePrivateAgentWithBodyWithResponse request with arbitrary body returning *UpdatePrivateAgentResponse
+func (c *ClientWithResponses) UpdatePrivateAgentWithBodyWithResponse(ctx context.Context, id openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdatePrivateAgentResponse, error) {
+	rsp, err := c.UpdatePrivateAgentWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdatePrivateAgentResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdatePrivateAgentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id openapi_types.UUID, body UpdatePrivateAgentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdatePrivateAgentResponse, error) {
+	rsp, err := c.UpdatePrivateAgentWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdatePrivateAgentResponse(rsp)
+}
+
+// RevokePrivateAgentWithResponse request returning *RevokePrivateAgentResponse
+func (c *ClientWithResponses) RevokePrivateAgentWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*RevokePrivateAgentResponse, error) {
+	rsp, err := c.RevokePrivateAgent(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRevokePrivateAgentResponse(rsp)
 }
 
 // ListPulsesWithResponse request returning *ListPulsesResponse
@@ -158235,6 +164833,32 @@ func (c *ClientWithResponses) UpdateStatusPageWithApplicationVndAPIPlusJSONBodyW
 		return nil, err
 	}
 	return ParseUpdateStatusPageResponse(rsp)
+}
+
+// ListStatusPageAnnouncementsWithResponse request returning *ListStatusPageAnnouncementsResponse
+func (c *ClientWithResponses) ListStatusPageAnnouncementsWithResponse(ctx context.Context, statusPageId string, params *ListStatusPageAnnouncementsParams, reqEditors ...RequestEditorFn) (*ListStatusPageAnnouncementsResponse, error) {
+	rsp, err := c.ListStatusPageAnnouncements(ctx, statusPageId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListStatusPageAnnouncementsResponse(rsp)
+}
+
+// CreateStatusPageAnnouncementWithBodyWithResponse request with arbitrary body returning *CreateStatusPageAnnouncementResponse
+func (c *ClientWithResponses) CreateStatusPageAnnouncementWithBodyWithResponse(ctx context.Context, statusPageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateStatusPageAnnouncementResponse, error) {
+	rsp, err := c.CreateStatusPageAnnouncementWithBody(ctx, statusPageId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateStatusPageAnnouncementResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, statusPageId string, body CreateStatusPageAnnouncementApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateStatusPageAnnouncementResponse, error) {
+	rsp, err := c.CreateStatusPageAnnouncementWithApplicationVndAPIPlusJSONBody(ctx, statusPageId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateStatusPageAnnouncementResponse(rsp)
 }
 
 // ListStatusPageComponentGroupsWithResponse request returning *ListStatusPageComponentGroupsResponse
@@ -159389,6 +166013,86 @@ func ParseStreamAiChatResponse(rsp *http.Response) (*StreamAiChatResponse, error
 	return response, nil
 }
 
+// ParseGetAlertConfigurationResponse parses an HTTP response from a GetAlertConfigurationWithResponse call
+func ParseGetAlertConfigurationResponse(rsp *http.Response) (*GetAlertConfigurationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAlertConfigurationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertConfigurationResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateAlertConfigurationResponse parses an HTTP response from a UpdateAlertConfigurationWithResponse call
+func ParseUpdateAlertConfigurationResponse(rsp *http.Response) (*UpdateAlertConfigurationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateAlertConfigurationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AlertConfigurationResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListAlertEventsFeedResponse parses an HTTP response from a ListAlertEventsFeedWithResponse call
 func ParseListAlertEventsFeedResponse(rsp *http.Response) (*ListAlertEventsFeedResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -159838,133 +166542,6 @@ func ParseUpdateAlertGroupResponse(rsp *http.Response) (*UpdateAlertGroupRespons
 			return nil, err
 		}
 		response.ApplicationvndApiJSON404 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseListAlertRetriggerRulesResponse parses an HTTP response from a ListAlertRetriggerRulesWithResponse call
-func ParseListAlertRetriggerRulesResponse(rsp *http.Response) (*ListAlertRetriggerRulesResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &ListAlertRetriggerRulesResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest AlertRetriggerRuleList
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseCreateAlertRetriggerRuleResponse parses an HTTP response from a CreateAlertRetriggerRuleWithResponse call
-func ParseCreateAlertRetriggerRuleResponse(rsp *http.Response) (*CreateAlertRetriggerRuleResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CreateAlertRetriggerRuleResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest AlertRetriggerRuleResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON201 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest ErrorsList
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON422 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseDeleteAlertRetriggerRuleResponse parses an HTTP response from a DeleteAlertRetriggerRuleWithResponse call
-func ParseDeleteAlertRetriggerRuleResponse(rsp *http.Response) (*DeleteAlertRetriggerRuleResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &DeleteAlertRetriggerRuleResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseGetAlertRetriggerRuleResponse parses an HTTP response from a GetAlertRetriggerRuleWithResponse call
-func ParseGetAlertRetriggerRuleResponse(rsp *http.Response) (*GetAlertRetriggerRuleResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetAlertRetriggerRuleResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest AlertRetriggerRuleResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseUpdateAlertRetriggerRuleResponse parses an HTTP response from a UpdateAlertRetriggerRuleWithResponse call
-func ParseUpdateAlertRetriggerRuleResponse(rsp *http.Response) (*UpdateAlertRetriggerRuleResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &UpdateAlertRetriggerRuleResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest AlertRetriggerRuleResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON200 = &dest
 
 	}
 
@@ -160551,6 +167128,13 @@ func ParseUpdateAlertsSourceResponse(rsp *http.Response) (*UpdateAlertsSourceRes
 		}
 		response.ApplicationvndApiJSON404 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
 	}
 
 	return response, nil
@@ -161099,6 +167683,105 @@ func ParseSnoozeAlertResponse(rsp *http.Response) (*SnoozeAlertResponse, error) 
 			return nil, err
 		}
 		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteStatusPageAnnouncementResponse parses an HTTP response from a DeleteStatusPageAnnouncementWithResponse call
+func ParseDeleteStatusPageAnnouncementResponse(rsp *http.Response) (*DeleteStatusPageAnnouncementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteStatusPageAnnouncementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest StatusPageAnnouncementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetStatusPageAnnouncementResponse parses an HTTP response from a GetStatusPageAnnouncementWithResponse call
+func ParseGetStatusPageAnnouncementResponse(rsp *http.Response) (*GetStatusPageAnnouncementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetStatusPageAnnouncementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest StatusPageAnnouncementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateStatusPageAnnouncementResponse parses an HTTP response from a UpdateStatusPageAnnouncementWithResponse call
+func ParseUpdateStatusPageAnnouncementResponse(rsp *http.Response) (*UpdateStatusPageAnnouncementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateStatusPageAnnouncementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest StatusPageAnnouncementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
 
 	}
 
@@ -164058,6 +170741,13 @@ func ParseCreateDashboardPanelResponse(rsp *http.Response) (*CreateDashboardPane
 		}
 		response.ApplicationvndApiJSON401 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
 	}
 
 	return response, nil
@@ -165975,6 +172665,13 @@ func ParseDeleteFormFieldPlacementResponse(rsp *http.Response) (*DeleteFormField
 			return nil, err
 		}
 		response.ApplicationvndApiJSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
 
 	}
 
@@ -168998,6 +175695,13 @@ func ParseCreateIncidentResponse(rsp *http.Response) (*CreateIncidentResponse, e
 	}
 
 	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest IncidentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
 		var dest IncidentResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -171393,6 +178097,89 @@ func ParseUpdateUserPhoneNumberResponse(rsp *http.Response) (*UpdateUserPhoneNum
 	return response, nil
 }
 
+// ParseResendVerificationUserPhoneNumberResponse parses an HTTP response from a ResendVerificationUserPhoneNumberWithResponse call
+func ParseResendVerificationUserPhoneNumberResponse(rsp *http.Response) (*ResendVerificationUserPhoneNumberResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ResendVerificationUserPhoneNumberResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			Message string `json:"message"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest struct {
+			Error string `json:"error"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseVerifyUserPhoneNumberResponse parses an HTTP response from a VerifyUserPhoneNumberWithResponse call
+func ParseVerifyUserPhoneNumberResponse(rsp *http.Response) (*VerifyUserPhoneNumberResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &VerifyUserPhoneNumberResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			Message string `json:"message"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest struct {
+			Error string `json:"error"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 503:
+		var dest struct {
+			Error string `json:"error"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON503 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseDeletePlaybookTaskResponse parses an HTTP response from a DeletePlaybookTaskWithResponse call
 func ParseDeletePlaybookTaskResponse(rsp *http.Response) (*DeletePlaybookTaskResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -171974,6 +178761,140 @@ func ParseUpdateIncidentPostmortemResponse(rsp *http.Response) (*UpdateIncidentP
 			return nil, err
 		}
 		response.ApplicationvndApiJSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 503:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON503 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListPrivateAgentsResponse parses an HTTP response from a ListPrivateAgentsWithResponse call
+func ParseListPrivateAgentsResponse(rsp *http.Response) (*ListPrivateAgentsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListPrivateAgentsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest PrivateAgentList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreatePrivateAgentEnrollmentTokenResponse parses an HTTP response from a CreatePrivateAgentEnrollmentTokenWithResponse call
+func ParseCreatePrivateAgentEnrollmentTokenResponse(rsp *http.Response) (*CreatePrivateAgentEnrollmentTokenResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreatePrivateAgentEnrollmentTokenResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest PrivateAgentEnrollmentTokenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetPrivateAgentResponse parses an HTTP response from a GetPrivateAgentWithResponse call
+func ParseGetPrivateAgentResponse(rsp *http.Response) (*GetPrivateAgentResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetPrivateAgentResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest PrivateAgentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdatePrivateAgentResponse parses an HTTP response from a UpdatePrivateAgentWithResponse call
+func ParseUpdatePrivateAgentResponse(rsp *http.Response) (*UpdatePrivateAgentResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdatePrivateAgentResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
+// ParseRevokePrivateAgentResponse parses an HTTP response from a RevokePrivateAgentWithResponse call
+func ParseRevokePrivateAgentResponse(rsp *http.Response) (*RevokePrivateAgentResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RevokePrivateAgentResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest PrivateAgentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
 
 	}
 
@@ -175026,6 +181947,72 @@ func ParseUpdateStatusPageResponse(rsp *http.Response) (*UpdateStatusPageRespons
 	return response, nil
 }
 
+// ParseListStatusPageAnnouncementsResponse parses an HTTP response from a ListStatusPageAnnouncementsWithResponse call
+func ParseListStatusPageAnnouncementsResponse(rsp *http.Response) (*ListStatusPageAnnouncementsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListStatusPageAnnouncementsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest StatusPageAnnouncementList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateStatusPageAnnouncementResponse parses an HTTP response from a CreateStatusPageAnnouncementWithResponse call
+func ParseCreateStatusPageAnnouncementResponse(rsp *http.Response) (*CreateStatusPageAnnouncementResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateStatusPageAnnouncementResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest StatusPageAnnouncementResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListStatusPageComponentGroupsResponse parses an HTTP response from a ListStatusPageComponentGroupsWithResponse call
 func ParseListStatusPageComponentGroupsResponse(rsp *http.Response) (*ListStatusPageComponentGroupsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -175509,6 +182496,13 @@ func ParseCreateTeamResponse(rsp *http.Response) (*CreateTeamResponse, error) {
 		}
 		response.ApplicationvndApiJSON401 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON403 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -175673,6 +182667,13 @@ func ParseUpdateTeamResponse(rsp *http.Response) (*UpdateTeamResponse, error) {
 			return nil, err
 		}
 		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
@@ -176876,6 +183877,13 @@ func ParseUpdateWorkflowFormFieldConditionResponse(rsp *http.Response) (*UpdateW
 		}
 		response.ApplicationvndApiJSON404 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
 	}
 
 	return response, nil
@@ -177495,6 +184503,13 @@ func ParseCreateWorkflowFormFieldConditionResponse(rsp *http.Response) (*CreateW
 			return nil, err
 		}
 		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
 
 	}
 

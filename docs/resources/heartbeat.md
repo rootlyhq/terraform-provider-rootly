@@ -41,9 +41,9 @@ resource "rootly_heartbeat" "nightly_backup" {
 - `description` (String) The description of the heartbeat
 - `email_address` (String) Email address to receive heartbeat pings.
 - `enabled` (Boolean)
-- `expires_at` (String) When heartbeat expires
+- `expires_at` (String) Persisted expiry deadline, including up to 30 seconds of coalescing grace.
 - `interval_unit` (String) Value must be one of `minutes`, `hours`, `days`.
-- `last_pinged_at` (String) When the heartbeat was last pinged.
+- `last_pinged_at` (String) Last persisted heartbeat ping timestamp. Accepted pings may be coalesced for up to 30 seconds.
 - `notification_target_type` (String) The type of the notification target. Please contact support if you encounter issues using `Functionality` as a target type.. Value must be one of `User`, `Group`, `Service`, `EscalationPolicy`, `Functionality`.
 - `owner_group_ids` (List of String) List of team IDs that own this heartbeat
 - `status` (String) Value must be one of `waiting`, `active`, `expired`.

@@ -42,6 +42,8 @@ Optional:
 - `emoji` (String) The bookmark emoji
 - `link` (String) The bookmark link. Required if not a playbook bookmark
 - `playbook_id` (String) The playbook id if bookmark is of an incident playbook
+- `retry_count` (Number) Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+- `retry_wait_time` (Number) Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
 - `task_type` (String)
 - `title` (String) The bookmark title. Required if not a playbook bookmark
 

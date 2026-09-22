@@ -7,9 +7,10 @@ package client
 
 import (
 	"fmt"
+	"reflect"
+
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
-	"reflect"
 )
 
 type EscalationLevel struct {

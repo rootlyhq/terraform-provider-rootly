@@ -79,6 +79,7 @@ ${dataSources
 				"rootly_teams": dataSourceTeams(),
 				"rootly_severities": dataSourceSeverities(),
 				"rootly_schedule": dataSourceSchedule(),
+				"rootly_user": dataSourceUser(),
 				"rootly_users": dataSourceUsers(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
