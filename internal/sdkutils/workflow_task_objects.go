@@ -3,20 +3,16 @@ package sdkutils
 import (
 	"fmt"
 	"maps"
-
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
-func FlattenWorkflowTaskObjects(params map[string]interface{}, fields map[string]*schema.Schema) (map[string]interface{}, error) {
+type WorkflowTaskObjectFields map[string]WorkflowTaskObjectFields
+
+func WorkflowTaskBlocksToObjects(params map[string]interface{}, fields WorkflowTaskObjectFields) (map[string]interface{}, error) {
 	if params == nil {
 		return nil, fmt.Errorf("workflow task parameters must be an object")
 	}
 	result := maps.Clone(params)
-	for name, field := range fields {
-		object, ok := workflowTaskObjectSchema(field)
-		if !ok {
-			continue
-		}
+	for name, nestedFields := range fields {
 		if params[name] == nil {
 			result[name] = nil
 			continue
@@ -33,25 +29,21 @@ func FlattenWorkflowTaskObjects(params map[string]interface{}, fields map[string
 		if !ok {
 			return nil, fmt.Errorf("%s must contain an object", name)
 		}
-		flattened, err := FlattenWorkflowTaskObjects(values, object.Schema)
+		object, err := WorkflowTaskBlocksToObjects(values, nestedFields)
 		if err != nil {
 			return nil, fmt.Errorf("%s: %w", name, err)
 		}
-		result[name] = flattened
+		result[name] = object
 	}
 	return result, nil
 }
 
-func ExpandWorkflowTaskObjects(params map[string]interface{}, fields map[string]*schema.Schema) (map[string]interface{}, error) {
+func WorkflowTaskObjectsToBlocks(params map[string]interface{}, fields WorkflowTaskObjectFields) (map[string]interface{}, error) {
 	if params == nil {
 		return nil, fmt.Errorf("workflow task parameters must be an object")
 	}
 	result := maps.Clone(params)
-	for name, field := range fields {
-		object, ok := workflowTaskObjectSchema(field)
-		if !ok {
-			continue
-		}
+	for name, nestedFields := range fields {
 		if params[name] == nil {
 			result[name] = []interface{}{}
 			continue
@@ -60,16 +52,11 @@ func ExpandWorkflowTaskObjects(params map[string]interface{}, fields map[string]
 		if !ok {
 			return nil, fmt.Errorf("%s must be an object", name)
 		}
-		expanded, err := ExpandWorkflowTaskObjects(values, object.Schema)
+		block, err := WorkflowTaskObjectsToBlocks(values, nestedFields)
 		if err != nil {
 			return nil, fmt.Errorf("%s: %w", name, err)
 		}
-		result[name] = []interface{}{expanded}
+		result[name] = []interface{}{block}
 	}
 	return result, nil
-}
-
-func workflowTaskObjectSchema(field *schema.Schema) (*schema.Resource, bool) {
-	object, ok := field.Elem.(*schema.Resource)
-	return object, ok && field.Type == schema.TypeList && field.MaxItems == 1
 }

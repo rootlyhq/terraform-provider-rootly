@@ -118,7 +118,7 @@ func resourceWorkflowTaskUpdateGithubIssue() *schema.Resource {
 							},
 						},
 						"labels_mode": &schema.Schema{
-							Description: "How to apply labels. 'replace' (default) overwrites all existing labels. 'append' adds to existing labels without removing them.. Value must be one of `replace`, `append`.",
+							Description: "How to apply labels. 'replace' (default) overwrites all existing labels. 'append' adds to existing labels without removing them. Value must be one of `replace`, `append`.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "replace",

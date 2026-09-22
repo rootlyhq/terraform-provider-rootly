@@ -68,6 +68,7 @@ resource "rootly_role" "custom" {
 - `is_editable` (Boolean) Whether the role can be edited.. Value must be one of true or false
 - `paging_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `playbooks_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
+- `private_agent_permissions` (List of String) Private Agent management permissions: create issues enrollment tokens, read views agent inventory and details, and delete revokes agent credentials. Create and delete can be used independently through the API; browser inventory requires read.. Value must be one of `create`, `read`, `update`, `delete`.
 - `private_incidents_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `pulses_permissions` (List of String) Value must be one of `create`, `update`, `read`.
 - `retrospective_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
@@ -77,6 +78,7 @@ resource "rootly_role" "custom" {
 - `severities_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `slas_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `slug` (String, Deprecated) The role slug.
+- `status_page_updates_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `status_pages_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `sub_statuses_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `webhooks_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.

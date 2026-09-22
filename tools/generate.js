@@ -112,6 +112,7 @@ const excluded = {
     "on_call_role",
     "oncall",
     "override_shift",
+    "private_agent", // lifecycle uses enrollment-token/revoke endpoints; no create/delete CRUD endpoints
     "post_mortem_template",
     "pulse",
     "retrospective_configuration",

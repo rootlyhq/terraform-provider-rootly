@@ -163,12 +163,66 @@ function annotateNullableRelationships(schemas) {
   }
 }
 
-function clarifyCanvasWorkspaceGoDescriptions(schemas) {
+// The Terraform schema feed can lag the Canvas API contract. Preserve the
+// contract shipped in #479 so a full regeneration does not remove workspace
+// selection, managed-section updates, or their plan-time validation.
+function preserveCanvasTerraformContract(schemas) {
+  const workspace = {
+    type: "object",
+    nullable: true,
+    description: "Workspace containing the channel, used for Enterprise Grid. Omit this field on update to retain the saved workspace, or send null to clear it.",
+    tf_nested_object: true,
+    tf_description: "Slack workspace containing the channel, used for Enterprise Grid. Omit this block to use automatic workspace resolution; removing a configured block clears the saved workspace.",
+    properties: {
+      id: {
+        type: "string",
+        minLength: 1,
+        pattern: "\\S",
+        description: "Slack workspace ID. Enter a literal ID from Slack.",
+      },
+      name: {
+        type: "string",
+        minLength: 1,
+        pattern: "\\S",
+        description: "Workspace display name.",
+      },
+    },
+    required: ["id", "name"],
+    additionalProperties: false,
+  };
+
+  for (const action of ["create_slack_canvas", "update_slack_canvas"]) {
+    const params = schemas[`${action}_task_params`];
+    if (!params) continue;
+
+    const channel = params.properties.channel;
+    channel.tf_nested_object = true;
+    channel.properties.workspace = structuredClone(workspace);
+    params.properties.retry_count.minimum = 0;
+    params.properties.retry_count.maximum = 4;
+    params.properties.retry_wait_time.minimum = 1;
+    params.properties.retry_wait_time.maximum = 15;
+  }
+
+  const update = schemas.update_slack_canvas_task_params;
+  if (update) {
+    update.properties.operation.enum = ["insert_at_end", "replace", "managed_sections"];
+    update.properties.operation.description = "Append content, replace all content, or replace only registered tables in a canvas created by Rootly from a managed template while preserving content outside them. Matching labels do not register an existing canvas. Managed sections overwrite edits inside those tables and require Slack reauthorization with canvases:read and canvases:write.";
+    delete update.properties.section_name;
+  }
+}
+
+function annotateCanvasWorkspaces(schemas) {
   const note = "Typed Go requests omit a nil workspace; use a map or raw JSON to send null.";
   for (const action of ["create_slack_canvas", "update_slack_canvas"]) {
     const workspace = schemas[`${action}_task_params`]?.properties.channel.properties.workspace;
-    if (workspace && !workspace.description.includes(note)) {
-      workspace.description += ` ${note}`;
+    if (workspace) {
+      if (!workspace.description.includes(note)) {
+        workspace.description += ` ${note}`;
+      }
+      // Workspace selection is resolved when the action is configured, so its
+      // ID must not contain a Liquid expression evaluated at execution time.
+      workspace.properties.id.tf_no_liquid = true;
     }
   }
 }
@@ -203,6 +257,7 @@ renameEscalationPolicyLevelSchemas(swagger);
 renameEscalationPolicyPathSchemas(swagger);
 addNestedRouteParentIds(swagger.components.schemas);
 annotateNullableRelationships(swagger.components.schemas);
-clarifyCanvasWorkspaceGoDescriptions(swagger.components.schemas);
+preserveCanvasTerraformContract(swagger.components.schemas);
+annotateCanvasWorkspaces(swagger.components.schemas);
 stripBulkOperations(swagger);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));

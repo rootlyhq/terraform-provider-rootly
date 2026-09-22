@@ -169,7 +169,7 @@ func TestWorkflowTaskSlackCanvasRetryBounds(t *testing.T) {
 	}
 }
 
-func TestWorkflowTaskSlackCanvasRejectsBlankTargets(t *testing.T) {
+func TestWorkflowTaskSlackCanvasValidatesTargets(t *testing.T) {
 	for _, resource := range []*schema.Resource{resourceWorkflowTaskCreateSlackCanvas(), resourceWorkflowTaskUpdateSlackCanvas()} {
 		params := resource.Schema["task_params"].Elem.(*schema.Resource).Schema
 		channel := params["channel"].Elem.(*schema.Resource).Schema
@@ -185,10 +185,16 @@ func TestWorkflowTaskSlackCanvasRejectsBlankTargets(t *testing.T) {
 						t.Errorf("blank %s was accepted: %q", name, blank)
 					}
 				}
-				if _, errors := validate("{{ incident.slack_channel_id }}", name); len(errors) != 0 {
-					t.Errorf("Liquid %s was rejected: %v", name, errors)
-				}
 			}
+		}
+		if _, errors := channel["id"].ValidateFunc("{{ incident.slack_channel_id }}", "channel.id"); len(errors) != 0 {
+			t.Errorf("Liquid channel ID was rejected: %v", errors)
+		}
+		if _, errors := workspace["id"].ValidateFunc("T0123456789", "workspace.id"); len(errors) != 0 {
+			t.Errorf("literal workspace ID was rejected: %v", errors)
+		}
+		if _, errors := workspace["id"].ValidateFunc("{{ incident.slack_workspace_id }}", "workspace.id"); len(errors) == 0 {
+			t.Error("Liquid workspace ID was accepted")
 		}
 	}
 }

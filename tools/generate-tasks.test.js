@@ -12,26 +12,30 @@ test("nested objects opt in without changing flat workflow task maps", () => {
   try {
     fs.mkdirSync(path.join(directory, "provider"));
     process.chdir(directory);
-    const workspace = {type: "object", tf_nested_object: true, description: "API description", tf_description: "Terraform description", properties: {id: {type: "string", minLength: 1, pattern: "\\S"}, name: {type: "string", minLength: 1, pattern: "\\S"}}, required: ["id", "name"]};
+    const workspace = {type: "object", tf_nested_object: true, description: "API description", tf_description: "Terraform description", properties: {id: {type: "string", minLength: 1, pattern: "\\S", tf_no_liquid: true}, name: {type: "string", minLength: 1, pattern: "\\S"}}, required: ["id", "name"]};
     const channel = {type: "object", properties: {id: {type: "string", minLength: 1, pattern: "\\S"}, name: {type: "string", minLength: 1, pattern: "\\S"}}, required: ["id", "name"]};
     generateTasks(["flat", "nested"], {components: {schemas: {
       flat_task_params: {properties: {channel}, required: ["channel"]},
-      nested_task_params: {properties: {retry_count: {type: "integer", default: 0, minimum: 0, maximum: 4}, retry_wait_time: {type: "integer", default: 1, minimum: 1, maximum: 15}, channel: {...channel, tf_nested_object: true, properties: {...channel.properties, workspace}}}, required: ["channel"]},
+      nested_task_params: {properties: {operation: {type: "string", enum: ["append"], description: "Operation."}, retry_count: {type: "integer", default: 0, minimum: 0, maximum: 4}, retry_wait_time: {type: "integer", default: 1, minimum: 1, maximum: 15}, channel: {...channel, tf_nested_object: true, properties: {...channel.properties, workspace}}}, required: ["channel"]},
     }}});
     const flat = fs.readFileSync("provider/resource_workflow_task_flat.go", "utf8");
     const nested = fs.readFileSync("provider/resource_workflow_task_nested.go", "utf8");
     const flatTests = fs.readFileSync("provider/resource_workflow_task_flat_test.go", "utf8");
     const nestedTests = fs.readFileSync("provider/resource_workflow_task_nested_test.go", "utf8");
     assert.match(flat, /Type: schema.TypeMap/);
-    assert.doesNotMatch(flat, /FlattenWorkflowTaskObjects|ExpandWorkflowTaskObjects/);
+    assert.doesNotMatch(flat, /WorkflowTask(?:BlocksToObjects|ObjectsToBlocks)|WorkflowTaskObjectFields/);
     assert.match(nested, /"workspace": &schema.Schema[\s\S]*?Type: schema.TypeList/);
-    assert.equal((nested.match(/FlattenWorkflowTaskObjects/g) || []).length, 2);
-    assert.equal((nested.match(/ExpandWorkflowTaskObjects/g) || []).length, 1);
+    assert.equal((nested.match(/WorkflowTaskBlocksToObjects/g) || []).length, 2);
+    assert.equal((nested.match(/WorkflowTaskObjectsToBlocks/g) || []).length, 1);
+    assert.match(nested, /WorkflowTaskObjectFields\{[\s\S]*?"channel": [\s\S]*?"workspace": sdkutils\.WorkflowTaskObjectFields\{\}/);
     assert.doesNotMatch(nested, /Map must contain two fields/);
     assert.match(nested, /_, err = c.UpdateWorkflowTask/);
     assert.match(nested, /Terraform description/);
-    assert.equal((nested.match(/ValidateFunc: validation.StringIsNotWhiteSpace/g) || []).length, 4);
+    assert.equal((nested.match(/validation.StringIsNotWhiteSpace/g) || []).length, 4);
+    assert.equal((nested.match(/validation.StringDoesNotContainAny\("\{\}"\)/g) || []).length, 1);
     assert.doesNotMatch(flat, /validation.StringIsNot(?:Empty|WhiteSpace)/);
+    assert.match(nested, /Operation\. Value must be one of `append`\./);
+    assert.doesNotMatch(nested, /Operation\.\./);
     assert.match(nested, /"retry_count": &schema.Schema[\s\S]*?Default: 0/);
     assert.match(nested, /"retry_wait_time": &schema.Schema[\s\S]*?Default: 1/);
     assert.match(nested, /"retry_count": &schema.Schema[\s\S]*?ValidateFunc: validation.IntBetween\(0, 4\)/);

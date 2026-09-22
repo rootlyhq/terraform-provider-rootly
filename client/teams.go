@@ -29,6 +29,7 @@ type Team struct {
 	PagertreeId                string                 `jsonapi:"attr,pagertree_id,omitempty"`
 	CortexId                   string                 `jsonapi:"attr,cortex_id,omitempty"`
 	ServiceNowCiSysId          string                 `jsonapi:"attr,service_now_ci_sys_id,omitempty"`
+	ScimGroupId                string                 `jsonapi:"attr,scim_group_id,omitempty"`
 	UserIds                    []interface{}          `jsonapi:"attr,user_ids,omitempty"`
 	AdminIds                   []interface{}          `jsonapi:"attr,admin_ids,omitempty"`
 	AlertsEmailEnabled         *bool                  `jsonapi:"attr,alerts_email_enabled,omitempty"`
@@ -42,6 +43,7 @@ type Team struct {
 	IncidentBroadcastChannel   map[string]interface{} `jsonapi:"attr,incident_broadcast_channel,omitempty"`
 	AutoAddMembersWhenAttached *bool                  `jsonapi:"attr,auto_add_members_when_attached,omitempty"`
 	AutoAddMembersScope        string                 `jsonapi:"attr,auto_add_members_scope,omitempty"`
+	ScheduleOverridePolicy     string                 `jsonapi:"attr,schedule_override_policy,omitempty"`
 	Properties                 []interface{}          `jsonapi:"attr,properties,omitempty"`
 }
 

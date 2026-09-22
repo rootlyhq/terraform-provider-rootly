@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceAlertField() *schema.Resource {
@@ -59,6 +60,21 @@ func resourceAlertField() *schema.Resource {
 				WriteOnly:   false,
 				Description: "The kind of alert field",
 			},
+
+			"owner_group_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "IDs of the teams that own the alert field. Empty for org-wide fields.",
+			},
 		},
 	}
 }
@@ -75,6 +91,9 @@ func resourceAlertFieldCreate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if value, ok := d.GetOkExists("kind"); ok {
 		s.Kind = value.(string)
+	}
+	if value, ok := d.GetOkExists("owner_group_ids"); ok {
+		s.OwnerGroupIds = value.([]interface{})
 	}
 
 	res, err := c.CreateAlertField(s)
@@ -108,6 +127,7 @@ func resourceAlertFieldRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("slug", item.Slug)
 	d.Set("name", item.Name)
 	d.Set("kind", item.Kind)
+	d.Set("owner_group_ids", item.OwnerGroupIds)
 
 	return nil
 }
@@ -123,6 +143,14 @@ func resourceAlertFieldUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if d.HasChange("kind") {
 		s.Kind = d.Get("kind").(string)
+	}
+
+	if d.HasChange("owner_group_ids") {
+		if value, ok := d.GetOk("owner_group_ids"); value != nil && ok {
+			s.OwnerGroupIds = value.([]interface{})
+		} else {
+			s.OwnerGroupIds = []interface{}{}
+		}
 	}
 
 	_, err := c.UpdateAlertField(d.Id(), s)

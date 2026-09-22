@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -15,6 +16,12 @@ import (
 
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
+
+var workflowTaskCreateSlackCanvasObjectFields = sdkutils.WorkflowTaskObjectFields{
+	"channel": sdkutils.WorkflowTaskObjectFields{
+		"workspace": sdkutils.WorkflowTaskObjectFields{},
+	},
+}
 
 func resourceWorkflowTaskCreateSlackCanvas() *schema.Resource {
 	return &schema.Resource{
@@ -110,7 +117,7 @@ func resourceWorkflowTaskCreateSlackCanvas() *schema.Resource {
 													Description:  "Slack workspace ID. Enter a literal ID from Slack.",
 													Type:         schema.TypeString,
 													Required:     true,
-													ValidateFunc: validation.StringIsNotWhiteSpace,
+													ValidateFunc: validation.All(validation.StringIsNotWhiteSpace, validation.StringDoesNotContainAny("{}")),
 												},
 												"name": &schema.Schema{
 													Description:  "Workspace display name.",
@@ -164,8 +171,7 @@ func resourceWorkflowTaskCreateSlackCanvasCreate(ctx context.Context, d *schema.
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
-	taskParamsSchema := resourceWorkflowTaskCreateSlackCanvas().Schema["task_params"].Elem.(*schema.Resource).Schema
-	taskParams, err := sdkutils.FlattenWorkflowTaskObjects(taskParams, taskParamsSchema)
+	taskParams, err := sdkutils.WorkflowTaskBlocksToObjects(taskParams, workflowTaskCreateSlackCanvasObjectFields)
 	if err != nil {
 		return diag.Errorf("Error preparing workflow task parameters: %s", err)
 	}
@@ -216,7 +222,7 @@ func resourceWorkflowTaskCreateSlackCanvasRead(ctx context.Context, d *schema.Re
 	d.Set("enabled", res.Enabled)
 	taskParamsSchema := resourceWorkflowTaskCreateSlackCanvas().Schema["task_params"].Elem.(*schema.Resource).Schema
 	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)
-	safeTaskParams, err = sdkutils.ExpandWorkflowTaskObjects(safeTaskParams, taskParamsSchema)
+	safeTaskParams, err = sdkutils.WorkflowTaskObjectsToBlocks(safeTaskParams, workflowTaskCreateSlackCanvasObjectFields)
 	if err != nil {
 		return diag.Errorf("Error reading workflow task parameters: %s", err)
 	}
@@ -237,8 +243,7 @@ func resourceWorkflowTaskCreateSlackCanvasUpdate(ctx context.Context, d *schema.
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
-	taskParamsSchema := resourceWorkflowTaskCreateSlackCanvas().Schema["task_params"].Elem.(*schema.Resource).Schema
-	taskParams, err := sdkutils.FlattenWorkflowTaskObjects(taskParams, taskParamsSchema)
+	taskParams, err := sdkutils.WorkflowTaskBlocksToObjects(taskParams, workflowTaskCreateSlackCanvasObjectFields)
 	if err != nil {
 		return diag.Errorf("Error preparing workflow task parameters: %s", err)
 	}

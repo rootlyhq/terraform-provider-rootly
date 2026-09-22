@@ -107,10 +107,11 @@ func resourceWorkflowTaskUpdateGoogleCalendarEvent() *schema.Resource {
 							Optional:    true,
 						},
 						"adjustment_days": &schema.Schema{
-							Description: "Days to adjust meeting by",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     nil,
+							Description:  "Days to adjust meeting by",
+							Type:         schema.TypeInt,
+							Optional:     true,
+							Default:      nil,
+							ValidateFunc: validation.IntBetween(0, 31),
 						},
 						"time_of_meeting": &schema.Schema{
 							Description: "Time of meeting in format HH:MM",
