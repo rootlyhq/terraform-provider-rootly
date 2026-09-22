@@ -44371,6 +44371,9 @@ type AutoAssignRoleRootlyTaskParams struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"group_target,omitempty"`
+
+	// IncidentRoleId The role id
+	IncidentRoleId string `json:"incident_role_id"`
 	ScheduleTarget *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`

@@ -102,6 +102,11 @@ func resourceWorkflowTaskAutoAssignRoleRootly() *schema.Resource {
 							Type:        schema.TypeMap,
 							Optional:    true,
 						},
+						"incident_role_id": &schema.Schema{
+							Description: "The role id",
+							Type:        schema.TypeString,
+							Required:    true,
+						},
 					},
 				},
 			},

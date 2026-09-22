@@ -227,6 +227,19 @@ function annotateStatusPageAnnouncement(schemas) {
   announcement.properties.published_at.tf_computed = true;
 }
 
+// The published schema currently lists incident_role_id as required without
+// defining the property. Restore the field so generated clients and Terraform
+// resources can satisfy the API contract.
+function preserveWorkflowTaskContracts(schemas) {
+  const autoAssignRole = schemas.auto_assign_role_rootly_task_params;
+  if (autoAssignRole && !autoAssignRole.properties.incident_role_id) {
+    autoAssignRole.properties.incident_role_id = {
+      type: "string",
+      description: "The role id",
+    };
+  }
+}
+
 function annotateCanvasWorkspaces(schemas) {
   const note = "Typed Go requests omit a nil workspace; use a map or raw JSON to send null.";
   for (const action of ["create_slack_canvas", "update_slack_canvas"]) {
@@ -274,6 +287,7 @@ addNestedRouteParentIds(swagger.components.schemas);
 annotateNullableRelationships(swagger.components.schemas);
 preserveCanvasTerraformContract(swagger.components.schemas);
 annotateStatusPageAnnouncement(swagger.components.schemas);
+preserveWorkflowTaskContracts(swagger.components.schemas);
 annotateCanvasWorkspaces(swagger.components.schemas);
 stripBulkOperations(swagger);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));

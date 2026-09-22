@@ -89,3 +89,28 @@ test("status-page announcement fields match their operation contracts", () => {
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+test("required workflow-task properties omitted by OpenAPI are restored", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-clean-swagger-"));
+  const swaggerPath = path.join(directory, "swagger.json");
+  const swagger = {
+    paths: {},
+    components: {schemas: {
+      auto_assign_role_rootly_task_params: {
+        type: "object",
+        properties: {task_type: {type: "string"}},
+        required: ["incident_role_id"],
+      },
+    }},
+  };
+  try {
+    fs.writeFileSync(swaggerPath, JSON.stringify(swagger));
+    const result = spawnSync(process.execPath, [path.join(__dirname, "clean-swagger.js"), swaggerPath], {encoding: "utf8"});
+    assert.equal(result.status, 0, result.stderr);
+    const property = JSON.parse(fs.readFileSync(swaggerPath, "utf8"))
+      .components.schemas.auto_assign_role_rootly_task_params.properties.incident_role_id;
+    assert.deepEqual(property, {type: "string", description: "The role id"});
+  } finally {
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});
