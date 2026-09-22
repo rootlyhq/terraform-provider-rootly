@@ -22,12 +22,13 @@ description: |-
 
 ### Optional
 
-- `published_at` (String) Date the announcement was published
-- `user_id` (Number) ID of the user who posted the announcement
+- `notify_subscribers` (Boolean) Controls if status page subscribers should be notified. Defaults to true. Value must be one of true or false
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `published_at` (String) Date the announcement was published
+- `user_id` (Number) ID of the user who posted the announcement
 
 ## Import
 

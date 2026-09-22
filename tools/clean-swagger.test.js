@@ -55,3 +55,37 @@ test("Canvas compatibility normalization preserves #479 and remains idempotent",
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+test("status-page announcement fields match their operation contracts", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-clean-swagger-"));
+  const swaggerPath = path.join(directory, "swagger.json");
+  const swagger = {
+    paths: {},
+    components: {schemas: {
+      status_page_announcement: {properties: {
+        user_id: {type: "integer"},
+        published_at: {type: "string"},
+      }},
+      new_status_page_announcement: {properties: {data: {properties: {attributes: {properties: {
+        notify_subscribers: {type: "boolean", description: "Notify subscribers"},
+      }}}}}},
+    }},
+  };
+  try {
+    fs.writeFileSync(swaggerPath, JSON.stringify(swagger));
+    const result = spawnSync(process.execPath, [path.join(__dirname, "clean-swagger.js"), swaggerPath], {encoding: "utf8"});
+    assert.equal(result.status, 0, result.stderr);
+    const properties = JSON.parse(fs.readFileSync(swaggerPath, "utf8"))
+      .components.schemas.status_page_announcement.properties;
+    assert.deepEqual(properties.notify_subscribers, {
+      type: "boolean",
+      description: "Notify subscribers",
+      default: true,
+      tf_create_only: true,
+    });
+    assert.equal(properties.user_id.tf_computed, true);
+    assert.equal(properties.published_at.tf_computed, true);
+  } finally {
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});

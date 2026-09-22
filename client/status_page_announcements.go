@@ -11,12 +11,13 @@ import (
 )
 
 type StatusPageAnnouncement struct {
-	ID           string `jsonapi:"primary,status_page_announcements"`
-	StatusPageId string `jsonapi:"attr,status_page_id,omitempty"`
-	Title        string `jsonapi:"attr,title,omitempty"`
-	Body         string `jsonapi:"attr,body,omitempty"`
-	UserId       int    `jsonapi:"attr,user_id,omitempty"`
-	PublishedAt  string `jsonapi:"attr,published_at,omitempty"`
+	ID                string `jsonapi:"primary,status_page_announcements"`
+	StatusPageId      string `jsonapi:"attr,status_page_id,omitempty"`
+	Title             string `jsonapi:"attr,title,omitempty"`
+	Body              string `jsonapi:"attr,body,omitempty"`
+	UserId            int    `jsonapi:"attr,user_id,omitempty"`
+	PublishedAt       string `jsonapi:"attr,published_at,omitempty"`
+	NotifySubscribers *bool  `jsonapi:"attr,notify_subscribers,omitempty"`
 }
 
 func (c *Client) ListStatusPageAnnouncements(id string, params *rootlygo.ListStatusPageAnnouncementsParams) ([]interface{}, error) {
@@ -113,10 +114,11 @@ func (c *Client) DeleteStatusPageAnnouncement(id string) error {
 		return fmt.Errorf("Error building request: %w", err)
 	}
 
-	_, err = c.Do(req)
+	resp, err := c.Do(req)
 	if err != nil {
 		return fmt.Errorf("Failed to make request to delete status_page_announcement: %w", err)
 	}
+	resp.Body.Close()
 
 	return nil
 }

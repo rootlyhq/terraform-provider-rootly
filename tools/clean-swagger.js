@@ -212,6 +212,21 @@ function preserveCanvasTerraformContract(schemas) {
   }
 }
 
+function annotateStatusPageAnnouncement(schemas) {
+  const announcement = schemas.status_page_announcement;
+  const createAttributes = schemas.new_status_page_announcement
+    ?.properties.data.properties.attributes.properties;
+  if (!announcement || !createAttributes?.notify_subscribers) return;
+
+  announcement.properties.notify_subscribers = {
+    ...structuredClone(createAttributes.notify_subscribers),
+    default: true,
+    tf_create_only: true,
+  };
+  announcement.properties.user_id.tf_computed = true;
+  announcement.properties.published_at.tf_computed = true;
+}
+
 function annotateCanvasWorkspaces(schemas) {
   const note = "Typed Go requests omit a nil workspace; use a map or raw JSON to send null.";
   for (const action of ["create_slack_canvas", "update_slack_canvas"]) {
@@ -258,6 +273,7 @@ renameEscalationPolicyPathSchemas(swagger);
 addNestedRouteParentIds(swagger.components.schemas);
 annotateNullableRelationships(swagger.components.schemas);
 preserveCanvasTerraformContract(swagger.components.schemas);
+annotateStatusPageAnnouncement(swagger.components.schemas);
 annotateCanvasWorkspaces(swagger.components.schemas);
 stripBulkOperations(swagger);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));

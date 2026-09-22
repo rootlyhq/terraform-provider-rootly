@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceStatusPageAnnouncement() *schema.Resource {
@@ -61,7 +62,7 @@ func resourceStatusPageAnnouncement() *schema.Resource {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Required:    false,
-				Optional:    true,
+				Optional:    false,
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
@@ -72,11 +73,21 @@ func resourceStatusPageAnnouncement() *schema.Resource {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Required:    false,
-				Optional:    true,
+				Optional:    false,
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "Date the announcement was published",
+			},
+
+			"notify_subscribers": &schema.Schema{
+				Type:        schema.TypeBool,
+				Default:     true,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    true,
+				WriteOnly:   false,
+				Description: "Controls if status page subscribers should be notified. Defaults to true. Value must be one of true or false",
 			},
 		},
 	}
@@ -98,11 +109,8 @@ func resourceStatusPageAnnouncementCreate(ctx context.Context, d *schema.Resourc
 	if value, ok := d.GetOkExists("body"); ok {
 		s.Body = value.(string)
 	}
-	if value, ok := d.GetOkExists("user_id"); ok {
-		s.UserId = value.(int)
-	}
-	if value, ok := d.GetOkExists("published_at"); ok {
-		s.PublishedAt = value.(string)
+	if value, ok := d.GetOkExists("notify_subscribers"); ok {
+		s.NotifySubscribers = tools.Bool(value.(bool))
 	}
 
 	res, err := c.CreateStatusPageAnnouncement(s)
@@ -156,12 +164,6 @@ func resourceStatusPageAnnouncementUpdate(ctx context.Context, d *schema.Resourc
 	}
 	if d.HasChange("body") {
 		s.Body = d.Get("body").(string)
-	}
-	if d.HasChange("user_id") {
-		s.UserId = d.Get("user_id").(int)
-	}
-	if d.HasChange("published_at") {
-		s.PublishedAt = d.Get("published_at").(string)
 	}
 
 	_, err := c.UpdateStatusPageAnnouncement(d.Id(), s)

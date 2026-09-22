@@ -1418,69 +1418,6 @@ func (e AlertConfigurationResponseDataType) Valid() bool {
 	}
 }
 
-// Defines values for AlertCreatePartialFailureErrorsMetaPagingStatus.
-const (
-	AlertCreatePartialFailureErrorsMetaPagingStatusNotAttempted AlertCreatePartialFailureErrorsMetaPagingStatus = "not_attempted"
-	AlertCreatePartialFailureErrorsMetaPagingStatusRejected     AlertCreatePartialFailureErrorsMetaPagingStatus = "rejected"
-	AlertCreatePartialFailureErrorsMetaPagingStatusSent         AlertCreatePartialFailureErrorsMetaPagingStatus = "sent"
-	AlertCreatePartialFailureErrorsMetaPagingStatusUnknown      AlertCreatePartialFailureErrorsMetaPagingStatus = "unknown"
-)
-
-// Valid indicates whether the value is a known member of the AlertCreatePartialFailureErrorsMetaPagingStatus enum.
-func (e AlertCreatePartialFailureErrorsMetaPagingStatus) Valid() bool {
-	switch e {
-	case AlertCreatePartialFailureErrorsMetaPagingStatusNotAttempted:
-		return true
-	case AlertCreatePartialFailureErrorsMetaPagingStatusRejected:
-		return true
-	case AlertCreatePartialFailureErrorsMetaPagingStatusSent:
-		return true
-	case AlertCreatePartialFailureErrorsMetaPagingStatusUnknown:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for AlertCreatePartialFailureErrorsStatus.
-const (
-	N422 AlertCreatePartialFailureErrorsStatus = "422"
-)
-
-// Valid indicates whether the value is a known member of the AlertCreatePartialFailureErrorsStatus enum.
-func (e AlertCreatePartialFailureErrorsStatus) Valid() bool {
-	switch e {
-	case N422:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for AlertEscalationFailureErrorsMetaPagingStatus.
-const (
-	AlertEscalationFailureErrorsMetaPagingStatusNotAttempted AlertEscalationFailureErrorsMetaPagingStatus = "not_attempted"
-	AlertEscalationFailureErrorsMetaPagingStatusRejected     AlertEscalationFailureErrorsMetaPagingStatus = "rejected"
-	AlertEscalationFailureErrorsMetaPagingStatusSent         AlertEscalationFailureErrorsMetaPagingStatus = "sent"
-	AlertEscalationFailureErrorsMetaPagingStatusUnknown      AlertEscalationFailureErrorsMetaPagingStatus = "unknown"
-)
-
-// Valid indicates whether the value is a known member of the AlertEscalationFailureErrorsMetaPagingStatus enum.
-func (e AlertEscalationFailureErrorsMetaPagingStatus) Valid() bool {
-	switch e {
-	case AlertEscalationFailureErrorsMetaPagingStatusNotAttempted:
-		return true
-	case AlertEscalationFailureErrorsMetaPagingStatusRejected:
-		return true
-	case AlertEscalationFailureErrorsMetaPagingStatusSent:
-		return true
-	case AlertEscalationFailureErrorsMetaPagingStatusUnknown:
-		return true
-	default:
-		return false
-	}
-}
-
 // Defines values for AlertEventAction.
 const (
 	AlertEventActionAckTimeoutRetriggered   AlertEventAction = "ack_timeout_retriggered"
@@ -5972,21 +5909,6 @@ const (
 func (e EscalateAlertDataType) Valid() bool {
 	switch e {
 	case EscalateAlertDataTypeAlerts:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for EscalateIncidentDataType.
-const (
-	EscalateIncidentDataTypeIncidents EscalateIncidentDataType = "incidents"
-)
-
-// Valid indicates whether the value is a known member of the EscalateIncidentDataType enum.
-func (e EscalateIncidentDataType) Valid() bool {
-	switch e {
-	case EscalateIncidentDataTypeIncidents:
 		return true
 	default:
 		return false
@@ -11216,30 +11138,6 @@ func (e IncidentCustomFieldSelectionResponseDataType) Valid() bool {
 	}
 }
 
-// Defines values for IncidentEscalationPartialFailureErrorsMetaPagingStatus.
-const (
-	NotAttempted IncidentEscalationPartialFailureErrorsMetaPagingStatus = "not_attempted"
-	Rejected     IncidentEscalationPartialFailureErrorsMetaPagingStatus = "rejected"
-	Sent         IncidentEscalationPartialFailureErrorsMetaPagingStatus = "sent"
-	Unknown      IncidentEscalationPartialFailureErrorsMetaPagingStatus = "unknown"
-)
-
-// Valid indicates whether the value is a known member of the IncidentEscalationPartialFailureErrorsMetaPagingStatus enum.
-func (e IncidentEscalationPartialFailureErrorsMetaPagingStatus) Valid() bool {
-	switch e {
-	case NotAttempted:
-		return true
-	case Rejected:
-		return true
-	case Sent:
-		return true
-	case Unknown:
-		return true
-	default:
-		return false
-	}
-}
-
 // Defines values for IncidentEventVisibility.
 const (
 	IncidentEventVisibilityExternal IncidentEventVisibility = "external"
@@ -13283,6 +13181,60 @@ func (e NewAlertDataAttributesNoise) Valid() bool {
 	}
 }
 
+// Defines values for NewAlertDataAttributesNotificationTargetType.
+const (
+	NewAlertDataAttributesNotificationTargetTypeEscalationPolicy NewAlertDataAttributesNotificationTargetType = "EscalationPolicy"
+	NewAlertDataAttributesNotificationTargetTypeFunctionality    NewAlertDataAttributesNotificationTargetType = "Functionality"
+	NewAlertDataAttributesNotificationTargetTypeGroup            NewAlertDataAttributesNotificationTargetType = "Group"
+	NewAlertDataAttributesNotificationTargetTypeService          NewAlertDataAttributesNotificationTargetType = "Service"
+	NewAlertDataAttributesNotificationTargetTypeUser             NewAlertDataAttributesNotificationTargetType = "User"
+)
+
+// Valid indicates whether the value is a known member of the NewAlertDataAttributesNotificationTargetType enum.
+func (e NewAlertDataAttributesNotificationTargetType) Valid() bool {
+	switch e {
+	case NewAlertDataAttributesNotificationTargetTypeEscalationPolicy:
+		return true
+	case NewAlertDataAttributesNotificationTargetTypeFunctionality:
+		return true
+	case NewAlertDataAttributesNotificationTargetTypeGroup:
+		return true
+	case NewAlertDataAttributesNotificationTargetTypeService:
+		return true
+	case NewAlertDataAttributesNotificationTargetTypeUser:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewAlertDataAttributesNotificationTargetsType.
+const (
+	NewAlertDataAttributesNotificationTargetsTypeEscalationPolicy NewAlertDataAttributesNotificationTargetsType = "EscalationPolicy"
+	NewAlertDataAttributesNotificationTargetsTypeFunctionality    NewAlertDataAttributesNotificationTargetsType = "Functionality"
+	NewAlertDataAttributesNotificationTargetsTypeGroup            NewAlertDataAttributesNotificationTargetsType = "Group"
+	NewAlertDataAttributesNotificationTargetsTypeService          NewAlertDataAttributesNotificationTargetsType = "Service"
+	NewAlertDataAttributesNotificationTargetsTypeUser             NewAlertDataAttributesNotificationTargetsType = "User"
+)
+
+// Valid indicates whether the value is a known member of the NewAlertDataAttributesNotificationTargetsType enum.
+func (e NewAlertDataAttributesNotificationTargetsType) Valid() bool {
+	switch e {
+	case NewAlertDataAttributesNotificationTargetsTypeEscalationPolicy:
+		return true
+	case NewAlertDataAttributesNotificationTargetsTypeFunctionality:
+		return true
+	case NewAlertDataAttributesNotificationTargetsTypeGroup:
+		return true
+	case NewAlertDataAttributesNotificationTargetsTypeService:
+		return true
+	case NewAlertDataAttributesNotificationTargetsTypeUser:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NewAlertDataAttributesStatus.
 const (
 	NewAlertDataAttributesStatusOpen      NewAlertDataAttributesStatus = "open"
@@ -13318,13 +13270,13 @@ func (e NewAlertDataType) Valid() bool {
 
 // Defines values for NewAlertEventDataAttributesKind.
 const (
-	Note NewAlertEventDataAttributesKind = "note"
+	NewAlertEventDataAttributesKindNote NewAlertEventDataAttributesKind = "note"
 )
 
 // Valid indicates whether the value is a known member of the NewAlertEventDataAttributesKind enum.
 func (e NewAlertEventDataAttributesKind) Valid() bool {
 	switch e {
-	case Note:
+	case NewAlertEventDataAttributesKindNote:
 		return true
 	default:
 		return false
@@ -28373,6 +28325,24 @@ func (e UpdateAirtableTableRecordTaskParamsTaskType) Valid() bool {
 	}
 }
 
+// Defines values for UpdateAlertDataAttributesNoise.
+const (
+	UpdateAlertDataAttributesNoiseNoise    UpdateAlertDataAttributesNoise = "noise"
+	UpdateAlertDataAttributesNoiseNotNoise UpdateAlertDataAttributesNoise = "not_noise"
+)
+
+// Valid indicates whether the value is a known member of the UpdateAlertDataAttributesNoise enum.
+func (e UpdateAlertDataAttributesNoise) Valid() bool {
+	switch e {
+	case UpdateAlertDataAttributesNoiseNoise:
+		return true
+	case UpdateAlertDataAttributesNoiseNotNoise:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateAlertDataType.
 const (
 	UpdateAlertDataTypeAlerts UpdateAlertDataType = "alerts"
@@ -41941,22 +41911,22 @@ func (e ListRetrospectiveProcessesParamsInclude) Valid() bool {
 
 // Defines values for GetRetrospectiveProcessParamsInclude.
 const (
-	GetRetrospectiveProcessParamsIncludeGroups             GetRetrospectiveProcessParamsInclude = "groups"
-	GetRetrospectiveProcessParamsIncludeIncidentTypes      GetRetrospectiveProcessParamsInclude = "incident_types"
-	GetRetrospectiveProcessParamsIncludeRetrospectiveSteps GetRetrospectiveProcessParamsInclude = "retrospective_steps"
-	GetRetrospectiveProcessParamsIncludeSeverities         GetRetrospectiveProcessParamsInclude = "severities"
+	Groups             GetRetrospectiveProcessParamsInclude = "groups"
+	IncidentTypes      GetRetrospectiveProcessParamsInclude = "incident_types"
+	RetrospectiveSteps GetRetrospectiveProcessParamsInclude = "retrospective_steps"
+	Severities         GetRetrospectiveProcessParamsInclude = "severities"
 )
 
 // Valid indicates whether the value is a known member of the GetRetrospectiveProcessParamsInclude enum.
 func (e GetRetrospectiveProcessParamsInclude) Valid() bool {
 	switch e {
-	case GetRetrospectiveProcessParamsIncludeGroups:
+	case Groups:
 		return true
-	case GetRetrospectiveProcessParamsIncludeIncidentTypes:
+	case IncidentTypes:
 		return true
-	case GetRetrospectiveProcessParamsIncludeRetrospectiveSteps:
+	case RetrospectiveSteps:
 		return true
-	case GetRetrospectiveProcessParamsIncludeSeverities:
+	case Severities:
 		return true
 	default:
 		return false
@@ -42873,7 +42843,7 @@ type Alert struct {
 	Services *[]Service `json:"services,omitempty"`
 
 	// ShortId Human-readable short identifier for the alert
-	ShortId *string `json:"short_id"`
+	ShortId string `json:"short_id"`
 
 	// Source The source of the alert
 	Source string `json:"source"`
@@ -42974,69 +42944,6 @@ type AlertConfigurationResponse struct {
 
 // AlertConfigurationResponseDataType defines model for AlertConfigurationResponse.Data.Type.
 type AlertConfigurationResponseDataType string
-
-// AlertCreatePartialFailure The alert was created or updated, but every paging attempt ended in failure. Inspect meta.paging_status before retrying so a page with an unknown or sent outcome is not duplicated.
-type AlertCreatePartialFailure struct {
-	Errors []struct {
-		Meta struct {
-			// AlertId The alert that was already persisted.
-			AlertId openapi_types.UUID `json:"alert_id"`
-
-			// PagingStatus Paging progress at failure. Do not automatically retry unknown or sent outcomes.
-			PagingStatus AlertCreatePartialFailureErrorsMetaPagingStatus `json:"paging_status"`
-		} `json:"meta"`
-		Status AlertCreatePartialFailureErrorsStatus `json:"status"`
-
-		// Title A sanitized summary of the paging failure.
-		Title string `json:"title"`
-	} `json:"errors"`
-}
-
-// AlertCreatePartialFailureErrorsMetaPagingStatus Paging progress at failure. Do not automatically retry unknown or sent outcomes.
-type AlertCreatePartialFailureErrorsMetaPagingStatus string
-
-// AlertCreatePartialFailureErrorsStatus defines model for AlertCreatePartialFailure.Errors.Status.
-type AlertCreatePartialFailureErrorsStatus string
-
-// AlertCreateUnprocessable The request was invalid, or the alert was persisted but every paging attempt ended in failure.
-type AlertCreateUnprocessable struct {
-	union json.RawMessage
-}
-
-// AlertEscalationBadRequest The request was malformed, or downstream paging rejected it after acting on the alert.
-type AlertEscalationBadRequest struct {
-	union json.RawMessage
-}
-
-// AlertEscalationConflict Downstream paging reported a conflict after acting on the alert.
-type AlertEscalationConflict struct {
-	union json.RawMessage
-}
-
-// AlertEscalationFailure Alert escalation failed. Inspect meta.paging_status before retrying so a page with an unknown or sent outcome is not duplicated.
-type AlertEscalationFailure struct {
-	Errors []struct {
-		Meta struct {
-			AlertId      openapi_types.UUID                           `json:"alert_id"`
-			PagingStatus AlertEscalationFailureErrorsMetaPagingStatus `json:"paging_status"`
-		} `json:"meta"`
-		Status string `json:"status"`
-		Title  string `json:"title"`
-	} `json:"errors"`
-}
-
-// AlertEscalationFailureErrorsMetaPagingStatus defines model for AlertEscalationFailure.Errors.Meta.PagingStatus.
-type AlertEscalationFailureErrorsMetaPagingStatus string
-
-// AlertEscalationForbidden defines model for alert_escalation_forbidden.
-type AlertEscalationForbidden struct {
-	union json.RawMessage
-}
-
-// AlertEscalationUnprocessable The request was invalid, or downstream processing failed after paging the alert.
-type AlertEscalationUnprocessable struct {
-	union json.RawMessage
-}
 
 // AlertEvent defines model for alert_event.
 type AlertEvent struct {
@@ -47395,69 +47302,20 @@ type ErrorsList struct {
 
 // EscalateAlert defines model for escalate_alert.
 type EscalateAlert struct {
-	Data struct {
-		Attributes struct {
-			// EscalationLevel Optional escalation policy level. Defaults to level 1.
+	Data *struct {
+		Attributes *struct {
+			// EscalationLevel The escalation policy level to escalate to. If omitted, defaults to the next level (same EP) or level 1 (different EP).
 			EscalationLevel *int `json:"escalation_level,omitempty"`
 
-			// EscalationNote Optional note recorded with the page.
-			EscalationNote *string `json:"escalation_note,omitempty"`
-
 			// EscalationPolicyId The ID of the escalation policy to escalate to. If omitted, uses the alert's current escalation policy from metadata. Required for resolved alerts whose metadata may have been cleared.
-			EscalationPolicyId *openapi_types.UUID `json:"escalation_policy_id,omitempty"`
-
-			// NotificationTargetId The escalation policy ID to page.
-			NotificationTargetId *openapi_types.UUID `json:"notification_target_id,omitempty"`
-
-			// NotificationTargetType Escalation policy target type. Singular/plural forms are case-insensitive and may use spaces, hyphens, or underscores.
-			NotificationTargetType *string `json:"notification_target_type,omitempty"`
-		} `json:"attributes"`
-		Type EscalateAlertDataType `json:"type"`
-	} `json:"data"`
+			EscalationPolicyId *string `json:"escalation_policy_id,omitempty"`
+		} `json:"attributes,omitempty"`
+		Type *EscalateAlertDataType `json:"type,omitempty"`
+	} `json:"data,omitempty"`
 }
 
 // EscalateAlertDataType defines model for EscalateAlert.Data.Type.
 type EscalateAlertDataType string
-
-// EscalateIncident defines model for escalate_incident.
-type EscalateIncident struct {
-	Data struct {
-		Attributes struct {
-			// AlertUrgencyId The UUID of an active alert urgency belonging to this organization. If omitted, the organization's default urgency is used. Malformed values return 400, unavailable or cross-organization values return 404, urgencies excluded from manual paging return 422, and requests made before a default urgency is available return 409.
-			AlertUrgencyId *openapi_types.UUID `json:"alert_urgency_id,omitempty"`
-
-			// Description Optional generated alert description. Defaults to an incident reference.
-			Description *string `json:"description,omitempty"`
-
-			// EscalationNote Optional note recorded with the page.
-			EscalationNote *string `json:"escalation_note,omitempty"`
-
-			// NotificationTargetId The numeric user ID.
-			NotificationTargetId *EscalateIncident_Data_Attributes_NotificationTargetId `json:"notification_target_id,omitempty"`
-
-			// NotificationTargetType User target type. User/users is case-insensitive.
-			NotificationTargetType *string `json:"notification_target_type,omitempty"`
-
-			// Summary Optional generated alert summary. Defaults to `Paged from incident <sequential ID>: <incident title>`.
-			Summary *string `json:"summary,omitempty"`
-		} `json:"attributes"`
-		Type EscalateIncidentDataType `json:"type"`
-	} `json:"data"`
-}
-
-// EscalateIncidentDataAttributesNotificationTargetId0 defines model for .
-type EscalateIncidentDataAttributesNotificationTargetId0 = int
-
-// EscalateIncidentDataAttributesNotificationTargetId1 defines model for .
-type EscalateIncidentDataAttributesNotificationTargetId1 = string
-
-// EscalateIncident_Data_Attributes_NotificationTargetId The numeric user ID.
-type EscalateIncident_Data_Attributes_NotificationTargetId struct {
-	union json.RawMessage
-}
-
-// EscalateIncidentDataType defines model for EscalateIncident.Data.Type.
-type EscalateIncidentDataType string
 
 // EscalationLevel defines model for escalation_level.
 type EscalationLevel struct {
@@ -49308,56 +49166,6 @@ type IncidentCustomFieldSelectionResponse struct {
 // IncidentCustomFieldSelectionResponseDataType defines model for IncidentCustomFieldSelectionResponse.Data.Type.
 type IncidentCustomFieldSelectionResponseDataType string
 
-// IncidentEscalationBadRequest The request was malformed, or downstream paging rejected it after creating the incident alert.
-type IncidentEscalationBadRequest struct {
-	union json.RawMessage
-}
-
-// IncidentEscalationConflict No default alert urgency is available before alert creation, or downstream paging reported a conflict after creating the incident alert.
-type IncidentEscalationConflict struct {
-	union json.RawMessage
-}
-
-// IncidentEscalationForbidden The request was forbidden before alert creation, or downstream paging was forbidden after creating the incident alert.
-type IncidentEscalationForbidden struct {
-	union json.RawMessage
-}
-
-// IncidentEscalationNotFound A resource was not found before alert creation, or downstream paging returned 404 after creating the incident alert.
-type IncidentEscalationNotFound struct {
-	union json.RawMessage
-}
-
-// IncidentEscalationPartialFailure The incident alert was created, but the operation failed. Inspect meta.paging_status before retrying so a page with an unknown or sent outcome is not duplicated.
-type IncidentEscalationPartialFailure struct {
-	Errors []struct {
-		Meta struct {
-			// AlertId The alert that was already created.
-			AlertId openapi_types.UUID `json:"alert_id"`
-
-			// IncidentLinked Whether the alert was attached to the incident before the failure.
-			IncidentLinked bool `json:"incident_linked"`
-
-			// PagingStatus Paging progress at failure. Do not automatically retry unknown or sent outcomes.
-			PagingStatus IncidentEscalationPartialFailureErrorsMetaPagingStatus `json:"paging_status"`
-		} `json:"meta"`
-
-		// Status The HTTP status code applicable to the paging failure.
-		Status string `json:"status"`
-
-		// Title A summary of the downstream paging failure.
-		Title string `json:"title"`
-	} `json:"errors"`
-}
-
-// IncidentEscalationPartialFailureErrorsMetaPagingStatus Paging progress at failure. Do not automatically retry unknown or sent outcomes.
-type IncidentEscalationPartialFailureErrorsMetaPagingStatus string
-
-// IncidentEscalationUnprocessable The request was invalid, or downstream processing failed after creating the incident alert.
-type IncidentEscalationUnprocessable struct {
-	union json.RawMessage
-}
-
 // IncidentEvent defines model for incident_event.
 type IncidentEvent struct {
 	// CreatedAt Date of creation
@@ -50885,8 +50693,88 @@ type MitigateIncidentDataType string
 // NewAlert defines model for new_alert.
 type NewAlert struct {
 	Data struct {
-		Attributes NewAlert_Data_Attributes `json:"attributes"`
-		Type       NewAlertDataType         `json:"type"`
+		Attributes struct {
+			// AlertFieldValuesAttributes Custom alert field values to create with the alert
+			AlertFieldValuesAttributes *[]*struct {
+				// AlertFieldId ID of the custom alert field
+				AlertFieldId string `json:"alert_field_id"`
+
+				// Value Value for the alert field
+				Value string `json:"value"`
+			} `json:"alert_field_values_attributes,omitempty"`
+
+			// AlertUrgencyId The ID of the alert urgency
+			AlertUrgencyId *string `json:"alert_urgency_id,omitempty"`
+
+			// Data Additional data
+			Data *map[string]interface{} `json:"data,omitempty"`
+
+			// DeduplicationKey Alerts sharing the same deduplication key are treated as a single alert.
+			DeduplicationKey *string `json:"deduplication_key,omitempty"`
+
+			// Description The description of the alert
+			Description *string `json:"description,omitempty"`
+
+			// EndedAt Alert end datetime
+			EndedAt *time.Time `json:"ended_at,omitempty"`
+
+			// EnvironmentIds The Environment IDs to attach to the alert
+			EnvironmentIds *[]string `json:"environment_ids,omitempty"`
+
+			// ExternalId External ID
+			ExternalId *string `json:"external_id,omitempty"`
+
+			// ExternalUrl External Url
+			ExternalUrl *string `json:"external_url,omitempty"`
+
+			// FunctionalityIds The Functionality IDs to attach to the alert
+			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
+
+			// GroupIds The Group IDs to attach to the alert. If your organization has On-Call enabled and your notification target is a Group. This field will be automatically set for you.
+			GroupIds *[]string `json:"group_ids,omitempty"`
+			Labels   *[]*struct {
+				// Key Key of the tag
+				Key string `json:"key"`
+
+				// Value Value of the tag
+				Value NewAlert_Data_Attributes_Labels_Value `json:"value"`
+			} `json:"labels,omitempty"`
+
+			// Noise Whether the alert is marked as noise
+			Noise *NewAlertDataAttributesNoise `json:"noise,omitempty"`
+
+			// NotificationTargetId Only available for organizations with Rootly On-Call enabled. The _identifier_ of the notification target object.
+			NotificationTargetId *string `json:"notification_target_id,omitempty"`
+
+			// NotificationTargetType Only available for organizations with Rootly On-Call enabled. Can be one of Group, Service, EscalationPolicy, Functionality, User. Please contact support if you encounter issues using `Functionality` as a notification target type.
+			NotificationTargetType *NewAlertDataAttributesNotificationTargetType `json:"notification_target_type,omitempty"`
+
+			// NotificationTargets Only available for organizations with Rootly On-Call enabled. Page multiple destinations (any combination of Group, Service, EscalationPolicy, Functionality, or User) in a single request. `Functionality` targets require the `enable_paging_functionalities` feature; a request that includes one while it is disabled is rejected. Applies to alert creation only. When provided, this takes precedence over the singular `notification_target_type` / `notification_target_id` fields.
+			NotificationTargets *[]struct {
+				// Id The identifier of the notification target object.
+				Id string `json:"id"`
+
+				// Type The type of the notification target. Can be one of Group, Service, EscalationPolicy, Functionality, User.
+				Type NewAlertDataAttributesNotificationTargetsType `json:"type"`
+			} `json:"notification_targets,omitempty"`
+
+			// ServiceIds The Service IDs to attach to the alert. If your organization has On-Call enabled and your notification target is a Service. This field will be automatically set for you.
+			ServiceIds *[]string `json:"service_ids,omitempty"`
+
+			// Source Deprecated. Accepted for backwards compatibility; new clients should omit. Defaults to `api`.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Source *string `json:"source,omitempty"`
+
+			// StartedAt Alert start datetime
+			StartedAt *time.Time `json:"started_at,omitempty"`
+
+			// Status Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered.
+			Status *NewAlertDataAttributesStatus `json:"status,omitempty"`
+
+			// Summary The summary of the alert
+			Summary string `json:"summary"`
+		} `json:"attributes"`
+		Type NewAlertDataType `json:"type"`
 	} `json:"data"`
 }
 
@@ -50907,127 +50795,14 @@ type NewAlert_Data_Attributes_Labels_Value struct {
 // NewAlertDataAttributesNoise Whether the alert is marked as noise
 type NewAlertDataAttributesNoise string
 
+// NewAlertDataAttributesNotificationTargetType Only available for organizations with Rootly On-Call enabled. Can be one of Group, Service, EscalationPolicy, Functionality, User. Please contact support if you encounter issues using `Functionality` as a notification target type.
+type NewAlertDataAttributesNotificationTargetType string
+
+// NewAlertDataAttributesNotificationTargetsType The type of the notification target. Can be one of Group, Service, EscalationPolicy, Functionality, User.
+type NewAlertDataAttributesNotificationTargetsType string
+
 // NewAlertDataAttributesStatus Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered.
 type NewAlertDataAttributesStatus string
-
-// NewAlertDataAttributes0 defines model for .
-type NewAlertDataAttributes0 struct {
-	NotificationTargets []interface{} `json:"notification_targets"`
-}
-
-// NewAlertDataAttributes1 defines model for .
-type NewAlertDataAttributes1 struct {
-	NotificationTargetId   interface{} `json:"notification_target_id"`
-	NotificationTargetType interface{} `json:"notification_target_type"`
-}
-
-// NewAlertDataAttributes2 defines model for .
-type NewAlertDataAttributes2 = map[string]interface{}
-
-// NewAlertDataAttributes3 defines model for .
-type NewAlertDataAttributes3 struct {
-	NotificationTargetId   NewAlert_Data_Attributes_3_NotificationTargetId `json:"notification_target_id"`
-	NotificationTargetType string                                          `json:"notification_target_type"`
-}
-
-// NewAlertDataAttributes3NotificationTargetId0 defines model for .
-type NewAlertDataAttributes3NotificationTargetId0 = int
-
-// NewAlertDataAttributes3NotificationTargetId1 defines model for .
-type NewAlertDataAttributes3NotificationTargetId1 = string
-
-// NewAlert_Data_Attributes_3_NotificationTargetId defines model for NewAlert.Data.Attributes.3.NotificationTargetId.
-type NewAlert_Data_Attributes_3_NotificationTargetId struct {
-	union json.RawMessage
-}
-
-// NewAlertDataAttributes4 defines model for .
-type NewAlertDataAttributes4 struct {
-	NotificationTargetId   openapi_types.UUID `json:"notification_target_id"`
-	NotificationTargetType string             `json:"notification_target_type"`
-}
-
-// NewAlert_Data_Attributes defines model for NewAlert.Data.Attributes.
-type NewAlert_Data_Attributes struct {
-	// AlertFieldValuesAttributes Custom alert field values to create with the alert
-	AlertFieldValuesAttributes *[]*struct {
-		// AlertFieldId ID of the custom alert field
-		AlertFieldId string `json:"alert_field_id"`
-
-		// Value Value for the alert field
-		Value string `json:"value"`
-	} `json:"alert_field_values_attributes,omitempty"`
-
-	// AlertUrgencyId The UUID of an active alert urgency belonging to this organization. Malformed, deleted, or cross-organization values are rejected with 422.
-	AlertUrgencyId *openapi_types.UUID `json:"alert_urgency_id,omitempty"`
-
-	// Data Additional data
-	Data *map[string]interface{} `json:"data,omitempty"`
-
-	// DeduplicationKey Alerts sharing the same deduplication key are treated as a single alert.
-	DeduplicationKey *string `json:"deduplication_key,omitempty"`
-
-	// Description The description of the alert
-	Description *string `json:"description,omitempty"`
-
-	// EndedAt Alert end datetime
-	EndedAt *time.Time `json:"ended_at,omitempty"`
-
-	// EnvironmentIds The Environment IDs to attach to the alert
-	EnvironmentIds *[]string `json:"environment_ids,omitempty"`
-
-	// ExternalId External ID
-	ExternalId *string `json:"external_id,omitempty"`
-
-	// ExternalUrl External Url
-	ExternalUrl *string `json:"external_url,omitempty"`
-
-	// FunctionalityIds The Functionality IDs to attach to the alert
-	FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
-
-	// GroupIds The Group IDs to attach to the alert. If your organization has On-Call enabled and your notification target is a Group. This field will be automatically set for you.
-	GroupIds *[]string `json:"group_ids,omitempty"`
-	Labels   *[]*struct {
-		// Key Key of the tag
-		Key string `json:"key"`
-
-		// Value Value of the tag
-		Value NewAlert_Data_Attributes_Labels_Value `json:"value"`
-	} `json:"labels,omitempty"`
-
-	// Noise Whether the alert is marked as noise
-	Noise *NewAlertDataAttributesNoise `json:"noise,omitempty"`
-
-	// NotificationTargetId Only available for organizations with Rootly On-Call enabled. Use a numeric ID for User targets and a UUID for Group, Service, EscalationPolicy, and Functionality targets.
-	NotificationTargetId interface{} `json:"notification_target_id,omitempty"`
-
-	// NotificationTargetType Only available for organizations with Rootly On-Call enabled. Supports Group (alias: Team), Service, EscalationPolicy, Functionality, and User. Target types and singular/plural aliases are case-insensitive; escalation-policy aliases may use spaces, hyphens, or underscores. Singular Functionality targets are ignored when the enable_paging_functionalities feature is disabled.
-	NotificationTargetType interface{} `json:"notification_target_type,omitempty"`
-
-	// NotificationTargets Only available for organizations with Rootly On-Call enabled. Page multiple destinations (any combination of Group, Service, EscalationPolicy, Functionality, or User) in a single request. `Functionality` targets require the `enable_paging_functionalities` feature; a request that includes one while it is disabled is rejected. Applies to alert creation only. When provided, this takes precedence over the singular `notification_target_type` / `notification_target_id` fields.
-	NotificationTargets *[]struct {
-		// Id The destination UUID.
-		Id   *openapi_types.UUID `json:"id,omitempty"`
-		Type *string             `json:"type,omitempty"`
-	} `json:"notification_targets,omitempty"`
-
-	// ServiceIds The Service IDs to attach to the alert. If your organization has On-Call enabled and your notification target is a Service. This field will be automatically set for you.
-	ServiceIds *[]string `json:"service_ids,omitempty"`
-
-	// Source Deprecated. Accepted for backwards compatibility; new clients should omit. Defaults to `api`.
-	// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	Source *string `json:"source,omitempty"`
-
-	// StartedAt Alert start datetime
-	StartedAt *time.Time `json:"started_at,omitempty"`
-
-	// Status Only available for organizations with Rootly On-Call enabled. Can be one of open, triggered.
-	Status *NewAlertDataAttributesStatus `json:"status,omitempty"`
-
-	// Summary The summary of the alert
-	Summary string `json:"summary"`
-	union   json.RawMessage
-}
 
 // NewAlertDataType defines model for NewAlert.Data.Type.
 type NewAlertDataType string
@@ -59132,6 +58907,9 @@ type StatusPageAnnouncement struct {
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
 
+	// NotifySubscribers Controls if status page subscribers should be notified. Defaults to true
+	NotifySubscribers *bool `json:"notify_subscribers,omitempty"`
+
 	// PublishedAt Date the announcement was published
 	PublishedAt string `json:"published_at"`
 
@@ -59762,8 +59540,67 @@ type UpdateAirtableTableRecordTaskParamsTaskType string
 type UpdateAlert struct {
 	Data struct {
 		Attributes struct {
-			NotificationTargetId   *openapi_types.UUID `json:"notification_target_id,omitempty"`
-			NotificationTargetType *string             `json:"notification_target_type,omitempty"`
+			// AlertFieldValuesAttributes Custom alert field values to create with the alert
+			AlertFieldValuesAttributes *[]*struct {
+				// AlertFieldId ID of the custom alert field
+				AlertFieldId string `json:"alert_field_id"`
+
+				// Value Value for the alert field
+				Value string `json:"value"`
+			} `json:"alert_field_values_attributes,omitempty"`
+
+			// AlertUrgencyId The ID of the alert urgency
+			AlertUrgencyId *string `json:"alert_urgency_id,omitempty"`
+
+			// Data Additional data
+			Data *map[string]interface{} `json:"data,omitempty"`
+
+			// DeduplicationKey Alerts sharing the same deduplication key are treated as a single alert.
+			DeduplicationKey *string `json:"deduplication_key,omitempty"`
+
+			// Description The description of the alert
+			Description *string `json:"description,omitempty"`
+
+			// EndedAt Alert end datetime
+			EndedAt *time.Time `json:"ended_at,omitempty"`
+
+			// EnvironmentIds The Environment IDs to attach to the alert
+			EnvironmentIds *[]string `json:"environment_ids,omitempty"`
+
+			// ExternalId External ID
+			ExternalId *string `json:"external_id,omitempty"`
+
+			// ExternalUrl External Url
+			ExternalUrl *string `json:"external_url,omitempty"`
+
+			// FunctionalityIds The Functionality IDs to attach to the alert
+			FunctionalityIds *[]string `json:"functionality_ids,omitempty"`
+
+			// GroupIds The Group IDs to attach to the alert
+			GroupIds *[]string `json:"group_ids,omitempty"`
+			Labels   *[]*struct {
+				// Key Key of the tag
+				Key string `json:"key"`
+
+				// Value Value of the tag
+				Value UpdateAlert_Data_Attributes_Labels_Value `json:"value"`
+			} `json:"labels,omitempty"`
+
+			// Noise Whether the alert is marked as noise
+			Noise *UpdateAlertDataAttributesNoise `json:"noise,omitempty"`
+
+			// ServiceIds The Service IDs to attach to the alert
+			ServiceIds *[]string `json:"service_ids,omitempty"`
+
+			// Source Deprecated. Accepted for backwards compatibility; new clients should omit. Defaults to `api`.
+			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
+			Source *string `json:"source,omitempty"`
+
+			// StartedAt Alert start datetime
+			StartedAt *time.Time `json:"started_at,omitempty"`
+
+			// Summary The summary of the alert
+			Summary *string `json:"summary,omitempty"`
 		} `json:"attributes"`
 
 		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
@@ -59771,6 +59608,23 @@ type UpdateAlert struct {
 		Type UpdateAlertDataType `json:"type"`
 	} `json:"data"`
 }
+
+// UpdateAlertDataAttributesLabelsValue0 defines model for .
+type UpdateAlertDataAttributesLabelsValue0 = string
+
+// UpdateAlertDataAttributesLabelsValue1 defines model for .
+type UpdateAlertDataAttributesLabelsValue1 = float32
+
+// UpdateAlertDataAttributesLabelsValue2 defines model for .
+type UpdateAlertDataAttributesLabelsValue2 = bool
+
+// UpdateAlert_Data_Attributes_Labels_Value Value of the tag
+type UpdateAlert_Data_Attributes_Labels_Value struct {
+	union json.RawMessage
+}
+
+// UpdateAlertDataAttributesNoise Whether the alert is marked as noise
+type UpdateAlertDataAttributesNoise string
 
 // UpdateAlertDataType defines model for UpdateAlert.Data.Type.
 type UpdateAlertDataType string
@@ -69481,9 +69335,6 @@ type CancelIncidentApplicationVndAPIPlusJSONRequestBody = CancelIncident
 // MarkAsDuplicateIncidentApplicationVndAPIPlusJSONRequestBody defines body for MarkAsDuplicateIncident for application/vnd.api+json ContentType.
 type MarkAsDuplicateIncidentApplicationVndAPIPlusJSONRequestBody = ResolveIncident
 
-// EscalateIncidentApplicationVndAPIPlusJSONRequestBody defines body for EscalateIncident for application/vnd.api+json ContentType.
-type EscalateIncidentApplicationVndAPIPlusJSONRequestBody = EscalateIncident
-
 // TriageIncidentApplicationVndAPIPlusJSONRequestBody defines body for TriageIncident for application/vnd.api+json ContentType.
 type TriageIncidentApplicationVndAPIPlusJSONRequestBody = InTriageIncident
 
@@ -70226,316 +70077,6 @@ func (t *Alert_Labels_Value) UnmarshalJSON(b []byte) error {
 	return err
 }
 
-// AsErrorsList returns the union data inside the AlertCreateUnprocessable as a ErrorsList
-func (t AlertCreateUnprocessable) AsErrorsList() (ErrorsList, error) {
-	var body ErrorsList
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromErrorsList overwrites any union data inside the AlertCreateUnprocessable as the provided ErrorsList
-func (t *AlertCreateUnprocessable) FromErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeErrorsList performs a merge with any union data inside the AlertCreateUnprocessable, using the provided ErrorsList
-func (t *AlertCreateUnprocessable) MergeErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsAlertCreatePartialFailure returns the union data inside the AlertCreateUnprocessable as a AlertCreatePartialFailure
-func (t AlertCreateUnprocessable) AsAlertCreatePartialFailure() (AlertCreatePartialFailure, error) {
-	var body AlertCreatePartialFailure
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromAlertCreatePartialFailure overwrites any union data inside the AlertCreateUnprocessable as the provided AlertCreatePartialFailure
-func (t *AlertCreateUnprocessable) FromAlertCreatePartialFailure(v AlertCreatePartialFailure) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeAlertCreatePartialFailure performs a merge with any union data inside the AlertCreateUnprocessable, using the provided AlertCreatePartialFailure
-func (t *AlertCreateUnprocessable) MergeAlertCreatePartialFailure(v AlertCreatePartialFailure) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t AlertCreateUnprocessable) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *AlertCreateUnprocessable) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsErrorsList returns the union data inside the AlertEscalationBadRequest as a ErrorsList
-func (t AlertEscalationBadRequest) AsErrorsList() (ErrorsList, error) {
-	var body ErrorsList
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromErrorsList overwrites any union data inside the AlertEscalationBadRequest as the provided ErrorsList
-func (t *AlertEscalationBadRequest) FromErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeErrorsList performs a merge with any union data inside the AlertEscalationBadRequest, using the provided ErrorsList
-func (t *AlertEscalationBadRequest) MergeErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsAlertEscalationFailure returns the union data inside the AlertEscalationBadRequest as a AlertEscalationFailure
-func (t AlertEscalationBadRequest) AsAlertEscalationFailure() (AlertEscalationFailure, error) {
-	var body AlertEscalationFailure
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromAlertEscalationFailure overwrites any union data inside the AlertEscalationBadRequest as the provided AlertEscalationFailure
-func (t *AlertEscalationBadRequest) FromAlertEscalationFailure(v AlertEscalationFailure) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeAlertEscalationFailure performs a merge with any union data inside the AlertEscalationBadRequest, using the provided AlertEscalationFailure
-func (t *AlertEscalationBadRequest) MergeAlertEscalationFailure(v AlertEscalationFailure) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t AlertEscalationBadRequest) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *AlertEscalationBadRequest) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsErrorsList returns the union data inside the AlertEscalationConflict as a ErrorsList
-func (t AlertEscalationConflict) AsErrorsList() (ErrorsList, error) {
-	var body ErrorsList
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromErrorsList overwrites any union data inside the AlertEscalationConflict as the provided ErrorsList
-func (t *AlertEscalationConflict) FromErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeErrorsList performs a merge with any union data inside the AlertEscalationConflict, using the provided ErrorsList
-func (t *AlertEscalationConflict) MergeErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsAlertEscalationFailure returns the union data inside the AlertEscalationConflict as a AlertEscalationFailure
-func (t AlertEscalationConflict) AsAlertEscalationFailure() (AlertEscalationFailure, error) {
-	var body AlertEscalationFailure
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromAlertEscalationFailure overwrites any union data inside the AlertEscalationConflict as the provided AlertEscalationFailure
-func (t *AlertEscalationConflict) FromAlertEscalationFailure(v AlertEscalationFailure) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeAlertEscalationFailure performs a merge with any union data inside the AlertEscalationConflict, using the provided AlertEscalationFailure
-func (t *AlertEscalationConflict) MergeAlertEscalationFailure(v AlertEscalationFailure) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t AlertEscalationConflict) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *AlertEscalationConflict) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsErrorsList returns the union data inside the AlertEscalationForbidden as a ErrorsList
-func (t AlertEscalationForbidden) AsErrorsList() (ErrorsList, error) {
-	var body ErrorsList
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromErrorsList overwrites any union data inside the AlertEscalationForbidden as the provided ErrorsList
-func (t *AlertEscalationForbidden) FromErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeErrorsList performs a merge with any union data inside the AlertEscalationForbidden, using the provided ErrorsList
-func (t *AlertEscalationForbidden) MergeErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsAlertEscalationFailure returns the union data inside the AlertEscalationForbidden as a AlertEscalationFailure
-func (t AlertEscalationForbidden) AsAlertEscalationFailure() (AlertEscalationFailure, error) {
-	var body AlertEscalationFailure
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromAlertEscalationFailure overwrites any union data inside the AlertEscalationForbidden as the provided AlertEscalationFailure
-func (t *AlertEscalationForbidden) FromAlertEscalationFailure(v AlertEscalationFailure) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeAlertEscalationFailure performs a merge with any union data inside the AlertEscalationForbidden, using the provided AlertEscalationFailure
-func (t *AlertEscalationForbidden) MergeAlertEscalationFailure(v AlertEscalationFailure) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t AlertEscalationForbidden) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *AlertEscalationForbidden) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsErrorsList returns the union data inside the AlertEscalationUnprocessable as a ErrorsList
-func (t AlertEscalationUnprocessable) AsErrorsList() (ErrorsList, error) {
-	var body ErrorsList
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromErrorsList overwrites any union data inside the AlertEscalationUnprocessable as the provided ErrorsList
-func (t *AlertEscalationUnprocessable) FromErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeErrorsList performs a merge with any union data inside the AlertEscalationUnprocessable, using the provided ErrorsList
-func (t *AlertEscalationUnprocessable) MergeErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsAlertEscalationFailure returns the union data inside the AlertEscalationUnprocessable as a AlertEscalationFailure
-func (t AlertEscalationUnprocessable) AsAlertEscalationFailure() (AlertEscalationFailure, error) {
-	var body AlertEscalationFailure
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromAlertEscalationFailure overwrites any union data inside the AlertEscalationUnprocessable as the provided AlertEscalationFailure
-func (t *AlertEscalationUnprocessable) FromAlertEscalationFailure(v AlertEscalationFailure) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeAlertEscalationFailure performs a merge with any union data inside the AlertEscalationUnprocessable, using the provided AlertEscalationFailure
-func (t *AlertEscalationUnprocessable) MergeAlertEscalationFailure(v AlertEscalationFailure) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t AlertEscalationUnprocessable) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *AlertEscalationUnprocessable) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
 // AsAutoAssignRolePagerdutyTaskParams0 returns the union data inside the AutoAssignRolePagerdutyTaskParams as a AutoAssignRolePagerdutyTaskParams0
 func (t AutoAssignRolePagerdutyTaskParams) AsAutoAssignRolePagerdutyTaskParams0() (AutoAssignRolePagerdutyTaskParams0, error) {
 	var body AutoAssignRolePagerdutyTaskParams0
@@ -70899,68 +70440,6 @@ func (t *CreateShortcutStoryTaskParams) UnmarshalJSON(b []byte) error {
 		}
 	}
 
-	return err
-}
-
-// AsEscalateIncidentDataAttributesNotificationTargetId0 returns the union data inside the EscalateIncident_Data_Attributes_NotificationTargetId as a EscalateIncidentDataAttributesNotificationTargetId0
-func (t EscalateIncident_Data_Attributes_NotificationTargetId) AsEscalateIncidentDataAttributesNotificationTargetId0() (EscalateIncidentDataAttributesNotificationTargetId0, error) {
-	var body EscalateIncidentDataAttributesNotificationTargetId0
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromEscalateIncidentDataAttributesNotificationTargetId0 overwrites any union data inside the EscalateIncident_Data_Attributes_NotificationTargetId as the provided EscalateIncidentDataAttributesNotificationTargetId0
-func (t *EscalateIncident_Data_Attributes_NotificationTargetId) FromEscalateIncidentDataAttributesNotificationTargetId0(v EscalateIncidentDataAttributesNotificationTargetId0) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeEscalateIncidentDataAttributesNotificationTargetId0 performs a merge with any union data inside the EscalateIncident_Data_Attributes_NotificationTargetId, using the provided EscalateIncidentDataAttributesNotificationTargetId0
-func (t *EscalateIncident_Data_Attributes_NotificationTargetId) MergeEscalateIncidentDataAttributesNotificationTargetId0(v EscalateIncidentDataAttributesNotificationTargetId0) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsEscalateIncidentDataAttributesNotificationTargetId1 returns the union data inside the EscalateIncident_Data_Attributes_NotificationTargetId as a EscalateIncidentDataAttributesNotificationTargetId1
-func (t EscalateIncident_Data_Attributes_NotificationTargetId) AsEscalateIncidentDataAttributesNotificationTargetId1() (EscalateIncidentDataAttributesNotificationTargetId1, error) {
-	var body EscalateIncidentDataAttributesNotificationTargetId1
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromEscalateIncidentDataAttributesNotificationTargetId1 overwrites any union data inside the EscalateIncident_Data_Attributes_NotificationTargetId as the provided EscalateIncidentDataAttributesNotificationTargetId1
-func (t *EscalateIncident_Data_Attributes_NotificationTargetId) FromEscalateIncidentDataAttributesNotificationTargetId1(v EscalateIncidentDataAttributesNotificationTargetId1) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeEscalateIncidentDataAttributesNotificationTargetId1 performs a merge with any union data inside the EscalateIncident_Data_Attributes_NotificationTargetId, using the provided EscalateIncidentDataAttributesNotificationTargetId1
-func (t *EscalateIncident_Data_Attributes_NotificationTargetId) MergeEscalateIncidentDataAttributesNotificationTargetId1(v EscalateIncidentDataAttributesNotificationTargetId1) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t EscalateIncident_Data_Attributes_NotificationTargetId) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *EscalateIncident_Data_Attributes_NotificationTargetId) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
 	return err
 }
 
@@ -71341,316 +70820,6 @@ func (t *GetGitlabCommitsTaskParams) UnmarshalJSON(b []byte) error {
 		}
 	}
 
-	return err
-}
-
-// AsErrorsList returns the union data inside the IncidentEscalationBadRequest as a ErrorsList
-func (t IncidentEscalationBadRequest) AsErrorsList() (ErrorsList, error) {
-	var body ErrorsList
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromErrorsList overwrites any union data inside the IncidentEscalationBadRequest as the provided ErrorsList
-func (t *IncidentEscalationBadRequest) FromErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeErrorsList performs a merge with any union data inside the IncidentEscalationBadRequest, using the provided ErrorsList
-func (t *IncidentEscalationBadRequest) MergeErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsIncidentEscalationPartialFailure returns the union data inside the IncidentEscalationBadRequest as a IncidentEscalationPartialFailure
-func (t IncidentEscalationBadRequest) AsIncidentEscalationPartialFailure() (IncidentEscalationPartialFailure, error) {
-	var body IncidentEscalationPartialFailure
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromIncidentEscalationPartialFailure overwrites any union data inside the IncidentEscalationBadRequest as the provided IncidentEscalationPartialFailure
-func (t *IncidentEscalationBadRequest) FromIncidentEscalationPartialFailure(v IncidentEscalationPartialFailure) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeIncidentEscalationPartialFailure performs a merge with any union data inside the IncidentEscalationBadRequest, using the provided IncidentEscalationPartialFailure
-func (t *IncidentEscalationBadRequest) MergeIncidentEscalationPartialFailure(v IncidentEscalationPartialFailure) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t IncidentEscalationBadRequest) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *IncidentEscalationBadRequest) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsErrorsList returns the union data inside the IncidentEscalationConflict as a ErrorsList
-func (t IncidentEscalationConflict) AsErrorsList() (ErrorsList, error) {
-	var body ErrorsList
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromErrorsList overwrites any union data inside the IncidentEscalationConflict as the provided ErrorsList
-func (t *IncidentEscalationConflict) FromErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeErrorsList performs a merge with any union data inside the IncidentEscalationConflict, using the provided ErrorsList
-func (t *IncidentEscalationConflict) MergeErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsIncidentEscalationPartialFailure returns the union data inside the IncidentEscalationConflict as a IncidentEscalationPartialFailure
-func (t IncidentEscalationConflict) AsIncidentEscalationPartialFailure() (IncidentEscalationPartialFailure, error) {
-	var body IncidentEscalationPartialFailure
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromIncidentEscalationPartialFailure overwrites any union data inside the IncidentEscalationConflict as the provided IncidentEscalationPartialFailure
-func (t *IncidentEscalationConflict) FromIncidentEscalationPartialFailure(v IncidentEscalationPartialFailure) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeIncidentEscalationPartialFailure performs a merge with any union data inside the IncidentEscalationConflict, using the provided IncidentEscalationPartialFailure
-func (t *IncidentEscalationConflict) MergeIncidentEscalationPartialFailure(v IncidentEscalationPartialFailure) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t IncidentEscalationConflict) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *IncidentEscalationConflict) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsErrorsList returns the union data inside the IncidentEscalationForbidden as a ErrorsList
-func (t IncidentEscalationForbidden) AsErrorsList() (ErrorsList, error) {
-	var body ErrorsList
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromErrorsList overwrites any union data inside the IncidentEscalationForbidden as the provided ErrorsList
-func (t *IncidentEscalationForbidden) FromErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeErrorsList performs a merge with any union data inside the IncidentEscalationForbidden, using the provided ErrorsList
-func (t *IncidentEscalationForbidden) MergeErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsIncidentEscalationPartialFailure returns the union data inside the IncidentEscalationForbidden as a IncidentEscalationPartialFailure
-func (t IncidentEscalationForbidden) AsIncidentEscalationPartialFailure() (IncidentEscalationPartialFailure, error) {
-	var body IncidentEscalationPartialFailure
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromIncidentEscalationPartialFailure overwrites any union data inside the IncidentEscalationForbidden as the provided IncidentEscalationPartialFailure
-func (t *IncidentEscalationForbidden) FromIncidentEscalationPartialFailure(v IncidentEscalationPartialFailure) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeIncidentEscalationPartialFailure performs a merge with any union data inside the IncidentEscalationForbidden, using the provided IncidentEscalationPartialFailure
-func (t *IncidentEscalationForbidden) MergeIncidentEscalationPartialFailure(v IncidentEscalationPartialFailure) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t IncidentEscalationForbidden) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *IncidentEscalationForbidden) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsErrorsList returns the union data inside the IncidentEscalationNotFound as a ErrorsList
-func (t IncidentEscalationNotFound) AsErrorsList() (ErrorsList, error) {
-	var body ErrorsList
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromErrorsList overwrites any union data inside the IncidentEscalationNotFound as the provided ErrorsList
-func (t *IncidentEscalationNotFound) FromErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeErrorsList performs a merge with any union data inside the IncidentEscalationNotFound, using the provided ErrorsList
-func (t *IncidentEscalationNotFound) MergeErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsIncidentEscalationPartialFailure returns the union data inside the IncidentEscalationNotFound as a IncidentEscalationPartialFailure
-func (t IncidentEscalationNotFound) AsIncidentEscalationPartialFailure() (IncidentEscalationPartialFailure, error) {
-	var body IncidentEscalationPartialFailure
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromIncidentEscalationPartialFailure overwrites any union data inside the IncidentEscalationNotFound as the provided IncidentEscalationPartialFailure
-func (t *IncidentEscalationNotFound) FromIncidentEscalationPartialFailure(v IncidentEscalationPartialFailure) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeIncidentEscalationPartialFailure performs a merge with any union data inside the IncidentEscalationNotFound, using the provided IncidentEscalationPartialFailure
-func (t *IncidentEscalationNotFound) MergeIncidentEscalationPartialFailure(v IncidentEscalationPartialFailure) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t IncidentEscalationNotFound) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *IncidentEscalationNotFound) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsErrorsList returns the union data inside the IncidentEscalationUnprocessable as a ErrorsList
-func (t IncidentEscalationUnprocessable) AsErrorsList() (ErrorsList, error) {
-	var body ErrorsList
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromErrorsList overwrites any union data inside the IncidentEscalationUnprocessable as the provided ErrorsList
-func (t *IncidentEscalationUnprocessable) FromErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeErrorsList performs a merge with any union data inside the IncidentEscalationUnprocessable, using the provided ErrorsList
-func (t *IncidentEscalationUnprocessable) MergeErrorsList(v ErrorsList) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsIncidentEscalationPartialFailure returns the union data inside the IncidentEscalationUnprocessable as a IncidentEscalationPartialFailure
-func (t IncidentEscalationUnprocessable) AsIncidentEscalationPartialFailure() (IncidentEscalationPartialFailure, error) {
-	var body IncidentEscalationPartialFailure
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromIncidentEscalationPartialFailure overwrites any union data inside the IncidentEscalationUnprocessable as the provided IncidentEscalationPartialFailure
-func (t *IncidentEscalationUnprocessable) FromIncidentEscalationPartialFailure(v IncidentEscalationPartialFailure) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeIncidentEscalationPartialFailure performs a merge with any union data inside the IncidentEscalationUnprocessable, using the provided IncidentEscalationPartialFailure
-func (t *IncidentEscalationUnprocessable) MergeIncidentEscalationPartialFailure(v IncidentEscalationPartialFailure) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t IncidentEscalationUnprocessable) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *IncidentEscalationUnprocessable) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
 	return err
 }
 
@@ -72067,517 +71236,6 @@ func (t NewAlert_Data_Attributes_Labels_Value) MarshalJSON() ([]byte, error) {
 
 func (t *NewAlert_Data_Attributes_Labels_Value) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsNewAlertDataAttributes3NotificationTargetId0 returns the union data inside the NewAlert_Data_Attributes_3_NotificationTargetId as a NewAlertDataAttributes3NotificationTargetId0
-func (t NewAlert_Data_Attributes_3_NotificationTargetId) AsNewAlertDataAttributes3NotificationTargetId0() (NewAlertDataAttributes3NotificationTargetId0, error) {
-	var body NewAlertDataAttributes3NotificationTargetId0
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromNewAlertDataAttributes3NotificationTargetId0 overwrites any union data inside the NewAlert_Data_Attributes_3_NotificationTargetId as the provided NewAlertDataAttributes3NotificationTargetId0
-func (t *NewAlert_Data_Attributes_3_NotificationTargetId) FromNewAlertDataAttributes3NotificationTargetId0(v NewAlertDataAttributes3NotificationTargetId0) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeNewAlertDataAttributes3NotificationTargetId0 performs a merge with any union data inside the NewAlert_Data_Attributes_3_NotificationTargetId, using the provided NewAlertDataAttributes3NotificationTargetId0
-func (t *NewAlert_Data_Attributes_3_NotificationTargetId) MergeNewAlertDataAttributes3NotificationTargetId0(v NewAlertDataAttributes3NotificationTargetId0) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsNewAlertDataAttributes3NotificationTargetId1 returns the union data inside the NewAlert_Data_Attributes_3_NotificationTargetId as a NewAlertDataAttributes3NotificationTargetId1
-func (t NewAlert_Data_Attributes_3_NotificationTargetId) AsNewAlertDataAttributes3NotificationTargetId1() (NewAlertDataAttributes3NotificationTargetId1, error) {
-	var body NewAlertDataAttributes3NotificationTargetId1
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromNewAlertDataAttributes3NotificationTargetId1 overwrites any union data inside the NewAlert_Data_Attributes_3_NotificationTargetId as the provided NewAlertDataAttributes3NotificationTargetId1
-func (t *NewAlert_Data_Attributes_3_NotificationTargetId) FromNewAlertDataAttributes3NotificationTargetId1(v NewAlertDataAttributes3NotificationTargetId1) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeNewAlertDataAttributes3NotificationTargetId1 performs a merge with any union data inside the NewAlert_Data_Attributes_3_NotificationTargetId, using the provided NewAlertDataAttributes3NotificationTargetId1
-func (t *NewAlert_Data_Attributes_3_NotificationTargetId) MergeNewAlertDataAttributes3NotificationTargetId1(v NewAlertDataAttributes3NotificationTargetId1) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t NewAlert_Data_Attributes_3_NotificationTargetId) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *NewAlert_Data_Attributes_3_NotificationTargetId) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsNewAlertDataAttributes0 returns the union data inside the NewAlert_Data_Attributes as a NewAlertDataAttributes0
-func (t NewAlert_Data_Attributes) AsNewAlertDataAttributes0() (NewAlertDataAttributes0, error) {
-	var body NewAlertDataAttributes0
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromNewAlertDataAttributes0 overwrites any union data inside the NewAlert_Data_Attributes as the provided NewAlertDataAttributes0
-func (t *NewAlert_Data_Attributes) FromNewAlertDataAttributes0(v NewAlertDataAttributes0) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeNewAlertDataAttributes0 performs a merge with any union data inside the NewAlert_Data_Attributes, using the provided NewAlertDataAttributes0
-func (t *NewAlert_Data_Attributes) MergeNewAlertDataAttributes0(v NewAlertDataAttributes0) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsNewAlertDataAttributes1 returns the union data inside the NewAlert_Data_Attributes as a NewAlertDataAttributes1
-func (t NewAlert_Data_Attributes) AsNewAlertDataAttributes1() (NewAlertDataAttributes1, error) {
-	var body NewAlertDataAttributes1
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromNewAlertDataAttributes1 overwrites any union data inside the NewAlert_Data_Attributes as the provided NewAlertDataAttributes1
-func (t *NewAlert_Data_Attributes) FromNewAlertDataAttributes1(v NewAlertDataAttributes1) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeNewAlertDataAttributes1 performs a merge with any union data inside the NewAlert_Data_Attributes, using the provided NewAlertDataAttributes1
-func (t *NewAlert_Data_Attributes) MergeNewAlertDataAttributes1(v NewAlertDataAttributes1) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsNewAlertDataAttributes2 returns the union data inside the NewAlert_Data_Attributes as a NewAlertDataAttributes2
-func (t NewAlert_Data_Attributes) AsNewAlertDataAttributes2() (NewAlertDataAttributes2, error) {
-	var body NewAlertDataAttributes2
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromNewAlertDataAttributes2 overwrites any union data inside the NewAlert_Data_Attributes as the provided NewAlertDataAttributes2
-func (t *NewAlert_Data_Attributes) FromNewAlertDataAttributes2(v NewAlertDataAttributes2) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeNewAlertDataAttributes2 performs a merge with any union data inside the NewAlert_Data_Attributes, using the provided NewAlertDataAttributes2
-func (t *NewAlert_Data_Attributes) MergeNewAlertDataAttributes2(v NewAlertDataAttributes2) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsNewAlertDataAttributes3 returns the union data inside the NewAlert_Data_Attributes as a NewAlertDataAttributes3
-func (t NewAlert_Data_Attributes) AsNewAlertDataAttributes3() (NewAlertDataAttributes3, error) {
-	var body NewAlertDataAttributes3
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromNewAlertDataAttributes3 overwrites any union data inside the NewAlert_Data_Attributes as the provided NewAlertDataAttributes3
-func (t *NewAlert_Data_Attributes) FromNewAlertDataAttributes3(v NewAlertDataAttributes3) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeNewAlertDataAttributes3 performs a merge with any union data inside the NewAlert_Data_Attributes, using the provided NewAlertDataAttributes3
-func (t *NewAlert_Data_Attributes) MergeNewAlertDataAttributes3(v NewAlertDataAttributes3) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsNewAlertDataAttributes4 returns the union data inside the NewAlert_Data_Attributes as a NewAlertDataAttributes4
-func (t NewAlert_Data_Attributes) AsNewAlertDataAttributes4() (NewAlertDataAttributes4, error) {
-	var body NewAlertDataAttributes4
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromNewAlertDataAttributes4 overwrites any union data inside the NewAlert_Data_Attributes as the provided NewAlertDataAttributes4
-func (t *NewAlert_Data_Attributes) FromNewAlertDataAttributes4(v NewAlertDataAttributes4) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeNewAlertDataAttributes4 performs a merge with any union data inside the NewAlert_Data_Attributes, using the provided NewAlertDataAttributes4
-func (t *NewAlert_Data_Attributes) MergeNewAlertDataAttributes4(v NewAlertDataAttributes4) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t NewAlert_Data_Attributes) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	if err != nil {
-		return nil, err
-	}
-	object := make(map[string]json.RawMessage)
-	if t.union != nil {
-		err = json.Unmarshal(b, &object)
-		if err != nil {
-			return nil, err
-		}
-	}
-
-	if t.AlertFieldValuesAttributes != nil {
-		object["alert_field_values_attributes"], err = json.Marshal(t.AlertFieldValuesAttributes)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'alert_field_values_attributes': %w", err)
-		}
-	}
-
-	if t.AlertUrgencyId != nil {
-		object["alert_urgency_id"], err = json.Marshal(t.AlertUrgencyId)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'alert_urgency_id': %w", err)
-		}
-	}
-
-	if t.Data != nil {
-		object["data"], err = json.Marshal(t.Data)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'data': %w", err)
-		}
-	}
-
-	if t.DeduplicationKey != nil {
-		object["deduplication_key"], err = json.Marshal(t.DeduplicationKey)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'deduplication_key': %w", err)
-		}
-	}
-
-	if t.Description != nil {
-		object["description"], err = json.Marshal(t.Description)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'description': %w", err)
-		}
-	}
-
-	if t.EndedAt != nil {
-		object["ended_at"], err = json.Marshal(t.EndedAt)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'ended_at': %w", err)
-		}
-	}
-
-	if t.EnvironmentIds != nil {
-		object["environment_ids"], err = json.Marshal(t.EnvironmentIds)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'environment_ids': %w", err)
-		}
-	}
-
-	if t.ExternalId != nil {
-		object["external_id"], err = json.Marshal(t.ExternalId)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'external_id': %w", err)
-		}
-	}
-
-	if t.ExternalUrl != nil {
-		object["external_url"], err = json.Marshal(t.ExternalUrl)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'external_url': %w", err)
-		}
-	}
-
-	if t.FunctionalityIds != nil {
-		object["functionality_ids"], err = json.Marshal(t.FunctionalityIds)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'functionality_ids': %w", err)
-		}
-	}
-
-	if t.GroupIds != nil {
-		object["group_ids"], err = json.Marshal(t.GroupIds)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'group_ids': %w", err)
-		}
-	}
-
-	if t.Labels != nil {
-		object["labels"], err = json.Marshal(t.Labels)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'labels': %w", err)
-		}
-	}
-
-	if t.Noise != nil {
-		object["noise"], err = json.Marshal(t.Noise)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'noise': %w", err)
-		}
-	}
-
-	object["notification_target_id"], err = json.Marshal(t.NotificationTargetId)
-	if err != nil {
-		return nil, fmt.Errorf("error marshaling 'notification_target_id': %w", err)
-	}
-
-	object["notification_target_type"], err = json.Marshal(t.NotificationTargetType)
-	if err != nil {
-		return nil, fmt.Errorf("error marshaling 'notification_target_type': %w", err)
-	}
-
-	if t.NotificationTargets != nil {
-		object["notification_targets"], err = json.Marshal(t.NotificationTargets)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'notification_targets': %w", err)
-		}
-	}
-
-	if t.ServiceIds != nil {
-		object["service_ids"], err = json.Marshal(t.ServiceIds)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'service_ids': %w", err)
-		}
-	}
-
-	if t.Source != nil {
-		object["source"], err = json.Marshal(t.Source)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'source': %w", err)
-		}
-	}
-
-	if t.StartedAt != nil {
-		object["started_at"], err = json.Marshal(t.StartedAt)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'started_at': %w", err)
-		}
-	}
-
-	if t.Status != nil {
-		object["status"], err = json.Marshal(t.Status)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'status': %w", err)
-		}
-	}
-
-	object["summary"], err = json.Marshal(t.Summary)
-	if err != nil {
-		return nil, fmt.Errorf("error marshaling 'summary': %w", err)
-	}
-
-	b, err = json.Marshal(object)
-	return b, err
-}
-
-func (t *NewAlert_Data_Attributes) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	if err != nil {
-		return err
-	}
-	object := make(map[string]json.RawMessage)
-	err = json.Unmarshal(b, &object)
-	if err != nil {
-		return err
-	}
-
-	if raw, found := object["alert_field_values_attributes"]; found {
-		err = json.Unmarshal(raw, &t.AlertFieldValuesAttributes)
-		if err != nil {
-			return fmt.Errorf("error reading 'alert_field_values_attributes': %w", err)
-		}
-	}
-
-	if raw, found := object["alert_urgency_id"]; found {
-		err = json.Unmarshal(raw, &t.AlertUrgencyId)
-		if err != nil {
-			return fmt.Errorf("error reading 'alert_urgency_id': %w", err)
-		}
-	}
-
-	if raw, found := object["data"]; found {
-		err = json.Unmarshal(raw, &t.Data)
-		if err != nil {
-			return fmt.Errorf("error reading 'data': %w", err)
-		}
-	}
-
-	if raw, found := object["deduplication_key"]; found {
-		err = json.Unmarshal(raw, &t.DeduplicationKey)
-		if err != nil {
-			return fmt.Errorf("error reading 'deduplication_key': %w", err)
-		}
-	}
-
-	if raw, found := object["description"]; found {
-		err = json.Unmarshal(raw, &t.Description)
-		if err != nil {
-			return fmt.Errorf("error reading 'description': %w", err)
-		}
-	}
-
-	if raw, found := object["ended_at"]; found {
-		err = json.Unmarshal(raw, &t.EndedAt)
-		if err != nil {
-			return fmt.Errorf("error reading 'ended_at': %w", err)
-		}
-	}
-
-	if raw, found := object["environment_ids"]; found {
-		err = json.Unmarshal(raw, &t.EnvironmentIds)
-		if err != nil {
-			return fmt.Errorf("error reading 'environment_ids': %w", err)
-		}
-	}
-
-	if raw, found := object["external_id"]; found {
-		err = json.Unmarshal(raw, &t.ExternalId)
-		if err != nil {
-			return fmt.Errorf("error reading 'external_id': %w", err)
-		}
-	}
-
-	if raw, found := object["external_url"]; found {
-		err = json.Unmarshal(raw, &t.ExternalUrl)
-		if err != nil {
-			return fmt.Errorf("error reading 'external_url': %w", err)
-		}
-	}
-
-	if raw, found := object["functionality_ids"]; found {
-		err = json.Unmarshal(raw, &t.FunctionalityIds)
-		if err != nil {
-			return fmt.Errorf("error reading 'functionality_ids': %w", err)
-		}
-	}
-
-	if raw, found := object["group_ids"]; found {
-		err = json.Unmarshal(raw, &t.GroupIds)
-		if err != nil {
-			return fmt.Errorf("error reading 'group_ids': %w", err)
-		}
-	}
-
-	if raw, found := object["labels"]; found {
-		err = json.Unmarshal(raw, &t.Labels)
-		if err != nil {
-			return fmt.Errorf("error reading 'labels': %w", err)
-		}
-	}
-
-	if raw, found := object["noise"]; found {
-		err = json.Unmarshal(raw, &t.Noise)
-		if err != nil {
-			return fmt.Errorf("error reading 'noise': %w", err)
-		}
-	}
-
-	if raw, found := object["notification_target_id"]; found {
-		err = json.Unmarshal(raw, &t.NotificationTargetId)
-		if err != nil {
-			return fmt.Errorf("error reading 'notification_target_id': %w", err)
-		}
-	}
-
-	if raw, found := object["notification_target_type"]; found {
-		err = json.Unmarshal(raw, &t.NotificationTargetType)
-		if err != nil {
-			return fmt.Errorf("error reading 'notification_target_type': %w", err)
-		}
-	}
-
-	if raw, found := object["notification_targets"]; found {
-		err = json.Unmarshal(raw, &t.NotificationTargets)
-		if err != nil {
-			return fmt.Errorf("error reading 'notification_targets': %w", err)
-		}
-	}
-
-	if raw, found := object["service_ids"]; found {
-		err = json.Unmarshal(raw, &t.ServiceIds)
-		if err != nil {
-			return fmt.Errorf("error reading 'service_ids': %w", err)
-		}
-	}
-
-	if raw, found := object["source"]; found {
-		err = json.Unmarshal(raw, &t.Source)
-		if err != nil {
-			return fmt.Errorf("error reading 'source': %w", err)
-		}
-	}
-
-	if raw, found := object["started_at"]; found {
-		err = json.Unmarshal(raw, &t.StartedAt)
-		if err != nil {
-			return fmt.Errorf("error reading 'started_at': %w", err)
-		}
-	}
-
-	if raw, found := object["status"]; found {
-		err = json.Unmarshal(raw, &t.Status)
-		if err != nil {
-			return fmt.Errorf("error reading 'status': %w", err)
-		}
-	}
-
-	if raw, found := object["summary"]; found {
-		err = json.Unmarshal(raw, &t.Summary)
-		if err != nil {
-			return fmt.Errorf("error reading 'summary': %w", err)
-		}
-	}
-
 	return err
 }
 
@@ -77940,6 +76598,94 @@ func (t *SendSlackMessageTaskParams) UnmarshalJSON(b []byte) error {
 		}
 	}
 
+	return err
+}
+
+// AsUpdateAlertDataAttributesLabelsValue0 returns the union data inside the UpdateAlert_Data_Attributes_Labels_Value as a UpdateAlertDataAttributesLabelsValue0
+func (t UpdateAlert_Data_Attributes_Labels_Value) AsUpdateAlertDataAttributesLabelsValue0() (UpdateAlertDataAttributesLabelsValue0, error) {
+	var body UpdateAlertDataAttributesLabelsValue0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateAlertDataAttributesLabelsValue0 overwrites any union data inside the UpdateAlert_Data_Attributes_Labels_Value as the provided UpdateAlertDataAttributesLabelsValue0
+func (t *UpdateAlert_Data_Attributes_Labels_Value) FromUpdateAlertDataAttributesLabelsValue0(v UpdateAlertDataAttributesLabelsValue0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateAlertDataAttributesLabelsValue0 performs a merge with any union data inside the UpdateAlert_Data_Attributes_Labels_Value, using the provided UpdateAlertDataAttributesLabelsValue0
+func (t *UpdateAlert_Data_Attributes_Labels_Value) MergeUpdateAlertDataAttributesLabelsValue0(v UpdateAlertDataAttributesLabelsValue0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateAlertDataAttributesLabelsValue1 returns the union data inside the UpdateAlert_Data_Attributes_Labels_Value as a UpdateAlertDataAttributesLabelsValue1
+func (t UpdateAlert_Data_Attributes_Labels_Value) AsUpdateAlertDataAttributesLabelsValue1() (UpdateAlertDataAttributesLabelsValue1, error) {
+	var body UpdateAlertDataAttributesLabelsValue1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateAlertDataAttributesLabelsValue1 overwrites any union data inside the UpdateAlert_Data_Attributes_Labels_Value as the provided UpdateAlertDataAttributesLabelsValue1
+func (t *UpdateAlert_Data_Attributes_Labels_Value) FromUpdateAlertDataAttributesLabelsValue1(v UpdateAlertDataAttributesLabelsValue1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateAlertDataAttributesLabelsValue1 performs a merge with any union data inside the UpdateAlert_Data_Attributes_Labels_Value, using the provided UpdateAlertDataAttributesLabelsValue1
+func (t *UpdateAlert_Data_Attributes_Labels_Value) MergeUpdateAlertDataAttributesLabelsValue1(v UpdateAlertDataAttributesLabelsValue1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsUpdateAlertDataAttributesLabelsValue2 returns the union data inside the UpdateAlert_Data_Attributes_Labels_Value as a UpdateAlertDataAttributesLabelsValue2
+func (t UpdateAlert_Data_Attributes_Labels_Value) AsUpdateAlertDataAttributesLabelsValue2() (UpdateAlertDataAttributesLabelsValue2, error) {
+	var body UpdateAlertDataAttributesLabelsValue2
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromUpdateAlertDataAttributesLabelsValue2 overwrites any union data inside the UpdateAlert_Data_Attributes_Labels_Value as the provided UpdateAlertDataAttributesLabelsValue2
+func (t *UpdateAlert_Data_Attributes_Labels_Value) FromUpdateAlertDataAttributesLabelsValue2(v UpdateAlertDataAttributesLabelsValue2) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeUpdateAlertDataAttributesLabelsValue2 performs a merge with any union data inside the UpdateAlert_Data_Attributes_Labels_Value, using the provided UpdateAlertDataAttributesLabelsValue2
+func (t *UpdateAlert_Data_Attributes_Labels_Value) MergeUpdateAlertDataAttributesLabelsValue2(v UpdateAlertDataAttributesLabelsValue2) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t UpdateAlert_Data_Attributes_Labels_Value) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *UpdateAlert_Data_Attributes_Labels_Value) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
 	return err
 }
 
@@ -87515,11 +86261,6 @@ type ClientInterface interface {
 
 	MarkAsDuplicateIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body MarkAsDuplicateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EscalateIncidentWithBody request with any body
-	EscalateIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	EscalateIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body EscalateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// TriageIncidentWithBody request with any body
 	TriageIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -93809,30 +92550,6 @@ func (c *Client) MarkAsDuplicateIncidentWithBody(ctx context.Context, id string,
 
 func (c *Client) MarkAsDuplicateIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body MarkAsDuplicateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewMarkAsDuplicateIncidentRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) EscalateIncidentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEscalateIncidentRequestWithBody(c.Server, id, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) EscalateIncidentWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body EscalateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEscalateIncidentRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -122181,53 +120898,6 @@ func NewMarkAsDuplicateIncidentRequestWithBody(server string, id string, content
 	return req, nil
 }
 
-// NewEscalateIncidentRequestWithApplicationVndAPIPlusJSONBody calls the generic EscalateIncident builder with application/vnd.api+json body
-func NewEscalateIncidentRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body EscalateIncidentApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewEscalateIncidentRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
-}
-
-// NewEscalateIncidentRequestWithBody generates requests for EscalateIncident with any type of body
-func NewEscalateIncidentRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/incidents/%s/escalate", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
 // NewTriageIncidentRequestWithApplicationVndAPIPlusJSONBody calls the generic TriageIncident builder with application/vnd.api+json body
 func NewTriageIncidentRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body TriageIncidentApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -141045,11 +139715,6 @@ type ClientWithResponsesInterface interface {
 
 	MarkAsDuplicateIncidentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body MarkAsDuplicateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*MarkAsDuplicateIncidentResponse, error)
 
-	// EscalateIncidentWithBodyWithResponse request with any body
-	EscalateIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EscalateIncidentResponse, error)
-
-	EscalateIncidentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body EscalateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*EscalateIncidentResponse, error)
-
 	// TriageIncidentWithBodyWithResponse request with any body
 	TriageIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TriageIncidentResponse, error)
 
@@ -143489,7 +142154,7 @@ type CreateAlertResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON201 *AlertResponse
 	ApplicationvndApiJSON401 *ErrorsList
-	ApplicationvndApiJSON422 *AlertCreateUnprocessable
+	ApplicationvndApiJSON422 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -143705,11 +142370,9 @@ type EscalateAlertResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *AlertResponse
-	ApplicationvndApiJSON400 *AlertEscalationBadRequest
-	ApplicationvndApiJSON403 *AlertEscalationForbidden
+	ApplicationvndApiJSON400 *ErrorsList
 	ApplicationvndApiJSON404 *ErrorsList
-	ApplicationvndApiJSON409 *AlertEscalationConflict
-	ApplicationvndApiJSON422 *AlertEscalationUnprocessable
+	ApplicationvndApiJSON422 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -151848,42 +150511,6 @@ func (r MarkAsDuplicateIncidentResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r MarkAsDuplicateIncidentResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type EscalateIncidentResponse struct {
-	Body                     []byte
-	HTTPResponse             *http.Response
-	ApplicationvndApiJSON201 *AlertResponse
-	ApplicationvndApiJSON400 *IncidentEscalationBadRequest
-	ApplicationvndApiJSON401 *ErrorsList
-	ApplicationvndApiJSON403 *IncidentEscalationForbidden
-	ApplicationvndApiJSON404 *IncidentEscalationNotFound
-	ApplicationvndApiJSON409 *IncidentEscalationConflict
-	ApplicationvndApiJSON422 *IncidentEscalationUnprocessable
-}
-
-// Status returns HTTPResponse.Status
-func (r EscalateIncidentResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r EscalateIncidentResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r EscalateIncidentResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -163980,23 +162607,6 @@ func (c *ClientWithResponses) MarkAsDuplicateIncidentWithApplicationVndAPIPlusJS
 	return ParseMarkAsDuplicateIncidentResponse(rsp)
 }
 
-// EscalateIncidentWithBodyWithResponse request with arbitrary body returning *EscalateIncidentResponse
-func (c *ClientWithResponses) EscalateIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EscalateIncidentResponse, error) {
-	rsp, err := c.EscalateIncidentWithBody(ctx, id, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseEscalateIncidentResponse(rsp)
-}
-
-func (c *ClientWithResponses) EscalateIncidentWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body EscalateIncidentApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*EscalateIncidentResponse, error) {
-	rsp, err := c.EscalateIncidentWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseEscalateIncidentResponse(rsp)
-}
-
 // TriageIncidentWithBodyWithResponse request with arbitrary body returning *TriageIncidentResponse
 func (c *ClientWithResponses) TriageIncidentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TriageIncidentResponse, error) {
 	rsp, err := c.TriageIncidentWithBody(ctx, id, contentType, body, reqEditors...)
@@ -168747,7 +167357,7 @@ func ParseCreateAlertResponse(rsp *http.Response) (*CreateAlertResponse, error) 
 		response.ApplicationvndApiJSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest AlertCreateUnprocessable
+		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -168971,18 +167581,11 @@ func ParseEscalateAlertResponse(rsp *http.Response) (*EscalateAlertResponse, err
 		response.ApplicationvndApiJSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest AlertEscalationBadRequest
+		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.ApplicationvndApiJSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest AlertEscalationForbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
@@ -168991,15 +167594,8 @@ func ParseEscalateAlertResponse(rsp *http.Response) (*EscalateAlertResponse, err
 		}
 		response.ApplicationvndApiJSON404 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest AlertEscalationConflict
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON409 = &dest
-
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest AlertEscalationUnprocessable
+		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -177387,74 +175983,6 @@ func ParseMarkAsDuplicateIncidentResponse(rsp *http.Response) (*MarkAsDuplicateI
 			return nil, err
 		}
 		response.ApplicationvndApiJSON404 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseEscalateIncidentResponse parses an HTTP response from a EscalateIncidentWithResponse call
-func ParseEscalateIncidentResponse(rsp *http.Response) (*EscalateIncidentResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &EscalateIncidentResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest AlertResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON201 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest IncidentEscalationBadRequest
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ErrorsList
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest IncidentEscalationForbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest IncidentEscalationNotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
-		var dest IncidentEscalationConflict
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON409 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest IncidentEscalationUnprocessable
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.ApplicationvndApiJSON422 = &dest
 
 	}
 
