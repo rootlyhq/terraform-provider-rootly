@@ -151,6 +151,19 @@ resource "rootly_escalation_level" "first" {
   }
 }
 
+# Page a Microsoft Teams channel — supply the external Teams channel ID
+# (e.g. from the channel link: https://teams.microsoft.com/l/channel/<id>/...).
+resource "rootly_escalation_level" "teams_channel" {
+  escalation_policy_path_id = rootly_escalation_path.default.id
+  escalation_policy_id      = rootly_escalation_policy.primary.id
+  position                  = 4
+  delay                     = 5
+  notification_target_params {
+    type = "microsoft_teams_channel"
+    id   = "19:49a01245b7d04e57b314b55986f771e4@thread.tacv2"
+  }
+}
+
 # cycle-based round-robin everyone on the schedule
 resource "rootly_escalation_level" "second" {
   escalation_policy_path_id                       = rootly_escalation_path.default.id

@@ -39405,6 +39405,9 @@ type AlertGroup struct {
 	// Name The name of the alert group
 	Name string `json:"name"`
 
+	// OwnerGroupIds Teams that own this alert group. Admins of an owning team can manage it, and an owned alert group can only target destinations that belong to its owning teams. Only available when owning teams for alert groups are enabled for the organization.
+	OwnerGroupIds *[]openapi_types.UUID `json:"owner_group_ids,omitempty"`
+
 	// Slug The slug of the alert group
 	Slug    *string `json:"slug,omitempty"`
 	Targets *[]struct {
@@ -46940,7 +46943,11 @@ type NewAlertGroup struct {
 			GroupByAlertUrgency *NewAlertGroupDataAttributesGroupByAlertUrgency `json:"group_by_alert_urgency,omitempty"`
 
 			// Name The name of the alert group
-			Name    string `json:"name"`
+			Name string `json:"name"`
+
+			// OwnerGroupIds Teams that own this alert group. Admins of an owning team can manage it, and an owned alert group can only target destinations that belong to its owning teams. Only available when owning teams for alert groups are enabled for the organization.
+			OwnerGroupIds *[]openapi_types.UUID `json:"owner_group_ids,omitempty"`
+
 			Targets *[]struct {
 				// TargetId id for the Group, Service, EscalationPolicy or Functionality
 				TargetId openapi_types.UUID `json:"target_id"`
@@ -55142,7 +55149,11 @@ type UpdateAlertGroup struct {
 			GroupByAlertUrgency *UpdateAlertGroupDataAttributesGroupByAlertUrgency `json:"group_by_alert_urgency,omitempty"`
 
 			// Name The name of the alert group
-			Name    *string `json:"name,omitempty"`
+			Name *string `json:"name,omitempty"`
+
+			// OwnerGroupIds Teams that own this alert group. Admins of an owning team can manage it, and an owned alert group can only target destinations that belong to its owning teams. Only available when owning teams for alert groups are enabled for the organization.
+			OwnerGroupIds *[]openapi_types.UUID `json:"owner_group_ids,omitempty"`
+
 			Targets *[]struct {
 				// TargetId id for the Group, Service, EscalationPolicy or Functionality
 				TargetId openapi_types.UUID `json:"target_id"`
