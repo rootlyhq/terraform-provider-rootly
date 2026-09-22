@@ -58,7 +58,8 @@ module.exports = function generateWorkflowTaskResources(tasks, swagger) {
 
 function hasJSONProperty(task_schema) {
   return Object.values(task_schema.properties).some(
-    (p) => p.type === "string" && p.description && p.description.match(/JSON/)
+    (p) => (p.type === "string" && p.description && p.description.match(/JSON/)) ||
+      (p.tf_nested_object && hasJSONProperty(p))
   );
 }
 
@@ -69,6 +70,7 @@ function genResourceFile(task_name, task_schema) {
     .join("");
 
   const needsJSON = hasJSONProperty(task_schema);
+  const hasNestedObjects = Object.values(task_schema.properties).some((property) => property.tf_nested_object);
   const stateUpgrade = taskStateUpgrades[task_name];
   const customizeDiff = taskCustomizeDiffs[task_name] || "validateUniqueWorkflowTaskPosition";
 
@@ -185,7 +187,12 @@ func resourceWorkflowTask${task_name_camel}Create(ctx context.Context, d *schema
 	position := d.Get("position").(int)
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
-	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
+	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})${hasNestedObjects ? `
+	taskParamsSchema := resourceWorkflowTask${task_name_camel}().Schema["task_params"].Elem.(*schema.Resource).Schema
+	taskParams, err := sdkutils.FlattenWorkflowTaskObjects(taskParams, taskParamsSchema)
+	if err != nil {
+		return diag.Errorf("Error preparing workflow task parameters: %s", err)
+	}` : ""}
 
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
@@ -232,8 +239,14 @@ func resourceWorkflowTask${task_name_camel}Read(ctx context.Context, d *schema.R
 	d.Set("skip_on_failure", res.SkipOnFailure)
 	d.Set("enabled", res.Enabled)
 	taskParamsSchema := resourceWorkflowTask${task_name_camel}().Schema["task_params"].Elem.(*schema.Resource).Schema
-	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)
-	d.Set("task_params", []interface{}{safeTaskParams})
+	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)${hasNestedObjects ? `
+	safeTaskParams, err = sdkutils.ExpandWorkflowTaskObjects(safeTaskParams, taskParamsSchema)
+	if err != nil {
+		return diag.Errorf("Error reading workflow task parameters: %s", err)
+	}` : ""}
+${hasNestedObjects ? `	if err := d.Set("task_params", []interface{}{safeTaskParams}); err != nil {
+		return diag.Errorf("Error setting workflow task parameters: %s", err)
+	}` : `	d.Set("task_params", []interface{}{safeTaskParams})`}
 
 	return nil
 }
@@ -247,7 +260,12 @@ func resourceWorkflowTask${task_name_camel}Update(ctx context.Context, d *schema
 	position := d.Get("position").(int)
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
-	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
+	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})${hasNestedObjects ? `
+	taskParamsSchema := resourceWorkflowTask${task_name_camel}().Schema["task_params"].Elem.(*schema.Resource).Schema
+	taskParams, err := sdkutils.FlattenWorkflowTaskObjects(taskParams, taskParamsSchema)
+	if err != nil {
+		return diag.Errorf("Error preparing workflow task parameters: %s", err)
+	}` : ""}
 
 	s := &client.WorkflowTask{
 		WorkflowId: workflowId,
@@ -259,7 +277,7 @@ func resourceWorkflowTask${task_name_camel}Update(ctx context.Context, d *schema
 	}
 
 	tflog.Debug(ctx, fmt.Sprintf("adding value: %#v", s))
-	_, err := c.UpdateWorkflowTask(d.Id(), s)
+	_, err ${hasNestedObjects ? "=" : ":="} c.UpdateWorkflowTask(d.Id(), s)
 	if err != nil {
 		return diag.Errorf("Error updating workflow task: %s", err.Error())
 	}
@@ -291,7 +309,7 @@ func resourceWorkflowTask${task_name_camel}Delete(ctx context.Context, d *schema
 }
 
 function annotatedDescription(schema) {
-  const description = (schema.description || "")
+  const description = ((schema.tf_nested_object && schema.tf_description) || schema.description || "")
     .replace(/"/g, '\\"')
     .replace(/ex. .+$/, "");
   if (schema.enum) {
@@ -309,6 +327,7 @@ function annotatedDescription(schema) {
       .join(", ")}.`;
   }
   if (
+    !schema.tf_nested_object &&
     schema.type === "object" &&
     schema.properties &&
     schema.properties.id &&
@@ -324,9 +343,24 @@ function annotatedDescription(schema) {
   return description;
 }
 
-function genTaskSchemaProperty(property_name, property_schema, required_props) {
+function genTaskSchemaProperty(property_name, property_schema, required_props, nested_object = false) {
   const isRequired =
     required_props && required_props.indexOf(property_name) !== -1;
+  if (property_schema.tf_nested_object) {
+    return `
+            "${property_name}": &schema.Schema {
+              Description: "${annotatedDescription(property_schema)}",
+              Type: schema.TypeList,
+              ${isRequired ? "Required" : "Optional"}: true,
+              MinItems: ${isRequired ? 1 : 0},
+              MaxItems: 1,
+              Elem: &schema.Resource{
+                Schema: map[string]*schema.Schema {
+                  ${Object.entries(property_schema.properties).map(([name, property]) => genTaskSchemaProperty(name, property, property_schema.required, true)).join("\n")}
+                },
+              },
+            },`;
+  }
   const isJSON =
     property_schema.type === "string" &&
     property_schema.description &&
@@ -355,6 +389,10 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 							Default: "{}",`;
     }
   }
+  if (nested_object && property_schema.type === "string" && property_schema.minLength === 1 && !property_schema.enum && !isJSON) {
+    a = `${a}
+							ValidateFunc: validation.${property_schema.pattern === "\\S" ? "StringIsNotWhiteSpace" : "StringIsNotEmpty"},`;
+  }
   if (property_schema.enum) {
     if (!isRequired) {
       if (property_schema?.default) {
@@ -380,11 +418,13 @@ function genTaskSchemaProperty(property_name, property_schema, required_props) {
 							Default: nil,`;
     }
   }
-  if (property_schema.type === "integer") {
-    if (!isRequired) {
-      a = `${a}
-							Default: nil,`;
-    }
+  if (property_schema.type === "integer" && !isRequired) {
+    a = `${a}
+							Default: ${property_schema.default ?? "nil"},`;
+  }
+  if (property_schema.type === "integer" && Number.isInteger(property_schema.minimum) && Number.isInteger(property_schema.maximum)) {
+    a = `${a}
+							ValidateFunc: validation.IntBetween(${property_schema.minimum}, ${property_schema.maximum}),`;
   }
   if (property_schema.type === "array") {
     if (property_schema.items.type === "string") {
@@ -545,11 +585,19 @@ function genTestParams(task_name, task_schema) {
     });
   }
   Object.entries(task_schema.properties).forEach(([key, prop]) => {
-    if (!required.includes(key) && prop.type === "integer" && (prop.minimum > 0 || prop.default > 0)) {
+    if (!required.includes(key) && (prop.tf_nested_object || (prop.type === "integer" && (prop.minimum > 0 || prop.default > 0)))) {
       required.push(key);
     }
   });
   return required.map((key) => {
+    const property = task_schema.properties[key];
+    if (property.tf_nested_object) {
+      const fields = genTestParams(task_name, property)
+        .map((field) => `  ${field.replace(/\n/g, "\n  ")}`)
+        .join("\n");
+      return `${key} {\n${fields}\n}`;
+    }
+
     let val;
 
     if (task_schema.properties[key].example) {
