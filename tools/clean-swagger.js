@@ -163,9 +163,13 @@ function annotateNullableRelationships(schemas) {
   }
 }
 
-// TODO: temporary mirror of the tf_nullable/enum metadata emitted by
+// TODO: mirrors the tf_nullable/enum metadata emitted by
 // lib/api/v1/schemas/{alert_urgencies,escalation_policy_path}_schema.rb in the
-// monolith. Delete once the published swagger carries these annotations.
+// monolith. Once rootlyhq/rootly#23331 deploys, the tf_nullable annotations and
+// the request-side enum become redundant and can be removed. The response-side
+// enum on the alert_urgency and escalation_path response keys stays: the
+// published response schema deliberately omits it because the
+// debug-short-retrigger-timeouts flag can legitimately emit 1/2/5.
 // NOTE: runs after renameEscalationPolicyPathSchemas, so the escalation path
 // schemas are keyed escalation_path / new_escalation_path / update_escalation_path.
 const RETRIGGER_TIMEOUT_ENUM = [-1, 10, 20, 30, 40, 50, 60, 90, 120, 180, 240, 300, 360, 720, 1440];
