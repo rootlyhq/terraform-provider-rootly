@@ -118,6 +118,7 @@ const excluded = {
     "retrospective_configuration",
     "retrospective_process",
     "retrospective_step",
+    "service",
     "secret",
     "schedule", // cannot auto-generate because of schema upgrade logic
     "schedule_rotation",

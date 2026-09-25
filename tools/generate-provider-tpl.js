@@ -113,6 +113,7 @@ ${resources
 				"rootly_user_on_call_role": resourceUserOnCallRole(),
 				"rootly_catalog_property": resourceCatalogProperty(),
 				"rootly_secret": resourceSecret(),
+				"rootly_service": resourceService(),
 				"rootly_status_page": resourceStatusPage(),
 				"rootly_team": resourceTeam(),
 				"rootly_workflow_incident": resourceWorkflowIncident(),

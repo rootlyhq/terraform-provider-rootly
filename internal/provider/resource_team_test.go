@@ -63,13 +63,13 @@ func init() {
 }
 
 func TestAccResourceTeam_UpgradeFromVersion(t *testing.T) {
-	resName := "rootly_team.test"
-	teamName := acctest.RandomWithPrefix("tf-team")
+	addr := "rootly_team.test"
+	name := acctest.RandomWithPrefix("tf-team")
 
 	configStateChecks := []statecheck.StateCheck{
-		statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(teamName)),
-		statecheck.ExpectKnownValue(resName, tfjsonpath.New("id"), knownvalue.NotNull()),
-		statecheck.ExpectKnownValue(resName, tfjsonpath.New("slug"), knownvalue.NotNull()),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("id"), knownvalue.NotNull()),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("slug"), knownvalue.NotNull()),
 	}
 
 	resource.UnitTest(t, resource.TestCase{
@@ -82,7 +82,7 @@ func TestAccResourceTeam_UpgradeFromVersion(t *testing.T) {
 						VersionConstraint: "4.3.8",
 					},
 				},
-				Config: testAccResourceTeamConfig(teamName, `
+				Config: testAccResourceTeamConfig(name, `
 					lifecycle {
 						ignore_changes = [user_ids, admin_ids]
 					}
@@ -91,7 +91,7 @@ func TestAccResourceTeam_UpgradeFromVersion(t *testing.T) {
 			},
 			{
 				ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
-				Config:                   testAccResourceTeamConfig(teamName, ""),
+				Config:                   testAccResourceTeamConfig(name, ""),
 				ConfigStateChecks:        configStateChecks,
 			},
 		},
@@ -99,12 +99,12 @@ func TestAccResourceTeam_UpgradeFromVersion(t *testing.T) {
 }
 
 func TestAccResourceTeam(t *testing.T) {
-	resName := "rootly_team.test"
-	teamName := acctest.RandomWithPrefix("tf-team")
+	addr := "rootly_team.test"
+	name := acctest.RandomWithPrefix("tf-team")
 
 	configStateChecks := []statecheck.StateCheck{
-		statecheck.ExpectKnownValue(resName, tfjsonpath.New("id"), knownvalue.NotNull()),
-		statecheck.ExpectKnownValue(resName, tfjsonpath.New("slug"), knownvalue.NotNull()),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("id"), knownvalue.NotNull()),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("slug"), knownvalue.NotNull()),
 	}
 
 	resource.UnitTest(t, resource.TestCase{
@@ -112,28 +112,71 @@ func TestAccResourceTeam(t *testing.T) {
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceTeamConfig(teamName, ""),
+				Config: testAccResourceTeamConfig(name, ""),
 				ConfigStateChecks: append(
 					configStateChecks,
-					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(teamName)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
 				),
 			},
 			{
-				Config: testAccResourceTeamConfig(teamName+"-updated", ""),
+				Config: testAccResourceTeamConfig(name+"-updated", ""),
 				ConfigStateChecks: append(
 					configStateChecks,
-					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(teamName+"-updated")),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name+"-updated")),
 				),
 			},
 		},
 	})
 }
 
-func testAccResourceTeamConfig(teamName string, extra string) string {
+func TestAccResourceTeam_WithAlertBroadcast(t *testing.T) {
+	addr := "rootly_team.test"
+	name := acctest.RandomWithPrefix("tf-team")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceTeamConfig(name, `
+					alert_broadcast_enabled = true
+					alert_broadcast_channel {
+						id   = "id"
+						name = "name"
+					}
+				`),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("id"), knownvalue.NotNull()),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_enabled"), knownvalue.Bool(true)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_channel"), knownvalue.ListExact([]knownvalue.Check{
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"id":   knownvalue.StringExact("id"),
+							"name": knownvalue.StringExact("name"),
+						}),
+					})),
+				},
+			},
+			{
+				Config: testAccResourceTeamConfig(name, `
+					alert_broadcast_enabled = false
+				`),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("id"), knownvalue.NotNull()),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_enabled"), knownvalue.Bool(false)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_channel"), knownvalue.ListSizeExact(0)),
+				},
+			},
+		},
+	})
+}
+
+func testAccResourceTeamConfig(name string, extras string) string {
 	return fmt.Sprintf(`
 resource "rootly_team" "test" {
 	name = "%s"
 	%s
 }
-`, teamName, extra)
+`, name, extras)
 }
