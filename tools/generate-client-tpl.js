@@ -187,6 +187,11 @@ function structAttr(name, resourceSchema) {
         name
       )} string \`jsonapi:"attr,${name}${schema.tf_computed === false ? "" : ",omitempty"}"\``;
     case "integer":
+      if (schema.tf_nullable) {
+        // No omitempty: a nil pointer serializes as an explicit null, which
+        // the API reads as "inherit".
+        return `${inflect.camelize(name)} *int \`jsonapi:"attr,${name}"\``;
+      }
       return `${inflect.camelize(
         name
       )} int \`jsonapi:"attr,${name},omitempty"\``;

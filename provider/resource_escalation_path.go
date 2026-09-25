@@ -137,6 +137,15 @@ func resourceEscalationPath() *schema.Resource {
 				Description: "Initial delay for escalation path in minutes. Maximum 1 week (10080).",
 			},
 
+			"retrigger_timeout_minutes": &schema.Schema{
+				Type:         schema.TypeInt,
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.",
+				ValidateFunc: validation.IntInSlice([]int{-1, 10, 20, 30, 40, 50, 60, 90, 120, 180, 240, 300, 360, 720, 1440}),
+			},
+
 			"rules": &schema.Schema{
 				Type:             schema.TypeList,
 				Computed:         false,
@@ -510,6 +519,15 @@ func resourceEscalationPathCreate(ctx context.Context, d *schema.ResourceData, m
 	if value, ok := d.GetOkExists("initial_delay"); ok {
 		s.InitialDelay = value.(int)
 	}
+	// Pointer client field without omitempty: a nil pointer serializes as
+	// an explicit null, so take nullness from the raw config — an absent
+	// attribute reads as the zero value in state, which GetOkExists
+	// cannot distinguish from a configured 0.
+	if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+		if attr := rawConfig.GetAttr("retrigger_timeout_minutes"); !attr.IsNull() && attr.IsKnown() {
+			s.RetriggerTimeoutMinutes = tools.Int(d.Get("retrigger_timeout_minutes").(int))
+		}
+	}
 	if value, ok := d.GetOkExists("rules"); ok {
 		s.Rules = value.([]interface{})
 	}
@@ -566,6 +584,7 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("repeat", item.Repeat)
 	d.Set("repeat_count", item.RepeatCount)
 	d.Set("initial_delay", item.InitialDelay)
+	d.Set("retrigger_timeout_minutes", item.RetriggerTimeoutMinutes)
 
 	if item.Rules != nil {
 		processed_items_rules := make([]map[string]interface{}, 0)
@@ -668,6 +687,15 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 	}
 	if d.HasChange("initial_delay") {
 		s.InitialDelay = d.Get("initial_delay").(int)
+	}
+	// Pointer client field without omitempty: a nil pointer serializes as
+	// an explicit null, so take nullness from the raw config — an absent
+	// attribute reads as the zero value in state, which GetOkExists
+	// cannot distinguish from a configured 0.
+	if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+		if attr := rawConfig.GetAttr("retrigger_timeout_minutes"); !attr.IsNull() && attr.IsKnown() {
+			s.RetriggerTimeoutMinutes = tools.Int(d.Get("retrigger_timeout_minutes").(int))
+		}
 	}
 
 	if d.HasChange("rules") {

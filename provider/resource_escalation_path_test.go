@@ -33,6 +33,7 @@ func TestAccResourceEscalationPath(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "time_restrictions.1.end_day", "wednesday"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "time_restrictions.1.end_time", "07:00"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "initial_delay", "5"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.test", "retrigger_timeout_minutes", "30"),
 				),
 			},
 			{
@@ -47,6 +48,14 @@ func TestAccResourceEscalationPath(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "time_restrictions.0.end_day", "monday"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "time_restrictions.0.end_time", "08:00"),
 					resource.TestCheckResourceAttr("rootly_escalation_path.test", "initial_delay", "0"),
+					resource.TestCheckResourceAttr("rootly_escalation_path.test", "retrigger_timeout_minutes", "-1"),
+				),
+			},
+			{
+				// Clearing the attribute must round-trip to null (inherit), not stay at the previous value.
+				Config: testAccResourceEscalationPathClearedConfig(rName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_escalation_path.test", "retrigger_timeout_minutes", "0"),
 				),
 			},
 		},
@@ -64,6 +73,7 @@ resource "rootly_escalation_path" "test" {
 	default = false
 	escalation_policy_id = rootly_escalation_policy.test.id
 	initial_delay = 5
+	retrigger_timeout_minutes = 30
 	time_restriction_time_zone = "America/New_York"
 	time_restrictions {
 		start_day = "monday"
@@ -92,6 +102,7 @@ resource "rootly_escalation_path" "test" {
 	default = false
 	escalation_policy_id = rootly_escalation_policy.test.id
 	initial_delay = 0
+	retrigger_timeout_minutes = -1
 	time_restriction_time_zone = "Pacific/Honolulu"
 	time_restrictions {
 		start_day = "friday"
@@ -473,6 +484,28 @@ resource "rootly_escalation_path" "source_related" {
 	rules {
 		rule_type = "related_incidents"
 		operator  = "is_set"
+	}
+}
+`, rName, rName)
+}
+
+func testAccResourceEscalationPathClearedConfig(rName string) string {
+	return fmt.Sprintf(`
+resource "rootly_escalation_policy" "test" {
+	name = "%s-ep"
+}
+
+resource "rootly_escalation_path" "test" {
+	name = "%s-path-updated"
+	default = false
+	escalation_policy_id = rootly_escalation_policy.test.id
+	initial_delay = 0
+	time_restriction_time_zone = "Pacific/Honolulu"
+	time_restrictions {
+		start_day = "friday"
+		start_time = "18:00"
+		end_day = "monday"
+		end_time = "08:00"
 	}
 }
 `, rName, rName)

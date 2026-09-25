@@ -16,7 +16,7 @@ type AlertUrgency struct {
 	Name                    string `jsonapi:"attr,name,omitempty"`
 	Description             string `jsonapi:"attr,description,omitempty"`
 	Position                int    `jsonapi:"attr,position,omitempty"`
-	RetriggerTimeoutMinutes int    `jsonapi:"attr,retrigger_timeout_minutes,omitempty"`
+	RetriggerTimeoutMinutes *int   `jsonapi:"attr,retrigger_timeout_minutes"`
 	Urgency                 string `jsonapi:"attr,urgency,omitempty"`
 	Color                   string `jsonapi:"attr,color,omitempty"`
 	TeamId                  int    `jsonapi:"attr,team_id,omitempty"`
