@@ -78,7 +78,7 @@ func resourceAlertUrgency() *schema.Resource {
 				Sensitive:    false,
 				ForceNew:     false,
 				WriteOnly:    false,
-				Description:  "Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, negative = never.. Value must be one of `-1`, `10`, `20`, `30`, `40`, `50`, `60`, `90`, `120`, `180`, `240`, `300`, `360`, `720`, `1440`.",
+				Description:  "Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, -1 = never.. Value must be one of `-1`, `10`, `20`, `30`, `40`, `50`, `60`, `90`, `120`, `180`, `240`, `300`, `360`, `720`, `1440`.",
 				ValidateFunc: validation.IntInSlice([]int{-1, 10, 20, 30, 40, 50, 60, 90, 120, 180, 240, 300, 360, 720, 1440}),
 			},
 

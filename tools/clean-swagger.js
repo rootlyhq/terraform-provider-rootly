@@ -163,29 +163,26 @@ function annotateNullableRelationships(schemas) {
   }
 }
 
-// TODO: mirrors the tf_nullable/enum metadata emitted by
+// Permanent Terraform-side write validation. generateResource builds the
+// resource schema from the response component (swagger.components.schemas[name]),
+// which deliberately carries no enum for retrigger_timeout_minutes: the
+// debug-short-retrigger-timeouts flag can legitimately emit 1/2/5, so the API
+// only publishes the accepted-value enum on the request schemas
+// (new_/update_alert_urgency, new_/update_escalation_policy_path). Annotate the
+// response-side property here so codegen still emits validation.IntInSlice.
+// Keep this list in sync with the request-side enum published by
 // lib/api/v1/schemas/{alert_urgencies,escalation_policy_path}_schema.rb in the
-// monolith. Once rootlyhq/rootly#23331 deploys, the tf_nullable annotations and
-// the request-side enum become redundant and can be removed. The response-side
-// enum on the alert_urgency and escalation_path response keys stays: the
-// published response schema deliberately omits it because the
-// debug-short-retrigger-timeouts flag can legitimately emit 1/2/5.
+// monolith.
 // NOTE: runs after renameEscalationPolicyPathSchemas, so the escalation path
 // schemas are keyed escalation_path / new_escalation_path / update_escalation_path.
 const RETRIGGER_TIMEOUT_ENUM = [-1, 10, 20, 30, 40, 50, 60, 90, 120, 180, 240, 300, 360, 720, 1440];
 
 function annotateRetriggerTimeout(schemas) {
   for (const name of ["alert_urgency", "escalation_path"]) {
-    for (const schema of [
-      schemas[name],
-      schemas[`new_${name}`] && schemas[`new_${name}`].properties && schemas[`new_${name}`].properties.data && schemas[`new_${name}`].properties.data.properties && schemas[`new_${name}`].properties.data.properties.attributes,
-      schemas[`update_${name}`] && schemas[`update_${name}`].properties && schemas[`update_${name}`].properties.data && schemas[`update_${name}`].properties.data.properties && schemas[`update_${name}`].properties.data.properties.attributes,
-    ]) {
-      const property = schema && schema.properties && schema.properties.retrigger_timeout_minutes;
-      if (property) {
-        property.tf_nullable = true;
-        property.enum = RETRIGGER_TIMEOUT_ENUM;
-      }
+    const schema = schemas[name];
+    const property = schema && schema.properties && schema.properties.retrigger_timeout_minutes;
+    if (property) {
+      property.enum = RETRIGGER_TIMEOUT_ENUM;
     }
   }
 }
