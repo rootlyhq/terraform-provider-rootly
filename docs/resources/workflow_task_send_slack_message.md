@@ -77,13 +77,16 @@ Required:
 Optional:
 
 - `actionables` (List of String) Value must be one of `update_summary`, `update_status`, `archive_channel`, `manage_incident_roles`, `update_incident`, `all_commands`, `leave_feedback`, `manage_form_fields`, `manage_action_items`, `view_tasks`, `add_pagerduty_responders`, `add_opsgenie_responders`, `add_victor_ops_responders`, `update_status_page`, `pause_reminder`, `snooze_reminder`, `restart_reminder`, `cancel_incident`, `delete_message`.
+- `allow_cross_workflow_threading` (Boolean) When set to true, allows workflows from different sources (e.g. different incidents or alerts) to thread together on the same parent message. Value must be one of true or false
 - `broadcast_thread_reply_to_channel` (Boolean) Value must be one of true or false
 - `channels` (Block List) (see [below for nested schema](#nestedblock--task_params--channels))
 - `color` (String) A hex color
 - `parent_message_thread_task` (Map of String) Map must contain two fields, `id` and `name`. A hash where [id] is the task id of the parent task that sent a message, and [name] is the name of the parent task
 - `pin_to_channel` (Boolean) Value must be one of true or false
+- `retry_count` (Number) Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+- `retry_wait_time` (Number) Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
 - `send_as_ephemeral` (Boolean) Value must be one of true or false
-- `send_only_as_threaded_message` (Boolean) When set to true, if the parent for this threaded message cannot be found the message will be skipped.. Value must be one of true or false
+- `send_only_as_threaded_message` (Boolean) When set to true, if the parent for this threaded message cannot be found the message will be skipped. Value must be one of true or false
 - `slack_user_groups` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_user_groups))
 - `slack_users` (Block List) (see [below for nested schema](#nestedblock--task_params--slack_users))
 - `task_type` (String)

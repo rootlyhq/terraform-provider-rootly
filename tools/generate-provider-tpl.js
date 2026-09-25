@@ -78,8 +78,8 @@ ${dataSources
 				"rootly_workflow_task": dataSourceWorkflowTask(),
 				"rootly_teams": dataSourceTeams(),
 				"rootly_severities": dataSourceSeverities(),
-				"rootly_services": dataSourceServices(),
 				"rootly_schedule": dataSourceSchedule(),
+				"rootly_user": dataSourceUser(),
 				"rootly_users": dataSourceUsers(),
 			},
 			ResourcesMap: map[string]*schema.Resource{
@@ -98,6 +98,7 @@ ${resources
 				"rootly_dashboard": resourceDashboard(),
 				"rootly_edge_connector": resourceEdgeConnector(),
 				"rootly_edge_connector_action": resourceEdgeConnectorAction(),
+				"rootly_escalation_level": resourceEscalationLevel(),
 				"rootly_escalation_path": resourceEscalationPath(),
 				"rootly_escalation_policy": resourceEscalationPolicy(),
 				"rootly_retrospective_configuration": resourceRetrospectiveConfiguration(),

@@ -32,6 +32,7 @@ type OnCallRole struct {
 	IntegrationsPermissions          []interface{} `jsonapi:"attr,integrations_permissions,omitempty"`
 	InvitationsPermissions           []interface{} `jsonapi:"attr,invitations_permissions,omitempty"`
 	LiveCallRoutingPermissions       []interface{} `jsonapi:"attr,live_call_routing_permissions,omitempty"`
+	MembersPermissions               []interface{} `jsonapi:"attr,members_permissions,omitempty"`
 	ScheduleOverridePermissions      []interface{} `jsonapi:"attr,schedule_override_permissions,omitempty"`
 	SchedulesPermissions             []interface{} `jsonapi:"attr,schedules_permissions,omitempty"`
 	ServicesPermissions              []interface{} `jsonapi:"attr,services_permissions,omitempty"`
@@ -135,10 +136,11 @@ func (c *Client) DeleteOnCallRole(id string) error {
 		return fmt.Errorf("Error building request: %w", err)
 	}
 
-	_, err = c.Do(req)
+	resp, err := c.Do(req)
 	if err != nil {
 		return fmt.Errorf("Failed to make request to delete on_call_role: %w", err)
 	}
+	resp.Body.Close()
 
 	return nil
 }

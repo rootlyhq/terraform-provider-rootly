@@ -37,6 +37,8 @@ type Workflow struct {
 	GroupIds                             []interface{}          `jsonapi:"attr,group_ids,omitempty"`
 	CauseIds                             []interface{}          `jsonapi:"attr,cause_ids,omitempty"`
 	SubStatusIds                         []interface{}          `jsonapi:"attr,sub_status_ids,omitempty"`
+	FailureNotificationMode              string                 `jsonapi:"attr,failure_notification_mode,omitempty"`
+	FailureNotificationChannels          []interface{}          `jsonapi:"attr,failure_notification_channels,omitempty"`
 }
 
 func (c *Client) ListWorkflows(params *rootlygo.ListWorkflowsParams) ([]interface{}, error) {
@@ -133,10 +135,11 @@ func (c *Client) DeleteWorkflow(id string) error {
 		return fmt.Errorf("Error building request: %w", err)
 	}
 
-	_, err = c.Do(req)
+	resp, err := c.Do(req)
 	if err != nil {
 		return fmt.Errorf("Failed to make request to delete workflow: %w", err)
 	}
+	resp.Body.Close()
 
 	return nil
 }

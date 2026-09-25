@@ -40,6 +40,8 @@ Required:
 
 Optional:
 
+- `retry_count` (Number) Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.
+- `retry_wait_time` (Number) Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.
 - `task_type` (String)
 
 ## Import

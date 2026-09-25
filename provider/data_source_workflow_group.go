@@ -25,7 +25,7 @@ func dataSourceWorkflowGroup() *schema.Resource {
 				Type:         schema.TypeString,
 				Computed:     true,
 				Optional:     true,
-				ValidateFunc: validation.StringInSlice([]string{"simple", "incident", "post_mortem", "action_item", "pulse", "alert"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"simple", "incident", "post_mortem", "action_item", "pulse", "problem", "alert"}, false),
 			},
 
 			"name": &schema.Schema{

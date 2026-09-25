@@ -1,0 +1,566 @@
+package provider
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diagutils"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/fwtypes"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/jsonapitypes"
+	rootly "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
+)
+
+var _ datasource.DataSource = &ServiceDataSource{}
+var _ datasource.DataSourceWithConfigure = &ServiceDataSource{}
+
+func NewServiceDataSource() datasource.DataSource {
+	return &ServiceDataSource{}
+}
+
+type ServiceDataSource struct {
+	baseDataSource
+}
+
+func (d *ServiceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_service"
+}
+
+func (d *ServiceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+	// Paths for all filters
+	filterPaths := []path.Expression{
+		path.MatchRoot("name"),
+		path.MatchRoot("slug"),
+		path.MatchRoot("backstage_id"),
+		path.MatchRoot("cortex_id"),
+		path.MatchRoot("external_id"),
+		path.MatchRoot("alert_broadcast_enabled"),
+		path.MatchRoot("incident_broadcast_enabled"),
+	}
+
+	resp.Schema = schema.Schema{
+		MarkdownDescription: "Retrieves a single service using either its `id` or search criteria (`name`, `slug`, `external_id`, `cortex_id`, `backstage_id`, `alert_broadcast_enabled`, or `incident_broadcast_enabled`). `id` cannot be combined with filter attributes. If multiple services match the provided filters, an error will be raised.",
+		Attributes: map[string]schema.Attribute{
+			"id": schema.StringAttribute{
+				MarkdownDescription: "The ID of the resource.",
+				Optional:            true,
+				Computed:            true,
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(filterPaths...),
+					stringvalidator.AtLeastOneOf(
+						append([]path.Expression{path.MatchRoot("id")}, filterPaths...)...,
+					),
+				},
+			},
+			"name": schema.StringAttribute{
+				MarkdownDescription: "The name of the service.",
+				Optional:            true,
+				Computed:            true,
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(path.MatchRoot("id")),
+					stringvalidator.AtLeastOneOf(
+						append([]path.Expression{path.MatchRoot("id")}, filterPaths...)...,
+					),
+				},
+			},
+			"slug": schema.StringAttribute{
+				MarkdownDescription: "The slug of the service.",
+				Optional:            true,
+				Computed:            true,
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(path.MatchRoot("id")),
+					stringvalidator.AtLeastOneOf(
+						append([]path.Expression{path.MatchRoot("id")}, filterPaths...)...,
+					),
+				},
+			},
+			"managed_by": schema.StringAttribute{
+				MarkdownDescription: "How this service is managed (provenance): web, api, terraform, etc. Read-only. Value must be one of `web`, `admin_web`, `api`, `terraform`, `pulumi`, `backstage`, `catalog_sync`.",
+				Computed:            true,
+				Validators: []validator.String{
+					stringvalidator.OneOf("web", "admin_web", "api", "terraform", "pulumi", "backstage", "catalog_sync"),
+				},
+			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "The description of the service.",
+				Computed:            true,
+			},
+			"public_description": schema.StringAttribute{
+				MarkdownDescription: "The status page description of the service.",
+				Computed:            true,
+			},
+			"notify_emails": schema.ListAttribute{
+				MarkdownDescription: "Emails attached to the service.",
+				Computed:            true,
+				CustomType:          supertypes.NewListTypeOf[string](ctx),
+			},
+			"color": schema.StringAttribute{
+				MarkdownDescription: "The hex color of the service.",
+				Computed:            true,
+			},
+			"position": schema.Int64Attribute{
+				MarkdownDescription: "Position of the service.",
+				Computed:            true,
+			},
+			"backstage_id": schema.StringAttribute{
+				MarkdownDescription: "The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name.",
+				Optional:            true,
+				Computed:            true,
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(path.MatchRoot("id")),
+					stringvalidator.AtLeastOneOf(
+						append([]path.Expression{path.MatchRoot("id")}, filterPaths...)...,
+					),
+				},
+			},
+			"external_id": schema.StringAttribute{
+				MarkdownDescription: "The external id associated to this service.",
+				Optional:            true,
+				Computed:            true,
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(path.MatchRoot("id")),
+					stringvalidator.AtLeastOneOf(
+						append([]path.Expression{path.MatchRoot("id")}, filterPaths...)...,
+					),
+				},
+			},
+			"pagerduty_id": schema.StringAttribute{
+				MarkdownDescription: "The PagerDuty service id associated to this service.",
+				Computed:            true,
+			},
+			"opsgenie_id": schema.StringAttribute{
+				MarkdownDescription: "The Opsgenie service id associated to this service.",
+				Computed:            true,
+			},
+			"cortex_id": schema.StringAttribute{
+				MarkdownDescription: "The Cortex group id associated to this service.",
+				Optional:            true,
+				Computed:            true,
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(path.MatchRoot("id")),
+					stringvalidator.AtLeastOneOf(
+						append([]path.Expression{path.MatchRoot("id")}, filterPaths...)...,
+					),
+				},
+			},
+			"service_now_ci_sys_id": schema.StringAttribute{
+				MarkdownDescription: "The Service Now CI sys id associated to this service.",
+				Computed:            true,
+			},
+			"github_repository_name": schema.StringAttribute{
+				MarkdownDescription: "The GitHub repository name associated to this service. eg: rootlyhq/my-service.",
+				Computed:            true,
+			},
+			"github_repository_branch": schema.StringAttribute{
+				MarkdownDescription: "The GitHub repository branch associated to this service. eg: main.",
+				Computed:            true,
+			},
+			"gitlab_repository_name": schema.StringAttribute{
+				MarkdownDescription: "The GitLab repository name associated to this service. eg: rootlyhq/my-service.",
+				Computed:            true,
+			},
+			"gitlab_repository_branch": schema.StringAttribute{
+				MarkdownDescription: "The GitLab repository branch associated to this service. eg: main.",
+				Computed:            true,
+			},
+			"kubernetes_deployment_name": schema.StringAttribute{
+				MarkdownDescription: "The Kubernetes deployment name associated to this service. eg: namespace/deployment-name.",
+				Computed:            true,
+			},
+			"environment_ids": schema.ListAttribute{
+				MarkdownDescription: "Environments associated with this service.",
+				Computed:            true,
+				CustomType:          supertypes.NewListTypeOf[string](ctx),
+			},
+			"service_ids": schema.ListAttribute{
+				MarkdownDescription: "Services dependent on this service.",
+				Computed:            true,
+				CustomType:          supertypes.NewListTypeOf[string](ctx),
+			},
+			"owner_group_ids": schema.ListAttribute{
+				MarkdownDescription: "Owner Teams associated with this service.",
+				Computed:            true,
+				CustomType:          supertypes.NewListTypeOf[string](ctx),
+			},
+			"owner_user_ids": schema.ListAttribute{
+				MarkdownDescription: "Owner Users associated with this service.",
+				Computed:            true,
+				CustomType:          supertypes.NewListTypeOf[int64](ctx),
+			},
+			"alert_urgency_id": schema.StringAttribute{
+				MarkdownDescription: "The alert urgency id of the service.",
+				Computed:            true,
+			},
+			"escalation_policy_id": schema.StringAttribute{
+				MarkdownDescription: "The escalation policy id of the service.",
+				Computed:            true,
+			},
+			"alerts_email_enabled": schema.BoolAttribute{
+				MarkdownDescription: "Enable alerts through email.",
+				Computed:            true,
+			},
+			"alerts_email_address": schema.StringAttribute{
+				MarkdownDescription: "Email generated to send alerts to.",
+				Computed:            true,
+			},
+			"slack_channels": schema.ListNestedAttribute{
+				MarkdownDescription: "Slack Channels associated with this service.",
+				Computed:            true,
+				CustomType:          supertypes.NewListNestedObjectTypeOf[ServiceDataSourceModelSlackChannelsItem](ctx),
+				NestedObject: schema.NestedAttributeObject{
+					Attributes: map[string]schema.Attribute{
+						"id": schema.StringAttribute{
+							MarkdownDescription: "Slack channel ID.",
+							Computed:            true,
+						},
+						"name": schema.StringAttribute{
+							MarkdownDescription: "Slack channel name.",
+							Computed:            true,
+						},
+					},
+				},
+			},
+			"slack_aliases": schema.ListNestedAttribute{
+				MarkdownDescription: "Slack Aliases associated with this service.",
+				Computed:            true,
+				CustomType:          supertypes.NewListNestedObjectTypeOf[ServiceDataSourceModelSlackAliasesItem](ctx),
+				NestedObject: schema.NestedAttributeObject{
+					Attributes: map[string]schema.Attribute{
+						"id": schema.StringAttribute{
+							MarkdownDescription: "Slack alias ID.",
+							Computed:            true,
+						},
+						"name": schema.StringAttribute{
+							MarkdownDescription: "Slack alias name.",
+							Computed:            true,
+						},
+					},
+				},
+			},
+			"alert_broadcast_enabled": schema.BoolAttribute{
+				MarkdownDescription: "Enable alerts to be broadcasted to a specific channel.",
+				Optional:            true,
+				Computed:            true,
+				Validators: []validator.Bool{
+					boolvalidator.ConflictsWith(path.MatchRoot("id")),
+					boolvalidator.AtLeastOneOf(
+						append([]path.Expression{path.MatchRoot("id")}, filterPaths...)...,
+					),
+				},
+			},
+			"alert_broadcast_channel": schema.SingleNestedAttribute{
+				MarkdownDescription: "Slack channel to broadcast alerts to.",
+				Computed:            true,
+				CustomType:          supertypes.NewSingleNestedObjectTypeOf[ServiceDataSourceModelAlertBroadcastChannel](ctx),
+				Attributes: map[string]schema.Attribute{
+					"id": schema.StringAttribute{
+						MarkdownDescription: "Slack channel ID.",
+						Computed:            true,
+					},
+					"name": schema.StringAttribute{
+						MarkdownDescription: "Slack channel name.",
+						Computed:            true,
+					},
+				},
+			},
+			"incident_broadcast_enabled": schema.BoolAttribute{
+				MarkdownDescription: "Enable incidents to be broadcasted to a specific channel.",
+				Optional:            true,
+				Computed:            true,
+				Validators: []validator.Bool{
+					boolvalidator.ConflictsWith(path.MatchRoot("id")),
+					boolvalidator.AtLeastOneOf(
+						append([]path.Expression{path.MatchRoot("id")}, filterPaths...)...,
+					),
+				},
+			},
+			"incident_broadcast_channel": schema.SingleNestedAttribute{
+				MarkdownDescription: "Slack channel to broadcast incidents to.",
+				Computed:            true,
+				CustomType:          supertypes.NewSingleNestedObjectTypeOf[ServiceDataSourceModelIncidentBroadcastChannel](ctx),
+				Attributes: map[string]schema.Attribute{
+					"id": schema.StringAttribute{
+						MarkdownDescription: "Slack channel ID.",
+						Computed:            true,
+					},
+					"name": schema.StringAttribute{
+						MarkdownDescription: "Slack channel name.",
+						Computed:            true,
+					},
+				},
+			},
+			"properties": schema.ListNestedAttribute{
+				MarkdownDescription: "Array of property values for this service.",
+				Computed:            true,
+				CustomType:          supertypes.NewListNestedObjectTypeOf[ServiceDataSourceModelPropertiesItem](ctx),
+				NestedObject: schema.NestedAttributeObject{
+					Attributes: map[string]schema.Attribute{
+						"catalog_property_id": schema.StringAttribute{
+							MarkdownDescription: "Catalog property ID.",
+							Computed:            true,
+						},
+						"value": schema.StringAttribute{
+							MarkdownDescription: "The property value.",
+							Computed:            true,
+						},
+					},
+				},
+			},
+			"created_at": schema.StringAttribute{
+				MarkdownDescription: "Date of creation.",
+				Computed:            true,
+			},
+			"updated_at": schema.StringAttribute{
+				MarkdownDescription: "Date of last update.",
+				Computed:            true,
+			},
+		},
+	}
+}
+
+func (d *ServiceDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var data ServiceDataSourceModel
+
+	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	var item *apiclient.Service
+	if fwtypes.IsKnown(data.Id) {
+		var err error
+		item, err = d.client.ServiceGet(ctx, data.Id.ValueString())
+		if err != nil {
+			resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read, got error: %s", err))
+			return
+		} else if item == nil {
+			resp.Diagnostics.AddError("Client Error", "Unable to read, got nil response")
+			return
+		}
+	} else {
+		params := &rootly.ListServicesParams{
+			FilterName:                     data.Name.ValueStringPointer(),
+			FilterSlug:                     data.Slug.ValueStringPointer(),
+			FilterBackstageId:              data.BackstageId.ValueStringPointer(),
+			FilterCortexId:                 data.CortexId.ValueStringPointer(),
+			FilterExternalId:               data.ExternalId.ValueStringPointer(),
+			FilterAlertBroadcastEnabled:    data.AlertBroadcastEnabled.ValueBoolPointer(),
+			FilterIncidentBroadcastEnabled: data.IncidentBroadcastEnabled.ValueBoolPointer(),
+		}
+		items, err := d.client.ServiceList(ctx, params)
+		if err != nil {
+			resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read, got error: %s", err))
+			return
+		} else if items == nil {
+			resp.Diagnostics.AddError("Client Error", "Unable to read, got nil response")
+			return
+		} else if len(*items) == 0 {
+			resp.Diagnostics.AddError("Client Error", "Unable to read, got no response")
+			return
+		} else if len(*items) > 1 {
+			resp.Diagnostics.AddError("Client Error", "Unable to read, got more than one response")
+			return
+		}
+		item = &(*items)[0]
+	}
+
+	resp.Diagnostics.Append(data.FromApi(ctx, *item)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+}
+
+type ServiceDataSourceModel struct {
+	Name                     types.String                                                                         `tfsdk:"name"`
+	Slug                     types.String                                                                         `tfsdk:"slug"`
+	ManagedBy                types.String                                                                         `tfsdk:"managed_by"`
+	Description              types.String                                                                         `tfsdk:"description"`
+	PublicDescription        types.String                                                                         `tfsdk:"public_description"`
+	NotifyEmails             supertypes.ListValueOf[string]                                                       `tfsdk:"notify_emails"`
+	Color                    types.String                                                                         `tfsdk:"color"`
+	Position                 types.Int64                                                                          `tfsdk:"position"`
+	BackstageId              types.String                                                                         `tfsdk:"backstage_id"`
+	ExternalId               types.String                                                                         `tfsdk:"external_id"`
+	PagerdutyId              types.String                                                                         `tfsdk:"pagerduty_id"`
+	OpsgenieId               types.String                                                                         `tfsdk:"opsgenie_id"`
+	CortexId                 types.String                                                                         `tfsdk:"cortex_id"`
+	ServiceNowCiSysId        types.String                                                                         `tfsdk:"service_now_ci_sys_id"`
+	GithubRepositoryName     types.String                                                                         `tfsdk:"github_repository_name"`
+	GithubRepositoryBranch   types.String                                                                         `tfsdk:"github_repository_branch"`
+	GitlabRepositoryName     types.String                                                                         `tfsdk:"gitlab_repository_name"`
+	GitlabRepositoryBranch   types.String                                                                         `tfsdk:"gitlab_repository_branch"`
+	KubernetesDeploymentName types.String                                                                         `tfsdk:"kubernetes_deployment_name"`
+	EnvironmentIds           supertypes.ListValueOf[string]                                                       `tfsdk:"environment_ids"`
+	ServiceIds               supertypes.ListValueOf[string]                                                       `tfsdk:"service_ids"`
+	OwnerGroupIds            supertypes.ListValueOf[string]                                                       `tfsdk:"owner_group_ids"`
+	OwnerUserIds             supertypes.ListValueOf[int64]                                                        `tfsdk:"owner_user_ids"`
+	AlertUrgencyId           types.String                                                                         `tfsdk:"alert_urgency_id"`
+	EscalationPolicyId       types.String                                                                         `tfsdk:"escalation_policy_id"`
+	AlertsEmailEnabled       types.Bool                                                                           `tfsdk:"alerts_email_enabled"`
+	AlertsEmailAddress       types.String                                                                         `tfsdk:"alerts_email_address"`
+	SlackChannels            supertypes.ListNestedObjectValueOf[ServiceDataSourceModelSlackChannelsItem]          `tfsdk:"slack_channels"`
+	SlackAliases             supertypes.ListNestedObjectValueOf[ServiceDataSourceModelSlackAliasesItem]           `tfsdk:"slack_aliases"`
+	AlertBroadcastEnabled    types.Bool                                                                           `tfsdk:"alert_broadcast_enabled"`
+	AlertBroadcastChannel    supertypes.SingleNestedObjectValueOf[ServiceDataSourceModelAlertBroadcastChannel]    `tfsdk:"alert_broadcast_channel"`
+	IncidentBroadcastEnabled types.Bool                                                                           `tfsdk:"incident_broadcast_enabled"`
+	IncidentBroadcastChannel supertypes.SingleNestedObjectValueOf[ServiceDataSourceModelIncidentBroadcastChannel] `tfsdk:"incident_broadcast_channel"`
+	Properties               supertypes.ListNestedObjectValueOf[ServiceDataSourceModelPropertiesItem]             `tfsdk:"properties"`
+	CreatedAt                types.String                                                                         `tfsdk:"created_at"`
+	UpdatedAt                types.String                                                                         `tfsdk:"updated_at"`
+	Id                       types.String                                                                         `tfsdk:"id"`
+}
+
+func (m *ServiceDataSourceModel) FromApi(ctx context.Context, data apiclient.Service) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	m.Id = types.StringValue(data.Id)
+	m.Name = jsonapitypes.NullableStringValue(data.Name)
+	m.Slug = jsonapitypes.NullableStringValue(data.Slug)
+	m.ManagedBy = jsonapitypes.NullableStringValue(data.ManagedBy)
+	m.Description = jsonapitypes.NullableStringValue(data.Description)
+	m.PublicDescription = jsonapitypes.NullableStringValue(data.PublicDescription)
+	m.NotifyEmails = jsonapitypes.NullableListValueOfSlice(ctx, data.NotifyEmails)
+	m.Color = jsonapitypes.NullableStringValue(data.Color)
+	m.Position = jsonapitypes.NullableInt64Value(data.Position)
+	m.BackstageId = jsonapitypes.NullableStringValue(data.BackstageId)
+	m.ExternalId = jsonapitypes.NullableStringValue(data.ExternalId)
+	m.PagerdutyId = jsonapitypes.NullableStringValue(data.PagerdutyId)
+	m.OpsgenieId = jsonapitypes.NullableStringValue(data.OpsgenieId)
+	m.CortexId = jsonapitypes.NullableStringValue(data.CortexId)
+	m.ServiceNowCiSysId = jsonapitypes.NullableStringValue(data.ServiceNowCiSysId)
+	m.GithubRepositoryName = jsonapitypes.NullableStringValue(data.GithubRepositoryName)
+	m.GithubRepositoryBranch = jsonapitypes.NullableStringValue(data.GithubRepositoryBranch)
+	m.GitlabRepositoryName = jsonapitypes.NullableStringValue(data.GitlabRepositoryName)
+	m.GitlabRepositoryBranch = jsonapitypes.NullableStringValue(data.GitlabRepositoryBranch)
+	m.KubernetesDeploymentName = jsonapitypes.NullableStringValue(data.KubernetesDeploymentName)
+	m.EnvironmentIds = jsonapitypes.NullableListValueOfSlice(ctx, data.EnvironmentIds)
+	m.ServiceIds = jsonapitypes.NullableListValueOfSlice(ctx, data.ServiceIds)
+	m.OwnerGroupIds = jsonapitypes.NullableListValueOfSlice(ctx, data.OwnerGroupIds)
+	m.OwnerUserIds = jsonapitypes.NullableListValueOfSlice(ctx, data.OwnerUserIds)
+	m.AlertUrgencyId = jsonapitypes.NullableStringValue(data.AlertUrgencyId)
+	m.EscalationPolicyId = jsonapitypes.NullableStringValue(data.EscalationPolicyId)
+	m.AlertsEmailEnabled = jsonapitypes.NullableBoolValue(data.AlertsEmailEnabled)
+	m.AlertsEmailAddress = jsonapitypes.NullableStringValue(data.AlertsEmailAddress)
+	m.SlackChannels = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+		ctx,
+		data.SlackChannels,
+		func(ctx context.Context, item *ServiceDataSourceModelSlackChannelsItem, apiItem apiclient.ServiceSlackChannelsItem) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
+	m.SlackAliases = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+		ctx,
+		data.SlackAliases,
+		func(ctx context.Context, item *ServiceDataSourceModelSlackAliasesItem, apiItem apiclient.ServiceSlackAliasesItem) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
+	m.AlertBroadcastEnabled = jsonapitypes.NullableBoolValue(data.AlertBroadcastEnabled)
+	m.AlertBroadcastChannel = diagutils.MergeDiagnostics(jsonapitypes.ConvertToSingleModel(
+		ctx,
+		data.AlertBroadcastChannel,
+		func(ctx context.Context, item *ServiceDataSourceModelAlertBroadcastChannel, apiItem apiclient.ServiceAlertBroadcastChannel) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
+	m.IncidentBroadcastEnabled = jsonapitypes.NullableBoolValue(data.IncidentBroadcastEnabled)
+	m.IncidentBroadcastChannel = diagutils.MergeDiagnostics(jsonapitypes.ConvertToSingleModel(
+		ctx,
+		data.IncidentBroadcastChannel,
+		func(ctx context.Context, item *ServiceDataSourceModelIncidentBroadcastChannel, apiItem apiclient.ServiceIncidentBroadcastChannel) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
+	m.Properties = diagutils.MergeDiagnostics(jsonapitypes.ConvertToListModel(
+		ctx,
+		data.Properties,
+		func(ctx context.Context, item *ServiceDataSourceModelPropertiesItem, apiItem apiclient.ServicePropertiesItem) diag.Diagnostics {
+			return item.FromApi(ctx, apiItem)
+		},
+	))(&diags)
+	m.CreatedAt = jsonapitypes.NullableStringValue(data.CreatedAt)
+	m.UpdatedAt = jsonapitypes.NullableStringValue(data.UpdatedAt)
+
+	return diags
+}
+
+type ServiceDataSourceModelSlackChannelsItem struct {
+	Id   types.String `tfsdk:"id"`
+	Name types.String `tfsdk:"name"`
+}
+
+func (m *ServiceDataSourceModelSlackChannelsItem) FromApi(ctx context.Context, data apiclient.ServiceSlackChannelsItem) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	m.Id = jsonapitypes.NullableStringValue(data.Id)
+	m.Name = jsonapitypes.NullableStringValue(data.Name)
+
+	return diags
+}
+
+type ServiceDataSourceModelSlackAliasesItem struct {
+	Id   types.String `tfsdk:"id"`
+	Name types.String `tfsdk:"name"`
+}
+
+func (m *ServiceDataSourceModelSlackAliasesItem) FromApi(ctx context.Context, data apiclient.ServiceSlackAliasesItem) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	m.Id = jsonapitypes.NullableStringValue(data.Id)
+	m.Name = jsonapitypes.NullableStringValue(data.Name)
+
+	return diags
+}
+
+type ServiceDataSourceModelAlertBroadcastChannel struct {
+	Id   types.String `tfsdk:"id"`
+	Name types.String `tfsdk:"name"`
+}
+
+func (m *ServiceDataSourceModelAlertBroadcastChannel) FromApi(ctx context.Context, data apiclient.ServiceAlertBroadcastChannel) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	m.Id = jsonapitypes.NullableStringValue(data.Id)
+	m.Name = jsonapitypes.NullableStringValue(data.Name)
+
+	return diags
+}
+
+type ServiceDataSourceModelIncidentBroadcastChannel struct {
+	Id   types.String `tfsdk:"id"`
+	Name types.String `tfsdk:"name"`
+}
+
+func (m *ServiceDataSourceModelIncidentBroadcastChannel) FromApi(ctx context.Context, data apiclient.ServiceIncidentBroadcastChannel) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	m.Id = jsonapitypes.NullableStringValue(data.Id)
+	m.Name = jsonapitypes.NullableStringValue(data.Name)
+
+	return diags
+}
+
+type ServiceDataSourceModelPropertiesItem struct {
+	CatalogPropertyId types.String `tfsdk:"catalog_property_id"`
+	Value             types.String `tfsdk:"value"`
+}
+
+func (m *ServiceDataSourceModelPropertiesItem) FromApi(ctx context.Context, data apiclient.ServicePropertiesItem) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	m.CatalogPropertyId = jsonapitypes.NullableStringValue(data.CatalogPropertyId)
+	m.Value = jsonapitypes.NullableStringValue(data.Value)
+
+	return diags
+}

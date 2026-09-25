@@ -55,6 +55,7 @@ const excluded = {
     "meeting_recording", // nested under incidents; list/create require incidentId
     "on_call_pay_report", // not exposed via Terraform
     "oncall",
+    "service", // V2: handled by ./internal/providergen
     "status",
     "post_mortem_template",
     "pulse",
@@ -93,6 +94,7 @@ const excluded = {
     "custom_field_option",
     "custom_field",
     "dashboard",
+    "escalation_level", // manual fix: delay is a nullable *int so partial updates can omit it (TER-182, #351)
     "escalation_path",
     "escalation_policy",
     "incident_action_item",
@@ -111,6 +113,7 @@ const excluded = {
     "on_call_role",
     "oncall",
     "override_shift",
+    "private_agent", // lifecycle uses enrollment-token/revoke endpoints; no create/delete CRUD endpoints
     "post_mortem_template",
     "pulse",
     "retrospective_configuration",
@@ -132,10 +135,13 @@ const excluded = {
     "workflow_task",
   ],
   clients: [
-    "escalation_level", // manual fix: delay must not use omitempty so 0 is sent
+    "escalation_level", // manual fix: delay is a nullable *int so it can be both omitted and explicitly 0 (TER-182, #351)
     "alert_urgency", // manual fix: retrigger_timeout_minutes must be *int without omitempty so null=inherit is sent (TER-230)
     "escalation_path", // manual fix: initial_delay must not use omitempty so 0 is sent (c74784b)
     "user", // hand-maintained: exposes on_call_role/role relations + on_call_role update
+  ],
+  workflowTasks: [
+    "remove_from_slack_channel", // not ready for Terraform: API rejects an otherwise empty task_params object
   ]
 }
 
@@ -150,20 +156,37 @@ const readOnlyCollections = [
 function main() {
   if (filterResource) {
     console.log(`Generating code for resource: ${filterResource}`);
-    if (resources().includes(filterResource)) {
-      if (readOnlyCollections.includes(filterResource)) {
-        generateReadOnlyClient(filterResource);
-      } else {
-        generateClient(filterResource);
+    // Honour excluded.clients here the same way generateClients() does. Without this the
+    // single-resource path silently regenerates hand-maintained client files and reverts
+    // their manual fixes, which then look like ordinary codegen drift in review.
+    const clientExcluded = (excluded.clients || []).includes(filterResource);
+    const generateClientUnlessExcluded = (name) => {
+      if (clientExcluded) {
+        console.log(
+          `Skipping client for '${name}': hand-maintained, listed in excluded.clients`
+        );
+        return;
       }
+      if (readOnlyCollections.includes(name)) {
+        generateReadOnlyClient(name);
+      } else {
+        generateClient(name);
+      }
+    };
+
+    if (resources().includes(filterResource)) {
+      generateClientUnlessExcluded(filterResource);
       generateResource(filterResource);
     } else if (dataSources().includes(filterResource)) {
-      if (readOnlyCollections.includes(filterResource)) {
-        generateReadOnlyClient(filterResource);
-      } else {
-        generateClient(filterResource);
-      }
+      generateClientUnlessExcluded(filterResource);
       generateDataSource(filterResource);
+    } else if (
+      excluded.resources.includes(filterResource) ||
+      excluded.dataSources.includes(filterResource)
+    ) {
+      console.log(
+        `Skipping '${filterResource}': hand-maintained, listed in excluded.resources/excluded.dataSources`
+      );
     } else {
       console.error(`Error: Resource '${filterResource}' not found in resources or data sources`);
       console.error(`Available resources: ${resources().slice(0, 10).join(', ')}...`);
@@ -197,6 +220,7 @@ function workflowTaskResources() {
   return Object.keys(swagger.components.schemas)
     .filter((key) => key.match(/_task_params/))
     .map((key) => key.replace("_task_params", ""))
+    .filter((name) => !excluded.workflowTasks.includes(name))
 }
 
 function generateProvider(resources, taskResources, dataSources) {

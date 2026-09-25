@@ -17,7 +17,7 @@ type ScheduleRotation struct {
 	ScheduleRotationableType       string                                         `jsonapi:"attr,schedule_rotationable_type"`
 	ActiveAllWeek                  jsonapi.NullableAttr[bool]                     `jsonapi:"attr,active_all_week,omitempty"`
 	ActiveDays                     []string                                       `jsonapi:"attr,active_days,omitempty"`
-	ActiveTimeType                 jsonapi.NullableAttr[string]                   `jsonapi:"attr,active_time_type,omitempty"`
+	ActiveTimeType                 string                                         `jsonapi:"attr,active_time_type"`
 	TimeZone                       string                                         `jsonapi:"attr,time_zone"`
 	StartTime                      jsonapi.NullableAttr[string]                   `jsonapi:"attr,start_time,omitempty"`
 	EndTime                        jsonapi.NullableAttr[string]                   `jsonapi:"attr,end_time,omitempty"`

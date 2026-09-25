@@ -19,13 +19,35 @@ func TestAccResourceAlertGroup(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceAlertGroupConfig(rName),
+				Config: testAccResourceAlertGroupConfig(rName, true),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_alert_group.tf1", "owner_group_ids.#", "1"),
+					resource.TestCheckResourceAttrPair("rootly_alert_group.tf1", "owner_group_ids.0", "rootly_team.tf", "id"),
+				),
+			},
+			{
+				Config: testAccResourceAlertGroupConfig(rName, false),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_alert_group.tf1", "owner_group_ids.#", "0"),
+				),
+			},
+			{
+				Config: testAccResourceAlertGroupConfig(rName, true),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_alert_group.tf1", "owner_group_ids.#", "1"),
+					resource.TestCheckResourceAttrPair("rootly_alert_group.tf1", "owner_group_ids.0", "rootly_team.tf", "id"),
+				),
 			},
 		},
 	})
 }
 
-func testAccResourceAlertGroupConfig(rName string) string {
+func testAccResourceAlertGroupConfig(rName string, withOwnerTeam bool) string {
+	ownerGroupIds := ""
+	if withOwnerTeam {
+		ownerGroupIds = "owner_group_ids = [rootly_team.tf.id]"
+	}
+
 	return fmt.Sprintf(`
 resource "rootly_alert_urgency" "tf" {
 	name = "%s-urgency"
@@ -39,6 +61,7 @@ resource "rootly_team" "tf" {
 resource "rootly_alert_group" "tf1" {
 	name = "%s-1"
 	description = "tf"
+	%s
 	targets {
 		target_type = "Group"
 		target_id = rootly_team.tf.id
@@ -63,5 +86,5 @@ resource "rootly_alert_group" "tf2" {
 		}
 	}
 }
-`, rName, rName, rName, rName)
+`, rName, rName, rName, ownerGroupIds, rName)
 }
