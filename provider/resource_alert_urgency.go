@@ -148,8 +148,10 @@ func resourceAlertUrgencyCreate(ctx context.Context, d *schema.ResourceData, met
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
-	if value, ok := d.GetOkExists("retrigger_timeout_minutes"); ok {
-		s.RetriggerTimeoutMinutes = tools.Int(value.(int))
+	if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+		if attr := rawConfig.GetAttr("retrigger_timeout_minutes"); !attr.IsNull() && attr.IsKnown() {
+			s.RetriggerTimeoutMinutes = tools.Int(d.Get("retrigger_timeout_minutes").(int))
+		}
 	}
 	if value, ok := d.GetOkExists("urgency"); ok {
 		s.Urgency = value.(string)
@@ -223,8 +225,10 @@ func resourceAlertUrgencyUpdate(ctx context.Context, d *schema.ResourceData, met
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
 	}
-	if value, ok := d.GetOkExists("retrigger_timeout_minutes"); ok {
-		s.RetriggerTimeoutMinutes = tools.Int(value.(int))
+	if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+		if attr := rawConfig.GetAttr("retrigger_timeout_minutes"); !attr.IsNull() && attr.IsKnown() {
+			s.RetriggerTimeoutMinutes = tools.Int(d.Get("retrigger_timeout_minutes").(int))
+		}
 	}
 	if d.HasChange("urgency") {
 		s.Urgency = d.Get("urgency").(string)

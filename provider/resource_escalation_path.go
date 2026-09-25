@@ -519,8 +519,14 @@ func resourceEscalationPathCreate(ctx context.Context, d *schema.ResourceData, m
 	if value, ok := d.GetOkExists("initial_delay"); ok {
 		s.InitialDelay = value.(int)
 	}
-	if value, ok := d.GetOkExists("retrigger_timeout_minutes"); ok {
-		s.RetriggerTimeoutMinutes = tools.Int(value.(int))
+	// Pointer client field without omitempty: a nil pointer serializes as
+	// an explicit null, so take nullness from the raw config — an absent
+	// attribute reads as the zero value in state, which GetOkExists
+	// cannot distinguish from a configured 0.
+	if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+		if attr := rawConfig.GetAttr("retrigger_timeout_minutes"); !attr.IsNull() && attr.IsKnown() {
+			s.RetriggerTimeoutMinutes = tools.Int(d.Get("retrigger_timeout_minutes").(int))
+		}
 	}
 	if value, ok := d.GetOkExists("rules"); ok {
 		s.Rules = value.([]interface{})
@@ -682,8 +688,14 @@ func resourceEscalationPathUpdate(ctx context.Context, d *schema.ResourceData, m
 	if d.HasChange("initial_delay") {
 		s.InitialDelay = d.Get("initial_delay").(int)
 	}
-	if value, ok := d.GetOkExists("retrigger_timeout_minutes"); ok {
-		s.RetriggerTimeoutMinutes = tools.Int(value.(int))
+	// Pointer client field without omitempty: a nil pointer serializes as
+	// an explicit null, so take nullness from the raw config — an absent
+	// attribute reads as the zero value in state, which GetOkExists
+	// cannot distinguish from a configured 0.
+	if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+		if attr := rawConfig.GetAttr("retrigger_timeout_minutes"); !attr.IsNull() && attr.IsKnown() {
+			s.RetriggerTimeoutMinutes = tools.Int(d.Get("retrigger_timeout_minutes").(int))
+		}
 	}
 
 	if d.HasChange("rules") {

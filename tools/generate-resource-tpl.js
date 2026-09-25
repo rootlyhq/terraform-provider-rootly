@@ -255,9 +255,15 @@ function createResourceFields(name, resourceSchema, writableFields, deprecatedFi
             s.${inflect.camelize(field)} = tools.String(value.(string))
           }`;
         } else if (schema.type === "integer" && schema.tf_nullable) {
+          // Pointer client field without omitempty: a nil pointer serializes as
+          // an explicit null, so take nullness from the raw config — an absent
+          // attribute reads as the zero value in state, which GetOkExists
+          // cannot distinguish from a configured 0.
           return `
-          if value, ok := d.GetOkExists("${field}"); ok {
-            s.${inflect.camelize(field)} = tools.Int(value.(int))
+          if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+            if attr := rawConfig.GetAttr("${field}"); !attr.IsNull() && attr.IsKnown() {
+              s.${inflect.camelize(field)} = tools.Int(d.Get("${field}").(int))
+            }
           }`;
         } else {
           return `
@@ -282,8 +288,14 @@ function createResourceFields(name, resourceSchema, writableFields, deprecatedFi
 				s.${inflect.camelize(field)} = tools.String(value.(string))
 			}`;
       } else if (schema.type === "integer" && schema.tf_nullable) {
-        return `  if value, ok := d.GetOkExists("${field}"); ok {
-				s.${inflect.camelize(field)} = tools.Int(value.(int))
+        // Pointer client field without omitempty: a nil pointer serializes as
+        // an explicit null, so take nullness from the raw config — an absent
+        // attribute reads as the zero value in state, which GetOkExists
+        // cannot distinguish from a configured 0.
+        return `  if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+				if attr := rawConfig.GetAttr("${field}"); !attr.IsNull() && attr.IsKnown() {
+					s.${inflect.camelize(field)} = tools.Int(d.Get("${field}").(int))
+				}
 			}`;
       } else if (
         schema.type == "object" &&
@@ -349,11 +361,14 @@ function updateResourceFields(name, resourceSchema, writableFields, deprecatedFi
           }`;
         } else if (schema.type === "integer" && schema.tf_nullable) {
           // Pointer client field without omitempty: a nil pointer serializes as
-          // an explicit null, so the request must mirror config on every update
-          // rather than only when this attribute changed.
+          // an explicit null, so take nullness from the raw config — an absent
+          // attribute reads as the zero value in state, which GetOkExists
+          // cannot distinguish from a configured 0.
           return `
-          if value, ok := d.GetOkExists("${field}"); ok {
-            s.${inflect.camelize(field)} = tools.Int(value.(int))
+          if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+            if attr := rawConfig.GetAttr("${field}"); !attr.IsNull() && attr.IsKnown() {
+              s.${inflect.camelize(field)} = tools.Int(d.Get("${field}").(int))
+            }
           }`;
         } else if (schema.tf_include_unchanged) {
           return `
@@ -386,10 +401,13 @@ function updateResourceFields(name, resourceSchema, writableFields, deprecatedFi
 			}`;
       } else if (schema.type === "integer" && schema.tf_nullable) {
         // Pointer client field without omitempty: a nil pointer serializes as
-        // an explicit null, so the request must mirror config on every update
-        // rather than only when this attribute changed.
-        return `  if value, ok := d.GetOkExists("${field}"); ok {
-				s.${inflect.camelize(field)} = tools.Int(value.(int))
+        // an explicit null, so take nullness from the raw config — an absent
+        // attribute reads as the zero value in state, which GetOkExists
+        // cannot distinguish from a configured 0.
+        return `  if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+				if attr := rawConfig.GetAttr("${field}"); !attr.IsNull() && attr.IsKnown() {
+					s.${inflect.camelize(field)} = tools.Int(d.Get("${field}").(int))
+				}
 			}`;
       } else if (schema.type == "array") {
         return `
