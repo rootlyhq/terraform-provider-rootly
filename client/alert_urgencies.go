@@ -3,9 +3,8 @@
 package client
 
 import (
-	"reflect"
-
 	"fmt"
+	"reflect"
 
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"

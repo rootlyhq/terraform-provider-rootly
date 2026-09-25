@@ -11,7 +11,7 @@ package client
 
 import (
 	"reflect"
-	${usesStrconv(pathIdField, resourceSchema) ? '"strconv"' : ""}
+	"strconv"
 	"fmt"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
@@ -155,14 +155,6 @@ function listClientParams(nested) {
   } else {
     return `c.Rootly.Server, params`;
   }
-}
-
-function usesStrconv(pathIdField, resourceSchema) {
-  return (
-    pathIdField &&
-    resourceSchema.properties[pathIdField] &&
-    resourceSchema.properties[pathIdField].type === "number"
-  );
 }
 
 function createParams(pathIdField, resourceSchema) {
