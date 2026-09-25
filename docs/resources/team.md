@@ -68,7 +68,7 @@ resource "rootly_team" "sre" {
 <a id="nestedblock--alert_broadcast_channel"></a>
 ### Nested Schema for `alert_broadcast_channel`
 
-Optional:
+Required:
 
 - `id` (String) Slack channel ID
 - `name` (String) Slack channel name
