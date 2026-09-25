@@ -75,7 +75,6 @@ const excluded = {
   ],
   resources: [
     "alert",
-    "alert_urgency", // manual fix: retrigger_timeout_minutes is nullable (*int, no omitempty) so clearing sends null=inherit (TER-230)
     "alert_event",
     "alert_route",
     "ai_chat_session_message",
@@ -136,7 +135,6 @@ const excluded = {
   ],
   clients: [
     "escalation_level", // manual fix: delay is a nullable *int so it can be both omitted and explicitly 0 (TER-182, #351)
-    "alert_urgency", // manual fix: retrigger_timeout_minutes must be *int without omitempty so null=inherit is sent (TER-230)
     "escalation_path", // manual fix: initial_delay must not use omitempty so 0 is sent (c74784b)
     "user", // hand-maintained: exposes on_call_role/role relations + on_call_role update
   ],

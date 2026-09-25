@@ -138,11 +138,12 @@ func resourceEscalationPath() *schema.Resource {
 			},
 
 			"retrigger_timeout_minutes": &schema.Schema{
-				Type:        schema.TypeInt,
-				Required:    false,
-				Optional:    true,
-				ForceNew:    false,
-				Description: "Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.",
+				Type:         schema.TypeInt,
+				Required:     false,
+				Optional:     true,
+				ForceNew:     false,
+				Description:  "Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.",
+				ValidateFunc: validation.IntInSlice([]int{-1, 10, 20, 30, 40, 50, 60, 90, 120, 180, 240, 300, 360, 720, 1440}),
 			},
 
 			"rules": &schema.Schema{
@@ -577,11 +578,7 @@ func resourceEscalationPathRead(ctx context.Context, d *schema.ResourceData, met
 	d.Set("repeat", item.Repeat)
 	d.Set("repeat_count", item.RepeatCount)
 	d.Set("initial_delay", item.InitialDelay)
-	if item.RetriggerTimeoutMinutes != nil {
-		d.Set("retrigger_timeout_minutes", *item.RetriggerTimeoutMinutes)
-	} else {
-		d.Set("retrigger_timeout_minutes", nil)
-	}
+	d.Set("retrigger_timeout_minutes", item.RetriggerTimeoutMinutes)
 
 	if item.Rules != nil {
 		processed_items_rules := make([]map[string]interface{}, 0)

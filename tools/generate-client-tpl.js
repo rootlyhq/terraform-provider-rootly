@@ -11,7 +11,7 @@ package client
 
 import (
 	"reflect"
-	"strconv"
+	${usesStrconv(pathIdField, resourceSchema) ? '"strconv"' : ""}
 	"fmt"
 	"github.com/google/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
@@ -157,6 +157,14 @@ function listClientParams(nested) {
   }
 }
 
+function usesStrconv(pathIdField, resourceSchema) {
+  return (
+    pathIdField &&
+    resourceSchema.properties[pathIdField] &&
+    resourceSchema.properties[pathIdField].type === "number"
+  );
+}
+
 function createParams(pathIdField, resourceSchema) {
   if (pathIdField) {
     const schema = resourceSchema.properties[pathIdField];
@@ -187,6 +195,11 @@ function structAttr(name, resourceSchema) {
         name
       )} string \`jsonapi:"attr,${name}${schema.tf_computed === false ? "" : ",omitempty"}"\``;
     case "integer":
+      if (schema.tf_nullable) {
+        // No omitempty: a nil pointer serializes as an explicit null, which
+        // the API reads as "inherit".
+        return `${inflect.camelize(name)} *int \`jsonapi:"attr,${name}"\``;
+      }
       return `${inflect.camelize(
         name
       )} int \`jsonapi:"attr,${name},omitempty"\``;

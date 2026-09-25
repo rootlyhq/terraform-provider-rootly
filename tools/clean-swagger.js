@@ -163,6 +163,29 @@ function annotateNullableRelationships(schemas) {
   }
 }
 
+// TODO: temporary mirror of the tf_nullable/enum metadata emitted by
+// lib/api/v1/schemas/{alert_urgencies,escalation_policy_path}_schema.rb in the
+// monolith. Delete once the published swagger carries these annotations.
+// NOTE: runs after renameEscalationPolicyPathSchemas, so the escalation path
+// schemas are keyed escalation_path / new_escalation_path / update_escalation_path.
+const RETRIGGER_TIMEOUT_ENUM = [-1, 10, 20, 30, 40, 50, 60, 90, 120, 180, 240, 300, 360, 720, 1440];
+
+function annotateRetriggerTimeout(schemas) {
+  for (const name of ["alert_urgency", "escalation_path"]) {
+    for (const schema of [
+      schemas[name],
+      schemas[`new_${name}`] && schemas[`new_${name}`].properties && schemas[`new_${name}`].properties.data && schemas[`new_${name}`].properties.data.properties && schemas[`new_${name}`].properties.data.properties.attributes,
+      schemas[`update_${name}`] && schemas[`update_${name}`].properties && schemas[`update_${name}`].properties.data && schemas[`update_${name}`].properties.data.properties && schemas[`update_${name}`].properties.data.properties.attributes,
+    ]) {
+      const property = schema && schema.properties && schema.properties.retrigger_timeout_minutes;
+      if (property) {
+        property.tf_nullable = true;
+        property.enum = RETRIGGER_TIMEOUT_ENUM;
+      }
+    }
+  }
+}
+
 // The Terraform schema feed can lag the Canvas API contract. Preserve the
 // contract shipped in #479 so a full regeneration does not remove workspace
 // selection, managed-section updates, or their plan-time validation.
@@ -285,6 +308,7 @@ renameEscalationPolicyLevelSchemas(swagger);
 renameEscalationPolicyPathSchemas(swagger);
 addNestedRouteParentIds(swagger.components.schemas);
 annotateNullableRelationships(swagger.components.schemas);
+annotateRetriggerTimeout(swagger.components.schemas);
 preserveCanvasTerraformContract(swagger.components.schemas);
 annotateStatusPageAnnouncement(swagger.components.schemas);
 preserveWorkflowTaskContracts(swagger.components.schemas);

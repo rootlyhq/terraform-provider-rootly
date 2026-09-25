@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -70,13 +71,15 @@ func resourceAlertUrgency() *schema.Resource {
 			},
 
 			"retrigger_timeout_minutes": &schema.Schema{
-				Type:        schema.TypeInt,
-				Required:    false,
-				Optional:    true,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, negative = never.",
+				Type:         schema.TypeInt,
+				Computed:     false,
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, negative = never.. Value must be one of `-1`, `10`, `20`, `30`, `40`, `50`, `60`, `90`, `120`, `180`, `240`, `300`, `360`, `720`, `1440`.",
+				ValidateFunc: validation.IntInSlice([]int{-1, 10, 20, 30, 40, 50, 60, 90, 120, 180, 240, 300, 360, 720, 1440}),
 			},
 
 			"urgency": &schema.Schema{
@@ -193,11 +196,7 @@ func resourceAlertUrgencyRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("name", item.Name)
 	d.Set("description", item.Description)
 	d.Set("position", item.Position)
-	if item.RetriggerTimeoutMinutes != nil {
-		d.Set("retrigger_timeout_minutes", *item.RetriggerTimeoutMinutes)
-	} else {
-		d.Set("retrigger_timeout_minutes", nil)
-	}
+	d.Set("retrigger_timeout_minutes", item.RetriggerTimeoutMinutes)
 	d.Set("urgency", item.Urgency)
 	d.Set("color", item.Color)
 	d.Set("team_id", item.TeamId)
