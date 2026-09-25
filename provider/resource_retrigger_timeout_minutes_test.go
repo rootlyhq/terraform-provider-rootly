@@ -35,7 +35,7 @@ func retriggerCases() []retriggerCase {
 	}
 }
 
-func retriggerRawConfig(set bool, val int64, changedKey string) cty.Value {
+func retriggerRawConfig(set bool, val int64) cty.Value {
 	attrs := map[string]cty.Value{
 		"retrigger_timeout_minutes": cty.NullVal(cty.Number),
 	}
@@ -58,7 +58,7 @@ func retriggerUpdateData(t *testing.T, s *schema.Resource, extraState map[string
 		Attributes: map[string]*terraform.ResourceAttrDiff{
 			tc.changedKey: {Old: "before", New: "after"},
 		},
-		RawConfig: retriggerRawConfig(tc.configSet, tc.configVal, tc.changedKey),
+		RawConfig: retriggerRawConfig(tc.configSet, tc.configVal),
 	}
 	if tc.configSet {
 		diff.Attributes["retrigger_timeout_minutes"] = &terraform.ResourceAttrDiff{
