@@ -444,7 +444,7 @@ func resourceService() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "Map must contain two fields, `id` and `name`. Slack channel to broadcast alerts to",
+				Description: "Map must contain two fields, `id` and `name`. Slack channel to broadcast alerts to. To clear, supply an empty block `alert_broadcast_channel {}`.",
 				MinItems:    0,
 				MaxItems:    1,
 				Elem: &schema.Resource{

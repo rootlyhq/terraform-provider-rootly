@@ -36,7 +36,7 @@ resource "rootly_team" "sre" {
 ### Optional
 
 - `admin_ids` (List of Number) The user ids of the admins of this team. These users must also be present in user_ids attribute.
-- `alert_broadcast_channel` (Block List, Max: 1) Map must contain two fields, `id` and `name`. Slack channel to broadcast alerts to (see [below for nested schema](#nestedblock--alert_broadcast_channel))
+- `alert_broadcast_channel` (Block List, Max: 1) Map must contain two fields, `id` and `name`. Slack channel to broadcast alerts to. To clear, supply an empty block `alert_broadcast_channel {}`. (see [below for nested schema](#nestedblock--alert_broadcast_channel))
 - `alert_broadcast_enabled` (Boolean) Enable alerts to be broadcasted to a specific channel. Value must be one of true or false
 - `alert_urgency_id` (String) The alert urgency id of the team
 - `auto_add_members_when_attached` (Boolean) Auto add members to incident channel when team is attached. Value must be one of true or false

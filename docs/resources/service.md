@@ -58,7 +58,7 @@ resource "rootly_service" "customer_postgresql_prod" {
 
 ### Optional
 
-- `alert_broadcast_channel` (Block List, Max: 1) Map must contain two fields, `id` and `name`. Slack channel to broadcast alerts to (see [below for nested schema](#nestedblock--alert_broadcast_channel))
+- `alert_broadcast_channel` (Block List, Max: 1) Map must contain two fields, `id` and `name`. Slack channel to broadcast alerts to. To clear, supply an empty block `alert_broadcast_channel {}`. (see [below for nested schema](#nestedblock--alert_broadcast_channel))
 - `alert_broadcast_enabled` (Boolean) Enable alerts to be broadcasted to a specific channel. Value must be one of true or false
 - `alert_urgency_id` (String) The alert urgency id of the service
 - `alerts_email_address` (String) Email generated to send alerts to
