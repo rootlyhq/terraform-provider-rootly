@@ -97,6 +97,72 @@ func TestAccResourceService_WithEscalationPolicyId(t *testing.T) {
 	})
 }
 
+func TestAccResourceService_WithAlertBroadcast(t *testing.T) {
+	addr := "rootly_service.test"
+	name := acctest.RandomWithPrefix("tf-service")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			// Explicitly enable alert broadcast and set a channel
+			{
+				Config: testAccResourceServiceConfig(name, `
+					alert_broadcast_enabled = true
+					alert_broadcast_channel {
+						id   = "id"
+						name = "name"
+					}
+				`),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("id"), knownvalue.NotNull()),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_enabled"), knownvalue.Bool(true)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_channel"), knownvalue.ListExact([]knownvalue.Check{
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"id":   knownvalue.StringExact("id"),
+							"name": knownvalue.StringExact("name"),
+						}),
+					})),
+				},
+			},
+			// Omitted alert broadcast settings, should retain previous values
+			{
+				Config: testAccResourceServiceConfig(name, ``),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("id"), knownvalue.NotNull()),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_enabled"), knownvalue.Bool(true)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_channel"), knownvalue.ListExact([]knownvalue.Check{
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"id":   knownvalue.StringExact("id"),
+							"name": knownvalue.StringExact("name"),
+						}),
+					})),
+				},
+			},
+			// Explicitly disable alert broadcast and clear channel
+			{
+				Config: testAccResourceServiceConfig(name, `
+					alert_broadcast_enabled = false
+					alert_broadcast_channel {}
+				`),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("id"), knownvalue.NotNull()),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_enabled"), knownvalue.Bool(false)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_channel"), knownvalue.ListExact([]knownvalue.Check{
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"id":   knownvalue.StringExact(""),
+							"name": knownvalue.StringExact(""),
+						}),
+					})),
+				},
+			},
+		},
+	})
+}
+
 func testAccResourceServiceConfig(name, extra string) string {
 	return fmt.Sprintf(`
 resource "rootly_service" "test" {
