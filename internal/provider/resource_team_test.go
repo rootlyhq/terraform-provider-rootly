@@ -137,6 +137,7 @@ func TestAccResourceTeam_WithAlertBroadcast(t *testing.T) {
 		PreCheck:                 func() { testAccPreCheck(t) },
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
+			// Explicitly enable alert broadcast and set a channel
 			{
 				Config: testAccResourceTeamConfig(name, `
 					alert_broadcast_enabled = true
@@ -157,15 +158,37 @@ func TestAccResourceTeam_WithAlertBroadcast(t *testing.T) {
 					})),
 				},
 			},
+			// Omitted alert broadcast settings, should retain previous values
+			{
+				Config: testAccResourceTeamConfig(name, ``),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("id"), knownvalue.NotNull()),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_enabled"), knownvalue.Bool(true)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_channel"), knownvalue.ListExact([]knownvalue.Check{
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"id":   knownvalue.StringExact("id"),
+							"name": knownvalue.StringExact("name"),
+						}),
+					})),
+				},
+			},
+			// Explicitly disable alert broadcast and clear channel
 			{
 				Config: testAccResourceTeamConfig(name, `
 					alert_broadcast_enabled = false
+					alert_broadcast_channel {}
 				`),
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("id"), knownvalue.NotNull()),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_enabled"), knownvalue.Bool(false)),
-					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_channel"), knownvalue.ListSizeExact(0)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("alert_broadcast_channel"), knownvalue.ListExact([]knownvalue.Check{
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"id":   knownvalue.StringExact(""),
+							"name": knownvalue.StringExact(""),
+						}),
+					})),
 				},
 			},
 		},

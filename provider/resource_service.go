@@ -427,7 +427,7 @@ func resourceService() *schema.Resource {
 
 			"alert_broadcast_enabled": &schema.Schema{
 				Type:        schema.TypeBool,
-				Computed:    false,
+				Computed:    true,
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
@@ -438,7 +438,7 @@ func resourceService() *schema.Resource {
 
 			"alert_broadcast_channel": &schema.Schema{
 				Type:        schema.TypeList,
-				Computed:    false,
+				Computed:    true,
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
@@ -453,8 +453,8 @@ func resourceService() *schema.Resource {
 						"id": &schema.Schema{
 							Type:        schema.TypeString,
 							Computed:    false,
-							Required:    true,
-							Optional:    false,
+							Required:    false,
+							Optional:    true,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
@@ -464,8 +464,8 @@ func resourceService() *schema.Resource {
 						"name": &schema.Schema{
 							Type:        schema.TypeString,
 							Computed:    false,
-							Required:    true,
-							Optional:    false,
+							Required:    false,
+							Optional:    true,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
@@ -659,7 +659,7 @@ func resourceServiceCreate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if value, ok := d.GetOkExists("alert_broadcast_channel"); ok {
 		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
-			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
+			if mapValue, ok := valueList[0].(map[string]interface{}); ok && len(mapValue) > 0 {
 				s.AlertBroadcastChannel = mapValue
 			}
 		}
@@ -774,17 +774,19 @@ func resourceServiceRead(ctx context.Context, d *schema.ResourceData, meta inter
 
 	d.Set("alert_broadcast_enabled", item.AlertBroadcastEnabled)
 
-	if len(item.AlertBroadcastChannel) > 0 {
-		singleton_list_alert_broadcast_channel := make([]interface{}, 1)
-		processed_item_alert_broadcast_channel := map[string]interface{}{
-			"id":   item.AlertBroadcastChannel["id"],
-			"name": item.AlertBroadcastChannel["name"],
-		}
-		singleton_list_alert_broadcast_channel[0] = processed_item_alert_broadcast_channel
-		d.Set("alert_broadcast_channel", singleton_list_alert_broadcast_channel)
-	} else {
-		d.Set("alert_broadcast_channel", nil)
+	processed_item_alert_broadcast_channel := map[string]interface{}{
+		"id":   "",
+		"name": "",
 	}
+	if len(item.AlertBroadcastChannel) > 0 {
+		if v, ok := item.AlertBroadcastChannel["id"]; ok && v != "" {
+			processed_item_alert_broadcast_channel["id"] = v
+		}
+		if v, ok := item.AlertBroadcastChannel["name"]; ok && v != "" {
+			processed_item_alert_broadcast_channel["name"] = v
+		}
+	}
+	d.Set("alert_broadcast_channel", []interface{}{processed_item_alert_broadcast_channel})
 
 	d.Set("incident_broadcast_enabled", item.IncidentBroadcastEnabled)
 	singleton_list_incident_broadcast_channel := make([]interface{}, 1, 1)
@@ -946,11 +948,18 @@ func resourceServiceUpdate(ctx context.Context, d *schema.ResourceData, meta int
 		s.AlertBroadcastEnabled = tools.Bool(d.Get("alert_broadcast_enabled").(bool))
 	}
 	if d.HasChange("alert_broadcast_channel") {
+		s.AlertBroadcastChannel = map[string]interface{}{}
 		tps := d.Get("alert_broadcast_channel").([]interface{})
 		if len(tps) == 1 {
-			s.AlertBroadcastChannel = tps[0].(map[string]interface{})
-		} else {
 			s.AlertBroadcastChannel = map[string]interface{}{}
+			if v, ok := tps[0].(map[string]interface{}); ok {
+				if vv, ok := v["id"].(string); ok && vv != "" {
+					s.AlertBroadcastChannel["id"] = vv
+				}
+				if vv, ok := v["name"].(string); ok && vv != "" {
+					s.AlertBroadcastChannel["name"] = vv
+				}
+			}
 		}
 	}
 
