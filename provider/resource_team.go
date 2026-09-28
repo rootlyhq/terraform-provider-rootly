@@ -315,7 +315,7 @@ func resourceTeam() *schema.Resource {
 
 			"alert_broadcast_enabled": &schema.Schema{
 				Type:        schema.TypeBool,
-				Computed:    false,
+				Computed:    true,
 				Required:    false,
 				Optional:    true,
 				Sensitive:   false,
