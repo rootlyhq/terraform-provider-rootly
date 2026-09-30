@@ -125,13 +125,16 @@ func (r *ScheduleResource) Schema(ctx context.Context, _ resource.SchemaRequest,
 			},
 			"slack_user_group": schema.SingleNestedAttribute{
 				CustomType:          supertypes.NewSingleNestedObjectTypeOf[ScheduleResourceSlackUserGroupModel](ctx),
-				MarkdownDescription: "Synced slack group of the schedule.",
+				MarkdownDescription: "Synced slack group of the schedule. To set, specify all nested attributes. To remove, set the attribute to an empty object `{}`.",
 				Optional:            true,
 				Computed:            true,
 				Attributes: map[string]schema.Attribute{
 					"id": schema.StringAttribute{
 						MarkdownDescription: "Slack user group ID.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.AlsoRequires(path.MatchRoot("slack_user_group").AtName("name")),
+						},
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Slack user group name.",
@@ -141,13 +144,16 @@ func (r *ScheduleResource) Schema(ctx context.Context, _ resource.SchemaRequest,
 			},
 			"slack_channel": schema.SingleNestedAttribute{
 				CustomType:          supertypes.NewSingleNestedObjectTypeOf[ScheduleResourceSlackChannelModel](ctx),
-				MarkdownDescription: "Synced slack channel of the schedule.",
+				MarkdownDescription: "Synced slack channel of the schedule. To set, specify all nested attributes. To remove, set the attribute to an empty object `{}`.",
 				Optional:            true,
 				Computed:            true,
 				Attributes: map[string]schema.Attribute{
 					"id": schema.StringAttribute{
 						MarkdownDescription: "Slack channel ID.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.AlsoRequires(path.MatchRoot("slack_channel").AtName("name")),
+						},
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Slack channel name.",
@@ -157,7 +163,7 @@ func (r *ScheduleResource) Schema(ctx context.Context, _ resource.SchemaRequest,
 			},
 			"business_hours": schema.SingleNestedAttribute{
 				CustomType:          supertypes.NewSingleNestedObjectTypeOf[ScheduleResourceBusinessHoursModel](ctx),
-				MarkdownDescription: "Controls shadow paging on the schedule. Set empty map to disable shadow paging. start_time and end_time are HH:MM 24-hour format strings.",
+				MarkdownDescription: "Controls shadow paging on the schedule. To enable, specify all nested attributes. To remove, set the attribute to an empty object `{}`. `start_time` and `end_time` are HH:MM 24-hour format strings.",
 				Optional:            true,
 				Computed:            true,
 				Attributes: map[string]schema.Attribute{
