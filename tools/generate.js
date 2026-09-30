@@ -62,7 +62,7 @@ const excluded = {
     "retrospective_configuration",
     "retrospective_process",
     "retrospective_step",
-    "schedule", // cannot auto-generate because of schema upgrade logic
+    "schedule", // migrated to tf plugin framework
     "schedule_rotation",
     "secret",
     "shift",
