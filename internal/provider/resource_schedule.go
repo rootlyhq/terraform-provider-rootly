@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -139,6 +140,9 @@ func (r *ScheduleResource) Schema(ctx context.Context, _ resource.SchemaRequest,
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Slack user group name.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.AlsoRequires(path.MatchRoot("slack_user_group").AtName("id")),
+						},
 					},
 				},
 			},
@@ -158,6 +162,9 @@ func (r *ScheduleResource) Schema(ctx context.Context, _ resource.SchemaRequest,
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Slack channel name.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.AlsoRequires(path.MatchRoot("slack_channel").AtName("id")),
+						},
 					},
 				},
 			},
@@ -178,10 +185,18 @@ func (r *ScheduleResource) Schema(ctx context.Context, _ resource.SchemaRequest,
 					"end_time": schema.StringAttribute{
 						MarkdownDescription: "End time in HH:MM 24-hour format.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.AlsoRequires(path.MatchRoot("business_hours").AtName("start_time")),
+							stringvalidator.AlsoRequires(path.MatchRoot("business_hours").AtName("include_weekends")),
+						},
 					},
 					"include_weekends": schema.BoolAttribute{
 						MarkdownDescription: "Whether to include weekends.",
 						Optional:            true,
+						Validators: []validator.Bool{
+							boolvalidator.AlsoRequires(path.MatchRoot("business_hours").AtName("start_time")),
+							boolvalidator.AlsoRequires(path.MatchRoot("business_hours").AtName("end_time")),
+						},
 					},
 				},
 			},
