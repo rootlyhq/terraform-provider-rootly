@@ -14,6 +14,8 @@ on:
   push:
     tags:
       - 'v*'
+permissions:
+  contents: write
 jobs:
   goreleaser:
     runs-on: blacksmith-2vcpu-ubuntu-2404
@@ -30,8 +32,17 @@ jobs:
           # These secrets will need to be configured for the repository:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
+      - name: Check whether the release is already published
+        id: release_state
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          published=$(gh api "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
+            jq -r --arg tag "$GITHUB_REF_NAME" '[.[] | select(.tag_name == $tag and .draft == false)] | length > 0')
+          echo "published=$published" >> "$GITHUB_OUTPUT"
       -
         name: Run GoReleaser
+        if: steps.release_state.outputs.published != 'true'
         uses: goreleaser/goreleaser-action@f06c13b6b1a9625abc9e6e439d9c05a8f2190e94 # v7.2.3
         with:
           distribution: goreleaser
@@ -41,3 +52,21 @@ jobs:
           GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
           # GitHub sets this automatically
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build assets for an already published release
+        if: steps.release_state.outputs.published == 'true'
+        uses: goreleaser/goreleaser-action@f06c13b6b1a9625abc9e6e439d9c05a8f2190e94 # v7.2.3
+        with:
+          distribution: goreleaser
+          version: latest
+          args: release --clean --skip=publish
+        env:
+          GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload assets to the published release
+        if: steps.release_state.outputs.published == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          version=${GITHUB_REF_NAME#v}
+          cp terraform-registry-manifest.json "dist/terraform-provider-rootly_${version}_manifest.json"
+          gh release upload "$GITHUB_REF_NAME" dist/*.zip dist/*_SHA256SUMS dist/*_SHA256SUMS.sig dist/*_manifest.json --clobber
