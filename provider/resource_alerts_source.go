@@ -553,9 +553,9 @@ func resourceAlertsSource() *schema.Resource {
 
 						"alert_field_id": &schema.Schema{
 							Type:        schema.TypeString,
-							Computed:    true,
-							Required:    false,
-							Optional:    true,
+							Computed:    false,
+							Required:    true,
+							Optional:    false,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
@@ -564,7 +564,7 @@ func resourceAlertsSource() *schema.Resource {
 
 						"template_body": &schema.Schema{
 							Type:        schema.TypeString,
-							Computed:    true,
+							Computed:    false,
 							Required:    false,
 							Optional:    true,
 							Sensitive:   false,

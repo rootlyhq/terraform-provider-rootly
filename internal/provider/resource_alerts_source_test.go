@@ -212,9 +212,13 @@ func TestAccResourceAlertsSource_WithAlertSourceFieldsAttributes(t *testing.T) {
 					})),
 				},
 			},
-			// Add one alert_source_fields_attributes, rename one, and swap order to test reordering and updates
+			// Add two alert_source_fields_attributes (title and custom), rename one, and swap order to test reordering and updates
 			{
 				Config: fmt.Sprintf(`
+					data "rootly_alert_field" "title_field" {
+						kind = "title"
+					}
+
 					resource "rootly_alert_field" "field_2" {
 						name = "%[1]s-2"
 					}
@@ -235,6 +239,10 @@ func TestAccResourceAlertsSource_WithAlertSourceFieldsAttributes(t *testing.T) {
 						name = "%[1]s-6"
 					}
 				`, alertFieldName) + testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, `
+					alert_source_fields_attributes {
+						alert_field_id = data.rootly_alert_field.title_field.id
+					}
+
 					alert_source_fields_attributes {
 						alert_field_id = rootly_alert_field.field_6.id
 						template_body = "6"
@@ -269,6 +277,7 @@ func TestAccResourceAlertsSource_WithAlertSourceFieldsAttributes(t *testing.T) {
 						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("4")}),
 						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("5")}),
 						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("6")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("")}), // title field
 					})),
 				},
 			},
