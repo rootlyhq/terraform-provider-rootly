@@ -122,7 +122,7 @@ func resourceApiKey() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    true,
 				WriteOnly:   false,
-				Description: "The group (team) ID for team API keys",
+				Description: "The group (team) ID for team API keys. Keys created via the API have exactly one group; for keys with multiple groups this is the first group.",
 			},
 		},
 	}

@@ -37,7 +37,7 @@ resource "rootly_api_key" "payments_team" {
 
 - `description` (String) A description of the API key
 - `grace_period_ends_at` (String) Grace period end date
-- `group_id` (String) The group (team) ID for team API keys
+- `group_id` (String) The group (team) ID for team API keys. Keys created via the API have exactly one group; for keys with multiple groups this is the first group.
 - `kind` (String) The kind of the API key. Value must be one of `personal`, `team`, `organization`.
 - `last_used_at` (String) Date of last use
 - `on_call_role_id` (String) The on-call role ID
