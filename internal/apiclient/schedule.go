@@ -26,6 +26,7 @@ type Schedule struct {
 	ShiftReportTimeOfDay               jsonapi.NullableAttr[string]                 `jsonapi:"attr,shift_report_time_of_day"`
 	ShiftReportTimeZone                jsonapi.NullableAttr[string]                 `jsonapi:"attr,shift_report_time_zone"`
 	TimeZone                           jsonapi.NullableAttr[string]                 `jsonapi:"attr,time_zone"`
+	BusinessHours                      jsonapi.NullableAttr[ScheduleBusinessHours]  `jsonapi:"attr,business_hours"`
 }
 
 type ScheduleSlackUserGroup struct {
@@ -36,6 +37,12 @@ type ScheduleSlackUserGroup struct {
 type ScheduleSlackChannel struct {
 	Id   jsonapi.NullableAttr[string] `jsonapi:"attr,id"`
 	Name jsonapi.NullableAttr[string] `jsonapi:"attr,name"`
+}
+
+type ScheduleBusinessHours struct {
+	StartTime       jsonapi.NullableAttr[string] `jsonapi:"attr,start_time"`
+	EndTime         jsonapi.NullableAttr[string] `jsonapi:"attr,end_time"`
+	IncludeWeekends jsonapi.NullableAttr[bool]   `jsonapi:"attr,include_weekends"`
 }
 
 func (c *Client) GetSchedule(ctx context.Context, id string) (*Schedule, error) {

@@ -155,6 +155,30 @@ func (r *ScheduleResource) Schema(ctx context.Context, _ resource.SchemaRequest,
 					},
 				},
 			},
+			"business_hours": schema.SingleNestedAttribute{
+				CustomType:          supertypes.NewSingleNestedObjectTypeOf[ScheduleResourceBusinessHoursModel](ctx),
+				MarkdownDescription: "Controls shadow paging on the schedule. Set empty map to disable shadow paging. start_time and end_time are HH:MM 24-hour format strings.",
+				Optional:            true,
+				Computed:            true,
+				Attributes: map[string]schema.Attribute{
+					"start_time": schema.StringAttribute{
+						MarkdownDescription: "Start time in HH:MM 24-hour format.",
+						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.AlsoRequires(path.MatchRoot("business_hours").AtName("end_time")),
+							stringvalidator.AlsoRequires(path.MatchRoot("business_hours").AtName("include_weekends")),
+						},
+					},
+					"end_time": schema.StringAttribute{
+						MarkdownDescription: "End time in HH:MM 24-hour format.",
+						Optional:            true,
+					},
+					"include_weekends": schema.BoolAttribute{
+						MarkdownDescription: "Whether to include weekends.",
+						Optional:            true,
+					},
+				},
+			},
 		},
 	}
 }
@@ -311,6 +335,7 @@ type ScheduleResourceModel struct {
 	ShiftReportTimeOfDay               types.String                                                              `tfsdk:"shift_report_time_of_day"`
 	ShiftReportTimeZone                types.String                                                              `tfsdk:"shift_report_time_zone"`
 	TimeZone                           types.String                                                              `tfsdk:"time_zone"`
+	BusinessHours                      supertypes.SingleNestedObjectValueOf[ScheduleResourceBusinessHoursModel]  `tfsdk:"business_hours"`
 }
 
 func (m *ScheduleResourceModel) FromApi(ctx context.Context, data apiclient.Schedule) (diags diag.Diagnostics) {
@@ -349,8 +374,25 @@ func (m *ScheduleResourceModel) FromApi(ctx context.Context, data apiclient.Sche
 		}
 		m.SlackChannel = supertypes.NewSingleNestedObjectValueOf(ctx, &mm)
 	} else {
-		// NOTE: slack_channel API's empty/default state is an empty object, not null
-		m.SlackChannel = supertypes.NewSingleNestedObjectValueOf(ctx, &ScheduleResourceSlackChannelModel{})
+		m.SlackChannel = supertypes.NewSingleNestedObjectValueOf(ctx, &ScheduleResourceSlackChannelModel{
+			Id:   types.StringNull(),
+			Name: types.StringNull(),
+		})
+	}
+
+	if v, err := data.BusinessHours.Get(); err == nil {
+		var mm ScheduleResourceBusinessHoursModel
+		diags.Append(mm.FromApi(ctx, v)...)
+		if diags.HasError() {
+			return
+		}
+		m.BusinessHours = supertypes.NewSingleNestedObjectValueOf(ctx, &mm)
+	} else {
+		m.BusinessHours = supertypes.NewSingleNestedObjectValueOf(ctx, &ScheduleResourceBusinessHoursModel{
+			StartTime:       types.StringNull(),
+			EndTime:         types.StringNull(),
+			IncludeWeekends: types.BoolNull(),
+		})
 	}
 
 	return
@@ -461,6 +503,26 @@ func (m *ScheduleResourceModel) ToApi(ctx context.Context) (*apiclient.Schedule,
 		}
 	}
 
+	if fwtypes.IsKnown(m.BusinessHours) {
+		vv, diagss := m.BusinessHours.Get(ctx)
+		diags.Append(diagss...)
+		if diags.HasError() {
+			return nil, diags
+		}
+
+		vvv, ok, diagss := vv.ToApi(ctx)
+		diags.Append(diagss...)
+		if diags.HasError() {
+			return nil, diags
+		}
+
+		if ok {
+			data.BusinessHours.Set(*vvv)
+		} else {
+			data.BusinessHours.SetNull()
+		}
+	}
+
 	return &data, diags
 }
 
@@ -519,6 +581,42 @@ func (m *ScheduleResourceSlackChannelModel) ToApi(ctx context.Context) (*apiclie
 func (m *ScheduleResourceSlackChannelModel) FromApi(ctx context.Context, data apiclient.ScheduleSlackChannel) diag.Diagnostics {
 	m.Id = jsonapitypes.NullableStringValue(data.Id)
 	m.Name = jsonapitypes.NullableStringValue(data.Name)
+
+	return nil
+}
+
+type ScheduleResourceBusinessHoursModel struct {
+	StartTime       types.String `tfsdk:"start_time"`
+	EndTime         types.String `tfsdk:"end_time"`
+	IncludeWeekends types.Bool   `tfsdk:"include_weekends"`
+}
+
+func (m *ScheduleResourceBusinessHoursModel) ToApi(ctx context.Context) (*apiclient.ScheduleBusinessHours, bool, diag.Diagnostics) {
+	var data apiclient.ScheduleBusinessHours
+	var ok bool
+
+	if fwtypes.IsKnown(m.StartTime) {
+		ok = true
+		data.StartTime.Set(m.StartTime.ValueString())
+	}
+
+	if fwtypes.IsKnown(m.EndTime) {
+		ok = true
+		data.EndTime.Set(m.EndTime.ValueString())
+	}
+
+	if fwtypes.IsKnown(m.IncludeWeekends) {
+		ok = true
+		data.IncludeWeekends.Set(m.IncludeWeekends.ValueBool())
+	}
+
+	return &data, ok, nil
+}
+
+func (m *ScheduleResourceBusinessHoursModel) FromApi(ctx context.Context, data apiclient.ScheduleBusinessHours) diag.Diagnostics {
+	m.StartTime = jsonapitypes.NullableStringValue(data.StartTime)
+	m.EndTime = jsonapitypes.NullableStringValue(data.EndTime)
+	m.IncludeWeekends = jsonapitypes.NullableBoolValue(data.IncludeWeekends)
 
 	return nil
 }

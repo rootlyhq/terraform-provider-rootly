@@ -92,6 +92,94 @@ func TestAccResourceSchedule_UpgradeFromVersion(t *testing.T) {
 	})
 }
 
+func TestAccResourceSchedule_WithBusinessHours(t *testing.T) {
+	addr := "rootly_schedule.tf"
+	name := acctest.RandomWithPrefix("tf-schedule")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceScheduleConfig(testAccResourceScheduleConfigData{
+					Name:            name,
+					Description:     "test description",
+					OwnerGroupId:    "a19ce0d4-8033-410b-97dd-c51164eadfc6",
+					OwnerUserId:     4261,
+					AllTimeCoverage: true,
+					Extras: `
+						business_hours = {
+							start_time = "09:00"
+							end_time = "17:00"
+							include_weekends = false
+						}
+					`,
+					RotationName: "test-initial",
+				}),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("business_hours"), knownvalue.ObjectExact(map[string]knownvalue.Check{
+						"start_time":       knownvalue.StringExact("09:00"),
+						"end_time":         knownvalue.StringExact("17:00"),
+						"include_weekends": knownvalue.Bool(false),
+					})),
+				},
+			},
+			{
+				Config: testAccResourceScheduleConfig(testAccResourceScheduleConfigData{
+					Name:            name,
+					Description:     "test description",
+					OwnerGroupId:    "a19ce0d4-8033-410b-97dd-c51164eadfc6",
+					OwnerUserId:     4261,
+					AllTimeCoverage: true,
+					Extras: `
+						business_hours = {
+							start_time = "08:00"
+							end_time = "18:00"
+							include_weekends = true
+						}
+					`,
+					RotationName: "test-updated",
+				}),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("business_hours"), knownvalue.ObjectExact(map[string]knownvalue.Check{
+						"start_time":       knownvalue.StringExact("08:00"),
+						"end_time":         knownvalue.StringExact("18:00"),
+						"include_weekends": knownvalue.Bool(true),
+					})),
+				},
+			},
+			{
+				Config: testAccResourceScheduleConfig(testAccResourceScheduleConfigData{
+					Name:            name,
+					Description:     "test description",
+					OwnerGroupId:    "a19ce0d4-8033-410b-97dd-c51164eadfc6",
+					OwnerUserId:     4261,
+					AllTimeCoverage: true,
+					Extras: `
+						business_hours = {}
+					`,
+					RotationName: "test-null",
+				}),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("business_hours"), knownvalue.ObjectExact(map[string]knownvalue.Check{
+						"start_time":       knownvalue.Null(),
+						"end_time":         knownvalue.Null(),
+						"include_weekends": knownvalue.Null(),
+					})),
+				},
+			},
+			{
+				ResourceName:      addr,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
 func TestAccResourceSchedule_Basic(t *testing.T) {
 	addr := "rootly_schedule.tf"
 	name := acctest.RandomWithPrefix("tf-schedule")
