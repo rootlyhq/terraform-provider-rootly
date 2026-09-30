@@ -63,8 +63,8 @@ func (r *ScheduleResource) Schema(ctx context.Context, _ resource.SchemaRequest,
 				Optional:            true,
 				Computed:            true,
 			},
-			"owner_group_ids": schema.ListAttribute{
-				CustomType:          supertypes.NewListTypeOf[string](ctx),
+			"owner_group_ids": schema.SetAttribute{
+				CustomType:          supertypes.NewSetTypeOf[string](ctx),
 				ElementType:         types.StringType,
 				MarkdownDescription: "The owning teams for this schedules.",
 				Optional:            true,
@@ -330,7 +330,7 @@ type ScheduleResourceModel struct {
 	AllTimeCoverage                    types.Bool                                                                `tfsdk:"all_time_coverage"`
 	SlackUserGroup                     supertypes.SingleNestedObjectValueOf[ScheduleResourceSlackUserGroupModel] `tfsdk:"slack_user_group"`
 	SlackChannel                       supertypes.SingleNestedObjectValueOf[ScheduleResourceSlackChannelModel]   `tfsdk:"slack_channel"`
-	OwnerGroupIds                      supertypes.ListValueOf[string]                                            `tfsdk:"owner_group_ids"`
+	OwnerGroupIds                      supertypes.SetValueOf[string]                                             `tfsdk:"owner_group_ids"`
 	OwnerUserId                        types.Int64                                                               `tfsdk:"owner_user_id"`
 	SyncLinearEnabled                  types.Bool                                                                `tfsdk:"sync_linear_enabled"`
 	IncludeShadowsInSlackNotifications types.Bool                                                                `tfsdk:"include_shadows_in_slack_notifications"`
@@ -359,7 +359,7 @@ func (m *ScheduleResourceModel) FromApi(ctx context.Context, data apiclient.Sche
 	m.ShiftReportTimeOfDay = jsonapitypes.NullableStringValue(data.ShiftReportTimeOfDay)
 	m.ShiftReportTimeZone = jsonapitypes.NullableStringValue(data.ShiftReportTimeZone)
 	m.TimeZone = jsonapitypes.NullableStringValue(data.TimeZone)
-	m.OwnerGroupIds = jsonapitypes.NullableListValueOfSlice(ctx, data.OwnerGroupIds)
+	m.OwnerGroupIds = jsonapitypes.NullableSetValueOfSlice(ctx, data.OwnerGroupIds)
 
 	if v, err := data.SlackUserGroup.Get(); err == nil {
 		var mm ScheduleResourceSlackUserGroupModel

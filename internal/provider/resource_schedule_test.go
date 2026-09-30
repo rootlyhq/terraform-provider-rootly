@@ -49,7 +49,7 @@ func TestAccResourceSchedule_UpgradeFromVersion(t *testing.T) {
 		statecheck.ExpectKnownValue(addr, tfjsonpath.New("description"), knownvalue.StringExact("test description")),
 		statecheck.ExpectKnownValue(addr, tfjsonpath.New("all_time_coverage"), knownvalue.Bool(true)),
 		statecheck.ExpectKnownValue(addr, tfjsonpath.New("owner_user_id"), knownvalue.Int64Exact(4261)),
-		statecheck.ExpectKnownValue(addr, tfjsonpath.New("owner_group_ids"), knownvalue.ListExact([]knownvalue.Check{
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("owner_group_ids"), knownvalue.SetExact([]knownvalue.Check{
 			knownvalue.StringExact("a19ce0d4-8033-410b-97dd-c51164eadfc6"),
 		})),
 		statecheck.ExpectKnownValue(addr, tfjsonpath.New("slack_user_group"), knownvalue.ObjectExact(map[string]knownvalue.Check{
@@ -220,7 +220,7 @@ func TestAccResourceSchedule_Basic(t *testing.T) {
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("description"), knownvalue.StringExact("test description")),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("all_time_coverage"), knownvalue.Bool(true)),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("owner_user_id"), knownvalue.Int64Exact(4261)),
-					statecheck.ExpectKnownValue(addr, tfjsonpath.New("owner_group_ids"), knownvalue.ListExact([]knownvalue.Check{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("owner_group_ids"), knownvalue.SetExact([]knownvalue.Check{
 						knownvalue.StringExact("a19ce0d4-8033-410b-97dd-c51164eadfc6"),
 					})),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("slack_user_group"), knownvalue.ObjectExact(map[string]knownvalue.Check{
@@ -270,7 +270,7 @@ func TestAccResourceSchedule_Basic(t *testing.T) {
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("description"), knownvalue.StringExact("test updated description")),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("all_time_coverage"), knownvalue.Bool(false)),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("owner_user_id"), knownvalue.Int64Exact(117092)),
-					statecheck.ExpectKnownValue(addr, tfjsonpath.New("owner_group_ids"), knownvalue.ListExact([]knownvalue.Check{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("owner_group_ids"), knownvalue.SetExact([]knownvalue.Check{
 						knownvalue.StringExact("868f05dd-3c8f-4fe8-8aa7-6c4851b72c15"),
 					})),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("slack_user_group"), knownvalue.ObjectExact(map[string]knownvalue.Check{

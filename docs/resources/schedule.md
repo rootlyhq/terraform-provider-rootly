@@ -120,7 +120,7 @@ resource "rootly_schedule_rotation_user" "jane" {
 - `business_hours` (Attributes) Controls shadow paging on the schedule. To enable, specify all nested attributes. To remove, set the attribute to an empty object `{}`. `start_time` and `end_time` are HH:MM 24-hour format strings. (see [below for nested schema](#nestedatt--business_hours))
 - `description` (String) The description of the schedule.
 - `include_shadows_in_slack_notifications` (Boolean) Whether shadow users are included in Slack notifications and user group syncing. Value must be one of true or false.
-- `owner_group_ids` (List of String) The owning teams for this schedules.
+- `owner_group_ids` (Set of String) The owning teams for this schedules.
 - `owner_user_id` (Number) ID of user assigned as owner of the schedule. Defaults to the API token's user if not specified.
 - `shift_report_day_of_week` (String) Day of week the weekly shift summary is sent. Value must be one of `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.
 - `shift_report_enabled` (Boolean) Whether the weekly shift summary report is sent. Requires `slack_channel` to be set. Value must be one of true or false.
