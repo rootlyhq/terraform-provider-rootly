@@ -13,6 +13,85 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/must"
 )
 
+func TestAccResourceSchedule_UpgradeFromVersion(t *testing.T) {
+	addr := "rootly_schedule.tf"
+	name := acctest.RandomWithPrefix("tf-schedule")
+
+	config := testAccResourceScheduleConfig(testAccResourceScheduleConfigData{
+		Name:            name,
+		Description:     "test description",
+		OwnerGroupId:    "a19ce0d4-8033-410b-97dd-c51164eadfc6",
+		OwnerUserId:     4261,
+		AllTimeCoverage: true,
+		Extras: `
+			slack_user_group = {
+				id = "123XYZ"
+				name = "slack user group"
+			}
+			slack_channel = {
+				id = "456ABC"
+				name = "slack channel"
+			}
+			sync_linear_enabled                    = true
+			include_shadows_in_slack_notifications = true
+			shift_start_notifications_enabled      = true
+			shift_update_notifications_enabled     = true
+			shift_report_enabled                   = true
+			shift_report_day_of_week               = "tuesday"
+			shift_report_time_of_day               = "10:30"
+			shift_report_time_zone                 = "Australia/Sydney"
+		`,
+		RotationName: "test-initial",
+	})
+
+	configStateChecks := []statecheck.StateCheck{
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("description"), knownvalue.StringExact("test description")),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("all_time_coverage"), knownvalue.Bool(true)),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("owner_user_id"), knownvalue.Int64Exact(4261)),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("owner_group_ids"), knownvalue.ListExact([]knownvalue.Check{
+			knownvalue.StringExact("a19ce0d4-8033-410b-97dd-c51164eadfc6"),
+		})),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("slack_user_group"), knownvalue.ObjectExact(map[string]knownvalue.Check{
+			"id":   knownvalue.StringExact("123XYZ"),
+			"name": knownvalue.StringExact("slack user group"),
+		})),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("slack_channel"), knownvalue.ObjectExact(map[string]knownvalue.Check{
+			"id":   knownvalue.StringExact("456ABC"),
+			"name": knownvalue.StringExact("slack channel"),
+		})),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("sync_linear_enabled"), knownvalue.Bool(true)),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("include_shadows_in_slack_notifications"), knownvalue.Bool(true)),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("shift_start_notifications_enabled"), knownvalue.Bool(true)),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("shift_update_notifications_enabled"), knownvalue.Bool(true)),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("shift_report_enabled"), knownvalue.Bool(true)),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("shift_report_day_of_week"), knownvalue.StringExact("tuesday")),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("shift_report_time_of_day"), knownvalue.StringExact("10:30")),
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("shift_report_time_zone"), knownvalue.StringExact("Australia/Sydney")),
+	}
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck: func() { testAccPreCheck(t) },
+		Steps: []resource.TestStep{
+			{
+				ExternalProviders: map[string]resource.ExternalProvider{
+					"rootly": {
+						Source:            "rootlyhq/rootly",
+						VersionConstraint: "5.23.1",
+					},
+				},
+				Config:            config,
+				ConfigStateChecks: configStateChecks,
+			},
+			{
+				ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+				Config:                   config,
+				ConfigStateChecks:        configStateChecks,
+			},
+		},
+	})
+}
+
 func TestAccResourceSchedule_Basic(t *testing.T) {
 	addr := "rootly_schedule.tf"
 	name := acctest.RandomWithPrefix("tf-schedule")

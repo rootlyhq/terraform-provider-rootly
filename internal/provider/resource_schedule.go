@@ -23,6 +23,7 @@ import (
 
 var _ resource.Resource = &ScheduleResource{}
 var _ resource.ResourceWithImportState = &ScheduleResource{}
+var _ resource.ResourceWithUpgradeState = &ScheduleResource{}
 
 func NewScheduleResource() resource.Resource {
 	return &ScheduleResource{}
@@ -39,6 +40,7 @@ func (r *ScheduleResource) Metadata(ctx context.Context, req resource.MetadataRe
 func (r *ScheduleResource) Schema(ctx context.Context, _ resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		MarkdownDescription: "Manages a schedule.",
+		Version:             1,
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "The ID of this resource.",
@@ -270,6 +272,25 @@ func (r *ScheduleResource) Delete(ctx context.Context, req resource.DeleteReques
 
 func (r *ScheduleResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+}
+
+func (r *ScheduleResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
+	return map[int64]resource.StateUpgrader{
+		0: {
+			PriorSchema: &schema.Schema{
+				Attributes: map[string]schema.Attribute{
+					"slack_user_group": schema.StringAttribute{
+						Optional: true,
+						Computed: true,
+					},
+				},
+			},
+			StateUpgrader: func(ctx context.Context, req resource.UpgradeStateRequest, resp *resource.UpgradeStateResponse) {
+				// The old slack_user_group string attribute is dropped and replaced with a nested object.
+				// The new nested object will be populated from the API on the next read operation.
+			},
+		},
+	}
 }
 
 type ScheduleResourceModel struct {
