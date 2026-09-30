@@ -113,6 +113,17 @@ func resourceApiKey() *schema.Resource {
 				WriteOnly:   false,
 				Description: "Grace period end date",
 			},
+
+			"group_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    true,
+				WriteOnly:   false,
+				Description: "The group (team) ID for team API keys",
+			},
 		},
 	}
 }
@@ -147,6 +158,9 @@ func resourceApiKeyCreate(ctx context.Context, d *schema.ResourceData, meta inte
 	}
 	if value, ok := d.GetOkExists("grace_period_ends_at"); ok {
 		s.GracePeriodEndsAt = value.(string)
+	}
+	if value, ok := d.GetOkExists("group_id"); ok {
+		s.GroupId = value.(string)
 	}
 
 	res, err := c.CreateApiKey(s)
@@ -185,6 +199,7 @@ func resourceApiKeyRead(ctx context.Context, d *schema.ResourceData, meta interf
 	d.Set("expires_at", item.ExpiresAt)
 	d.Set("last_used_at", item.LastUsedAt)
 	d.Set("grace_period_ends_at", item.GracePeriodEndsAt)
+	d.Set("group_id", item.GroupId)
 
 	return nil
 }
@@ -218,6 +233,9 @@ func resourceApiKeyUpdate(ctx context.Context, d *schema.ResourceData, meta inte
 	}
 	if d.HasChange("grace_period_ends_at") {
 		s.GracePeriodEndsAt = d.Get("grace_period_ends_at").(string)
+	}
+	if d.HasChange("group_id") {
+		s.GroupId = d.Get("group_id").(string)
 	}
 
 	_, err := c.UpdateApiKey(d.Id(), s)
