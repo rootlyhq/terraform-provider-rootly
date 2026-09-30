@@ -824,6 +824,17 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 
 		for _, c := range item.AlertSourceFieldsAttributes {
 			if rawItem, ok := c.(map[string]interface{}); ok {
+				alertField, ok := rawItem["alert_field"].(map[string]interface{})
+				if !ok {
+					continue
+				}
+
+				kind, ok := alertField["kind"].(string)
+				if !ok || kind != "custom" {
+					// Ignore non-custom alert fields
+					continue
+				}
+
 				// Create a new map with only the fields defined in the schema
 				processed_item_alert_source_fields_attributes := map[string]interface{}{
 					"alert_field_id": rawItem["alert_field_id"],
