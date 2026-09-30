@@ -822,17 +822,42 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 	if item.AlertSourceFieldsAttributes != nil {
 		processed_items_alert_source_fields_attributes := make([]map[string]interface{}, 0)
 
+		// Get explicitly configured alert_field_ids
+		configuredFieldIds := make(map[string]bool)
+		if configuredFields, ok := d.GetOk("alert_source_fields_attributes"); ok {
+			if fieldList, ok := configuredFields.([]interface{}); ok {
+				for _, field := range fieldList {
+					if fieldMap, ok := field.(map[string]interface{}); ok {
+						if fieldId, ok := fieldMap["alert_field_id"].(string); ok {
+							configuredFieldIds[fieldId] = true
+						}
+					}
+				}
+			}
+		}
+
+		explicitlyProvided := len(configuredFieldIds) > 0
+
 		for _, c := range item.AlertSourceFieldsAttributes {
 			if rawItem, ok := c.(map[string]interface{}); ok {
-				alertField, ok := rawItem["alert_field"].(map[string]interface{})
-				if !ok {
-					continue
-				}
+				alertFieldId, _ := rawItem["alert_field_id"].(string)
 
-				kind, ok := alertField["kind"].(string)
-				if !ok || kind != "custom" {
-					// Ignore non-custom alert fields
-					continue
+				// If explicitly provided, only include fields that match configured IDs
+				if explicitlyProvided {
+					if !configuredFieldIds[alertFieldId] {
+						continue
+					}
+				} else {
+					// If not explicitly provided, only include custom fields
+					alertField, ok := rawItem["alert_field"].(map[string]interface{})
+					if !ok {
+						continue
+					}
+
+					kind, ok := alertField["kind"].(string)
+					if !ok || kind != "custom" {
+						continue
+					}
 				}
 
 				// Create a new map with only the fields defined in the schema
