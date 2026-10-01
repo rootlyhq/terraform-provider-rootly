@@ -316,14 +316,15 @@ func resourceAlertsSource() *schema.Resource {
 						},
 
 						"notification_target_type": &schema.Schema{
-							Type:        schema.TypeString,
-							Computed:    false,
-							Required:    false,
-							Optional:    true,
-							Sensitive:   false,
-							ForceNew:    false,
-							WriteOnly:   false,
-							Description: "Email sources only. The type of the notification target every alert from this source pages directly; Alert Routes are not evaluated when it is set. Value must be one of `EscalationPolicy`, `Group`, `Service`, `Functionality`, `User`.",
+							Type:         schema.TypeString,
+							Computed:     false,
+							Required:     false,
+							Optional:     true,
+							Sensitive:    false,
+							ForceNew:     false,
+							WriteOnly:    false,
+							Description:  "Email sources only; on other source types it is ignored and shows as a change on every plan. The type of the notification target every alert from this source pages directly; Alert Routes are not evaluated when it is set. Value must be one of `EscalationPolicy`, `Group`, `Service`, `Functionality`, `User`.",
+							ValidateFunc: validation.StringInSlice([]string{"EscalationPolicy", "Group", "Service", "Functionality", "User"}, false),
 						},
 
 						"notification_target_id": &schema.Schema{
@@ -334,7 +335,7 @@ func resourceAlertsSource() *schema.Resource {
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
-							Description: "Email sources only. The ID of the notification target. Omit both notification target fields to clear it.",
+							Description: "Email sources only. The ID of the notification target. Omit both notification target fields to clear it; removing the whole `sourceable_attributes` block keeps the current target.",
 						},
 
 						"field_mappings_attributes": &schema.Schema{

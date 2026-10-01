@@ -190,8 +190,8 @@ Optional:
 - `accept_threaded_emails` (Boolean) Set this to false to reject threaded emails. Value must be one of true or false
 - `auto_resolve` (Boolean) Set this to true to auto-resolve alerts based on field_mappings_attributes conditions. Value must be one of true or false
 - `field_mappings_attributes` (Block List) Specify rules to auto resolve alerts (see [below for nested schema](#nestedblock--sourceable_attributes--field_mappings_attributes))
-- `notification_target_id` (String) Email sources only. The ID of the notification target. Omit both notification target fields to clear it.
-- `notification_target_type` (String) Email sources only. The type of the notification target every alert from this source pages directly; Alert Routes are not evaluated when it is set. Value must be one of `EscalationPolicy`, `Group`, `Service`, `Functionality`, `User`.
+- `notification_target_id` (String) Email sources only. The ID of the notification target. Omit both notification target fields to clear it; removing the whole `sourceable_attributes` block keeps the current target.
+- `notification_target_type` (String) Email sources only; on other source types it is ignored and shows as a change on every plan. The type of the notification target every alert from this source pages directly; Alert Routes are not evaluated when it is set. Value must be one of `EscalationPolicy`, `Group`, `Service`, `Functionality`, `User`.
 - `resolve_state` (String) This value is matched with the value extracted from alerts payload using JSON path in field_mappings_attributes
 
 <a id="nestedblock--sourceable_attributes--field_mappings_attributes"></a>

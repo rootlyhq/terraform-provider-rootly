@@ -88,3 +88,14 @@ func TestAlertsSourceNotificationTargetOnWire(t *testing.T) {
 		t.Fatalf("expected cleared notification_target_id in state, got %#v", got)
 	}
 }
+
+func TestAlertsSourceNotificationTargetTypeValidation(t *testing.T) {
+	sourceable := resourceAlertsSource().Schema["sourceable_attributes"].Elem.(*schema.Resource)
+	validate := sourceable.Schema["notification_target_type"].ValidateFunc
+	if _, errs := validate("EscalationPolicy", "notification_target_type"); len(errs) > 0 {
+		t.Fatalf("EscalationPolicy rejected: %v", errs)
+	}
+	if _, errs := validate("Team", "notification_target_type"); len(errs) == 0 {
+		t.Fatal("Team accepted")
+	}
+}
