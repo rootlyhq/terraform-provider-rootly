@@ -323,7 +323,7 @@ func resourceAlertsSource() *schema.Resource {
 							Sensitive:    false,
 							ForceNew:     false,
 							WriteOnly:    false,
-							Description:  "Email sources only; on other source types it is ignored and shows as a change on every plan. The type of the notification target every alert from this source pages directly; Alert Routes are not evaluated when it is set. Value must be one of `EscalationPolicy`, `Group`, `Service`, `Functionality`, `User`.",
+							Description:  "Email sources only; on other source types it is ignored and shows as a change on every plan. The type of the notification target every alert from this source pages directly; Alert Routes are not evaluated when it is set. Value must be one of `EscalationPolicy`, `Group`, `Service`, `Functionality`, `User`. Requires the `email-alert-source-notification-target` feature flag on the team; without it the API ignores the target.",
 							ValidateFunc: validation.StringInSlice([]string{"EscalationPolicy", "Group", "Service", "Functionality", "User"}, false),
 						},
 
