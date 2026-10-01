@@ -108,6 +108,21 @@ func resourceAlertGroup() *schema.Resource {
 				Description: "[DEPRECATED] Whether the alerts are grouped by urgency or not. This field is deprecated. Please use the `conditions` field with advanced alert grouping instead.. Value must be one of true or false",
 			},
 
+			"owner_group_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Teams that own this alert group. Admins of an owning team can manage it, and an owned alert group can only target destinations that belong to its owning teams. Only available when owning teams for alert groups are enabled for the organization. Set this explicitly when the provider uses a team-scoped API key: omitting it makes the API assign that key's own teams, which the key cannot later clear.",
+			},
+
 			"targets": &schema.Schema{
 				Type:             schema.TypeList,
 				Computed:         false,
@@ -366,6 +381,9 @@ func resourceAlertGroupCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("group_by_alert_urgency"); ok {
 		s.GroupByAlertUrgency = tools.Bool(value.(bool))
 	}
+	if value, ok := d.GetOkExists("owner_group_ids"); ok {
+		s.OwnerGroupIds = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("targets"); ok {
 		s.Targets = value.([]interface{})
 	}
@@ -414,6 +432,7 @@ func resourceAlertGroupRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("time_window", item.TimeWindow)
 	d.Set("group_by_alert_title", item.GroupByAlertTitle)
 	d.Set("group_by_alert_urgency", item.GroupByAlertUrgency)
+	d.Set("owner_group_ids", item.OwnerGroupIds)
 
 	if item.Targets != nil {
 		processed_items_targets := make([]map[string]interface{}, 0)
@@ -506,6 +525,14 @@ func resourceAlertGroupUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if d.HasChange("group_by_alert_urgency") {
 		s.GroupByAlertUrgency = tools.Bool(d.Get("group_by_alert_urgency").(bool))
+	}
+
+	if d.HasChange("owner_group_ids") {
+		if value, ok := d.GetOk("owner_group_ids"); value != nil && ok {
+			s.OwnerGroupIds = value.([]interface{})
+		} else {
+			s.OwnerGroupIds = []interface{}{}
+		}
 	}
 
 	if d.HasChange("targets") {

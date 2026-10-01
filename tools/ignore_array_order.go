@@ -10,18 +10,8 @@ import (
 
 // https://github.com/hashicorp/terraform-plugin-sdk/issues/477#issuecomment-1238807249
 func EqualIgnoringOrder(key, oldValue, newValue string, d *schema.ResourceData) bool {
-	// For a list, the key is path to the element, rather than the list.
-	// E.g. "node_groups.2.ips.0"
-	key = listPathFromDiffKey(key)
-
-	oldData, newData := d.GetChange(key)
-	if oldData == nil || newData == nil {
-		return false
-	}
-
-	oldArray, oldOK := oldData.([]interface{})
-	newArray, newOK := newData.([]interface{})
-	if !oldOK || !newOK {
+	oldArray, newArray, ok := listChangeFromDiffKey(key, d)
+	if !ok {
 		return false
 	}
 	if len(oldArray) != len(newArray) {
@@ -35,6 +25,23 @@ func EqualIgnoringOrder(key, oldValue, newValue string, d *schema.ResourceData) 
 	}
 
 	return listsAreEqual(oldArray, newArray)
+}
+
+func listChangeFromDiffKey(key string, d *schema.ResourceData) ([]interface{}, []interface{}, bool) {
+	for {
+		key = listPathFromDiffKey(key)
+		oldData, newData := d.GetChange(key)
+		oldArray, oldOK := oldData.([]interface{})
+		newArray, newOK := newData.([]interface{})
+		if oldOK && newOK {
+			return oldArray, newArray, true
+		}
+
+		parent := listPathFromDiffKey(key)
+		if parent == key {
+			return nil, nil, false
+		}
+	}
 }
 
 func listPathFromDiffKey(key string) string {

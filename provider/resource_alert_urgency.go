@@ -10,7 +10,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceAlertUrgency() *schema.Resource {
@@ -66,6 +68,18 @@ func resourceAlertUrgency() *schema.Resource {
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "Position of the alert urgency",
+			},
+
+			"retrigger_timeout_minutes": &schema.Schema{
+				Type:         schema.TypeInt,
+				Computed:     false,
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, -1 = never.. Value must be one of `-1`, `10`, `20`, `30`, `40`, `50`, `60`, `90`, `120`, `180`, `240`, `300`, `360`, `720`, `1440`.",
+				ValidateFunc: validation.IntInSlice([]int{-1, 10, 20, 30, 40, 50, 60, 90, 120, 180, 240, 300, 360, 720, 1440}),
 			},
 
 			"urgency": &schema.Schema{
@@ -134,6 +148,11 @@ func resourceAlertUrgencyCreate(ctx context.Context, d *schema.ResourceData, met
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
+	if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+		if attr := rawConfig.GetAttr("retrigger_timeout_minutes"); !attr.IsNull() && attr.IsKnown() {
+			s.RetriggerTimeoutMinutes = tools.Int(d.Get("retrigger_timeout_minutes").(int))
+		}
+	}
 	if value, ok := d.GetOkExists("urgency"); ok {
 		s.Urgency = value.(string)
 	}
@@ -179,6 +198,7 @@ func resourceAlertUrgencyRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("name", item.Name)
 	d.Set("description", item.Description)
 	d.Set("position", item.Position)
+	d.Set("retrigger_timeout_minutes", item.RetriggerTimeoutMinutes)
 	d.Set("urgency", item.Urgency)
 	d.Set("color", item.Color)
 	d.Set("team_id", item.TeamId)
@@ -204,6 +224,11 @@ func resourceAlertUrgencyUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
+	}
+	if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+		if attr := rawConfig.GetAttr("retrigger_timeout_minutes"); !attr.IsNull() && attr.IsKnown() {
+			s.RetriggerTimeoutMinutes = tools.Int(d.Get("retrigger_timeout_minutes").(int))
+		}
 	}
 	if d.HasChange("urgency") {
 		s.Urgency = d.Get("urgency").(string)

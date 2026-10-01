@@ -468,6 +468,22 @@ func resourceRole() *schema.Resource {
 				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
 			},
 
+			"status_page_updates_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
+
 			"webhooks_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -546,6 +562,22 @@ func resourceRole() *schema.Resource {
 				ForceNew:         false,
 				WriteOnly:        false,
 				Description:      "Value must be one of `create`, `read`, `update`, `delete`.",
+			},
+
+			"private_agent_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"create", "read", "update", "delete"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Private Agent management permissions: create issues enrollment tokens, read views agent inventory and details, and delete revokes agent credentials. Create and delete can be used independently through the API; browser inventory requires read.. Value must be one of `create`, `read`, `update`, `delete`.",
 			},
 
 			"slas_permissions": &schema.Schema{
@@ -706,6 +738,9 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("status_pages_permissions"); ok {
 		s.StatusPagesPermissions = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("status_page_updates_permissions"); ok {
+		s.StatusPageUpdatesPermissions = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("webhooks_permissions"); ok {
 		s.WebhooksPermissions = value.([]interface{})
 	}
@@ -720,6 +755,9 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if value, ok := d.GetOkExists("edge_connector_permissions"); ok {
 		s.EdgeConnectorPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("private_agent_permissions"); ok {
+		s.PrivateAgentPermissions = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("slas_permissions"); ok {
 		s.SlasPermissions = value.([]interface{})
@@ -791,11 +829,13 @@ func resourceRoleRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("services_permissions", item.ServicesPermissions)
 	d.Set("severities_permissions", item.SeveritiesPermissions)
 	d.Set("status_pages_permissions", item.StatusPagesPermissions)
+	d.Set("status_page_updates_permissions", item.StatusPageUpdatesPermissions)
 	d.Set("webhooks_permissions", item.WebhooksPermissions)
 	d.Set("workflows_permissions", item.WorkflowsPermissions)
 	d.Set("catalogs_permissions", item.CatalogsPermissions)
 	d.Set("sub_statuses_permissions", item.SubStatusesPermissions)
 	d.Set("edge_connector_permissions", item.EdgeConnectorPermissions)
+	d.Set("private_agent_permissions", item.PrivateAgentPermissions)
 	d.Set("slas_permissions", item.SlasPermissions)
 	d.Set("paging_permissions", item.PagingPermissions)
 	d.Set("incident_communication_permissions", item.IncidentCommunicationPermissions)
@@ -1015,6 +1055,14 @@ func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 		}
 	}
 
+	if d.HasChange("status_page_updates_permissions") {
+		if value, ok := d.GetOk("status_page_updates_permissions"); value != nil && ok {
+			s.StatusPageUpdatesPermissions = value.([]interface{})
+		} else {
+			s.StatusPageUpdatesPermissions = []interface{}{}
+		}
+	}
+
 	if d.HasChange("webhooks_permissions") {
 		if value, ok := d.GetOk("webhooks_permissions"); value != nil && ok {
 			s.WebhooksPermissions = value.([]interface{})
@@ -1052,6 +1100,14 @@ func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 			s.EdgeConnectorPermissions = value.([]interface{})
 		} else {
 			s.EdgeConnectorPermissions = []interface{}{}
+		}
+	}
+
+	if d.HasChange("private_agent_permissions") {
+		if value, ok := d.GetOk("private_agent_permissions"); value != nil && ok {
+			s.PrivateAgentPermissions = value.([]interface{})
+		} else {
+			s.PrivateAgentPermissions = []interface{}{}
 		}
 	}
 

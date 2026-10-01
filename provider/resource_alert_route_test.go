@@ -84,6 +84,7 @@ func TestAccResourceAlertRoute(t *testing.T) {
                 property_field_name = "$.title"
                 property_field_type = "payload"
                 property_field_value = "error"
+                alert_urgency_ids = [rootly_alert_urgency.test.id]
               }
             }
           }

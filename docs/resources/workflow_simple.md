@@ -23,15 +23,17 @@ description: |-
 - `cause_ids` (List of String)
 - `command` (String) Workflow command
 - `command_feedback_enabled` (Boolean) This will notify you back when the workflow is starting. Value must be one of true or false
-- `continuously_repeat` (Boolean) When continuously repeat is true, repeat workflows aren't automatically stopped when conditions aren't met. This setting won't override your conditions set by repeat_condition_duration_since_first_run and repeat_condition_number_of_repeats parameters.. Value must be one of true or false
+- `continuously_repeat` (Boolean) When continuously repeat is true, repeat workflows aren't automatically stopped when conditions aren't met. This setting won't override your conditions set by repeat_condition_duration_since_first_run and repeat_condition_number_of_repeats parameters. Value must be one of true or false
 - `description` (String) The description of the workflow
 - `enabled` (Boolean)
 - `environment_ids` (List of String)
+- `failure_notification_channels` (Block List) Slack channels notified when a run of this workflow fails. Used when `failure_notification_mode` is `custom`. (see [below for nested schema](#nestedblock--failure_notification_channels))
+- `failure_notification_mode` (String) Where failure notifications for this workflow are sent. `inherit` uses the account default channel, `custom` uses `failure_notification_channels`, `off` suppresses them. Value must be one of `inherit`, `custom`, `off`.
 - `functionality_ids` (List of String)
 - `group_ids` (List of String)
 - `incident_role_ids` (List of String)
 - `incident_type_ids` (List of String)
-- `locked` (Boolean) Restricts workflow edits to admins when turned on. Only admins can set this field.. Value must be one of true or false
+- `locked` (Boolean) Restricts workflow edits to admins when turned on. Only admins can set this field. Value must be one of true or false
 - `position` (Number) The order which the workflow should run with other workflows.
 - `repeat_condition_duration_since_first_run` (String) The workflow will stop repeating if its runtime since it's first workflow run exceeds the duration set in this field
 - `repeat_condition_number_of_repeats` (Number) The workflow will stop repeating if the number of repeats exceeds the value set in this field
@@ -48,6 +50,15 @@ description: |-
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--failure_notification_channels"></a>
+### Nested Schema for `failure_notification_channels`
+
+Required:
+
+- `id` (String) Slack channel ID. Liquid is allowed, for example `{{ incident.slack_channel_id }}` for the incident channel.
+- `name` (String) Slack channel name
+
 
 <a id="nestedblock--trigger_params"></a>
 ### Nested Schema for `trigger_params`

@@ -69,10 +69,6 @@ func TestAccResourceAlertsSource(t *testing.T) {
 	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
 	alertsSourceName := acctest.RandomWithPrefix("tf-alerts-source")
 
-	configStateChecks := []statecheck.StateCheck{
-		statecheck.ExpectKnownValue(resName, tfjsonpath.New("id"), knownvalue.NotNull()),
-	}
-
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:                 func() { testAccPreCheck(t) },
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
@@ -96,19 +92,46 @@ func TestAccResourceAlertsSource(t *testing.T) {
 						resolve_state = "$.status"
 					}
 				`),
-				ConfigStateChecks: append(
-					configStateChecks,
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("id"), knownvalue.NotNull()),
 					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(alertsSourceName)),
-				),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("alert_source_urgency_rules_attributes"), knownvalue.ListExact([]knownvalue.Check{
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{
+							"alert_urgency_id": knownvalue.NotNull(),
+							"json_path":        knownvalue.StringExact("test"),
+							"operator":         knownvalue.StringExact("is"),
+							"value":            knownvalue.StringExact("P1"),
+						}),
+					})),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("sourceable_attributes"), knownvalue.ListExact([]knownvalue.Check{
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{
+							"auto_resolve":  knownvalue.Bool(false),
+							"resolve_state": knownvalue.StringExact("$.status"),
+						}),
+					})),
+				},
 			},
+			// Remove alert_source_urgency_rules_attributes
 			{
 				Config: testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName+"-updated", `
 					source_type = "generic_webhook"
+
+					sourceable_attributes {
+						auto_resolve  = false
+						resolve_state = "$.status"
+					}
 				`),
-				ConfigStateChecks: append(
-					configStateChecks,
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("id"), knownvalue.NotNull()),
 					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(alertsSourceName+"-updated")),
-				),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("alert_source_urgency_rules_attributes"), knownvalue.ListSizeExact(0)),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("sourceable_attributes"), knownvalue.ListExact([]knownvalue.Check{
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{
+							"auto_resolve":  knownvalue.Bool(false),
+							"resolve_state": knownvalue.StringExact("$.status"),
+						}),
+					})),
+				},
 			},
 			{
 				ResourceName:      resName,
@@ -158,6 +181,33 @@ func TestAccResourceAlertsSource_AlertTemplateAttributesErrorWhenAlertFieldsEnab
 						external_url = "https://example.com"
 					}
 				`),
+			},
+		},
+	})
+}
+
+func TestAccResourceAlertsSource_SecretGenerated(t *testing.T) {
+	resName := "rootly_alerts_source.test"
+	teamName := acctest.RandomWithPrefix("tf-team")
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
+	alertsSourceName := acctest.RandomWithPrefix("tf-alerts-source")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				PlanOnly: true,
+				Config: testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, `
+					secret = "secret"
+				`),
+				ExpectError: acctest.ExpectLiteralErrors(`Can't configure a value for "secret": its value will be decided automatically based on the result of applying this configuration.`),
+			},
+			{
+				Config: testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, ""),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("secret"), knownvalue.NotNull()),
+				},
 			},
 		},
 	})

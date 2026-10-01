@@ -139,6 +139,7 @@ function setResourceFields(name, resourceSchema) {
 
   return Object.entries(resourceSchema.properties)
     .filter(excludeIgnoredProperties)
+    .filter(([, schema]) => !schema.tf_create_only)
     .map(([field]) => {
       const schema = resourceSchema.properties[field];
 
@@ -253,6 +254,17 @@ function createResourceFields(name, resourceSchema, writableFields, deprecatedFi
           if value, ok := d.GetOkExists("${field}"); ok {
             s.${inflect.camelize(field)} = tools.String(value.(string))
           }`;
+        } else if (schema.type === "integer" && schema.tf_nullable) {
+          // Pointer client field without omitempty: a nil pointer serializes as
+          // an explicit null, so take nullness from the raw config — an absent
+          // attribute reads as the zero value in state, which GetOkExists
+          // cannot distinguish from a configured 0.
+          return `
+          if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+            if attr := rawConfig.GetAttr("${field}"); !attr.IsNull() && attr.IsKnown() {
+              s.${inflect.camelize(field)} = tools.Int(d.Get("${field}").(int))
+            }
+          }`;
         } else {
           return `
           if value, ok := d.GetOkExists("${field}"); ok {
@@ -274,6 +286,16 @@ function createResourceFields(name, resourceSchema, writableFields, deprecatedFi
       } else if (schema.type === "string" && schema.tf_nullable) {
         return `  if value, ok := d.GetOkExists("${field}"); ok {
 				s.${inflect.camelize(field)} = tools.String(value.(string))
+			}`;
+      } else if (schema.type === "integer" && schema.tf_nullable) {
+        // Pointer client field without omitempty: a nil pointer serializes as
+        // an explicit null, so take nullness from the raw config — an absent
+        // attribute reads as the zero value in state, which GetOkExists
+        // cannot distinguish from a configured 0.
+        return `  if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+				if attr := rawConfig.GetAttr("${field}"); !attr.IsNull() && attr.IsKnown() {
+					s.${inflect.camelize(field)} = tools.Int(d.Get("${field}").(int))
+				}
 			}`;
       } else if (
         schema.type == "object" &&
@@ -301,6 +323,7 @@ function updateResourceFields(name, resourceSchema, writableFields, deprecatedFi
 
   return Object.entries(resourceSchema.properties)
     .filter(excludeIgnoredProperties)
+    .filter(([, schema]) => !schema.tf_create_only)
     .filter(([field, schema]) => !(schema.tf_computed && writableFields && !writableFields.includes(field)))
     // Deprecated properties are ignored by the API, so stop sending them.
     .filter(([field]) => !(deprecatedFields && deprecatedFields[field]))
@@ -336,6 +359,17 @@ function updateResourceFields(name, resourceSchema, writableFields, deprecatedFi
           if d.HasChange("${field}") {
             s.${inflect.camelize(field)} = tools.String(d.Get("${field}").(string))
           }`;
+        } else if (schema.type === "integer" && schema.tf_nullable) {
+          // Pointer client field without omitempty: a nil pointer serializes as
+          // an explicit null, so take nullness from the raw config — an absent
+          // attribute reads as the zero value in state, which GetOkExists
+          // cannot distinguish from a configured 0.
+          return `
+          if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+            if attr := rawConfig.GetAttr("${field}"); !attr.IsNull() && attr.IsKnown() {
+              s.${inflect.camelize(field)} = tools.Int(d.Get("${field}").(int))
+            }
+          }`;
         } else if (schema.tf_include_unchanged) {
           return `
           s.${inflect.camelize(field)} = d.Get("${field}").(${jsonapiToGoType(
@@ -364,6 +398,16 @@ function updateResourceFields(name, resourceSchema, writableFields, deprecatedFi
         // attribute serializes an explicit blank instead of being omitted.
         return `  if d.HasChange("${field}") {
 				s.${inflect.camelize(field)} = tools.String(d.Get("${field}").(string))
+			}`;
+      } else if (schema.type === "integer" && schema.tf_nullable) {
+        // Pointer client field without omitempty: a nil pointer serializes as
+        // an explicit null, so take nullness from the raw config — an absent
+        // attribute reads as the zero value in state, which GetOkExists
+        // cannot distinguish from a configured 0.
+        return `  if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+				if attr := rawConfig.GetAttr("${field}"); !attr.IsNull() && attr.IsKnown() {
+					s.${inflect.camelize(field)} = tools.Int(d.Get("${field}").(int))
+				}
 			}`;
       } else if (schema.type == "array") {
         return `
@@ -467,6 +511,11 @@ function annotatedDescription(schema) {
 
 function generateValidateFunc(schema) {
   if (schema.enum && schema.enum.length > 0) {
+    if (schema.type === "integer") {
+      const enumValues = schema.enum.map((val) => `${val}`).join(", ");
+      return `
+		ValidateFunc: validation.IntInSlice([]int{${enumValues}}),`;
+    }
     const enumValues = schema.enum.map((val) => `"${val}"`).join(", ");
     return `
 		ValidateFunc: validation.StringInSlice([]string{${enumValues}}, false),`;
@@ -524,8 +573,9 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
   const description = annotatedDescription(schema);
   const sensitive = schema.tf_sensitive ? "true" : "false";
   const forceNew =
-    name === pathIdField || schema.tf_force_new ? "true" : "false";
+    name === pathIdField || schema.tf_force_new || schema.tf_create_only ? "true" : "false";
   const writeOnly = schema.tf_write_only ? "true" : "false";
+  const computed = schema.tf_computed ? "true" : optional;
 
   // A property the create schema marks `deprecated: true` is accepted on write
   // but ignored by the API. Keep it settable so no configuration breaks, warn
@@ -575,21 +625,20 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
       return `
       "${name}": &schema.Schema {
         Type: schema.TypeInt,
-        Computed: ${optional},
+        Computed: ${schema.tf_nullable ? "false" : computed},
         Required: ${required},
         Optional: ${optional},
         Sensitive: ${sensitive},
         ForceNew: ${forceNew},
         WriteOnly: ${writeOnly},
-        Description: "${description}",
-        ${diffSuppressFuncField}
+        Description: "${description}",${validateFunc}${diffSuppressFuncField}
       },
       `;
     case "number":
       return `
 			"${name}": &schema.Schema {
 				Type: schema.TypeFloat,
-				Computed: ${optional},
+				Computed: ${computed},
 				Required: ${required},
 				Optional: ${optional},
         Sensitive: ${sensitive},
@@ -630,7 +679,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
       return `
         "${name}": &schema.Schema {
           Type: schema.TypeBool,
-          Computed: ${optional},
+          Computed: ${computed},
           Required: ${required},
           Optional: ${optional},
           Sensitive: ${sensitive},
@@ -737,11 +786,11 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
     default:
       if (schema.properties && !forceMapFor(name)) {
         return `
-   			"${name}": &schema.Schema {
-	 				Type: schema.TypeList,
-	 				Computed: ${optional},
-	 				Required: ${required},
-	 				Optional: ${optional},
+      "${name}": &schema.Schema {
+        Type: schema.TypeList,
+        Computed: ${computed},
+        Required: ${required},
+        Optional: ${optional},
           Sensitive: ${sensitive},
           ForceNew: ${forceNew},
           WriteOnly: ${writeOnly},
@@ -771,7 +820,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
 				Elem: &schema.Schema {
 					Type: schema.TypeString,
 				},
-				Computed: ${optional},
+				Computed: ${computed},
 				Required: ${required},
 				Optional: ${optional},
 				Description: "${description}",

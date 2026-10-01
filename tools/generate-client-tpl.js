@@ -124,10 +124,11 @@ func (c *Client) Delete${nameCamel}(id string) error {
 		return fmt.Errorf("Error building request: %w", err)
 	}
 
-	_, err = c.Do(req)
+	resp, err := c.Do(req)
 	if err != nil {
 		return fmt.Errorf("Failed to make request to delete ${name}: %w", err)
 	}
+	resp.Body.Close()
 
 	return nil
 }
@@ -186,6 +187,11 @@ function structAttr(name, resourceSchema) {
         name
       )} string \`jsonapi:"attr,${name}${schema.tf_computed === false ? "" : ",omitempty"}"\``;
     case "integer":
+      if (schema.tf_nullable) {
+        // No omitempty: a nil pointer serializes as an explicit null, which
+        // the API reads as "inherit".
+        return `${inflect.camelize(name)} *int \`jsonapi:"attr,${name}"\``;
+      }
       return `${inflect.camelize(
         name
       )} int \`jsonapi:"attr,${name},omitempty"\``;

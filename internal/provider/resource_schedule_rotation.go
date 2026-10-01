@@ -20,6 +20,7 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diagutils"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/fwtypes"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/jsonapitypes"
 	intsetvalidator "github.com/rootlyhq/terraform-provider-rootly/v5/internal/validators/setvalidator"
 	"github.com/samber/lo"
@@ -92,9 +93,10 @@ func (r *ScheduleRotationResource) Schema(ctx context.Context, _ resource.Schema
 				},
 			},
 			"active_time_type": schema.StringAttribute{
-				MarkdownDescription: "Value must be one of `all_day`, `same_time`, or `custom`. The value chosen will override `active_time_attributes` in any `rootly_schedule_rotation_active_day` resources linked to this `rootly_schedule_rotation`.",
+				MarkdownDescription: "Value must be one of `all_day`, `same_time`, or `custom`. The value chosen will override `active_time_attributes` in any `rootly_schedule_rotation_active_day` resources linked to this `rootly_schedule_rotation`. Defaults to `all_day`.",
 				Optional:            true,
 				Computed:            true,
+				Default:             stringdefault.StaticString("all_day"),
 				Validators: []validator.String{
 					stringvalidator.OneOf("all_day", "same_time", "custom"),
 				},
@@ -330,7 +332,7 @@ func (m *ScheduleRotationResourceModel) FromApi(ctx context.Context, data apicli
 	m.ScheduleRotationableType = types.StringValue(data.ScheduleRotationableType)
 	m.ActiveAllWeek = jsonapitypes.NullableBoolValue(data.ActiveAllWeek)
 	m.ActiveDays = supertypes.NewSetValueOfSlice(ctx, data.ActiveDays)
-	m.ActiveTimeType = jsonapitypes.NullableStringValue(data.ActiveTimeType)
+	m.ActiveTimeType = types.StringValue(data.ActiveTimeType)
 	m.TimeZone = types.StringValue(data.TimeZone)
 	m.StartTime = jsonapitypes.NullableStringValue(data.StartTime)
 	m.EndTime = jsonapitypes.NullableStringValue(data.EndTime)
@@ -341,7 +343,7 @@ func (m *ScheduleRotationResourceModel) FromApi(ctx context.Context, data apicli
 		ShiftLengthUnit: jsonapitypes.NullableStringValue(data.ScheduleRotationableAttributes.ShiftLengthUnit),
 	})
 
-	if m.ActiveTimeAttributes.IsKnown() {
+	if fwtypes.IsKnown(m.ActiveTimeAttributes) {
 		m.ActiveTimeAttributes = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.ActiveTimeAttributes, func(v apiclient.ScheduleRotationActiveTimeAttributes, _ int) ScheduleRotationResourceActiveTimeModel {
 			return ScheduleRotationResourceActiveTimeModel{
 				StartTime: types.StringValue(v.StartTime),
@@ -350,7 +352,7 @@ func (m *ScheduleRotationResourceModel) FromApi(ctx context.Context, data apicli
 		}))
 	}
 
-	if m.ScheduleRotationMembers.IsKnown() {
+	if fwtypes.IsKnown(m.ScheduleRotationMembers) {
 		m.ScheduleRotationMembers = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.ScheduleRotationMembers, func(v apiclient.ScheduleRotationMember, _ int) ScheduleRotationResourceScheduleRotationMemberModel {
 			return ScheduleRotationResourceScheduleRotationMemberModel{
 				MemberId:   types.StringValue(v.MemberID),
@@ -367,33 +369,33 @@ func (m *ScheduleRotationResourceModel) ToApi(ctx context.Context) (*apiclient.S
 	var diags diag.Diagnostics
 	var data apiclient.ScheduleRotation
 
-	if !m.Id.IsNull() && !m.Id.IsUnknown() {
+	if fwtypes.IsKnown(m.Id) {
 		data.ID = m.Id.ValueString()
 	}
 
-	if !m.ScheduleId.IsNull() && !m.ScheduleId.IsUnknown() {
+	if fwtypes.IsKnown(m.ScheduleId) {
 		data.ScheduleId = m.ScheduleId.ValueString()
 	}
 
-	if !m.Name.IsNull() && !m.Name.IsUnknown() {
+	if fwtypes.IsKnown(m.Name) {
 		data.Name = m.Name.ValueString()
 	}
 
-	if !m.Position.IsNull() && !m.Position.IsUnknown() {
+	if fwtypes.IsKnown(m.Position) {
 		data.Position = m.Position.ValueInt64()
 	}
 
-	if !m.ScheduleRotationableType.IsNull() && !m.ScheduleRotationableType.IsUnknown() {
+	if fwtypes.IsKnown(m.ScheduleRotationableType) {
 		data.ScheduleRotationableType = m.ScheduleRotationableType.ValueString()
 	}
 
-	if !m.ActiveAllWeek.IsNull() && !m.ActiveAllWeek.IsUnknown() {
+	if fwtypes.IsKnown(m.ActiveAllWeek) {
 		data.ActiveAllWeek.Set(m.ActiveAllWeek.ValueBool())
 	} else {
 		data.ActiveAllWeek.SetNull()
 	}
 
-	if !m.ActiveDays.IsNull() && !m.ActiveDays.IsUnknown() {
+	if fwtypes.IsKnown(m.ActiveDays) {
 		vv, diagss := m.ActiveDays.Get(ctx)
 		diags.Append(diagss...)
 		if diags.HasError() {
@@ -405,29 +407,27 @@ func (m *ScheduleRotationResourceModel) ToApi(ctx context.Context) (*apiclient.S
 		data.ActiveDays = []string{}
 	}
 
-	if !m.ActiveTimeType.IsNull() && !m.ActiveTimeType.IsUnknown() {
-		data.ActiveTimeType.Set(m.ActiveTimeType.ValueString())
-	} else {
-		data.ActiveTimeType.SetNull()
+	if fwtypes.IsKnown(m.ActiveTimeType) {
+		data.ActiveTimeType = m.ActiveTimeType.ValueString()
 	}
 
-	if !m.TimeZone.IsNull() && !m.TimeZone.IsUnknown() {
+	if fwtypes.IsKnown(m.TimeZone) {
 		data.TimeZone = m.TimeZone.ValueString()
 	}
 
-	if !m.StartTime.IsNull() && !m.StartTime.IsUnknown() {
+	if fwtypes.IsKnown(m.StartTime) {
 		data.StartTime.Set(m.StartTime.ValueString())
 	} else {
 		data.StartTime.SetNull()
 	}
 
-	if !m.EndTime.IsNull() && !m.EndTime.IsUnknown() {
+	if fwtypes.IsKnown(m.EndTime) {
 		data.EndTime.Set(m.EndTime.ValueString())
 	} else {
 		data.EndTime.SetNull()
 	}
 
-	if !m.ScheduleRotationableAttributes.IsNull() && !m.ScheduleRotationableAttributes.IsUnknown() {
+	if fwtypes.IsKnown(m.ScheduleRotationableAttributes) {
 		vv, diagss := m.ScheduleRotationableAttributes.Get(ctx)
 		diags.Append(diagss...)
 		if diags.HasError() {
@@ -444,7 +444,7 @@ func (m *ScheduleRotationResourceModel) ToApi(ctx context.Context) (*apiclient.S
 	}
 
 	data.ActiveTimeAttributes = []apiclient.ScheduleRotationActiveTimeAttributes{}
-	if !m.ActiveTimeAttributes.IsNull() && !m.ActiveTimeAttributes.IsUnknown() {
+	if fwtypes.IsKnown(m.ActiveTimeAttributes) {
 		vv, diagss := m.ActiveTimeAttributes.Get(ctx)
 		diags.Append(diagss...)
 		if diags.HasError() {
@@ -463,7 +463,7 @@ func (m *ScheduleRotationResourceModel) ToApi(ctx context.Context) (*apiclient.S
 	}
 
 	data.ScheduleRotationMembers = []apiclient.ScheduleRotationMember{}
-	if !m.ScheduleRotationMembers.IsNull() && !m.ScheduleRotationMembers.IsUnknown() {
+	if fwtypes.IsKnown(m.ScheduleRotationMembers) {
 		vv, diagss := m.ScheduleRotationMembers.Get(ctx)
 		diags.Append(diagss...)
 		if diags.HasError() {
@@ -494,25 +494,25 @@ type ScheduleRotationResourceScheduleRotationAttributesModel struct {
 func (m *ScheduleRotationResourceScheduleRotationAttributesModel) ToApi(ctx context.Context) (*apiclient.ScheduleRotationScheduleRotationableAttributes, diag.Diagnostics) {
 	var data apiclient.ScheduleRotationScheduleRotationableAttributes
 
-	if !m.HandoffTime.IsNull() && !m.HandoffTime.IsUnknown() {
+	if fwtypes.IsKnown(m.HandoffTime) {
 		data.HandoffTime.Set(m.HandoffTime.ValueString())
 	} else {
 		data.HandoffTime.SetNull()
 	}
 
-	if !m.HandoffDay.IsNull() && !m.HandoffDay.IsUnknown() {
+	if fwtypes.IsKnown(m.HandoffDay) {
 		data.HandoffDay.Set(m.HandoffDay.ValueString())
 	} else {
 		data.HandoffDay.SetNull()
 	}
 
-	if !m.ShiftLength.IsNull() && !m.ShiftLength.IsUnknown() {
+	if fwtypes.IsKnown(m.ShiftLength) {
 		data.ShiftLength.Set(m.ShiftLength.ValueInt64())
 	} else {
 		data.ShiftLength.SetNull()
 	}
 
-	if !m.ShiftLengthUnit.IsNull() && !m.ShiftLengthUnit.IsUnknown() {
+	if fwtypes.IsKnown(m.ShiftLengthUnit) {
 		data.ShiftLengthUnit.Set(m.ShiftLengthUnit.ValueString())
 	} else {
 		data.ShiftLengthUnit.SetNull()

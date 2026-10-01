@@ -12,6 +12,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -96,6 +98,18 @@ func resourceWorkflowTaskCreateSlackChannel() *schema.Resource {
 								"false",
 							}, false),
 						},
+						"retry_count": &schema.Schema{
+							Description: "Number of times to retry on rate-limit (HTTP 429) responses (0-4). 0 disables retry.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Default:     0,
+						},
+						"retry_wait_time": &schema.Schema{
+							Description: "Seconds to wait before each retry (1-15). Retry-After header is honored when present and <= 90s, taking the larger of retry_wait_time and the header value.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Default:     1,
+						},
 					},
 				},
 			},
@@ -157,9 +171,9 @@ func resourceWorkflowTaskCreateSlackChannelRead(ctx context.Context, d *schema.R
 	d.Set("position", res.Position)
 	d.Set("skip_on_failure", res.SkipOnFailure)
 	d.Set("enabled", res.Enabled)
-	tps := make([]interface{}, 1, 1)
-	tps[0] = res.TaskParams
-	d.Set("task_params", tps)
+	taskParamsSchema := resourceWorkflowTaskCreateSlackChannel().Schema["task_params"].Elem.(*schema.Resource).Schema
+	safeTaskParams := sdkutils.FilterToSchema(res.TaskParams, taskParamsSchema)
+	d.Set("task_params", []interface{}{safeTaskParams})
 
 	return nil
 }

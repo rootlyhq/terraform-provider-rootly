@@ -163,13 +163,6 @@ func TestAccResourceScheduleRotation_Basic(t *testing.T) {
 			"shift_length":      knownvalue.Int64Exact(7),
 			"shift_length_unit": knownvalue.StringExact("days"),
 		})),
-		statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotation_members"), knownvalue.SetExact([]knownvalue.Check{
-			knownvalue.ObjectExact(map[string]knownvalue.Check{
-				"member_id":   knownvalue.NotNull(),
-				"member_type": knownvalue.StringExact("User"),
-				"position":    knownvalue.Int64Exact(1),
-			}),
-		})),
 	}
 
 	resource.UnitTest(t, resource.TestCase{
@@ -177,13 +170,22 @@ func TestAccResourceScheduleRotation_Basic(t *testing.T) {
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceScheduleRotationConfig(name, ""),
+				Config: testAccResourceScheduleRotationConfig(name, `
+					active_time_type = "all_day"
+				`),
 				ConfigStateChecks: append(
 					configStateChecks,
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("name"), knownvalue.StringExact(name)),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("active_days"), knownvalue.SetSizeExact(0)),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("active_time_attributes"), knownvalue.SetSizeExact(0)),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("end_time"), knownvalue.Null()),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotation_members"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"member_id":   knownvalue.NotNull(),
+							"member_type": knownvalue.StringExact("User"),
+							"position":    knownvalue.Int64Exact(1),
+						}),
+					})),
 				),
 			},
 			{
@@ -201,6 +203,11 @@ func TestAccResourceScheduleRotation_Basic(t *testing.T) {
 						end_time = "21:00"
 					}
 
+					schedule_rotation_members {
+						position    = 2
+						member_type = "User"
+						member_id   = data.rootly_user.test.id
+					}
 				`),
 				ConfigStateChecks: append(
 					configStateChecks,
@@ -221,6 +228,18 @@ func TestAccResourceScheduleRotation_Basic(t *testing.T) {
 						}),
 					})),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("end_time"), knownvalue.StringExact("2025-06-21T00:00:00Z")),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotation_members"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"member_id":   knownvalue.NotNull(),
+							"member_type": knownvalue.StringExact("User"),
+							"position":    knownvalue.Int64Exact(1),
+						}),
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"member_id":   knownvalue.NotNull(),
+							"member_type": knownvalue.StringExact("User"),
+							"position":    knownvalue.Int64Exact(2),
+						}),
+					})),
 				),
 			},
 			{
@@ -241,6 +260,13 @@ func TestAccResourceScheduleRotation_Basic(t *testing.T) {
 						}),
 					})),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("end_time"), knownvalue.Null()),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotation_members"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"member_id":   knownvalue.NotNull(),
+							"member_type": knownvalue.StringExact("User"),
+							"position":    knownvalue.Int64Exact(1),
+						}),
+					})),
 				),
 			},
 		},
@@ -259,12 +285,11 @@ resource "rootly_schedule" "test" {
 }
 
 resource "rootly_schedule_rotation" "test" {
-	schedule_id          = rootly_schedule.test.id
-	name                 = "%[1]s"
-	active_all_week      = true
-	active_time_type     = "all_day"
-	position             = 1
-	start_time           = "2025-06-20T00:00:00Z"
+	schedule_id     = rootly_schedule.test.id
+	name            = "%[1]s"
+	active_all_week = true
+	position        = 1
+	start_time      = "2025-06-20T00:00:00Z"
 
 	schedule_rotationable_type       = "ScheduleCustomRotation"
 	schedule_rotationable_attributes = {

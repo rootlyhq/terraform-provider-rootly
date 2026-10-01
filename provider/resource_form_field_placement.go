@@ -45,7 +45,7 @@ func resourceFormFieldPlacement() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The form set this field is placed in.",
+				Description: "The form set this field is placed in. The form set must have the same `resource_type` as the form field, otherwise the request is rejected with 422.",
 			},
 
 			"form": &schema.Schema{

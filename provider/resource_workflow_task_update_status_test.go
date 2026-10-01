@@ -5,6 +5,7 @@ package provider
 import (
 	"fmt"
 	"testing"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
@@ -14,11 +15,11 @@ func TestAccResourceWorkflowTaskUpdateStatus(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-wf-task")
 
 	resource.UnitTest(t, resource.TestCase{
-		PreCheck:          func() {
+		PreCheck: func() {
 			testAccPreCheck(t)
 		},
 		ProviderFactories: providerFactories,
-		Steps: []resource.TestStep {
+		Steps: []resource.TestStep{
 			{
 				Config: testAccResourceWorkflowTaskUpdateStatusConfig(rName),
 				Check: resource.ComposeTestCheckFunc(

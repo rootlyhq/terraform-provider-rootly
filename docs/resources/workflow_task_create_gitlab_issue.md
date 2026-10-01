@@ -35,6 +35,7 @@ Manages workflow create_gitlab_issue task.
 
 Required:
 
+- `issue_type` (String) The issue type. Value must be one of `issue`, `incident`, `test_case`, `task`.
 - `repository` (Map of String) Map must contain two fields, `id` and `name`.
 - `title` (String) The issue title
 
@@ -42,7 +43,6 @@ Optional:
 
 - `description` (String) The issue description
 - `due_date` (String) The due date
-- `issue_type` (String) The issue type. Value must be one of `issue`, `incident`, `test_case`, `task`.
 - `labels` (String) The issue labels
 - `task_type` (String)
 

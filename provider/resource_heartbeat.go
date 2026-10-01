@@ -206,7 +206,7 @@ func resourceHeartbeat() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "When the heartbeat was last pinged.",
+				Description: "Last persisted heartbeat ping timestamp. Accepted pings may be coalesced for up to 30 seconds.",
 			},
 
 			"expires_at": &schema.Schema{
@@ -217,7 +217,7 @@ func resourceHeartbeat() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "When heartbeat expires",
+				Description: "Persisted expiry deadline, including up to 30 seconds of coalescing grace.",
 			},
 		},
 	}

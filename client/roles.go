@@ -41,11 +41,13 @@ type Role struct {
 	ServicesPermissions              []interface{} `jsonapi:"attr,services_permissions,omitempty"`
 	SeveritiesPermissions            []interface{} `jsonapi:"attr,severities_permissions,omitempty"`
 	StatusPagesPermissions           []interface{} `jsonapi:"attr,status_pages_permissions,omitempty"`
+	StatusPageUpdatesPermissions     []interface{} `jsonapi:"attr,status_page_updates_permissions,omitempty"`
 	WebhooksPermissions              []interface{} `jsonapi:"attr,webhooks_permissions,omitempty"`
 	WorkflowsPermissions             []interface{} `jsonapi:"attr,workflows_permissions,omitempty"`
 	CatalogsPermissions              []interface{} `jsonapi:"attr,catalogs_permissions,omitempty"`
 	SubStatusesPermissions           []interface{} `jsonapi:"attr,sub_statuses_permissions,omitempty"`
 	EdgeConnectorPermissions         []interface{} `jsonapi:"attr,edge_connector_permissions,omitempty"`
+	PrivateAgentPermissions          []interface{} `jsonapi:"attr,private_agent_permissions,omitempty"`
 	SlasPermissions                  []interface{} `jsonapi:"attr,slas_permissions,omitempty"`
 	PagingPermissions                []interface{} `jsonapi:"attr,paging_permissions,omitempty"`
 	IncidentCommunicationPermissions []interface{} `jsonapi:"attr,incident_communication_permissions,omitempty"`
@@ -146,10 +148,11 @@ func (c *Client) DeleteRole(id string) error {
 		return fmt.Errorf("Error building request: %w", err)
 	}
 
-	_, err = c.Do(req)
+	resp, err := c.Do(req)
 	if err != nil {
 		return fmt.Errorf("Failed to make request to delete role: %w", err)
 	}
+	resp.Body.Close()
 
 	return nil
 }

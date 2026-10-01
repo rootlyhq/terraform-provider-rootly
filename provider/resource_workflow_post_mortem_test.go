@@ -21,6 +21,8 @@ func TestAccResourceWorkflowPostMortem(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "name", rName),
 					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "description", ""),
 					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "enabled", "true"),
+					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "trigger_params.0.incident_visibilities.#", "1"),
+					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "trigger_params.0.incident_visibilities.0", "true"),
 				),
 			},
 			{
@@ -29,6 +31,8 @@ func TestAccResourceWorkflowPostMortem(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "name", rName+"-updated"),
 					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "description", "test description"),
 					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "enabled", "false"),
+					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "trigger_params.0.incident_visibilities.#", "1"),
+					resource.TestCheckResourceAttr("rootly_workflow_post_mortem.foo", "trigger_params.0.incident_visibilities.0", "false"),
 				),
 			},
 		},
@@ -41,6 +45,7 @@ resource "rootly_workflow_post_mortem" "foo" {
   name = "%s"
 	trigger_params {
 		triggers = ["post_mortem_created"]
+		incident_visibilities = [true]
 	}
 }
 `, name)
@@ -54,6 +59,7 @@ resource "rootly_workflow_post_mortem" "foo" {
   enabled     = false
 	trigger_params {
 		triggers = ["post_mortem_updated"]
+		incident_visibilities = [false]
 	}
 }
 `, name)

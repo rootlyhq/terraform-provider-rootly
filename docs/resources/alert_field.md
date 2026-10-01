@@ -28,6 +28,7 @@ resource "rootly_alert_field" "cloud_region" {
 ### Optional
 
 - `kind` (String) The kind of alert field
+- `owner_group_ids` (List of String) IDs of the teams that own the alert field. Empty for org-wide fields.
 - `slug` (String, Deprecated) The slug of the alert field
 
 ### Read-Only

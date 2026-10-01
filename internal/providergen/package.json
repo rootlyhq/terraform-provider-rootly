@@ -1,0 +1,19 @@
+{
+  "name": "providergen",
+  "module": "index.ts",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "openapi3-ts": "^4.6.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@trojs/openapi-dereference": "^2.0.4",
+    "immer": "^11.1.17",
+    "inflection": "^3.0.2",
+    "ts-pattern": "^5.9.0"
+  }
+}

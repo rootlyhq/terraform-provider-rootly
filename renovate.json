@@ -31,6 +31,13 @@
       "groupName": "go-directive"
     },
     {
+      "description": "Require an explicit migration review for oapi-codegen generator updates",
+      "matchPackageNames": [
+        "github.com/oapi-codegen/oapi-codegen/v2"
+      ],
+      "dependencyDashboardApproval": true
+    },
+    {
       "matchUpdateTypes": [
         "major"
       ],

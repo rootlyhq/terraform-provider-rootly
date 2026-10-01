@@ -252,10 +252,9 @@ function annotatedDescription(schema) {
     (schema.items && schema.items.description) ||
     ""
   ).replace(/"/g, '\\"');
+  const prefix = !!description ? `${description.replace(/\.$/, "")}. ` : "";
   if (schema.enum) {
-    return `${
-      !!description ? `${description}. ` : ""
-    }Value must be one of ${schema.enum
+    return `${prefix}Value must be one of ${schema.enum
       .map((val) => `\`${val}\``)
       .join(", ")}.`;
   }
@@ -267,16 +266,12 @@ function annotatedDescription(schema) {
     return `Map must contain two fields, \`id\` and \`name\`. ${description}`;
   }
   if (schema.type === "array" && schema.items && schema.items.enum) {
-    return `${
-      !!description ? `${description}. ` : ""
-    }Value must be one of ${schema.items.enum
+    return `${prefix}Value must be one of ${schema.items.enum
       .map((val) => `\`${val}\``)
       .join(", ")}.`;
   }
   if (schema.type === "boolean") {
-    return `${
-      !!description ? `${description}. ` : ""
-    }Value must be one of true or false`;
+    return `${prefix}Value must be one of true or false`;
   }
   return description;
 }
@@ -300,7 +295,12 @@ function schemaField(
   let defaultValue;
   if (schema.default) {
     defaultValue = `Default: "${schema.default}"`;
-  } else if (schema.enum && schema.enum.length > 0 && !schema.nullable) {
+  } else if (
+    schema.enum &&
+    schema.enum.length > 0 &&
+    !schema.nullable &&
+    !schema.tf_computed // a default would be sent on every create, and the API rejects the field when the feature is off
+  ) {
     defaultValue = `Default: "${schema.enum[0]}"`;
   } else {
     defaultValue = `Computed: ${optional}`;
@@ -363,43 +363,67 @@ function schemaField(
 			},
 			`;
     case "array":
-      if (schema.items && schema.items.type === "object") {
-        return `
-				"${name}": &schema.Schema {
-					Type: schema.TypeList,
-					Computed: ${optional},
-					Required: ${required},
-					Optional: ${optional},
-					Description: "${description}",${deprecationFields}
-					Elem: &schema.Resource{
-						Schema: map[string]*schema.Schema {
-							"id": &schema.Schema {
-								Type: schema.TypeString,
-								Required: true,
-							},
-							"name": &schema.Schema {
-								Type: schema.TypeString,
-								Required: true,
+			if (!schema.items) {
+				throw new Error(`Array schema must have items defined, field: ${name}`)
+			}
+			switch (schema.items.type) {
+				case "object":
+					const itemDescription = (key) =>
+						annotatedDescription((schema.items.properties || {})[key] || {});
+					return `
+					"${name}": &schema.Schema {
+						Type: schema.TypeList,
+						Computed: ${optional},
+						Required: ${required},
+						Optional: ${optional},
+						Description: "${description}",${deprecationFields}
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema {
+								"id": &schema.Schema {
+									Type: schema.TypeString,
+									Required: true,
+									Description: "${itemDescription("id")}",
+								},
+								"name": &schema.Schema {
+									Type: schema.TypeString,
+									Required: true,
+									Description: "${itemDescription("name")}",
+								},
 							},
 						},
 					},
-				},
-				`;
-      } else {
-        return `
-				"${name}": &schema.Schema {
-					Type: schema.TypeList,
-					Elem: &schema.Schema {
-						Type: schema.TypeString,
+					`;
+				case "string":
+					return `
+					"${name}": &schema.Schema {
+						Type: schema.TypeList,
+						Elem: &schema.Schema {
+							Type: schema.TypeString,
+						},
+						DiffSuppressFunc: ${isDeprecated ? "diffsuppressfunc.Skip" : "tools.EqualIgnoringOrder"},
+						Computed: ${optional},
+						Required: ${required},
+						Optional: ${optional},
+						Description: "${description}",${isDeprecated ? `\n\t\t\t\t\tDeprecated: "${deprecationMessage.replace(/"/g, '\\"')}",` : ""}
 					},
-					DiffSuppressFunc: ${isDeprecated ? "diffsuppressfunc.Skip" : "tools.EqualIgnoringOrder"},
-					Computed: ${optional},
-					Required: ${required},
-					Optional: ${optional},
-					Description: "${description}",${isDeprecated ? `\n\t\t\t\t\tDeprecated: "${deprecationMessage.replace(/"/g, '\\"')}",` : ""}
-				},
-				`;
-      }
+					`;
+				case "boolean":
+					return `
+					"${name}": &schema.Schema {
+						Type: schema.TypeList,
+						Elem: &schema.Schema {
+							Type: schema.TypeBool,
+						},
+						DiffSuppressFunc: ${isDeprecated ? "diffsuppressfunc.Skip" : "tools.EqualIgnoringOrder"},
+						Computed: ${optional},
+						Required: ${required},
+						Optional: ${optional},
+						Description: "${description}",${isDeprecated ? `\n\t\t\t\t\tDeprecated: "${deprecationMessage.replace(/"/g, '\\"')}",` : ""}
+					},
+					`;
+				default:
+					throw new Error(`Array items type ${schema.items.type} is not supported, field: ${name}`)
+			}
     case "object":
     default:
       if (name === "trigger_params") {
