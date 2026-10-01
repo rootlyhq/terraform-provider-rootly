@@ -823,20 +823,59 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 		processed_items_alert_source_fields_attributes := make([]map[string]interface{}, 0)
 
 		// Get explicitly configured alert_field_ids
+		// Try to read from raw config first (available during plan/apply)
 		configuredFieldIds := make(map[string]bool)
-		if configuredFields, ok := d.GetOk("alert_source_fields_attributes"); ok {
-			if fieldList, ok := configuredFields.([]interface{}); ok {
-				for _, field := range fieldList {
-					if fieldMap, ok := field.(map[string]interface{}); ok {
-						if fieldId, ok := fieldMap["alert_field_id"].(string); ok {
-							configuredFieldIds[fieldId] = true
+		explicitlyProvided := false
+
+		if rawConfig := d.GetRawConfig(); !rawConfig.IsNull() {
+			if attr := rawConfig.GetAttr("alert_source_fields_attributes"); !attr.IsNull() && attr.IsKnown() {
+				// The field is explicitly set in the config - extract field IDs from raw config
+				explicitlyProvided = true
+				for it := attr.ElementIterator(); it.Next(); {
+					_, val := it.Element()
+					if !val.IsNull() && val.IsKnown() {
+						fieldIdAttr := val.GetAttr("alert_field_id")
+						if !fieldIdAttr.IsNull() && fieldIdAttr.IsKnown() {
+							configuredFieldIds[fieldIdAttr.AsString()] = true
 						}
 					}
 				}
 			}
 		}
 
-		explicitlyProvided := len(configuredFieldIds) > 0
+		// During refresh, GetRawConfig may not have values. In that case, check if there are
+		// any non-custom fields in the API response - if so, they must have been explicitly configured
+		// (since we never add non-custom fields as computed values)
+		if !explicitlyProvided {
+			hasNonCustomField := false
+			for _, c := range item.AlertSourceFieldsAttributes {
+				if rawItem, ok := c.(map[string]interface{}); ok {
+					if alertField, ok := rawItem["alert_field"].(map[string]interface{}); ok {
+						if kind, ok := alertField["kind"].(string); ok && kind != "custom" {
+							hasNonCustomField = true
+							break
+						}
+					}
+				}
+			}
+
+			if hasNonCustomField {
+				// Non-custom fields present means user explicitly configured them
+				// Read all configured field IDs from state
+				if configuredFields, ok := d.GetOk("alert_source_fields_attributes"); ok {
+					if fieldList, ok := configuredFields.([]interface{}); ok {
+						explicitlyProvided = true
+						for _, field := range fieldList {
+							if fieldMap, ok := field.(map[string]interface{}); ok {
+								if fieldId, ok := fieldMap["alert_field_id"].(string); ok {
+									configuredFieldIds[fieldId] = true
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 
 		for _, c := range item.AlertSourceFieldsAttributes {
 			if rawItem, ok := c.(map[string]interface{}); ok {

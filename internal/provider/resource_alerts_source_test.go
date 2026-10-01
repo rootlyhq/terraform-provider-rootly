@@ -285,6 +285,87 @@ func TestAccResourceAlertsSource_WithAlertSourceFieldsAttributes(t *testing.T) {
 	})
 }
 
+func TestAccResourceAlertsSource_AlertSourceFieldsAttributesOmitted(t *testing.T) {
+	resName := "rootly_alerts_source.test"
+	teamName := acctest.RandomWithPrefix("tf-team")
+	alertFieldName := acctest.RandomWithPrefix("tf-alert-field")
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
+	alertsSourceName := acctest.RandomWithPrefix("tf-alerts-source")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			// Create alert source with explicit alert_source_fields_attributes
+			{
+				Config: fmt.Sprintf(`
+					resource "rootly_alert_field" "field_1" {
+						name = "%[1]s-1"
+					}
+
+					resource "rootly_alert_field" "field_2" {
+						name = "%[1]s-2"
+					}
+				`, alertFieldName) + testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, `
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_1.id
+						template_body = "1"
+					}
+
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_2.id
+						template_body = "2"
+					}
+				`),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("alert_source_fields_attributes"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("1")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("2")}),
+					})),
+				},
+			},
+			// Remove alert_source_fields_attributes from config (omit it entirely)
+			// This should still show the custom fields as computed values
+			{
+				Config: fmt.Sprintf(`
+					resource "rootly_alert_field" "field_1" {
+						name = "%[1]s-1"
+					}
+
+					resource "rootly_alert_field" "field_2" {
+						name = "%[1]s-2"
+					}
+				`, alertFieldName) + testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, ``),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("alert_source_fields_attributes"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("1")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("2")}),
+					})),
+				},
+			},
+			// Apply the same config again (another refresh) to verify fields are still present
+			// This tests that GetRawConfig properly detects omitted fields vs stored state
+			{
+				Config: fmt.Sprintf(`
+					resource "rootly_alert_field" "field_1" {
+						name = "%[1]s-1"
+					}
+
+					resource "rootly_alert_field" "field_2" {
+						name = "%[1]s-2"
+					}
+				`, alertFieldName) + testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, ``),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("alert_source_fields_attributes"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("1")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("2")}),
+					})),
+				},
+			},
+		},
+	})
+}
+
 func TestAccResourceAlertsSource_AlertTemplateAttributesErrorWhenAlertFieldsEnabled(t *testing.T) {
 	teamName := acctest.RandomWithPrefix("tf-team")
 	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
