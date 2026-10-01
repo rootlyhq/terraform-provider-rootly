@@ -3,6 +3,10 @@ resource "rootly_api_key" "ci_pipeline" {
   expires_at = "2027-01-01T00:00:00Z"
 }
 
+resource "rootly_team" "payments" {
+  name = "Payments"
+}
+
 resource "rootly_api_key" "payments_team" {
   name       = "Payments Team"
   expires_at = "2027-01-01T00:00:00Z"
