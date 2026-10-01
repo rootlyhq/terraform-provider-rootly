@@ -4,6 +4,7 @@
 
 ### Added
 
+- `rootly_alerts_source` now supports `notification_target_type` and `notification_target_id` in `sourceable_attributes` for email sources, so every alert from the source pages that target directly (`EscalationPolicy`, `Group`, `Service`, `Functionality` or `User`). Set both to `""` to clear it. Requires the `email-alert-source-notification-target` feature flag on the team. (PRF-3278)
 - `rootly_escalation_path` and `rootly_alert_urgency` now support `retrigger_timeout_minutes` to manage the ack-timeout re-trigger override per escalation path and per alert urgency. `null` inherits the next tier (path > urgency > workspace default), `-1` never re-triggers, and positive values set the interval in minutes. Requires the `escalation-path-based-alert-retrigger` feature flag on the team. (TER-230)
 
 ### Changed

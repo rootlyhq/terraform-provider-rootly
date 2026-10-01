@@ -315,6 +315,28 @@ func resourceAlertsSource() *schema.Resource {
 							Description: "Set this to false to reject threaded emails. Value must be one of true or false",
 						},
 
+						"notification_target_type": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "Email sources only. The type of the notification target every alert from this source pages directly; Alert Routes are not evaluated when it is set. Value must be one of `EscalationPolicy`, `Group`, `Service`, `Functionality`, `User`.",
+						},
+
+						"notification_target_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "Email sources only. The ID of the notification target. Set to an empty string to clear it.",
+						},
+
 						"field_mappings_attributes": &schema.Schema{
 							Type:             schema.TypeList,
 							Computed:         true,
@@ -782,6 +804,8 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 		"auto_resolve":              item.SourceableAttributes["auto_resolve"],
 		"resolve_state":             item.SourceableAttributes["resolve_state"],
 		"accept_threaded_emails":    item.SourceableAttributes["accept_threaded_emails"],
+		"notification_target_type":  item.SourceableAttributes["notification_target_type"],
+		"notification_target_id":    item.SourceableAttributes["notification_target_id"],
 		"field_mappings_attributes": processed_field_mappings_attributes,
 	}
 	singleton_list_sourceable_attributes[0] = processed_item_sourceable_attributes
