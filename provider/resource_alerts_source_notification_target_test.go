@@ -74,8 +74,7 @@ func TestAlertsSourceNotificationTargetOnWire(t *testing.T) {
 	}
 
 	if err := data.Set("sourceable_attributes", []interface{}{map[string]interface{}{
-		"notification_target_type": "",
-		"notification_target_id":   "",
+		"accept_threaded_emails": true,
 	}}); err != nil {
 		t.Fatal(err)
 	}
@@ -83,7 +82,7 @@ func TestAlertsSourceNotificationTargetOnWire(t *testing.T) {
 		t.Fatal(diags)
 	}
 	if v, ok := sent["notification_target_id"]; !ok || v != "" {
-		t.Fatalf("clearing should send an empty notification_target_id, sent %#v", sent)
+		t.Fatalf("omitting the target should send an empty notification_target_id, sent %#v", sent)
 	}
 	if got := data.Get("sourceable_attributes.0.notification_target_id"); got != "" {
 		t.Fatalf("expected cleared notification_target_id in state, got %#v", got)

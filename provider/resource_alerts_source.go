@@ -317,7 +317,7 @@ func resourceAlertsSource() *schema.Resource {
 
 						"notification_target_type": &schema.Schema{
 							Type:        schema.TypeString,
-							Computed:    true,
+							Computed:    false,
 							Required:    false,
 							Optional:    true,
 							Sensitive:   false,
@@ -328,13 +328,13 @@ func resourceAlertsSource() *schema.Resource {
 
 						"notification_target_id": &schema.Schema{
 							Type:        schema.TypeString,
-							Computed:    true,
+							Computed:    false,
 							Required:    false,
 							Optional:    true,
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
-							Description: "Email sources only. The ID of the notification target. Set to an empty string to clear it.",
+							Description: "Email sources only. The ID of the notification target. Omit both notification target fields to clear it.",
 						},
 
 						"field_mappings_attributes": &schema.Schema{
