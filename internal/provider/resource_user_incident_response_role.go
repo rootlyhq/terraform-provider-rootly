@@ -44,7 +44,7 @@ func (r *UserIncidentResponseRoleResource) Schema(ctx context.Context, _ resourc
 				},
 			},
 			"role_id": schema.StringAttribute{
-				MarkdownDescription: "The ID of the incident response role to assign to the user.",
+				MarkdownDescription: "The ID of the incident response role to assign to the user. Role IDs can be found using data source [`rootly_role`](../data-sources/role.md).",
 				Required:            true,
 			},
 		},
