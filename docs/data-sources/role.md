@@ -2,18 +2,51 @@
 page_title: "Data Source rootly_role - terraform-provider-rootly"
 subcategory:
 description: |-
-    
+    Retrieves information about a Rootly role. Rootly provides the following built-in roles:
+  | Name | Slug |
+  |------|------|
+  | owner | owner |
+  | admin | admin |
+  | user | user |
+  | observer | observer |
+  | None | no_access |
 ---
 
 # Data Source (rootly_role)
 
+Retrieves information about a Rootly role. Rootly provides the following built-in roles:
 
+| Name | Slug |
+|------|------|
+| owner | owner |
+| admin | admin |
+| user | user |
+| observer | observer |
+| None | no_access |
 
 ## Example Usage
 
 ```shell
-data "rootly_role" "my-role" {
-  slug = "my-role"
+# Built-in roles examples
+data "rootly_role" "owner" {
+  slug = "owner"
+}
+
+data "rootly_role" "admin" {
+  slug = "admin"
+}
+
+data "rootly_role" "user" {
+  slug = "user"
+}
+
+data "rootly_role" "observer" {
+  slug = "observer"
+}
+
+# This is the "None" role in the UI
+data "rootly_role" "no_access" {
+  slug = "no_access"
 }
 ```
 
