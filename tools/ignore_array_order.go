@@ -91,3 +91,79 @@ func listsAreEqual(list1, list2 []interface{}) bool {
 	}
 	return true
 }
+
+// EqualIgnoringOrderAndFields returns a DiffSuppressFunc that compares lists
+// ignoring order and only comparing specified fields. This is useful when
+// comparing objects with computed fields that should be ignored.
+//
+// fieldsToCompare: list of field names to include in comparison (all others ignored)
+func EqualIgnoringOrderAndFields(fieldsToCompare []string) schema.SchemaDiffSuppressFunc {
+	return func(key, oldValue, newValue string, d *schema.ResourceData) bool {
+		oldArray, newArray, ok := listChangeFromDiffKey(key, d)
+		if !ok {
+			return false
+		}
+		if len(oldArray) != len(newArray) {
+			// Items added or removed, always detect as changed
+			return false
+		}
+
+		// Workaround to detect lists being removed from plan
+		if len(oldArray) > 0 && oldValue != newValue && newValue == "0" && oldArray[0] != "0" {
+			return false
+		}
+
+		return listsAreEqualByFields(oldArray, newArray, fieldsToCompare)
+	}
+}
+
+// filterMapByFields returns a new map containing only the specified fields
+func filterMapByFields(m map[string]interface{}, fields []string) map[string]interface{} {
+	filtered := make(map[string]interface{})
+	for _, field := range fields {
+		if value, exists := m[field]; exists {
+			filtered[field] = value
+		}
+	}
+	return filtered
+}
+
+// listsAreEqualByFields compares two lists of maps, ignoring order and only
+// comparing specified fields
+func listsAreEqualByFields(list1, list2 []interface{}, fields []string) bool {
+	// Convert each value in the lists to a string, filtering by fields
+	strList1 := make([]string, len(list1))
+	strList2 := make([]string, len(list2))
+
+	for i, value := range list1 {
+		if m, ok := value.(map[string]interface{}); ok {
+			filtered := filterMapByFields(m, fields)
+			strList1[i] = toString(filtered)
+		} else {
+			strList1[i] = toString(value)
+		}
+	}
+	for i, value := range list2 {
+		if m, ok := value.(map[string]interface{}); ok {
+			filtered := filterMapByFields(m, fields)
+			strList2[i] = toString(filtered)
+		} else {
+			strList2[i] = toString(value)
+		}
+	}
+
+	// Sort the string lists.
+	sort.Strings(strList1)
+	sort.Strings(strList2)
+
+	// Compare the sorted lists.
+	if len(strList1) != len(strList2) {
+		return false
+	}
+	for i := range strList1 {
+		if strList1[i] != strList2[i] {
+			return false
+		}
+	}
+	return true
+}

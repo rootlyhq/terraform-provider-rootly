@@ -92,3 +92,96 @@ func TestEqualIgnoringOrderNestedObjectList(t *testing.T) {
 		})
 	}
 }
+
+func TestEqualIgnoringOrderAndFieldsIgnoresComputedFields(t *testing.T) {
+	testSchema := map[string]*schema.Schema{
+		"items": {
+			Type:             schema.TypeList,
+			Optional:         true,
+			DiffSuppressFunc: EqualIgnoringOrderAndFields([]string{"name", "value"}),
+			Elem: &schema.Resource{Schema: map[string]*schema.Schema{
+				"id": {
+					Type:     schema.TypeString,
+					Computed: true,
+				},
+				"name": {
+					Type:     schema.TypeString,
+					Required: true,
+				},
+				"value": {
+					Type:     schema.TypeString,
+					Required: true,
+				},
+			}},
+		},
+	}
+
+	oldItems := []interface{}{
+		map[string]interface{}{"id": "old-id-1", "name": "field1", "value": "val1"},
+		map[string]interface{}{"id": "old-id-2", "name": "field2", "value": "val2"},
+	}
+
+	tests := []struct {
+		name     string
+		newItems []interface{}
+		wantDiff bool
+	}{
+		{
+			name: "same fields, different computed id (no diff)",
+			newItems: []interface{}{
+				map[string]interface{}{"id": "new-id-1", "name": "field1", "value": "val1"},
+				map[string]interface{}{"id": "new-id-2", "name": "field2", "value": "val2"},
+			},
+			wantDiff: false,
+		},
+		{
+			name: "reordered with different ids (no diff)",
+			newItems: []interface{}{
+				map[string]interface{}{"id": "different-id", "name": "field2", "value": "val2"},
+				map[string]interface{}{"id": "another-id", "name": "field1", "value": "val1"},
+			},
+			wantDiff: false,
+		},
+		{
+			name: "changed value (should diff)",
+			newItems: []interface{}{
+				map[string]interface{}{"id": "any-id", "name": "field1", "value": "val1"},
+				map[string]interface{}{"id": "any-id", "name": "field2", "value": "different"},
+			},
+			wantDiff: true,
+		},
+		{
+			name: "changed name (should diff)",
+			newItems: []interface{}{
+				map[string]interface{}{"id": "any-id", "name": "field1", "value": "val1"},
+				map[string]interface{}{"id": "any-id", "name": "field3", "value": "val2"},
+			},
+			wantDiff: true,
+		},
+		{
+			name: "missing id in new (no diff if name and value match)",
+			newItems: []interface{}{
+				map[string]interface{}{"name": "field1", "value": "val1"},
+				map[string]interface{}{"name": "field2", "value": "val2"},
+			},
+			wantDiff: false,
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			oldData := schema.TestResourceDataRaw(t, testSchema, map[string]interface{}{"items": oldItems})
+			oldData.SetId("test")
+			config := terraform.NewResourceConfigRaw(map[string]interface{}{"items": test.newItems})
+
+			diff, err := schema.InternalMap(testSchema).Diff(context.Background(), oldData.State(), config, nil, nil, true)
+			if err != nil {
+				t.Fatal(err)
+			}
+			gotDiff := diff != nil && !diff.Empty()
+			if gotDiff != test.wantDiff {
+				t.Fatalf("diff=%t, want %t: %#v", gotDiff, test.wantDiff, diff)
+			}
+		})
+	}
+}
