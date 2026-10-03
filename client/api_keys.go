@@ -15,6 +15,7 @@ type ApiKey struct {
 	Name              string `jsonapi:"attr,name,omitempty"`
 	Description       string `jsonapi:"attr,description,omitempty"`
 	Kind              string `jsonapi:"attr,kind,omitempty"`
+	GroupId           string `jsonapi:"attr,group_id,omitempty"`
 	RoleId            string `jsonapi:"attr,role_id,omitempty"`
 	OnCallRoleId      string `jsonapi:"attr,on_call_role_id,omitempty"`
 	ExpiresAt         string `jsonapi:"attr,expires_at,omitempty"`
