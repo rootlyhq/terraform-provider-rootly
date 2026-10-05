@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -108,6 +109,14 @@ func resourceWorkflowIncident() *schema.Resource {
 				Description: "When continuously repeat is true, repeat workflows aren't automatically stopped when conditions aren't met. This setting won't override your conditions set by repeat_condition_duration_since_first_run and repeat_condition_number_of_repeats parameters. Value must be one of true or false",
 			},
 
+			"run_once_per_resource": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "When true, the workflow runs at most once per incident. Later triggers on the same incident create a canceled run instead. Manual runs and repeats are not affected. Only applies to incident workflows. Value must be one of true or false",
+			},
+
 			"repeat_on": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -174,7 +183,7 @@ func resourceWorkflowIncident() *schema.Resource {
 							Computed:         true,
 							Required:         false,
 							Optional:         true,
-							Description:      "Actions that trigger the workflow. One of custom_fields.<slug>.updated, incident_in_triage, incident_created, incident_started, incident_updated, title_updated, summary_updated, status_updated, severity_updated, notify_emails_updated, environments_added, environments_removed, environments_updated, incident_types_added, incident_types_removed, incident_types_updated, services_added, services_removed, services_updated, visibility_updated, functionalities_added, functionalities_removed, functionalities_updated, teams_added, teams_removed, teams_updated, causes_added, causes_removed, causes_updated, timeline_updated, status_page_timeline_updated, role_assignments_updated, role_assignments_added, role_assignments_removed, slack_command, slack_channel_created, slack_channel_converted, microsoft_teams_channel_created, microsoft_teams_chat_created, google_chat_space_created, subscribers_updated, subscribers_added, subscribers_removed, user_joined_slack_channel, user_left_slack_channel, meeting_summary_created",
+							Description:      "Actions that trigger the workflow. One of custom_fields.<slug>.updated, incident_in_triage, incident_created, incident_started, incident_updated, title_updated, summary_updated, status_updated, severity_updated, notify_emails_updated, scheduled_for_updated, scheduled_until_updated, environments_added, environments_removed, environments_updated, incident_types_added, incident_types_removed, incident_types_updated, services_added, services_removed, services_updated, visibility_updated, functionalities_added, functionalities_removed, functionalities_updated, teams_added, teams_removed, teams_updated, causes_added, causes_removed, causes_updated, timeline_updated, status_page_timeline_updated, role_assignments_updated, role_assignments_added, role_assignments_removed, slack_command, slack_channel_created, slack_channel_converted, microsoft_teams_channel_created, microsoft_teams_chat_created, google_chat_space_created, subscribers_updated, subscribers_added, subscribers_removed, user_joined_slack_channel, user_left_slack_channel, meeting_summary_created",
 						},
 
 						"incident_visibilities": &schema.Schema{
@@ -409,6 +418,22 @@ func resourceWorkflowIncident() *schema.Resource {
 							Description: "Value must be one of `SET`, `UNSET`.",
 						},
 
+						"incident_condition_scheduled_for": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Description: "Value must be one of `SET`, `UNSET`.",
+						},
+
+						"incident_condition_scheduled_until": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Description: "Value must be one of `SET`, `UNSET`.",
+						},
+
 						"incident_conditional_inactivity": &schema.Schema{
 							Type:        schema.TypeString,
 							Computed:    true,
@@ -506,6 +531,18 @@ func resourceWorkflowIncident() *schema.Resource {
 				Description:      "",
 			},
 
+			"group_assignment_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Owning team IDs. Requires team-scoped workflows.",
+			},
+
 			"cause_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -597,6 +634,9 @@ func resourceWorkflowIncidentCreate(ctx context.Context, d *schema.ResourceData,
 	if value, ok := d.GetOkExists("continuously_repeat"); ok {
 		s.ContinuouslyRepeat = tools.Bool(value.(bool))
 	}
+	if value, ok := d.GetOkExists("run_once_per_resource"); ok {
+		s.RunOncePerResource = tools.Bool(value.(bool))
+	}
 	if value, ok := d.GetOkExists("repeat_on"); ok {
 		s.RepeatOn = value.([]interface{})
 	}
@@ -635,6 +675,9 @@ func resourceWorkflowIncidentCreate(ctx context.Context, d *schema.ResourceData,
 	}
 	if value, ok := d.GetOkExists("group_ids"); ok {
 		s.GroupIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("group_assignment_ids"); ok {
+		s.GroupAssignmentIds = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("cause_ids"); ok {
 		s.CauseIds = value.([]interface{})
@@ -687,15 +730,16 @@ func resourceWorkflowIncidentRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("repeat_condition_duration_since_first_run", item.RepeatConditionDurationSinceFirstRun)
 	d.Set("repeat_condition_number_of_repeats", item.RepeatConditionNumberOfRepeats)
 	d.Set("continuously_repeat", item.ContinuouslyRepeat)
+	d.Set("run_once_per_resource", item.RunOncePerResource)
 	d.Set("repeat_on", item.RepeatOn)
 	d.Set("enabled", item.Enabled)
 	d.Set("locked", item.Locked)
 	d.Set("position", item.Position)
 	d.Set("workflow_group_id", item.WorkflowGroupId)
 
-	tps := make([]interface{}, 1, 1)
-	tps[0] = item.TriggerParams
-	d.Set("trigger_params", tps)
+	triggerParamsSchema := resourceWorkflowIncident().Schema["trigger_params"].Elem.(*schema.Resource).Schema
+	safeTriggerParams := sdkutils.FilterToSchema(item.TriggerParams, triggerParamsSchema)
+	d.Set("trigger_params", []interface{}{safeTriggerParams})
 
 	d.Set("environment_ids", item.EnvironmentIds)
 	d.Set("severity_ids", item.SeverityIds)
@@ -704,6 +748,7 @@ func resourceWorkflowIncidentRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("functionality_ids", item.FunctionalityIds)
 	d.Set("group_ids", item.GroupIds)
+	d.Set("group_assignment_ids", item.GroupAssignmentIds)
 	d.Set("cause_ids", item.CauseIds)
 	d.Set("sub_status_ids", item.SubStatusIds)
 	d.Set("failure_notification_mode", item.FailureNotificationMode)
@@ -744,6 +789,9 @@ func resourceWorkflowIncidentUpdate(ctx context.Context, d *schema.ResourceData,
 	}
 	if d.HasChange("continuously_repeat") {
 		s.ContinuouslyRepeat = tools.Bool(d.Get("continuously_repeat").(bool))
+	}
+	if d.HasChange("run_once_per_resource") {
+		s.RunOncePerResource = tools.Bool(d.Get("run_once_per_resource").(bool))
 	}
 	if d.HasChange("repeat_on") {
 		s.RepeatOn = d.Get("repeat_on").([]interface{})
@@ -787,6 +835,9 @@ func resourceWorkflowIncidentUpdate(ctx context.Context, d *schema.ResourceData,
 	}
 	if d.HasChange("group_ids") {
 		s.GroupIds = d.Get("group_ids").([]interface{})
+	}
+	if d.HasChange("group_assignment_ids") {
+		s.GroupAssignmentIds = d.Get("group_assignment_ids").([]interface{})
 	}
 	if d.HasChange("cause_ids") {
 		s.CauseIds = d.Get("cause_ids").([]interface{})

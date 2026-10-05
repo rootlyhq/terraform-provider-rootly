@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -106,6 +107,14 @@ func resourceWorkflowPostMortem() *schema.Resource {
 				Required:    false,
 				Optional:    true,
 				Description: "When continuously repeat is true, repeat workflows aren't automatically stopped when conditions aren't met. This setting won't override your conditions set by repeat_condition_duration_since_first_run and repeat_condition_number_of_repeats parameters. Value must be one of true or false",
+			},
+
+			"run_once_per_resource": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "When true, the workflow runs at most once per incident. Later triggers on the same incident create a canceled run instead. Manual runs and repeats are not affected. Only applies to incident workflows. Value must be one of true or false",
 			},
 
 			"repeat_on": &schema.Schema{
@@ -409,6 +418,22 @@ func resourceWorkflowPostMortem() *schema.Resource {
 							Description: "Value must be one of `SET`, `UNSET`.",
 						},
 
+						"incident_condition_scheduled_for": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Description: "Value must be one of `SET`, `UNSET`.",
+						},
+
+						"incident_condition_scheduled_until": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Description: "Value must be one of `SET`, `UNSET`.",
+						},
+
 						"incident_conditional_inactivity": &schema.Schema{
 							Type:        schema.TypeString,
 							Computed:    true,
@@ -534,6 +559,18 @@ func resourceWorkflowPostMortem() *schema.Resource {
 				Description:      "",
 			},
 
+			"group_assignment_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Owning team IDs. Requires team-scoped workflows.",
+			},
+
 			"cause_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -625,6 +662,9 @@ func resourceWorkflowPostMortemCreate(ctx context.Context, d *schema.ResourceDat
 	if value, ok := d.GetOkExists("continuously_repeat"); ok {
 		s.ContinuouslyRepeat = tools.Bool(value.(bool))
 	}
+	if value, ok := d.GetOkExists("run_once_per_resource"); ok {
+		s.RunOncePerResource = tools.Bool(value.(bool))
+	}
 	if value, ok := d.GetOkExists("repeat_on"); ok {
 		s.RepeatOn = value.([]interface{})
 	}
@@ -663,6 +703,9 @@ func resourceWorkflowPostMortemCreate(ctx context.Context, d *schema.ResourceDat
 	}
 	if value, ok := d.GetOkExists("group_ids"); ok {
 		s.GroupIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("group_assignment_ids"); ok {
+		s.GroupAssignmentIds = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("cause_ids"); ok {
 		s.CauseIds = value.([]interface{})
@@ -715,15 +758,16 @@ func resourceWorkflowPostMortemRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("repeat_condition_duration_since_first_run", item.RepeatConditionDurationSinceFirstRun)
 	d.Set("repeat_condition_number_of_repeats", item.RepeatConditionNumberOfRepeats)
 	d.Set("continuously_repeat", item.ContinuouslyRepeat)
+	d.Set("run_once_per_resource", item.RunOncePerResource)
 	d.Set("repeat_on", item.RepeatOn)
 	d.Set("enabled", item.Enabled)
 	d.Set("locked", item.Locked)
 	d.Set("position", item.Position)
 	d.Set("workflow_group_id", item.WorkflowGroupId)
 
-	tps := make([]interface{}, 1, 1)
-	tps[0] = item.TriggerParams
-	d.Set("trigger_params", tps)
+	triggerParamsSchema := resourceWorkflowPostMortem().Schema["trigger_params"].Elem.(*schema.Resource).Schema
+	safeTriggerParams := sdkutils.FilterToSchema(item.TriggerParams, triggerParamsSchema)
+	d.Set("trigger_params", []interface{}{safeTriggerParams})
 
 	d.Set("environment_ids", item.EnvironmentIds)
 	d.Set("severity_ids", item.SeverityIds)
@@ -732,6 +776,7 @@ func resourceWorkflowPostMortemRead(ctx context.Context, d *schema.ResourceData,
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("functionality_ids", item.FunctionalityIds)
 	d.Set("group_ids", item.GroupIds)
+	d.Set("group_assignment_ids", item.GroupAssignmentIds)
 	d.Set("cause_ids", item.CauseIds)
 	d.Set("sub_status_ids", item.SubStatusIds)
 	d.Set("failure_notification_mode", item.FailureNotificationMode)
@@ -772,6 +817,9 @@ func resourceWorkflowPostMortemUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("continuously_repeat") {
 		s.ContinuouslyRepeat = tools.Bool(d.Get("continuously_repeat").(bool))
+	}
+	if d.HasChange("run_once_per_resource") {
+		s.RunOncePerResource = tools.Bool(d.Get("run_once_per_resource").(bool))
 	}
 	if d.HasChange("repeat_on") {
 		s.RepeatOn = d.Get("repeat_on").([]interface{})
@@ -815,6 +863,9 @@ func resourceWorkflowPostMortemUpdate(ctx context.Context, d *schema.ResourceDat
 	}
 	if d.HasChange("group_ids") {
 		s.GroupIds = d.Get("group_ids").([]interface{})
+	}
+	if d.HasChange("group_assignment_ids") {
+		s.GroupAssignmentIds = d.Get("group_assignment_ids").([]interface{})
 	}
 	if d.HasChange("cause_ids") {
 		s.CauseIds = d.Get("cause_ids").([]interface{})
