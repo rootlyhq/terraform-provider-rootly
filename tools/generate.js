@@ -62,6 +62,7 @@ const excluded = {
     "retrospective_configuration",
     "retrospective_process",
     "retrospective_step",
+    "role", // hand-maintained: added description with built-in roles documentation
     "schedule", // migrated to tf plugin framework
     "schedule_rotation",
     "secret",
