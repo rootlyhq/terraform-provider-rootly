@@ -142,6 +142,230 @@ func TestAccResourceAlertsSource(t *testing.T) {
 	})
 }
 
+func TestAccResourceAlertsSource_WithAlertSourceFieldsAttributes(t *testing.T) {
+	resName := "rootly_alerts_source.test"
+	teamName := acctest.RandomWithPrefix("tf-team")
+	alertFieldName := acctest.RandomWithPrefix("tf-alert-field")
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
+	alertsSourceName := acctest.RandomWithPrefix("tf-alerts-source")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: fmt.Sprintf(`
+					resource "rootly_alert_field" "field_1" {
+						name = "%[1]s-1"
+					}
+
+					resource "rootly_alert_field" "field_2" {
+						name = "%[1]s-2"
+					}
+
+					resource "rootly_alert_field" "field_3" {
+						name = "%[1]s-3"
+					}
+
+					resource "rootly_alert_field" "field_4" {
+						name = "%[1]s-4"
+					}
+
+					resource "rootly_alert_field" "field_5" {
+						name = "%[1]s-5"
+					}
+				`, alertFieldName) + testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, `
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_1.id
+						template_body = "1"
+					}
+
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_2.id
+						template_body = "2"
+					}
+
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_3.id
+						template_body = "3"
+					}
+
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_4.id
+						template_body = "4"
+					}
+
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_5.id
+						template_body = "5"
+					}
+				`),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("id"), knownvalue.NotNull()),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(alertsSourceName)),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("alert_source_fields_attributes"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("1")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("2")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("3")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("4")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("5")}),
+					})),
+				},
+			},
+			// Add two alert_source_fields_attributes (title and custom), rename one, and swap order to test reordering and updates
+			{
+				Config: fmt.Sprintf(`
+					data "rootly_alert_field" "title_field" {
+						kind = "title"
+					}
+
+					resource "rootly_alert_field" "field_2" {
+						name = "%[1]s-2"
+					}
+
+					resource "rootly_alert_field" "field_3" {
+						name = "%[1]s-3"
+					}
+
+					resource "rootly_alert_field" "field_4" {
+						name = "%[1]s-4"
+					}
+
+					resource "rootly_alert_field" "field_5" {
+						name = "%[1]s-5"
+					}
+
+					resource "rootly_alert_field" "field_6" {
+						name = "%[1]s-6"
+					}
+				`, alertFieldName) + testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, `
+					alert_source_fields_attributes {
+						alert_field_id = data.rootly_alert_field.title_field.id
+					}
+
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_6.id
+						template_body = "6"
+					}
+
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_5.id
+						template_body = "5"
+					}
+
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_4.id
+						template_body = "4"
+					}
+
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_3.id
+						template_body = "3"
+					}
+
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_2.id
+						template_body = "2"
+					}
+				`),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("id"), knownvalue.NotNull()),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(alertsSourceName)),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("alert_source_fields_attributes"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("2")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("3")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("4")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("5")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("6")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("")}), // title field
+					})),
+				},
+			},
+		},
+	})
+}
+
+func TestAccResourceAlertsSource_AlertSourceFieldsAttributesOmitted(t *testing.T) {
+	resName := "rootly_alerts_source.test"
+	teamName := acctest.RandomWithPrefix("tf-team")
+	alertFieldName := acctest.RandomWithPrefix("tf-alert-field")
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
+	alertsSourceName := acctest.RandomWithPrefix("tf-alerts-source")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			// Create alert source with explicit alert_source_fields_attributes
+			{
+				Config: fmt.Sprintf(`
+					resource "rootly_alert_field" "field_1" {
+						name = "%[1]s-1"
+					}
+
+					resource "rootly_alert_field" "field_2" {
+						name = "%[1]s-2"
+					}
+				`, alertFieldName) + testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, `
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_1.id
+						template_body = "1"
+					}
+
+					alert_source_fields_attributes {
+						alert_field_id = rootly_alert_field.field_2.id
+						template_body = "2"
+					}
+				`),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("alert_source_fields_attributes"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("1")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("2")}),
+					})),
+				},
+			},
+			// Remove alert_source_fields_attributes from config (omit it entirely)
+			// This should still show the custom fields as computed values
+			{
+				Config: fmt.Sprintf(`
+					resource "rootly_alert_field" "field_1" {
+						name = "%[1]s-1"
+					}
+
+					resource "rootly_alert_field" "field_2" {
+						name = "%[1]s-2"
+					}
+				`, alertFieldName) + testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, ``),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("alert_source_fields_attributes"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("1")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("2")}),
+					})),
+				},
+			},
+			// Apply the same config again (another refresh) to verify fields are still present
+			// This tests that GetRawConfig properly detects omitted fields vs stored state
+			{
+				Config: fmt.Sprintf(`
+					resource "rootly_alert_field" "field_1" {
+						name = "%[1]s-1"
+					}
+
+					resource "rootly_alert_field" "field_2" {
+						name = "%[1]s-2"
+					}
+				`, alertFieldName) + testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, ``),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("alert_source_fields_attributes"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("1")}),
+						knownvalue.ObjectPartial(map[string]knownvalue.Check{"template_body": knownvalue.StringExact("2")}),
+					})),
+				},
+			},
+		},
+	})
+}
+
 func TestAccResourceAlertsSource_AlertTemplateAttributesErrorWhenAlertFieldsEnabled(t *testing.T) {
 	teamName := acctest.RandomWithPrefix("tf-team")
 	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")

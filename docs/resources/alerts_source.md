@@ -124,9 +124,12 @@ resource "rootly_alerts_source" "example" {
 <a id="nestedblock--alert_source_fields_attributes"></a>
 ### Nested Schema for `alert_source_fields_attributes`
 
-Optional:
+Required:
 
 - `alert_field_id` (String) The ID of the alert field
+
+Optional:
+
 - `template_body` (String) Liquid expression to extract a specific value from the alert's payload for evaluation
 
 
