@@ -394,7 +394,7 @@ func resourceAlertsSource() *schema.Resource {
 
 						"identifier_matchable_type": &schema.Schema{
 							Type:         schema.TypeString,
-							Default:      "AlertField",
+							Computed:     true,
 							Required:     false,
 							Optional:     true,
 							Sensitive:    false,
