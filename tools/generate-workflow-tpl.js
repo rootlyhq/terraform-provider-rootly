@@ -87,7 +87,7 @@ func resource${nameCamel}Read(ctx context.Context, d *schema.ResourceData, meta 
 		return diag.Errorf("Error reading ${name}: %s", d.Id())
 	}
 
-	${setResourceFields(resourceSchema)}
+	${setResourceFields({resourceSchema, nameCamel})}
 
 	return nil
 }
@@ -135,15 +135,15 @@ function excludeDateFields(field) {
   return field !== "created_at" && field !== "updated_at";
 }
 
-function setResourceFields(resourceSchema) {
+function setResourceFields({ resourceSchema, nameCamel }) {
   return Object.keys(resourceSchema.properties)
     .filter(excludeDateFields)
     .map((field) => {
       if (field === "trigger_params") {
         return `
-        tps := make([]interface{}, 1, 1)
-        tps[0] = item.TriggerParams
-        d.Set("trigger_params", tps)
+				triggerParamsSchema := resource${nameCamel}().Schema["trigger_params"].Elem.(*schema.Resource).Schema
+				safeTriggerParams := sdkutils.FilterToSchema(item.TriggerParams, triggerParamsSchema)
+        d.Set("trigger_params", []interface{}{safeTriggerParams})
 			`;
       } else {
         return `d.Set("${field}", item.${inflect.camelize(field)})`;

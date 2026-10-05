@@ -77,6 +77,7 @@ resource "rootly_workflow_incident" "quiet" {
 - `failure_notification_channels` (Block List) Slack channels notified when a run of this workflow fails. Used when `failure_notification_mode` is `custom`. (see [below for nested schema](#nestedblock--failure_notification_channels))
 - `failure_notification_mode` (String) Where failure notifications for this workflow are sent. `inherit` uses the account default channel, `custom` uses `failure_notification_channels`, `off` suppresses them. Value must be one of `inherit`, `custom`, `off`.
 - `functionality_ids` (List of String)
+- `group_assignment_ids` (List of String) Owning team IDs. Requires team-scoped workflows.
 - `group_ids` (List of String)
 - `incident_role_ids` (List of String)
 - `incident_type_ids` (List of String)
@@ -86,6 +87,7 @@ resource "rootly_workflow_incident" "quiet" {
 - `repeat_condition_number_of_repeats` (Number) The workflow will stop repeating if the number of repeats exceeds the value set in this field
 - `repeat_every_duration` (String) Repeat workflow every duration
 - `repeat_on` (List of String) Repeat on weekdays. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
+- `run_once_per_resource` (Boolean) When true, the workflow runs at most once per incident. Later triggers on the same incident create a canceled run instead. Manual runs and repeats are not affected. Only applies to incident workflows. Value must be one of true or false
 - `service_ids` (List of String)
 - `severity_ids` (List of String)
 - `slug` (String, Deprecated) The slug of the workflow
@@ -126,6 +128,8 @@ Optional:
 - `incident_condition_label_use_regexp` (Boolean) Value must be one of true or false
 - `incident_condition_mitigated_at` (String) Value must be one of `SET`, `UNSET`.
 - `incident_condition_resolved_at` (String) Value must be one of `SET`, `UNSET`.
+- `incident_condition_scheduled_for` (String) Value must be one of `SET`, `UNSET`.
+- `incident_condition_scheduled_until` (String) Value must be one of `SET`, `UNSET`.
 - `incident_condition_service` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_condition_severity` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `incident_condition_started_at` (String) Value must be one of `SET`, `UNSET`.
@@ -141,7 +145,7 @@ Optional:
 - `incident_statuses` (List of String) Value must be one of `in_triage`, `started`, `detected`, `acknowledged`, `mitigated`, `resolved`, `closed`, `cancelled`, `scheduled`, `in_progress`, `completed`.
 - `incident_visibilities` (List of Boolean)
 - `trigger_type` (String) Value must be one of `incident`.
-- `triggers` (List of String) Actions that trigger the workflow. One of custom_fields.<slug>.updated, incident_in_triage, incident_created, incident_started, incident_updated, title_updated, summary_updated, status_updated, severity_updated, notify_emails_updated, environments_added, environments_removed, environments_updated, incident_types_added, incident_types_removed, incident_types_updated, services_added, services_removed, services_updated, visibility_updated, functionalities_added, functionalities_removed, functionalities_updated, teams_added, teams_removed, teams_updated, causes_added, causes_removed, causes_updated, timeline_updated, status_page_timeline_updated, role_assignments_updated, role_assignments_added, role_assignments_removed, slack_command, slack_channel_created, slack_channel_converted, microsoft_teams_channel_created, microsoft_teams_chat_created, google_chat_space_created, subscribers_updated, subscribers_added, subscribers_removed, user_joined_slack_channel, user_left_slack_channel, meeting_summary_created
+- `triggers` (List of String) Actions that trigger the workflow. One of custom_fields.<slug>.updated, incident_in_triage, incident_created, incident_started, incident_updated, title_updated, summary_updated, status_updated, severity_updated, notify_emails_updated, scheduled_for_updated, scheduled_until_updated, environments_added, environments_removed, environments_updated, incident_types_added, incident_types_removed, incident_types_updated, services_added, services_removed, services_updated, visibility_updated, functionalities_added, functionalities_removed, functionalities_updated, teams_added, teams_removed, teams_updated, causes_added, causes_removed, causes_updated, timeline_updated, status_page_timeline_updated, role_assignments_updated, role_assignments_added, role_assignments_removed, slack_command, slack_channel_created, slack_channel_converted, microsoft_teams_channel_created, microsoft_teams_chat_created, google_chat_space_created, subscribers_updated, subscribers_added, subscribers_removed, user_joined_slack_channel, user_left_slack_channel, meeting_summary_created
 
 ## Import
 
