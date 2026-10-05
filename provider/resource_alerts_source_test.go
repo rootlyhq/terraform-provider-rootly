@@ -381,13 +381,35 @@ resource "rootly_alerts_source" "test" {
   name        = "%s"
   source_type = "generic_webhook"
 
+  deduplicate_alerts_by_key = true
+  deduplication_key_kind = "payload"
+  deduplication_key_path = "$.id"
+
   sourceable_attributes {
     auto_resolve  = true
     resolve_state = "resolved"
 
     field_mappings_attributes {
+      field     = "external_id"
+      json_path = "$.id"
+    }
+
+    field_mappings_attributes {
       field     = "state"
       json_path = "$.status"
+    }
+  }
+
+  resolution_rule_attributes {
+    condition_type = "all"
+    identifier_json_path = "$.id"
+    identifier_reference_kind = "payload"
+
+    conditions_attributes {
+      field = "$.status"
+      operator = "is"
+      value = "resolved"
+      kind = "payload"
     }
   }
 }
