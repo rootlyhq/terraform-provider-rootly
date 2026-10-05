@@ -23,6 +23,21 @@ const (
 	Bearer_authScopes bearerAuthContextKey = "bearer_auth.Scopes"
 )
 
+// Defines values for AcknowledgeAlertDataType.
+const (
+	AcknowledgeAlertDataTypeAlerts AcknowledgeAlertDataType = "alerts"
+)
+
+// Valid indicates whether the value is a known member of the AcknowledgeAlertDataType enum.
+func (e AcknowledgeAlertDataType) Valid() bool {
+	switch e {
+	case AcknowledgeAlertDataTypeAlerts:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ActionItemTriggerParamsIncidentActionItemCondition.
 const (
 	ActionItemTriggerParamsIncidentActionItemConditionALL  ActionItemTriggerParamsIncidentActionItemCondition = "ALL"
@@ -623,6 +638,42 @@ func (e ActionItemTriggerParamsIncidentConditionResolvedAt) Valid() bool {
 	case ActionItemTriggerParamsIncidentConditionResolvedAtSET:
 		return true
 	case ActionItemTriggerParamsIncidentConditionResolvedAtUNSET:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ActionItemTriggerParamsIncidentConditionScheduledFor.
+const (
+	ActionItemTriggerParamsIncidentConditionScheduledForSET   ActionItemTriggerParamsIncidentConditionScheduledFor = "SET"
+	ActionItemTriggerParamsIncidentConditionScheduledForUNSET ActionItemTriggerParamsIncidentConditionScheduledFor = "UNSET"
+)
+
+// Valid indicates whether the value is a known member of the ActionItemTriggerParamsIncidentConditionScheduledFor enum.
+func (e ActionItemTriggerParamsIncidentConditionScheduledFor) Valid() bool {
+	switch e {
+	case ActionItemTriggerParamsIncidentConditionScheduledForSET:
+		return true
+	case ActionItemTriggerParamsIncidentConditionScheduledForUNSET:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ActionItemTriggerParamsIncidentConditionScheduledUntil.
+const (
+	ActionItemTriggerParamsIncidentConditionScheduledUntilSET   ActionItemTriggerParamsIncidentConditionScheduledUntil = "SET"
+	ActionItemTriggerParamsIncidentConditionScheduledUntilUNSET ActionItemTriggerParamsIncidentConditionScheduledUntil = "UNSET"
+)
+
+// Valid indicates whether the value is a known member of the ActionItemTriggerParamsIncidentConditionScheduledUntil enum.
+func (e ActionItemTriggerParamsIncidentConditionScheduledUntil) Valid() bool {
+	switch e {
+	case ActionItemTriggerParamsIncidentConditionScheduledUntilSET:
+		return true
+	case ActionItemTriggerParamsIncidentConditionScheduledUntilUNSET:
 		return true
 	default:
 		return false
@@ -1446,6 +1497,7 @@ const (
 	AlertEventActionPaged                   AlertEventAction = "paged"
 	AlertEventActionRemoved                 AlertEventAction = "removed"
 	AlertEventActionResolved                AlertEventAction = "resolved"
+	AlertEventActionRetriggerCancelled      AlertEventAction = "retrigger_cancelled"
 	AlertEventActionRetriggerSuppressed     AlertEventAction = "retrigger_suppressed"
 	AlertEventActionRetriggered             AlertEventAction = "retriggered"
 	AlertEventActionSkipped                 AlertEventAction = "skipped"
@@ -1512,6 +1564,8 @@ func (e AlertEventAction) Valid() bool {
 	case AlertEventActionRemoved:
 		return true
 	case AlertEventActionResolved:
+		return true
+	case AlertEventActionRetriggerCancelled:
 		return true
 	case AlertEventActionRetriggerSuppressed:
 		return true
@@ -2489,6 +2543,63 @@ func (e AlertTriggerParamsTriggers) Valid() bool {
 	}
 }
 
+// Defines values for AlertUrgencyRetriggerTimeoutMinutes.
+const (
+	AlertUrgencyRetriggerTimeoutMinutesMinus1 AlertUrgencyRetriggerTimeoutMinutes = -1
+	AlertUrgencyRetriggerTimeoutMinutesN10    AlertUrgencyRetriggerTimeoutMinutes = 10
+	AlertUrgencyRetriggerTimeoutMinutesN120   AlertUrgencyRetriggerTimeoutMinutes = 120
+	AlertUrgencyRetriggerTimeoutMinutesN1440  AlertUrgencyRetriggerTimeoutMinutes = 1440
+	AlertUrgencyRetriggerTimeoutMinutesN180   AlertUrgencyRetriggerTimeoutMinutes = 180
+	AlertUrgencyRetriggerTimeoutMinutesN20    AlertUrgencyRetriggerTimeoutMinutes = 20
+	AlertUrgencyRetriggerTimeoutMinutesN240   AlertUrgencyRetriggerTimeoutMinutes = 240
+	AlertUrgencyRetriggerTimeoutMinutesN30    AlertUrgencyRetriggerTimeoutMinutes = 30
+	AlertUrgencyRetriggerTimeoutMinutesN300   AlertUrgencyRetriggerTimeoutMinutes = 300
+	AlertUrgencyRetriggerTimeoutMinutesN360   AlertUrgencyRetriggerTimeoutMinutes = 360
+	AlertUrgencyRetriggerTimeoutMinutesN40    AlertUrgencyRetriggerTimeoutMinutes = 40
+	AlertUrgencyRetriggerTimeoutMinutesN50    AlertUrgencyRetriggerTimeoutMinutes = 50
+	AlertUrgencyRetriggerTimeoutMinutesN60    AlertUrgencyRetriggerTimeoutMinutes = 60
+	AlertUrgencyRetriggerTimeoutMinutesN720   AlertUrgencyRetriggerTimeoutMinutes = 720
+	AlertUrgencyRetriggerTimeoutMinutesN90    AlertUrgencyRetriggerTimeoutMinutes = 90
+)
+
+// Valid indicates whether the value is a known member of the AlertUrgencyRetriggerTimeoutMinutes enum.
+func (e AlertUrgencyRetriggerTimeoutMinutes) Valid() bool {
+	switch e {
+	case AlertUrgencyRetriggerTimeoutMinutesMinus1:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN10:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN120:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN1440:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN180:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN20:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN240:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN30:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN300:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN360:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN40:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN50:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN60:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN720:
+		return true
+	case AlertUrgencyRetriggerTimeoutMinutesN90:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AlertUrgencyListDataType.
 const (
 	AlertUrgencyListDataTypeAlertUrgencies AlertUrgencyListDataType = "alert_urgencies"
@@ -2822,6 +2933,33 @@ func (e AlertsSourceSourceableAttributesFieldMappingsAttributesField) Valid() bo
 	}
 }
 
+// Defines values for AlertsSourceSourceableAttributesNotificationTargetType.
+const (
+	AlertsSourceSourceableAttributesNotificationTargetTypeEscalationPolicy AlertsSourceSourceableAttributesNotificationTargetType = "EscalationPolicy"
+	AlertsSourceSourceableAttributesNotificationTargetTypeFunctionality    AlertsSourceSourceableAttributesNotificationTargetType = "Functionality"
+	AlertsSourceSourceableAttributesNotificationTargetTypeGroup            AlertsSourceSourceableAttributesNotificationTargetType = "Group"
+	AlertsSourceSourceableAttributesNotificationTargetTypeService          AlertsSourceSourceableAttributesNotificationTargetType = "Service"
+	AlertsSourceSourceableAttributesNotificationTargetTypeUser             AlertsSourceSourceableAttributesNotificationTargetType = "User"
+)
+
+// Valid indicates whether the value is a known member of the AlertsSourceSourceableAttributesNotificationTargetType enum.
+func (e AlertsSourceSourceableAttributesNotificationTargetType) Valid() bool {
+	switch e {
+	case AlertsSourceSourceableAttributesNotificationTargetTypeEscalationPolicy:
+		return true
+	case AlertsSourceSourceableAttributesNotificationTargetTypeFunctionality:
+		return true
+	case AlertsSourceSourceableAttributesNotificationTargetTypeGroup:
+		return true
+	case AlertsSourceSourceableAttributesNotificationTargetTypeService:
+		return true
+	case AlertsSourceSourceableAttributesNotificationTargetTypeUser:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AlertsSourceStatus.
 const (
 	Connected       AlertsSourceStatus = "connected"
@@ -3086,6 +3224,7 @@ const (
 	AuditItemTypeAlertRoutingRule                  AuditItemType = "AlertRoutingRule"
 	AuditItemTypeAlertsSource                      AuditItemType = "Alerts::Source"
 	AuditItemTypeApiKey                            AuditItemType = "ApiKey"
+	AuditItemTypeBrowserIpPolicy                   AuditItemType = "BrowserIpPolicy"
 	AuditItemTypeCatalog                           AuditItemType = "Catalog"
 	AuditItemTypeCatalogEntity                     AuditItemType = "CatalogEntity"
 	AuditItemTypeCatalogEntityProperty             AuditItemType = "CatalogEntityProperty"
@@ -3137,6 +3276,7 @@ const (
 	AuditItemTypeLiveCallRouter                    AuditItemType = "LiveCallRouter"
 	AuditItemTypeLoginActivity                     AuditItemType = "LoginActivity"
 	AuditItemTypeMembership                        AuditItemType = "Membership"
+	AuditItemTypeOauthApplication                  AuditItemType = "OauthApplication"
 	AuditItemTypeOnCallRole                        AuditItemType = "OnCallRole"
 	AuditItemTypePlaybook                          AuditItemType = "Playbook"
 	AuditItemTypePlaybookTask                      AuditItemType = "PlaybookTask"
@@ -3158,6 +3298,8 @@ func (e AuditItemType) Valid() bool {
 	case AuditItemTypeAlertsSource:
 		return true
 	case AuditItemTypeApiKey:
+		return true
+	case AuditItemTypeBrowserIpPolicy:
 		return true
 	case AuditItemTypeCatalog:
 		return true
@@ -3260,6 +3402,8 @@ func (e AuditItemType) Valid() bool {
 	case AuditItemTypeLoginActivity:
 		return true
 	case AuditItemTypeMembership:
+		return true
+	case AuditItemTypeOauthApplication:
 		return true
 	case AuditItemTypeOnCallRole:
 		return true
@@ -6231,6 +6375,7 @@ const (
 	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaUrumqi                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Urumqi"
 	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaVladivostok             EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Vladivostok"
 	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYakutsk                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Yakutsk"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYangon                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Yangon"
 	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYekaterinburg           EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Yekaterinburg"
 	EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYerevan                 EscalationPathNotificationTypeRulesConditionsTimeZone = "Asia/Yerevan"
 	EscalationPathNotificationTypeRulesConditionsTimeZoneAstana                      EscalationPathNotificationTypeRulesConditionsTimeZone = "Astana"
@@ -6304,6 +6449,7 @@ const (
 	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeIstanbul              EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Istanbul"
 	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeKaliningrad           EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Kaliningrad"
 	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeKiev                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Kiev"
+	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeKyiv                  EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Kyiv"
 	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeLisbon                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Lisbon"
 	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeLjubljana             EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/Ljubljana"
 	EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeLondon                EscalationPathNotificationTypeRulesConditionsTimeZone = "Europe/London"
@@ -6624,6 +6770,8 @@ func (e EscalationPathNotificationTypeRulesConditionsTimeZone) Valid() bool {
 		return true
 	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYakutsk:
 		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYangon:
+		return true
 	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYekaterinburg:
 		return true
 	case EscalationPathNotificationTypeRulesConditionsTimeZoneAsiaYerevan:
@@ -6769,6 +6917,8 @@ func (e EscalationPathNotificationTypeRulesConditionsTimeZone) Valid() bool {
 	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeKaliningrad:
 		return true
 	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeKiev:
+		return true
+	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeKyiv:
 		return true
 	case EscalationPathNotificationTypeRulesConditionsTimeZoneEuropeLisbon:
 		return true
@@ -7127,6 +7277,63 @@ func (e EscalationPathPathType) Valid() bool {
 	}
 }
 
+// Defines values for EscalationPathRetriggerTimeoutMinutes.
+const (
+	EscalationPathRetriggerTimeoutMinutesMinus1 EscalationPathRetriggerTimeoutMinutes = -1
+	EscalationPathRetriggerTimeoutMinutesN10    EscalationPathRetriggerTimeoutMinutes = 10
+	EscalationPathRetriggerTimeoutMinutesN120   EscalationPathRetriggerTimeoutMinutes = 120
+	EscalationPathRetriggerTimeoutMinutesN1440  EscalationPathRetriggerTimeoutMinutes = 1440
+	EscalationPathRetriggerTimeoutMinutesN180   EscalationPathRetriggerTimeoutMinutes = 180
+	EscalationPathRetriggerTimeoutMinutesN20    EscalationPathRetriggerTimeoutMinutes = 20
+	EscalationPathRetriggerTimeoutMinutesN240   EscalationPathRetriggerTimeoutMinutes = 240
+	EscalationPathRetriggerTimeoutMinutesN30    EscalationPathRetriggerTimeoutMinutes = 30
+	EscalationPathRetriggerTimeoutMinutesN300   EscalationPathRetriggerTimeoutMinutes = 300
+	EscalationPathRetriggerTimeoutMinutesN360   EscalationPathRetriggerTimeoutMinutes = 360
+	EscalationPathRetriggerTimeoutMinutesN40    EscalationPathRetriggerTimeoutMinutes = 40
+	EscalationPathRetriggerTimeoutMinutesN50    EscalationPathRetriggerTimeoutMinutes = 50
+	EscalationPathRetriggerTimeoutMinutesN60    EscalationPathRetriggerTimeoutMinutes = 60
+	EscalationPathRetriggerTimeoutMinutesN720   EscalationPathRetriggerTimeoutMinutes = 720
+	EscalationPathRetriggerTimeoutMinutesN90    EscalationPathRetriggerTimeoutMinutes = 90
+)
+
+// Valid indicates whether the value is a known member of the EscalationPathRetriggerTimeoutMinutes enum.
+func (e EscalationPathRetriggerTimeoutMinutes) Valid() bool {
+	switch e {
+	case EscalationPathRetriggerTimeoutMinutesMinus1:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN10:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN120:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN1440:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN180:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN20:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN240:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN30:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN300:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN360:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN40:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN50:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN60:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN720:
+		return true
+	case EscalationPathRetriggerTimeoutMinutesN90:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for EscalationPathRulesOperator.
 const (
 	EscalationPathRulesOperatorIsNotSet EscalationPathRulesOperator = "is_not_set"
@@ -7245,6 +7452,7 @@ const (
 	EscalationPathRulesTimeZoneAsiaUrumqi                  EscalationPathRulesTimeZone = "Asia/Urumqi"
 	EscalationPathRulesTimeZoneAsiaVladivostok             EscalationPathRulesTimeZone = "Asia/Vladivostok"
 	EscalationPathRulesTimeZoneAsiaYakutsk                 EscalationPathRulesTimeZone = "Asia/Yakutsk"
+	EscalationPathRulesTimeZoneAsiaYangon                  EscalationPathRulesTimeZone = "Asia/Yangon"
 	EscalationPathRulesTimeZoneAsiaYekaterinburg           EscalationPathRulesTimeZone = "Asia/Yekaterinburg"
 	EscalationPathRulesTimeZoneAsiaYerevan                 EscalationPathRulesTimeZone = "Asia/Yerevan"
 	EscalationPathRulesTimeZoneAstana                      EscalationPathRulesTimeZone = "Astana"
@@ -7318,6 +7526,7 @@ const (
 	EscalationPathRulesTimeZoneEuropeIstanbul              EscalationPathRulesTimeZone = "Europe/Istanbul"
 	EscalationPathRulesTimeZoneEuropeKaliningrad           EscalationPathRulesTimeZone = "Europe/Kaliningrad"
 	EscalationPathRulesTimeZoneEuropeKiev                  EscalationPathRulesTimeZone = "Europe/Kiev"
+	EscalationPathRulesTimeZoneEuropeKyiv                  EscalationPathRulesTimeZone = "Europe/Kyiv"
 	EscalationPathRulesTimeZoneEuropeLisbon                EscalationPathRulesTimeZone = "Europe/Lisbon"
 	EscalationPathRulesTimeZoneEuropeLjubljana             EscalationPathRulesTimeZone = "Europe/Ljubljana"
 	EscalationPathRulesTimeZoneEuropeLondon                EscalationPathRulesTimeZone = "Europe/London"
@@ -7638,6 +7847,8 @@ func (e EscalationPathRulesTimeZone) Valid() bool {
 		return true
 	case EscalationPathRulesTimeZoneAsiaYakutsk:
 		return true
+	case EscalationPathRulesTimeZoneAsiaYangon:
+		return true
 	case EscalationPathRulesTimeZoneAsiaYekaterinburg:
 		return true
 	case EscalationPathRulesTimeZoneAsiaYerevan:
@@ -7783,6 +7994,8 @@ func (e EscalationPathRulesTimeZone) Valid() bool {
 	case EscalationPathRulesTimeZoneEuropeKaliningrad:
 		return true
 	case EscalationPathRulesTimeZoneEuropeKiev:
+		return true
+	case EscalationPathRulesTimeZoneEuropeKyiv:
 		return true
 	case EscalationPathRulesTimeZoneEuropeLisbon:
 		return true
@@ -8172,6 +8385,7 @@ const (
 	EscalationPathTimeRestrictionTimeZoneAsiaUrumqi                  EscalationPathTimeRestrictionTimeZone = "Asia/Urumqi"
 	EscalationPathTimeRestrictionTimeZoneAsiaVladivostok             EscalationPathTimeRestrictionTimeZone = "Asia/Vladivostok"
 	EscalationPathTimeRestrictionTimeZoneAsiaYakutsk                 EscalationPathTimeRestrictionTimeZone = "Asia/Yakutsk"
+	EscalationPathTimeRestrictionTimeZoneAsiaYangon                  EscalationPathTimeRestrictionTimeZone = "Asia/Yangon"
 	EscalationPathTimeRestrictionTimeZoneAsiaYekaterinburg           EscalationPathTimeRestrictionTimeZone = "Asia/Yekaterinburg"
 	EscalationPathTimeRestrictionTimeZoneAsiaYerevan                 EscalationPathTimeRestrictionTimeZone = "Asia/Yerevan"
 	EscalationPathTimeRestrictionTimeZoneAstana                      EscalationPathTimeRestrictionTimeZone = "Astana"
@@ -8245,6 +8459,7 @@ const (
 	EscalationPathTimeRestrictionTimeZoneEuropeIstanbul              EscalationPathTimeRestrictionTimeZone = "Europe/Istanbul"
 	EscalationPathTimeRestrictionTimeZoneEuropeKaliningrad           EscalationPathTimeRestrictionTimeZone = "Europe/Kaliningrad"
 	EscalationPathTimeRestrictionTimeZoneEuropeKiev                  EscalationPathTimeRestrictionTimeZone = "Europe/Kiev"
+	EscalationPathTimeRestrictionTimeZoneEuropeKyiv                  EscalationPathTimeRestrictionTimeZone = "Europe/Kyiv"
 	EscalationPathTimeRestrictionTimeZoneEuropeLisbon                EscalationPathTimeRestrictionTimeZone = "Europe/Lisbon"
 	EscalationPathTimeRestrictionTimeZoneEuropeLjubljana             EscalationPathTimeRestrictionTimeZone = "Europe/Ljubljana"
 	EscalationPathTimeRestrictionTimeZoneEuropeLondon                EscalationPathTimeRestrictionTimeZone = "Europe/London"
@@ -8565,6 +8780,8 @@ func (e EscalationPathTimeRestrictionTimeZone) Valid() bool {
 		return true
 	case EscalationPathTimeRestrictionTimeZoneAsiaYakutsk:
 		return true
+	case EscalationPathTimeRestrictionTimeZoneAsiaYangon:
+		return true
 	case EscalationPathTimeRestrictionTimeZoneAsiaYekaterinburg:
 		return true
 	case EscalationPathTimeRestrictionTimeZoneAsiaYerevan:
@@ -8710,6 +8927,8 @@ func (e EscalationPathTimeRestrictionTimeZone) Valid() bool {
 	case EscalationPathTimeRestrictionTimeZoneEuropeKaliningrad:
 		return true
 	case EscalationPathTimeRestrictionTimeZoneEuropeKiev:
+		return true
+	case EscalationPathTimeRestrictionTimeZoneEuropeKyiv:
 		return true
 	case EscalationPathTimeRestrictionTimeZoneEuropeLisbon:
 		return true
@@ -9213,6 +9432,7 @@ const (
 	EscalationPolicyBusinessHoursTimeZoneAsiaUrumqi                  EscalationPolicyBusinessHoursTimeZone = "Asia/Urumqi"
 	EscalationPolicyBusinessHoursTimeZoneAsiaVladivostok             EscalationPolicyBusinessHoursTimeZone = "Asia/Vladivostok"
 	EscalationPolicyBusinessHoursTimeZoneAsiaYakutsk                 EscalationPolicyBusinessHoursTimeZone = "Asia/Yakutsk"
+	EscalationPolicyBusinessHoursTimeZoneAsiaYangon                  EscalationPolicyBusinessHoursTimeZone = "Asia/Yangon"
 	EscalationPolicyBusinessHoursTimeZoneAsiaYekaterinburg           EscalationPolicyBusinessHoursTimeZone = "Asia/Yekaterinburg"
 	EscalationPolicyBusinessHoursTimeZoneAsiaYerevan                 EscalationPolicyBusinessHoursTimeZone = "Asia/Yerevan"
 	EscalationPolicyBusinessHoursTimeZoneAstana                      EscalationPolicyBusinessHoursTimeZone = "Astana"
@@ -9286,6 +9506,7 @@ const (
 	EscalationPolicyBusinessHoursTimeZoneEuropeIstanbul              EscalationPolicyBusinessHoursTimeZone = "Europe/Istanbul"
 	EscalationPolicyBusinessHoursTimeZoneEuropeKaliningrad           EscalationPolicyBusinessHoursTimeZone = "Europe/Kaliningrad"
 	EscalationPolicyBusinessHoursTimeZoneEuropeKiev                  EscalationPolicyBusinessHoursTimeZone = "Europe/Kiev"
+	EscalationPolicyBusinessHoursTimeZoneEuropeKyiv                  EscalationPolicyBusinessHoursTimeZone = "Europe/Kyiv"
 	EscalationPolicyBusinessHoursTimeZoneEuropeLisbon                EscalationPolicyBusinessHoursTimeZone = "Europe/Lisbon"
 	EscalationPolicyBusinessHoursTimeZoneEuropeLjubljana             EscalationPolicyBusinessHoursTimeZone = "Europe/Ljubljana"
 	EscalationPolicyBusinessHoursTimeZoneEuropeLondon                EscalationPolicyBusinessHoursTimeZone = "Europe/London"
@@ -9606,6 +9827,8 @@ func (e EscalationPolicyBusinessHoursTimeZone) Valid() bool {
 		return true
 	case EscalationPolicyBusinessHoursTimeZoneAsiaYakutsk:
 		return true
+	case EscalationPolicyBusinessHoursTimeZoneAsiaYangon:
+		return true
 	case EscalationPolicyBusinessHoursTimeZoneAsiaYekaterinburg:
 		return true
 	case EscalationPolicyBusinessHoursTimeZoneAsiaYerevan:
@@ -9751,6 +9974,8 @@ func (e EscalationPolicyBusinessHoursTimeZone) Valid() bool {
 	case EscalationPolicyBusinessHoursTimeZoneEuropeKaliningrad:
 		return true
 	case EscalationPolicyBusinessHoursTimeZoneEuropeKiev:
+		return true
+	case EscalationPolicyBusinessHoursTimeZoneEuropeKyiv:
 		return true
 	case EscalationPolicyBusinessHoursTimeZoneEuropeLisbon:
 		return true
@@ -12323,6 +12548,42 @@ func (e IncidentTriggerParamsIncidentConditionResolvedAt) Valid() bool {
 	}
 }
 
+// Defines values for IncidentTriggerParamsIncidentConditionScheduledFor.
+const (
+	IncidentTriggerParamsIncidentConditionScheduledForSET   IncidentTriggerParamsIncidentConditionScheduledFor = "SET"
+	IncidentTriggerParamsIncidentConditionScheduledForUNSET IncidentTriggerParamsIncidentConditionScheduledFor = "UNSET"
+)
+
+// Valid indicates whether the value is a known member of the IncidentTriggerParamsIncidentConditionScheduledFor enum.
+func (e IncidentTriggerParamsIncidentConditionScheduledFor) Valid() bool {
+	switch e {
+	case IncidentTriggerParamsIncidentConditionScheduledForSET:
+		return true
+	case IncidentTriggerParamsIncidentConditionScheduledForUNSET:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for IncidentTriggerParamsIncidentConditionScheduledUntil.
+const (
+	IncidentTriggerParamsIncidentConditionScheduledUntilSET   IncidentTriggerParamsIncidentConditionScheduledUntil = "SET"
+	IncidentTriggerParamsIncidentConditionScheduledUntilUNSET IncidentTriggerParamsIncidentConditionScheduledUntil = "UNSET"
+)
+
+// Valid indicates whether the value is a known member of the IncidentTriggerParamsIncidentConditionScheduledUntil enum.
+func (e IncidentTriggerParamsIncidentConditionScheduledUntil) Valid() bool {
+	switch e {
+	case IncidentTriggerParamsIncidentConditionScheduledUntilSET:
+		return true
+	case IncidentTriggerParamsIncidentConditionScheduledUntilUNSET:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for IncidentTriggerParamsIncidentConditionService.
 const (
 	IncidentTriggerParamsIncidentConditionServiceANY          IncidentTriggerParamsIncidentConditionService = "ANY"
@@ -12866,6 +13127,21 @@ const (
 func (e IpRangesResponseDataType) Valid() bool {
 	switch e {
 	case IpRangesResponseDataTypeIpRanges:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for LinkIncidentsDataType.
+const (
+	LinkIncidentsDataTypeProblems LinkIncidentsDataType = "problems"
+)
+
+// Valid indicates whether the value is a known member of the LinkIncidentsDataType enum.
+func (e LinkIncidentsDataType) Valid() bool {
+	switch e {
+	case LinkIncidentsDataTypeProblems:
 		return true
 	default:
 		return false
@@ -13703,6 +13979,63 @@ func (e NewAlertRoutingRuleDataType) Valid() bool {
 	}
 }
 
+// Defines values for NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes.
+const (
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesMinus1 NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = -1
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN10    NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 10
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN120   NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 120
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN1440  NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 1440
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN180   NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 180
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN20    NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 20
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN240   NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 240
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN30    NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 30
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN300   NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 300
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN360   NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 360
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN40    NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 40
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN50    NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 50
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN60    NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 60
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN720   NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 720
+	NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN90    NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 90
+)
+
+// Valid indicates whether the value is a known member of the NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes enum.
+func (e NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes) Valid() bool {
+	switch e {
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesMinus1:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN10:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN120:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN1440:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN180:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN20:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN240:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN30:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN300:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN360:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN40:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN50:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN60:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN720:
+		return true
+	case NewAlertUrgencyDataAttributesRetriggerTimeoutMinutesN90:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NewAlertUrgencyDataType.
 const (
 	NewAlertUrgencyDataTypeAlertUrgencies NewAlertUrgencyDataType = "alert_urgencies"
@@ -14015,6 +14348,33 @@ func (e NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributes
 	case NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldNotificationTargetType:
 		return true
 	case NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesFieldState:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetType.
+const (
+	NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeEscalationPolicy NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetType = "EscalationPolicy"
+	NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeFunctionality    NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetType = "Functionality"
+	NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeGroup            NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetType = "Group"
+	NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeService          NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetType = "Service"
+	NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeUser             NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetType = "User"
+)
+
+// Valid indicates whether the value is a known member of the NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetType enum.
+func (e NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetType) Valid() bool {
+	switch e {
+	case NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeEscalationPolicy:
+		return true
+	case NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeFunctionality:
+		return true
+	case NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeGroup:
+		return true
+	case NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeService:
+		return true
+	case NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeUser:
 		return true
 	default:
 		return false
@@ -15189,6 +15549,7 @@ const (
 	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaUrumqi                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Urumqi"
 	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaVladivostok             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Vladivostok"
 	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYakutsk                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yakutsk"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYangon                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yangon"
 	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYekaterinburg           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yekaterinburg"
 	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYerevan                 NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yerevan"
 	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAstana                      NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Astana"
@@ -15262,6 +15623,7 @@ const (
 	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeIstanbul              NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Istanbul"
 	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKaliningrad           NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Kaliningrad"
 	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKiev                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Kiev"
+	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKyiv                  NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Kyiv"
 	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLisbon                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Lisbon"
 	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLjubljana             NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Ljubljana"
 	NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLondon                NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/London"
@@ -15582,6 +15944,8 @@ func (e NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone) 
 		return true
 	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYakutsk:
 		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYangon:
+		return true
 	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYekaterinburg:
 		return true
 	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYerevan:
@@ -15727,6 +16091,8 @@ func (e NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone) 
 	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKaliningrad:
 		return true
 	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKiev:
+		return true
+	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKyiv:
 		return true
 	case NewEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLisbon:
 		return true
@@ -16085,6 +16451,63 @@ func (e NewEscalationPathDataAttributesPathType) Valid() bool {
 	}
 }
 
+// Defines values for NewEscalationPathDataAttributesRetriggerTimeoutMinutes.
+const (
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesMinus1 NewEscalationPathDataAttributesRetriggerTimeoutMinutes = -1
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN10    NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 10
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN120   NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 120
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN1440  NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 1440
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN180   NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 180
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN20    NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 20
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN240   NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 240
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN30    NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 30
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN300   NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 300
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN360   NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 360
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN40    NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 40
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN50    NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 50
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN60    NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 60
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN720   NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 720
+	NewEscalationPathDataAttributesRetriggerTimeoutMinutesN90    NewEscalationPathDataAttributesRetriggerTimeoutMinutes = 90
+)
+
+// Valid indicates whether the value is a known member of the NewEscalationPathDataAttributesRetriggerTimeoutMinutes enum.
+func (e NewEscalationPathDataAttributesRetriggerTimeoutMinutes) Valid() bool {
+	switch e {
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesMinus1:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN10:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN120:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN1440:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN180:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN20:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN240:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN30:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN300:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN360:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN40:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN50:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN60:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN720:
+		return true
+	case NewEscalationPathDataAttributesRetriggerTimeoutMinutesN90:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NewEscalationPathDataAttributesRulesOperator.
 const (
 	NewEscalationPathDataAttributesRulesOperatorIsNotSet NewEscalationPathDataAttributesRulesOperator = "is_not_set"
@@ -16203,6 +16626,7 @@ const (
 	NewEscalationPathDataAttributesRulesTimeZoneAsiaUrumqi                  NewEscalationPathDataAttributesRulesTimeZone = "Asia/Urumqi"
 	NewEscalationPathDataAttributesRulesTimeZoneAsiaVladivostok             NewEscalationPathDataAttributesRulesTimeZone = "Asia/Vladivostok"
 	NewEscalationPathDataAttributesRulesTimeZoneAsiaYakutsk                 NewEscalationPathDataAttributesRulesTimeZone = "Asia/Yakutsk"
+	NewEscalationPathDataAttributesRulesTimeZoneAsiaYangon                  NewEscalationPathDataAttributesRulesTimeZone = "Asia/Yangon"
 	NewEscalationPathDataAttributesRulesTimeZoneAsiaYekaterinburg           NewEscalationPathDataAttributesRulesTimeZone = "Asia/Yekaterinburg"
 	NewEscalationPathDataAttributesRulesTimeZoneAsiaYerevan                 NewEscalationPathDataAttributesRulesTimeZone = "Asia/Yerevan"
 	NewEscalationPathDataAttributesRulesTimeZoneAstana                      NewEscalationPathDataAttributesRulesTimeZone = "Astana"
@@ -16276,6 +16700,7 @@ const (
 	NewEscalationPathDataAttributesRulesTimeZoneEuropeIstanbul              NewEscalationPathDataAttributesRulesTimeZone = "Europe/Istanbul"
 	NewEscalationPathDataAttributesRulesTimeZoneEuropeKaliningrad           NewEscalationPathDataAttributesRulesTimeZone = "Europe/Kaliningrad"
 	NewEscalationPathDataAttributesRulesTimeZoneEuropeKiev                  NewEscalationPathDataAttributesRulesTimeZone = "Europe/Kiev"
+	NewEscalationPathDataAttributesRulesTimeZoneEuropeKyiv                  NewEscalationPathDataAttributesRulesTimeZone = "Europe/Kyiv"
 	NewEscalationPathDataAttributesRulesTimeZoneEuropeLisbon                NewEscalationPathDataAttributesRulesTimeZone = "Europe/Lisbon"
 	NewEscalationPathDataAttributesRulesTimeZoneEuropeLjubljana             NewEscalationPathDataAttributesRulesTimeZone = "Europe/Ljubljana"
 	NewEscalationPathDataAttributesRulesTimeZoneEuropeLondon                NewEscalationPathDataAttributesRulesTimeZone = "Europe/London"
@@ -16596,6 +17021,8 @@ func (e NewEscalationPathDataAttributesRulesTimeZone) Valid() bool {
 		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneAsiaYakutsk:
 		return true
+	case NewEscalationPathDataAttributesRulesTimeZoneAsiaYangon:
+		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneAsiaYekaterinburg:
 		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneAsiaYerevan:
@@ -16741,6 +17168,8 @@ func (e NewEscalationPathDataAttributesRulesTimeZone) Valid() bool {
 	case NewEscalationPathDataAttributesRulesTimeZoneEuropeKaliningrad:
 		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneEuropeKiev:
+		return true
+	case NewEscalationPathDataAttributesRulesTimeZoneEuropeKyiv:
 		return true
 	case NewEscalationPathDataAttributesRulesTimeZoneEuropeLisbon:
 		return true
@@ -17130,6 +17559,7 @@ const (
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaUrumqi                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Urumqi"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaVladivostok             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Vladivostok"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYakutsk                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yakutsk"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYangon                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yangon"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYekaterinburg           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yekaterinburg"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYerevan                 NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yerevan"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneAstana                      NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Astana"
@@ -17203,6 +17633,7 @@ const (
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeIstanbul              NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Istanbul"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKaliningrad           NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kaliningrad"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKiev                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kiev"
+	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKyiv                  NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kyiv"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLisbon                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Lisbon"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLjubljana             NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Ljubljana"
 	NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLondon                NewEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/London"
@@ -17523,6 +17954,8 @@ func (e NewEscalationPathDataAttributesTimeRestrictionTimeZone) Valid() bool {
 		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYakutsk:
 		return true
+	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYangon:
+		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYekaterinburg:
 		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYerevan:
@@ -17668,6 +18101,8 @@ func (e NewEscalationPathDataAttributesTimeRestrictionTimeZone) Valid() bool {
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKaliningrad:
 		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKiev:
+		return true
+	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKyiv:
 		return true
 	case NewEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLisbon:
 		return true
@@ -18171,6 +18606,7 @@ const (
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaUrumqi                  NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Urumqi"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaVladivostok             NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Vladivostok"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYakutsk                 NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yakutsk"
+	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYangon                  NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yangon"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYekaterinburg           NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yekaterinburg"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYerevan                 NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yerevan"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAstana                      NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Astana"
@@ -18244,6 +18680,7 @@ const (
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeIstanbul              NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Istanbul"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKaliningrad           NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kaliningrad"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKiev                  NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kiev"
+	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKyiv                  NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kyiv"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLisbon                NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Lisbon"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLjubljana             NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Ljubljana"
 	NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLondon                NewEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/London"
@@ -18564,6 +19001,8 @@ func (e NewEscalationPolicyDataAttributesBusinessHoursTimeZone) Valid() bool {
 		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYakutsk:
 		return true
+	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYangon:
+		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYekaterinburg:
 		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYerevan:
@@ -18709,6 +19148,8 @@ func (e NewEscalationPolicyDataAttributesBusinessHoursTimeZone) Valid() bool {
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKaliningrad:
 		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKiev:
+		return true
+	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKyiv:
 		return true
 	case NewEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLisbon:
 		return true
@@ -21086,6 +21527,24 @@ func (e NewOverrideShiftDataType) Valid() bool {
 	}
 }
 
+// Defines values for NewPlaybookDataAttributesKind.
+const (
+	NewPlaybookDataAttributesKindExternalUrl      NewPlaybookDataAttributesKind = "external_url"
+	NewPlaybookDataAttributesKindInternalDocument NewPlaybookDataAttributesKind = "internal_document"
+)
+
+// Valid indicates whether the value is a known member of the NewPlaybookDataAttributesKind enum.
+func (e NewPlaybookDataAttributesKind) Valid() bool {
+	switch e {
+	case NewPlaybookDataAttributesKindExternalUrl:
+		return true
+	case NewPlaybookDataAttributesKindInternalDocument:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NewPlaybookDataType.
 const (
 	NewPlaybookDataTypePlaybooks NewPlaybookDataType = "playbooks"
@@ -21143,6 +21602,105 @@ const (
 func (e NewPostMortemTemplateDataType) Valid() bool {
 	switch e {
 	case NewPostMortemTemplateDataTypePostMortemTemplates:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewProblemDataAttributesPriority.
+const (
+	NewProblemDataAttributesPriorityP0 NewProblemDataAttributesPriority = "P0"
+	NewProblemDataAttributesPriorityP1 NewProblemDataAttributesPriority = "P1"
+	NewProblemDataAttributesPriorityP2 NewProblemDataAttributesPriority = "P2"
+	NewProblemDataAttributesPriorityP3 NewProblemDataAttributesPriority = "P3"
+)
+
+// Valid indicates whether the value is a known member of the NewProblemDataAttributesPriority enum.
+func (e NewProblemDataAttributesPriority) Valid() bool {
+	switch e {
+	case NewProblemDataAttributesPriorityP0:
+		return true
+	case NewProblemDataAttributesPriorityP1:
+		return true
+	case NewProblemDataAttributesPriorityP2:
+		return true
+	case NewProblemDataAttributesPriorityP3:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewProblemDataType.
+const (
+	NewProblemDataTypeProblems NewProblemDataType = "problems"
+)
+
+// Valid indicates whether the value is a known member of the NewProblemDataType enum.
+func (e NewProblemDataType) Valid() bool {
+	switch e {
+	case NewProblemDataTypeProblems:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewProblemActionItemDataAttributesPriority.
+const (
+	NewProblemActionItemDataAttributesPriorityHigh   NewProblemActionItemDataAttributesPriority = "high"
+	NewProblemActionItemDataAttributesPriorityLow    NewProblemActionItemDataAttributesPriority = "low"
+	NewProblemActionItemDataAttributesPriorityMedium NewProblemActionItemDataAttributesPriority = "medium"
+)
+
+// Valid indicates whether the value is a known member of the NewProblemActionItemDataAttributesPriority enum.
+func (e NewProblemActionItemDataAttributesPriority) Valid() bool {
+	switch e {
+	case NewProblemActionItemDataAttributesPriorityHigh:
+		return true
+	case NewProblemActionItemDataAttributesPriorityLow:
+		return true
+	case NewProblemActionItemDataAttributesPriorityMedium:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewProblemActionItemDataAttributesStatus.
+const (
+	NewProblemActionItemDataAttributesStatusCancelled  NewProblemActionItemDataAttributesStatus = "cancelled"
+	NewProblemActionItemDataAttributesStatusDone       NewProblemActionItemDataAttributesStatus = "done"
+	NewProblemActionItemDataAttributesStatusInProgress NewProblemActionItemDataAttributesStatus = "in_progress"
+	NewProblemActionItemDataAttributesStatusOpen       NewProblemActionItemDataAttributesStatus = "open"
+)
+
+// Valid indicates whether the value is a known member of the NewProblemActionItemDataAttributesStatus enum.
+func (e NewProblemActionItemDataAttributesStatus) Valid() bool {
+	switch e {
+	case NewProblemActionItemDataAttributesStatusCancelled:
+		return true
+	case NewProblemActionItemDataAttributesStatusDone:
+		return true
+	case NewProblemActionItemDataAttributesStatusInProgress:
+		return true
+	case NewProblemActionItemDataAttributesStatusOpen:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewProblemActionItemDataType.
+const (
+	NewProblemActionItemDataTypeProblemActionItems NewProblemActionItemDataType = "problem_action_items"
+)
+
+// Valid indicates whether the value is a known member of the NewProblemActionItemDataType enum.
+func (e NewProblemActionItemDataType) Valid() bool {
+	switch e {
+	case NewProblemActionItemDataTypeProblemActionItems:
 		return true
 	default:
 		return false
@@ -24656,6 +25214,24 @@ func (e PatchAlertRouteDataType) Valid() bool {
 	}
 }
 
+// Defines values for PlaybookKind.
+const (
+	PlaybookKindExternalUrl      PlaybookKind = "external_url"
+	PlaybookKindInternalDocument PlaybookKind = "internal_document"
+)
+
+// Valid indicates whether the value is a known member of the PlaybookKind enum.
+func (e PlaybookKind) Valid() bool {
+	switch e {
+	case PlaybookKindExternalUrl:
+		return true
+	case PlaybookKindInternalDocument:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for PlaybookListDataType.
 const (
 	PlaybookListDataTypePlaybooks PlaybookListDataType = "playbooks"
@@ -24905,6 +25481,162 @@ const (
 func (e PrivateAgentUpdateDataType) Valid() bool {
 	switch e {
 	case PrivateAgents:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ProblemPriority.
+const (
+	ProblemPriorityP0 ProblemPriority = "P0"
+	ProblemPriorityP1 ProblemPriority = "P1"
+	ProblemPriorityP2 ProblemPriority = "P2"
+	ProblemPriorityP3 ProblemPriority = "P3"
+)
+
+// Valid indicates whether the value is a known member of the ProblemPriority enum.
+func (e ProblemPriority) Valid() bool {
+	switch e {
+	case ProblemPriorityP0:
+		return true
+	case ProblemPriorityP1:
+		return true
+	case ProblemPriorityP2:
+		return true
+	case ProblemPriorityP3:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ProblemStatus.
+const (
+	ProblemStatusCancelled  ProblemStatus = "cancelled"
+	ProblemStatusCompleted  ProblemStatus = "completed"
+	ProblemStatusCreated    ProblemStatus = "created"
+	ProblemStatusDeferred   ProblemStatus = "deferred"
+	ProblemStatusInProgress ProblemStatus = "in_progress"
+)
+
+// Valid indicates whether the value is a known member of the ProblemStatus enum.
+func (e ProblemStatus) Valid() bool {
+	switch e {
+	case ProblemStatusCancelled:
+		return true
+	case ProblemStatusCompleted:
+		return true
+	case ProblemStatusCreated:
+		return true
+	case ProblemStatusDeferred:
+		return true
+	case ProblemStatusInProgress:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ProblemActionItemPriority.
+const (
+	ProblemActionItemPriorityHigh   ProblemActionItemPriority = "high"
+	ProblemActionItemPriorityLow    ProblemActionItemPriority = "low"
+	ProblemActionItemPriorityMedium ProblemActionItemPriority = "medium"
+)
+
+// Valid indicates whether the value is a known member of the ProblemActionItemPriority enum.
+func (e ProblemActionItemPriority) Valid() bool {
+	switch e {
+	case ProblemActionItemPriorityHigh:
+		return true
+	case ProblemActionItemPriorityLow:
+		return true
+	case ProblemActionItemPriorityMedium:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ProblemActionItemStatus.
+const (
+	ProblemActionItemStatusCancelled  ProblemActionItemStatus = "cancelled"
+	ProblemActionItemStatusDone       ProblemActionItemStatus = "done"
+	ProblemActionItemStatusInProgress ProblemActionItemStatus = "in_progress"
+	ProblemActionItemStatusOpen       ProblemActionItemStatus = "open"
+)
+
+// Valid indicates whether the value is a known member of the ProblemActionItemStatus enum.
+func (e ProblemActionItemStatus) Valid() bool {
+	switch e {
+	case ProblemActionItemStatusCancelled:
+		return true
+	case ProblemActionItemStatusDone:
+		return true
+	case ProblemActionItemStatusInProgress:
+		return true
+	case ProblemActionItemStatusOpen:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ProblemActionItemListDataType.
+const (
+	ProblemActionItemListDataTypeProblemActionItems ProblemActionItemListDataType = "problem_action_items"
+)
+
+// Valid indicates whether the value is a known member of the ProblemActionItemListDataType enum.
+func (e ProblemActionItemListDataType) Valid() bool {
+	switch e {
+	case ProblemActionItemListDataTypeProblemActionItems:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ProblemActionItemResponseDataType.
+const (
+	ProblemActionItemResponseDataTypeProblemActionItems ProblemActionItemResponseDataType = "problem_action_items"
+)
+
+// Valid indicates whether the value is a known member of the ProblemActionItemResponseDataType enum.
+func (e ProblemActionItemResponseDataType) Valid() bool {
+	switch e {
+	case ProblemActionItemResponseDataTypeProblemActionItems:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ProblemListDataType.
+const (
+	ProblemListDataTypeProblems ProblemListDataType = "problems"
+)
+
+// Valid indicates whether the value is a known member of the ProblemListDataType enum.
+func (e ProblemListDataType) Valid() bool {
+	switch e {
+	case ProblemListDataTypeProblems:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ProblemResponseDataType.
+const (
+	ProblemResponseDataTypeProblems ProblemResponseDataType = "problems"
+)
+
+// Valid indicates whether the value is a known member of the ProblemResponseDataType enum.
+func (e ProblemResponseDataType) Valid() bool {
+	switch e {
+	case ProblemResponseDataTypeProblems:
 		return true
 	default:
 		return false
@@ -28922,6 +29654,63 @@ func (e UpdateAlertRoutingRuleDataType) Valid() bool {
 	}
 }
 
+// Defines values for UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes.
+const (
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesMinus1 UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = -1
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN10    UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 10
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN120   UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 120
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN1440  UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 1440
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN180   UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 180
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN20    UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 20
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN240   UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 240
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN30    UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 30
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN300   UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 300
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN360   UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 360
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN40    UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 40
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN50    UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 50
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN60    UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 60
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN720   UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 720
+	UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN90    UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes = 90
+)
+
+// Valid indicates whether the value is a known member of the UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes enum.
+func (e UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes) Valid() bool {
+	switch e {
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesMinus1:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN10:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN120:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN1440:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN180:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN20:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN240:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN30:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN300:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN360:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN40:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN50:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN60:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN720:
+		return true
+	case UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutesN90:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateAlertUrgencyDataType.
 const (
 	UpdateAlertUrgencyDataTypeAlertUrgencies UpdateAlertUrgencyDataType = "alert_urgencies"
@@ -29234,6 +30023,33 @@ func (e UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttribu
 	case NotificationTargetType:
 		return true
 	case State:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetType.
+const (
+	UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeEscalationPolicy UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetType = "EscalationPolicy"
+	UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeFunctionality    UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetType = "Functionality"
+	UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeGroup            UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetType = "Group"
+	UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeService          UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetType = "Service"
+	UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeUser             UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetType = "User"
+)
+
+// Valid indicates whether the value is a known member of the UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetType enum.
+func (e UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetType) Valid() bool {
+	switch e {
+	case UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeEscalationPolicy:
+		return true
+	case UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeFunctionality:
+		return true
+	case UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeGroup:
+		return true
+	case UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeService:
+		return true
+	case UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetTypeUser:
 		return true
 	default:
 		return false
@@ -30381,6 +31197,7 @@ const (
 	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaUrumqi                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Urumqi"
 	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaVladivostok             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Vladivostok"
 	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYakutsk                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yakutsk"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYangon                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yangon"
 	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYekaterinburg           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yekaterinburg"
 	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYerevan                 UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Asia/Yerevan"
 	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAstana                      UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Astana"
@@ -30454,6 +31271,7 @@ const (
 	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeIstanbul              UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Istanbul"
 	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKaliningrad           UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Kaliningrad"
 	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKiev                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Kiev"
+	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKyiv                  UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Kyiv"
 	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLisbon                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Lisbon"
 	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLjubljana             UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/Ljubljana"
 	UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLondon                UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZone = "Europe/London"
@@ -30774,6 +31592,8 @@ func (e UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZon
 		return true
 	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYakutsk:
 		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYangon:
+		return true
 	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYekaterinburg:
 		return true
 	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneAsiaYerevan:
@@ -30919,6 +31739,8 @@ func (e UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZon
 	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKaliningrad:
 		return true
 	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKiev:
+		return true
+	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeKyiv:
 		return true
 	case UpdateEscalationPathDataAttributesNotificationTypeRulesConditionsTimeZoneEuropeLisbon:
 		return true
@@ -31277,6 +32099,63 @@ func (e UpdateEscalationPathDataAttributesPathType) Valid() bool {
 	}
 }
 
+// Defines values for UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes.
+const (
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesMinus1 UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = -1
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN10    UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 10
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN120   UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 120
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN1440  UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 1440
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN180   UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 180
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN20    UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 20
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN240   UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 240
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN30    UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 30
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN300   UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 300
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN360   UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 360
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN40    UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 40
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN50    UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 50
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN60    UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 60
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN720   UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 720
+	UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN90    UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes = 90
+)
+
+// Valid indicates whether the value is a known member of the UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes enum.
+func (e UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes) Valid() bool {
+	switch e {
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesMinus1:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN10:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN120:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN1440:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN180:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN20:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN240:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN30:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN300:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN360:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN40:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN50:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN60:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN720:
+		return true
+	case UpdateEscalationPathDataAttributesRetriggerTimeoutMinutesN90:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateEscalationPathDataAttributesRulesOperator.
 const (
 	UpdateEscalationPathDataAttributesRulesOperatorIsNotSet UpdateEscalationPathDataAttributesRulesOperator = "is_not_set"
@@ -31395,6 +32274,7 @@ const (
 	UpdateEscalationPathDataAttributesRulesTimeZoneAsiaUrumqi                  UpdateEscalationPathDataAttributesRulesTimeZone = "Asia/Urumqi"
 	UpdateEscalationPathDataAttributesRulesTimeZoneAsiaVladivostok             UpdateEscalationPathDataAttributesRulesTimeZone = "Asia/Vladivostok"
 	UpdateEscalationPathDataAttributesRulesTimeZoneAsiaYakutsk                 UpdateEscalationPathDataAttributesRulesTimeZone = "Asia/Yakutsk"
+	UpdateEscalationPathDataAttributesRulesTimeZoneAsiaYangon                  UpdateEscalationPathDataAttributesRulesTimeZone = "Asia/Yangon"
 	UpdateEscalationPathDataAttributesRulesTimeZoneAsiaYekaterinburg           UpdateEscalationPathDataAttributesRulesTimeZone = "Asia/Yekaterinburg"
 	UpdateEscalationPathDataAttributesRulesTimeZoneAsiaYerevan                 UpdateEscalationPathDataAttributesRulesTimeZone = "Asia/Yerevan"
 	UpdateEscalationPathDataAttributesRulesTimeZoneAstana                      UpdateEscalationPathDataAttributesRulesTimeZone = "Astana"
@@ -31468,6 +32348,7 @@ const (
 	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeIstanbul              UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/Istanbul"
 	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeKaliningrad           UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/Kaliningrad"
 	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeKiev                  UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/Kiev"
+	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeKyiv                  UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/Kyiv"
 	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeLisbon                UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/Lisbon"
 	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeLjubljana             UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/Ljubljana"
 	UpdateEscalationPathDataAttributesRulesTimeZoneEuropeLondon                UpdateEscalationPathDataAttributesRulesTimeZone = "Europe/London"
@@ -31788,6 +32669,8 @@ func (e UpdateEscalationPathDataAttributesRulesTimeZone) Valid() bool {
 		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneAsiaYakutsk:
 		return true
+	case UpdateEscalationPathDataAttributesRulesTimeZoneAsiaYangon:
+		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneAsiaYekaterinburg:
 		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneAsiaYerevan:
@@ -31933,6 +32816,8 @@ func (e UpdateEscalationPathDataAttributesRulesTimeZone) Valid() bool {
 	case UpdateEscalationPathDataAttributesRulesTimeZoneEuropeKaliningrad:
 		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneEuropeKiev:
+		return true
+	case UpdateEscalationPathDataAttributesRulesTimeZoneEuropeKyiv:
 		return true
 	case UpdateEscalationPathDataAttributesRulesTimeZoneEuropeLisbon:
 		return true
@@ -32322,6 +33207,7 @@ const (
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaUrumqi                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Urumqi"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaVladivostok             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Vladivostok"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYakutsk                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yakutsk"
+	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYangon                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yangon"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYekaterinburg           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yekaterinburg"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYerevan                 UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Asia/Yerevan"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAstana                      UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Astana"
@@ -32395,6 +33281,7 @@ const (
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeIstanbul              UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Istanbul"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKaliningrad           UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kaliningrad"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKiev                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kiev"
+	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKyiv                  UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Kyiv"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLisbon                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Lisbon"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLjubljana             UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/Ljubljana"
 	UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLondon                UpdateEscalationPathDataAttributesTimeRestrictionTimeZone = "Europe/London"
@@ -32715,6 +33602,8 @@ func (e UpdateEscalationPathDataAttributesTimeRestrictionTimeZone) Valid() bool 
 		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYakutsk:
 		return true
+	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYangon:
+		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYekaterinburg:
 		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneAsiaYerevan:
@@ -32860,6 +33749,8 @@ func (e UpdateEscalationPathDataAttributesTimeRestrictionTimeZone) Valid() bool 
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKaliningrad:
 		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKiev:
+		return true
+	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeKyiv:
 		return true
 	case UpdateEscalationPathDataAttributesTimeRestrictionTimeZoneEuropeLisbon:
 		return true
@@ -33363,6 +34254,7 @@ const (
 	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaUrumqi                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Urumqi"
 	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaVladivostok             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Vladivostok"
 	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYakutsk                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yakutsk"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYangon                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yangon"
 	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYekaterinburg           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yekaterinburg"
 	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYerevan                 UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Asia/Yerevan"
 	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAstana                      UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Astana"
@@ -33436,6 +34328,7 @@ const (
 	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeIstanbul              UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Istanbul"
 	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKaliningrad           UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kaliningrad"
 	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKiev                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kiev"
+	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKyiv                  UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Kyiv"
 	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLisbon                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Lisbon"
 	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLjubljana             UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/Ljubljana"
 	UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLondon                UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone = "Europe/London"
@@ -33756,6 +34649,8 @@ func (e UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone) Valid() bool 
 		return true
 	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYakutsk:
 		return true
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYangon:
+		return true
 	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYekaterinburg:
 		return true
 	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneAsiaYerevan:
@@ -33901,6 +34796,8 @@ func (e UpdateEscalationPolicyDataAttributesBusinessHoursTimeZone) Valid() bool 
 	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKaliningrad:
 		return true
 	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKiev:
+		return true
+	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeKyiv:
 		return true
 	case UpdateEscalationPolicyDataAttributesBusinessHoursTimeZoneEuropeLisbon:
 		return true
@@ -36866,6 +37763,24 @@ func (e UpdatePagertreeAlertTaskParamsUrgency) Valid() bool {
 	}
 }
 
+// Defines values for UpdatePlaybookDataAttributesKind.
+const (
+	ExternalUrl      UpdatePlaybookDataAttributesKind = "external_url"
+	InternalDocument UpdatePlaybookDataAttributesKind = "internal_document"
+)
+
+// Valid indicates whether the value is a known member of the UpdatePlaybookDataAttributesKind enum.
+func (e UpdatePlaybookDataAttributesKind) Valid() bool {
+	switch e {
+	case ExternalUrl:
+		return true
+	case InternalDocument:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdatePlaybookDataType.
 const (
 	UpdatePlaybookDataTypePlaybooks UpdatePlaybookDataType = "playbooks"
@@ -36923,6 +37838,159 @@ const (
 func (e UpdatePostMortemTemplateDataType) Valid() bool {
 	switch e {
 	case UpdatePostMortemTemplateDataTypePostMortemTemplates:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateProblemDataAttributesExpectedStatus.
+const (
+	UpdateProblemDataAttributesExpectedStatusCancelled  UpdateProblemDataAttributesExpectedStatus = "cancelled"
+	UpdateProblemDataAttributesExpectedStatusCompleted  UpdateProblemDataAttributesExpectedStatus = "completed"
+	UpdateProblemDataAttributesExpectedStatusCreated    UpdateProblemDataAttributesExpectedStatus = "created"
+	UpdateProblemDataAttributesExpectedStatusDeferred   UpdateProblemDataAttributesExpectedStatus = "deferred"
+	UpdateProblemDataAttributesExpectedStatusInProgress UpdateProblemDataAttributesExpectedStatus = "in_progress"
+)
+
+// Valid indicates whether the value is a known member of the UpdateProblemDataAttributesExpectedStatus enum.
+func (e UpdateProblemDataAttributesExpectedStatus) Valid() bool {
+	switch e {
+	case UpdateProblemDataAttributesExpectedStatusCancelled:
+		return true
+	case UpdateProblemDataAttributesExpectedStatusCompleted:
+		return true
+	case UpdateProblemDataAttributesExpectedStatusCreated:
+		return true
+	case UpdateProblemDataAttributesExpectedStatusDeferred:
+		return true
+	case UpdateProblemDataAttributesExpectedStatusInProgress:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateProblemDataAttributesPriority.
+const (
+	P0 UpdateProblemDataAttributesPriority = "P0"
+	P1 UpdateProblemDataAttributesPriority = "P1"
+	P2 UpdateProblemDataAttributesPriority = "P2"
+	P3 UpdateProblemDataAttributesPriority = "P3"
+)
+
+// Valid indicates whether the value is a known member of the UpdateProblemDataAttributesPriority enum.
+func (e UpdateProblemDataAttributesPriority) Valid() bool {
+	switch e {
+	case P0:
+		return true
+	case P1:
+		return true
+	case P2:
+		return true
+	case P3:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateProblemDataAttributesStatus.
+const (
+	UpdateProblemDataAttributesStatusCancelled  UpdateProblemDataAttributesStatus = "cancelled"
+	UpdateProblemDataAttributesStatusCompleted  UpdateProblemDataAttributesStatus = "completed"
+	UpdateProblemDataAttributesStatusCreated    UpdateProblemDataAttributesStatus = "created"
+	UpdateProblemDataAttributesStatusDeferred   UpdateProblemDataAttributesStatus = "deferred"
+	UpdateProblemDataAttributesStatusInProgress UpdateProblemDataAttributesStatus = "in_progress"
+)
+
+// Valid indicates whether the value is a known member of the UpdateProblemDataAttributesStatus enum.
+func (e UpdateProblemDataAttributesStatus) Valid() bool {
+	switch e {
+	case UpdateProblemDataAttributesStatusCancelled:
+		return true
+	case UpdateProblemDataAttributesStatusCompleted:
+		return true
+	case UpdateProblemDataAttributesStatusCreated:
+		return true
+	case UpdateProblemDataAttributesStatusDeferred:
+		return true
+	case UpdateProblemDataAttributesStatusInProgress:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateProblemDataType.
+const (
+	Problems UpdateProblemDataType = "problems"
+)
+
+// Valid indicates whether the value is a known member of the UpdateProblemDataType enum.
+func (e UpdateProblemDataType) Valid() bool {
+	switch e {
+	case Problems:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateProblemActionItemDataAttributesPriority.
+const (
+	UpdateProblemActionItemDataAttributesPriorityHigh   UpdateProblemActionItemDataAttributesPriority = "high"
+	UpdateProblemActionItemDataAttributesPriorityLow    UpdateProblemActionItemDataAttributesPriority = "low"
+	UpdateProblemActionItemDataAttributesPriorityMedium UpdateProblemActionItemDataAttributesPriority = "medium"
+)
+
+// Valid indicates whether the value is a known member of the UpdateProblemActionItemDataAttributesPriority enum.
+func (e UpdateProblemActionItemDataAttributesPriority) Valid() bool {
+	switch e {
+	case UpdateProblemActionItemDataAttributesPriorityHigh:
+		return true
+	case UpdateProblemActionItemDataAttributesPriorityLow:
+		return true
+	case UpdateProblemActionItemDataAttributesPriorityMedium:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateProblemActionItemDataAttributesStatus.
+const (
+	UpdateProblemActionItemDataAttributesStatusCancelled  UpdateProblemActionItemDataAttributesStatus = "cancelled"
+	UpdateProblemActionItemDataAttributesStatusDone       UpdateProblemActionItemDataAttributesStatus = "done"
+	UpdateProblemActionItemDataAttributesStatusInProgress UpdateProblemActionItemDataAttributesStatus = "in_progress"
+	UpdateProblemActionItemDataAttributesStatusOpen       UpdateProblemActionItemDataAttributesStatus = "open"
+)
+
+// Valid indicates whether the value is a known member of the UpdateProblemActionItemDataAttributesStatus enum.
+func (e UpdateProblemActionItemDataAttributesStatus) Valid() bool {
+	switch e {
+	case UpdateProblemActionItemDataAttributesStatusCancelled:
+		return true
+	case UpdateProblemActionItemDataAttributesStatusDone:
+		return true
+	case UpdateProblemActionItemDataAttributesStatusInProgress:
+		return true
+	case UpdateProblemActionItemDataAttributesStatusOpen:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateProblemActionItemDataType.
+const (
+	UpdateProblemActionItemDataTypeProblemActionItems UpdateProblemActionItemDataType = "problem_action_items"
+)
+
+// Valid indicates whether the value is a known member of the UpdateProblemActionItemDataType enum.
+func (e UpdateProblemActionItemDataType) Valid() bool {
+	switch e {
+	case UpdateProblemActionItemDataTypeProblemActionItems:
 		return true
 	default:
 		return false
@@ -40162,28 +41230,28 @@ func (e WorkflowResponseDataType) Valid() bool {
 
 // Defines values for WorkflowRunStatus.
 const (
-	WorkflowRunStatusCanceled            WorkflowRunStatus = "canceled"
-	WorkflowRunStatusCompleted           WorkflowRunStatus = "completed"
-	WorkflowRunStatusCompletedWithErrors WorkflowRunStatus = "completed_with_errors"
-	WorkflowRunStatusFailed              WorkflowRunStatus = "failed"
-	WorkflowRunStatusQueued              WorkflowRunStatus = "queued"
-	WorkflowRunStatusStarted             WorkflowRunStatus = "started"
+	Canceled            WorkflowRunStatus = "canceled"
+	Completed           WorkflowRunStatus = "completed"
+	CompletedWithErrors WorkflowRunStatus = "completed_with_errors"
+	Failed              WorkflowRunStatus = "failed"
+	Queued              WorkflowRunStatus = "queued"
+	Started             WorkflowRunStatus = "started"
 )
 
 // Valid indicates whether the value is a known member of the WorkflowRunStatus enum.
 func (e WorkflowRunStatus) Valid() bool {
 	switch e {
-	case WorkflowRunStatusCanceled:
+	case Canceled:
 		return true
-	case WorkflowRunStatusCompleted:
+	case Completed:
 		return true
-	case WorkflowRunStatusCompletedWithErrors:
+	case CompletedWithErrors:
 		return true
-	case WorkflowRunStatusFailed:
+	case Failed:
 		return true
-	case WorkflowRunStatusQueued:
+	case Queued:
 		return true
-	case WorkflowRunStatusStarted:
+	case Started:
 		return true
 	default:
 		return false
@@ -40365,6 +41433,7 @@ const (
 	Paged                   ListAlertEventsFeedParamsFilterAction = "paged"
 	Removed                 ListAlertEventsFeedParamsFilterAction = "removed"
 	Resolved                ListAlertEventsFeedParamsFilterAction = "resolved"
+	RetriggerCancelled      ListAlertEventsFeedParamsFilterAction = "retrigger_cancelled"
 	RetriggerSuppressed     ListAlertEventsFeedParamsFilterAction = "retrigger_suppressed"
 	Retriggered             ListAlertEventsFeedParamsFilterAction = "retriggered"
 	Skipped                 ListAlertEventsFeedParamsFilterAction = "skipped"
@@ -40431,6 +41500,8 @@ func (e ListAlertEventsFeedParamsFilterAction) Valid() bool {
 	case Removed:
 		return true
 	case Resolved:
+		return true
+	case RetriggerCancelled:
 		return true
 	case RetriggerSuppressed:
 		return true
@@ -41911,22 +42982,22 @@ func (e ListRetrospectiveProcessesParamsInclude) Valid() bool {
 
 // Defines values for GetRetrospectiveProcessParamsInclude.
 const (
-	Groups             GetRetrospectiveProcessParamsInclude = "groups"
-	IncidentTypes      GetRetrospectiveProcessParamsInclude = "incident_types"
-	RetrospectiveSteps GetRetrospectiveProcessParamsInclude = "retrospective_steps"
-	Severities         GetRetrospectiveProcessParamsInclude = "severities"
+	GetRetrospectiveProcessParamsIncludeGroups             GetRetrospectiveProcessParamsInclude = "groups"
+	GetRetrospectiveProcessParamsIncludeIncidentTypes      GetRetrospectiveProcessParamsInclude = "incident_types"
+	GetRetrospectiveProcessParamsIncludeRetrospectiveSteps GetRetrospectiveProcessParamsInclude = "retrospective_steps"
+	GetRetrospectiveProcessParamsIncludeSeverities         GetRetrospectiveProcessParamsInclude = "severities"
 )
 
 // Valid indicates whether the value is a known member of the GetRetrospectiveProcessParamsInclude enum.
 func (e GetRetrospectiveProcessParamsInclude) Valid() bool {
 	switch e {
-	case Groups:
+	case GetRetrospectiveProcessParamsIncludeGroups:
 		return true
-	case IncidentTypes:
+	case GetRetrospectiveProcessParamsIncludeIncidentTypes:
 		return true
-	case RetrospectiveSteps:
+	case GetRetrospectiveProcessParamsIncludeRetrospectiveSteps:
 		return true
-	case Severities:
+	case GetRetrospectiveProcessParamsIncludeSeverities:
 		return true
 	default:
 		return false
@@ -42323,6 +43394,26 @@ func (e ListWorkflowRunsParamsInclude) Valid() bool {
 	}
 }
 
+// AcknowledgeAlert defines model for acknowledge_alert.
+type AcknowledgeAlert struct {
+	Data *struct {
+		Attributes *struct {
+			// Actor The user to record as performing this action. Only available when actor attribution is enabled for the organization; otherwise it is ignored. Only supported with Global and Team API keys; with a Team API key the user must belong to one of the key's teams. When omitted or null, the action is attributed to the API key. Otherwise provide either `email` or `user_id`, not both.
+			Actor *struct {
+				// Email Email of the user, including verified secondary emails.
+				Email *string `json:"email,omitempty"`
+
+				// UserId Rootly ID of the user.
+				UserId *string `json:"user_id,omitempty"`
+			} `json:"actor,omitempty"`
+		} `json:"attributes,omitempty"`
+		Type *AcknowledgeAlertDataType `json:"type,omitempty"`
+	} `json:"data,omitempty"`
+}
+
+// AcknowledgeAlertDataType defines model for AcknowledgeAlert.Data.Type.
+type AcknowledgeAlertDataType string
+
 // ActionItemTriggerParams defines model for action_item_trigger_params.
 type ActionItemTriggerParams struct {
 	IncidentActionItemCondition         *ActionItemTriggerParamsIncidentActionItemCondition         `json:"incident_action_item_condition,omitempty"`
@@ -42347,6 +43438,8 @@ type ActionItemTriggerParams struct {
 	IncidentConditionLabelUseRegexp     *bool                                                       `json:"incident_condition_label_use_regexp,omitempty"`
 	IncidentConditionMitigatedAt        *ActionItemTriggerParamsIncidentConditionMitigatedAt        `json:"incident_condition_mitigated_at,omitempty"`
 	IncidentConditionResolvedAt         *ActionItemTriggerParamsIncidentConditionResolvedAt         `json:"incident_condition_resolved_at,omitempty"`
+	IncidentConditionScheduledFor       *ActionItemTriggerParamsIncidentConditionScheduledFor       `json:"incident_condition_scheduled_for,omitempty"`
+	IncidentConditionScheduledUntil     *ActionItemTriggerParamsIncidentConditionScheduledUntil     `json:"incident_condition_scheduled_until,omitempty"`
 	IncidentConditionService            *ActionItemTriggerParamsIncidentConditionService            `json:"incident_condition_service,omitempty"`
 	IncidentConditionSeverity           *ActionItemTriggerParamsIncidentConditionSeverity           `json:"incident_condition_severity,omitempty"`
 	IncidentConditionStartedAt          *ActionItemTriggerParamsIncidentConditionStartedAt          `json:"incident_condition_started_at,omitempty"`
@@ -42425,6 +43518,12 @@ type ActionItemTriggerParamsIncidentConditionMitigatedAt string
 
 // ActionItemTriggerParamsIncidentConditionResolvedAt defines model for ActionItemTriggerParams.IncidentConditionResolvedAt.
 type ActionItemTriggerParamsIncidentConditionResolvedAt string
+
+// ActionItemTriggerParamsIncidentConditionScheduledFor defines model for ActionItemTriggerParams.IncidentConditionScheduledFor.
+type ActionItemTriggerParamsIncidentConditionScheduledFor string
+
+// ActionItemTriggerParamsIncidentConditionScheduledUntil defines model for ActionItemTriggerParams.IncidentConditionScheduledUntil.
+type ActionItemTriggerParamsIncidentConditionScheduledUntil string
 
 // ActionItemTriggerParamsIncidentConditionService defines model for ActionItemTriggerParams.IncidentConditionService.
 type ActionItemTriggerParamsIncidentConditionService string
@@ -42845,6 +43944,15 @@ type Alert struct {
 	// ShortId Human-readable short identifier for the alert
 	ShortId string `json:"short_id"`
 
+	// SlackNotifications Slack channel and root thread ts of each announcement Rootly posted for the alert. Only present when the alert-slack-message-references feature flag is enabled for the team.
+	SlackNotifications *[]struct {
+		// ChannelId Slack channel ID
+		ChannelId string `json:"channel_id"`
+
+		// ThreadTs Slack ts of the root announcement message
+		ThreadTs string `json:"thread_ts"`
+	} `json:"slack_notifications,omitempty"`
+
 	// Source The source of the alert
 	Source string `json:"source"`
 
@@ -43005,10 +44113,16 @@ type AlertEvent struct {
 		Name      *string `json:"name,omitempty"`
 		UpdatedAt *string `json:"updated_at,omitempty"`
 	} `json:"schedule,omitempty"`
-	SlackChannel *SlackChannel   `json:"slack_channel,omitempty"`
-	Source       string          `json:"source"`
-	UpdatedAt    string          `json:"updated_at"`
-	User         *AlertEventUser `json:"user,omitempty"`
+	SlackChannel *SlackChannel `json:"slack_channel,omitempty"`
+
+	// SlackMessagePermalink Permalink to the Slack message Rootly posted for this event, when present.
+	SlackMessagePermalink *string `json:"slack_message_permalink,omitempty"`
+
+	// SlackMessageTs Slack thread ts of the message Rootly posted for this event, when present.
+	SlackMessageTs *string         `json:"slack_message_ts,omitempty"`
+	Source         string          `json:"source"`
+	UpdatedAt      string          `json:"updated_at"`
+	User           *AlertEventUser `json:"user,omitempty"`
 
 	// UserId Author of the note.
 	UserId *int `json:"user_id,omitempty"`
@@ -43656,8 +44770,8 @@ type AlertUrgency struct {
 	// Position Position of the alert urgency
 	Position int `json:"position"`
 
-	// RetriggerTimeoutMinutes Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, negative = never.
-	RetriggerTimeoutMinutes *int `json:"retrigger_timeout_minutes,omitempty"`
+	// RetriggerTimeoutMinutes Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, -1 = never.
+	RetriggerTimeoutMinutes *AlertUrgencyRetriggerTimeoutMinutes `json:"retrigger_timeout_minutes,omitempty"`
 
 	// TeamId The ID of the team this urgency belongs to
 	TeamId *int `json:"team_id,omitempty"`
@@ -43668,6 +44782,9 @@ type AlertUrgency struct {
 	// Urgency The urgency level
 	Urgency *string `json:"urgency,omitempty"`
 }
+
+// AlertUrgencyRetriggerTimeoutMinutes Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, -1 = never.
+type AlertUrgencyRetriggerTimeoutMinutes int
 
 // AlertUrgencyList defines model for alert_urgency_list.
 type AlertUrgencyList struct {
@@ -43827,7 +44944,7 @@ type AlertsSource struct {
 	// SourceType The alert source type
 	SourceType *AlertsSourceSourceType `json:"source_type,omitempty"`
 
-	// SourceableAttributes Provide additional attributes for the underlying source. `auto_resolve`, `resolve_state` and `field_mappings_attributes` apply to generic_webhook sources; `accept_threaded_emails` applies to email sources.
+	// SourceableAttributes Provide additional attributes for the underlying source. `auto_resolve`, `resolve_state` and `field_mappings_attributes` apply to generic_webhook sources; `accept_threaded_emails`, `notification_target_type` and `notification_target_id` apply to email sources.
 	SourceableAttributes *struct {
 		// AcceptThreadedEmails Set this to false to reject threaded emails
 		AcceptThreadedEmails *bool `json:"accept_threaded_emails,omitempty"`
@@ -43846,6 +44963,12 @@ type AlertsSource struct {
 
 		// Id Unique ID of the underlying source. Read-only; it is resolved from the alert source itself on update.
 		Id *openapi_types.UUID `json:"id,omitempty"`
+
+		// NotificationTargetId Email sources only. The ID of the notification target. Set to null to clear it; this also clears `notification_target_type`. Only used when the `email-alert-source-notification-target` feature flag is on for the team.
+		NotificationTargetId *string `json:"notification_target_id,omitempty"`
+
+		// NotificationTargetType Email sources only. The type of the notification target every alert from this source pages directly; While it points to an active, pageable target, Alert Routes are not evaluated. Only used when the `email-alert-source-notification-target` feature flag is on for the team.
+		NotificationTargetType *AlertsSourceSourceableAttributesNotificationTargetType `json:"notification_target_type,omitempty"`
 
 		// ResolveState This value is matched with the value extracted from alerts payload using JSON path in field_mappings_attributes
 		ResolveState *string `json:"resolve_state,omitempty"`
@@ -43897,6 +45020,9 @@ type AlertsSourceSourceType string
 // AlertsSourceSourceableAttributesFieldMappingsAttributesField Select the field on which the condition to be evaluated
 type AlertsSourceSourceableAttributesFieldMappingsAttributesField string
 
+// AlertsSourceSourceableAttributesNotificationTargetType Email sources only. The type of the notification target every alert from this source pages directly; While it points to an active, pageable target, Alert Routes are not evaluated. Only used when the `email-alert-source-notification-target` feature flag is on for the team.
+type AlertsSourceSourceableAttributesNotificationTargetType string
+
 // AlertsSourceStatus The status of the alert source
 type AlertsSourceStatus string
 
@@ -43945,6 +45071,9 @@ type ApiKey struct {
 
 	// GracePeriodEndsAt Grace period end date
 	GracePeriodEndsAt *string `json:"grace_period_ends_at,omitempty"`
+
+	// GroupId The group (team) ID for team API keys. Keys created via the API have exactly one group; for keys with multiple groups this is the first group.
+	GroupId *string `json:"group_id,omitempty"`
 
 	// Kind The kind of the API key
 	Kind ApiKeyKind `json:"kind"`
@@ -44015,6 +45144,9 @@ type ApiKeyWithTokenResponse struct {
 
 			// GracePeriodEndsAt Grace period end date
 			GracePeriodEndsAt *string `json:"grace_period_ends_at,omitempty"`
+
+			// GroupId The group (team) ID for team API keys. Keys created via the API have exactly one group; for keys with multiple groups this is the first group.
+			GroupId *string `json:"group_id,omitempty"`
 
 			// Kind The kind of the API key
 			Kind ApiKeyWithTokenResponseDataAttributesKind `json:"kind"`
@@ -47307,6 +48439,15 @@ type ErrorsList struct {
 type EscalateAlert struct {
 	Data *struct {
 		Attributes *struct {
+			// Actor The user to record as performing this action. Only available when actor attribution is enabled for the organization; otherwise it is ignored. Only supported with Global and Team API keys; with a Team API key the user must belong to one of the key's teams. When omitted or null, the action is attributed to the API key. Otherwise provide either `email` or `user_id`, not both.
+			Actor *struct {
+				// Email Email of the user, including verified secondary emails.
+				Email *string `json:"email,omitempty"`
+
+				// UserId Rootly ID of the user.
+				UserId *string `json:"user_id,omitempty"`
+			} `json:"actor,omitempty"`
+
 			// EscalationLevel The escalation policy level to escalate to. If omitted, defaults to the next level (same EP) or level 1 (different EP).
 			EscalationLevel *int `json:"escalation_level,omitempty"`
 
@@ -47529,8 +48670,8 @@ type EscalationPath struct {
 	// RepeatCount The number of times this path will be executed until someone acknowledges the alert
 	RepeatCount *int `json:"repeat_count"`
 
-	// RetriggerTimeoutMinutes Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.
-	RetriggerTimeoutMinutes *int `json:"retrigger_timeout_minutes,omitempty"`
+	// RetriggerTimeoutMinutes Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, -1 = never.
+	RetriggerTimeoutMinutes *EscalationPathRetriggerTimeoutMinutes `json:"retrigger_timeout_minutes,omitempty"`
 
 	// Rules Escalation path rules
 	Rules *[]*struct {
@@ -47640,6 +48781,9 @@ type EscalationPathNotificationTypeRulesNotificationType string
 
 // EscalationPathPathType The type of escalation path
 type EscalationPathPathType string
+
+// EscalationPathRetriggerTimeoutMinutes Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, -1 = never.
+type EscalationPathRetriggerTimeoutMinutes int
 
 // EscalationPathRulesOperator Whether the alert must (or must not) have related incidents
 type EscalationPathRulesOperator string
@@ -49992,6 +51136,8 @@ type IncidentTriggerParams struct {
 	IncidentConditionLabelUseRegexp *bool                                                 `json:"incident_condition_label_use_regexp,omitempty"`
 	IncidentConditionMitigatedAt    *IncidentTriggerParamsIncidentConditionMitigatedAt    `json:"incident_condition_mitigated_at,omitempty"`
 	IncidentConditionResolvedAt     *IncidentTriggerParamsIncidentConditionResolvedAt     `json:"incident_condition_resolved_at,omitempty"`
+	IncidentConditionScheduledFor   *IncidentTriggerParamsIncidentConditionScheduledFor   `json:"incident_condition_scheduled_for,omitempty"`
+	IncidentConditionScheduledUntil *IncidentTriggerParamsIncidentConditionScheduledUntil `json:"incident_condition_scheduled_until,omitempty"`
 	IncidentConditionService        *IncidentTriggerParamsIncidentConditionService        `json:"incident_condition_service,omitempty"`
 	IncidentConditionSeverity       *IncidentTriggerParamsIncidentConditionSeverity       `json:"incident_condition_severity,omitempty"`
 	IncidentConditionStartedAt      *IncidentTriggerParamsIncidentConditionStartedAt      `json:"incident_condition_started_at,omitempty"`
@@ -50052,6 +51198,12 @@ type IncidentTriggerParamsIncidentConditionMitigatedAt string
 
 // IncidentTriggerParamsIncidentConditionResolvedAt defines model for IncidentTriggerParams.IncidentConditionResolvedAt.
 type IncidentTriggerParamsIncidentConditionResolvedAt string
+
+// IncidentTriggerParamsIncidentConditionScheduledFor defines model for IncidentTriggerParams.IncidentConditionScheduledFor.
+type IncidentTriggerParamsIncidentConditionScheduledFor string
+
+// IncidentTriggerParamsIncidentConditionScheduledUntil defines model for IncidentTriggerParams.IncidentConditionScheduledUntil.
+type IncidentTriggerParamsIncidentConditionScheduledUntil string
 
 // IncidentTriggerParamsIncidentConditionService defines model for IncidentTriggerParams.IncidentConditionService.
 type IncidentTriggerParamsIncidentConditionService string
@@ -50439,6 +51591,23 @@ type JsonapiIncludedResource struct {
 	Type          string                  `json:"type"`
 }
 
+// LinkIncidents defines model for link_incidents.
+type LinkIncidents struct {
+	Data struct {
+		Attributes struct {
+			// IncidentId ID of a single incident to link
+			IncidentId *string `json:"incident_id,omitempty"`
+
+			// IncidentIds IDs of incidents to link
+			IncidentIds *[]string `json:"incident_ids,omitempty"`
+		} `json:"attributes"`
+		Type LinkIncidentsDataType `json:"type"`
+	} `json:"data"`
+}
+
+// LinkIncidentsDataType defines model for LinkIncidents.Data.Type.
+type LinkIncidentsDataType string
+
 // Links defines model for links.
 type Links struct {
 	First string  `json:"first"`
@@ -50697,6 +51866,15 @@ type MitigateIncidentDataType string
 type NewAlert struct {
 	Data struct {
 		Attributes struct {
+			// Actor The user to record as performing this action. Only available when actor attribution is enabled for the organization; otherwise it is ignored. Only supported with Global and Team API keys; with a Team API key the user must belong to one of the key's teams. When omitted or null, the action is attributed to the API key. Otherwise provide either `email` or `user_id`, not both.
+			Actor *struct {
+				// Email Email of the user, including verified secondary emails.
+				Email *string `json:"email,omitempty"`
+
+				// UserId Rootly ID of the user.
+				UserId *string `json:"user_id,omitempty"`
+			} `json:"actor,omitempty"`
+
 			// AlertFieldValuesAttributes Custom alert field values to create with the alert
 			AlertFieldValuesAttributes *[]*struct {
 				// AlertFieldId ID of the custom alert field
@@ -51101,12 +52279,15 @@ type NewAlertUrgency struct {
 			// Position Position of the alert urgency
 			Position *int `json:"position,omitempty"`
 
-			// RetriggerTimeoutMinutes Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, negative = never.
-			RetriggerTimeoutMinutes *int `json:"retrigger_timeout_minutes,omitempty"`
+			// RetriggerTimeoutMinutes Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, -1 = never.
+			RetriggerTimeoutMinutes *NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes `json:"retrigger_timeout_minutes,omitempty"`
 		} `json:"attributes"`
 		Type NewAlertUrgencyDataType `json:"type"`
 	} `json:"data"`
 }
+
+// NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, -1 = never.
+type NewAlertUrgencyDataAttributesRetriggerTimeoutMinutes int
 
 // NewAlertUrgencyDataType defines model for NewAlertUrgency.Data.Type.
 type NewAlertUrgencyDataType string
@@ -51230,7 +52411,7 @@ type NewAlertsSource struct {
 			// SourceType The alert source type
 			SourceType *NewAlertsSourceDataAttributesSourceType `json:"source_type,omitempty"`
 
-			// SourceableAttributes Provide additional attributes for the underlying source. `auto_resolve`, `resolve_state` and `field_mappings_attributes` apply to generic_webhook sources; `accept_threaded_emails` applies to email sources.
+			// SourceableAttributes Provide additional attributes for the underlying source. `auto_resolve`, `resolve_state` and `field_mappings_attributes` apply to generic_webhook sources; `accept_threaded_emails`, `notification_target_type` and `notification_target_id` apply to email sources.
 			SourceableAttributes *struct {
 				// AcceptThreadedEmails Set this to false to reject threaded emails
 				AcceptThreadedEmails *bool `json:"accept_threaded_emails,omitempty"`
@@ -51246,6 +52427,12 @@ type NewAlertsSource struct {
 					// JsonPath JSON path expression to extract a specific value from the alert's payload for evaluation. For `notification_target_id` only: if your account has opted in to Dynamic Notification Targets, this may also be a Liquid template that resolves to a notification target id at routing time.
 					JsonPath *string `json:"json_path,omitempty"`
 				} `json:"field_mappings_attributes,omitempty"`
+
+				// NotificationTargetId Email sources only. The ID of the notification target. Set to null to clear it; this also clears `notification_target_type`. Only used when the `email-alert-source-notification-target` feature flag is on for the team.
+				NotificationTargetId *string `json:"notification_target_id,omitempty"`
+
+				// NotificationTargetType Email sources only. The type of the notification target every alert from this source pages directly; While it points to an active, pageable target, Alert Routes are not evaluated. Only used when the `email-alert-source-notification-target` feature flag is on for the team.
+				NotificationTargetType *NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetType `json:"notification_target_type,omitempty"`
 
 				// ResolveState This value is matched with the value extracted from alerts payload using JSON path in field_mappings_attributes
 				ResolveState *string `json:"resolve_state,omitempty"`
@@ -51290,6 +52477,9 @@ type NewAlertsSourceDataAttributesSourceType string
 
 // NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField Select the field on which the condition to be evaluated
 type NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField string
+
+// NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetType Email sources only. The type of the notification target every alert from this source pages directly; While it points to an active, pageable target, Alert Routes are not evaluated. Only used when the `email-alert-source-notification-target` feature flag is on for the team.
+type NewAlertsSourceDataAttributesSourceableAttributesNotificationTargetType string
 
 // NewAlertsSourceDataType defines model for NewAlertsSource.Data.Type.
 type NewAlertsSourceDataType string
@@ -52157,8 +53347,8 @@ type NewEscalationPath struct {
 			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
 			RepeatCount *int `json:"repeat_count,omitempty"`
 
-			// RetriggerTimeoutMinutes Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.
-			RetriggerTimeoutMinutes *int `json:"retrigger_timeout_minutes,omitempty"`
+			// RetriggerTimeoutMinutes Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, -1 = never.
+			RetriggerTimeoutMinutes *NewEscalationPathDataAttributesRetriggerTimeoutMinutes `json:"retrigger_timeout_minutes,omitempty"`
 
 			// Rules Escalation path conditions
 			Rules *[]struct {
@@ -52271,6 +53461,9 @@ type NewEscalationPathDataAttributesNotificationTypeRulesNotificationType string
 
 // NewEscalationPathDataAttributesPathType The type of escalation path to create
 type NewEscalationPathDataAttributesPathType string
+
+// NewEscalationPathDataAttributesRetriggerTimeoutMinutes Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, -1 = never.
+type NewEscalationPathDataAttributesRetriggerTimeoutMinutes int
 
 // NewEscalationPathDataAttributesRulesOperator Whether the alert must (or must not) have related incidents
 type NewEscalationPathDataAttributesRulesOperator string
@@ -53667,6 +54860,12 @@ type NewOverrideShiftDataType string
 type NewPlaybook struct {
 	Data struct {
 		Attributes struct {
+			// CauseIds The Cause IDs to attach to the incident
+			CauseIds *[]string `json:"cause_ids,omitempty"`
+
+			// Content Sanitized HTML instructions. Still returned when `kind` is `external_url`, where the body may be stale — branch on `kind`, not on `content` being present.
+			Content *string `json:"content,omitempty"`
+
 			// EnvironmentIds The Environment IDs to attach to the incident
 			EnvironmentIds *[]string `json:"environment_ids,omitempty"`
 
@@ -53681,6 +54880,9 @@ type NewPlaybook struct {
 
 			// IncidentTypeIds The Incident Type IDs to attach to the incident
 			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+
+			// Kind Whether the playbook body lives in Rootly (`internal_document`) or at an external link (`external_url`).
+			Kind *NewPlaybookDataAttributesKind `json:"kind,omitempty"`
 
 			// ServiceIds The Service IDs to attach to the incident
 			ServiceIds *[]string `json:"service_ids,omitempty"`
@@ -53697,6 +54899,9 @@ type NewPlaybook struct {
 		Type NewPlaybookDataType `json:"type"`
 	} `json:"data"`
 }
+
+// NewPlaybookDataAttributesKind Whether the playbook body lives in Rootly (`internal_document`) or at an external link (`external_url`).
+type NewPlaybookDataAttributesKind string
 
 // NewPlaybookDataType defines model for NewPlaybook.Data.Type.
 type NewPlaybookDataType string
@@ -53750,6 +54955,109 @@ type NewPostMortemTemplateDataAttributesFormat string
 
 // NewPostMortemTemplateDataType defines model for NewPostMortemTemplate.Data.Type.
 type NewPostMortemTemplateDataType string
+
+// NewProblem defines model for new_problem.
+type NewProblem struct {
+	Data struct {
+		Attributes struct {
+			// CancellationReason The reason for cancelling the problem
+			CancellationReason *string `json:"cancellation_reason,omitempty"`
+
+			// DeferralReason The reason and accepted risk for deferring the problem
+			DeferralReason *string `json:"deferral_reason,omitempty"`
+
+			// Description The description of the problem
+			Description *string `json:"description,omitempty"`
+
+			// DueDate The due date of the problem
+			DueDate *openapi_types.Date `json:"due_date,omitempty"`
+
+			// ExitCriteria The exit criteria of the problem
+			ExitCriteria *string `json:"exit_criteria,omitempty"`
+
+			// FormFieldSelections Custom (form) field selections for the problem
+			FormFieldSelections *[]map[string]interface{} `json:"form_field_selections,omitempty"`
+
+			// ImpactSoFar The impact observed so far
+			ImpactSoFar *string `json:"impact_so_far,omitempty"`
+
+			// IncidentIds IDs of incidents to link to the problem
+			IncidentIds *[]string `json:"incident_ids,omitempty"`
+
+			// NextReviewAt The next review date for a deferred problem
+			NextReviewAt *string `json:"next_review_at,omitempty"`
+
+			// OwnerGroupId ID of the group (team) that owns the problem
+			OwnerGroupId *string `json:"owner_group_id,omitempty"`
+
+			// OwnerUserId ID of the user who owns the problem
+			OwnerUserId *int `json:"owner_user_id,omitempty"`
+
+			// Priority The priority of the problem
+			Priority *NewProblemDataAttributesPriority `json:"priority,omitempty"`
+
+			// ReReviewCadence Days between reviews for a deferred problem
+			ReReviewCadence *int `json:"re_review_cadence,omitempty"`
+
+			// Resolution The resolution of the problem
+			Resolution *string `json:"resolution,omitempty"`
+
+			// RootCause The root cause of the problem
+			RootCause *string `json:"root_cause,omitempty"`
+
+			// Scope The scope of the problem
+			Scope *string `json:"scope,omitempty"`
+
+			// Title The title of the problem
+			Title string `json:"title"`
+		} `json:"attributes"`
+		Type NewProblemDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewProblemDataAttributesPriority The priority of the problem
+type NewProblemDataAttributesPriority string
+
+// NewProblemDataType defines model for NewProblem.Data.Type.
+type NewProblemDataType string
+
+// NewProblemActionItem defines model for new_problem_action_item.
+type NewProblemActionItem struct {
+	Data struct {
+		Attributes struct {
+			// AssignedToUserId ID of user you wish to assign this action item
+			AssignedToUserId *int `json:"assigned_to_user_id,omitempty"`
+
+			// Description The description of the action item
+			Description *string `json:"description,omitempty"`
+
+			// DueDate The due date of the action item
+			DueDate *string `json:"due_date,omitempty"`
+
+			// JiraIssueUrl The Jira issue URL.
+			JiraIssueUrl *string `json:"jira_issue_url,omitempty"`
+
+			// Priority The priority of the action item
+			Priority *NewProblemActionItemDataAttributesPriority `json:"priority,omitempty"`
+
+			// Status The status of the action item
+			Status *NewProblemActionItemDataAttributesStatus `json:"status,omitempty"`
+
+			// Summary The summary of the action item
+			Summary string `json:"summary"`
+		} `json:"attributes"`
+		Type NewProblemActionItemDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewProblemActionItemDataAttributesPriority The priority of the action item
+type NewProblemActionItemDataAttributesPriority string
+
+// NewProblemActionItemDataAttributesStatus The status of the action item
+type NewProblemActionItemDataAttributesStatus string
+
+// NewProblemActionItemDataType defines model for NewProblemActionItem.Data.Type.
+type NewProblemActionItemDataType string
 
 // NewPulse defines model for new_pulse.
 type NewPulse struct {
@@ -54061,6 +55369,13 @@ type NewSchedule struct {
 		Attributes struct {
 			// AllTimeCoverage 24/7 coverage of the schedule
 			AllTimeCoverage *bool `json:"all_time_coverage,omitempty"`
+
+			// BusinessHours Controls shadow paging on the schedule. Null disables shadow paging. start_time and end_time are HH:MM 24-hour format strings.
+			BusinessHours *struct {
+				EndTime         string `json:"end_time"`
+				IncludeWeekends bool   `json:"include_weekends"`
+				StartTime       string `json:"start_time"`
+			} `json:"business_hours,omitempty"`
 
 			// Description The description of the schedule
 			Description *string `json:"description,omitempty"`
@@ -54496,6 +55811,9 @@ type NewShiftCoverageRequest struct {
 		Attributes struct {
 			// EndsAt End datetime of the time range to request coverage for
 			EndsAt time.Time `json:"ends_at"`
+
+			// RecipientUserIds Optional. Notify selected active schedule members for every covered shift when targeted-shift-coverage is enabled. Recipients must be eligible for each shift. Omitted, empty, or flag-disabled selections broadcast.
+			RecipientUserIds *[]int `json:"recipient_user_ids,omitempty"`
 
 			// StartsAt Start datetime of the time range to request coverage for
 			StartsAt time.Time `json:"starts_at"`
@@ -55125,9 +56443,12 @@ type NewWorkflow struct {
 			// FailureNotificationMode Where failure notifications for this workflow are sent. `inherit` uses the account default channel, `custom` uses `failure_notification_channels`, `off` suppresses them.
 			FailureNotificationMode *NewWorkflowDataAttributesFailureNotificationMode `json:"failure_notification_mode,omitempty"`
 			FunctionalityIds        *[]string                                         `json:"functionality_ids,omitempty"`
-			GroupIds                *[]string                                         `json:"group_ids,omitempty"`
-			IncidentRoleIds         *[]string                                         `json:"incident_role_ids,omitempty"`
-			IncidentTypeIds         *[]string                                         `json:"incident_type_ids,omitempty"`
+
+			// GroupAssignmentIds Owning team IDs. Requires team-scoped workflows.
+			GroupAssignmentIds *[]string `json:"group_assignment_ids,omitempty"`
+			GroupIds           *[]string `json:"group_ids,omitempty"`
+			IncidentRoleIds    *[]string `json:"incident_role_ids,omitempty"`
+			IncidentTypeIds    *[]string `json:"incident_type_ids,omitempty"`
 
 			// Locked Restricts workflow edits to admins when turned on. Only admins can set this field.
 			Locked *bool `json:"locked,omitempty"`
@@ -55150,8 +56471,11 @@ type NewWorkflow struct {
 			// RepeatEveryDuration Repeat workflow every duration
 			RepeatEveryDuration *string                              `json:"repeat_every_duration,omitempty"`
 			RepeatOn            *[]NewWorkflowDataAttributesRepeatOn `json:"repeat_on,omitempty"`
-			ServiceIds          *[]string                            `json:"service_ids,omitempty"`
-			SeverityIds         *[]string                            `json:"severity_ids,omitempty"`
+
+			// RunOncePerResource When true, the workflow runs at most once per incident. Later triggers on the same incident create a canceled run instead. Manual runs and repeats are not affected. Only applies to incident workflows.
+			RunOncePerResource *bool     `json:"run_once_per_resource,omitempty"`
+			ServiceIds         *[]string `json:"service_ids,omitempty"`
+			SeverityIds        *[]string `json:"severity_ids,omitempty"`
 
 			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
 			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
@@ -55845,6 +57169,27 @@ type OncallRelationshipsScheduleDataType string
 // OncallRelationshipsUserDataType defines model for OncallRelationships.User.Data.Type.
 type OncallRelationshipsUserDataType string
 
+// OverriddenShift defines model for overridden_shift.
+type OverriddenShift struct {
+	// AssigneeId ID of the overridden assignee
+	AssigneeId *string `json:"assignee_id,omitempty"`
+
+	// AssigneeType Type of the overridden assignee (User or Schedule)
+	AssigneeType *string `json:"assignee_type,omitempty"`
+
+	// EndsAt End datetime of the overridden portion
+	EndsAt string `json:"ends_at"`
+
+	// RotationId ID of the rotation the overridden shift belongs to
+	RotationId *string `json:"rotation_id,omitempty"`
+
+	// StartsAt Start datetime of the overridden portion
+	StartsAt string `json:"starts_at"`
+
+	// UserId ID of the user whose shift was overridden
+	UserId *int `json:"user_id,omitempty"`
+}
+
 // OverrideShift defines model for override_shift.
 type OverrideShift struct {
 	// CreatedAt Date of creation
@@ -56176,6 +57521,12 @@ type PatchAlertRouteDataType string
 
 // Playbook defines model for playbook.
 type Playbook struct {
+	// CauseIds The Cause IDs to attach to the incident
+	CauseIds *[]string `json:"cause_ids,omitempty"`
+
+	// Content Sanitized HTML instructions. Still returned when `kind` is `external_url`, where the body may be stale — branch on `kind`, not on `content` being present.
+	Content *string `json:"content,omitempty"`
+
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
 
@@ -56194,6 +57545,9 @@ type Playbook struct {
 	// IncidentTypeIds The Incident Type IDs to attach to the incident
 	IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
 
+	// Kind Whether the playbook body lives in Rootly (`internal_document`) or at an external link (`external_url`).
+	Kind *PlaybookKind `json:"kind,omitempty"`
+
 	// ServiceIds The Service IDs to attach to the incident
 	ServiceIds *[]string `json:"service_ids,omitempty"`
 
@@ -56209,6 +57563,9 @@ type Playbook struct {
 	// UpdatedAt Date of last update
 	UpdatedAt string `json:"updated_at"`
 }
+
+// PlaybookKind Whether the playbook body lives in Rootly (`internal_document`) or at an external link (`external_url`).
+type PlaybookKind string
 
 // PlaybookList defines model for playbook_list.
 type PlaybookList struct {
@@ -56376,9 +57733,12 @@ type PrivateAgent struct {
 		DeploymentMode PrivateAgentAttributesDeploymentMode `json:"deployment_mode"`
 
 		// Description Non-sensitive routing metadata. Do not include secrets or personal data.
-		Description *string    `json:"description"`
-		LastSeenAt  *time.Time `json:"last_seen_at"`
-		Name        string     `json:"name"`
+		Description *string `json:"description"`
+
+		// Enabled For active agents, whether Rootly may advertise tools and assign new work.
+		Enabled    bool       `json:"enabled"`
+		LastSeenAt *time.Time `json:"last_seen_at"`
+		Name       string     `json:"name"`
 
 		// Online Active agent seen within two minutes; does not imply all providers are healthy.
 		Online    bool `json:"online"`
@@ -56398,44 +57758,58 @@ type PrivateAgent struct {
 			} `json:"health"`
 			Id string `json:"id"`
 
-			// Policy Reported local policy, not credentials or provider connection configuration. Fields are provider-type specific: Kubernetes reports namespace scope; search providers report index scope; databases report database/schema scope; HTTP reports method/path/header scope; and each provider family normally reports only its applicable numeric limits. Management responses may preserve legacy cross-family fields for backwards compatibility; capability catalog and dispatch use provider-scoped execution metadata. Invalid or absent fields are omitted.
+			// Policy Reported local policy, not credentials or provider connection configuration. Fields are provider-type specific: Kubernetes reports namespace scope; search providers report index scope; databases report database/schema scope; HTTP reports method/path/header scope; Kafka reports topic and message-read scope; Redis and Valkey report diagnostic limits; and each provider family normally reports only its applicable numeric limits. Management responses may preserve legacy cross-family fields for backwards compatibility; capability catalog and dispatch use provider-scoped execution metadata. Invalid or absent fields are omitted.
 			Policy *struct {
-				AllowedIndices         *[]string `json:"allowed_indices,omitempty"`
-				AllowedMethods         *[]string `json:"allowed_methods,omitempty"`
-				AllowedPathPrefixes    *[]string `json:"allowed_path_prefixes,omitempty"`
-				AllowedRequestHeaders  *[]string `json:"allowed_request_headers,omitempty"`
-				AllowedSchemas         *[]string `json:"allowed_schemas,omitempty"`
-				ClusterScoped          *bool     `json:"cluster_scoped,omitempty"`
-				Database               *string   `json:"database,omitempty"`
-				Digest                 *string   `json:"digest,omitempty"`
-				ExposedResponseHeaders *[]string `json:"exposed_response_headers,omitempty"`
-				MaximumAttributeValues *int      `json:"maximum_attribute_values,omitempty"`
-				MaximumConcurrency     *int      `json:"maximum_concurrency,omitempty"`
-				MaximumDocuments       *int      `json:"maximum_documents,omitempty"`
-				MaximumEntries         *int      `json:"maximum_entries,omitempty"`
-				MaximumExemplars       *int      `json:"maximum_exemplars,omitempty"`
-				MaximumIndices         *int      `json:"maximum_indices,omitempty"`
-				MaximumPatternPoints   *int      `json:"maximum_pattern_points,omitempty"`
-				MaximumPointsPerSeries *int      `json:"maximum_points_per_series,omitempty"`
-				MaximumQueryBytes      *int      `json:"maximum_query_bytes,omitempty"`
-				MaximumRangeSeconds    *int      `json:"maximum_range_seconds,omitempty"`
-				MaximumRequestBytes    *int      `json:"maximum_request_bytes,omitempty"`
-				MaximumResponseBytes   *int      `json:"maximum_response_bytes,omitempty"`
-				MaximumResultBytes     *int      `json:"maximum_result_bytes,omitempty"`
-				MaximumRows            *int      `json:"maximum_rows,omitempty"`
-				MaximumScanBytes       *int      `json:"maximum_scan_bytes,omitempty"`
-				MaximumSeries          *int      `json:"maximum_series,omitempty"`
-				MaximumShards          *int      `json:"maximum_shards,omitempty"`
-				MaximumSpansPerSpanSet *int      `json:"maximum_spans_per_span_set,omitempty"`
-				MaximumStaleValues     *int      `json:"maximum_stale_values,omitempty"`
-				MaximumTimeoutSeconds  *int      `json:"maximum_timeout_seconds,omitempty"`
-				MaximumTraces          *int      `json:"maximum_traces,omitempty"`
-				Namespaces             *[]string `json:"namespaces,omitempty"`
-				PodLogs                *bool     `json:"pod_logs,omitempty"`
-				TimestampField         *string   `json:"timestamp_field,omitempty"`
+				AllowMessageReads       *bool     `json:"allow_message_reads,omitempty"`
+				AllowedIndices          *[]string `json:"allowed_indices,omitempty"`
+				AllowedMethods          *[]string `json:"allowed_methods,omitempty"`
+				AllowedPathPrefixes     *[]string `json:"allowed_path_prefixes,omitempty"`
+				AllowedRequestHeaders   *[]string `json:"allowed_request_headers,omitempty"`
+				AllowedSchemas          *[]string `json:"allowed_schemas,omitempty"`
+				AllowedTopics           *[]string `json:"allowed_topics,omitempty"`
+				ClusterScoped           *bool     `json:"cluster_scoped,omitempty"`
+				Database                *string   `json:"database,omitempty"`
+				DeniedTopics            *[]string `json:"denied_topics,omitempty"`
+				Digest                  *string   `json:"digest,omitempty"`
+				ExposedResponseHeaders  *[]string `json:"exposed_response_headers,omitempty"`
+				IncludeInternalTopics   *bool     `json:"include_internal_topics,omitempty"`
+				IncludeMessageValues    *bool     `json:"include_message_values,omitempty"`
+				MaximumAttributeValues  *int      `json:"maximum_attribute_values,omitempty"`
+				MaximumConcurrency      *int      `json:"maximum_concurrency,omitempty"`
+				MaximumDocuments        *int      `json:"maximum_documents,omitempty"`
+				MaximumEntries          *int      `json:"maximum_entries,omitempty"`
+				MaximumExemplars        *int      `json:"maximum_exemplars,omitempty"`
+				MaximumIndices          *int      `json:"maximum_indices,omitempty"`
+				MaximumItems            *int      `json:"maximum_items,omitempty"`
+				MaximumLabelValues      *int      `json:"maximum_label_values,omitempty"`
+				MaximumMessageBytes     *int      `json:"maximum_message_bytes,omitempty"`
+				MaximumMessages         *int      `json:"maximum_messages,omitempty"`
+				MaximumNodes            *int      `json:"maximum_nodes,omitempty"`
+				MaximumPatternPoints    *int      `json:"maximum_pattern_points,omitempty"`
+				MaximumPointsPerSeries  *int      `json:"maximum_points_per_series,omitempty"`
+				MaximumProfileTypes     *int      `json:"maximum_profile_types,omitempty"`
+				MaximumQueryBytes       *int      `json:"maximum_query_bytes,omitempty"`
+				MaximumRangeSeconds     *int      `json:"maximum_range_seconds,omitempty"`
+				MaximumRequestBytes     *int      `json:"maximum_request_bytes,omitempty"`
+				MaximumResponseBytes    *int      `json:"maximum_response_bytes,omitempty"`
+				MaximumResultBytes      *int      `json:"maximum_result_bytes,omitempty"`
+				MaximumRows             *int      `json:"maximum_rows,omitempty"`
+				MaximumScanBytes        *int      `json:"maximum_scan_bytes,omitempty"`
+				MaximumScanRecords      *int      `json:"maximum_scan_records,omitempty"`
+				MaximumSeries           *int      `json:"maximum_series,omitempty"`
+				MaximumShards           *int      `json:"maximum_shards,omitempty"`
+				MaximumSlowlogEntries   *int      `json:"maximum_slowlog_entries,omitempty"`
+				MaximumSpansPerSpanSet  *int      `json:"maximum_spans_per_span_set,omitempty"`
+				MaximumStaleValues      *int      `json:"maximum_stale_values,omitempty"`
+				MaximumTimeoutSeconds   *int      `json:"maximum_timeout_seconds,omitempty"`
+				MaximumTraces           *int      `json:"maximum_traces,omitempty"`
+				Namespaces              *[]string `json:"namespaces,omitempty"`
+				PodLogs                 *bool     `json:"pod_logs,omitempty"`
+				StuckTransactionSeconds *int      `json:"stuck_transaction_seconds,omitempty"`
+				TimestampField          *string   `json:"timestamp_field,omitempty"`
 			} `json:"policy"`
 
-			// Type Provider adapter type, such as kubernetes, prometheus, loki, tempo, elasticsearch, opensearch, postgresql, mysql, mcp, or http.
+			// Type Provider adapter type, such as kubernetes, prometheus, loki, tempo, pyroscope, elasticsearch, opensearch, postgresql, mysql, mcp, http, kafka, redis, or valkey.
 			Type    string  `json:"type"`
 			Version *string `json:"version"`
 		} `json:"providers"`
@@ -56492,9 +57866,12 @@ type PrivateAgentSummary struct {
 		DeploymentMode PrivateAgentSummaryAttributesDeploymentMode `json:"deployment_mode"`
 
 		// Description Non-sensitive routing metadata. Do not include secrets or personal data.
-		Description *string    `json:"description"`
-		LastSeenAt  *time.Time `json:"last_seen_at"`
-		Name        string     `json:"name"`
+		Description *string `json:"description"`
+
+		// Enabled For active agents, whether Rootly may advertise tools and assign new work.
+		Enabled    bool       `json:"enabled"`
+		LastSeenAt *time.Time `json:"last_seen_at"`
+		Name       string     `json:"name"`
 
 		// Online Active agent seen within two minutes; does not imply all providers are healthy.
 		Online       bool                                `json:"online"`
@@ -56521,6 +57898,7 @@ type PrivateAgentUpdate struct {
 		Attributes struct {
 			// Description Non-sensitive routing metadata. Do not include secrets or personal data.
 			Description *string `json:"description,omitempty"`
+			Enabled     *bool   `json:"enabled,omitempty"`
 			Name        *string `json:"name,omitempty"`
 		} `json:"attributes"`
 		Type PrivateAgentUpdateDataType `json:"type"`
@@ -56529,6 +57907,229 @@ type PrivateAgentUpdate struct {
 
 // PrivateAgentUpdateDataType defines model for PrivateAgentUpdate.Data.Type.
 type PrivateAgentUpdateDataType string
+
+// Problem defines model for problem.
+type Problem struct {
+	// ActionItemsCount Number of action items on the problem
+	ActionItemsCount *int `json:"action_items_count,omitempty"`
+
+	// CancellationReason The reason for cancelling the problem
+	CancellationReason *string `json:"cancellation_reason,omitempty"`
+
+	// CancelledAt When the problem was cancelled
+	CancelledAt *string `json:"cancelled_at,omitempty"`
+
+	// CancelledByUserId ID of the user who cancelled the problem
+	CancelledByUserId *int `json:"cancelled_by_user_id,omitempty"`
+
+	// CompletedAt When the problem was completed
+	CompletedAt *string `json:"completed_at,omitempty"`
+
+	// CompletedByUserId ID of the user who completed the problem
+	CompletedByUserId *int `json:"completed_by_user_id,omitempty"`
+
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// CreatedByUserId ID of the user who created the problem
+	CreatedByUserId *int `json:"created_by_user_id,omitempty"`
+
+	// DeferralReason The reason and accepted risk for deferring the problem
+	DeferralReason *string `json:"deferral_reason,omitempty"`
+
+	// DeferredAt When the problem was deferred
+	DeferredAt *string `json:"deferred_at,omitempty"`
+
+	// DeferredByUserId ID of the user who approved deferring the problem
+	DeferredByUserId *int `json:"deferred_by_user_id,omitempty"`
+
+	// Description The description of the problem
+	Description *string `json:"description,omitempty"`
+
+	// DisplayId Human-readable identifier of the problem (e.g. PROB-12)
+	DisplayId *string `json:"display_id,omitempty"`
+
+	// DueDate The due date of the problem
+	DueDate *openapi_types.Date `json:"due_date,omitempty"`
+
+	// ExitCriteria The exit criteria of the problem
+	ExitCriteria *string `json:"exit_criteria,omitempty"`
+
+	// ImpactSoFar The impact observed so far
+	ImpactSoFar *string `json:"impact_so_far,omitempty"`
+
+	// InProgressAt When the problem moved to in progress
+	InProgressAt *string `json:"in_progress_at,omitempty"`
+
+	// InProgressByUserId ID of the user who moved the problem to in progress
+	InProgressByUserId *int `json:"in_progress_by_user_id,omitempty"`
+
+	// IncidentIds IDs of incidents linked to the problem
+	IncidentIds *[]string `json:"incident_ids,omitempty"`
+
+	// IncidentsCount Number of incidents linked to the problem
+	IncidentsCount *int `json:"incidents_count,omitempty"`
+
+	// NextReviewAt The next review date for a deferred problem
+	NextReviewAt *string `json:"next_review_at,omitempty"`
+
+	// OwnerGroupId ID of the group (team) that owns the problem
+	OwnerGroupId *string `json:"owner_group_id,omitempty"`
+
+	// OwnerUserId ID of the user who owns the problem
+	OwnerUserId *int `json:"owner_user_id,omitempty"`
+
+	// Priority The priority of the problem
+	Priority *ProblemPriority `json:"priority,omitempty"`
+
+	// ReReviewCadence Days between reviews for a deferred problem
+	ReReviewCadence *int `json:"re_review_cadence,omitempty"`
+
+	// Resolution The resolution of the problem
+	Resolution *string `json:"resolution,omitempty"`
+
+	// RootCause The root cause of the problem
+	RootCause *string `json:"root_cause,omitempty"`
+
+	// Scope The scope of the problem
+	Scope *string `json:"scope,omitempty"`
+
+	// SequentialId Team-scoped sequential number of the problem
+	SequentialId *int `json:"sequential_id,omitempty"`
+
+	// Status The status of the problem
+	Status *ProblemStatus `json:"status,omitempty"`
+
+	// SubscribersCount Number of users following the problem
+	SubscribersCount *int `json:"subscribers_count,omitempty"`
+
+	// Title The title of the problem
+	Title string `json:"title"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+
+	// Url URL of the problem in the Rootly web app
+	Url *string `json:"url,omitempty"`
+
+	// UsersAssignedCount Number of problem role assignees
+	UsersAssignedCount *int `json:"users_assigned_count,omitempty"`
+}
+
+// ProblemPriority The priority of the problem
+type ProblemPriority string
+
+// ProblemStatus The status of the problem
+type ProblemStatus string
+
+// ProblemActionItem defines model for problem_action_item.
+type ProblemActionItem struct {
+	// AssignedTo User assigned to this action item
+	AssignedTo *UserFlatResponse `json:"assigned_to,omitempty"`
+
+	// AssignedToUserId ID of user you wish to assign this action item
+	AssignedToUserId *int `json:"assigned_to_user_id,omitempty"`
+
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// CreatedBy User who created this action item
+	CreatedBy *UserFlatResponse `json:"created_by,omitempty"`
+
+	// Description The description of the action item
+	Description *string `json:"description,omitempty"`
+
+	// DueDate The due date of the action item
+	DueDate *string `json:"due_date,omitempty"`
+
+	// JiraIssueUrl The Jira issue URL.
+	JiraIssueUrl *string `json:"jira_issue_url,omitempty"`
+
+	// Priority The priority of the action item
+	Priority *ProblemActionItemPriority `json:"priority,omitempty"`
+
+	// ProblemId ID of the problem this action item belongs to
+	ProblemId *string `json:"problem_id,omitempty"`
+
+	// Status The status of the action item
+	Status *ProblemActionItemStatus `json:"status,omitempty"`
+
+	// Summary The summary of the action item
+	Summary string `json:"summary"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// ProblemActionItemPriority The priority of the action item
+type ProblemActionItemPriority string
+
+// ProblemActionItemStatus The status of the action item
+type ProblemActionItemStatus string
+
+// ProblemActionItemList defines model for problem_action_item_list.
+type ProblemActionItemList struct {
+	Data []struct {
+		Attributes ProblemActionItem `json:"attributes"`
+
+		// Id Unique ID of the action item
+		Id   string                        `json:"id"`
+		Type ProblemActionItemListDataType `json:"type"`
+	} `json:"data"`
+	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
+	Links    Links                      `json:"links"`
+	Meta     Meta                       `json:"meta"`
+}
+
+// ProblemActionItemListDataType defines model for ProblemActionItemList.Data.Type.
+type ProblemActionItemListDataType string
+
+// ProblemActionItemResponse defines model for problem_action_item_response.
+type ProblemActionItemResponse struct {
+	Data struct {
+		Attributes ProblemActionItem `json:"attributes"`
+
+		// Id Unique ID of the action item
+		Id   string                            `json:"id"`
+		Type ProblemActionItemResponseDataType `json:"type"`
+	} `json:"data"`
+	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
+}
+
+// ProblemActionItemResponseDataType defines model for ProblemActionItemResponse.Data.Type.
+type ProblemActionItemResponseDataType string
+
+// ProblemList defines model for problem_list.
+type ProblemList struct {
+	Data []struct {
+		Attributes Problem `json:"attributes"`
+
+		// Id Unique ID of the problem
+		Id   string              `json:"id"`
+		Type ProblemListDataType `json:"type"`
+	} `json:"data"`
+	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
+	Links    Links                      `json:"links"`
+	Meta     Meta                       `json:"meta"`
+}
+
+// ProblemListDataType defines model for ProblemList.Data.Type.
+type ProblemListDataType string
+
+// ProblemResponse defines model for problem_response.
+type ProblemResponse struct {
+	Data struct {
+		Attributes Problem `json:"attributes"`
+
+		// Id Unique ID of the problem
+		Id   string                  `json:"id"`
+		Type ProblemResponseDataType `json:"type"`
+	} `json:"data"`
+	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
+}
+
+// ProblemResponseDataType defines model for ProblemResponse.Data.Type.
+type ProblemResponseDataType string
 
 // PublishIncidentTaskParams defines model for publish_incident_task_params.
 type PublishIncidentTaskParams struct {
@@ -56822,6 +58423,15 @@ type RenameSlackChannelTaskParamsTaskType string
 type ResolveAlert struct {
 	Data *struct {
 		Attributes *struct {
+			// Actor The user to record as performing this action. Only available when actor attribution is enabled for the organization; otherwise it is ignored. Only supported with Global and Team API keys; with a Team API key the user must belong to one of the key's teams. When omitted or null, the action is attributed to the API key. Otherwise provide either `email` or `user_id`, not both.
+			Actor *struct {
+				// Email Email of the user, including verified secondary emails.
+				Email *string `json:"email,omitempty"`
+
+				// UserId Rootly ID of the user.
+				UserId *string `json:"user_id,omitempty"`
+			} `json:"actor,omitempty"`
+
 			// ResolutionMessage How was the alert resolved?
 			ResolutionMessage *string `json:"resolution_message,omitempty"`
 
@@ -57367,6 +58977,13 @@ type RunCommandHerokuTaskParamsTaskType string
 type Schedule struct {
 	// AllTimeCoverage 24/7 coverage of the schedule
 	AllTimeCoverage *bool `json:"all_time_coverage,omitempty"`
+
+	// BusinessHours Controls shadow paging on the schedule. Null disables shadow paging. start_time and end_time are HH:MM 24-hour format strings.
+	BusinessHours *struct {
+		EndTime         string `json:"end_time"`
+		IncludeWeekends bool   `json:"include_weekends"`
+		StartTime       string `json:"start_time"`
+	} `json:"business_hours,omitempty"`
 
 	// CreatedAt Date of creation
 	CreatedAt string `json:"created_at"`
@@ -58318,6 +59935,9 @@ type Shift struct {
 	// IsShadow Denotes shift is a shadow shift
 	IsShadow bool `json:"is_shadow"`
 
+	// OverriddenShifts For override shifts, the portions of the regular shifts this override replaces, clipped to the override window. Null for non-override shifts. Available when overridden shifts are enabled for the organization.
+	OverriddenShifts *[]OverriddenShift `json:"overridden_shifts,omitempty"`
+
 	// RotationId ID of rotation
 	RotationId *string `json:"rotation_id"`
 
@@ -58720,6 +60340,15 @@ type SnapshotNewRelicGraphTaskParamsTaskType string
 type SnoozeAlert struct {
 	Data struct {
 		Attributes struct {
+			// Actor The user to record as performing this action. Only available when actor attribution is enabled for the organization; otherwise it is ignored. Only supported with Global and Team API keys; with a Team API key the user must belong to one of the key's teams. When omitted or null, the action is attributed to the API key. Otherwise provide either `email` or `user_id`, not both.
+			Actor *struct {
+				// Email Email of the user, including verified secondary emails.
+				Email *string `json:"email,omitempty"`
+
+				// UserId Rootly ID of the user.
+				UserId *string `json:"user_id,omitempty"`
+			} `json:"actor,omitempty"`
+
 			// DelayMinutes Number of minutes to snooze the alert for
 			DelayMinutes int `json:"delay_minutes"`
 		} `json:"attributes"`
@@ -59543,6 +61172,15 @@ type UpdateAirtableTableRecordTaskParamsTaskType string
 type UpdateAlert struct {
 	Data struct {
 		Attributes struct {
+			// Actor The user to record as performing this action. Only available when actor attribution is enabled for the organization; otherwise it is ignored. Only supported with Global and Team API keys; with a Team API key the user must belong to one of the key's teams. When omitted or null, the action is attributed to the API key. Otherwise provide either `email` or `user_id`, not both.
+			Actor *struct {
+				// Email Email of the user, including verified secondary emails.
+				Email *string `json:"email,omitempty"`
+
+				// UserId Rootly ID of the user.
+				UserId *string `json:"user_id,omitempty"`
+			} `json:"actor,omitempty"`
+
 			// AlertFieldValuesAttributes Custom alert field values to create with the alert
 			AlertFieldValuesAttributes *[]*struct {
 				// AlertFieldId ID of the custom alert field
@@ -59991,8 +61629,8 @@ type UpdateAlertUrgency struct {
 			// Position Position of the alert urgency
 			Position *int `json:"position,omitempty"`
 
-			// RetriggerTimeoutMinutes Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, negative = never.
-			RetriggerTimeoutMinutes *int `json:"retrigger_timeout_minutes,omitempty"`
+			// RetriggerTimeoutMinutes Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, -1 = never.
+			RetriggerTimeoutMinutes *UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes `json:"retrigger_timeout_minutes,omitempty"`
 		} `json:"attributes"`
 
 		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
@@ -60000,6 +61638,9 @@ type UpdateAlertUrgency struct {
 		Type UpdateAlertUrgencyDataType `json:"type"`
 	} `json:"data"`
 }
+
+// UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes Re-trigger acknowledged alerts of this urgency after N minutes; null inherits the workspace default, -1 = never.
+type UpdateAlertUrgencyDataAttributesRetriggerTimeoutMinutes int
 
 // UpdateAlertUrgencyDataType defines model for UpdateAlertUrgency.Data.Type.
 type UpdateAlertUrgencyDataType string
@@ -60126,7 +61767,7 @@ type UpdateAlertsSource struct {
 			// SourceType The alert source type
 			SourceType *UpdateAlertsSourceDataAttributesSourceType `json:"source_type,omitempty"`
 
-			// SourceableAttributes Provide additional attributes for the underlying source. `auto_resolve`, `resolve_state` and `field_mappings_attributes` apply to generic_webhook sources; `accept_threaded_emails` applies to email sources.
+			// SourceableAttributes Provide additional attributes for the underlying source. `auto_resolve`, `resolve_state` and `field_mappings_attributes` apply to generic_webhook sources; `accept_threaded_emails`, `notification_target_type` and `notification_target_id` apply to email sources.
 			SourceableAttributes *struct {
 				// AcceptThreadedEmails Set this to false to reject threaded emails
 				AcceptThreadedEmails *bool `json:"accept_threaded_emails,omitempty"`
@@ -60142,6 +61783,12 @@ type UpdateAlertsSource struct {
 					// JsonPath JSON path expression to extract a specific value from the alert's payload for evaluation. For `notification_target_id` only: if your account has opted in to Dynamic Notification Targets, this may also be a Liquid template that resolves to a notification target id at routing time.
 					JsonPath *string `json:"json_path,omitempty"`
 				} `json:"field_mappings_attributes,omitempty"`
+
+				// NotificationTargetId Email sources only. The ID of the notification target. Set to null to clear it; this also clears `notification_target_type`. Only used when the `email-alert-source-notification-target` feature flag is on for the team.
+				NotificationTargetId *string `json:"notification_target_id,omitempty"`
+
+				// NotificationTargetType Email sources only. The type of the notification target every alert from this source pages directly; While it points to an active, pageable target, Alert Routes are not evaluated. Only used when the `email-alert-source-notification-target` feature flag is on for the team.
+				NotificationTargetType *UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetType `json:"notification_target_type,omitempty"`
 
 				// ResolveState This value is matched with the value extracted from alerts payload using JSON path in field_mappings_attributes
 				ResolveState *string `json:"resolve_state,omitempty"`
@@ -60189,6 +61836,9 @@ type UpdateAlertsSourceDataAttributesSourceType string
 
 // UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField Select the field on which the condition to be evaluated
 type UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesField string
+
+// UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetType Email sources only. The type of the notification target every alert from this source pages directly; While it points to an active, pageable target, Alert Routes are not evaluated. Only used when the `email-alert-source-notification-target` feature flag is on for the team.
+type UpdateAlertsSourceDataAttributesSourceableAttributesNotificationTargetType string
 
 // UpdateAlertsSourceDataType defines model for UpdateAlertsSource.Data.Type.
 type UpdateAlertsSourceDataType string
@@ -61213,8 +62863,8 @@ type UpdateEscalationPath struct {
 			// RepeatCount The number of times this path will be executed until someone acknowledges the alert
 			RepeatCount *int `json:"repeat_count,omitempty"`
 
-			// RetriggerTimeoutMinutes Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, negative = never.
-			RetriggerTimeoutMinutes *int `json:"retrigger_timeout_minutes,omitempty"`
+			// RetriggerTimeoutMinutes Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, -1 = never.
+			RetriggerTimeoutMinutes *UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes `json:"retrigger_timeout_minutes,omitempty"`
 
 			// Rules Escalation path conditions
 			Rules *[]*struct {
@@ -61330,6 +62980,9 @@ type UpdateEscalationPathDataAttributesNotificationTypeRulesNotificationType str
 
 // UpdateEscalationPathDataAttributesPathType The type of escalation path. Cannot be changed after creation.
 type UpdateEscalationPathDataAttributesPathType string
+
+// UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes Re-trigger acknowledged alerts on this path after N minutes; null inherits the urgency/workspace default, -1 = never.
+type UpdateEscalationPathDataAttributesRetriggerTimeoutMinutes int
 
 // UpdateEscalationPathDataAttributesRulesOperator Whether the alert must (or must not) have related incidents
 type UpdateEscalationPathDataAttributesRulesOperator string
@@ -63378,6 +65031,12 @@ type UpdatePagertreeAlertTaskParamsUrgency string
 type UpdatePlaybook struct {
 	Data struct {
 		Attributes struct {
+			// CauseIds The Cause IDs to attach to the incident
+			CauseIds *[]string `json:"cause_ids,omitempty"`
+
+			// Content Sanitized HTML instructions. Still returned when `kind` is `external_url`, where the body may be stale — branch on `kind`, not on `content` being present.
+			Content *string `json:"content,omitempty"`
+
 			// EnvironmentIds The Environment IDs to attach to the incident
 			EnvironmentIds *[]string `json:"environment_ids,omitempty"`
 
@@ -63392,6 +65051,9 @@ type UpdatePlaybook struct {
 
 			// IncidentTypeIds The Incident Type IDs to attach to the incident
 			IncidentTypeIds *[]string `json:"incident_type_ids,omitempty"`
+
+			// Kind Whether the playbook body lives in Rootly (`internal_document`) or at an external link (`external_url`).
+			Kind *UpdatePlaybookDataAttributesKind `json:"kind,omitempty"`
 
 			// ServiceIds The Service IDs to attach to the incident
 			ServiceIds *[]string `json:"service_ids,omitempty"`
@@ -63411,6 +65073,9 @@ type UpdatePlaybook struct {
 		Type UpdatePlaybookDataType `json:"type"`
 	} `json:"data"`
 }
+
+// UpdatePlaybookDataAttributesKind Whether the playbook body lives in Rootly (`internal_document`) or at an external link (`external_url`).
+type UpdatePlaybookDataAttributesKind string
 
 // UpdatePlaybookDataType defines model for UpdatePlaybook.Data.Type.
 type UpdatePlaybookDataType string
@@ -63470,6 +65135,124 @@ type UpdatePostMortemTemplateDataAttributesFormat string
 
 // UpdatePostMortemTemplateDataType defines model for UpdatePostMortemTemplate.Data.Type.
 type UpdatePostMortemTemplateDataType string
+
+// UpdateProblem defines model for update_problem.
+type UpdateProblem struct {
+	Data struct {
+		Attributes struct {
+			// CancellationReason The reason for cancelling the problem
+			CancellationReason *string `json:"cancellation_reason,omitempty"`
+
+			// DeferralReason The reason and accepted risk for deferring the problem
+			DeferralReason *string `json:"deferral_reason,omitempty"`
+
+			// Description The description of the problem
+			Description *string `json:"description,omitempty"`
+
+			// DueDate The due date of the problem
+			DueDate *openapi_types.Date `json:"due_date,omitempty"`
+
+			// ExitCriteria The exit criteria of the problem
+			ExitCriteria *string `json:"exit_criteria,omitempty"`
+
+			// ExpectedStatus Optional optimistic-concurrency guard: the transition is rejected unless the problem is currently in this status.
+			ExpectedStatus *UpdateProblemDataAttributesExpectedStatus `json:"expected_status,omitempty"`
+
+			// FormFieldSelections Custom (form) field selections for the problem
+			FormFieldSelections *[]map[string]interface{} `json:"form_field_selections,omitempty"`
+
+			// ImpactSoFar The impact observed so far
+			ImpactSoFar *string `json:"impact_so_far,omitempty"`
+
+			// NextReviewAt The next review date for a deferred problem
+			NextReviewAt *string `json:"next_review_at,omitempty"`
+
+			// OwnerGroupId ID of the group (team) that owns the problem
+			OwnerGroupId *string `json:"owner_group_id,omitempty"`
+
+			// OwnerUserId ID of the user who owns the problem
+			OwnerUserId *int `json:"owner_user_id,omitempty"`
+
+			// Priority The priority of the problem
+			Priority *UpdateProblemDataAttributesPriority `json:"priority,omitempty"`
+
+			// ReReviewCadence Days between reviews for a deferred problem
+			ReReviewCadence *int `json:"re_review_cadence,omitempty"`
+
+			// Resolution The resolution of the problem
+			Resolution *string `json:"resolution,omitempty"`
+
+			// RootCause The root cause of the problem
+			RootCause *string `json:"root_cause,omitempty"`
+
+			// Scope The scope of the problem
+			Scope *string `json:"scope,omitempty"`
+
+			// Status Target status. Transitions run through the problem status workflow: gate fields required by the target status must be supplied in the same request. Other updatable attributes may accompany a status change and are applied atomically with it.
+			Status *UpdateProblemDataAttributesStatus `json:"status,omitempty"`
+
+			// Title The title of the problem
+			Title *string `json:"title,omitempty"`
+		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string               `json:"id,omitempty"`
+		Type UpdateProblemDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateProblemDataAttributesExpectedStatus Optional optimistic-concurrency guard: the transition is rejected unless the problem is currently in this status.
+type UpdateProblemDataAttributesExpectedStatus string
+
+// UpdateProblemDataAttributesPriority The priority of the problem
+type UpdateProblemDataAttributesPriority string
+
+// UpdateProblemDataAttributesStatus Target status. Transitions run through the problem status workflow: gate fields required by the target status must be supplied in the same request. Other updatable attributes may accompany a status change and are applied atomically with it.
+type UpdateProblemDataAttributesStatus string
+
+// UpdateProblemDataType defines model for UpdateProblem.Data.Type.
+type UpdateProblemDataType string
+
+// UpdateProblemActionItem defines model for update_problem_action_item.
+type UpdateProblemActionItem struct {
+	Data struct {
+		Attributes struct {
+			// AssignedToUserId ID of user you wish to assign this action item
+			AssignedToUserId *int `json:"assigned_to_user_id,omitempty"`
+
+			// Description The description of the action item
+			Description *string `json:"description,omitempty"`
+
+			// DueDate The due date of the action item
+			DueDate *string `json:"due_date,omitempty"`
+
+			// JiraIssueUrl The Jira issue URL.
+			JiraIssueUrl *string `json:"jira_issue_url,omitempty"`
+
+			// Priority The priority of the action item
+			Priority *UpdateProblemActionItemDataAttributesPriority `json:"priority,omitempty"`
+
+			// Status The status of the action item
+			Status *UpdateProblemActionItemDataAttributesStatus `json:"status,omitempty"`
+
+			// Summary The summary of the action item
+			Summary *string `json:"summary,omitempty"`
+		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                         `json:"id,omitempty"`
+		Type UpdateProblemActionItemDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateProblemActionItemDataAttributesPriority The priority of the action item
+type UpdateProblemActionItemDataAttributesPriority string
+
+// UpdateProblemActionItemDataAttributesStatus The status of the action item
+type UpdateProblemActionItemDataAttributesStatus string
+
+// UpdateProblemActionItemDataType defines model for UpdateProblemActionItem.Data.Type.
+type UpdateProblemActionItemDataType string
 
 // UpdatePulse defines model for update_pulse.
 type UpdatePulse struct {
@@ -63838,6 +65621,13 @@ type UpdateSchedule struct {
 		Attributes struct {
 			// AllTimeCoverage 24/7 coverage of the schedule
 			AllTimeCoverage *bool `json:"all_time_coverage,omitempty"`
+
+			// BusinessHours Controls shadow paging on the schedule. Null disables shadow paging. start_time and end_time are HH:MM 24-hour format strings.
+			BusinessHours *struct {
+				EndTime         string `json:"end_time"`
+				IncludeWeekends bool   `json:"include_weekends"`
+				StartTime       string `json:"start_time"`
+			} `json:"business_hours,omitempty"`
 
 			// Description The description of the schedule
 			Description *string `json:"description,omitempty"`
@@ -65136,9 +66926,12 @@ type UpdateWorkflow struct {
 			// FailureNotificationMode Where failure notifications for this workflow are sent. `inherit` uses the account default channel, `custom` uses `failure_notification_channels`, `off` suppresses them.
 			FailureNotificationMode *UpdateWorkflowDataAttributesFailureNotificationMode `json:"failure_notification_mode,omitempty"`
 			FunctionalityIds        *[]string                                            `json:"functionality_ids,omitempty"`
-			GroupIds                *[]string                                            `json:"group_ids,omitempty"`
-			IncidentRoleIds         *[]string                                            `json:"incident_role_ids,omitempty"`
-			IncidentTypeIds         *[]string                                            `json:"incident_type_ids,omitempty"`
+
+			// GroupAssignmentIds Owning team IDs. Requires team-scoped workflows.
+			GroupAssignmentIds *[]string `json:"group_assignment_ids,omitempty"`
+			GroupIds           *[]string `json:"group_ids,omitempty"`
+			IncidentRoleIds    *[]string `json:"incident_role_ids,omitempty"`
+			IncidentTypeIds    *[]string `json:"incident_type_ids,omitempty"`
 
 			// Locked Restricts workflow edits to admins when turned on. Only admins can set this field.
 			Locked *bool `json:"locked,omitempty"`
@@ -65156,9 +66949,12 @@ type UpdateWorkflow struct {
 			RepeatConditionNumberOfRepeats *int `json:"repeat_condition_number_of_repeats,omitempty"`
 
 			// RepeatEveryDuration Repeat workflow every duration
-			RepeatEveryDuration *string   `json:"repeat_every_duration,omitempty"`
-			ServiceIds          *[]string `json:"service_ids,omitempty"`
-			SeverityIds         *[]string `json:"severity_ids,omitempty"`
+			RepeatEveryDuration *string `json:"repeat_every_duration,omitempty"`
+
+			// RunOncePerResource When true, the workflow runs at most once per incident. Later triggers on the same incident create a canceled run instead. Manual runs and repeats are not affected. Only applies to incident workflows.
+			RunOncePerResource *bool     `json:"run_once_per_resource,omitempty"`
+			ServiceIds         *[]string `json:"service_ids,omitempty"`
+			SeverityIds        *[]string `json:"severity_ids,omitempty"`
 
 			// Slug Deprecated. `slug` is derived from `name`; any submitted value is ignored. This property will be removed from the request schema in a future version.
 			// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
@@ -65895,9 +67691,12 @@ type Workflow struct {
 	// FailureNotificationMode Where failure notifications for this workflow are sent. `inherit` uses the account default channel, `custom` uses `failure_notification_channels`, `off` suppresses them.
 	FailureNotificationMode *WorkflowFailureNotificationMode `json:"failure_notification_mode,omitempty"`
 	FunctionalityIds        *[]string                        `json:"functionality_ids,omitempty"`
-	GroupIds                *[]string                        `json:"group_ids,omitempty"`
-	IncidentRoleIds         *[]string                        `json:"incident_role_ids,omitempty"`
-	IncidentTypeIds         *[]string                        `json:"incident_type_ids,omitempty"`
+
+	// GroupAssignmentIds Owning team IDs. Requires team-scoped workflows.
+	GroupAssignmentIds *[]string `json:"group_assignment_ids,omitempty"`
+	GroupIds           *[]string `json:"group_ids,omitempty"`
+	IncidentRoleIds    *[]string `json:"incident_role_ids,omitempty"`
+	IncidentTypeIds    *[]string `json:"incident_type_ids,omitempty"`
 
 	// Locked Restricts workflow edits to admins when turned on. Only admins can set this field.
 	Locked *bool `json:"locked,omitempty"`
@@ -65917,8 +67716,11 @@ type Workflow struct {
 	// RepeatEveryDuration Repeat workflow every duration
 	RepeatEveryDuration *string             `json:"repeat_every_duration,omitempty"`
 	RepeatOn            *[]WorkflowRepeatOn `json:"repeat_on,omitempty"`
-	ServiceIds          *[]string           `json:"service_ids,omitempty"`
-	SeverityIds         *[]string           `json:"severity_ids,omitempty"`
+
+	// RunOncePerResource When true, the workflow runs at most once per incident. Later triggers on the same incident create a canceled run instead. Manual runs and repeats are not affected. Only applies to incident workflows.
+	RunOncePerResource *bool     `json:"run_once_per_resource,omitempty"`
+	ServiceIds         *[]string `json:"service_ids,omitempty"`
+	SeverityIds        *[]string `json:"severity_ids,omitempty"`
 
 	// Slug The slug of the workflow
 	Slug          *string                 `json:"slug,omitempty"`
@@ -68232,6 +70034,90 @@ type ListPrivateAgentsParams struct {
 	PageSize   *int `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
+// ListAllProblemActionItemsParams defines parameters for ListAllProblemActionItems.
+type ListAllProblemActionItemsParams struct {
+	PageNumber                  *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize                    *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	Sort                        *string `form:"sort,omitempty" json:"sort,omitempty"`
+	ProblemId                   *string `form:"problem_id,omitempty" json:"problem_id,omitempty"`
+	FilterSearch                *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterDueDateGt             *string `form:"filter[due_date][gt],omitempty" json:"filter[due_date][gt],omitempty"`
+	FilterDueDateGte            *string `form:"filter[due_date][gte],omitempty" json:"filter[due_date][gte],omitempty"`
+	FilterDueDateLt             *string `form:"filter[due_date][lt],omitempty" json:"filter[due_date][lt],omitempty"`
+	FilterDueDateLte            *string `form:"filter[due_date][lte],omitempty" json:"filter[due_date][lte],omitempty"`
+	FilterCreatedAtGt           *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte          *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt           *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte          *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	FilterStatusEq              *string `form:"filter[status][eq],omitempty" json:"filter[status][eq],omitempty"`
+	FilterStatusNotEq           *string `form:"filter[status][not_eq],omitempty" json:"filter[status][not_eq],omitempty"`
+	FilterStatusIn              *string `form:"filter[status][in],omitempty" json:"filter[status][in],omitempty"`
+	FilterStatusNotIn           *string `form:"filter[status][not_in],omitempty" json:"filter[status][not_in],omitempty"`
+	FilterPriorityEq            *string `form:"filter[priority][eq],omitempty" json:"filter[priority][eq],omitempty"`
+	FilterPriorityNotEq         *string `form:"filter[priority][not_eq],omitempty" json:"filter[priority][not_eq],omitempty"`
+	FilterPriorityIn            *string `form:"filter[priority][in],omitempty" json:"filter[priority][in],omitempty"`
+	FilterPriorityNotIn         *string `form:"filter[priority][not_in],omitempty" json:"filter[priority][not_in],omitempty"`
+	FilterAssignedToUserIdEq    *string `form:"filter[assigned_to_user_id][eq],omitempty" json:"filter[assigned_to_user_id][eq],omitempty"`
+	FilterAssignedToUserIdNotEq *string `form:"filter[assigned_to_user_id][not_eq],omitempty" json:"filter[assigned_to_user_id][not_eq],omitempty"`
+	FilterAssignedToUserIdIn    *string `form:"filter[assigned_to_user_id][in],omitempty" json:"filter[assigned_to_user_id][in],omitempty"`
+	FilterAssignedToUserIdNotIn *string `form:"filter[assigned_to_user_id][not_in],omitempty" json:"filter[assigned_to_user_id][not_in],omitempty"`
+}
+
+// ListProblemsParams defines parameters for ListProblems.
+type ListProblemsParams struct {
+	PageNumber            *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize              *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	Sort                  *string `form:"sort,omitempty" json:"sort,omitempty"`
+	FilterSearch          *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterOwnerUserId     *int    `form:"filter[owner_user_id],omitempty" json:"filter[owner_user_id],omitempty"`
+	FilterOwnerGroupId    *string `form:"filter[owner_group_id],omitempty" json:"filter[owner_group_id],omitempty"`
+	FilterCreatedByUserId *int    `form:"filter[created_by_user_id],omitempty" json:"filter[created_by_user_id],omitempty"`
+	FilterCreatedAtGt     *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte    *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt     *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte    *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	FilterDueDateGt       *string `form:"filter[due_date][gt],omitempty" json:"filter[due_date][gt],omitempty"`
+	FilterDueDateGte      *string `form:"filter[due_date][gte],omitempty" json:"filter[due_date][gte],omitempty"`
+	FilterDueDateLt       *string `form:"filter[due_date][lt],omitempty" json:"filter[due_date][lt],omitempty"`
+	FilterDueDateLte      *string `form:"filter[due_date][lte],omitempty" json:"filter[due_date][lte],omitempty"`
+	FilterStatusEq        *string `form:"filter[status][eq],omitempty" json:"filter[status][eq],omitempty"`
+	FilterStatusNotEq     *string `form:"filter[status][not_eq],omitempty" json:"filter[status][not_eq],omitempty"`
+	FilterStatusIn        *string `form:"filter[status][in],omitempty" json:"filter[status][in],omitempty"`
+	FilterStatusNotIn     *string `form:"filter[status][not_in],omitempty" json:"filter[status][not_in],omitempty"`
+	FilterPriorityEq      *string `form:"filter[priority][eq],omitempty" json:"filter[priority][eq],omitempty"`
+	FilterPriorityNotEq   *string `form:"filter[priority][not_eq],omitempty" json:"filter[priority][not_eq],omitempty"`
+	FilterPriorityIn      *string `form:"filter[priority][in],omitempty" json:"filter[priority][in],omitempty"`
+	FilterPriorityNotIn   *string `form:"filter[priority][not_in],omitempty" json:"filter[priority][not_in],omitempty"`
+}
+
+// ListProblemActionItemsParams defines parameters for ListProblemActionItems.
+type ListProblemActionItemsParams struct {
+	PageNumber                  *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize                    *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	Sort                        *string `form:"sort,omitempty" json:"sort,omitempty"`
+	FilterSearch                *string `form:"filter[search],omitempty" json:"filter[search],omitempty"`
+	FilterDueDateGt             *string `form:"filter[due_date][gt],omitempty" json:"filter[due_date][gt],omitempty"`
+	FilterDueDateGte            *string `form:"filter[due_date][gte],omitempty" json:"filter[due_date][gte],omitempty"`
+	FilterDueDateLt             *string `form:"filter[due_date][lt],omitempty" json:"filter[due_date][lt],omitempty"`
+	FilterDueDateLte            *string `form:"filter[due_date][lte],omitempty" json:"filter[due_date][lte],omitempty"`
+	FilterCreatedAtGt           *string `form:"filter[created_at][gt],omitempty" json:"filter[created_at][gt],omitempty"`
+	FilterCreatedAtGte          *string `form:"filter[created_at][gte],omitempty" json:"filter[created_at][gte],omitempty"`
+	FilterCreatedAtLt           *string `form:"filter[created_at][lt],omitempty" json:"filter[created_at][lt],omitempty"`
+	FilterCreatedAtLte          *string `form:"filter[created_at][lte],omitempty" json:"filter[created_at][lte],omitempty"`
+	FilterStatusEq              *string `form:"filter[status][eq],omitempty" json:"filter[status][eq],omitempty"`
+	FilterStatusNotEq           *string `form:"filter[status][not_eq],omitempty" json:"filter[status][not_eq],omitempty"`
+	FilterStatusIn              *string `form:"filter[status][in],omitempty" json:"filter[status][in],omitempty"`
+	FilterStatusNotIn           *string `form:"filter[status][not_in],omitempty" json:"filter[status][not_in],omitempty"`
+	FilterPriorityEq            *string `form:"filter[priority][eq],omitempty" json:"filter[priority][eq],omitempty"`
+	FilterPriorityNotEq         *string `form:"filter[priority][not_eq],omitempty" json:"filter[priority][not_eq],omitempty"`
+	FilterPriorityIn            *string `form:"filter[priority][in],omitempty" json:"filter[priority][in],omitempty"`
+	FilterPriorityNotIn         *string `form:"filter[priority][not_in],omitempty" json:"filter[priority][not_in],omitempty"`
+	FilterAssignedToUserIdEq    *string `form:"filter[assigned_to_user_id][eq],omitempty" json:"filter[assigned_to_user_id][eq],omitempty"`
+	FilterAssignedToUserIdNotEq *string `form:"filter[assigned_to_user_id][not_eq],omitempty" json:"filter[assigned_to_user_id][not_eq],omitempty"`
+	FilterAssignedToUserIdIn    *string `form:"filter[assigned_to_user_id][in],omitempty" json:"filter[assigned_to_user_id][in],omitempty"`
+	FilterAssignedToUserIdNotIn *string `form:"filter[assigned_to_user_id][not_in],omitempty" json:"filter[assigned_to_user_id][not_in],omitempty"`
+}
+
 // ListPulsesParams defines parameters for ListPulses.
 type ListPulsesParams struct {
 	Include                 *string `form:"include,omitempty" json:"include,omitempty"`
@@ -69023,6 +70909,9 @@ type CreateAlertEventApplicationVndAPIPlusJSONRequestBody = NewAlertEvent
 // UpdateAlertApplicationVndAPIPlusJSONRequestBody defines body for UpdateAlert for application/vnd.api+json ContentType.
 type UpdateAlertApplicationVndAPIPlusJSONRequestBody = UpdateAlert
 
+// AcknowledgeAlertApplicationVndAPIPlusJSONRequestBody defines body for AcknowledgeAlert for application/vnd.api+json ContentType.
+type AcknowledgeAlertApplicationVndAPIPlusJSONRequestBody = AcknowledgeAlert
+
 // EscalateAlertApplicationVndAPIPlusJSONRequestBody defines body for EscalateAlert for application/vnd.api+json ContentType.
 type EscalateAlertApplicationVndAPIPlusJSONRequestBody = EscalateAlert
 
@@ -69439,6 +71328,21 @@ type UpdateIncidentPostmortemApplicationVndAPIPlusJSONRequestBody = UpdateIncide
 
 // UpdatePrivateAgentApplicationVndAPIPlusJSONRequestBody defines body for UpdatePrivateAgent for application/vnd.api+json ContentType.
 type UpdatePrivateAgentApplicationVndAPIPlusJSONRequestBody = PrivateAgentUpdate
+
+// UpdateProblemActionItemApplicationVndAPIPlusJSONRequestBody defines body for UpdateProblemActionItem for application/vnd.api+json ContentType.
+type UpdateProblemActionItemApplicationVndAPIPlusJSONRequestBody = UpdateProblemActionItem
+
+// CreateProblemApplicationVndAPIPlusJSONRequestBody defines body for CreateProblem for application/vnd.api+json ContentType.
+type CreateProblemApplicationVndAPIPlusJSONRequestBody = NewProblem
+
+// UpdateProblemApplicationVndAPIPlusJSONRequestBody defines body for UpdateProblem for application/vnd.api+json ContentType.
+type UpdateProblemApplicationVndAPIPlusJSONRequestBody = UpdateProblem
+
+// LinkProblemIncidentsApplicationVndAPIPlusJSONRequestBody defines body for LinkProblemIncidents for application/vnd.api+json ContentType.
+type LinkProblemIncidentsApplicationVndAPIPlusJSONRequestBody = LinkIncidents
+
+// CreateProblemActionItemApplicationVndAPIPlusJSONRequestBody defines body for CreateProblemActionItem for application/vnd.api+json ContentType.
+type CreateProblemActionItemApplicationVndAPIPlusJSONRequestBody = NewProblemActionItem
 
 // CreatePulseApplicationVndAPIPlusJSONRequestBody defines body for CreatePulse for application/vnd.api+json ContentType.
 type CreatePulseApplicationVndAPIPlusJSONRequestBody = NewPulse
@@ -85251,8 +87155,10 @@ type ClientInterface interface {
 
 	UpdateAlertWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AcknowledgeAlert request
-	AcknowledgeAlert(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// AcknowledgeAlertWithBody request with any body
+	AcknowledgeAlertWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	AcknowledgeAlertWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body AcknowledgeAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// EscalateAlertWithBody request with any body
 	EscalateAlertWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -86604,6 +88510,55 @@ type ClientInterface interface {
 
 	// RevokePrivateAgent request
 	RevokePrivateAgent(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListAllProblemActionItems request
+	ListAllProblemActionItems(ctx context.Context, params *ListAllProblemActionItemsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteProblemActionItem request
+	DeleteProblemActionItem(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetProblemActionItem request
+	GetProblemActionItem(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateProblemActionItemWithBody request with any body
+	UpdateProblemActionItemWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateProblemActionItemWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateProblemActionItemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListProblems request
+	ListProblems(ctx context.Context, params *ListProblemsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateProblemWithBody request with any body
+	CreateProblemWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateProblemWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateProblemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteProblem request
+	DeleteProblem(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetProblem request
+	GetProblem(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateProblemWithBody request with any body
+	UpdateProblemWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateProblemWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateProblemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// LinkProblemIncidentsWithBody request with any body
+	LinkProblemIncidentsWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	LinkProblemIncidentsWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body LinkProblemIncidentsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UnlinkProblemIncident request
+	UnlinkProblemIncident(ctx context.Context, id string, incidentId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListProblemActionItems request
+	ListProblemActionItems(ctx context.Context, problemId string, params *ListProblemActionItemsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateProblemActionItemWithBody request with any body
+	CreateProblemActionItemWithBody(ctx context.Context, problemId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateProblemActionItemWithApplicationVndAPIPlusJSONBody(ctx context.Context, problemId string, body CreateProblemActionItemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListPulses request
 	ListPulses(ctx context.Context, params *ListPulsesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -88115,8 +90070,20 @@ func (c *Client) UpdateAlertWithApplicationVndAPIPlusJSONBody(ctx context.Contex
 	return c.Client.Do(req)
 }
 
-func (c *Client) AcknowledgeAlert(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAcknowledgeAlertRequest(c.Server, id)
+func (c *Client) AcknowledgeAlertWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAcknowledgeAlertRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AcknowledgeAlertWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body AcknowledgeAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAcknowledgeAlertRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -94053,6 +96020,222 @@ func (c *Client) UpdatePrivateAgentWithApplicationVndAPIPlusJSONBody(ctx context
 
 func (c *Client) RevokePrivateAgent(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRevokePrivateAgentRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListAllProblemActionItems(ctx context.Context, params *ListAllProblemActionItemsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAllProblemActionItemsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteProblemActionItem(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteProblemActionItemRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetProblemActionItem(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetProblemActionItemRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateProblemActionItemWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateProblemActionItemRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateProblemActionItemWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateProblemActionItemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateProblemActionItemRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListProblems(ctx context.Context, params *ListProblemsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListProblemsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateProblemWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateProblemRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateProblemWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateProblemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateProblemRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteProblem(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteProblemRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetProblem(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetProblemRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateProblemWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateProblemRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateProblemWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateProblemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateProblemRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) LinkProblemIncidentsWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLinkProblemIncidentsRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) LinkProblemIncidentsWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body LinkProblemIncidentsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLinkProblemIncidentsRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UnlinkProblemIncident(ctx context.Context, id string, incidentId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUnlinkProblemIncidentRequest(c.Server, id, incidentId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListProblemActionItems(ctx context.Context, problemId string, params *ListProblemActionItemsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListProblemActionItemsRequest(c.Server, problemId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateProblemActionItemWithBody(ctx context.Context, problemId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateProblemActionItemRequestWithBody(c.Server, problemId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateProblemActionItemWithApplicationVndAPIPlusJSONBody(ctx context.Context, problemId string, body CreateProblemActionItemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateProblemActionItemRequestWithApplicationVndAPIPlusJSONBody(c.Server, problemId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -101372,8 +103555,19 @@ func NewUpdateAlertRequestWithBody(server string, id string, contentType string,
 	return req, nil
 }
 
-// NewAcknowledgeAlertRequest generates requests for AcknowledgeAlert
-func NewAcknowledgeAlertRequest(server string, id string) (*http.Request, error) {
+// NewAcknowledgeAlertRequestWithApplicationVndAPIPlusJSONBody calls the generic AcknowledgeAlert builder with application/vnd.api+json body
+func NewAcknowledgeAlertRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body AcknowledgeAlertApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAcknowledgeAlertRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewAcknowledgeAlertRequestWithBody generates requests for AcknowledgeAlert with any type of body
+func NewAcknowledgeAlertRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -101398,10 +103592,12 @@ func NewAcknowledgeAlertRequest(server string, id string) (*http.Request, error)
 		return nil, err
 	}
 
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -126199,6 +128395,1408 @@ func NewRevokePrivateAgentRequest(server string, id openapi_types.UUID) (*http.R
 	return req, nil
 }
 
+// NewListAllProblemActionItemsRequest generates requests for ListAllProblemActionItems
+func NewListAllProblemActionItemsRequest(server string, params *ListAllProblemActionItemsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/problem_action_items")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[number]", *params.PageNumber, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[size]", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ProblemId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "problem_id", *params.ProblemId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterSearch != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[search]", *params.FilterSearch, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterDueDateGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[due_date][gt]", *params.FilterDueDateGt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterDueDateGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[due_date][gte]", *params.FilterDueDateGte, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterDueDateLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[due_date][lt]", *params.FilterDueDateLt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterDueDateLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[due_date][lte]", *params.FilterDueDateLte, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][gt]", *params.FilterCreatedAtGt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][gte]", *params.FilterCreatedAtGte, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][lt]", *params.FilterCreatedAtLt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][lte]", *params.FilterCreatedAtLte, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterStatusEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[status][eq]", *params.FilterStatusEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterStatusNotEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[status][not_eq]", *params.FilterStatusNotEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterStatusIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[status][in]", *params.FilterStatusIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterStatusNotIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[status][not_in]", *params.FilterStatusNotIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterPriorityEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[priority][eq]", *params.FilterPriorityEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterPriorityNotEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[priority][not_eq]", *params.FilterPriorityNotEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterPriorityIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[priority][in]", *params.FilterPriorityIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterPriorityNotIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[priority][not_in]", *params.FilterPriorityNotIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterAssignedToUserIdEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[assigned_to_user_id][eq]", *params.FilterAssignedToUserIdEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterAssignedToUserIdNotEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[assigned_to_user_id][not_eq]", *params.FilterAssignedToUserIdNotEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterAssignedToUserIdIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[assigned_to_user_id][in]", *params.FilterAssignedToUserIdIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterAssignedToUserIdNotIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[assigned_to_user_id][not_in]", *params.FilterAssignedToUserIdNotIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDeleteProblemActionItemRequest generates requests for DeleteProblemActionItem
+func NewDeleteProblemActionItemRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/problem_action_items/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetProblemActionItemRequest generates requests for GetProblemActionItem
+func NewGetProblemActionItemRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/problem_action_items/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateProblemActionItemRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateProblemActionItem builder with application/vnd.api+json body
+func NewUpdateProblemActionItemRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateProblemActionItemApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateProblemActionItemRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateProblemActionItemRequestWithBody generates requests for UpdateProblemActionItem with any type of body
+func NewUpdateProblemActionItemRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/problem_action_items/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListProblemsRequest generates requests for ListProblems
+func NewListProblemsRequest(server string, params *ListProblemsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/problems")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[number]", *params.PageNumber, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[size]", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterSearch != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[search]", *params.FilterSearch, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterOwnerUserId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[owner_user_id]", *params.FilterOwnerUserId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterOwnerGroupId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[owner_group_id]", *params.FilterOwnerGroupId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterCreatedByUserId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_by_user_id]", *params.FilterCreatedByUserId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][gt]", *params.FilterCreatedAtGt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][gte]", *params.FilterCreatedAtGte, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][lt]", *params.FilterCreatedAtLt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][lte]", *params.FilterCreatedAtLte, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterDueDateGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[due_date][gt]", *params.FilterDueDateGt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterDueDateGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[due_date][gte]", *params.FilterDueDateGte, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterDueDateLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[due_date][lt]", *params.FilterDueDateLt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterDueDateLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[due_date][lte]", *params.FilterDueDateLte, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterStatusEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[status][eq]", *params.FilterStatusEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterStatusNotEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[status][not_eq]", *params.FilterStatusNotEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterStatusIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[status][in]", *params.FilterStatusIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterStatusNotIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[status][not_in]", *params.FilterStatusNotIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterPriorityEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[priority][eq]", *params.FilterPriorityEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterPriorityNotEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[priority][not_eq]", *params.FilterPriorityNotEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterPriorityIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[priority][in]", *params.FilterPriorityIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterPriorityNotIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[priority][not_in]", *params.FilterPriorityNotIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateProblemRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateProblem builder with application/vnd.api+json body
+func NewCreateProblemRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateProblemApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateProblemRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateProblemRequestWithBody generates requests for CreateProblem with any type of body
+func NewCreateProblemRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/problems")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteProblemRequest generates requests for DeleteProblem
+func NewDeleteProblemRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/problems/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetProblemRequest generates requests for GetProblem
+func NewGetProblemRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/problems/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateProblemRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateProblem builder with application/vnd.api+json body
+func NewUpdateProblemRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateProblemApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateProblemRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateProblemRequestWithBody generates requests for UpdateProblem with any type of body
+func NewUpdateProblemRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/problems/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewLinkProblemIncidentsRequestWithApplicationVndAPIPlusJSONBody calls the generic LinkProblemIncidents builder with application/vnd.api+json body
+func NewLinkProblemIncidentsRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body LinkProblemIncidentsApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewLinkProblemIncidentsRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewLinkProblemIncidentsRequestWithBody generates requests for LinkProblemIncidents with any type of body
+func NewLinkProblemIncidentsRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/problems/%s/incidents", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewUnlinkProblemIncidentRequest generates requests for UnlinkProblemIncident
+func NewUnlinkProblemIncidentRequest(server string, id string, incidentId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "incident_id", incidentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/problems/%s/incidents/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewListProblemActionItemsRequest generates requests for ListProblemActionItems
+func NewListProblemActionItemsRequest(server string, problemId string, params *ListProblemActionItemsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "problem_id", problemId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/problems/%s/action_items", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[number]", *params.PageNumber, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[size]", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterSearch != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[search]", *params.FilterSearch, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterDueDateGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[due_date][gt]", *params.FilterDueDateGt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterDueDateGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[due_date][gte]", *params.FilterDueDateGte, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterDueDateLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[due_date][lt]", *params.FilterDueDateLt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterDueDateLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[due_date][lte]", *params.FilterDueDateLte, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][gt]", *params.FilterCreatedAtGt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtGte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][gte]", *params.FilterCreatedAtGte, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLt != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][lt]", *params.FilterCreatedAtLt, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterCreatedAtLte != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[created_at][lte]", *params.FilterCreatedAtLte, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterStatusEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[status][eq]", *params.FilterStatusEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterStatusNotEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[status][not_eq]", *params.FilterStatusNotEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterStatusIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[status][in]", *params.FilterStatusIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterStatusNotIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[status][not_in]", *params.FilterStatusNotIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterPriorityEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[priority][eq]", *params.FilterPriorityEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterPriorityNotEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[priority][not_eq]", *params.FilterPriorityNotEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterPriorityIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[priority][in]", *params.FilterPriorityIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterPriorityNotIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[priority][not_in]", *params.FilterPriorityNotIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterAssignedToUserIdEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[assigned_to_user_id][eq]", *params.FilterAssignedToUserIdEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterAssignedToUserIdNotEq != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[assigned_to_user_id][not_eq]", *params.FilterAssignedToUserIdNotEq, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterAssignedToUserIdIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[assigned_to_user_id][in]", *params.FilterAssignedToUserIdIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterAssignedToUserIdNotIn != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[assigned_to_user_id][not_in]", *params.FilterAssignedToUserIdNotIn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateProblemActionItemRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateProblemActionItem builder with application/vnd.api+json body
+func NewCreateProblemActionItemRequestWithApplicationVndAPIPlusJSONBody(server string, problemId string, body CreateProblemActionItemApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateProblemActionItemRequestWithBody(server, problemId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateProblemActionItemRequestWithBody generates requests for CreateProblemActionItem with any type of body
+func NewCreateProblemActionItemRequestWithBody(server string, problemId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "problem_id", problemId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/problems/%s/action_items", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListPulsesRequest generates requests for ListPulses
 func NewListPulsesRequest(server string, params *ListPulsesParams) (*http.Request, error) {
 	var err error
@@ -138705,8 +142303,10 @@ type ClientWithResponsesInterface interface {
 
 	UpdateAlertWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAlertResponse, error)
 
-	// AcknowledgeAlertWithResponse request
-	AcknowledgeAlertWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*AcknowledgeAlertResponse, error)
+	// AcknowledgeAlertWithBodyWithResponse request with any body
+	AcknowledgeAlertWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AcknowledgeAlertResponse, error)
+
+	AcknowledgeAlertWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body AcknowledgeAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*AcknowledgeAlertResponse, error)
 
 	// EscalateAlertWithBodyWithResponse request with any body
 	EscalateAlertWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EscalateAlertResponse, error)
@@ -140058,6 +143658,55 @@ type ClientWithResponsesInterface interface {
 
 	// RevokePrivateAgentWithResponse request
 	RevokePrivateAgentWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*RevokePrivateAgentResponse, error)
+
+	// ListAllProblemActionItemsWithResponse request
+	ListAllProblemActionItemsWithResponse(ctx context.Context, params *ListAllProblemActionItemsParams, reqEditors ...RequestEditorFn) (*ListAllProblemActionItemsResponse, error)
+
+	// DeleteProblemActionItemWithResponse request
+	DeleteProblemActionItemWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteProblemActionItemResponse, error)
+
+	// GetProblemActionItemWithResponse request
+	GetProblemActionItemWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetProblemActionItemResponse, error)
+
+	// UpdateProblemActionItemWithBodyWithResponse request with any body
+	UpdateProblemActionItemWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateProblemActionItemResponse, error)
+
+	UpdateProblemActionItemWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateProblemActionItemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateProblemActionItemResponse, error)
+
+	// ListProblemsWithResponse request
+	ListProblemsWithResponse(ctx context.Context, params *ListProblemsParams, reqEditors ...RequestEditorFn) (*ListProblemsResponse, error)
+
+	// CreateProblemWithBodyWithResponse request with any body
+	CreateProblemWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateProblemResponse, error)
+
+	CreateProblemWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateProblemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateProblemResponse, error)
+
+	// DeleteProblemWithResponse request
+	DeleteProblemWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteProblemResponse, error)
+
+	// GetProblemWithResponse request
+	GetProblemWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetProblemResponse, error)
+
+	// UpdateProblemWithBodyWithResponse request with any body
+	UpdateProblemWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateProblemResponse, error)
+
+	UpdateProblemWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateProblemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateProblemResponse, error)
+
+	// LinkProblemIncidentsWithBodyWithResponse request with any body
+	LinkProblemIncidentsWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LinkProblemIncidentsResponse, error)
+
+	LinkProblemIncidentsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body LinkProblemIncidentsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*LinkProblemIncidentsResponse, error)
+
+	// UnlinkProblemIncidentWithResponse request
+	UnlinkProblemIncidentWithResponse(ctx context.Context, id string, incidentId string, reqEditors ...RequestEditorFn) (*UnlinkProblemIncidentResponse, error)
+
+	// ListProblemActionItemsWithResponse request
+	ListProblemActionItemsWithResponse(ctx context.Context, problemId string, params *ListProblemActionItemsParams, reqEditors ...RequestEditorFn) (*ListProblemActionItemsResponse, error)
+
+	// CreateProblemActionItemWithBodyWithResponse request with any body
+	CreateProblemActionItemWithBodyWithResponse(ctx context.Context, problemId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateProblemActionItemResponse, error)
+
+	CreateProblemActionItemWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, problemId string, body CreateProblemActionItemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateProblemActionItemResponse, error)
 
 	// ListPulsesWithResponse request
 	ListPulsesWithResponse(ctx context.Context, params *ListPulsesParams, reqEditors ...RequestEditorFn) (*ListPulsesResponse, error)
@@ -142342,7 +145991,9 @@ type AcknowledgeAlertResponse struct {
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *AlertResponse
 	ApplicationvndApiJSON400 *ErrorsList
+	ApplicationvndApiJSON403 *ErrorsList
 	ApplicationvndApiJSON404 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -153279,8 +156930,9 @@ func (r GetPrivateAgentResponse) ContentType() string {
 }
 
 type UpdatePrivateAgentResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON409 *ErrorsList
 }
 
 // Status returns HTTPResponse.Status
@@ -153331,6 +156983,412 @@ func (r RevokePrivateAgentResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r RevokePrivateAgentResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ListAllProblemActionItemsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ProblemActionItemList
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListAllProblemActionItemsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListAllProblemActionItemsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListAllProblemActionItemsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DeleteProblemActionItemResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ProblemActionItemResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteProblemActionItemResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteProblemActionItemResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DeleteProblemActionItemResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetProblemActionItemResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ProblemActionItemResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetProblemActionItemResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetProblemActionItemResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetProblemActionItemResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateProblemActionItemResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ProblemActionItemResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateProblemActionItemResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateProblemActionItemResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateProblemActionItemResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ListProblemsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ProblemList
+	ApplicationvndApiJSON400 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListProblemsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListProblemsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListProblemsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CreateProblemResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *ProblemResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateProblemResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateProblemResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateProblemResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DeleteProblemResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ProblemResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteProblemResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteProblemResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DeleteProblemResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetProblemResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ProblemResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetProblemResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetProblemResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetProblemResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateProblemResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ProblemResponse
+	ApplicationvndApiJSON404 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateProblemResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateProblemResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateProblemResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type LinkProblemIncidentsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ProblemResponse
+	ApplicationvndApiJSON400 *ErrorsList
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r LinkProblemIncidentsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r LinkProblemIncidentsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r LinkProblemIncidentsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UnlinkProblemIncidentResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ProblemResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UnlinkProblemIncidentResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UnlinkProblemIncidentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UnlinkProblemIncidentResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ListProblemActionItemsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *ProblemActionItemList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListProblemActionItemsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListProblemActionItemsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListProblemActionItemsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CreateProblemActionItemResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *ProblemActionItemResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateProblemActionItemResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateProblemActionItemResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateProblemActionItemResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -156742,6 +160800,7 @@ type CreateTeamResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON201 *TeamResponse
+	ApplicationvndApiJSON400 *ErrorsList
 	ApplicationvndApiJSON401 *ErrorsList
 	ApplicationvndApiJSON403 *ErrorsList
 	ApplicationvndApiJSON422 *ErrorsList
@@ -156899,6 +160958,7 @@ type UpdateTeamResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
 	ApplicationvndApiJSON200 *TeamResponse
+	ApplicationvndApiJSON400 *ErrorsList
 	ApplicationvndApiJSON403 *ErrorsList
 	ApplicationvndApiJSON404 *ErrorsList
 }
@@ -159377,9 +163437,17 @@ func (c *ClientWithResponses) UpdateAlertWithApplicationVndAPIPlusJSONBodyWithRe
 	return ParseUpdateAlertResponse(rsp)
 }
 
-// AcknowledgeAlertWithResponse request returning *AcknowledgeAlertResponse
-func (c *ClientWithResponses) AcknowledgeAlertWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*AcknowledgeAlertResponse, error) {
-	rsp, err := c.AcknowledgeAlert(ctx, id, reqEditors...)
+// AcknowledgeAlertWithBodyWithResponse request with arbitrary body returning *AcknowledgeAlertResponse
+func (c *ClientWithResponses) AcknowledgeAlertWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AcknowledgeAlertResponse, error) {
+	rsp, err := c.AcknowledgeAlertWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAcknowledgeAlertResponse(rsp)
+}
+
+func (c *ClientWithResponses) AcknowledgeAlertWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body AcknowledgeAlertApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*AcknowledgeAlertResponse, error) {
+	rsp, err := c.AcknowledgeAlertWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -163701,6 +167769,163 @@ func (c *ClientWithResponses) RevokePrivateAgentWithResponse(ctx context.Context
 	return ParseRevokePrivateAgentResponse(rsp)
 }
 
+// ListAllProblemActionItemsWithResponse request returning *ListAllProblemActionItemsResponse
+func (c *ClientWithResponses) ListAllProblemActionItemsWithResponse(ctx context.Context, params *ListAllProblemActionItemsParams, reqEditors ...RequestEditorFn) (*ListAllProblemActionItemsResponse, error) {
+	rsp, err := c.ListAllProblemActionItems(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListAllProblemActionItemsResponse(rsp)
+}
+
+// DeleteProblemActionItemWithResponse request returning *DeleteProblemActionItemResponse
+func (c *ClientWithResponses) DeleteProblemActionItemWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteProblemActionItemResponse, error) {
+	rsp, err := c.DeleteProblemActionItem(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteProblemActionItemResponse(rsp)
+}
+
+// GetProblemActionItemWithResponse request returning *GetProblemActionItemResponse
+func (c *ClientWithResponses) GetProblemActionItemWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetProblemActionItemResponse, error) {
+	rsp, err := c.GetProblemActionItem(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetProblemActionItemResponse(rsp)
+}
+
+// UpdateProblemActionItemWithBodyWithResponse request with arbitrary body returning *UpdateProblemActionItemResponse
+func (c *ClientWithResponses) UpdateProblemActionItemWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateProblemActionItemResponse, error) {
+	rsp, err := c.UpdateProblemActionItemWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateProblemActionItemResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateProblemActionItemWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateProblemActionItemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateProblemActionItemResponse, error) {
+	rsp, err := c.UpdateProblemActionItemWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateProblemActionItemResponse(rsp)
+}
+
+// ListProblemsWithResponse request returning *ListProblemsResponse
+func (c *ClientWithResponses) ListProblemsWithResponse(ctx context.Context, params *ListProblemsParams, reqEditors ...RequestEditorFn) (*ListProblemsResponse, error) {
+	rsp, err := c.ListProblems(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListProblemsResponse(rsp)
+}
+
+// CreateProblemWithBodyWithResponse request with arbitrary body returning *CreateProblemResponse
+func (c *ClientWithResponses) CreateProblemWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateProblemResponse, error) {
+	rsp, err := c.CreateProblemWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateProblemResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateProblemWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateProblemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateProblemResponse, error) {
+	rsp, err := c.CreateProblemWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateProblemResponse(rsp)
+}
+
+// DeleteProblemWithResponse request returning *DeleteProblemResponse
+func (c *ClientWithResponses) DeleteProblemWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteProblemResponse, error) {
+	rsp, err := c.DeleteProblem(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteProblemResponse(rsp)
+}
+
+// GetProblemWithResponse request returning *GetProblemResponse
+func (c *ClientWithResponses) GetProblemWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetProblemResponse, error) {
+	rsp, err := c.GetProblem(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetProblemResponse(rsp)
+}
+
+// UpdateProblemWithBodyWithResponse request with arbitrary body returning *UpdateProblemResponse
+func (c *ClientWithResponses) UpdateProblemWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateProblemResponse, error) {
+	rsp, err := c.UpdateProblemWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateProblemResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateProblemWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateProblemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateProblemResponse, error) {
+	rsp, err := c.UpdateProblemWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateProblemResponse(rsp)
+}
+
+// LinkProblemIncidentsWithBodyWithResponse request with arbitrary body returning *LinkProblemIncidentsResponse
+func (c *ClientWithResponses) LinkProblemIncidentsWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LinkProblemIncidentsResponse, error) {
+	rsp, err := c.LinkProblemIncidentsWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseLinkProblemIncidentsResponse(rsp)
+}
+
+func (c *ClientWithResponses) LinkProblemIncidentsWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body LinkProblemIncidentsApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*LinkProblemIncidentsResponse, error) {
+	rsp, err := c.LinkProblemIncidentsWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseLinkProblemIncidentsResponse(rsp)
+}
+
+// UnlinkProblemIncidentWithResponse request returning *UnlinkProblemIncidentResponse
+func (c *ClientWithResponses) UnlinkProblemIncidentWithResponse(ctx context.Context, id string, incidentId string, reqEditors ...RequestEditorFn) (*UnlinkProblemIncidentResponse, error) {
+	rsp, err := c.UnlinkProblemIncident(ctx, id, incidentId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUnlinkProblemIncidentResponse(rsp)
+}
+
+// ListProblemActionItemsWithResponse request returning *ListProblemActionItemsResponse
+func (c *ClientWithResponses) ListProblemActionItemsWithResponse(ctx context.Context, problemId string, params *ListProblemActionItemsParams, reqEditors ...RequestEditorFn) (*ListProblemActionItemsResponse, error) {
+	rsp, err := c.ListProblemActionItems(ctx, problemId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListProblemActionItemsResponse(rsp)
+}
+
+// CreateProblemActionItemWithBodyWithResponse request with arbitrary body returning *CreateProblemActionItemResponse
+func (c *ClientWithResponses) CreateProblemActionItemWithBodyWithResponse(ctx context.Context, problemId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateProblemActionItemResponse, error) {
+	rsp, err := c.CreateProblemActionItemWithBody(ctx, problemId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateProblemActionItemResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateProblemActionItemWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, problemId string, body CreateProblemActionItemApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateProblemActionItemResponse, error) {
+	rsp, err := c.CreateProblemActionItemWithApplicationVndAPIPlusJSONBody(ctx, problemId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateProblemActionItemResponse(rsp)
+}
+
 // ListPulsesWithResponse request returning *ListPulsesResponse
 func (c *ClientWithResponses) ListPulsesWithResponse(ctx context.Context, params *ListPulsesParams, reqEditors ...RequestEditorFn) (*ListPulsesResponse, error) {
 	rsp, err := c.ListPulses(ctx, params, reqEditors...)
@@ -167550,12 +171775,26 @@ func ParseAcknowledgeAlertResponse(rsp *http.Response) (*AcknowledgeAlertRespons
 		}
 		response.ApplicationvndApiJSON400 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON403 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.ApplicationvndApiJSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
 
 	}
 
@@ -178872,6 +183111,16 @@ func ParseUpdatePrivateAgentResponse(rsp *http.Response) (*UpdatePrivateAgentRes
 		HTTPResponse: rsp,
 	}
 
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON409 = &dest
+
+	}
+
 	return response, nil
 }
 
@@ -178895,6 +183144,456 @@ func ParseRevokePrivateAgentResponse(rsp *http.Response) (*RevokePrivateAgentRes
 			return nil, err
 		}
 		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListAllProblemActionItemsResponse parses an HTTP response from a ListAllProblemActionItemsWithResponse call
+func ParseListAllProblemActionItemsResponse(rsp *http.Response) (*ListAllProblemActionItemsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListAllProblemActionItemsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ProblemActionItemList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteProblemActionItemResponse parses an HTTP response from a DeleteProblemActionItemWithResponse call
+func ParseDeleteProblemActionItemResponse(rsp *http.Response) (*DeleteProblemActionItemResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteProblemActionItemResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ProblemActionItemResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetProblemActionItemResponse parses an HTTP response from a GetProblemActionItemWithResponse call
+func ParseGetProblemActionItemResponse(rsp *http.Response) (*GetProblemActionItemResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetProblemActionItemResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ProblemActionItemResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateProblemActionItemResponse parses an HTTP response from a UpdateProblemActionItemWithResponse call
+func ParseUpdateProblemActionItemResponse(rsp *http.Response) (*UpdateProblemActionItemResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateProblemActionItemResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ProblemActionItemResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListProblemsResponse parses an HTTP response from a ListProblemsWithResponse call
+func ParseListProblemsResponse(rsp *http.Response) (*ListProblemsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListProblemsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ProblemList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateProblemResponse parses an HTTP response from a CreateProblemWithResponse call
+func ParseCreateProblemResponse(rsp *http.Response) (*CreateProblemResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateProblemResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest ProblemResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteProblemResponse parses an HTTP response from a DeleteProblemWithResponse call
+func ParseDeleteProblemResponse(rsp *http.Response) (*DeleteProblemResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteProblemResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ProblemResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetProblemResponse parses an HTTP response from a GetProblemWithResponse call
+func ParseGetProblemResponse(rsp *http.Response) (*GetProblemResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetProblemResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ProblemResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateProblemResponse parses an HTTP response from a UpdateProblemWithResponse call
+func ParseUpdateProblemResponse(rsp *http.Response) (*UpdateProblemResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateProblemResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ProblemResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseLinkProblemIncidentsResponse parses an HTTP response from a LinkProblemIncidentsWithResponse call
+func ParseLinkProblemIncidentsResponse(rsp *http.Response) (*LinkProblemIncidentsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &LinkProblemIncidentsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ProblemResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUnlinkProblemIncidentResponse parses an HTTP response from a UnlinkProblemIncidentWithResponse call
+func ParseUnlinkProblemIncidentResponse(rsp *http.Response) (*UnlinkProblemIncidentResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UnlinkProblemIncidentResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ProblemResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListProblemActionItemsResponse parses an HTTP response from a ListProblemActionItemsWithResponse call
+func ParseListProblemActionItemsResponse(rsp *http.Response) (*ListProblemActionItemsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListProblemActionItemsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ProblemActionItemList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateProblemActionItemResponse parses an HTTP response from a CreateProblemActionItemWithResponse call
+func ParseCreateProblemActionItemResponse(rsp *http.Response) (*CreateProblemActionItemResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateProblemActionItemResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest ProblemActionItemResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
 
 	}
 
@@ -182489,6 +187188,13 @@ func ParseCreateTeamResponse(rsp *http.Response) (*CreateTeamResponse, error) {
 		}
 		response.ApplicationvndApiJSON201 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON400 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest ErrorsList
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -182667,6 +187373,13 @@ func ParseUpdateTeamResponse(rsp *http.Response) (*UpdateTeamResponse, error) {
 			return nil, err
 		}
 		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest ErrorsList

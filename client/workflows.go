@@ -22,6 +22,7 @@ type Workflow struct {
 	RepeatConditionDurationSinceFirstRun string                 `jsonapi:"attr,repeat_condition_duration_since_first_run,omitempty"`
 	RepeatConditionNumberOfRepeats       int                    `jsonapi:"attr,repeat_condition_number_of_repeats,omitempty"`
 	ContinuouslyRepeat                   *bool                  `jsonapi:"attr,continuously_repeat,omitempty"`
+	RunOncePerResource                   *bool                  `jsonapi:"attr,run_once_per_resource,omitempty"`
 	RepeatOn                             []interface{}          `jsonapi:"attr,repeat_on,omitempty"`
 	Enabled                              *bool                  `jsonapi:"attr,enabled,omitempty"`
 	Locked                               *bool                  `jsonapi:"attr,locked,omitempty"`
@@ -35,6 +36,7 @@ type Workflow struct {
 	ServiceIds                           []interface{}          `jsonapi:"attr,service_ids,omitempty"`
 	FunctionalityIds                     []interface{}          `jsonapi:"attr,functionality_ids,omitempty"`
 	GroupIds                             []interface{}          `jsonapi:"attr,group_ids,omitempty"`
+	GroupAssignmentIds                   []interface{}          `jsonapi:"attr,group_assignment_ids,omitempty"`
 	CauseIds                             []interface{}          `jsonapi:"attr,cause_ids,omitempty"`
 	SubStatusIds                         []interface{}          `jsonapi:"attr,sub_status_ids,omitempty"`
 	FailureNotificationMode              string                 `jsonapi:"attr,failure_notification_mode,omitempty"`
