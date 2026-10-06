@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const HAND_MAINTAINED_HEADER = "// Hand-maintained";
+const legacyClients = ["service"];
 
 function safeWriteFile(filePath, code) {
   if (fs.existsSync(filePath)) {
@@ -180,6 +181,8 @@ function main() {
     } else if (dataSources().includes(filterResource)) {
       generateClientUnlessExcluded(filterResource);
       generateDataSource(filterResource);
+    } else if (legacyClients.includes(filterResource)) {
+      generateClientUnlessExcluded(filterResource);
     } else if (
       excluded.resources.includes(filterResource) ||
       excluded.dataSources.includes(filterResource)
@@ -236,7 +239,7 @@ function generateProvider(resources, taskResources, dataSources) {
 }
 
 function generateClients() {
-  new Set([...resources(), ...dataSources()]).forEach((name) => {
+  new Set([...resources(), ...dataSources(), ...legacyClients]).forEach((name) => {
     if ((excluded.clients || []).includes(name)) return;
     if (readOnlyCollections.includes(name)) {
       generateReadOnlyClient(name)

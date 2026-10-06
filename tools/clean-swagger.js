@@ -264,6 +264,25 @@ function preserveWorkflowTaskContracts(schemas) {
   }
 }
 
+function annotateCatalogExternalIds(schemas) {
+  const fields = [
+    "backstage_id", "external_id", "pagerduty_id", "opsgenie_id",
+    "opsgenie_team_id", "cortex_id", "opslevel_id",
+  ];
+  const note = "Omit to preserve an existing value; set to an empty string to clear it.";
+  for (const name of ["service", "functionality"]) {
+    for (const field of fields) {
+      const property = schemas[name]?.properties[field];
+      if (!property) continue;
+      property.tf_nullable = true;
+      property.tf_computed = true;
+      if (!property.description?.includes(note)) {
+        property.description = `${(property.description || "").replace(/\.$/, "")}. ${note}`.replace(/^\. /, "");
+      }
+    }
+  }
+}
+
 function annotateCanvasWorkspaces(schemas) {
   const note = "Typed Go requests omit a nil workspace; use a map or raw JSON to send null.";
   for (const action of ["create_slack_canvas", "update_slack_canvas"]) {
@@ -309,6 +328,7 @@ renameEscalationPolicyLevelSchemas(swagger);
 renameEscalationPolicyPathSchemas(swagger);
 addNestedRouteParentIds(swagger.components.schemas);
 annotateNullableRelationships(swagger.components.schemas);
+annotateCatalogExternalIds(swagger.components.schemas);
 annotateRetriggerTimeout(swagger.components.schemas);
 preserveCanvasTerraformContract(swagger.components.schemas);
 annotateStatusPageAnnouncement(swagger.components.schemas);

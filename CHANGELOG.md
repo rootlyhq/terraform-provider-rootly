@@ -8,6 +8,8 @@
 
 ### Changed
 
+- Service and functionality external integration IDs are preserved when omitted or set to `null` in Terraform configuration, including IDs populated outside Terraform or imported into state. Set an ID to `""` to intentionally clear it, or a non-empty string to replace it. Removing a previously configured service ID now relinquishes Terraform ownership instead of clearing the remote ID. Existing state remains compatible; no state migration is required. (IR-6531)
+
 - `rootly_alert_urgency.retrigger_timeout_minutes` is no longer `Computed`: a value set outside Terraform is now cleared on the next apply if it is not in the configuration. (TER-230)
 
 ## [5.20.1] -- 2026-08-19
