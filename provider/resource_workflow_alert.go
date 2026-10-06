@@ -1,5 +1,8 @@
 // Hand-maintained: workflow_alert is excluded from codegen (see tools/generate.js)
-// because of the nested alert_payload_conditions schema and the v5.5→v5.6 state upgrader.
+// because of:
+//  1. Nested alert_payload_conditions schema
+//  2. v5.5→v5.6 state upgrader
+//  3. additional read logic for alert_field_conditions
 
 package provider
 
@@ -11,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"
@@ -343,13 +347,23 @@ func resourceWorkflowAlert() *schema.Resource {
 							Description: "",
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"id": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
+									"alert_field_id": &schema.Schema{
+										Type:        schema.TypeString,
+										Required:    true,
+										Description: "The ID of the alert field.",
 									},
-									"name": &schema.Schema{
-										Type:     schema.TypeString,
-										Required: true,
+									"condition_type": &schema.Schema{
+										Type:         schema.TypeString,
+										Required:     true,
+										Description:  "Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+										ValidateFunc: validation.StringInSlice([]string{"IS", "IS NOT", "ANY", "CONTAINS", "CONTAINS_ALL", "CONTAINS_NONE", "NONE", "SET", "UNSET"}, false),
+									},
+									"values": &schema.Schema{
+										Type:     schema.TypeList,
+										Optional: true,
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										},
 									},
 								},
 							},
@@ -652,6 +666,12 @@ func resourceWorkflowAlertRead(ctx context.Context, d *schema.ResourceData, meta
 	tp := item.TriggerParams
 	if tp != nil {
 		stateupgrade.CoerceAlertPayloadConditions(ctx, tp)
+
+		afc, err := c.GetWorkflowAlertFieldConditions(d.Id())
+		if err != nil {
+			return diag.Errorf("Error reading workflow_alert alert_field_conditions: %s", err.Error())
+		}
+		tp["alert_field_conditions"] = afc
 	}
 	tps[0] = tp
 	d.Set("trigger_params", tps)

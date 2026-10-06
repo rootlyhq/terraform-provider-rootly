@@ -92,8 +92,12 @@ Optional:
 
 Required:
 
-- `id` (String)
-- `name` (String)
+- `alert_field_id` (String) The ID of the alert field.
+- `condition_type` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+
+Optional:
+
+- `values` (List of String)
 
 
 <a id="nestedblock--trigger_params--alert_payload_conditions"></a>
