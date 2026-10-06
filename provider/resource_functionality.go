@@ -12,11 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceFunctionality() *schema.Resource {
 	return &schema.Resource{
+		CustomizeDiff: sdkutils.ExplicitEmptyStrings("backstage_id", "external_id", "pagerduty_id", "opsgenie_id", "opsgenie_team_id", "cortex_id"),
 		CreateContext: resourceFunctionalityCreate,
 		ReadContext:   resourceFunctionalityRead,
 		UpdateContext: resourceFunctionalityUpdate,
@@ -117,7 +119,7 @@ func resourceFunctionality() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The Backstage entity id associated to this functionality. eg: :namespace/:kind/:entity_name",
+				Description: "The Backstage entity id associated to this functionality. eg: :namespace/:kind/:entity_name. Omit to preserve an existing value; set to an empty string to clear it.",
 			},
 
 			"external_id": &schema.Schema{
@@ -128,7 +130,7 @@ func resourceFunctionality() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The external id associated to this functionality",
+				Description: "The external id associated to this functionality. Omit to preserve an existing value; set to an empty string to clear it.",
 			},
 
 			"pagerduty_id": &schema.Schema{
@@ -139,7 +141,7 @@ func resourceFunctionality() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The PagerDuty service id associated to this functionality",
+				Description: "The PagerDuty service id associated to this functionality. Omit to preserve an existing value; set to an empty string to clear it.",
 			},
 
 			"opsgenie_id": &schema.Schema{
@@ -150,7 +152,7 @@ func resourceFunctionality() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The Opsgenie service id associated to this functionality",
+				Description: "The Opsgenie service id associated to this functionality. Omit to preserve an existing value; set to an empty string to clear it.",
 			},
 
 			"opsgenie_team_id": &schema.Schema{
@@ -161,7 +163,7 @@ func resourceFunctionality() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The Opsgenie team id associated to this functionality",
+				Description: "The Opsgenie team id associated to this functionality. Omit to preserve an existing value; set to an empty string to clear it.",
 			},
 
 			"cortex_id": &schema.Schema{
@@ -172,7 +174,7 @@ func resourceFunctionality() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The Cortex group id associated to this functionality",
+				Description: "The Cortex group id associated to this functionality. Omit to preserve an existing value; set to an empty string to clear it.",
 			},
 
 			"service_now_ci_sys_id": &schema.Schema{
@@ -408,22 +410,22 @@ func resourceFunctionalityCreate(ctx context.Context, d *schema.ResourceData, me
 		s.Color = value.(string)
 	}
 	if value, ok := d.GetOkExists("backstage_id"); ok {
-		s.BackstageId = value.(string)
+		s.BackstageId = tools.String(value.(string))
 	}
 	if value, ok := d.GetOkExists("external_id"); ok {
-		s.ExternalId = value.(string)
+		s.ExternalId = tools.String(value.(string))
 	}
 	if value, ok := d.GetOkExists("pagerduty_id"); ok {
-		s.PagerdutyId = value.(string)
+		s.PagerdutyId = tools.String(value.(string))
 	}
 	if value, ok := d.GetOkExists("opsgenie_id"); ok {
-		s.OpsgenieId = value.(string)
+		s.OpsgenieId = tools.String(value.(string))
 	}
 	if value, ok := d.GetOkExists("opsgenie_team_id"); ok {
-		s.OpsgenieTeamId = value.(string)
+		s.OpsgenieTeamId = tools.String(value.(string))
 	}
 	if value, ok := d.GetOkExists("cortex_id"); ok {
-		s.CortexId = value.(string)
+		s.CortexId = tools.String(value.(string))
 	}
 	if value, ok := d.GetOkExists("service_now_ci_sys_id"); ok {
 		s.ServiceNowCiSysId = value.(string)
@@ -592,24 +594,12 @@ func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, me
 	if d.HasChange("color") {
 		s.Color = d.Get("color").(string)
 	}
-	if d.HasChange("backstage_id") {
-		s.BackstageId = d.Get("backstage_id").(string)
-	}
-	if d.HasChange("external_id") {
-		s.ExternalId = d.Get("external_id").(string)
-	}
-	if d.HasChange("pagerduty_id") {
-		s.PagerdutyId = d.Get("pagerduty_id").(string)
-	}
-	if d.HasChange("opsgenie_id") {
-		s.OpsgenieId = d.Get("opsgenie_id").(string)
-	}
-	if d.HasChange("opsgenie_team_id") {
-		s.OpsgenieTeamId = d.Get("opsgenie_team_id").(string)
-	}
-	if d.HasChange("cortex_id") {
-		s.CortexId = d.Get("cortex_id").(string)
-	}
+	s.BackstageId = sdkutils.OptionalComputedStringUpdate(d, "backstage_id")
+	s.ExternalId = sdkutils.OptionalComputedStringUpdate(d, "external_id")
+	s.PagerdutyId = sdkutils.OptionalComputedStringUpdate(d, "pagerduty_id")
+	s.OpsgenieId = sdkutils.OptionalComputedStringUpdate(d, "opsgenie_id")
+	s.OpsgenieTeamId = sdkutils.OptionalComputedStringUpdate(d, "opsgenie_team_id")
+	s.CortexId = sdkutils.OptionalComputedStringUpdate(d, "cortex_id")
 	if d.HasChange("service_now_ci_sys_id") {
 		s.ServiceNowCiSysId = d.Get("service_now_ci_sys_id").(string)
 	}
