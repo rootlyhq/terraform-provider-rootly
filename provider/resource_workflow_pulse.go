@@ -85,6 +85,14 @@ func resourceWorkflowPulse() *schema.Resource {
 				Description: "Repeat workflow every duration",
 			},
 
+			"run_at": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Description: "Time of day (HH:MM, 24-hour) in the team's time zone to run a simple workflow on each repeat_on weekday. Cannot be combined with repeat_every_duration.",
+			},
+
 			"repeat_condition_duration_since_first_run": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -469,6 +477,9 @@ func resourceWorkflowPulseCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("repeat_every_duration"); ok {
 		s.RepeatEveryDuration = value.(string)
 	}
+	if value, ok := d.GetOkExists("run_at"); ok {
+		s.RunAt = value.(string)
+	}
 	if value, ok := d.GetOkExists("repeat_condition_duration_since_first_run"); ok {
 		s.RepeatConditionDurationSinceFirstRun = value.(string)
 	}
@@ -571,6 +582,7 @@ func resourceWorkflowPulseRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("command_feedback_enabled", item.CommandFeedbackEnabled)
 	d.Set("wait", item.Wait)
 	d.Set("repeat_every_duration", item.RepeatEveryDuration)
+	d.Set("run_at", item.RunAt)
 	d.Set("repeat_condition_duration_since_first_run", item.RepeatConditionDurationSinceFirstRun)
 	d.Set("repeat_condition_number_of_repeats", item.RepeatConditionNumberOfRepeats)
 	d.Set("continuously_repeat", item.ContinuouslyRepeat)
@@ -624,6 +636,9 @@ func resourceWorkflowPulseUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("repeat_every_duration") {
 		s.RepeatEveryDuration = d.Get("repeat_every_duration").(string)
+	}
+	if d.HasChange("run_at") {
+		s.RunAt = d.Get("run_at").(string)
 	}
 	if d.HasChange("repeat_condition_duration_since_first_run") {
 		s.RepeatConditionDurationSinceFirstRun = d.Get("repeat_condition_duration_since_first_run").(string)
