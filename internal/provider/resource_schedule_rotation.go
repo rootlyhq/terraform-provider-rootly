@@ -391,8 +391,6 @@ func (m *ScheduleRotationResourceModel) ToApi(ctx context.Context) (*apiclient.S
 
 	if fwtypes.IsKnown(m.ActiveAllWeek) {
 		data.ActiveAllWeek.Set(m.ActiveAllWeek.ValueBool())
-	} else {
-		data.ActiveAllWeek.SetNull()
 	}
 
 	if fwtypes.IsKnown(m.ActiveDays) {
