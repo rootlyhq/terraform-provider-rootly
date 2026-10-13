@@ -48,7 +48,7 @@ jobs:
 
     - name: Canvas regression tests
       run: |
-        go test ./internal/sdkutils ./provider -run '^(TestProvider$|TestWorkflowTaskSlackCanvas|TestWorkflowTaskObjects)'
+        go test ./internal/sdkutils ./provider -run '^(TestProvider$|TestWorkflowTaskSlackCanvas|TestWorkflowTaskObjects|TestCatalogExternalID)'
         node --test tools/*.test.js
 
   lint:

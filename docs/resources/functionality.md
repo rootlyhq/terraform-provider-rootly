@@ -58,19 +58,19 @@ resource "rootly_functionality" "logging_in" {
 
 ### Optional
 
-- `backstage_id` (String) The Backstage entity id associated to this functionality. eg: :namespace/:kind/:entity_name
+- `backstage_id` (String) The Backstage entity id associated to this functionality. eg: :namespace/:kind/:entity_name. Omit to preserve an existing value; set to an empty string to clear it.
 - `color` (String) The hex color of the functionality
-- `cortex_id` (String) The Cortex group id associated to this functionality
+- `cortex_id` (String) The Cortex group id associated to this functionality. Omit to preserve an existing value; set to an empty string to clear it.
 - `description` (String) The description of the functionality
 - `environment_ids` (List of String) Environments associated with this functionality
 - `escalation_policy_id` (String) The escalation policy id of the functionality
-- `external_id` (String) The external id associated to this functionality
+- `external_id` (String) The external id associated to this functionality. Omit to preserve an existing value; set to an empty string to clear it.
 - `notify_emails` (List of String) Emails attached to the functionality
-- `opsgenie_id` (String) The Opsgenie service id associated to this functionality
-- `opsgenie_team_id` (String) The Opsgenie team id associated to this functionality
+- `opsgenie_id` (String) The Opsgenie service id associated to this functionality. Omit to preserve an existing value; set to an empty string to clear it.
+- `opsgenie_team_id` (String) The Opsgenie team id associated to this functionality. Omit to preserve an existing value; set to an empty string to clear it.
 - `owner_group_ids` (List of String) Owner Teams associated with this functionality
 - `owner_user_ids` (List of Number) Owner Users associated with this functionality
-- `pagerduty_id` (String) The PagerDuty service id associated to this functionality
+- `pagerduty_id` (String) The PagerDuty service id associated to this functionality. Omit to preserve an existing value; set to an empty string to clear it.
 - `position` (Number) Position of the functionality
 - `properties` (Block List) Array of property values for this functionality. (see [below for nested schema](#nestedblock--properties))
 - `public_description` (String) The status page description of the functionality
