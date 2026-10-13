@@ -63,7 +63,7 @@ func init() {
 	})
 }
 
-func TestAccResourceAlertsSource(t *testing.T) {
+func TestAccResourceAlertsSource_Basic(t *testing.T) {
 	resName := "rootly_alerts_source.test"
 	teamName := acctest.RandomWithPrefix("tf-team")
 	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
@@ -432,6 +432,81 @@ func TestAccResourceAlertsSource_SecretGenerated(t *testing.T) {
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(resName, tfjsonpath.New("secret"), knownvalue.NotNull()),
 				},
+			},
+		},
+	})
+}
+
+func TestAccResourceAlertsSource_WithResolutionRulePayloadDedup(t *testing.T) {
+	resName := "rootly_alerts_source.test"
+	teamName := acctest.RandomWithPrefix("tf-team")
+	alertUrgencyName := acctest.RandomWithPrefix("tf-alert-urgency")
+	alertsSourceName := acctest.RandomWithPrefix("tf-alerts-source")
+	alertFieldName := acctest.RandomWithPrefix("tf-alert-field")
+
+	config := fmt.Sprintf(`
+		resource "rootly_alert_field" "test" {
+			name = "%s"
+		}
+	`, alertFieldName) + testAccResourceAlertsSourceConfig(teamName, alertUrgencyName, alertsSourceName, `
+		source_type = "generic_webhook"
+
+		deduplicate_alerts_by_key = true
+		deduplication_key_kind = "payload"
+		deduplication_key_path = "$.ticket.key"
+
+		resolution_rule_attributes {
+			condition_type = "all"
+			identifier_json_path = "$.ticket.key"
+			identifier_reference_kind = "payload"
+
+			conditions_attributes {
+				field = "$.status"
+				operator = "is"
+				value = "resolved"
+			}
+		}
+	`)
+	configStateChecks := []statecheck.StateCheck{
+		statecheck.ExpectKnownValue(resName, tfjsonpath.New("id"), knownvalue.NotNull()),
+		statecheck.ExpectKnownValue(resName, tfjsonpath.New("name"), knownvalue.StringExact(alertsSourceName)),
+		statecheck.ExpectKnownValue(resName, tfjsonpath.New("deduplication_key_kind"), knownvalue.StringExact("payload")),
+		statecheck.ExpectKnownValue(resName, tfjsonpath.New("deduplication_key_path"), knownvalue.StringExact("$.ticket.key")),
+		statecheck.ExpectKnownValue(resName, tfjsonpath.New("resolution_rule_attributes"), knownvalue.ListExact([]knownvalue.Check{
+			knownvalue.ObjectPartial(map[string]knownvalue.Check{
+				"enabled":                   knownvalue.Bool(true),
+				"condition_type":            knownvalue.StringExact("all"),
+				"identifier_matchable_type": knownvalue.StringExact(""),
+				"identifier_matchable_id":   knownvalue.StringExact(""),
+				"identifier_reference_kind": knownvalue.StringExact("payload"),
+				"identifier_json_path":      knownvalue.StringExact("$.ticket.key"),
+				"identifier_value_regex":    knownvalue.StringExact(""),
+				"conditions_attributes": knownvalue.ListExact([]knownvalue.Check{
+					knownvalue.ObjectExact(map[string]knownvalue.Check{
+						"field":              knownvalue.StringExact("$.status"),
+						"operator":           knownvalue.StringExact("is"),
+						"value":              knownvalue.StringExact("resolved"),
+						"conditionable_type": knownvalue.StringExact(""),
+						"conditionable_id":   knownvalue.StringExact(""),
+						"kind":               knownvalue.StringExact("payload"),
+					}),
+				}),
+			}),
+		})),
+	}
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config:            config,
+				ConfigStateChecks: configStateChecks,
+			},
+			// Apply the same config again to verify no perpetual diff
+			{
+				Config:            config,
+				ConfigStateChecks: configStateChecks,
 			},
 		},
 	})
