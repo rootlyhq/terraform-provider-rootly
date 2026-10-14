@@ -96,7 +96,7 @@ func TestAccResourceAlertRoute_RemovePropertyFieldName(t *testing.T) {
 				Config: testAccResourceAlertRouteConditionConfig(rName, `
 					property_field_type   = "alert_field"
 					conditionable_type    = "AlertField"
-					conditionable_id      = rootly_alert_field.test.id
+					conditionable_id      = data.rootly_alert_field.test.id
 					property_field_values = ["infra"]
 				`),
 				ConfigStateChecks: []statecheck.StateCheck{
@@ -129,7 +129,7 @@ func TestAccResourceAlertRoute_RemoveConditionable(t *testing.T) {
 				Config: testAccResourceAlertRouteConditionConfig(rName, `
 					property_field_type   = "alert_field"
 					conditionable_type    = "AlertField"
-					conditionable_id      = rootly_alert_field.test.id
+					conditionable_id      = data.rootly_alert_field.test.id
 					property_field_values = ["infra"]
 				`),
 				ConfigStateChecks: []statecheck.StateCheck{
@@ -210,8 +210,10 @@ func testAccCheckAlertRouteFirstCondition(resName string, check func(alertRouteC
 
 func testAccResourceAlertRouteConditionConfig(name, condition string) string {
 	return testAccResourceTeamConfig(name, "") + testAccResourceAlertUrgencyConfig(name, name+" description") + fmt.Sprintf(`
-resource "rootly_alert_field" "test" {
-	name = "%[1]s"
+# Use a built-in alert field: route rule conditions are removed asynchronously,
+# so deleting a custom alert field right after the route fails with a 422.
+data "rootly_alert_field" "test" {
+	kind = "title"
 }
 
 resource "rootly_escalation_policy" "test" {
@@ -228,9 +230,6 @@ resource "rootly_alerts_source" "test" {
 }
 
 resource "rootly_alert_route" "test" {
-	# Conditions referencing the alert field must be gone before it can be deleted.
-	depends_on = [rootly_alert_field.test]
-
 	name              = "%[1]s"
 	alerts_source_ids = [rootly_alerts_source.test.id]
 
