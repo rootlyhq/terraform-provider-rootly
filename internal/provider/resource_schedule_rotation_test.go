@@ -2,6 +2,7 @@ package provider
 
 import (
 	"fmt"
+	"regexp"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
@@ -58,6 +59,70 @@ func TestAccResourceScheduleRotation_Validation(t *testing.T) {
 	})
 }
 
+func TestAccResourceScheduleRotation_ScheduleRotationableAttributesValidation(t *testing.T) {
+	config := func(attrs string) string {
+		return fmt.Sprintf(`
+			resource "rootly_schedule_rotation" "test" {
+				schedule_id = "123"
+				name        = "name"
+
+				schedule_rotationable_type       = "ScheduleCustomRotation"
+				schedule_rotationable_attributes = {
+					%s
+				}
+			}
+		`, attrs)
+	}
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				PlanOnly: true,
+				Config: config(`
+					shift_length      = 7
+					shift_length_unit = "days"
+				`),
+				ExpectError: regexp.MustCompile(`Key "handoff_time" is required`),
+			},
+			{
+				PlanOnly: true,
+				Config: config(`
+					handoff_time = "09:00"
+					unknown_key  = "foo"
+				`),
+				ExpectError: regexp.MustCompile(`Invalid Attribute Value Match`),
+			},
+			{
+				PlanOnly: true,
+				Config: config(`
+					handoff_time = "09:00"
+					shift_length = "seven"
+				`),
+				ExpectError: regexp.MustCompile(`must be an\s+integer`),
+			},
+			{
+				// shift_length may be given as a number or a numeric string
+				PlanOnly:           true,
+				ExpectNonEmptyPlan: true,
+				Config: config(`
+					handoff_time = "09:00"
+					shift_length = 7
+				`),
+			},
+			{
+				PlanOnly:           true,
+				ExpectNonEmptyPlan: true,
+				Config: config(`
+					handoff_time = "09:00"
+					shift_length = "7"
+				`),
+			},
+		},
+	})
+}
+
 func TestAccResourceScheduleRotation_UpgradeFromVersion(t *testing.T) {
 	addr := "rootly_schedule_rotation.test"
 	name := acctest.RandomWithPrefix("tf-rotation")
@@ -105,8 +170,14 @@ func TestAccResourceScheduleRotation_UpgradeFromVersion(t *testing.T) {
 				),
 			},
 			{
-				ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
-				Config:                   testAccResourceScheduleRotationConfig(name, ""),
+				// Last release where schedule_rotationable_attributes was a nested object
+				ExternalProviders: map[string]resource.ExternalProvider{
+					"rootly": {
+						Source:            "rootlyhq/rootly",
+						VersionConstraint: "5.23.3",
+					},
+				},
+				Config: testAccResourceScheduleRotationConfig(name, ""),
 				ConfigStateChecks: append(
 					configStateChecks,
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("active_days"), knownvalue.SetSizeExact(0)),
@@ -115,6 +186,20 @@ func TestAccResourceScheduleRotation_UpgradeFromVersion(t *testing.T) {
 						"handoff_time":      knownvalue.StringExact("09:00"),
 						"handoff_day":       knownvalue.Null(),
 						"shift_length":      knownvalue.Int64Exact(7),
+						"shift_length_unit": knownvalue.StringExact("days"),
+					})),
+				),
+			},
+			{
+				ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+				Config:                   testAccResourceScheduleRotationConfig(name, ""),
+				ConfigStateChecks: append(
+					configStateChecks,
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("active_days"), knownvalue.SetSizeExact(0)),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("end_time"), knownvalue.Null()),
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotationable_attributes"), knownvalue.MapExact(map[string]knownvalue.Check{
+						"handoff_time":      knownvalue.StringExact("09:00"),
+						"shift_length":      knownvalue.StringExact("7"),
 						"shift_length_unit": knownvalue.StringExact("days"),
 					})),
 				),
@@ -132,10 +217,9 @@ func TestAccResourceScheduleRotation_UpgradeFromVersion(t *testing.T) {
 						knownvalue.StringExact("W"),
 					})),
 					statecheck.ExpectKnownValue(addr, tfjsonpath.New("end_time"), knownvalue.Null()),
-					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotationable_attributes"), knownvalue.ObjectExact(map[string]knownvalue.Check{
+					statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotationable_attributes"), knownvalue.MapExact(map[string]knownvalue.Check{
 						"handoff_time":      knownvalue.StringExact("09:00"),
-						"handoff_day":       knownvalue.Null(),
-						"shift_length":      knownvalue.Int64Exact(7),
+						"shift_length":      knownvalue.StringExact("7"),
 						"shift_length_unit": knownvalue.StringExact("days"),
 					})),
 				),
@@ -156,10 +240,9 @@ func TestAccResourceScheduleRotation_Basic(t *testing.T) {
 		statecheck.ExpectKnownValue(addr, tfjsonpath.New("active_time_type"), knownvalue.StringExact("all_day")),
 		statecheck.ExpectKnownValue(addr, tfjsonpath.New("time_zone"), knownvalue.StringExact("UTC")),
 		statecheck.ExpectKnownValue(addr, tfjsonpath.New("start_time"), knownvalue.StringExact("2025-06-20T00:00:00Z")),
-		statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotationable_attributes"), knownvalue.ObjectExact(map[string]knownvalue.Check{
+		statecheck.ExpectKnownValue(addr, tfjsonpath.New("schedule_rotationable_attributes"), knownvalue.MapExact(map[string]knownvalue.Check{
 			"handoff_time":      knownvalue.StringExact("09:00"),
-			"handoff_day":       knownvalue.Null(),
-			"shift_length":      knownvalue.Int64Exact(7),
+			"shift_length":      knownvalue.StringExact("7"),
 			"shift_length_unit": knownvalue.StringExact("days"),
 		})),
 	}
