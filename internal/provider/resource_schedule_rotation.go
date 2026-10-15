@@ -3,8 +3,12 @@ package provider
 import (
 	"context"
 	"errors"
+	"fmt"
+	"regexp"
+	"strconv"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/mapvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
@@ -22,6 +26,7 @@ import (
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diagutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/fwtypes"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/jsonapitypes"
+	intmapvalidator "github.com/rootlyhq/terraform-provider-rootly/v5/internal/validators/mapvalidator"
 	intsetvalidator "github.com/rootlyhq/terraform-provider-rootly/v5/internal/validators/setvalidator"
 	"github.com/samber/lo"
 )
@@ -117,27 +122,20 @@ func (r *ScheduleRotationResource) Schema(ctx context.Context, _ resource.Schema
 				Optional:            true,
 				Computed:            true,
 			},
-			"schedule_rotationable_attributes": schema.SingleNestedAttribute{
-				CustomType:          supertypes.NewSingleNestedObjectTypeOf[ScheduleRotationResourceScheduleRotationAttributesModel](ctx),
-				MarkdownDescription: "handoff_time and/or handoff_day may be required, depending on schedule_rotationable_type. Please see API docs for options based on schedule_rotationable_type: https://docs.rootly.com/api-reference/schedulerotations/creates-a-schedule-rotation#response-data-attributes-schedule-rotationable-attributes",
-				Required:            true,
-				Attributes: map[string]schema.Attribute{
-					"handoff_time": schema.StringAttribute{
-						MarkdownDescription: "Hand off time. Only applicable for daily, weekly/biweekly, monthly, and custom rotations.",
-						Required:            true,
-					},
-					"handoff_day": schema.StringAttribute{
-						MarkdownDescription: "Hand off day. Only applicable for weekly/biweekly, and monthly.",
-						Optional:            true,
-					},
-					"shift_length": schema.Int64Attribute{
-						MarkdownDescription: "Shift length for custom rotation.",
-						Optional:            true,
-					},
-					"shift_length_unit": schema.StringAttribute{
-						MarkdownDescription: "Shift length unit for custom rotation. Value must be one of `hours`, `days`, `weeks`.",
-						Optional:            true,
-					},
+			"schedule_rotationable_attributes": schema.MapAttribute{
+				CustomType:  supertypes.NewMapTypeOf[string](ctx),
+				ElementType: types.StringType,
+				MarkdownDescription: "Schedule rotation type specific attributes. `handoff_time` and/or `handoff_day` may be required, depending on `schedule_rotationable_type`. The following keys are supported:\n" +
+					"  - `handoff_time` - (Required) Hand off time, e.g. `09:00`. Applicable for daily, weekly/biweekly, monthly, and custom rotations.\n" +
+					"  - `handoff_day` - (Optional) Hand off day. Applicable for weekly/biweekly and monthly rotations.\n" +
+					"  - `shift_length` - (Optional) Shift length, as an integer (e.g. `7` or `\"7\"`). Applicable for custom rotations.\n" +
+					"  - `shift_length_unit` - (Optional) Shift length unit. Applicable for custom rotations. Value must be one of `hours`, `days`, `weeks`.\n\n" +
+					"Please see API docs for options based on `schedule_rotationable_type`: https://docs.rootly.com/api-reference/schedulerotations/creates-a-schedule-rotation#response-data-attributes-schedule-rotationable-attributes",
+				Required: true,
+				Validators: []validator.Map{
+					mapvalidator.KeysAre(stringvalidator.OneOf("handoff_time", "handoff_day", "shift_length", "shift_length_unit")),
+					intmapvalidator.KeysRequired("handoff_time"),
+					intmapvalidator.ValueStringAtKey("shift_length", stringvalidator.RegexMatches(regexp.MustCompile(`^[0-9]+$`), "must be an integer")),
 				},
 			},
 		},
@@ -308,23 +306,25 @@ func (r *ScheduleRotationResource) ImportState(ctx context.Context, req resource
 }
 
 type ScheduleRotationResourceModel struct {
-	Id                             types.String                                                                                  `tfsdk:"id"`
-	ScheduleId                     types.String                                                                                  `tfsdk:"schedule_id"`
-	Name                           types.String                                                                                  `tfsdk:"name"`
-	Position                       types.Int64                                                                                   `tfsdk:"position"`
-	ScheduleRotationableType       types.String                                                                                  `tfsdk:"schedule_rotationable_type"`
-	ActiveAllWeek                  types.Bool                                                                                    `tfsdk:"active_all_week"`
-	ActiveDays                     supertypes.SetValueOf[string]                                                                 `tfsdk:"active_days"`
-	ActiveTimeType                 types.String                                                                                  `tfsdk:"active_time_type"`
-	TimeZone                       types.String                                                                                  `tfsdk:"time_zone"`
-	StartTime                      types.String                                                                                  `tfsdk:"start_time"`
-	EndTime                        types.String                                                                                  `tfsdk:"end_time"`
-	ScheduleRotationableAttributes supertypes.SingleNestedObjectValueOf[ScheduleRotationResourceScheduleRotationAttributesModel] `tfsdk:"schedule_rotationable_attributes"`
-	ActiveTimeAttributes           supertypes.SetNestedObjectValueOf[ScheduleRotationResourceActiveTimeModel]                    `tfsdk:"active_time_attributes"`
-	ScheduleRotationMembers        supertypes.SetNestedObjectValueOf[ScheduleRotationResourceScheduleRotationMemberModel]        `tfsdk:"schedule_rotation_members"`
+	Id                             types.String                                                                           `tfsdk:"id"`
+	ScheduleId                     types.String                                                                           `tfsdk:"schedule_id"`
+	Name                           types.String                                                                           `tfsdk:"name"`
+	Position                       types.Int64                                                                            `tfsdk:"position"`
+	ScheduleRotationableType       types.String                                                                           `tfsdk:"schedule_rotationable_type"`
+	ActiveAllWeek                  types.Bool                                                                             `tfsdk:"active_all_week"`
+	ActiveDays                     supertypes.SetValueOf[string]                                                          `tfsdk:"active_days"`
+	ActiveTimeType                 types.String                                                                           `tfsdk:"active_time_type"`
+	TimeZone                       types.String                                                                           `tfsdk:"time_zone"`
+	StartTime                      types.String                                                                           `tfsdk:"start_time"`
+	EndTime                        types.String                                                                           `tfsdk:"end_time"`
+	ScheduleRotationableAttributes supertypes.MapValueOf[string]                                                          `tfsdk:"schedule_rotationable_attributes"`
+	ActiveTimeAttributes           supertypes.SetNestedObjectValueOf[ScheduleRotationResourceActiveTimeModel]             `tfsdk:"active_time_attributes"`
+	ScheduleRotationMembers        supertypes.SetNestedObjectValueOf[ScheduleRotationResourceScheduleRotationMemberModel] `tfsdk:"schedule_rotation_members"`
 }
 
 func (m *ScheduleRotationResourceModel) FromApi(ctx context.Context, data apiclient.ScheduleRotation) diag.Diagnostics {
+	var diags diag.Diagnostics
+
 	m.Id = types.StringValue(data.ID)
 	m.ScheduleId = types.StringValue(data.ScheduleId)
 	m.Name = types.StringValue(data.Name)
@@ -336,12 +336,26 @@ func (m *ScheduleRotationResourceModel) FromApi(ctx context.Context, data apicli
 	m.TimeZone = types.StringValue(data.TimeZone)
 	m.StartTime = jsonapitypes.NullableStringValue(data.StartTime)
 	m.EndTime = jsonapitypes.NullableStringValue(data.EndTime)
-	m.ScheduleRotationableAttributes = supertypes.NewSingleNestedObjectValueOf(ctx, &ScheduleRotationResourceScheduleRotationAttributesModel{
-		HandoffTime:     jsonapitypes.NullableStringValue(data.ScheduleRotationableAttributes.HandoffTime),
-		HandoffDay:      jsonapitypes.NullableStringValue(data.ScheduleRotationableAttributes.HandoffDay),
-		ShiftLength:     jsonapitypes.NullableInt64Value(data.ScheduleRotationableAttributes.ShiftLength),
-		ShiftLengthUnit: jsonapitypes.NullableStringValue(data.ScheduleRotationableAttributes.ShiftLengthUnit),
-	})
+
+	scheduleRotationableAttributes := map[string]string{}
+	if v, err := data.ScheduleRotationableAttributes.HandoffTime.Get(); err == nil {
+		scheduleRotationableAttributes["handoff_time"] = v
+	}
+	if v, err := data.ScheduleRotationableAttributes.HandoffDay.Get(); err == nil {
+		scheduleRotationableAttributes["handoff_day"] = v
+	}
+	if v, err := data.ScheduleRotationableAttributes.ShiftLength.Get(); err == nil {
+		scheduleRotationableAttributes["shift_length"] = strconv.FormatInt(v, 10)
+	}
+	if v, err := data.ScheduleRotationableAttributes.ShiftLengthUnit.Get(); err == nil {
+		scheduleRotationableAttributes["shift_length_unit"] = v
+	}
+	var diagss diag.Diagnostics
+	m.ScheduleRotationableAttributes, diagss = supertypes.NewMapValueOfMap(ctx, scheduleRotationableAttributes)
+	diags.Append(diagss...)
+	if diags.HasError() {
+		return diags
+	}
 
 	if fwtypes.IsKnown(m.ActiveTimeAttributes) {
 		m.ActiveTimeAttributes = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.ActiveTimeAttributes, func(v apiclient.ScheduleRotationActiveTimeAttributes, _ int) ScheduleRotationResourceActiveTimeModel {
@@ -362,7 +376,7 @@ func (m *ScheduleRotationResourceModel) FromApi(ctx context.Context, data apicli
 		}))
 	}
 
-	return nil
+	return diags
 }
 
 func (m *ScheduleRotationResourceModel) ToApi(ctx context.Context) (*apiclient.ScheduleRotation, diag.Diagnostics) {
@@ -391,8 +405,6 @@ func (m *ScheduleRotationResourceModel) ToApi(ctx context.Context) (*apiclient.S
 
 	if fwtypes.IsKnown(m.ActiveAllWeek) {
 		data.ActiveAllWeek.Set(m.ActiveAllWeek.ValueBool())
-	} else {
-		data.ActiveAllWeek.SetNull()
 	}
 
 	if fwtypes.IsKnown(m.ActiveDays) {
@@ -434,7 +446,7 @@ func (m *ScheduleRotationResourceModel) ToApi(ctx context.Context) (*apiclient.S
 			return nil, diags
 		}
 
-		vvv, diagss := vv.ToApi(ctx)
+		vvv, diagss := scheduleRotationableAttributesToApi(vv)
 		diags.Append(diagss...)
 		if diags.HasError() {
 			return nil, diags
@@ -484,41 +496,44 @@ func (m *ScheduleRotationResourceModel) ToApi(ctx context.Context) (*apiclient.S
 	return &data, diags
 }
 
-type ScheduleRotationResourceScheduleRotationAttributesModel struct {
-	HandoffTime     types.String `tfsdk:"handoff_time"`
-	HandoffDay      types.String `tfsdk:"handoff_day"`
-	ShiftLength     types.Int64  `tfsdk:"shift_length"`
-	ShiftLengthUnit types.String `tfsdk:"shift_length_unit"`
-}
-
-func (m *ScheduleRotationResourceScheduleRotationAttributesModel) ToApi(ctx context.Context) (*apiclient.ScheduleRotationScheduleRotationableAttributes, diag.Diagnostics) {
+func scheduleRotationableAttributesToApi(m map[string]string) (*apiclient.ScheduleRotationScheduleRotationableAttributes, diag.Diagnostics) {
+	var diags diag.Diagnostics
 	var data apiclient.ScheduleRotationScheduleRotationableAttributes
 
-	if fwtypes.IsKnown(m.HandoffTime) {
-		data.HandoffTime.Set(m.HandoffTime.ValueString())
+	if v, ok := m["handoff_time"]; ok {
+		data.HandoffTime.Set(v)
 	} else {
 		data.HandoffTime.SetNull()
 	}
 
-	if fwtypes.IsKnown(m.HandoffDay) {
-		data.HandoffDay.Set(m.HandoffDay.ValueString())
+	if v, ok := m["handoff_day"]; ok {
+		data.HandoffDay.Set(v)
 	} else {
 		data.HandoffDay.SetNull()
 	}
 
-	if fwtypes.IsKnown(m.ShiftLength) {
-		data.ShiftLength.Set(m.ShiftLength.ValueInt64())
+	if v, ok := m["shift_length"]; ok {
+		vv, err := strconv.ParseInt(v, 10, 64)
+		if err != nil {
+			diags.AddAttributeError(
+				path.Root("schedule_rotationable_attributes").AtMapKey("shift_length"),
+				"Invalid shift_length",
+				fmt.Sprintf("Unable to parse %q as an integer: %s", v, err),
+			)
+			return nil, diags
+		}
+		data.ShiftLength.Set(vv)
 	} else {
 		data.ShiftLength.SetNull()
 	}
 
-	if fwtypes.IsKnown(m.ShiftLengthUnit) {
-		data.ShiftLengthUnit.Set(m.ShiftLengthUnit.ValueString())
+	if v, ok := m["shift_length_unit"]; ok {
+		data.ShiftLengthUnit.Set(v)
 	} else {
 		data.ShiftLengthUnit.SetNull()
 	}
 
-	return &data, nil
+	return &data, diags
 }
 
 type ScheduleRotationResourceActiveTimeModel struct {

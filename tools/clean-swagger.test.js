@@ -5,6 +5,42 @@ const path = require("node:path");
 const {spawnSync} = require("node:child_process");
 const test = require("node:test");
 
+test("catalog IDs preserve remote values and support explicit clearing", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-catalog-swagger-"));
+  const swaggerPath = path.join(directory, "swagger.json");
+  const fields = ["backstage_id", "external_id", "pagerduty_id", "opsgenie_id", "opsgenie_team_id", "cortex_id", "opslevel_id"];
+  const properties = Object.fromEntries(fields.map(field => [field, {type: "string", description: "External ID", tf_computed: false}]));
+  properties.service_now_ci_sys_id = {type: "string", tf_computed: false};
+  const swagger = {paths: {}, components: {schemas: {
+    service: {properties: structuredClone(properties)},
+    functionality: {properties: structuredClone(properties)},
+    environment: {properties: structuredClone(properties)},
+  }}};
+  delete swagger.components.schemas.service.properties.opslevel_id;
+  try {
+    fs.writeFileSync(swaggerPath, JSON.stringify(swagger));
+    for (let run = 0; run < 2; run++) {
+      const result = spawnSync(process.execPath, [path.join(__dirname, "clean-swagger.js"), swaggerPath], {encoding: "utf8"});
+      assert.equal(result.status, 0, result.stderr);
+    }
+    const schemas = JSON.parse(fs.readFileSync(swaggerPath, "utf8")).components.schemas;
+    for (const name of ["service", "functionality"]) {
+      for (const field of fields) {
+        const property = schemas[name].properties[field];
+        if (!property) continue;
+        assert.equal(property.tf_nullable, true);
+        assert.equal(property.tf_computed, true);
+        assert.equal((property.description.match(/Omit to preserve/g) || []).length, 1);
+      }
+      assert.deepEqual(schemas[name].properties.service_now_ci_sys_id, properties.service_now_ci_sys_id);
+    }
+    assert.equal(schemas.service.properties.opslevel_id, undefined);
+    assert.deepEqual(schemas.environment.properties, properties);
+  } finally {
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});
+
 test("Canvas compatibility normalization preserves #479 and remains idempotent", () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-clean-swagger-"));
   const swaggerPath = path.join(directory, "swagger.json");

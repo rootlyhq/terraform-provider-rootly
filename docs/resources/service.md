@@ -63,13 +63,13 @@ resource "rootly_service" "customer_postgresql_prod" {
 - `alert_urgency_id` (String) The alert urgency id of the service
 - `alerts_email_address` (String) Email generated to send alerts to
 - `alerts_email_enabled` (Boolean) Enable alerts through email. Value must be one of true or false
-- `backstage_id` (String) The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name
+- `backstage_id` (String) The Backstage entity id associated to this service. eg: :namespace/:kind/:entity_name. Omit to preserve an existing value; set to an empty string to clear it.
 - `color` (String) The hex color of the service
-- `cortex_id` (String) The Cortex group id associated to this service
+- `cortex_id` (String) The Cortex group id associated to this service. Omit to preserve an existing value; set to an empty string to clear it.
 - `description` (String) The description of the service
 - `environment_ids` (List of String) Environments associated with this service
 - `escalation_policy_id` (String) The escalation policy id of the service
-- `external_id` (String) The external id associated to this service
+- `external_id` (String) The external id associated to this service. Omit to preserve an existing value; set to an empty string to clear it.
 - `github_repository_branch` (String) The GitHub repository branch associated to this service. eg: main
 - `github_repository_name` (String) The GitHub repository name associated to this service. eg: rootlyhq/my-service
 - `gitlab_repository_branch` (String) The GitLab repository branch associated to this service. eg: main
@@ -78,10 +78,10 @@ resource "rootly_service" "customer_postgresql_prod" {
 - `incident_broadcast_enabled` (Boolean) Enable incidents to be broadcasted to a specific channel. Value must be one of true or false
 - `kubernetes_deployment_name` (String) The Kubernetes deployment name associated to this service. eg: namespace/deployment-name
 - `notify_emails` (List of String) Emails attached to the service
-- `opsgenie_id` (String) The Opsgenie service id associated to this service
+- `opsgenie_id` (String) The Opsgenie service id associated to this service. Omit to preserve an existing value; set to an empty string to clear it.
 - `owner_group_ids` (List of String) Owner Teams associated with this service
 - `owner_user_ids` (List of Number) Owner Users associated with this service
-- `pagerduty_id` (String) The PagerDuty service id associated to this service
+- `pagerduty_id` (String) The PagerDuty service id associated to this service. Omit to preserve an existing value; set to an empty string to clear it.
 - `position` (Number) Position of the service
 - `properties` (Block List) Array of property values for this service. (see [below for nested schema](#nestedblock--properties))
 - `public_description` (String) The status page description of the service
