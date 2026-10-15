@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
-func TestAccResourceWorkflowAlert(t *testing.T) {
+func TestAccResourceWorkflowAlert_Basic(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-wf-alert")
 
 	resource.UnitTest(t, resource.TestCase{
@@ -59,7 +59,7 @@ resource "rootly_workflow_alert" "foo" {
 `, name)
 }
 
-func TestAccResourceWorkflowAlertWithPayloadConditions(t *testing.T) {
+func TestAccResourceWorkflowAlert_WithPayloadConditions(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-wf-alert-pc")
 
 	resource.UnitTest(t, resource.TestCase{
@@ -148,7 +148,7 @@ resource "rootly_workflow_alert" "test_payload" {
 `, name)
 }
 
-func TestAccResourceWorkflowAlertWithRegexpConditions(t *testing.T) {
+func TestAccResourceWorkflowAlert_WithRegexpConditions(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-wf-alert-re")
 
 	resource.UnitTest(t, resource.TestCase{
@@ -187,6 +187,100 @@ resource "rootly_workflow_alert" "test_regexp" {
         values     = ["^(api|web)-.+"]
         use_regexp = true
       }
+    }
+  }
+}
+`, name)
+}
+
+func TestAccResourceWorkflowAlert_WithAlertFieldConditions(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-wf-alert-afc")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:          func() { testAccPreCheck(t) },
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceWorkflowAlertAlertFieldConditionsConfig(rName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_afc", "name", rName),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_afc", "trigger_params.0.alert_field_conditions.#", "2"),
+					resource.TestCheckResourceAttrPair("rootly_workflow_alert.test_afc", "trigger_params.0.alert_field_conditions.0.alert_field_id", "rootly_alert_field.region", "id"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_afc", "trigger_params.0.alert_field_conditions.0.condition_type", "IS"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_afc", "trigger_params.0.alert_field_conditions.0.values.#", "2"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_afc", "trigger_params.0.alert_field_conditions.0.values.0", "us-east-1"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_afc", "trigger_params.0.alert_field_conditions.0.values.1", "us-west-2"),
+					resource.TestCheckResourceAttrPair("rootly_workflow_alert.test_afc", "trigger_params.0.alert_field_conditions.1.alert_field_id", "rootly_alert_field.team", "id"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_afc", "trigger_params.0.alert_field_conditions.1.condition_type", "SET"),
+				),
+			},
+			{
+				Config: testAccResourceWorkflowAlertAlertFieldConditionsUpdateConfig(rName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_afc", "trigger_params.0.alert_field_conditions.#", "1"),
+					resource.TestCheckResourceAttrPair("rootly_workflow_alert.test_afc", "trigger_params.0.alert_field_conditions.0.alert_field_id", "rootly_alert_field.region", "id"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_afc", "trigger_params.0.alert_field_conditions.0.condition_type", "IS NOT"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_afc", "trigger_params.0.alert_field_conditions.0.values.#", "1"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_afc", "trigger_params.0.alert_field_conditions.0.values.0", "eu-west-1"),
+				),
+			},
+		},
+	})
+}
+
+func testAccResourceWorkflowAlertAlertFieldConditionsConfig(name string) string {
+	return fmt.Sprintf(`
+resource "rootly_alert_field" "region" {
+  name = "%[1]s-region"
+}
+
+resource "rootly_alert_field" "team" {
+  name = "%[1]s-team"
+}
+
+resource "rootly_workflow_alert" "test_afc" {
+  name    = "%[1]s"
+  enabled = true
+
+  trigger_params {
+    triggers = ["alert_created"]
+
+    alert_field_conditions {
+      alert_field_id = rootly_alert_field.region.id
+      condition_type = "IS"
+      values         = ["us-east-1", "us-west-2"]
+    }
+
+    alert_field_conditions {
+      alert_field_id = rootly_alert_field.team.id
+      condition_type = "SET"
+    }
+  }
+}
+`, name)
+}
+
+func testAccResourceWorkflowAlertAlertFieldConditionsUpdateConfig(name string) string {
+	return fmt.Sprintf(`
+resource "rootly_alert_field" "region" {
+  name = "%[1]s-region"
+}
+
+resource "rootly_alert_field" "team" {
+  name = "%[1]s-team"
+}
+
+resource "rootly_workflow_alert" "test_afc" {
+  name    = "%[1]s"
+  enabled = true
+
+  trigger_params {
+    triggers = ["alert_created"]
+
+    alert_field_conditions {
+      alert_field_id = rootly_alert_field.region.id
+      condition_type = "IS NOT"
+      values         = ["eu-west-1"]
     }
   }
 }
