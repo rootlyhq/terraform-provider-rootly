@@ -253,7 +253,7 @@ func resourceAlertRoute() *schema.Resource {
 
 												"property_field_name": &schema.Schema{
 													Type:        schema.TypeString,
-													Computed:    true,
+													Computed:    false,
 													Required:    false,
 													Optional:    true,
 													Sensitive:   false,
@@ -276,7 +276,7 @@ func resourceAlertRoute() *schema.Resource {
 
 												"property_field_value": &schema.Schema{
 													Type:        schema.TypeString,
-													Computed:    true,
+													Computed:    false,
 													Required:    false,
 													Optional:    true,
 													Sensitive:   false,
@@ -317,7 +317,7 @@ func resourceAlertRoute() *schema.Resource {
 
 												"conditionable_type": &schema.Schema{
 													Type:         schema.TypeString,
-													Computed:     true,
+													Computed:     false,
 													Required:     false,
 													Optional:     true,
 													Sensitive:    false,
@@ -329,7 +329,7 @@ func resourceAlertRoute() *schema.Resource {
 
 												"conditionable_id": &schema.Schema{
 													Type:        schema.TypeString,
-													Computed:    true,
+													Computed:    false,
 													Required:    false,
 													Optional:    true,
 													Sensitive:   false,
@@ -370,7 +370,7 @@ func resourceAlertRouteCreate(ctx context.Context, d *schema.ResourceData, meta 
 		s.OwningTeamIds = value.([]interface{})
 	}
 	if value, ok := d.GetOkExists("rules"); ok {
-		s.Rules = value.([]interface{})
+		s.Rules = expandAlertRouteRules(value.([]interface{}))
 	}
 
 	var requestID string
@@ -492,7 +492,7 @@ func resourceAlertRouteUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	var requestID string
 	if d.HasChange("rules") {
 		if value, ok := d.GetOk("rules"); value != nil && ok {
-			s.Rules = value.([]interface{})
+			s.Rules = expandAlertRouteRules(value.([]interface{}))
 			if rules := value.([]interface{}); len(rules) > 0 {
 				requestID = polling.GenerateRequestId()
 				s.RequestId = requestID
@@ -552,4 +552,42 @@ func resourceAlertRouteDelete(ctx context.Context, d *schema.ResourceData, meta 
 	d.SetId("")
 
 	return nil
+}
+
+// alertRouteConditionNullableFields are optional condition attributes that are
+// sent as null when blank, so removing them from config clears them server-side.
+var alertRouteConditionNullableFields = []string{
+	"property_field_name",
+	"property_field_value",
+	"conditionable_type",
+	"conditionable_id",
+}
+
+func expandAlertRouteRules(rules []interface{}) []interface{} {
+	for _, rule := range rules {
+		ruleMap, ok := rule.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		conditionGroups, _ := ruleMap["condition_groups"].([]interface{})
+		for _, conditionGroup := range conditionGroups {
+			conditionGroupMap, ok := conditionGroup.(map[string]interface{})
+			if !ok {
+				continue
+			}
+			conditions, _ := conditionGroupMap["conditions"].([]interface{})
+			for _, condition := range conditions {
+				conditionMap, ok := condition.(map[string]interface{})
+				if !ok {
+					continue
+				}
+				for _, field := range alertRouteConditionNullableFields {
+					if value, ok := conditionMap[field].(string); ok && value == "" {
+						conditionMap[field] = nil
+					}
+				}
+			}
+		}
+	}
+	return rules
 }
