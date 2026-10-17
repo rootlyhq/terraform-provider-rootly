@@ -44,7 +44,7 @@ require (
 	github.com/cloudflare/circl v1.6.4 // indirect
 	github.com/dprotaso/go-yit v0.0.0-20220510233725-9ba8df137936 // indirect
 	github.com/fatih/color v1.19.0 // indirect
-	github.com/getkin/kin-openapi v0.144.0 // indirect
+	github.com/getkin/kin-openapi v0.149.0 // indirect
 	github.com/go-openapi/jsonpointer v0.22.5 // indirect
 	github.com/go-openapi/swag/jsonname v0.25.5 // indirect
 	github.com/go-test/deep v1.0.8 // indirect
@@ -83,7 +83,7 @@ require (
 	github.com/onsi/gomega v1.27.6 // indirect
 	github.com/posener/complete v1.2.3 // indirect
 	github.com/rootlyhq/jsonapi v0.0.0-20260818145503-f499cfb9d78f
-	github.com/santhosh-tekuri/jsonschema/v6 v6.0.2 // indirect
+	github.com/santhosh-tekuri/jsonschema/v6 v6.0.3 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/speakeasy-api/jsonpath v0.6.3 // indirect
 	github.com/speakeasy-api/openapi v1.19.2 // indirect
