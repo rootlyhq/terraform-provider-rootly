@@ -19,6 +19,7 @@ type Workflow struct {
 	CommandFeedbackEnabled               *bool                  `jsonapi:"attr,command_feedback_enabled,omitempty"`
 	Wait                                 string                 `jsonapi:"attr,wait,omitempty"`
 	RepeatEveryDuration                  string                 `jsonapi:"attr,repeat_every_duration,omitempty"`
+	RunAt                                string                 `jsonapi:"attr,run_at,omitempty"`
 	RepeatConditionDurationSinceFirstRun string                 `jsonapi:"attr,repeat_condition_duration_since_first_run,omitempty"`
 	RepeatConditionNumberOfRepeats       int                    `jsonapi:"attr,repeat_condition_number_of_repeats,omitempty"`
 	ContinuouslyRepeat                   *bool                  `jsonapi:"attr,continuously_repeat,omitempty"`

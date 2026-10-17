@@ -52,6 +52,7 @@ resource "rootly_workflow_pulse" "my-workflow" {
 - `repeat_condition_number_of_repeats` (Number) The workflow will stop repeating if the number of repeats exceeds the value set in this field
 - `repeat_every_duration` (String) Repeat workflow every duration
 - `repeat_on` (List of String) Repeat on weekdays. Value must be one of `S`, `M`, `T`, `W`, `R`, `F`, `U`.
+- `run_at` (String) Time of day (HH:MM, 24-hour) in the team's time zone to run a simple workflow on each repeat_on weekday. Cannot be combined with repeat_every_duration.
 - `run_once_per_resource` (Boolean) When true, the workflow runs at most once per incident. Later triggers on the same incident create a canceled run instead. Manual runs and repeats are not affected. Only applies to incident workflows. Value must be one of true or false
 - `service_ids` (List of String)
 - `severity_ids` (List of String)

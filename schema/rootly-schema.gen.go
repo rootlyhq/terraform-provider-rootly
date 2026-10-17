@@ -56472,6 +56472,9 @@ type NewWorkflow struct {
 			RepeatEveryDuration *string                              `json:"repeat_every_duration,omitempty"`
 			RepeatOn            *[]NewWorkflowDataAttributesRepeatOn `json:"repeat_on,omitempty"`
 
+			// RunAt Time of day (HH:MM, 24-hour) in the team's time zone to run a simple workflow on each repeat_on weekday. Cannot be combined with repeat_every_duration.
+			RunAt *string `json:"run_at,omitempty"`
+
 			// RunOncePerResource When true, the workflow runs at most once per incident. Later triggers on the same incident create a canceled run instead. Manual runs and repeats are not affected. Only applies to incident workflows.
 			RunOncePerResource *bool     `json:"run_once_per_resource,omitempty"`
 			ServiceIds         *[]string `json:"service_ids,omitempty"`
@@ -66951,6 +66954,9 @@ type UpdateWorkflow struct {
 			// RepeatEveryDuration Repeat workflow every duration
 			RepeatEveryDuration *string `json:"repeat_every_duration,omitempty"`
 
+			// RunAt Time of day (HH:MM, 24-hour) in the team's time zone to run a simple workflow on each repeat_on weekday. Cannot be combined with repeat_every_duration.
+			RunAt *string `json:"run_at,omitempty"`
+
 			// RunOncePerResource When true, the workflow runs at most once per incident. Later triggers on the same incident create a canceled run instead. Manual runs and repeats are not affected. Only applies to incident workflows.
 			RunOncePerResource *bool     `json:"run_once_per_resource,omitempty"`
 			ServiceIds         *[]string `json:"service_ids,omitempty"`
@@ -67716,6 +67722,9 @@ type Workflow struct {
 	// RepeatEveryDuration Repeat workflow every duration
 	RepeatEveryDuration *string             `json:"repeat_every_duration,omitempty"`
 	RepeatOn            *[]WorkflowRepeatOn `json:"repeat_on,omitempty"`
+
+	// RunAt Time of day (HH:MM, 24-hour) in the team's time zone to run a simple workflow on each repeat_on weekday. Cannot be combined with repeat_every_duration.
+	RunAt *string `json:"run_at,omitempty"`
 
 	// RunOncePerResource When true, the workflow runs at most once per incident. Later triggers on the same incident create a canceled run instead. Manual runs and repeats are not affected. Only applies to incident workflows.
 	RunOncePerResource *bool     `json:"run_once_per_resource,omitempty"`
