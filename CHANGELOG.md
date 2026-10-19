@@ -4,6 +4,8 @@
 
 ### Added
 
+- `rootly_alerts_source` now supports `attach_owner_groups_to_alerts` to attach the source's owning teams to its alerts without paging them. Requires the `alert-source-team-from-payload` feature flag on the team; otherwise the value is ignored. (PRF-3476)
+
 - `rootly_escalation_path` and `rootly_alert_urgency` now support `retrigger_timeout_minutes` to manage the ack-timeout re-trigger override per escalation path and per alert urgency. `null` inherits the next tier (path > urgency > workspace default), `-1` never re-triggers, and positive values set the interval in minutes. Requires the `escalation-path-based-alert-retrigger` feature flag on the team. (TER-230)
 
 ### Changed
