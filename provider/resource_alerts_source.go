@@ -122,6 +122,17 @@ func resourceAlertsSource() *schema.Resource {
 				Description:      "List of team IDs that will own the alert source",
 			},
 
+			"attach_owner_groups_to_alerts": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Whether to attach the alert source's owning teams to its alerts. Attached teams are not paged.",
+			},
+
 			"alert_template_attributes": &schema.Schema{
 				Type:          schema.TypeList,
 				Computed:      true,
@@ -655,6 +666,9 @@ func resourceAlertsSourceCreate(ctx context.Context, d *schema.ResourceData, met
 	if value, ok := d.GetOkExists("owner_group_ids"); ok {
 		s.OwnerGroupIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("attach_owner_groups_to_alerts"); ok {
+		s.AttachOwnerGroupsToAlerts = tools.Bool(value.(bool))
+	}
 	if value, ok := d.GetOkExists("alert_template_attributes"); ok {
 		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
 			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
@@ -728,6 +742,7 @@ func resourceAlertsSourceRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("deduplication_key_path", item.DeduplicationKeyPath)
 	d.Set("deduplication_key_regexp", item.DeduplicationKeyRegexp)
 	d.Set("owner_group_ids", item.OwnerGroupIds)
+	d.Set("attach_owner_groups_to_alerts", item.AttachOwnerGroupsToAlerts)
 	singleton_list_alert_template_attributes := make([]interface{}, 1, 1)
 	processed_item_alert_template_attributes := map[string]interface{}{
 		"title":        item.AlertTemplateAttributes["title"],
@@ -955,6 +970,9 @@ func resourceAlertsSourceUpdate(ctx context.Context, d *schema.ResourceData, met
 		} else {
 			s.OwnerGroupIds = []interface{}{}
 		}
+	}
+	if d.HasChange("attach_owner_groups_to_alerts") {
+		s.AttachOwnerGroupsToAlerts = tools.Bool(d.Get("attach_owner_groups_to_alerts").(bool))
 	}
 
 	if d.HasChange("alert_template_attributes") {
