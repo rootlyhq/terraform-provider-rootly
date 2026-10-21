@@ -6,6 +6,31 @@ const path = require("node:path");
 const test = require("node:test");
 const generateTasks = require("./generate-tasks");
 
+test("task test parameter overrides take precedence only for the configured task", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-task-generator-"));
+  const previous = process.cwd();
+  try {
+    fs.mkdirSync(path.join(directory, "provider"));
+    process.chdir(directory);
+    const taskParams = {
+      properties: {url: {type: "string", example: "redis://fake.invalid:1"}},
+      required: ["url"],
+    };
+    generateTasks(["redis_client", "other"], {components: {schemas: {
+      redis_client_task_params: taskParams,
+      other_task_params: taskParams,
+    }}});
+    const redisTest = fs.readFileSync("provider/resource_workflow_task_redis_client_test.go", "utf8");
+    const otherTest = fs.readFileSync("provider/resource_workflow_task_other_test.go", "utf8");
+    assert.ok(redisTest.includes('url = "redis://example.com:6379"'));
+    assert.ok(!redisTest.includes("redis://fake.invalid:1"));
+    assert.ok(otherTest.includes('url = "redis://fake.invalid:1"'));
+  } finally {
+    process.chdir(previous);
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});
+
 test("nested objects opt in without changing flat workflow task maps", () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-task-generator-"));
   const previous = process.cwd();

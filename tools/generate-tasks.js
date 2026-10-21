@@ -47,6 +47,10 @@ const taskTestSkips = {
   update_attached_alerts: "API requires task name but it should be auto-assigned",
 };
 
+const taskTestParamOverrides = {
+  redis_client: { url: "redis://example.com:6379" },
+};
+
 module.exports = function generateWorkflowTaskResources(tasks, swagger) {
 	tasks.forEach((taskName) => {
 		const taskSchema = swagger.components.schemas[`${taskName}_task_params`]
@@ -619,14 +623,16 @@ function genTestParams(task_name, task_schema) {
       return `${key} {\n${fields}\n}`;
     }
 
-    let val;
+    let val = taskTestParamOverrides[task_name]?.[key];
 
-    if (task_schema.properties[key].example) {
-      val = task_schema.properties[key].example;
-    } else if (task_schema.properties[key].enum) {
-      val = task_schema.properties[key].enum[0];
-    } else {
-      val = "test";
+    if (val === undefined) {
+      if (task_schema.properties[key].example) {
+        val = task_schema.properties[key].example;
+      } else if (task_schema.properties[key].enum) {
+        val = task_schema.properties[key].enum[0];
+      } else {
+        val = "test";
+      }
     }
 
     switch (task_schema.properties[key].type) {
