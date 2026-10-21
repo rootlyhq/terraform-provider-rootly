@@ -45,7 +45,7 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_redis_client" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		url = "redis://redis-12345.c1.us-east-1-2.ec2.cloud.redislabs.com:12345"
+		url = "redis://example.com:6379"
 commands = "test"
 	}
 }
@@ -64,7 +64,7 @@ resource "rootly_workflow_incident" "foo" {
 resource "rootly_workflow_task_redis_client" "foo" {
 	workflow_id = rootly_workflow_incident.foo.id
 	task_params {
-		url = "redis://redis-12345.c1.us-east-1-2.ec2.cloud.redislabs.com:12345"
+		url = "redis://example.com:6379"
 commands = "test"
 	}
 }
