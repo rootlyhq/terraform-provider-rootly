@@ -1,6 +1,6 @@
 module github.com/rootlyhq/terraform-provider-rootly/v5
 
-go 1.26.6
+go 1.26.10
 
 require (
 	github.com/buxizhizhoum/inflection v1.0.4
