@@ -2,12 +2,12 @@
 page_title: "Resource rootly_api_key - terraform-provider-rootly"
 subcategory:
 description: |-
-    
+    Manages a Rootly API key. The token is only returned by the API when the key is created or rotated, so it is not available after import until the key is rotated. To rotate a key, change rotation_trigger: the provider calls the rotate endpoint and stores the new token. The API only allows a key to rotate itself, so the provider's api_token must be this key's token, and you must update the provider's token after rotating.
 ---
 
 # Resource (rootly_api_key)
 
-
+Manages a Rootly API key. The `token` is only returned by the API when the key is created or rotated, so it is not available after import until the key is rotated. To rotate a key, change `rotation_trigger`: the provider calls the rotate endpoint and stores the new token. The API only allows a key to rotate itself, so the provider's `api_token` must be this key's token, and you must update the provider's token after rotating.
 
 ## Example Usage
 
@@ -26,6 +26,25 @@ resource "rootly_api_key" "payments_team" {
   expires_at = "2027-01-01T00:00:00Z"
   kind       = "team"
   group_id   = rootly_team.payments.id
+}
+
+# Rotate a key by changing rotation_trigger. The API only lets a key rotate itself,
+# so manage the key with a provider authenticated by that same key (for example,
+# import the key your pipeline already uses). The new token is only returned once;
+# write it to a secret store and point the provider at it before the next run.
+provider "rootly" {
+  alias     = "deploy_bot"
+  api_token = var.deploy_bot_api_token
+}
+
+resource "rootly_api_key" "deploy_bot" {
+  provider = rootly.deploy_bot
+
+  name       = "Deploy Bot"
+  expires_at = "2027-01-01T00:00:00Z"
+
+  rotation_trigger              = "2026-10"
+  rotation_grace_period_minutes = 60
 }
 ```
 
@@ -46,10 +65,13 @@ resource "rootly_api_key" "payments_team" {
 - `last_used_at` (String) Date of last use
 - `on_call_role_id` (String) The on-call role ID
 - `role_id` (String) The role ID
+- `rotation_grace_period_minutes` (Number) How many minutes the old token stays valid after rotation, if the grace period is enabled for your organization. Set to 0 to invalidate the old token immediately. The API defaults to 30.
+- `rotation_trigger` (String) Arbitrary value that, when changed, rotates the API key's token. Not sent to the API.
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `token` (String, Sensitive) The API key token. Only returned when the key is created or rotated, so it is empty for imported keys until they are rotated. Stored in state as a sensitive value.
 
 ## Import
 

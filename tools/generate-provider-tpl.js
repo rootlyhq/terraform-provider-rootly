@@ -92,6 +92,7 @@ ${resources
 				"rootly_alert_group": resourceAlertGroup(),
 				"rootly_alert_route": resourceAlertRoute(),
 				"rootly_alerts_source": resourceAlertsSource(),
+				"rootly_api_key": resourceApiKey(),
 				"rootly_communications_group": resourceCommunicationsGroup(),
 				"rootly_communications_template": resourceCommunicationsTemplate(),
 				"rootly_custom_field": resourceCustomField(),
