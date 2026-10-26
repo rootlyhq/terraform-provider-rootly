@@ -2,12 +2,12 @@
 page_title: "Resource rootly_api_key - terraform-provider-rootly"
 subcategory:
 description: |-
-    
+    Manages a Rootly API key. The token is only returned by the API when the key is created, so it is not available after import. To rotate a key, change rotation_trigger: the provider creates a new key and deletes the old one.
 ---
 
 # Resource (rootly_api_key)
 
-
+Manages a Rootly API key. The `token` is only returned by the API when the key is created, so it is not available after import. To rotate a key, change `rotation_trigger`: the provider creates a new key and deletes the old one.
 
 ## Example Usage
 
@@ -26,6 +26,27 @@ resource "rootly_api_key" "payments_team" {
   expires_at = "2027-01-01T00:00:00Z"
   kind       = "team"
   group_id   = rootly_team.payments.id
+}
+
+# Rotate the key by changing rotation_trigger, which replaces it with a new key.
+# The token is only returned on create; write it to a secret store so consumers
+# pick up the new value. Names must be unique, so include the trigger in the name
+# if you use create_before_destroy.
+resource "rootly_api_key" "rotated" {
+  name       = "Deploy Bot v${local.deploy_bot_key_version}"
+  expires_at = "2027-01-01T00:00:00Z"
+  kind       = "team"
+  group_id   = rootly_team.payments.id
+
+  rotation_trigger = local.deploy_bot_key_version
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+locals {
+  deploy_bot_key_version = "1"
 }
 ```
 
@@ -46,10 +67,12 @@ resource "rootly_api_key" "payments_team" {
 - `last_used_at` (String) Date of last use
 - `on_call_role_id` (String) The on-call role ID
 - `role_id` (String) The role ID
+- `rotation_trigger` (String) Arbitrary value that, when changed, replaces the API key with a new one, rotating the token. Not sent to the API.
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `token` (String, Sensitive) The API key token. Only returned when the key is created, so it is empty for imported keys. Stored in state as a sensitive value.
 
 ## Import
 

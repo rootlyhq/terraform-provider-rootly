@@ -2,6 +2,7 @@ package provider
 
 import (
 	"fmt"
+	"os"
 	"testing"
 	"time"
 
@@ -11,7 +12,9 @@ import (
 )
 
 func TestAccResourceApiKey(t *testing.T) {
-	t.Skip("Skipping: CI uses a service account token which cannot create personal API keys")
+	if os.Getenv("ROOTLY_TEST_API_KEY") == "" {
+		t.Skip("Skipping: CI uses a service account token which cannot create personal API keys")
+	}
 	rName := acctest.RandomWithPrefix("tf-apikey")
 	expiresAt := time.Now().AddDate(1, 0, 0).UTC().Format(time.RFC3339)
 
@@ -48,9 +51,10 @@ func TestAccResourceApiKeyTeamScoped(t *testing.T) {
 				),
 			},
 			{
-				ResourceName:      "rootly_api_key.test",
-				ImportState:       true,
-				ImportStateVerify: true,
+				ResourceName:            "rootly_api_key.test",
+				ImportState:             true,
+				ImportStateVerify:       true,
+				ImportStateVerifyIgnore: []string{"token"},
 			},
 			{
 				Config: testAccResourceApiKeyTeamScopedConfig(rName, expiresAt, "second"),
@@ -61,6 +65,66 @@ func TestAccResourceApiKeyTeamScoped(t *testing.T) {
 			},
 		},
 	})
+}
+
+func TestAccResourceApiKeyRotation(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-apikey")
+	expiresAt := time.Now().AddDate(1, 0, 0).UTC().Format(time.RFC3339)
+	var firstID, firstToken string
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:          func() { testAccPreCheck(t) },
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceApiKeyRotationConfig(rName, expiresAt, "1"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttrSet("rootly_api_key.test", "token"),
+					resource.TestCheckResourceAttr("rootly_api_key.test", "rotation_trigger", "1"),
+					testAccCaptureResourceID("rootly_api_key.test", &firstID),
+					testAccCaptureResourceAttr("rootly_api_key.test", "token", &firstToken),
+				),
+			},
+			{
+				ResourceName:            "rootly_api_key.test",
+				ImportState:             true,
+				ImportStateVerify:       true,
+				ImportStateVerifyIgnore: []string{"token", "rotation_trigger"},
+			},
+			{
+				Config: testAccResourceApiKeyRotationConfig(rName, expiresAt, "2"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_api_key.test", "rotation_trigger", "2"),
+					testAccCheckResourceIDChanged("rootly_api_key.test", &firstID),
+					testAccCheckResourceAttrChanged("rootly_api_key.test", "token", &firstToken),
+				),
+			},
+		},
+	})
+}
+
+func testAccCaptureResourceAttr(name, key string, value *string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[name]
+		if !ok {
+			return fmt.Errorf("resource %s not found in state", name)
+		}
+		*value = rs.Primary.Attributes[key]
+		return nil
+	}
+}
+
+func testAccCheckResourceAttrChanged(name, key string, previous *string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[name]
+		if !ok {
+			return fmt.Errorf("resource %s not found in state", name)
+		}
+		if rs.Primary.Attributes[key] == *previous {
+			return fmt.Errorf("expected %s.%s to change, but it is unchanged", name, key)
+		}
+		return nil
+	}
 }
 
 func testAccCaptureResourceID(name string, id *string) resource.TestCheckFunc {
@@ -113,4 +177,21 @@ resource "rootly_api_key" "test" {
 	group_id   = rootly_team.%[3]s.id
 }
 `, name, expiresAt, team)
+}
+
+func testAccResourceApiKeyRotationConfig(name, expiresAt, version string) string {
+	return fmt.Sprintf(`
+resource "rootly_team" "test" {
+	name = "%[1]s"
+}
+
+resource "rootly_api_key" "test" {
+	name       = "%[1]s"
+	expires_at = "%[2]s"
+	kind       = "team"
+	group_id   = rootly_team.test.id
+
+	rotation_trigger = "%[3]s"
+}
+`, name, expiresAt, version)
 }
