@@ -1,14 +1,23 @@
 package provider
 
 import (
+	"context"
+	"encoding/json"
 	"fmt"
+	"net/http"
+	"net/http/httptest"
 	"os"
+	"regexp"
 	"testing"
 	"time"
 
+	"github.com/hashicorp/go-cty/cty"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 )
 
 func TestAccResourceApiKey(t *testing.T) {
@@ -70,7 +79,6 @@ func TestAccResourceApiKeyTeamScoped(t *testing.T) {
 func TestAccResourceApiKeyRotation(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-apikey")
 	expiresAt := time.Now().AddDate(1, 0, 0).UTC().Format(time.RFC3339)
-	var firstID, firstToken string
 
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
@@ -81,8 +89,6 @@ func TestAccResourceApiKeyRotation(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttrSet("rootly_api_key.test", "token"),
 					resource.TestCheckResourceAttr("rootly_api_key.test", "rotation_trigger", "1"),
-					testAccCaptureResourceID("rootly_api_key.test", &firstID),
-					testAccCaptureResourceAttr("rootly_api_key.test", "token", &firstToken),
 				),
 			},
 			{
@@ -91,40 +97,15 @@ func TestAccResourceApiKeyRotation(t *testing.T) {
 				ImportStateVerify:       true,
 				ImportStateVerifyIgnore: []string{"token", "rotation_trigger"},
 			},
+			// The rotate endpoint only lets a key rotate itself, and the test provider
+			// authenticates with a different key. TestApiKeyRotateOnWire covers the
+			// success path against a mock server.
 			{
-				Config: testAccResourceApiKeyRotationConfig(rName, expiresAt, "2"),
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_api_key.test", "rotation_trigger", "2"),
-					testAccCheckResourceIDChanged("rootly_api_key.test", &firstID),
-					testAccCheckResourceAttrChanged("rootly_api_key.test", "token", &firstToken),
-				),
+				Config:      testAccResourceApiKeyRotationConfig(rName, expiresAt, "2"),
+				ExpectError: regexp.MustCompile(`Error rotating api_key: .*\(403\)`),
 			},
 		},
 	})
-}
-
-func testAccCaptureResourceAttr(name, key string, value *string) resource.TestCheckFunc {
-	return func(s *terraform.State) error {
-		rs, ok := s.RootModule().Resources[name]
-		if !ok {
-			return fmt.Errorf("resource %s not found in state", name)
-		}
-		*value = rs.Primary.Attributes[key]
-		return nil
-	}
-}
-
-func testAccCheckResourceAttrChanged(name, key string, previous *string) resource.TestCheckFunc {
-	return func(s *terraform.State) error {
-		rs, ok := s.RootModule().Resources[name]
-		if !ok {
-			return fmt.Errorf("resource %s not found in state", name)
-		}
-		if rs.Primary.Attributes[key] == *previous {
-			return fmt.Errorf("expected %s.%s to change, but it is unchanged", name, key)
-		}
-		return nil
-	}
 }
 
 func testAccCaptureResourceID(name string, id *string) resource.TestCheckFunc {
@@ -194,4 +175,85 @@ resource "rootly_api_key" "test" {
 	rotation_trigger = "%[3]s"
 }
 `, name, expiresAt, version)
+}
+
+func TestApiKeyRotateOnWire(t *testing.T) {
+	var requests []string
+	var got map[string]interface{}
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		requests = append(requests, r.Method+" "+r.URL.Path)
+		w.Header().Set("Content-Type", "application/vnd.api+json")
+		if r.Method == http.MethodPost && r.URL.Path == "/v1/api_keys/1/rotate" {
+			var body struct {
+				Data struct {
+					Attributes map[string]interface{} `json:"attributes"`
+				} `json:"data"`
+			}
+			if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+				t.Errorf("decoding rotate request body: %v", err)
+			}
+			got = body.Data.Attributes
+		}
+		json.NewEncoder(w).Encode(map[string]interface{}{
+			"data": map[string]interface{}{
+				"id": "1", "type": "api_keys", "attributes": map[string]interface{}{
+					"name":                 "deploy",
+					"kind":                 "personal",
+					"expires_at":           "2027-01-01T00:00:00Z",
+					"grace_period_ends_at": "2026-10-26T00:10:00Z",
+					"token":                "new-token",
+				},
+			},
+		})
+	}))
+	t.Cleanup(server.Close)
+
+	api, err := client.NewClient(server.URL, "test-token", "api-key-test")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	r := resourceApiKey()
+	state := &terraform.InstanceState{ID: "1", Attributes: map[string]string{
+		"id":               "1",
+		"name":             "deploy",
+		"kind":             "personal",
+		"expires_at":       "2027-01-01T00:00:00Z",
+		"token":            "old-token",
+		"rotation_trigger": "1",
+	}}
+	diff := &terraform.InstanceDiff{
+		Attributes: map[string]*terraform.ResourceAttrDiff{
+			"rotation_trigger":              {Old: "1", New: "2"},
+			"rotation_grace_period_minutes": {Old: "", New: "0"},
+			"token":                         {Old: "old-token", NewComputed: true},
+		},
+		RawConfig: cty.ObjectVal(map[string]cty.Value{
+			"rotation_grace_period_minutes": cty.NumberIntVal(0),
+		}),
+	}
+	data, err := schema.InternalMap(r.Schema).Data(state, diff)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if diags := resourceApiKeyUpdate(context.Background(), data, api); diags.HasError() {
+		t.Fatal(diags)
+	}
+
+	if len(requests) != 1 || requests[0] != "POST /v1/api_keys/1/rotate" {
+		t.Fatalf("expected only the rotate request, got %v", requests)
+	}
+	if got["expires_at"] != "2027-01-01T00:00:00Z" {
+		t.Errorf("expected expires_at to be sent, got %#v", got["expires_at"])
+	}
+	if got["grace_period_minutes"] != float64(0) {
+		t.Errorf("expected grace_period_minutes 0, got %#v", got["grace_period_minutes"])
+	}
+	if token := data.Get("token").(string); token != "new-token" {
+		t.Errorf("expected token from rotate response, got %q", token)
+	}
+	if ends := data.Get("grace_period_ends_at").(string); ends != "2026-10-26T00:10:00Z" {
+		t.Errorf("expected grace_period_ends_at from rotate response, got %q", ends)
+	}
 }

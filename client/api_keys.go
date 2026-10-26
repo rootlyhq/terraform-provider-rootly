@@ -26,6 +26,12 @@ type ApiKey struct {
 	Token             string `jsonapi:"attr,token,omitempty"`
 }
 
+type ApiKeyRotation struct {
+	ID                 string `jsonapi:"primary,api_keys"`
+	ExpiresAt          string `jsonapi:"attr,expires_at,omitempty"`
+	GracePeriodMinutes *int   `jsonapi:"attr,grace_period_minutes,omitempty"`
+}
+
 func (c *Client) ListApiKeys(params *rootlygo.ListApiKeysParams) ([]interface{}, error) {
 	req, err := rootlygo.NewListApiKeysRequest(c.Rootly.Server, params)
 	if err != nil {
@@ -103,6 +109,32 @@ func (c *Client) UpdateApiKey(id string, api_key *ApiKey) (*ApiKey, error) {
 	resp, err := c.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to make request to update api_key: %w", err)
+	}
+
+	data, err := UnmarshalData(resp.Body, new(ApiKey))
+	resp.Body.Close()
+	if err != nil {
+		return nil, fmt.Errorf("Error unmarshaling api_key: %w", err)
+	}
+
+	return data.(*ApiKey), nil
+}
+
+// RotateApiKey issues a new token for the key. The API only allows rotating the key
+// used to authenticate the request, so this returns a 403 for any other key.
+func (c *Client) RotateApiKey(id string, rotation *ApiKeyRotation) (*ApiKey, error) {
+	buffer, err := MarshalData(rotation)
+	if err != nil {
+		return nil, fmt.Errorf("Error marshaling api_key rotation: %w", err)
+	}
+
+	req, err := rootlygo.NewRotateApiKeyRequestWithBody(c.Rootly.Server, id, c.ContentType, buffer)
+	if err != nil {
+		return nil, fmt.Errorf("Error building request: %w", err)
+	}
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to make request to rotate api_key: %w", err)
 	}
 
 	data, err := UnmarshalData(resp.Body, new(ApiKey))

@@ -14,23 +14,21 @@ resource "rootly_api_key" "payments_team" {
   group_id   = rootly_team.payments.id
 }
 
-# Rotate the key by changing rotation_trigger, which replaces it with a new key.
-# The token is only returned on create; write it to a secret store so consumers
-# pick up the new value. Names must be unique, so include the trigger in the name
-# if you use create_before_destroy.
-resource "rootly_api_key" "rotated" {
-  name       = "Deploy Bot v${local.deploy_bot_key_version}"
-  expires_at = "2027-01-01T00:00:00Z"
-  kind       = "team"
-  group_id   = rootly_team.payments.id
-
-  rotation_trigger = local.deploy_bot_key_version
-
-  lifecycle {
-    create_before_destroy = true
-  }
+# Rotate a key by changing rotation_trigger. The API only lets a key rotate itself,
+# so manage the key with a provider authenticated by that same key (for example,
+# import the key your pipeline already uses). The new token is only returned once;
+# write it to a secret store and point the provider at it before the next run.
+provider "rootly" {
+  alias     = "deploy_bot"
+  api_token = var.deploy_bot_api_token
 }
 
-locals {
-  deploy_bot_key_version = "1"
+resource "rootly_api_key" "deploy_bot" {
+  provider = rootly.deploy_bot
+
+  name       = "Deploy Bot"
+  expires_at = "2027-01-01T00:00:00Z"
+
+  rotation_trigger              = "2026-10"
+  rotation_grace_period_minutes = 60
 }

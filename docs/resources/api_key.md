@@ -2,12 +2,12 @@
 page_title: "Resource rootly_api_key - terraform-provider-rootly"
 subcategory:
 description: |-
-    Manages a Rootly API key. The token is only returned by the API when the key is created, so it is not available after import. To rotate a key, change rotation_trigger: the provider creates a new key and deletes the old one.
+    Manages a Rootly API key. The token is only returned by the API when the key is created or rotated, so it is not available after import until the key is rotated. To rotate a key, change rotation_trigger: the provider calls the rotate endpoint and stores the new token. The API only allows a key to rotate itself, so the provider's api_token must be this key's token, and you must update the provider's token after rotating.
 ---
 
 # Resource (rootly_api_key)
 
-Manages a Rootly API key. The `token` is only returned by the API when the key is created, so it is not available after import. To rotate a key, change `rotation_trigger`: the provider creates a new key and deletes the old one.
+Manages a Rootly API key. The `token` is only returned by the API when the key is created or rotated, so it is not available after import until the key is rotated. To rotate a key, change `rotation_trigger`: the provider calls the rotate endpoint and stores the new token. The API only allows a key to rotate itself, so the provider's `api_token` must be this key's token, and you must update the provider's token after rotating.
 
 ## Example Usage
 
@@ -28,25 +28,23 @@ resource "rootly_api_key" "payments_team" {
   group_id   = rootly_team.payments.id
 }
 
-# Rotate the key by changing rotation_trigger, which replaces it with a new key.
-# The token is only returned on create; write it to a secret store so consumers
-# pick up the new value. Names must be unique, so include the trigger in the name
-# if you use create_before_destroy.
-resource "rootly_api_key" "rotated" {
-  name       = "Deploy Bot v${local.deploy_bot_key_version}"
-  expires_at = "2027-01-01T00:00:00Z"
-  kind       = "team"
-  group_id   = rootly_team.payments.id
-
-  rotation_trigger = local.deploy_bot_key_version
-
-  lifecycle {
-    create_before_destroy = true
-  }
+# Rotate a key by changing rotation_trigger. The API only lets a key rotate itself,
+# so manage the key with a provider authenticated by that same key (for example,
+# import the key your pipeline already uses). The new token is only returned once;
+# write it to a secret store and point the provider at it before the next run.
+provider "rootly" {
+  alias     = "deploy_bot"
+  api_token = var.deploy_bot_api_token
 }
 
-locals {
-  deploy_bot_key_version = "1"
+resource "rootly_api_key" "deploy_bot" {
+  provider = rootly.deploy_bot
+
+  name       = "Deploy Bot"
+  expires_at = "2027-01-01T00:00:00Z"
+
+  rotation_trigger              = "2026-10"
+  rotation_grace_period_minutes = 60
 }
 ```
 
@@ -67,12 +65,13 @@ locals {
 - `last_used_at` (String) Date of last use
 - `on_call_role_id` (String) The on-call role ID
 - `role_id` (String) The role ID
-- `rotation_trigger` (String) Arbitrary value that, when changed, replaces the API key with a new one, rotating the token. Not sent to the API.
+- `rotation_grace_period_minutes` (Number) How many minutes the old token stays valid after rotation, if the grace period is enabled for your organization. Set to 0 to invalidate the old token immediately. The API defaults to 30.
+- `rotation_trigger` (String) Arbitrary value that, when changed, rotates the API key's token. Not sent to the API.
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-- `token` (String, Sensitive) The API key token. Only returned when the key is created, so it is empty for imported keys. Stored in state as a sensitive value.
+- `token` (String, Sensitive) The API key token. Only returned when the key is created or rotated, so it is empty for imported keys until they are rotated. Stored in state as a sensitive value.
 
 ## Import
 
