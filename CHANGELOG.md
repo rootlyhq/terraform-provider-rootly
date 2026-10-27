@@ -16,7 +16,7 @@
 
 ### Fixed
 
-- `rootly_schedule_rotation` now reads `schedule_rotation_members` after import, so importing a rotation no longer plans to add its existing members. (#540)
+- `rootly_schedule_rotation` now reads `schedule_rotation_members` after import, so importing a rotation no longer plans to add its existing members. (#542, fixes #540)
 
 ## [5.20.1] -- 2026-08-19
 
