@@ -52,7 +52,21 @@ resource "rootly_form_field_placement_condition" "team_b" {
 
 ### Read-Only
 
+- `conditions` (List of Object) The conditions in this group, ordered by position. Manage them through the form field placement conditions endpoints. (see [below for nested schema](#nestedatt--conditions))
 - `id` (String) The ID of this resource.
+
+<a id="nestedatt--conditions"></a>
+### Nested Schema for `conditions`
+
+Read-Only:
+
+- `comparison` (String)
+- `condition_group_id` (String)
+- `conditioned` (String)
+- `form_field_id` (String)
+- `id` (String)
+- `position` (Number)
+- `values` (List of String)
 
 ## Import
 

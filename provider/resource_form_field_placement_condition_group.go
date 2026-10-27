@@ -12,6 +12,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+
+	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceFormFieldPlacementConditionGroup() *schema.Resource {
@@ -71,6 +73,103 @@ func resourceFormFieldPlacementConditionGroup() *schema.Resource {
 				WriteOnly:   false,
 				Description: "The position of the group among groups of the same group_type.",
 			},
+
+			"conditions": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    true,
+				Required:    false,
+				Optional:    false,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The conditions in this group, ordered by position. Manage them through the form field placement conditions endpoints.",
+
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "The condition ID.",
+						},
+
+						"condition_group_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "The condition group ID.",
+						},
+
+						"conditioned": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "Whether the condition applies to placement or requiredness.",
+						},
+
+						"position": &schema.Schema{
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "The condition position.",
+						},
+
+						"form_field_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "The condition field.",
+						},
+
+						"comparison": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "The condition comparison.",
+						},
+
+						"values": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Sensitive:        false,
+							ForceNew:         false,
+							WriteOnly:        false,
+							Description:      "The values for comparison.",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -127,7 +226,30 @@ func resourceFormFieldPlacementConditionGroupRead(ctx context.Context, d *schema
 	d.Set("group_type", item.GroupType)
 	d.Set("group_operator", item.GroupOperator)
 	d.Set("position", item.Position)
-	d.Set("conditions", item.Conditions)
+
+	if item.Conditions != nil {
+		processed_items_conditions := make([]map[string]interface{}, 0)
+
+		for _, c := range item.Conditions {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				// Create a new map with only the fields defined in the schema
+				processed_item_conditions := map[string]interface{}{
+					"id":                 rawItem["id"],
+					"condition_group_id": rawItem["condition_group_id"],
+					"conditioned":        rawItem["conditioned"],
+					"position":           rawItem["position"],
+					"form_field_id":      rawItem["form_field_id"],
+					"comparison":         rawItem["comparison"],
+					"values":             rawItem["values"],
+				}
+				processed_items_conditions = append(processed_items_conditions, processed_item_conditions)
+			}
+		}
+
+		d.Set("conditions", processed_items_conditions)
+	} else {
+		d.Set("conditions", nil)
+	}
 
 	return nil
 }

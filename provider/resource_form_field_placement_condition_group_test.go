@@ -22,13 +22,16 @@ func TestAccResourceFormFieldPlacementConditionGroup(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_form_field_placement_condition_group.test", "group_operator", "or"),
 					resource.TestCheckResourceAttrPair("rootly_form_field_placement_condition.option_a", "condition_group_id", "rootly_form_field_placement_condition_group.test", "id"),
 					resource.TestCheckResourceAttrPair("rootly_form_field_placement_condition.option_b", "condition_group_id", "rootly_form_field_placement_condition_group.test", "id"),
+					resource.TestCheckResourceAttrSet("rootly_form_field_placement_condition.ungrouped", "condition_group_id"),
 				),
 			},
 			{
 				Config: testAccResourceFormFieldPlacementConditionGroup(name, "and"),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_form_field_placement_condition_group.test", "group_operator", "and"),
+					resource.TestCheckResourceAttr("rootly_form_field_placement_condition_group.test", "conditions.#", "2"),
 					resource.TestCheckResourceAttrPair("rootly_form_field_placement_condition.option_b", "condition_group_id", "rootly_form_field_placement_condition_group.test", "id"),
+					resource.TestCheckResourceAttrSet("rootly_form_field_placement_condition.ungrouped", "condition_group_id"),
 				),
 			},
 		},
@@ -94,6 +97,14 @@ resource "rootly_form_field_placement_condition" "option_b" {
   form_field_id           = rootly_form_field.source.id
   comparison              = "equal"
   values                  = [rootly_form_field_option.b.id]
+}
+
+resource "rootly_form_field_placement_condition" "ungrouped" {
+  form_field_placement_id = rootly_form_field_placement.test.id
+  conditioned             = "placement"
+  form_field_id           = rootly_form_field.source.id
+  comparison              = "is_set"
+  values                  = []
 }
 `, name, groupOperator)
 }
