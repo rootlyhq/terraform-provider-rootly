@@ -51,8 +51,8 @@ resource "rootly_heartbeat" "nightly_backup" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-- `ping_url` (String) URL to receive heartbeat pings.
-- `secret` (String) Secret used as bearer token when pinging heartbeat.
+- `ping_url` (String, Sensitive) URL to receive heartbeat pings.
+- `secret` (String, Sensitive) Secret used as bearer token when pinging heartbeat.
 
 ## Import
 

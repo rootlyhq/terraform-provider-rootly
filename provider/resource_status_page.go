@@ -192,7 +192,7 @@ func resourceStatusPage() *schema.Resource {
 				Computed:         true,
 				Required:         false,
 				Optional:         true,
-				Sensitive:        false,
+				Sensitive:        true,
 				ForceNew:         false,
 				WriteOnly:        false,
 				Description:      "Authentication password",
