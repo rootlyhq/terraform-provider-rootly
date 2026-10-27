@@ -134,6 +134,7 @@ func New(version string) func() *schema.Provider {
 				"rootly_environment":                                                   resourceEnvironment(),
 				"rootly_form_field_option":                                             resourceFormFieldOption(),
 				"rootly_form_field_placement_condition":                                resourceFormFieldPlacementCondition(),
+				"rootly_form_field_placement_condition_group":                          resourceFormFieldPlacementConditionGroup(),
 				"rootly_form_field_placement":                                          resourceFormFieldPlacement(),
 				"rootly_form_field_position":                                           resourceFormFieldPosition(),
 				"rootly_form_field":                                                    resourceFormField(),

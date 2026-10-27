@@ -13,6 +13,7 @@ import (
 type FormFieldPlacementCondition struct {
 	ID                   string        `jsonapi:"primary,form_field_placement_conditions"`
 	FormFieldPlacementId string        `jsonapi:"attr,form_field_placement_id,omitempty"`
+	ConditionGroupId     string        `jsonapi:"attr,condition_group_id,omitempty"`
 	Conditioned          string        `jsonapi:"attr,conditioned,omitempty"`
 	Position             int           `jsonapi:"attr,position,omitempty"`
 	FormFieldId          string        `jsonapi:"attr,form_field_id,omitempty"`
