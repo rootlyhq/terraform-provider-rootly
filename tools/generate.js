@@ -131,7 +131,6 @@ const excluded = {
     "user",
     "user_notification_rule",
     "webhooks_delivery",
-    "heartbeat", // manual change: ping_url and secret set to Sensitive: true
     "status_page", // manual change: section_order/service_ids/functionality_ids set to Computed: true to prevent drift from API-returned values
     "workflow_alert", // cannot auto-generate because codegen doesn't handle nested objects in trigger_params (alert_payload_conditions requires complex nested schema)
     "workflow_run",
