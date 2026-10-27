@@ -10,7 +10,7 @@
 
 ### Changed
 
-- `rootly_heartbeat.secret`, `rootly_heartbeat.ping_url`, and `rootly_status_page.authentication_password` are now `Sensitive` and no longer print in plan output. Outputs that expose them must set `sensitive = true`. (#539)
+- `rootly_heartbeat.secret`, `rootly_heartbeat.ping_url`, and `rootly_status_page.authentication_password` are now `Sensitive` and no longer print in plan output. Outputs that expose them must set `sensitive = true`. (#541, fixes #539)
 
 - Service and functionality external integration IDs are preserved when omitted or set to `null` in Terraform configuration, including IDs populated outside Terraform or imported into state. Set an ID to `""` to intentionally clear it, or a non-empty string to replace it. Removing a previously configured service ID now relinquishes Terraform ownership instead of clearing the remote ID. Existing state remains compatible; no state migration is required. (IR-6531)
 
