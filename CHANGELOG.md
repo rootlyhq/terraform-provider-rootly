@@ -14,6 +14,10 @@
 
 - `rootly_alert_urgency.retrigger_timeout_minutes` is no longer `Computed`: a value set outside Terraform is now cleared on the next apply if it is not in the configuration. (TER-230)
 
+### Fixed
+
+- `rootly_workflow_task_*` resources no longer send `workflow_id` as a request body attribute on create and update. The parent workflow is already in the URL path, and the API rejected the attribute with a 400 ("this endpoint does not accept workflow_id"). (#525)
+
 ## [5.20.1] -- 2026-08-19
 
 ### Changed
