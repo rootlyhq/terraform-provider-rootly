@@ -15,7 +15,9 @@ func TestWorkflowTaskRequestsOmitWorkflowIdAttribute(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		raw, err := io.ReadAll(r.Body)
 		if err != nil {
-			t.Fatal(err)
+			t.Errorf("%s %s: reading body: %v", r.Method, r.URL.Path, err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
 		}
 		var body struct {
 			Data struct {
@@ -23,7 +25,9 @@ func TestWorkflowTaskRequestsOmitWorkflowIdAttribute(t *testing.T) {
 			} `json:"data"`
 		}
 		if err := json.Unmarshal(raw, &body); err != nil {
-			t.Fatalf("%s %s: invalid body %q: %v", r.Method, r.URL.Path, raw, err)
+			t.Errorf("%s %s: invalid body %q: %v", r.Method, r.URL.Path, raw, err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
 		}
 		requests[r.Method+" "+r.URL.Path] = body.Data.Attributes
 
