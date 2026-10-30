@@ -251,6 +251,15 @@ function annotateStatusPageAnnouncement(schemas) {
   announcement.properties.published_at.tf_computed = true;
 }
 
+// Heartbeat ping credentials must not print in plan output.
+function annotateHeartbeatCredentials(schemas) {
+  const heartbeat = schemas.heartbeat;
+  if (!heartbeat) return;
+  for (const name of ["secret", "ping_url"]) {
+    if (heartbeat.properties[name]) heartbeat.properties[name].tf_sensitive = true;
+  }
+}
+
 // The published schema currently lists incident_role_id as required without
 // defining the property. Restore the field so generated clients and Terraform
 // resources can satisfy the API contract.
@@ -332,6 +341,7 @@ annotateCatalogExternalIds(swagger.components.schemas);
 annotateRetriggerTimeout(swagger.components.schemas);
 preserveCanvasTerraformContract(swagger.components.schemas);
 annotateStatusPageAnnouncement(swagger.components.schemas);
+annotateHeartbeatCredentials(swagger.components.schemas);
 preserveWorkflowTaskContracts(swagger.components.schemas);
 annotateCanvasWorkspaces(swagger.components.schemas);
 stripBulkOperations(swagger);

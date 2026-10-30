@@ -150,3 +150,30 @@ test("required workflow-task properties omitted by OpenAPI are restored", () => 
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+test("heartbeat ping credentials are sensitive", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-clean-swagger-"));
+  const swaggerPath = path.join(directory, "swagger.json");
+  const swagger = {
+    paths: {},
+    components: {schemas: {
+      heartbeat: {properties: {
+        name: {type: "string"},
+        secret: {type: "string"},
+        ping_url: {type: "string"},
+      }},
+    }},
+  };
+  try {
+    fs.writeFileSync(swaggerPath, JSON.stringify(swagger));
+    const result = spawnSync(process.execPath, [path.join(__dirname, "clean-swagger.js"), swaggerPath], {encoding: "utf8"});
+    assert.equal(result.status, 0, result.stderr);
+    const properties = JSON.parse(fs.readFileSync(swaggerPath, "utf8"))
+      .components.schemas.heartbeat.properties;
+    assert.equal(properties.secret.tf_sensitive, true);
+    assert.equal(properties.ping_url.tf_sensitive, true);
+    assert.equal(properties.name.tf_sensitive, undefined);
+  } finally {
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});
