@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/polling"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -125,7 +126,7 @@ func resourceAlertRoute() *schema.Resource {
 				ForceNew:         false,
 				WriteOnly:        false,
 				Description:      "",
-				DiffSuppressFunc: tools.EqualIgnoringOrderOmittingFields(alertRouteRuleServerAssignedFields),
+				DiffSuppressFunc: diffsuppressfunc.EqualIgnoringOrderOmittingFields(alertRouteRuleServerAssignedFields),
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
