@@ -82,6 +82,7 @@ const excluded = {
     "ai_chat_session_message",
     "alert_group",
     "alerts_source",
+    "api_key", // hand-maintained: exposes the create-time token and rotation_trigger (PRF-3498)
     "status",
     "audit",
     "edge_connector",
@@ -137,6 +138,7 @@ const excluded = {
     "workflow_task",
   ],
   clients: [
+    "api_key", // hand-maintained: Token is only returned by create/rotate (PRF-3498)
     "escalation_level", // manual fix: delay is a nullable *int so it can be both omitted and explicitly 0 (TER-182, #351)
     "escalation_path", // manual fix: initial_delay must not use omitempty so 0 is sent (c74784b)
     "user", // hand-maintained: exposes on_call_role/role relations + on_call_role update
