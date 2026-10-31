@@ -390,6 +390,10 @@ function genTaskSchemaProperty(property_name, property_schema, required_props, n
 							Description: "${annotatedDescription(property_schema)}",
 							Type: ${genTaskSchemaPropertyType(property_schema.type)},
 							${isRequired ? "Required" : "Optional"}: true,`;
+  if (property_schema.tf_sensitive) {
+    a = `${a}
+							Sensitive: true,`;
+  }
   if (isJSON) {
     a = `${a}
 							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {

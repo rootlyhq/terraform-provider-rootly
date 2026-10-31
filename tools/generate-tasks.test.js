@@ -132,3 +132,24 @@ func validateUniqueWorkflowTaskPosition(context.Context, *schema.ResourceDiff, i
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+test("tf_sensitive task params are marked Sensitive", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-task-generator-"));
+  const previous = process.cwd();
+  try {
+    fs.mkdirSync(path.join(directory, "provider"));
+    process.chdir(directory);
+    generateTasks(["meeting"], {components: {schemas: {
+      meeting_task_params: {properties: {
+        topic: {type: "string"},
+        password: {type: "string", tf_sensitive: true},
+      }, required: ["topic"]},
+    }}});
+    const resource = fs.readFileSync("provider/resource_workflow_task_meeting.go", "utf8");
+    assert.match(resource, /"password": &schema.Schema \{[^}]*Sensitive: true,/);
+    assert.doesNotMatch(resource, /"topic": &schema.Schema \{[^}]*Sensitive/);
+  } finally {
+    process.chdir(previous);
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});
