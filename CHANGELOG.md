@@ -14,6 +14,10 @@
 
 - `rootly_alert_urgency.retrigger_timeout_minutes` is no longer `Computed`: a value set outside Terraform is now cleared on the next apply if it is not in the configuration. (TER-230)
 
+### Fixed
+
+- `rootly_schedule_rotation` now reads `schedule_rotation_members` after import, so importing a rotation no longer plans to add its existing members. (#542, fixes #540)
+
 ## [5.20.1] -- 2026-08-19
 
 ### Changed

@@ -366,15 +366,14 @@ func (m *ScheduleRotationResourceModel) FromApi(ctx context.Context, data apicli
 		}))
 	}
 
-	if fwtypes.IsKnown(m.ScheduleRotationMembers) {
-		m.ScheduleRotationMembers = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.ScheduleRotationMembers, func(v apiclient.ScheduleRotationMember, _ int) ScheduleRotationResourceScheduleRotationMemberModel {
-			return ScheduleRotationResourceScheduleRotationMemberModel{
-				MemberId:   types.StringValue(v.MemberID),
-				MemberType: types.StringValue(v.MemberType),
-				Position:   types.Int64Value(v.Position),
-			}
-		}))
-	}
+	// Always read members: after import the prior value is null.
+	m.ScheduleRotationMembers = supertypes.NewSetNestedObjectValueOfValueSlice(ctx, lo.Map(data.ScheduleRotationMembers, func(v apiclient.ScheduleRotationMember, _ int) ScheduleRotationResourceScheduleRotationMemberModel {
+		return ScheduleRotationResourceScheduleRotationMemberModel{
+			MemberId:   types.StringValue(v.MemberID),
+			MemberType: types.StringValue(v.MemberType),
+			Position:   types.Int64Value(v.Position),
+		}
+	}))
 
 	return diags
 }
