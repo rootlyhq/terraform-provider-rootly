@@ -14,6 +14,10 @@
 
 - `rootly_alert_urgency.retrigger_timeout_minutes` is no longer `Computed`: a value set outside Terraform is now cleared on the next apply if it is not in the configuration. (TER-230)
 
+### Fixed
+
+- `rootly_alert_route` no longer shows a diff on every plan when a fallback rule's `name` differs from the name Rootly assigns (`Fallback Rule for <route name>`). The `name` of a fallback rule is now ignored when comparing rules. (#533)
+
 ## [5.20.1] -- 2026-08-19
 
 ### Changed

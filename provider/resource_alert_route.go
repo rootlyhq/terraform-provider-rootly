@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/polling"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -125,7 +126,7 @@ func resourceAlertRoute() *schema.Resource {
 				ForceNew:         false,
 				WriteOnly:        false,
 				Description:      "",
-				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				DiffSuppressFunc: diffsuppressfunc.EqualIgnoringOrderOmittingFields(alertRouteRuleServerAssignedFields),
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 
@@ -137,7 +138,7 @@ func resourceAlertRoute() *schema.Resource {
 							Sensitive:   false,
 							ForceNew:    false,
 							WriteOnly:   false,
-							Description: "The name of the alert routing rule",
+							Description: "The name of the alert routing rule. Rootly names a fallback rule `Fallback Rule for <route name>` and ignores this value, so a different `name` on a fallback rule is not treated as a change.",
 						},
 
 						"position": &schema.Schema{
@@ -561,6 +562,17 @@ var alertRouteConditionNullableFields = []string{
 	"property_field_value",
 	"conditionable_type",
 	"conditionable_id",
+}
+
+// alertRouteRuleServerAssignedFields returns the rule fields that Rootly
+// assigns itself. Rootly names a fallback rule "Fallback Rule for <route
+// name>" whatever name is sent, so comparing that name with the configured
+// one would show a diff on every plan and replace all rules on every apply.
+func alertRouteRuleServerAssignedFields(rule map[string]interface{}) []string {
+	if fallback, ok := rule["fallback_rule"].(bool); ok && fallback {
+		return []string{"name"}
+	}
+	return nil
 }
 
 func expandAlertRouteRules(rules []interface{}) []interface{} {
