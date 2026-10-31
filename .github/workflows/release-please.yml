@@ -1,0 +1,26 @@
+name: Release Please
+
+on:
+  push:
+    branches: [master]
+
+permissions:
+  actions: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    steps:
+      - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger release workflow
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.release.outputs.tag_name }}
+        run: gh workflow run release.yml --repo "$GITHUB_REPOSITORY" --ref "$TAG"

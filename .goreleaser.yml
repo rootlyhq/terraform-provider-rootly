@@ -56,9 +56,8 @@ signs:
       - "--detach-sign"
       - "${artifact}"
 release:
-  # Release Drafter creates the notes on master before the tag is pushed.
-  # Publish that draft instead of creating a second release for the same tag.
-  use_existing_draft: true
+  # The release already exists (created by release-please with its notes);
+  # attach the built artifacts to it instead of creating a second release.
   mode: keep-existing
   extra_files:
     - glob: 'terraform-registry-manifest.json'
