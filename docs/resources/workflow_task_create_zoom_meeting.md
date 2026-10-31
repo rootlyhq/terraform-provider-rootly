@@ -43,7 +43,7 @@ Optional:
 - `auto_recording` (String) Value must be one of `none`, `local`, `cloud`.
 - `create_as_email` (String) The email to use if creating as email
 - `enable_zoom_bot_auto_join` (Boolean) Allow the Rootly bot to start recording without waiting for host approval. Value must be one of true or false
-- `password` (String) The meeting password
+- `password` (String, Sensitive) The meeting password
 - `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `record_meeting` (Boolean) Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting. Value must be one of true or false

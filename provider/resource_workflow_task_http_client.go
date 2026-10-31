@@ -91,6 +91,7 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 							Description: "JSON map of HTTP headers",
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
 								var oldJSONAsInterface, newJSONAsInterface interface{}
 
