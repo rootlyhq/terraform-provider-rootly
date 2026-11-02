@@ -4769,6 +4769,24 @@ func (e CreateGoogleChatSpaceTaskParamsTaskType) Valid() bool {
 	}
 }
 
+// Defines values for CreateGoogleDocsPageTaskParamsDocumentMode.
+const (
+	CreateGoogleDocsPageTaskParamsDocumentModePageless CreateGoogleDocsPageTaskParamsDocumentMode = "pageless"
+	CreateGoogleDocsPageTaskParamsDocumentModePages    CreateGoogleDocsPageTaskParamsDocumentMode = "pages"
+)
+
+// Valid indicates whether the value is a known member of the CreateGoogleDocsPageTaskParamsDocumentMode enum.
+func (e CreateGoogleDocsPageTaskParamsDocumentMode) Valid() bool {
+	switch e {
+	case CreateGoogleDocsPageTaskParamsDocumentModePageless:
+		return true
+	case CreateGoogleDocsPageTaskParamsDocumentModePages:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for CreateGoogleDocsPageTaskParamsTaskType.
 const (
 	CreateGoogleDocsPageTaskParamsTaskTypeCreateGoogleDocsPage CreateGoogleDocsPageTaskParamsTaskType = "create_google_docs_page"
@@ -35720,6 +35738,24 @@ func (e UpdateGoogleChatSpaceDescriptionTaskParamsTaskType) Valid() bool {
 	}
 }
 
+// Defines values for UpdateGoogleDocsPageTaskParamsDocumentMode.
+const (
+	UpdateGoogleDocsPageTaskParamsDocumentModePageless UpdateGoogleDocsPageTaskParamsDocumentMode = "pageless"
+	UpdateGoogleDocsPageTaskParamsDocumentModePages    UpdateGoogleDocsPageTaskParamsDocumentMode = "pages"
+)
+
+// Valid indicates whether the value is a known member of the UpdateGoogleDocsPageTaskParamsDocumentMode enum.
+func (e UpdateGoogleDocsPageTaskParamsDocumentMode) Valid() bool {
+	switch e {
+	case UpdateGoogleDocsPageTaskParamsDocumentModePageless:
+		return true
+	case UpdateGoogleDocsPageTaskParamsDocumentModePages:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateGoogleDocsPageTaskParamsTaskType.
 const (
 	UpdateGoogleDocsPage UpdateGoogleDocsPageTaskParamsTaskType = "update_google_docs_page"
@@ -46896,7 +46932,10 @@ type CreateGoogleChatSpaceTaskParamsTaskType string
 type CreateGoogleDocsPageTaskParams struct {
 	// Content The page content
 	Content *string `json:"content,omitempty"`
-	Drive   *struct {
+
+	// DocumentMode Page setup for the Google Doc. pageless makes the doc pageless; pages leaves the page setup unchanged unless the Google Doc template is pageless
+	DocumentMode *CreateGoogleDocsPageTaskParamsDocumentMode `json:"document_mode,omitempty"`
+	Drive        *struct {
 		Id   *string `json:"id,omitempty"`
 		Name *string `json:"name,omitempty"`
 	} `json:"drive,omitempty"`
@@ -46922,6 +46961,9 @@ type CreateGoogleDocsPageTaskParams struct {
 	// Title The page title
 	Title string `json:"title"`
 }
+
+// CreateGoogleDocsPageTaskParamsDocumentMode Page setup for the Google Doc. pageless makes the doc pageless; pages leaves the page setup unchanged unless the Google Doc template is pageless
+type CreateGoogleDocsPageTaskParamsDocumentMode string
 
 // CreateGoogleDocsPageTaskParamsTaskType defines model for CreateGoogleDocsPageTaskParams.TaskType.
 type CreateGoogleDocsPageTaskParamsTaskType string
@@ -63533,6 +63575,9 @@ type UpdateGoogleDocsPageTaskParams struct {
 	// Content The Google Doc content
 	Content *string `json:"content,omitempty"`
 
+	// DocumentMode Page setup for the Google Doc. pageless makes the doc pageless; pages leaves the page setup unchanged unless the Google Doc template is pageless
+	DocumentMode *UpdateGoogleDocsPageTaskParamsDocumentMode `json:"document_mode,omitempty"`
+
 	// FileId The Google Doc file ID
 	FileId           string `json:"file_id"`
 	IncludeFollowUps *bool  `json:"include_follow_ups,omitempty"`
@@ -63549,6 +63594,9 @@ type UpdateGoogleDocsPageTaskParams struct {
 	// Title The Google Doc title
 	Title *string `json:"title,omitempty"`
 }
+
+// UpdateGoogleDocsPageTaskParamsDocumentMode Page setup for the Google Doc. pageless makes the doc pageless; pages leaves the page setup unchanged unless the Google Doc template is pageless
+type UpdateGoogleDocsPageTaskParamsDocumentMode string
 
 // UpdateGoogleDocsPageTaskParamsTaskType defines model for UpdateGoogleDocsPageTaskParams.TaskType.
 type UpdateGoogleDocsPageTaskParamsTaskType string
