@@ -182,7 +182,7 @@ func testAccCheckAlertRouteFirstCondition(resName string, check func(alertRouteC
 			return fmt.Errorf("not found: %s", resName)
 		}
 
-		httpResp, err := acctest.SharedClient.GetAlertRouteWithResponse(context.Background(), rs.Primary.ID)
+		httpResp, err := acctest.SharedClient.GetAlertRouteWithResponse(context.Background(), rs.Primary.ID, nil)
 		if err != nil {
 			return fmt.Errorf("Error getting alert route, got error: %s", err)
 		} else if httpResp.StatusCode() != http.StatusOK {
