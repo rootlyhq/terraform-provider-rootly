@@ -68,6 +68,19 @@ function combineOneOf(obj) {
   }
 }
 
+// oapi-codegen renders `enum: [null]` variants as `= <nil>` constants, which don't compile
+function stripNullEnumVariants(obj) {
+  if (typeof obj !== "object" || obj === null) return;
+  ["oneOf", "anyOf"].forEach((keyword) => {
+    if (!Array.isArray(obj[keyword])) return;
+    const variants = obj[keyword].filter((variant) => !(Array.isArray(variant.enum) && variant.enum.every((value) => value === null)));
+    if (variants.length === obj[keyword].length) return;
+    obj[keyword] = variants;
+    obj.nullable = true;
+  });
+  Object.keys(obj).forEach((key) => stripNullEnumVariants(obj[key]));
+}
+
 function renameEscalationPolicyLevelSchemas(obj) {
   for (var key in obj) {
     if (key.match(/escalation_policy_level/)) {
@@ -321,6 +334,7 @@ function stripBulkOperations(swagger) {
 }
 
 fixFilterParameterTypes(swagger.paths);
+stripNullEnumVariants(swagger.components.schemas);
 stripAnyOf(swagger.components.schemas);
 combineOneOf(swagger.components.schemas);
 processPathParametersAnyOf(swagger.paths);

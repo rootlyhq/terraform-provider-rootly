@@ -10640,6 +10640,72 @@ func (e FormFieldPlacementConditionConditioned) Valid() bool {
 	}
 }
 
+// Defines values for FormFieldPlacementConditionGroupGroupOperator.
+const (
+	FormFieldPlacementConditionGroupGroupOperatorAnd FormFieldPlacementConditionGroupGroupOperator = "and"
+	FormFieldPlacementConditionGroupGroupOperatorOr  FormFieldPlacementConditionGroupGroupOperator = "or"
+)
+
+// Valid indicates whether the value is a known member of the FormFieldPlacementConditionGroupGroupOperator enum.
+func (e FormFieldPlacementConditionGroupGroupOperator) Valid() bool {
+	switch e {
+	case FormFieldPlacementConditionGroupGroupOperatorAnd:
+		return true
+	case FormFieldPlacementConditionGroupGroupOperatorOr:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for FormFieldPlacementConditionGroupGroupType.
+const (
+	FormFieldPlacementConditionGroupGroupTypePlacement FormFieldPlacementConditionGroupGroupType = "placement"
+	FormFieldPlacementConditionGroupGroupTypeRequired  FormFieldPlacementConditionGroupGroupType = "required"
+)
+
+// Valid indicates whether the value is a known member of the FormFieldPlacementConditionGroupGroupType enum.
+func (e FormFieldPlacementConditionGroupGroupType) Valid() bool {
+	switch e {
+	case FormFieldPlacementConditionGroupGroupTypePlacement:
+		return true
+	case FormFieldPlacementConditionGroupGroupTypeRequired:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for FormFieldPlacementConditionGroupListDataType.
+const (
+	FormFieldPlacementConditionGroupListDataTypeFormFieldPlacementConditionGroups FormFieldPlacementConditionGroupListDataType = "form_field_placement_condition_groups"
+)
+
+// Valid indicates whether the value is a known member of the FormFieldPlacementConditionGroupListDataType enum.
+func (e FormFieldPlacementConditionGroupListDataType) Valid() bool {
+	switch e {
+	case FormFieldPlacementConditionGroupListDataTypeFormFieldPlacementConditionGroups:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for FormFieldPlacementConditionGroupResponseDataType.
+const (
+	FormFieldPlacementConditionGroupResponseDataTypeFormFieldPlacementConditionGroups FormFieldPlacementConditionGroupResponseDataType = "form_field_placement_condition_groups"
+)
+
+// Valid indicates whether the value is a known member of the FormFieldPlacementConditionGroupResponseDataType enum.
+func (e FormFieldPlacementConditionGroupResponseDataType) Valid() bool {
+	switch e {
+	case FormFieldPlacementConditionGroupResponseDataTypeFormFieldPlacementConditionGroups:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for FormFieldPlacementConditionListDataType.
 const (
 	FormFieldPlacementConditionListDataTypeFormFieldPlacementConditions FormFieldPlacementConditionListDataType = "form_field_placement_conditions"
@@ -19790,6 +19856,57 @@ const (
 func (e NewFormFieldPlacementConditionDataType) Valid() bool {
 	switch e {
 	case NewFormFieldPlacementConditionDataTypeFormFieldPlacementConditions:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewFormFieldPlacementConditionGroupDataAttributesGroupOperator.
+const (
+	NewFormFieldPlacementConditionGroupDataAttributesGroupOperatorAnd NewFormFieldPlacementConditionGroupDataAttributesGroupOperator = "and"
+	NewFormFieldPlacementConditionGroupDataAttributesGroupOperatorOr  NewFormFieldPlacementConditionGroupDataAttributesGroupOperator = "or"
+)
+
+// Valid indicates whether the value is a known member of the NewFormFieldPlacementConditionGroupDataAttributesGroupOperator enum.
+func (e NewFormFieldPlacementConditionGroupDataAttributesGroupOperator) Valid() bool {
+	switch e {
+	case NewFormFieldPlacementConditionGroupDataAttributesGroupOperatorAnd:
+		return true
+	case NewFormFieldPlacementConditionGroupDataAttributesGroupOperatorOr:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewFormFieldPlacementConditionGroupDataAttributesGroupType.
+const (
+	NewFormFieldPlacementConditionGroupDataAttributesGroupTypePlacement NewFormFieldPlacementConditionGroupDataAttributesGroupType = "placement"
+	NewFormFieldPlacementConditionGroupDataAttributesGroupTypeRequired  NewFormFieldPlacementConditionGroupDataAttributesGroupType = "required"
+)
+
+// Valid indicates whether the value is a known member of the NewFormFieldPlacementConditionGroupDataAttributesGroupType enum.
+func (e NewFormFieldPlacementConditionGroupDataAttributesGroupType) Valid() bool {
+	switch e {
+	case NewFormFieldPlacementConditionGroupDataAttributesGroupTypePlacement:
+		return true
+	case NewFormFieldPlacementConditionGroupDataAttributesGroupTypeRequired:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewFormFieldPlacementConditionGroupDataType.
+const (
+	NewFormFieldPlacementConditionGroupDataTypeFormFieldPlacementConditionGroups NewFormFieldPlacementConditionGroupDataType = "form_field_placement_condition_groups"
+)
+
+// Valid indicates whether the value is a known member of the NewFormFieldPlacementConditionGroupDataType enum.
+func (e NewFormFieldPlacementConditionGroupDataType) Valid() bool {
+	switch e {
+	case NewFormFieldPlacementConditionGroupDataTypeFormFieldPlacementConditionGroups:
 		return true
 	default:
 		return false
@@ -35444,6 +35561,39 @@ func (e UpdateFormFieldPlacementConditionDataType) Valid() bool {
 	}
 }
 
+// Defines values for UpdateFormFieldPlacementConditionGroupDataAttributesGroupOperator.
+const (
+	And UpdateFormFieldPlacementConditionGroupDataAttributesGroupOperator = "and"
+	Or  UpdateFormFieldPlacementConditionGroupDataAttributesGroupOperator = "or"
+)
+
+// Valid indicates whether the value is a known member of the UpdateFormFieldPlacementConditionGroupDataAttributesGroupOperator enum.
+func (e UpdateFormFieldPlacementConditionGroupDataAttributesGroupOperator) Valid() bool {
+	switch e {
+	case And:
+		return true
+	case Or:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateFormFieldPlacementConditionGroupDataType.
+const (
+	UpdateFormFieldPlacementConditionGroupDataTypeFormFieldPlacementConditionGroups UpdateFormFieldPlacementConditionGroupDataType = "form_field_placement_condition_groups"
+)
+
+// Valid indicates whether the value is a known member of the UpdateFormFieldPlacementConditionGroupDataType enum.
+func (e UpdateFormFieldPlacementConditionGroupDataType) Valid() bool {
+	switch e {
+	case UpdateFormFieldPlacementConditionGroupDataTypeFormFieldPlacementConditionGroups:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateFormFieldPositionDataAttributesForm.
 const (
 	UpdateFormFieldPositionDataAttributesFormIncidentPostMortem               UpdateFormFieldPositionDataAttributesForm = "incident_post_mortem"
@@ -49083,6 +49233,9 @@ type FormFieldPlacementCondition struct {
 	// Comparison The condition comparison.
 	Comparison FormFieldPlacementConditionComparison `json:"comparison"`
 
+	// ConditionGroupId The condition group this condition belongs to.
+	ConditionGroupId *string `json:"condition_group_id,omitempty"`
+
 	// Conditioned The resource or attribute the condition applies.
 	Conditioned FormFieldPlacementConditionConditioned `json:"conditioned"`
 
@@ -49104,6 +49257,62 @@ type FormFieldPlacementConditionComparison string
 
 // FormFieldPlacementConditionConditioned The resource or attribute the condition applies.
 type FormFieldPlacementConditionConditioned string
+
+// FormFieldPlacementConditionGroup defines model for form_field_placement_condition_group.
+type FormFieldPlacementConditionGroup struct {
+	// Conditions The conditions in this group, ordered by position. Manage them through the form field placement conditions endpoints.
+	Conditions *[]FormFieldPlacementCondition `json:"conditions,omitempty"`
+
+	// FormFieldPlacementId The form field placement this group belongs to.
+	FormFieldPlacementId string `json:"form_field_placement_id"`
+
+	// GroupOperator Logical operator used to combine the conditions inside this group.
+	GroupOperator FormFieldPlacementConditionGroupGroupOperator `json:"group_operator"`
+
+	// GroupType Whether the group's conditions control the field's placement (visibility) or requiredness. Cannot be changed after creation.
+	GroupType FormFieldPlacementConditionGroupGroupType `json:"group_type"`
+
+	// Position The position of the group among groups of the same group_type.
+	Position int `json:"position"`
+}
+
+// FormFieldPlacementConditionGroupGroupOperator Logical operator used to combine the conditions inside this group.
+type FormFieldPlacementConditionGroupGroupOperator string
+
+// FormFieldPlacementConditionGroupGroupType Whether the group's conditions control the field's placement (visibility) or requiredness. Cannot be changed after creation.
+type FormFieldPlacementConditionGroupGroupType string
+
+// FormFieldPlacementConditionGroupList defines model for form_field_placement_condition_group_list.
+type FormFieldPlacementConditionGroupList struct {
+	Data []struct {
+		Attributes FormFieldPlacementConditionGroup `json:"attributes"`
+
+		// Id Unique ID of the condition group
+		Id   string                                       `json:"id"`
+		Type FormFieldPlacementConditionGroupListDataType `json:"type"`
+	} `json:"data"`
+	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
+	Links    Links                      `json:"links"`
+	Meta     Meta                       `json:"meta"`
+}
+
+// FormFieldPlacementConditionGroupListDataType defines model for FormFieldPlacementConditionGroupList.Data.Type.
+type FormFieldPlacementConditionGroupListDataType string
+
+// FormFieldPlacementConditionGroupResponse defines model for form_field_placement_condition_group_response.
+type FormFieldPlacementConditionGroupResponse struct {
+	Data struct {
+		Attributes FormFieldPlacementConditionGroup `json:"attributes"`
+
+		// Id Unique ID of the condition group
+		Id   string                                           `json:"id"`
+		Type FormFieldPlacementConditionGroupResponseDataType `json:"type"`
+	} `json:"data"`
+	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
+}
+
+// FormFieldPlacementConditionGroupResponseDataType defines model for FormFieldPlacementConditionGroupResponse.Data.Type.
+type FormFieldPlacementConditionGroupResponseDataType string
 
 // FormFieldPlacementConditionList defines model for form_field_placement_condition_list.
 type FormFieldPlacementConditionList struct {
@@ -53656,6 +53865,9 @@ type NewFormFieldPlacementCondition struct {
 			// Comparison The condition comparison.
 			Comparison NewFormFieldPlacementConditionDataAttributesComparison `json:"comparison"`
 
+			// ConditionGroupId The group to add the condition to. Must be on the same placement and match `conditioned`. If omitted on create, the condition gets its own group.
+			ConditionGroupId *string `json:"condition_group_id,omitempty"`
+
 			// Conditioned The resource or attribute the condition applies.
 			Conditioned NewFormFieldPlacementConditionDataAttributesConditioned `json:"conditioned"`
 
@@ -53680,6 +53892,32 @@ type NewFormFieldPlacementConditionDataAttributesConditioned string
 
 // NewFormFieldPlacementConditionDataType defines model for NewFormFieldPlacementCondition.Data.Type.
 type NewFormFieldPlacementConditionDataType string
+
+// NewFormFieldPlacementConditionGroup defines model for new_form_field_placement_condition_group.
+type NewFormFieldPlacementConditionGroup struct {
+	Data struct {
+		Attributes struct {
+			// GroupOperator Logical operator used to combine the conditions inside this group.
+			GroupOperator NewFormFieldPlacementConditionGroupDataAttributesGroupOperator `json:"group_operator"`
+
+			// GroupType Whether the group's conditions control the field's placement (visibility) or requiredness. Cannot be changed after creation.
+			GroupType NewFormFieldPlacementConditionGroupDataAttributesGroupType `json:"group_type"`
+
+			// Position The position of the group among groups of the same group_type.
+			Position *int `json:"position,omitempty"`
+		} `json:"attributes"`
+		Type NewFormFieldPlacementConditionGroupDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewFormFieldPlacementConditionGroupDataAttributesGroupOperator Logical operator used to combine the conditions inside this group.
+type NewFormFieldPlacementConditionGroupDataAttributesGroupOperator string
+
+// NewFormFieldPlacementConditionGroupDataAttributesGroupType Whether the group's conditions control the field's placement (visibility) or requiredness. Cannot be changed after creation.
+type NewFormFieldPlacementConditionGroupDataAttributesGroupType string
+
+// NewFormFieldPlacementConditionGroupDataType defines model for NewFormFieldPlacementConditionGroup.Data.Type.
+type NewFormFieldPlacementConditionGroupDataType string
 
 // NewFormFieldPosition defines model for new_form_field_position.
 type NewFormFieldPosition struct {
@@ -63184,6 +63422,9 @@ type UpdateFormFieldPlacementCondition struct {
 			// Comparison The condition comparison.
 			Comparison *UpdateFormFieldPlacementConditionDataAttributesComparison `json:"comparison,omitempty"`
 
+			// ConditionGroupId The group to add the condition to. Must be on the same placement and match `conditioned`. If omitted on create, the condition gets its own group.
+			ConditionGroupId *string `json:"condition_group_id,omitempty"`
+
 			// Conditioned The resource or attribute the condition applies.
 			Conditioned *UpdateFormFieldPlacementConditionDataAttributesConditioned `json:"conditioned,omitempty"`
 
@@ -63211,6 +63452,29 @@ type UpdateFormFieldPlacementConditionDataAttributesConditioned string
 
 // UpdateFormFieldPlacementConditionDataType defines model for UpdateFormFieldPlacementCondition.Data.Type.
 type UpdateFormFieldPlacementConditionDataType string
+
+// UpdateFormFieldPlacementConditionGroup defines model for update_form_field_placement_condition_group.
+type UpdateFormFieldPlacementConditionGroup struct {
+	Data struct {
+		Attributes struct {
+			// GroupOperator Logical operator used to combine the conditions inside this group.
+			GroupOperator *UpdateFormFieldPlacementConditionGroupDataAttributesGroupOperator `json:"group_operator,omitempty"`
+
+			// Position The position of the group among groups of the same group_type.
+			Position *int `json:"position,omitempty"`
+		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                        `json:"id,omitempty"`
+		Type UpdateFormFieldPlacementConditionGroupDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateFormFieldPlacementConditionGroupDataAttributesGroupOperator Logical operator used to combine the conditions inside this group.
+type UpdateFormFieldPlacementConditionGroupDataAttributesGroupOperator string
+
+// UpdateFormFieldPlacementConditionGroupDataType defines model for UpdateFormFieldPlacementConditionGroup.Data.Type.
+type UpdateFormFieldPlacementConditionGroupDataType string
 
 // UpdateFormFieldPosition defines model for update_form_field_position.
 type UpdateFormFieldPosition struct {
@@ -69215,6 +69479,13 @@ type ListIncidentEventServicesParams struct {
 	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
 }
 
+// ListFormFieldPlacementConditionGroupsParams defines parameters for ListFormFieldPlacementConditionGroups.
+type ListFormFieldPlacementConditionGroupsParams struct {
+	PageNumber      *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize        *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterGroupType *string `form:"filter[group_type],omitempty" json:"filter[group_type],omitempty"`
+}
+
 // ListFormFieldPlacementConditionsParams defines parameters for ListFormFieldPlacementConditions.
 type ListFormFieldPlacementConditionsParams struct {
 	Include           *string `form:"include,omitempty" json:"include,omitempty"`
@@ -71098,8 +71369,14 @@ type UpdateIncidentFeedbackApplicationVndAPIPlusJSONRequestBody = UpdateIncident
 // UpdateFormFieldOptionApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormFieldOption for application/vnd.api+json ContentType.
 type UpdateFormFieldOptionApplicationVndAPIPlusJSONRequestBody = UpdateFormFieldOption
 
+// UpdateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormFieldPlacementConditionGroup for application/vnd.api+json ContentType.
+type UpdateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody = UpdateFormFieldPlacementConditionGroup
+
 // UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody defines body for UpdateFormFieldPlacementCondition for application/vnd.api+json ContentType.
 type UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody = UpdateFormFieldPlacementCondition
+
+// CreateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody defines body for CreateFormFieldPlacementConditionGroup for application/vnd.api+json ContentType.
+type CreateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody = NewFormFieldPlacementConditionGroup
 
 // CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody defines body for CreateFormFieldPlacementCondition for application/vnd.api+json ContentType.
 type CreateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody = NewFormFieldPlacementCondition
@@ -87766,6 +88043,17 @@ type ClientInterface interface {
 
 	UpdateFormFieldOptionWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldOptionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteFormFieldPlacementConditionGroup request
+	DeleteFormFieldPlacementConditionGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetFormFieldPlacementConditionGroup request
+	GetFormFieldPlacementConditionGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateFormFieldPlacementConditionGroupWithBody request with any body
+	UpdateFormFieldPlacementConditionGroupWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateFormFieldPlacementConditionGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DeleteFormFieldPlacementCondition request
 	DeleteFormFieldPlacementCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -87776,6 +88064,14 @@ type ClientInterface interface {
 	UpdateFormFieldPlacementConditionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	UpdateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListFormFieldPlacementConditionGroups request
+	ListFormFieldPlacementConditionGroups(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateFormFieldPlacementConditionGroupWithBody request with any body
+	CreateFormFieldPlacementConditionGroupWithBody(ctx context.Context, formFieldPlacementId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateFormFieldPlacementConditionGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, formFieldPlacementId string, body CreateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListFormFieldPlacementConditions request
 	ListFormFieldPlacementConditions(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -92742,6 +93038,54 @@ func (c *Client) UpdateFormFieldOptionWithApplicationVndAPIPlusJSONBody(ctx cont
 	return c.Client.Do(req)
 }
 
+func (c *Client) DeleteFormFieldPlacementConditionGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteFormFieldPlacementConditionGroupRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetFormFieldPlacementConditionGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFormFieldPlacementConditionGroupRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormFieldPlacementConditionGroupWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormFieldPlacementConditionGroupRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateFormFieldPlacementConditionGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateFormFieldPlacementConditionGroupRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) DeleteFormFieldPlacementCondition(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteFormFieldPlacementConditionRequest(c.Server, id)
 	if err != nil {
@@ -92780,6 +93124,42 @@ func (c *Client) UpdateFormFieldPlacementConditionWithBody(ctx context.Context, 
 
 func (c *Client) UpdateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateFormFieldPlacementConditionRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListFormFieldPlacementConditionGroups(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListFormFieldPlacementConditionGroupsRequest(c.Server, formFieldPlacementId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormFieldPlacementConditionGroupWithBody(ctx context.Context, formFieldPlacementId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormFieldPlacementConditionGroupRequestWithBody(c.Server, formFieldPlacementId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateFormFieldPlacementConditionGroupWithApplicationVndAPIPlusJSONBody(ctx context.Context, formFieldPlacementId string, body CreateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateFormFieldPlacementConditionGroupRequestWithApplicationVndAPIPlusJSONBody(c.Server, formFieldPlacementId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -114410,6 +114790,121 @@ func NewUpdateFormFieldOptionRequestWithBody(server string, id string, contentTy
 	return req, nil
 }
 
+// NewDeleteFormFieldPlacementConditionGroupRequest generates requests for DeleteFormFieldPlacementConditionGroup
+func NewDeleteFormFieldPlacementConditionGroupRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placement_condition_groups/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetFormFieldPlacementConditionGroupRequest generates requests for GetFormFieldPlacementConditionGroup
+func NewGetFormFieldPlacementConditionGroupRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placement_condition_groups/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateFormFieldPlacementConditionGroupRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateFormFieldPlacementConditionGroup builder with application/vnd.api+json body
+func NewUpdateFormFieldPlacementConditionGroupRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateFormFieldPlacementConditionGroupRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateFormFieldPlacementConditionGroupRequestWithBody generates requests for UpdateFormFieldPlacementConditionGroup with any type of body
+func NewUpdateFormFieldPlacementConditionGroupRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placement_condition_groups/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewDeleteFormFieldPlacementConditionRequest generates requests for DeleteFormFieldPlacementCondition
 func NewDeleteFormFieldPlacementConditionRequest(server string, id string) (*http.Request, error) {
 	var err error
@@ -114516,6 +115011,138 @@ func NewUpdateFormFieldPlacementConditionRequestWithBody(server string, id strin
 	}
 
 	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListFormFieldPlacementConditionGroupsRequest generates requests for ListFormFieldPlacementConditionGroups
+func NewListFormFieldPlacementConditionGroupsRequest(server string, formFieldPlacementId string, params *ListFormFieldPlacementConditionGroupsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "form_field_placement_id", formFieldPlacementId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placements/%s/condition_groups", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[number]", *params.PageNumber, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[size]", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterGroupType != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[group_type]", *params.FilterGroupType, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateFormFieldPlacementConditionGroupRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateFormFieldPlacementConditionGroup builder with application/vnd.api+json body
+func NewCreateFormFieldPlacementConditionGroupRequestWithApplicationVndAPIPlusJSONBody(server string, formFieldPlacementId string, body CreateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateFormFieldPlacementConditionGroupRequestWithBody(server, formFieldPlacementId, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateFormFieldPlacementConditionGroupRequestWithBody generates requests for CreateFormFieldPlacementConditionGroup with any type of body
+func NewCreateFormFieldPlacementConditionGroupRequestWithBody(server string, formFieldPlacementId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "form_field_placement_id", formFieldPlacementId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/form_field_placements/%s/condition_groups", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -142914,6 +143541,17 @@ type ClientWithResponsesInterface interface {
 
 	UpdateFormFieldOptionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldOptionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldOptionResponse, error)
 
+	// DeleteFormFieldPlacementConditionGroupWithResponse request
+	DeleteFormFieldPlacementConditionGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPlacementConditionGroupResponse, error)
+
+	// GetFormFieldPlacementConditionGroupWithResponse request
+	GetFormFieldPlacementConditionGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldPlacementConditionGroupResponse, error)
+
+	// UpdateFormFieldPlacementConditionGroupWithBodyWithResponse request with any body
+	UpdateFormFieldPlacementConditionGroupWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionGroupResponse, error)
+
+	UpdateFormFieldPlacementConditionGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionGroupResponse, error)
+
 	// DeleteFormFieldPlacementConditionWithResponse request
 	DeleteFormFieldPlacementConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPlacementConditionResponse, error)
 
@@ -142924,6 +143562,14 @@ type ClientWithResponsesInterface interface {
 	UpdateFormFieldPlacementConditionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionResponse, error)
 
 	UpdateFormFieldPlacementConditionWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldPlacementConditionApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionResponse, error)
+
+	// ListFormFieldPlacementConditionGroupsWithResponse request
+	ListFormFieldPlacementConditionGroupsWithResponse(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionGroupsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPlacementConditionGroupsResponse, error)
+
+	// CreateFormFieldPlacementConditionGroupWithBodyWithResponse request with any body
+	CreateFormFieldPlacementConditionGroupWithBodyWithResponse(ctx context.Context, formFieldPlacementId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementConditionGroupResponse, error)
+
+	CreateFormFieldPlacementConditionGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formFieldPlacementId string, body CreateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementConditionGroupResponse, error)
 
 	// ListFormFieldPlacementConditionsWithResponse request
 	ListFormFieldPlacementConditionsWithResponse(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPlacementConditionsResponse, error)
@@ -150882,6 +151528,99 @@ func (r UpdateFormFieldOptionResponse) ContentType() string {
 	return ""
 }
 
+type DeleteFormFieldPlacementConditionGroupResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementConditionGroupResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteFormFieldPlacementConditionGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteFormFieldPlacementConditionGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DeleteFormFieldPlacementConditionGroupResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetFormFieldPlacementConditionGroupResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementConditionGroupResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetFormFieldPlacementConditionGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetFormFieldPlacementConditionGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetFormFieldPlacementConditionGroupResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateFormFieldPlacementConditionGroupResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementConditionGroupResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateFormFieldPlacementConditionGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateFormFieldPlacementConditionGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateFormFieldPlacementConditionGroupResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type DeleteFormFieldPlacementConditionResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -150969,6 +151708,68 @@ func (r UpdateFormFieldPlacementConditionResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r UpdateFormFieldPlacementConditionResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ListFormFieldPlacementConditionGroupsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *FormFieldPlacementConditionGroupList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListFormFieldPlacementConditionGroupsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListFormFieldPlacementConditionGroupsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListFormFieldPlacementConditionGroupsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CreateFormFieldPlacementConditionGroupResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *FormFieldPlacementConditionGroupResponse
+	ApplicationvndApiJSON401 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateFormFieldPlacementConditionGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateFormFieldPlacementConditionGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateFormFieldPlacementConditionGroupResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -165380,6 +166181,41 @@ func (c *ClientWithResponses) UpdateFormFieldOptionWithApplicationVndAPIPlusJSON
 	return ParseUpdateFormFieldOptionResponse(rsp)
 }
 
+// DeleteFormFieldPlacementConditionGroupWithResponse request returning *DeleteFormFieldPlacementConditionGroupResponse
+func (c *ClientWithResponses) DeleteFormFieldPlacementConditionGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPlacementConditionGroupResponse, error) {
+	rsp, err := c.DeleteFormFieldPlacementConditionGroup(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteFormFieldPlacementConditionGroupResponse(rsp)
+}
+
+// GetFormFieldPlacementConditionGroupWithResponse request returning *GetFormFieldPlacementConditionGroupResponse
+func (c *ClientWithResponses) GetFormFieldPlacementConditionGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetFormFieldPlacementConditionGroupResponse, error) {
+	rsp, err := c.GetFormFieldPlacementConditionGroup(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetFormFieldPlacementConditionGroupResponse(rsp)
+}
+
+// UpdateFormFieldPlacementConditionGroupWithBodyWithResponse request with arbitrary body returning *UpdateFormFieldPlacementConditionGroupResponse
+func (c *ClientWithResponses) UpdateFormFieldPlacementConditionGroupWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionGroupResponse, error) {
+	rsp, err := c.UpdateFormFieldPlacementConditionGroupWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormFieldPlacementConditionGroupResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateFormFieldPlacementConditionGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFormFieldPlacementConditionGroupResponse, error) {
+	rsp, err := c.UpdateFormFieldPlacementConditionGroupWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateFormFieldPlacementConditionGroupResponse(rsp)
+}
+
 // DeleteFormFieldPlacementConditionWithResponse request returning *DeleteFormFieldPlacementConditionResponse
 func (c *ClientWithResponses) DeleteFormFieldPlacementConditionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteFormFieldPlacementConditionResponse, error) {
 	rsp, err := c.DeleteFormFieldPlacementCondition(ctx, id, reqEditors...)
@@ -165413,6 +166249,32 @@ func (c *ClientWithResponses) UpdateFormFieldPlacementConditionWithApplicationVn
 		return nil, err
 	}
 	return ParseUpdateFormFieldPlacementConditionResponse(rsp)
+}
+
+// ListFormFieldPlacementConditionGroupsWithResponse request returning *ListFormFieldPlacementConditionGroupsResponse
+func (c *ClientWithResponses) ListFormFieldPlacementConditionGroupsWithResponse(ctx context.Context, formFieldPlacementId string, params *ListFormFieldPlacementConditionGroupsParams, reqEditors ...RequestEditorFn) (*ListFormFieldPlacementConditionGroupsResponse, error) {
+	rsp, err := c.ListFormFieldPlacementConditionGroups(ctx, formFieldPlacementId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListFormFieldPlacementConditionGroupsResponse(rsp)
+}
+
+// CreateFormFieldPlacementConditionGroupWithBodyWithResponse request with arbitrary body returning *CreateFormFieldPlacementConditionGroupResponse
+func (c *ClientWithResponses) CreateFormFieldPlacementConditionGroupWithBodyWithResponse(ctx context.Context, formFieldPlacementId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementConditionGroupResponse, error) {
+	rsp, err := c.CreateFormFieldPlacementConditionGroupWithBody(ctx, formFieldPlacementId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormFieldPlacementConditionGroupResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateFormFieldPlacementConditionGroupWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, formFieldPlacementId string, body CreateFormFieldPlacementConditionGroupApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFormFieldPlacementConditionGroupResponse, error) {
+	rsp, err := c.CreateFormFieldPlacementConditionGroupWithApplicationVndAPIPlusJSONBody(ctx, formFieldPlacementId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateFormFieldPlacementConditionGroupResponse(rsp)
 }
 
 // ListFormFieldPlacementConditionsWithResponse request returning *ListFormFieldPlacementConditionsResponse
@@ -176712,6 +177574,105 @@ func ParseUpdateFormFieldOptionResponse(rsp *http.Response) (*UpdateFormFieldOpt
 	return response, nil
 }
 
+// ParseDeleteFormFieldPlacementConditionGroupResponse parses an HTTP response from a DeleteFormFieldPlacementConditionGroupWithResponse call
+func ParseDeleteFormFieldPlacementConditionGroupResponse(rsp *http.Response) (*DeleteFormFieldPlacementConditionGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteFormFieldPlacementConditionGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementConditionGroupResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetFormFieldPlacementConditionGroupResponse parses an HTTP response from a GetFormFieldPlacementConditionGroupWithResponse call
+func ParseGetFormFieldPlacementConditionGroupResponse(rsp *http.Response) (*GetFormFieldPlacementConditionGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetFormFieldPlacementConditionGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementConditionGroupResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateFormFieldPlacementConditionGroupResponse parses an HTTP response from a UpdateFormFieldPlacementConditionGroupWithResponse call
+func ParseUpdateFormFieldPlacementConditionGroupResponse(rsp *http.Response) (*UpdateFormFieldPlacementConditionGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateFormFieldPlacementConditionGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementConditionGroupResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseDeleteFormFieldPlacementConditionResponse parses an HTTP response from a DeleteFormFieldPlacementConditionWithResponse call
 func ParseDeleteFormFieldPlacementConditionResponse(rsp *http.Response) (*DeleteFormFieldPlacementConditionResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -176805,6 +177766,72 @@ func ParseUpdateFormFieldPlacementConditionResponse(rsp *http.Response) (*Update
 			return nil, err
 		}
 		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListFormFieldPlacementConditionGroupsResponse parses an HTTP response from a ListFormFieldPlacementConditionGroupsWithResponse call
+func ParseListFormFieldPlacementConditionGroupsResponse(rsp *http.Response) (*ListFormFieldPlacementConditionGroupsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListFormFieldPlacementConditionGroupsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest FormFieldPlacementConditionGroupList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateFormFieldPlacementConditionGroupResponse parses an HTTP response from a CreateFormFieldPlacementConditionGroupWithResponse call
+func ParseCreateFormFieldPlacementConditionGroupResponse(rsp *http.Response) (*CreateFormFieldPlacementConditionGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateFormFieldPlacementConditionGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest FormFieldPlacementConditionGroupResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
 
 	}
 

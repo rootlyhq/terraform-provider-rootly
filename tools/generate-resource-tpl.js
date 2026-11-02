@@ -712,7 +712,7 @@ function schemaField(name, resourceSchema, requiredFields, pathIdField, writable
           ForceNew: ${forceNew},
           WriteOnly: ${writeOnly},
 					Description: "${description}",
-					DiffSuppressFunc: tools.EqualIgnoringOrder,
+					${isReadOnly ? "" : "DiffSuppressFunc: tools.EqualIgnoringOrder,"}
 					Elem: &schema.Resource {
 						Schema: map[string]*schema.Schema {
               ${Object.keys(schema.items.properties)

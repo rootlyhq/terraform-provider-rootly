@@ -150,3 +150,25 @@ test("required workflow-task properties omitted by OpenAPI are restored", () => 
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+test("null-only enum variants are dropped and mark the property nullable", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-null-enum-swagger-"));
+  const swaggerPath = path.join(directory, "swagger.json");
+  const swagger = {paths: {}, components: {schemas: {
+    new_ai_automation: {properties: {max_credits_per_run: {oneOf: [
+      {type: "number", enum: [0]},
+      {type: "number", minimum: 1, maximum: 1000},
+      {type: "number", nullable: true, enum: [null]},
+    ]}}},
+  }}};
+  try {
+    fs.writeFileSync(swaggerPath, JSON.stringify(swagger));
+    const result = spawnSync(process.execPath, [path.join(__dirname, "clean-swagger.js"), swaggerPath], {encoding: "utf8"});
+    assert.equal(result.status, 0, result.stderr);
+    const property = JSON.parse(fs.readFileSync(swaggerPath, "utf8")).components.schemas.new_ai_automation.properties.max_credits_per_run;
+    assert.equal(property.nullable, true);
+    assert.deepEqual(property.oneOf, [{type: "number", enum: [0]}, {type: "number", minimum: 1, maximum: 1000}]);
+  } finally {
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});
