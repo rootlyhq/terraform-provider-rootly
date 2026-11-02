@@ -37,7 +37,7 @@ resource "rootly_status_page" "public" {
 - `allow_search_engine_index` (Boolean) Allow search engines to include your public status page in search results. Value must be one of true or false
 - `authentication_enabled` (Boolean) Enable authentication (deprecated - use authentication_method instead). Value must be one of true or false
 - `authentication_method` (String) Authentication method. Value must be one of `none`, `password`, `saml`.
-- `authentication_password` (String) Authentication password
+- `authentication_password` (String, Sensitive) Authentication password
 - `description` (String) The description of the status page
 - `enabled` (Boolean)
 - `external_domain_names` (List of String) External domain names attached to the status page

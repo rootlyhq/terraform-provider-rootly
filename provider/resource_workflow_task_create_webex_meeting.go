@@ -86,6 +86,7 @@ func resourceWorkflowTaskCreateWebexMeeting() *schema.Resource {
 							Description: "The meeting password",
 							Type:        schema.TypeString,
 							Optional:    true,
+							Sensitive:   true,
 						},
 						"record_meeting": &schema.Schema{
 							Description: "Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting. Value must be one of true or false",

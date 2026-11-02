@@ -39,7 +39,7 @@ Required:
 
 Optional:
 
-- `password` (String) The meeting password
+- `password` (String, Sensitive) The meeting password
 - `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `record_meeting` (Boolean) Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting. Value must be one of true or false
