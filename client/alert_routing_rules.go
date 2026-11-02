@@ -14,6 +14,7 @@ type AlertRoutingRule struct {
 	ID              string                 `jsonapi:"primary,alert_routing_rules"`
 	Name            string                 `jsonapi:"attr,name,omitempty"`
 	Enabled         *bool                  `jsonapi:"attr,enabled,omitempty"`
+	AiSreProvider   string                 `jsonapi:"attr,ai_sre_provider,omitempty"`
 	AlertsSourceId  string                 `jsonapi:"attr,alerts_source_id,omitempty"`
 	Position        int                    `jsonapi:"attr,position,omitempty"`
 	ConditionType   string                 `jsonapi:"attr,condition_type,omitempty"`

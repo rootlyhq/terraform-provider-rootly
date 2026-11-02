@@ -83,6 +83,7 @@ resource "rootly_environment" "production" {
 - `position` (Number) Position of the environment
 - `properties` (Block List) Array of property values for this environment. (see [below for nested schema](#nestedblock--properties))
 - `public_description` (String) The status page description of the environment
+- `public_name` (String) The public name of the environment shown on status pages instead of its name. Only used and returned when `status-page-v3-phase-1` is enabled
 - `slack_aliases` (Block List) Slack Aliases associated with this environment (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this environment (see [below for nested schema](#nestedblock--slack_channels))
 - `slug` (String, Deprecated) The slug of the environment

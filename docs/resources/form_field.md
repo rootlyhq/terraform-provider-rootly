@@ -50,8 +50,9 @@ resource "rootly_form_field_option" "north_america" {
 - `description` (String) The description of the form field
 - `enabled` (Boolean)
 - `input_kind` (String) The input kind of the form field. Value must be one of `text`, `textarea`, `select`, `multi_select`, `date`, `datetime`, `number`, `checkbox`, `tags`, `rich_text`.
-- `kind` (String) The kind of the form field. Value must be one of `custom`, `title`, `summary`, `mitigation_message`, `resolution_message`, `cancellation_message`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `status`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `in_triage_at`, `started_at`, `detected_at`, `acknowledged_at`, `mitigated_at`, `resolved_at`, `closed_at`, `custom_sub_status`, `manual_starting_datetime_field`.
+- `kind` (String) The kind of the form field. Value must be one of `custom`, `title`, `summary`, `mitigation_message`, `resolution_message`, `cancellation_message`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `status`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `in_triage_at`, `started_at`, `detected_at`, `acknowledged_at`, `mitigated_at`, `resolved_at`, `closed_at`, `custom_sub_status`, `manual_starting_datetime_field`, `priority`, `scope`, `exit_criteria`, `impact_so_far`, `root_cause`, `resolution`, `approved_by`, `reason_and_accepted_risk`, `re_review_date`, `cancellation_reason`, `problem_services`, `problem_environments`, `problem_functionalities`, `problem_teams`, `problem_title`, `problem_description`, `problem_incidents`, `problem_due_date`, `owner`.
 - `required` (List of String)
+- `resource_type` (String) The resource type this field belongs to. Value must be one of `incident`, `problem`.
 - `show_on_incident_details` (Boolean) Whether the form field is shown on the incident details panel. Value must be one of true or false
 - `shown` (List of String)
 - `slug` (String, Deprecated) The slug of the form field
@@ -61,7 +62,6 @@ resource "rootly_form_field_option" "north_america" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-- `resource_type` (String) The resource type this field belongs to. Value must be one of `incident`, `problem`.
 
 ## Import
 

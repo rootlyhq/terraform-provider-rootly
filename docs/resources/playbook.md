@@ -29,11 +29,14 @@ resource "rootly_playbook" "database_outage" {
 
 ### Optional
 
+- `cause_ids` (List of String) The Cause IDs to attach to the incident
+- `content` (String) Sanitized HTML instructions. Still returned when `kind` is `external_url`, where the body may be stale — branch on `kind`, not on `content` being present.
 - `environment_ids` (List of String) The Environment IDs to attach to the incident
 - `external_url` (String) The external url of the playbook
 - `functionality_ids` (List of String) The Functionality IDs to attach to the incident
 - `group_ids` (List of String) The Team IDs to attach to the incident
 - `incident_type_ids` (List of String) The Incident Type IDs to attach to the incident
+- `kind` (String) Whether the playbook body lives in Rootly (`internal_document`) or at an external link (`external_url`).. Value must be one of `internal_document`, `external_url`.
 - `service_ids` (List of String) The Service IDs to attach to the incident
 - `severity_ids` (List of String) The Severity IDs to attach to the incident
 - `summary` (String) The summary of the playbook

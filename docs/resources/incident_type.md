@@ -40,6 +40,7 @@ resource "rootly_incident_type" "service_degradation" {
 - `position` (Number) Position of the incident type
 - `properties` (Block List) Array of property values for this incident type. (see [below for nested schema](#nestedblock--properties))
 - `public_description` (String) The status page description of the incident type
+- `public_name` (String) The public name of the incident type shown on status pages instead of its name. Only used and returned when `status-page-v3-phase-1` is enabled
 - `slack_aliases` (Block List) Slack Aliases associated with this incident type (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this incident type (see [below for nested schema](#nestedblock--slack_channels))
 - `slug` (String, Deprecated) The slug of the incident type

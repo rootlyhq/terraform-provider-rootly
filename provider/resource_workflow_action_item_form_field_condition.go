@@ -12,11 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceWorkflowActionItemFormFieldCondition() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceWorkflowActionItemFormFieldConditionCreate,
 		ReadContext:   resourceWorkflowActionItemFormFieldConditionRead,
 		UpdateContext: resourceWorkflowActionItemFormFieldConditionUpdate,

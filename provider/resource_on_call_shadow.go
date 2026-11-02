@@ -16,6 +16,7 @@ import (
 
 func resourceOnCallShadow() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceOnCallShadowCreate,
 		ReadContext:   resourceOnCallShadowRead,
 		UpdateContext: resourceOnCallShadowUpdate,

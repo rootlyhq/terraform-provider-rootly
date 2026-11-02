@@ -15,6 +15,7 @@ import (
 
 func resourceRetrospectiveProcessGroup() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceRetrospectiveProcessGroupCreate,
 		ReadContext:   resourceRetrospectiveProcessGroupRead,
 		UpdateContext: resourceRetrospectiveProcessGroupUpdate,

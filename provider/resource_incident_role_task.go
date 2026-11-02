@@ -16,6 +16,7 @@ import (
 
 func resourceIncidentRoleTask() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceIncidentRoleTaskCreate,
 		ReadContext:   resourceIncidentRoleTaskRead,
 		UpdateContext: resourceIncidentRoleTaskUpdate,

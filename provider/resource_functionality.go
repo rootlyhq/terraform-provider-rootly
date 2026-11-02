@@ -85,6 +85,17 @@ func resourceFunctionality() *schema.Resource {
 				Description: "The status page description of the functionality",
 			},
 
+			"public_name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The public name of the functionality shown on status pages instead of its name",
+			},
+
 			"notify_emails": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -403,6 +414,9 @@ func resourceFunctionalityCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("public_description"); ok {
 		s.PublicDescription = value.(string)
 	}
+	if value, ok := d.GetOkExists("public_name"); ok {
+		s.PublicName = value.(string)
+	}
 	if value, ok := d.GetOkExists("notify_emails"); ok {
 		s.NotifyEmails = value.([]interface{})
 	}
@@ -491,6 +505,7 @@ func resourceFunctionalityRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("managed_by", item.ManagedBy)
 	d.Set("description", item.Description)
 	d.Set("public_description", item.PublicDescription)
+	d.Set("public_name", item.PublicName)
 	d.Set("notify_emails", item.NotifyEmails)
 	d.Set("color", item.Color)
 	d.Set("backstage_id", item.BackstageId)
@@ -581,6 +596,9 @@ func resourceFunctionalityUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("public_description") {
 		s.PublicDescription = d.Get("public_description").(string)
+	}
+	if d.HasChange("public_name") {
+		s.PublicName = d.Get("public_name").(string)
 	}
 
 	if d.HasChange("notify_emails") {

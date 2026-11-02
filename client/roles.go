@@ -48,6 +48,8 @@ type Role struct {
 	SubStatusesPermissions           []interface{} `jsonapi:"attr,sub_statuses_permissions,omitempty"`
 	EdgeConnectorPermissions         []interface{} `jsonapi:"attr,edge_connector_permissions,omitempty"`
 	PrivateAgentPermissions          []interface{} `jsonapi:"attr,private_agent_permissions,omitempty"`
+	AiSkillsPermissions              []interface{} `jsonapi:"attr,ai_skills_permissions,omitempty"`
+	AiAutomationsPermissions         []interface{} `jsonapi:"attr,ai_automations_permissions,omitempty"`
 	SlasPermissions                  []interface{} `jsonapi:"attr,slas_permissions,omitempty"`
 	PagingPermissions                []interface{} `jsonapi:"attr,paging_permissions,omitempty"`
 	IncidentCommunicationPermissions []interface{} `jsonapi:"attr,incident_communication_permissions,omitempty"`

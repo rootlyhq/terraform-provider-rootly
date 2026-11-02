@@ -18,6 +18,7 @@ description: |-
 
 - `created_at` (Map of String) Filter by date range using 'lt' and 'gt'.
 - `is_default` (Boolean)
+- `resource_type` (String)
 - `slug` (String)
 
 ### Read-Only
