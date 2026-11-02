@@ -40,6 +40,7 @@ Required:
 Optional:
 
 - `content` (String) The page content
+- `document_mode` (String) Page setup for the Google Doc. pageless makes the doc pageless; pages leaves the page setup unchanged unless the Google Doc template is pageless. Value must be one of `pages`, `pageless`.
 - `drive` (Map of String) Map must contain two fields, `id` and `name`.
 - `include_follow_ups` (Boolean) Value must be one of true or false
 - `include_overview` (Boolean) Value must be one of true or false

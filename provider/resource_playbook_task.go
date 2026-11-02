@@ -15,6 +15,7 @@ import (
 
 func resourcePlaybookTask() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourcePlaybookTaskCreate,
 		ReadContext:   resourcePlaybookTaskRead,
 		UpdateContext: resourcePlaybookTaskUpdate,

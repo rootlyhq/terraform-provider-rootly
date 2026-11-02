@@ -16,6 +16,7 @@ import (
 
 func resourceCommunicationsType() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceCommunicationsTypeCreate,
 		ReadContext:   resourceCommunicationsTypeRead,
 		UpdateContext: resourceCommunicationsTypeUpdate,

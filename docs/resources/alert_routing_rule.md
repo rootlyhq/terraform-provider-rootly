@@ -30,6 +30,7 @@ resource "rootly_alert_routing_rule" "production_alerts" {
 
 ### Optional
 
+- `ai_sre_provider` (String) AI SRE provider that investigates alerts matching this rule. Null disables AI SRE for the rule. Value must be one of `rootly`, `devin`.
 - `condition_groups` (Block List) The condition groups for the alert routing rule (see [below for nested schema](#nestedblock--condition_groups))
 - `condition_type` (String) The type of condition for the alert routing rule. Value must be one of `all`, `any`.
 - `conditions` (Block List) The conditions for the alert routing rule (see [below for nested schema](#nestedblock--conditions))
@@ -49,7 +50,7 @@ Required:
 
 Optional:
 
-- `target_type` (String) The type of the target. Please contact support if you encounter issues using `Functionality` as a target type.. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`.
+- `target_type` (String) The type of the target. Please contact support if you encounter issues using `Functionality` as a target type.. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`, `CatalogEntity`.
 
 
 <a id="nestedblock--condition_groups"></a>

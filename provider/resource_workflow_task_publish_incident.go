@@ -160,6 +160,23 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 								}, false),
 							},
 						},
+						"sync_incident_components": &schema.Schema{
+							Description: "When true, every run also publishes the incident's tagged services and functionalities that are components on the target page. Defaults to true when selected_component_keys is empty. This field is in Early Access and is not generally available; contact Rootly Support to request access. Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+						"synced_component_status": &schema.Schema{
+							Description: "Default impact status for components synced from the incident. The default only applies to newly synced components and to ones with no earlier status on the incident's updates on a page. A synced component with an earlier status keeps its most recent status there. Defaults to degraded_performance. A component also listed in selected_component_keys keeps its selected_component_statuses entry. Value must be one of `operational`, `degraded_performance`, `partial_outage`, `major_outage`.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     nil,
+							ValidateFunc: validation.StringInSlice([]string{
+								"operational",
+								"degraded_performance",
+								"partial_outage",
+								"major_outage",
+							}, false),
+						},
 						"integration_payload": &schema.Schema{
 							Description: "Additional API Payload you can pass to statuspage.io for example. Can contain liquid markup and need to be valid JSON",
 							Type:        schema.TypeString,

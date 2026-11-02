@@ -10,13 +10,16 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceFormSet() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceFormSetCreate,
 		ReadContext:   resourceFormSetRead,
 		UpdateContext: resourceFormSetUpdate,
@@ -61,6 +64,18 @@ func resourceFormSet() *schema.Resource {
 				Description: "Whether the form set is default. Value must be one of true or false",
 			},
 
+			"resource_type": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "The area the form set applies to. `problem` form sets are only returned when Problem Management is enabled.. Value must be one of `incident`, `problem`.",
+				ValidateFunc: validation.StringInSlice([]string{"incident", "problem"}, false),
+			},
+
 			"forms": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -73,7 +88,7 @@ func resourceFormSet() *schema.Resource {
 				Sensitive:        false,
 				ForceNew:         false,
 				WriteOnly:        false,
-				Description:      "The forms included in the form set. Add custom forms using the custom form's `slug` field. Or choose a built-in form: `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`, `google_chat_new_incident_form`, `google_chat_update_incident_form`, `microsoft_teams_new_incident_form`",
+				Description:      "The forms included in the form set. Add custom forms using the custom form's `slug` field. Or choose a built-in form: `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`, `google_chat_new_incident_form`, `google_chat_update_incident_form`, `google_chat_incident_mitigation_form`, `google_chat_incident_resolution_form`, `google_chat_incident_cancellation_form`, `google_chat_scheduled_incident_form`, `microsoft_teams_new_incident_form`. A `problem` form set accepts only problem forms: `web_new_problem_form`, `web_update_problem_form`, `web_problem_in_progress_form`, `web_problem_deferred_form`, `web_problem_completed_form`, `web_problem_cancelled_form`",
 			},
 		},
 	}
@@ -91,6 +106,9 @@ func resourceFormSetCreate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if value, ok := d.GetOkExists("is_default"); ok {
 		s.IsDefault = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("resource_type"); ok {
+		s.ResourceType = value.(string)
 	}
 	if value, ok := d.GetOkExists("forms"); ok {
 		s.Forms = value.([]interface{})
@@ -127,6 +145,7 @@ func resourceFormSetRead(ctx context.Context, d *schema.ResourceData, meta inter
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
 	d.Set("is_default", item.IsDefault)
+	d.Set("resource_type", item.ResourceType)
 	d.Set("forms", item.Forms)
 
 	return nil
@@ -143,6 +162,9 @@ func resourceFormSetUpdate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 	if d.HasChange("is_default") {
 		s.IsDefault = tools.Bool(d.Get("is_default").(bool))
+	}
+	if d.HasChange("resource_type") {
+		s.ResourceType = d.Get("resource_type").(string)
 	}
 
 	if d.HasChange("forms") {

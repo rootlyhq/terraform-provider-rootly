@@ -13,11 +13,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceFormField() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceFormFieldCreate,
 		ReadContext:   resourceFormFieldRead,
 		UpdateContext: resourceFormFieldUpdate,
@@ -35,8 +37,8 @@ func resourceFormField() *schema.Resource {
 				Sensitive:    false,
 				ForceNew:     false,
 				WriteOnly:    false,
-				Description:  "The kind of the form field. Value must be one of `custom`, `title`, `summary`, `mitigation_message`, `resolution_message`, `cancellation_message`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `status`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `in_triage_at`, `started_at`, `detected_at`, `acknowledged_at`, `mitigated_at`, `resolved_at`, `closed_at`, `custom_sub_status`, `manual_starting_datetime_field`.",
-				ValidateFunc: validation.StringInSlice([]string{"custom", "title", "summary", "mitigation_message", "resolution_message", "cancellation_message", "severity", "environments", "types", "services", "causes", "functionalities", "teams", "status", "visibility", "mark_as_test", "mark_as_backfilled", "labels", "notify_emails", "trigger_manual_workflows", "show_ongoing_incidents", "attach_alerts", "mark_as_in_triage", "in_triage_at", "started_at", "detected_at", "acknowledged_at", "mitigated_at", "resolved_at", "closed_at", "custom_sub_status", "manual_starting_datetime_field"}, false),
+				Description:  "The kind of the form field. Value must be one of `custom`, `title`, `summary`, `mitigation_message`, `resolution_message`, `cancellation_message`, `severity`, `environments`, `types`, `services`, `causes`, `functionalities`, `teams`, `status`, `visibility`, `mark_as_test`, `mark_as_backfilled`, `labels`, `notify_emails`, `trigger_manual_workflows`, `show_ongoing_incidents`, `attach_alerts`, `mark_as_in_triage`, `in_triage_at`, `started_at`, `detected_at`, `acknowledged_at`, `mitigated_at`, `resolved_at`, `closed_at`, `custom_sub_status`, `manual_starting_datetime_field`, `priority`, `scope`, `exit_criteria`, `impact_so_far`, `root_cause`, `resolution`, `approved_by`, `reason_and_accepted_risk`, `re_review_date`, `cancellation_reason`, `problem_services`, `problem_environments`, `problem_functionalities`, `problem_teams`, `problem_title`, `problem_description`, `problem_incidents`, `problem_due_date`, `owner`.",
+				ValidateFunc: validation.StringInSlice([]string{"custom", "title", "summary", "mitigation_message", "resolution_message", "cancellation_message", "severity", "environments", "types", "services", "causes", "functionalities", "teams", "status", "visibility", "mark_as_test", "mark_as_backfilled", "labels", "notify_emails", "trigger_manual_workflows", "show_ongoing_incidents", "attach_alerts", "mark_as_in_triage", "in_triage_at", "started_at", "detected_at", "acknowledged_at", "mitigated_at", "resolved_at", "closed_at", "custom_sub_status", "manual_starting_datetime_field", "priority", "scope", "exit_criteria", "impact_so_far", "root_cause", "resolution", "approved_by", "reason_and_accepted_risk", "re_review_date", "cancellation_reason", "problem_services", "problem_environments", "problem_functionalities", "problem_teams", "problem_title", "problem_description", "problem_incidents", "problem_due_date", "owner"}, false),
 			},
 
 			"input_kind": &schema.Schema{
@@ -99,14 +101,15 @@ func resourceFormField() *schema.Resource {
 			},
 
 			"resource_type": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    false,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "The resource type this field belongs to. Value must be one of `incident`, `problem`.",
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "The resource type this field belongs to. Value must be one of `incident`, `problem`.",
+				ValidateFunc: validation.StringInSlice([]string{"incident", "problem"}, false),
 			},
 
 			"description": &schema.Schema{
@@ -221,6 +224,9 @@ func resourceFormFieldCreate(ctx context.Context, d *schema.ResourceData, meta i
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
 	}
+	if value, ok := d.GetOkExists("resource_type"); ok {
+		s.ResourceType = value.(string)
+	}
 	if value, ok := d.GetOkExists("description"); ok {
 		s.Description = value.(string)
 	}
@@ -309,6 +315,9 @@ func resourceFormFieldUpdate(ctx context.Context, d *schema.ResourceData, meta i
 	}
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("resource_type") {
+		s.ResourceType = d.Get("resource_type").(string)
 	}
 	if d.HasChange("description") {
 		s.Description = d.Get("description").(string)

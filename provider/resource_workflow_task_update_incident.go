@@ -207,6 +207,11 @@ func resourceWorkflowTaskUpdateIncident() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
+						"append_associations": &schema.Schema{
+							Description: "When true, the configured services, functionalities, environments, groups and incident types are added to the incident's existing ones instead of replacing them. Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 						"custom_fields_mapping": &schema.Schema{
 							Description: "Custom field mappings. Can contain liquid markup and need to be valid JSON. Use 'services', 'functionalities', or 'groups' keys with arrays of names/slugs for name/slug lookup",
 							Type:        schema.TypeString,
