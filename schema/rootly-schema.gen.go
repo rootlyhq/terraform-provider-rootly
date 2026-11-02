@@ -49437,7 +49437,7 @@ type AlertRouteResponseDataType string
 
 // AlertRoutingRule defines model for alert_routing_rule.
 type AlertRoutingRule struct {
-	// AiSreProvider AI SRE provider that investigates alerts matching this rule. Null disables AI SRE for the rule
+	// AiSreProvider AI SRE provider that investigates alerts matching this rule. Null disables AI SRE for the rule. Omit to preserve an existing value; set to an empty string to disable AI SRE
 	AiSreProvider *AlertRoutingRuleAiSreProvider `json:"ai_sre_provider,omitempty"`
 
 	// AlertsSourceId The ID of the alerts source
@@ -49537,7 +49537,7 @@ type AlertRoutingRule struct {
 	UpdatedAt string `json:"updated_at"`
 }
 
-// AlertRoutingRuleAiSreProvider AI SRE provider that investigates alerts matching this rule. Null disables AI SRE for the rule
+// AlertRoutingRuleAiSreProvider AI SRE provider that investigates alerts matching this rule. Null disables AI SRE for the rule. Omit to preserve an existing value; set to an empty string to disable AI SRE
 type AlertRoutingRuleAiSreProvider string
 
 // AlertRoutingRuleConditionGroupsConditionsPropertyFieldConditionType The condition type of the property field

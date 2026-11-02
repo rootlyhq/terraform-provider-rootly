@@ -12,13 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
-
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceAlertRoutingRule() *schema.Resource {
 	return &schema.Resource{
-
+		CustomizeDiff: sdkutils.ExplicitEmptyStrings("ai_sre_provider"),
 		CreateContext: resourceAlertRoutingRuleCreate,
 		ReadContext:   resourceAlertRoutingRuleRead,
 		UpdateContext: resourceAlertRoutingRuleUpdate,
@@ -56,8 +56,8 @@ func resourceAlertRoutingRule() *schema.Resource {
 				Sensitive:    false,
 				ForceNew:     false,
 				WriteOnly:    false,
-				Description:  "AI SRE provider that investigates alerts matching this rule. Null disables AI SRE for the rule. Value must be one of `rootly`, `devin`.",
-				ValidateFunc: validation.StringInSlice([]string{"rootly", "devin"}, false),
+				Description:  "AI SRE provider that investigates alerts matching this rule. Null disables AI SRE for the rule. Omit to preserve an existing value; set to an empty string to disable AI SRE. Value must be one of `rootly`, `devin`.",
+				ValidateFunc: validation.StringInSlice([]string{"", "rootly", "devin"}, false),
 			},
 
 			"alerts_source_id": &schema.Schema{
@@ -420,7 +420,7 @@ func resourceAlertRoutingRuleCreate(ctx context.Context, d *schema.ResourceData,
 		s.Enabled = tools.Bool(value.(bool))
 	}
 	if value, ok := d.GetOkExists("ai_sre_provider"); ok {
-		s.AiSreProvider = value.(string)
+		s.AiSreProvider = tools.String(value.(string))
 	}
 	if value, ok := d.GetOkExists("alerts_source_id"); ok {
 		s.AlertsSourceId = value.(string)
@@ -547,9 +547,7 @@ func resourceAlertRoutingRuleUpdate(ctx context.Context, d *schema.ResourceData,
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
 	}
-	if d.HasChange("ai_sre_provider") {
-		s.AiSreProvider = d.Get("ai_sre_provider").(string)
-	}
+	s.AiSreProvider = sdkutils.OptionalComputedStringUpdate(d, "ai_sre_provider")
 	if d.HasChange("alerts_source_id") {
 		s.AlertsSourceId = d.Get("alerts_source_id").(string)
 	}

@@ -70,7 +70,7 @@ func resourceFormSet() *schema.Resource {
 				Required:     false,
 				Optional:     true,
 				Sensitive:    false,
-				ForceNew:     false,
+				ForceNew:     true,
 				WriteOnly:    false,
 				Description:  "The area the form set applies to. `problem` form sets are only returned when Problem Management is enabled.. Value must be one of `incident`, `problem`.",
 				ValidateFunc: validation.StringInSlice([]string{"incident", "problem"}, false),

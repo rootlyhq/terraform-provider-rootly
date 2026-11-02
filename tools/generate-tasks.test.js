@@ -153,3 +153,28 @@ test("tf_sensitive task params are marked Sensitive", () => {
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+test("nullable boolean params are computed and omitted from requests when unset", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-task-generator-"));
+  const previous = process.cwd();
+  try {
+    fs.mkdirSync(path.join(directory, "provider"));
+    process.chdir(directory);
+    generateTasks(["publish_incident"], {components: {schemas: {publish_incident_task_params: {
+      properties: {
+        sync_incident_components: {type: "boolean", nullable: true},
+        notify: {type: "boolean"},
+      },
+    }}}});
+    const resource = fs.readFileSync("provider/resource_workflow_task_publish_incident.go", "utf8");
+    const syncSchema = resource.slice(resource.indexOf('"sync_incident_components": &schema.Schema'), resource.indexOf('"notify": &schema.Schema'));
+    const notifySchema = resource.slice(resource.indexOf('"notify": &schema.Schema'));
+    assert.match(syncSchema, /Computed:\s+true/);
+    assert.doesNotMatch(notifySchema.slice(0, notifySchema.indexOf("},")), /Computed:/);
+    assert.equal(resource.split('sdkutils.OmitUnsetTaskParams(d, taskParams, "sync_incident_components")').length - 1, 2);
+    assert.ok(!resource.includes('"notify")'));
+  } finally {
+    process.chdir(previous);
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});

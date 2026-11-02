@@ -96,6 +96,10 @@ function genResourceFile(task_name, task_schema) {
 
   const needsJSON = hasJSONProperty(task_schema);
   const hasNestedObjects = Object.values(task_schema.properties).some((property) => property.tf_nested_object);
+  const omitWhenUnset = nullableBooleanParams(task_schema)
+    .map((name) => `
+	sdkutils.OmitUnsetTaskParams(d, taskParams, "${name}")`)
+    .join("");
   const stateUpgrade = taskStateUpgrades[task_name];
   const customizeDiff = taskCustomizeDiffs[task_name] || "validateUniqueWorkflowTaskPosition";
 
@@ -214,7 +218,7 @@ func resourceWorkflowTask${task_name_camel}Create(ctx context.Context, d *schema
 	position := d.Get("position").(int)
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
-	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})${hasNestedObjects ? `
+	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})${omitWhenUnset}${hasNestedObjects ? `
 	taskParams, err := sdkutils.WorkflowTaskBlocksToObjects(taskParams, workflowTask${task_name_camel}ObjectFields)
 	if err != nil {
 		return diag.Errorf("Error preparing workflow task parameters: %s", err)
@@ -286,7 +290,7 @@ func resourceWorkflowTask${task_name_camel}Update(ctx context.Context, d *schema
 	position := d.Get("position").(int)
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
-	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})${hasNestedObjects ? `
+	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})${omitWhenUnset}${hasNestedObjects ? `
 	taskParams, err := sdkutils.WorkflowTaskBlocksToObjects(taskParams, workflowTask${task_name_camel}ObjectFields)
 	if err != nil {
 		return diag.Errorf("Error preparing workflow task parameters: %s", err)
@@ -367,6 +371,17 @@ function descriptionConstraintPrefix(description) {
   return `${description}${/[.!?]$/.test(description) ? "" : "."} `;
 }
 
+function isNullableBoolean(property) {
+  return property.type === "boolean" && property.nullable === true && property.default === undefined;
+}
+
+function nullableBooleanParams(task_schema) {
+  const required = task_schema.required || [];
+  return Object.entries(task_schema.properties)
+    .filter(([name, property]) => isNullableBoolean(property) && !required.includes(name))
+    .map(([name]) => name);
+}
+
 function genTaskSchemaProperty(property_name, property_schema, required_props, nested_object = false) {
   const isRequired =
     required_props && required_props.indexOf(property_name) !== -1;
@@ -390,6 +405,10 @@ function genTaskSchemaProperty(property_name, property_schema, required_props, n
 							Description: "${annotatedDescription(property_schema)}",
 							Type: ${genTaskSchemaPropertyType(property_schema.type)},
 							${isRequired ? "Required" : "Optional"}: true,`;
+  if (!nested_object && !isRequired && isNullableBoolean(property_schema)) {
+    a = `${a}
+							Computed: true,`;
+  }
   if (property_schema.tf_sensitive) {
     a = `${a}
 							Sensitive: true,`;
