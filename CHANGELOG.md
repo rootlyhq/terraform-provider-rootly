@@ -2,17 +2,57 @@
 
 ## [Unreleased]
 
+## [5.24.0] -- 2026-11-03
+
 ### Added
 
-- `rootly_alerts_source` now supports `attach_owner_groups_to_alerts` to attach the source's owning teams to its alerts without paging them. Requires the `alert-source-team-from-payload` feature flag on the team; otherwise the value is ignored. (PRF-3476)
-
-- `rootly_escalation_path` and `rootly_alert_urgency` now support `retrigger_timeout_minutes` to manage the ack-timeout re-trigger override per escalation path and per alert urgency. `null` inherits the next tier (path > urgency > workspace default), `-1` never re-triggers, and positive values set the interval in minutes. Requires the `escalation-path-based-alert-retrigger` feature flag on the team. (TER-230)
+- Regenerated from the latest Rootly API. New optional attributes (#552):
+  - `rootly_alert_routing_rule.ai_sre_provider` (`rootly` or `devin`) selects the AI SRE provider that investigates matching alerts. Omit it to keep the existing value; set it to `""` to disable AI SRE for the rule.
+  - `rootly_alert_routing_rule` destinations accept `CatalogEntity` as a `target_type`.
+  - `public_name` on `rootly_catalog_entity`, `rootly_cause`, `rootly_environment`, `rootly_functionality` and `rootly_incident_type`, and `escalation_policy_id` on `rootly_catalog_entity`.
+  - `rootly_heartbeat.attach_owner_groups_to_alerts`.
+  - `rootly_playbook.kind`, `content` and `cause_ids`.
+  - `rootly_role.ai_skills_permissions` and `ai_automations_permissions`.
+  - `rootly_form_field_placement_condition.condition_group_id`.
+  - `resource_type` (`incident` or `problem`) on `rootly_form_set` and the `rootly_form_set` / `rootly_form_field` data sources. `rootly_form_field.resource_type` is now settable instead of read-only.
+  - `group_id` filter on the `rootly_api_key` data source.
+- New workflow task params (#552):
+  - `rootly_workflow_task_publish_incident`: `sync_incident_components` and `synced_component_status` (defaults to `degraded_performance` when unset).
+  - `rootly_workflow_task_create_sub_incident`: `severity_id`, `incident_type_ids`, `service_ids`, `functionality_ids`, `environment_ids`, `group_ids` and `private`. Blank values are inherited from the parent incident.
+  - `rootly_workflow_task_create_google_docs_page` and `rootly_workflow_task_update_google_docs_page`: `document_mode`.
+  - `rootly_workflow_task_create_google_meeting`: `enable_google_meet_bot_auto_join`.
+  - `rootly_workflow_task_update_incident`: `append_associations`.
+- New enum values (#552):
+  - `rootly_form_field.kind`: problem fields such as `problem_title`, `problem_description`, `root_cause` and `owner`.
+  - `rootly_form_field_position.form`: `google_chat_action_item_form` and `google_chat_task_form`.
+  - `rootly_form_set.forms`: problem forms and more Google Chat incident forms.
+  - `rootly_webhooks_endpoint.event_types`: `incident.custom_field.updated`.
+  - `rootly_dashboard_panel` display: `breakdown_table`.
 
 ### Changed
 
 - Credential attributes are now `Sensitive` and no longer print in plan output: `rootly_heartbeat.secret`, `rootly_heartbeat.ping_url`, `rootly_status_page.authentication_password`, `rootly_secret.secret`, `rootly_webhooks_endpoint.secret`, `rootly_webhooks_endpoint.custom_headers.value`, `task_params.password` on `rootly_workflow_task_create_zoom_meeting` and `rootly_workflow_task_create_webex_meeting`, and `task_params.headers` on `rootly_workflow_task_http_client`. Outputs that expose them must set `sensitive = true`. (#541, fixes #539)
 
+- `rootly_status_page_template.update_status` is now validated at plan time against the statuses the API accepts. An explicit `update_status = ""` is now rejected; omit the attribute instead. (#552)
+- `rootly_workflow_task_create_go_to_meeting.task_params.password_required` and `rootly_workflow_task_publish_incident.task_params.sync_incident_components` are no longer sent when unset, so the API default applies. (#552)
+
+## [5.23.4] -- 2026-10-19
+
+### Added
+
+- `rootly_alerts_source` now supports `attach_owner_groups_to_alerts` to attach the source's owning teams to its alerts without paging them. Requires the `alert-source-team-from-payload` feature flag on the team; otherwise the value is ignored. (PRF-3476)
+
+### Changed
+
 - Service and functionality external integration IDs are preserved when omitted or set to `null` in Terraform configuration, including IDs populated outside Terraform or imported into state. Set an ID to `""` to intentionally clear it, or a non-empty string to replace it. Removing a previously configured service ID now relinquishes Terraform ownership instead of clearing the remote ID. Existing state remains compatible; no state migration is required. (IR-6531)
+
+## [5.23.0] -- 2026-09-25
+
+### Added
+
+- `rootly_escalation_path` and `rootly_alert_urgency` now support `retrigger_timeout_minutes` to manage the ack-timeout re-trigger override per escalation path and per alert urgency. `null` inherits the next tier (path > urgency > workspace default), `-1` never re-triggers, and positive values set the interval in minutes. Requires the `escalation-path-based-alert-retrigger` feature flag on the team. (TER-230)
+
+### Changed
 
 - `rootly_alert_urgency.retrigger_timeout_minutes` is no longer `Computed`: a value set outside Terraform is now cleared on the next apply if it is not in the configuration. (TER-230)
 
