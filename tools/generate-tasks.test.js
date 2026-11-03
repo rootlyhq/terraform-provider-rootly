@@ -178,3 +178,26 @@ test("nullable boolean params are computed and omitted from requests when unset"
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+test("tf_computed task params are computed", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-task-generator-"));
+  const previous = process.cwd();
+  try {
+    fs.mkdirSync(path.join(directory, "provider"));
+    process.chdir(directory);
+    generateTasks(["publish_incident"], {components: {schemas: {publish_incident_task_params: {
+      properties: {
+        synced_component_status: {type: "string", enum: ["operational"], nullable: true, tf_computed: true},
+        public_title: {type: "string"},
+      },
+    }}}});
+    const resource = fs.readFileSync("provider/resource_workflow_task_publish_incident.go", "utf8");
+    const statusSchema = resource.slice(resource.indexOf('"synced_component_status": &schema.Schema'), resource.indexOf('"public_title": &schema.Schema'));
+    const titleSchema = resource.slice(resource.indexOf('"public_title": &schema.Schema'));
+    assert.match(statusSchema, /Computed:\s+true/);
+    assert.doesNotMatch(titleSchema.slice(0, titleSchema.indexOf("},")), /Computed:/);
+  } finally {
+    process.chdir(previous);
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});

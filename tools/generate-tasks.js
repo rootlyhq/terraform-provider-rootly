@@ -405,7 +405,7 @@ function genTaskSchemaProperty(property_name, property_schema, required_props, n
 							Description: "${annotatedDescription(property_schema)}",
 							Type: ${genTaskSchemaPropertyType(property_schema.type)},
 							${isRequired ? "Required" : "Optional"}: true,`;
-  if (!nested_object && !isRequired && isNullableBoolean(property_schema)) {
+  if (!nested_object && !isRequired && (isNullableBoolean(property_schema) || property_schema.tf_computed)) {
     a = `${a}
 							Computed: true,`;
   }

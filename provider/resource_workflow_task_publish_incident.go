@@ -170,6 +170,7 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 							Description: "Default impact status for components synced from the incident. The default only applies to newly synced components and to ones with no earlier status on the incident's updates on a page. A synced component with an earlier status keeps its most recent status there. Defaults to degraded_performance. A component also listed in selected_component_keys keeps its selected_component_statuses entry. Value must be one of `operational`, `degraded_performance`, `partial_outage`, `major_outage`.",
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 							Default:     nil,
 							ValidateFunc: validation.StringInSlice([]string{
 								"operational",

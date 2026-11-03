@@ -182,6 +182,12 @@ function annotateAiSreProvider(schemas) {
   }
 }
 
+// The API reports degraded_performance when synced_component_status is unset.
+function annotatePublishIncidentSyncedComponentStatus(schemas) {
+  const property = schemas.publish_incident_task_params?.properties?.synced_component_status;
+  if (property) property.tf_computed = true;
+}
+
 // Permanent Terraform-side write validation. generateResource builds the
 // resource schema from the response component (swagger.components.schemas[name]),
 // which deliberately carries no enum for retrigger_timeout_minutes: the
@@ -350,6 +356,7 @@ annotateNullableRelationships(swagger.components.schemas);
 annotateCatalogExternalIds(swagger.components.schemas);
 annotateFormSetResourceType(swagger.components.schemas);
 annotateAiSreProvider(swagger.components.schemas);
+annotatePublishIncidentSyncedComponentStatus(swagger.components.schemas);
 annotateRetriggerTimeout(swagger.components.schemas);
 preserveCanvasTerraformContract(swagger.components.schemas);
 annotateStatusPageAnnouncement(swagger.components.schemas);

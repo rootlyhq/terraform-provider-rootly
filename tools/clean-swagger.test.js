@@ -174,3 +174,21 @@ test("form set resource type forces replacement and the AI SRE provider can be c
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+test("publish incident synced component status keeps the API default", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-clean-swagger-"));
+  const swaggerPath = path.join(directory, "swagger.json");
+  const swagger = {paths: {}, components: {schemas: {
+    publish_incident_task_params: {properties: {synced_component_status: {type: "string", enum: ["operational", "degraded_performance"], nullable: true}}},
+  }}};
+  try {
+    fs.writeFileSync(swaggerPath, JSON.stringify(swagger));
+    const result = spawnSync(process.execPath, [path.join(__dirname, "clean-swagger.js"), swaggerPath], {encoding: "utf8"});
+    assert.equal(result.status, 0, result.stderr);
+    const property = JSON.parse(fs.readFileSync(swaggerPath, "utf8"))
+      .components.schemas.publish_incident_task_params.properties.synced_component_status;
+    assert.equal(property.tf_computed, true);
+  } finally {
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});
