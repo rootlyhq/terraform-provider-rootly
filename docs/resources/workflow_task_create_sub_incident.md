@@ -39,6 +39,13 @@ Required:
 
 Optional:
 
+- `environment_ids` (List of String) Array of environment UUIDs. Inherited from the parent incident when blank
+- `functionality_ids` (List of String) Array of functionality UUIDs. Inherited from the parent incident when blank
+- `group_ids` (List of String) Array of group/team UUIDs. Inherited from the parent incident when blank
+- `incident_type_ids` (List of String) Array of incident type UUIDs. Inherited from the parent incident when blank
+- `private` (Boolean) Make the sub incident private. Cannot make it public when the parent incident is private. Value must be one of true or false
+- `service_ids` (List of String) Array of service UUIDs. Inherited from the parent incident when blank
+- `severity_id` (String) Inherited from the parent incident when blank
 - `summary` (String) The sub incident summary
 - `task_type` (String)
 
