@@ -222,6 +222,52 @@ func TestAccResourceAlertRoute_Validation(t *testing.T) {
 				PlanOnly:           true,
 				ExpectNonEmptyPlan: true,
 			},
+			{
+				Config: `
+          resource "rootly_alert_route" "test" {
+            name              = "Test Alert Route"
+            alerts_source_ids = ["alert-source-id"]
+
+            rules {
+              name = "Static destination with a catalog"
+              fallback_rule = true
+
+              destinations {
+                target_type  = "EscalationPolicy"
+                target_id    = "escalation-policy-id"
+                catalog_type = "Service"
+              }
+            }
+          }
+        `,
+				ExpectError: regexp.MustCompile("`catalog_type`, `catalog_id` and `match_keys` can only be set on a `dynamic`"),
+			},
+			{
+				Config: `
+          resource "rootly_alert_route" "test" {
+            name              = "Test Alert Route"
+            alerts_source_ids = ["alert-source-id"]
+
+            rules {
+              name = "Dynamic destination with a target"
+              fallback_rule = true
+
+              destinations {
+                target_type  = "dynamic"
+                target_id    = "escalation-policy-id"
+                catalog_type = "Service"
+
+                match_keys {
+                  property_ref = "builtin:name"
+                  source_kind  = "payload"
+                  source_ref   = "$.service"
+                }
+              }
+            }
+          }
+        `,
+				ExpectError: regexp.MustCompile("`target_id` can't be set on a `dynamic` destination"),
+			},
 		},
 	})
 }
