@@ -17,7 +17,7 @@
   - `resource_type` (`incident` or `problem`) on `rootly_form_set` and the `rootly_form_set` / `rootly_form_field` data sources. `rootly_form_field.resource_type` is now settable instead of read-only.
   - `group_id` filter on the `rootly_api_key` data source.
 - New workflow task params (#552):
-  - `rootly_workflow_task_publish_incident`: `sync_incident_components` and `synced_component_status` (defaults to `degraded_performance` when unset).
+  - `rootly_workflow_task_publish_incident`: `sync_incident_components` and `synced_component_status` (defaults to `degraded_performance` when unset). Both are in Early Access and are not generally available; contact Rootly Support to request access.
   - `rootly_workflow_task_create_sub_incident`: `severity_id`, `incident_type_ids`, `service_ids`, `functionality_ids`, `environment_ids`, `group_ids` and `private`. Blank values are inherited from the parent incident.
   - `rootly_workflow_task_create_google_docs_page` and `rootly_workflow_task_update_google_docs_page`: `document_mode`.
   - `rootly_workflow_task_create_google_meeting`: `enable_google_meet_bot_auto_join`.
