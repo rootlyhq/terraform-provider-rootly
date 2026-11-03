@@ -117,6 +117,30 @@ func EqualIgnoringOrderAndFields(fieldsToCompare []string) schema.SchemaDiffSupp
 	}
 }
 
+func EqualIgnoringOrderOfList(listName string) schema.SchemaDiffSuppressFunc {
+	return func(key, oldValue, newValue string, d *schema.ResourceData) bool {
+		listKey, ok := enclosingListKey(key, listName)
+		if !ok || key == listKey+".#" {
+			return EqualIgnoringOrder(key, oldValue, newValue, d)
+		}
+
+		oldData, newData := d.GetChange(listKey)
+		oldArray, oldOK := oldData.([]interface{})
+		newArray, newOK := newData.([]interface{})
+		return oldOK && newOK && listsAreEqual(oldArray, newArray)
+	}
+}
+
+func enclosingListKey(key, listName string) (string, bool) {
+	parts := strings.Split(key, ".")
+	for i := len(parts) - 1; i >= 0; i-- {
+		if parts[i] == listName {
+			return strings.Join(parts[:i+1], "."), true
+		}
+	}
+	return "", false
+}
+
 // filterMapByFields returns a new map containing only the specified fields
 func filterMapByFields(m map[string]interface{}, fields []string) map[string]interface{} {
 	filtered := make(map[string]interface{})

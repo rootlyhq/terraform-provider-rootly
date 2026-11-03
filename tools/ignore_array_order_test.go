@@ -185,3 +185,81 @@ func TestEqualIgnoringOrderAndFieldsIgnoresComputedFields(t *testing.T) {
 		})
 	}
 }
+
+func TestEqualIgnoringOrderOfListComparesNamedListForNestedKeys(t *testing.T) {
+	testSchema := map[string]*schema.Schema{
+		"rules": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{Schema: map[string]*schema.Schema{
+				"destinations": {
+					Type:             schema.TypeList,
+					Optional:         true,
+					DiffSuppressFunc: EqualIgnoringOrderOfList("destinations"),
+					Elem: &schema.Resource{Schema: map[string]*schema.Schema{
+						"target_id": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"match_keys": {
+							Type:     schema.TypeList,
+							Optional: true,
+							Elem: &schema.Resource{Schema: map[string]*schema.Schema{
+								"source_ref": {
+									Type:     schema.TypeString,
+									Required: true,
+								},
+							}},
+						},
+					}},
+				},
+			}},
+		},
+	}
+	static := map[string]interface{}{"target_id": "escalation-policy"}
+	dynamic := func(sourceRef string) map[string]interface{} {
+		return map[string]interface{}{"match_keys": []interface{}{map[string]interface{}{"source_ref": sourceRef}}}
+	}
+	rules := func(destinations ...interface{}) map[string]interface{} {
+		return map[string]interface{}{"rules": []interface{}{map[string]interface{}{"destinations": destinations}}}
+	}
+
+	tests := []struct {
+		name     string
+		newRules map[string]interface{}
+		wantDiff bool
+	}{
+		{
+			name:     "dynamic destination listed before the static one",
+			newRules: rules(dynamic("$.service"), static),
+			wantDiff: false,
+		},
+		{
+			name:     "changed match key",
+			newRules: rules(static, dynamic("$.team")),
+			wantDiff: true,
+		},
+		{
+			name:     "removed destination",
+			newRules: rules(dynamic("$.service")),
+			wantDiff: true,
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			oldData := schema.TestResourceDataRaw(t, testSchema, rules(static, dynamic("$.service")))
+			oldData.SetId("test")
+			config := terraform.NewResourceConfigRaw(test.newRules)
+
+			diff, err := schema.InternalMap(testSchema).Diff(context.Background(), oldData.State(), config, nil, nil, true)
+			if err != nil {
+				t.Fatal(err)
+			}
+			gotDiff := diff != nil && !diff.Empty()
+			if gotDiff != test.wantDiff {
+				t.Fatalf("diff=%t, want %t: %#v", gotDiff, test.wantDiff, diff)
+			}
+		})
+	}
+}
