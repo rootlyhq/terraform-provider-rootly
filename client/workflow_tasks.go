@@ -1,6 +1,7 @@
 package client
 
 import (
+	"io"
 	"reflect"
 
 	"fmt"
@@ -38,8 +39,18 @@ func (c *Client) ListWorkflowTasks(workflowId string, params *rootlygo.ListWorkf
 	return workflow_tasks, nil
 }
 
+// marshalWorkflowTask builds the request body for create and update. The parent
+// workflow is identified by the URL path, and the API rejects workflow_id as a
+// body attribute (400 "this endpoint does not accept workflow_id"), so it is
+// left out of the payload. It is still read back from responses.
+func marshalWorkflowTask(i *WorkflowTask) (io.Reader, error) {
+	payload := *i
+	payload.WorkflowId = ""
+	return MarshalData(&payload)
+}
+
 func (c *Client) CreateWorkflowTask(i *WorkflowTask) (*WorkflowTask, error) {
-	buffer, err := MarshalData(i)
+	buffer, err := marshalWorkflowTask(i)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling workflow_task: %w", err)
 	}
@@ -81,7 +92,7 @@ func (c *Client) GetWorkflowTask(id string) (*WorkflowTask, error) {
 }
 
 func (c *Client) UpdateWorkflowTask(id string, i *WorkflowTask) (*WorkflowTask, error) {
-	buffer, err := MarshalData(i)
+	buffer, err := marshalWorkflowTask(i)
 	if err != nil {
 		return nil, fmt.Errorf("Error marshaling workflow_task: %w", err)
 	}
