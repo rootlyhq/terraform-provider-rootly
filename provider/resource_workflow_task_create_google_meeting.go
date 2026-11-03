@@ -116,6 +116,11 @@ func resourceWorkflowTaskCreateGoogleMeeting() *schema.Resource {
 								"audio_only",
 							}, false),
 						},
+						"enable_google_meet_bot_auto_join": &schema.Schema{
+							Description: "Invite the signed-in Rootly bot to the meeting so it joins without waiting to be admitted. Only takes effect when the Google Meet integration's auto-join setting is on and the integration has calendar event access; setting it to false turns auto-join off for this task. Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 						"post_to_incident_timeline": &schema.Schema{
 							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,

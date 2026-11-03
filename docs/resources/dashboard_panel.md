@@ -68,7 +68,7 @@ Optional:
 - `datalabels` (Block List, Max: 1) (see [below for nested schema](#nestedblock--params--datalabels))
 - `datasets` (Block List) (see [below for nested schema](#nestedblock--params--datasets))
 - `description` (String)
-- `display` (String) Value must be one of `line_chart`, `line_stepped_chart`, `column_chart`, `stacked_column_chart`, `monitoring_chart`, `pie_chart`, `table`, `aggregate_value`.
+- `display` (String) Value must be one of `line_chart`, `line_stepped_chart`, `column_chart`, `stacked_column_chart`, `monitoring_chart`, `pie_chart`, `breakdown_table`, `table`, `aggregate_value`.
 - `legend` (Block List, Max: 1) (see [below for nested schema](#nestedblock--params--legend))
 - `table_fields` (List of String)
 

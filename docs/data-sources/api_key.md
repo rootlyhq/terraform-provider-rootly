@@ -18,6 +18,7 @@ description: |-
 
 - `created_at` (Map of String) Filter by date range using 'lt' and 'gt'.
 - `expires_at` (Map of String) Filter by date range using 'lt' and 'gt'.
+- `group_id` (String)
 - `kind` (String)
 - `last_used_at` (Map of String) Filter by date range using 'lt' and 'gt'.
 - `name` (String)

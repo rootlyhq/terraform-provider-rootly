@@ -13,11 +13,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceSLA() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceSLACreate,
 		ReadContext:   resourceSLARead,
 		UpdateContext: resourceSLAUpdate,

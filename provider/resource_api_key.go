@@ -16,6 +16,7 @@ import (
 
 func resourceApiKey() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceApiKeyCreate,
 		ReadContext:   resourceApiKeyRead,
 		UpdateContext: resourceApiKeyUpdate,

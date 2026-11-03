@@ -150,3 +150,45 @@ test("required workflow-task properties omitted by OpenAPI are restored", () => 
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+test("form set resource type forces replacement and the AI SRE provider can be cleared", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-clean-swagger-"));
+  const swaggerPath = path.join(directory, "swagger.json");
+  const swagger = {paths: {}, components: {schemas: {
+    form_set: {properties: {resource_type: {type: "string", enum: ["incident", "problem"], tf_computed: true}}},
+    alert_routing_rule: {properties: {ai_sre_provider: {type: "string", enum: ["rootly", "devin"], nullable: true, description: "AI SRE provider. Null disables AI SRE for the rule"}}},
+  }}};
+  try {
+    fs.writeFileSync(swaggerPath, JSON.stringify(swagger));
+    for (let run = 0; run < 2; run++) {
+      const result = spawnSync(process.execPath, [path.join(__dirname, "clean-swagger.js"), swaggerPath], {encoding: "utf8"});
+      assert.equal(result.status, 0, result.stderr);
+    }
+    const schemas = JSON.parse(fs.readFileSync(swaggerPath, "utf8")).components.schemas;
+    assert.equal(schemas.form_set.properties.resource_type.tf_force_new, true);
+    const provider = schemas.alert_routing_rule.properties.ai_sre_provider;
+    assert.equal(provider.tf_nullable, true);
+    assert.equal(provider.tf_computed, true);
+    assert.equal((provider.description.match(/set to an empty string to disable/g) || []).length, 1);
+  } finally {
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});
+
+test("publish incident synced component status keeps the API default", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-clean-swagger-"));
+  const swaggerPath = path.join(directory, "swagger.json");
+  const swagger = {paths: {}, components: {schemas: {
+    publish_incident_task_params: {properties: {synced_component_status: {type: "string", enum: ["operational", "degraded_performance"], nullable: true}}},
+  }}};
+  try {
+    fs.writeFileSync(swaggerPath, JSON.stringify(swagger));
+    const result = spawnSync(process.execPath, [path.join(__dirname, "clean-swagger.js"), swaggerPath], {encoding: "utf8"});
+    assert.equal(result.status, 0, result.stderr);
+    const property = JSON.parse(fs.readFileSync(swaggerPath, "utf8"))
+      .components.schemas.publish_incident_task_params.properties.synced_component_status;
+    assert.equal(property.tf_computed, true);
+  } finally {
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});

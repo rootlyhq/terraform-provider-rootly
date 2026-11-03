@@ -12,11 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceIncidentType() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceIncidentTypeCreate,
 		ReadContext:   resourceIncidentTypeRead,
 		UpdateContext: resourceIncidentTypeUpdate,
@@ -70,6 +72,17 @@ func resourceIncidentType() *schema.Resource {
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "The status page description of the incident type",
+			},
+
+			"public_name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The public name of the incident type shown on status pages instead of its name. Only used and returned when `status-page-v3-phase-1` is enabled",
 			},
 
 			"color": &schema.Schema{
@@ -242,6 +255,9 @@ func resourceIncidentTypeCreate(ctx context.Context, d *schema.ResourceData, met
 	if value, ok := d.GetOkExists("public_description"); ok {
 		s.PublicDescription = value.(string)
 	}
+	if value, ok := d.GetOkExists("public_name"); ok {
+		s.PublicName = value.(string)
+	}
 	if value, ok := d.GetOkExists("color"); ok {
 		s.Color = value.(string)
 	}
@@ -293,6 +309,7 @@ func resourceIncidentTypeRead(ctx context.Context, d *schema.ResourceData, meta 
 	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
 	d.Set("public_description", item.PublicDescription)
+	d.Set("public_name", item.PublicName)
 	d.Set("color", item.Color)
 	d.Set("position", item.Position)
 	d.Set("notify_emails", item.NotifyEmails)
@@ -371,6 +388,9 @@ func resourceIncidentTypeUpdate(ctx context.Context, d *schema.ResourceData, met
 	}
 	if d.HasChange("public_description") {
 		s.PublicDescription = d.Get("public_description").(string)
+	}
+	if d.HasChange("public_name") {
+		s.PublicName = d.Get("public_name").(string)
 	}
 	if d.HasChange("color") {
 		s.Color = d.Get("color").(string)

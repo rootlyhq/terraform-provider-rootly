@@ -16,6 +16,7 @@ type Cause struct {
 	Slug              string        `jsonapi:"attr,slug,omitempty"`
 	Description       string        `jsonapi:"attr,description,omitempty"`
 	PublicDescription string        `jsonapi:"attr,public_description,omitempty"`
+	PublicName        string        `jsonapi:"attr,public_name,omitempty"`
 	Position          int           `jsonapi:"attr,position,omitempty"`
 	Properties        []interface{} `jsonapi:"attr,properties,omitempty"`
 }

@@ -25,7 +25,7 @@ func dataSourceFormField() *schema.Resource {
 				Type:         schema.TypeString,
 				Computed:     true,
 				Optional:     true,
-				ValidateFunc: validation.StringInSlice([]string{"custom", "title", "summary", "mitigation_message", "resolution_message", "cancellation_message", "severity", "environments", "types", "services", "causes", "functionalities", "teams", "status", "visibility", "mark_as_test", "mark_as_backfilled", "labels", "notify_emails", "trigger_manual_workflows", "show_ongoing_incidents", "attach_alerts", "mark_as_in_triage", "in_triage_at", "started_at", "detected_at", "acknowledged_at", "mitigated_at", "resolved_at", "closed_at", "custom_sub_status", "manual_starting_datetime_field"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"custom", "title", "summary", "mitigation_message", "resolution_message", "cancellation_message", "severity", "environments", "types", "services", "causes", "functionalities", "teams", "status", "visibility", "mark_as_test", "mark_as_backfilled", "labels", "notify_emails", "trigger_manual_workflows", "show_ongoing_incidents", "attach_alerts", "mark_as_in_triage", "in_triage_at", "started_at", "detected_at", "acknowledged_at", "mitigated_at", "resolved_at", "closed_at", "custom_sub_status", "manual_starting_datetime_field", "priority", "scope", "exit_criteria", "impact_so_far", "root_cause", "resolution", "approved_by", "reason_and_accepted_risk", "re_review_date", "cancellation_reason", "problem_services", "problem_environments", "problem_functionalities", "problem_teams", "problem_title", "problem_description", "problem_incidents", "problem_due_date", "owner"}, false),
 			},
 
 			"name": &schema.Schema{
@@ -38,6 +38,13 @@ func dataSourceFormField() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
+			},
+
+			"resource_type": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Optional:     true,
+				ValidateFunc: validation.StringInSlice([]string{"incident", "problem"}, false),
 			},
 
 			"enabled": &schema.Schema{
@@ -82,6 +89,11 @@ func dataSourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta i
 		params.FilterEnabled = &enabled
 	}
 
+	if value, ok := d.GetOkExists("resource_type"); ok {
+		resource_type := value.(string)
+		params.FilterResourceType = &resource_type
+	}
+
 	created_at_gt := d.Get("created_at").(map[string]interface{})
 	if value, exists := created_at_gt["gt"]; exists {
 		v := value.(string)
@@ -110,5 +122,6 @@ func dataSourceFormFieldRead(ctx context.Context, d *schema.ResourceData, meta i
 	d.Set("name", item.Name)
 	d.Set("kind", item.Kind)
 	d.Set("enabled", item.Enabled)
+	d.Set("resource_type", item.ResourceType)
 	return nil
 }

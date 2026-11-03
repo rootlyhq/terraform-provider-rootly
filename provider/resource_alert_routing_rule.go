@@ -12,11 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceAlertRoutingRule() *schema.Resource {
 	return &schema.Resource{
+		CustomizeDiff: sdkutils.ExplicitEmptyStrings("ai_sre_provider"),
 		CreateContext: resourceAlertRoutingRuleCreate,
 		ReadContext:   resourceAlertRoutingRuleRead,
 		UpdateContext: resourceAlertRoutingRuleUpdate,
@@ -44,6 +46,18 @@ func resourceAlertRoutingRule() *schema.Resource {
 				Sensitive: false,
 				ForceNew:  false,
 				WriteOnly: false,
+			},
+
+			"ai_sre_provider": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "AI SRE provider that investigates alerts matching this rule. Null disables AI SRE for the rule. Omit to preserve an existing value; set to an empty string to disable AI SRE. Value must be one of `rootly`, `devin`.",
+				ValidateFunc: validation.StringInSlice([]string{"", "rootly", "devin"}, false),
 			},
 
 			"alerts_source_id": &schema.Schema{
@@ -179,8 +193,8 @@ func resourceAlertRoutingRule() *schema.Resource {
 							Sensitive:    false,
 							ForceNew:     false,
 							WriteOnly:    false,
-							Description:  "The type of the target. Please contact support if you encounter issues using `Functionality` as a target type.. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`.",
-							ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "Functionality", "EscalationPolicy"}, false),
+							Description:  "The type of the target. Please contact support if you encounter issues using `Functionality` as a target type.. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`, `CatalogEntity`.",
+							ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "Functionality", "EscalationPolicy", "CatalogEntity"}, false),
 						},
 
 						"target_id": &schema.Schema{
@@ -405,6 +419,9 @@ func resourceAlertRoutingRuleCreate(ctx context.Context, d *schema.ResourceData,
 	if value, ok := d.GetOkExists("enabled"); ok {
 		s.Enabled = tools.Bool(value.(bool))
 	}
+	if value, ok := d.GetOkExists("ai_sre_provider"); ok {
+		s.AiSreProvider = tools.String(value.(string))
+	}
 	if value, ok := d.GetOkExists("alerts_source_id"); ok {
 		s.AlertsSourceId = value.(string)
 	}
@@ -458,6 +475,7 @@ func resourceAlertRoutingRuleRead(ctx context.Context, d *schema.ResourceData, m
 
 	d.Set("name", item.Name)
 	d.Set("enabled", item.Enabled)
+	d.Set("ai_sre_provider", item.AiSreProvider)
 	d.Set("alerts_source_id", item.AlertsSourceId)
 	d.Set("position", item.Position)
 	d.Set("condition_type", item.ConditionType)
@@ -529,6 +547,7 @@ func resourceAlertRoutingRuleUpdate(ctx context.Context, d *schema.ResourceData,
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
 	}
+	s.AiSreProvider = sdkutils.OptionalComputedStringUpdate(d, "ai_sre_provider")
 	if d.HasChange("alerts_source_id") {
 		s.AlertsSourceId = d.Get("alerts_source_id").(string)
 	}

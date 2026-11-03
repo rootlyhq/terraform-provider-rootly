@@ -87,6 +87,61 @@ func resourceWorkflowTaskCreateSubIncident() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
+						"severity_id": &schema.Schema{
+							Description: "Inherited from the parent incident when blank",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"incident_type_ids": &schema.Schema{
+							Description: "Array of incident type UUIDs. Inherited from the parent incident when blank",
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+						},
+						"service_ids": &schema.Schema{
+							Description: "Array of service UUIDs. Inherited from the parent incident when blank",
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+						},
+						"functionality_ids": &schema.Schema{
+							Description: "Array of functionality UUIDs. Inherited from the parent incident when blank",
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+						},
+						"environment_ids": &schema.Schema{
+							Description: "Array of environment UUIDs. Inherited from the parent incident when blank",
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+						},
+						"group_ids": &schema.Schema{
+							Description: "Array of group/team UUIDs. Inherited from the parent incident when blank",
+							Type:        schema.TypeList,
+							Optional:    true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+						},
+						"private": &schema.Schema{
+							Description: "Make the sub incident private. Cannot make it public when the parent incident is private. Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 					},
 				},
 			},

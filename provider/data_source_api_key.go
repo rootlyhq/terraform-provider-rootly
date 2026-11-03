@@ -34,6 +34,12 @@ func dataSourceApiKey() *schema.Resource {
 				ValidateFunc: validation.StringInSlice([]string{"personal", "team", "organization"}, false),
 			},
 
+			"group_id": &schema.Schema{
+				Type:     schema.TypeString,
+				Computed: true,
+				Optional: true,
+			},
+
 			"role_id": &schema.Schema{
 				Type:     schema.TypeString,
 				Computed: true,
@@ -76,6 +82,11 @@ func dataSourceApiKeyRead(ctx context.Context, d *schema.ResourceData, meta inte
 	if value, ok := d.GetOkExists("name"); ok {
 		name := value.(string)
 		params.FilterName = &name
+	}
+
+	if value, ok := d.GetOkExists("group_id"); ok {
+		group_id := value.(string)
+		params.FilterGroupIds = &group_id
 	}
 
 	if value, ok := d.GetOkExists("role_id"); ok {
@@ -133,6 +144,7 @@ func dataSourceApiKeyRead(ctx context.Context, d *schema.ResourceData, meta inte
 
 	d.Set("kind", item.Kind)
 	d.Set("name", item.Name)
+	d.Set("group_id", item.GroupId)
 	d.Set("role_id", item.RoleId)
 	return nil
 }

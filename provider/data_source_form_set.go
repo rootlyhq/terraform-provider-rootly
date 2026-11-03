@@ -7,6 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
@@ -30,6 +31,13 @@ func dataSourceFormSet() *schema.Resource {
 				Type:     schema.TypeBool,
 				Computed: true,
 				Optional: true,
+			},
+
+			"resource_type": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Optional:     true,
+				ValidateFunc: validation.StringInSlice([]string{"incident", "problem"}, false),
 			},
 
 			"created_at": &schema.Schema{
@@ -58,6 +66,11 @@ func dataSourceFormSetRead(ctx context.Context, d *schema.ResourceData, meta int
 		params.FilterIsDefault = &is_default
 	}
 
+	if value, ok := d.GetOkExists("resource_type"); ok {
+		resource_type := value.(string)
+		params.FilterResourceType = &resource_type
+	}
+
 	created_at_gt := d.Get("created_at").(map[string]interface{})
 	if value, exists := created_at_gt["gt"]; exists {
 		v := value.(string)
@@ -83,5 +96,6 @@ func dataSourceFormSetRead(ctx context.Context, d *schema.ResourceData, meta int
 	d.SetId(item.ID)
 
 	d.Set("slug", item.Slug)
+	d.Set("resource_type", item.ResourceType)
 	return nil
 }

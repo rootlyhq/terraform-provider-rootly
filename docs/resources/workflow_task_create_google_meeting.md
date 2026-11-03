@@ -41,6 +41,7 @@ Required:
 Optional:
 
 - `conference_solution_key` (String) [DEPRECATED] Sets the video conference type attached to the meeting. Value must be one of `eventHangout`, `eventNamedHangout`, `hangoutsMeet`, `addOn`.
+- `enable_google_meet_bot_auto_join` (Boolean) Invite the signed-in Rootly bot to the meeting so it joins without waiting to be admitted. Only takes effect when the Google Meet integration's auto-join setting is on and the integration has calendar event access; setting it to false turns auto-join off for this task. Value must be one of true or false
 - `post_to_incident_timeline` (Boolean) Value must be one of true or false
 - `post_to_slack_channels` (Block List) (see [below for nested schema](#nestedblock--task_params--post_to_slack_channels))
 - `record_meeting` (Boolean) Rootly AI will record the meeting and automatically generate a transcript and summary from your meeting. Value must be one of true or false
