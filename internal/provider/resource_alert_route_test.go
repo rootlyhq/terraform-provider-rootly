@@ -286,6 +286,54 @@ func TestAccResourceAlertRoute_DynamicDestinations(t *testing.T) {
 	})
 }
 
+func TestAccResourceAlertRoute_StaticCatalogEntityDestination(t *testing.T) {
+	testAccSkipUnlessDynamicAlertRouting(t)
+	resName := "rootly_alert_route.test"
+	rName := acctest.RandomWithPrefix("tf-alert-route")
+	uuidPattern := regexp.MustCompile(`^[0-9a-f-]{36}$`)
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceAlertRouteRulesConfig(rName, `
+					rules {
+						fallback_rule = true
+
+						destinations {
+							target_type = "CatalogEntity"
+							target_id   = rootly_catalog_entity.test.id
+						}
+					}
+				`) + fmt.Sprintf(`
+resource "rootly_catalog_entity" "test" {
+	catalog_id           = rootly_catalog.test.id
+	name                 = "%[1]s"
+	escalation_policy_id = rootly_escalation_policy.test.id
+}
+`, rName),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("rules").AtSliceIndex(0).AtMapKey("destinations"), knownvalue.ListExact([]knownvalue.Check{
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"target_type":  knownvalue.StringExact("CatalogEntity"),
+							"target_id":    knownvalue.StringRegexp(uuidPattern),
+							"catalog_type": knownvalue.StringExact(""),
+							"catalog_id":   knownvalue.StringExact(""),
+							"match_keys":   knownvalue.ListExact([]knownvalue.Check{}),
+						}),
+					})),
+				},
+			},
+			{
+				ResourceName:      resName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
 func TestAccResourceAlertRoute_NonPaging(t *testing.T) {
 	testAccSkipUnlessDynamicAlertRouting(t)
 	resName := "rootly_alert_route.test"
