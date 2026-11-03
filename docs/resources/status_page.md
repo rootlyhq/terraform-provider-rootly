@@ -49,8 +49,12 @@ resource "rootly_status_page" "public" {
 - `public` (Boolean) Make the status page accessible to the public. Value must be one of true or false
 - `public_description` (String) The public description of the status page
 - `public_title` (String) The public title of the status page
+- `saml_access_rules` (Block List) Rules that decide which signed-in SAML users can view the page. Values are compared case-sensitively. (see [below for nested schema](#nestedblock--saml_access_rules))
+- `saml_access_rules_match` (String) Whether all rules or any rule must match. Value must be one of `all`, `any`.
+- `saml_configuration_id` (String) ID of the shared SAML configuration used by the page. Manage shared configurations with /v1/status-page-saml-configurations.
 - `saml_idp_cert` (String) SAML IdP certificate
 - `saml_idp_cert_fingerprint` (String) SAML IdP certificate fingerprint
+- `saml_idp_entity_id` (String) SAML IdP entity ID (issuer). Blank accepts any issuer. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
 - `saml_idp_slo_service_url` (String) SAML IdP SLO service URL
 - `saml_idp_sso_service_url` (String) SAML IdP SSO service URL
 - `saml_name_identifier_format` (String) SAML name identifier format. Value must be one of `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`, `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`, `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`, `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`.
@@ -69,6 +73,15 @@ resource "rootly_status_page" "public" {
 
 - `cname_records` (Map of String) CNAME records mapping external domain names to their DNS target values. Populated asynchronously after setting external_domain_names.
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--saml_access_rules"></a>
+### Nested Schema for `saml_access_rules`
+
+Optional:
+
+- `claim` (String) SAML attribute name. Required for is_any_of.
+- `operator` (String) is_any_of matches attribute values; email_domain_is_any_of matches the domain of the signed-in email. Value must be one of `is_any_of`, `email_domain_is_any_of`.
+- `values` (List of String) Accepted values
 
 ## Import
 

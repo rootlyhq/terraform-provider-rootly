@@ -26258,6 +26258,42 @@ func (e NewStatusPageDataAttributesPublicationStatus) Valid() bool {
 	}
 }
 
+// Defines values for NewStatusPageDataAttributesSamlAccessRulesOperator.
+const (
+	NewStatusPageDataAttributesSamlAccessRulesOperatorEmailDomainIsAnyOf NewStatusPageDataAttributesSamlAccessRulesOperator = "email_domain_is_any_of"
+	NewStatusPageDataAttributesSamlAccessRulesOperatorIsAnyOf            NewStatusPageDataAttributesSamlAccessRulesOperator = "is_any_of"
+)
+
+// Valid indicates whether the value is a known member of the NewStatusPageDataAttributesSamlAccessRulesOperator enum.
+func (e NewStatusPageDataAttributesSamlAccessRulesOperator) Valid() bool {
+	switch e {
+	case NewStatusPageDataAttributesSamlAccessRulesOperatorEmailDomainIsAnyOf:
+		return true
+	case NewStatusPageDataAttributesSamlAccessRulesOperatorIsAnyOf:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewStatusPageDataAttributesSamlAccessRulesMatch.
+const (
+	NewStatusPageDataAttributesSamlAccessRulesMatchAll NewStatusPageDataAttributesSamlAccessRulesMatch = "all"
+	NewStatusPageDataAttributesSamlAccessRulesMatchAny NewStatusPageDataAttributesSamlAccessRulesMatch = "any"
+)
+
+// Valid indicates whether the value is a known member of the NewStatusPageDataAttributesSamlAccessRulesMatch enum.
+func (e NewStatusPageDataAttributesSamlAccessRulesMatch) Valid() bool {
+	switch e {
+	case NewStatusPageDataAttributesSamlAccessRulesMatchAll:
+		return true
+	case NewStatusPageDataAttributesSamlAccessRulesMatchAny:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NewStatusPageDataAttributesSamlNameIdentifierFormat.
 const (
 	NewStatusPageDataAttributesSamlNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatEmailAddress NewStatusPageDataAttributesSamlNameIdentifierFormat = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
@@ -26396,6 +26432,45 @@ const (
 func (e NewStatusPageComponentGroupDataType) Valid() bool {
 	switch e {
 	case NewStatusPageComponentGroupDataTypeStatusPageComponentGroups:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormat.
+const (
+	NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatEmailAddress NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormat = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
+	NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatUnspecified  NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormat = "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+	NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatPersistent   NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormat = "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
+	NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatTransient    NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormat = "urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+)
+
+// Valid indicates whether the value is a known member of the NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormat enum.
+func (e NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormat) Valid() bool {
+	switch e {
+	case NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatEmailAddress:
+		return true
+	case NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatUnspecified:
+		return true
+	case NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatPersistent:
+		return true
+	case NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatTransient:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for NewStatusPageSamlConfigurationDataType.
+const (
+	NewStatusPageSamlConfigurationDataTypeStatusPageSamlConfigurations NewStatusPageSamlConfigurationDataType = "status_page_saml_configurations"
+)
+
+// Valid indicates whether the value is a known member of the NewStatusPageSamlConfigurationDataType enum.
+func (e NewStatusPageSamlConfigurationDataType) Valid() bool {
+	switch e {
+	case NewStatusPageSamlConfigurationDataTypeStatusPageSamlConfigurations:
 		return true
 	default:
 		return false
@@ -31433,6 +31508,42 @@ func (e StatusPagePublicationStatus) Valid() bool {
 	}
 }
 
+// Defines values for StatusPageSamlAccessRulesOperator.
+const (
+	StatusPageSamlAccessRulesOperatorEmailDomainIsAnyOf StatusPageSamlAccessRulesOperator = "email_domain_is_any_of"
+	StatusPageSamlAccessRulesOperatorIsAnyOf            StatusPageSamlAccessRulesOperator = "is_any_of"
+)
+
+// Valid indicates whether the value is a known member of the StatusPageSamlAccessRulesOperator enum.
+func (e StatusPageSamlAccessRulesOperator) Valid() bool {
+	switch e {
+	case StatusPageSamlAccessRulesOperatorEmailDomainIsAnyOf:
+		return true
+	case StatusPageSamlAccessRulesOperatorIsAnyOf:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for StatusPageSamlAccessRulesMatch.
+const (
+	StatusPageSamlAccessRulesMatchAll StatusPageSamlAccessRulesMatch = "all"
+	StatusPageSamlAccessRulesMatchAny StatusPageSamlAccessRulesMatch = "any"
+)
+
+// Valid indicates whether the value is a known member of the StatusPageSamlAccessRulesMatch enum.
+func (e StatusPageSamlAccessRulesMatch) Valid() bool {
+	switch e {
+	case StatusPageSamlAccessRulesMatchAll:
+		return true
+	case StatusPageSamlAccessRulesMatchAny:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for StatusPageSamlNameIdentifierFormat.
 const (
 	StatusPageSamlNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatEmailAddress StatusPageSamlNameIdentifierFormat = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
@@ -31643,6 +31754,60 @@ const (
 func (e StatusPageResponseDataType) Valid() bool {
 	switch e {
 	case StatusPageResponseDataTypeStatusPages:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for StatusPageSamlConfigurationNameIdentifierFormat.
+const (
+	StatusPageSamlConfigurationNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatEmailAddress StatusPageSamlConfigurationNameIdentifierFormat = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
+	StatusPageSamlConfigurationNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatUnspecified  StatusPageSamlConfigurationNameIdentifierFormat = "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+	StatusPageSamlConfigurationNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatPersistent   StatusPageSamlConfigurationNameIdentifierFormat = "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
+	StatusPageSamlConfigurationNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatTransient    StatusPageSamlConfigurationNameIdentifierFormat = "urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+)
+
+// Valid indicates whether the value is a known member of the StatusPageSamlConfigurationNameIdentifierFormat enum.
+func (e StatusPageSamlConfigurationNameIdentifierFormat) Valid() bool {
+	switch e {
+	case StatusPageSamlConfigurationNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatEmailAddress:
+		return true
+	case StatusPageSamlConfigurationNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatUnspecified:
+		return true
+	case StatusPageSamlConfigurationNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatPersistent:
+		return true
+	case StatusPageSamlConfigurationNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatTransient:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for StatusPageSamlConfigurationListDataType.
+const (
+	StatusPageSamlConfigurationListDataTypeStatusPageSamlConfigurations StatusPageSamlConfigurationListDataType = "status_page_saml_configurations"
+)
+
+// Valid indicates whether the value is a known member of the StatusPageSamlConfigurationListDataType enum.
+func (e StatusPageSamlConfigurationListDataType) Valid() bool {
+	switch e {
+	case StatusPageSamlConfigurationListDataTypeStatusPageSamlConfigurations:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for StatusPageSamlConfigurationResponseDataType.
+const (
+	StatusPageSamlConfigurationResponseDataTypeStatusPageSamlConfigurations StatusPageSamlConfigurationResponseDataType = "status_page_saml_configurations"
+)
+
+// Valid indicates whether the value is a known member of the StatusPageSamlConfigurationResponseDataType enum.
+func (e StatusPageSamlConfigurationResponseDataType) Valid() bool {
+	switch e {
+	case StatusPageSamlConfigurationResponseDataTypeStatusPageSamlConfigurations:
 		return true
 	default:
 		return false
@@ -43490,24 +43655,60 @@ func (e UpdateStatusPageDataAttributesPublicationStatus) Valid() bool {
 	}
 }
 
+// Defines values for UpdateStatusPageDataAttributesSamlAccessRulesOperator.
+const (
+	EmailDomainIsAnyOf UpdateStatusPageDataAttributesSamlAccessRulesOperator = "email_domain_is_any_of"
+	IsAnyOf            UpdateStatusPageDataAttributesSamlAccessRulesOperator = "is_any_of"
+)
+
+// Valid indicates whether the value is a known member of the UpdateStatusPageDataAttributesSamlAccessRulesOperator enum.
+func (e UpdateStatusPageDataAttributesSamlAccessRulesOperator) Valid() bool {
+	switch e {
+	case EmailDomainIsAnyOf:
+		return true
+	case IsAnyOf:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateStatusPageDataAttributesSamlAccessRulesMatch.
+const (
+	UpdateStatusPageDataAttributesSamlAccessRulesMatchAll UpdateStatusPageDataAttributesSamlAccessRulesMatch = "all"
+	UpdateStatusPageDataAttributesSamlAccessRulesMatchAny UpdateStatusPageDataAttributesSamlAccessRulesMatch = "any"
+)
+
+// Valid indicates whether the value is a known member of the UpdateStatusPageDataAttributesSamlAccessRulesMatch enum.
+func (e UpdateStatusPageDataAttributesSamlAccessRulesMatch) Valid() bool {
+	switch e {
+	case UpdateStatusPageDataAttributesSamlAccessRulesMatchAll:
+		return true
+	case UpdateStatusPageDataAttributesSamlAccessRulesMatchAny:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for UpdateStatusPageDataAttributesSamlNameIdentifierFormat.
 const (
-	UrnOasisNamesTcSAML11NameidFormatEmailAddress UpdateStatusPageDataAttributesSamlNameIdentifierFormat = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
-	UrnOasisNamesTcSAML11NameidFormatUnspecified  UpdateStatusPageDataAttributesSamlNameIdentifierFormat = "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
-	UrnOasisNamesTcSAML20NameidFormatPersistent   UpdateStatusPageDataAttributesSamlNameIdentifierFormat = "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
-	UrnOasisNamesTcSAML20NameidFormatTransient    UpdateStatusPageDataAttributesSamlNameIdentifierFormat = "urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+	UpdateStatusPageDataAttributesSamlNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatEmailAddress UpdateStatusPageDataAttributesSamlNameIdentifierFormat = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
+	UpdateStatusPageDataAttributesSamlNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatUnspecified  UpdateStatusPageDataAttributesSamlNameIdentifierFormat = "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+	UpdateStatusPageDataAttributesSamlNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatPersistent   UpdateStatusPageDataAttributesSamlNameIdentifierFormat = "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
+	UpdateStatusPageDataAttributesSamlNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatTransient    UpdateStatusPageDataAttributesSamlNameIdentifierFormat = "urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
 )
 
 // Valid indicates whether the value is a known member of the UpdateStatusPageDataAttributesSamlNameIdentifierFormat enum.
 func (e UpdateStatusPageDataAttributesSamlNameIdentifierFormat) Valid() bool {
 	switch e {
-	case UrnOasisNamesTcSAML11NameidFormatEmailAddress:
+	case UpdateStatusPageDataAttributesSamlNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatEmailAddress:
 		return true
-	case UrnOasisNamesTcSAML11NameidFormatUnspecified:
+	case UpdateStatusPageDataAttributesSamlNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatUnspecified:
 		return true
-	case UrnOasisNamesTcSAML20NameidFormatPersistent:
+	case UpdateStatusPageDataAttributesSamlNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatPersistent:
 		return true
-	case UrnOasisNamesTcSAML20NameidFormatTransient:
+	case UpdateStatusPageDataAttributesSamlNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatTransient:
 		return true
 	default:
 		return false
@@ -43610,6 +43811,45 @@ const (
 func (e UpdateStatusPageComponentGroupDataType) Valid() bool {
 	switch e {
 	case UpdateStatusPageComponentGroupDataTypeStatusPageComponentGroups:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormat.
+const (
+	UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatEmailAddress UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormat = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
+	UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatUnspecified  UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormat = "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+	UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatPersistent   UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormat = "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
+	UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatTransient    UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormat = "urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+)
+
+// Valid indicates whether the value is a known member of the UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormat enum.
+func (e UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormat) Valid() bool {
+	switch e {
+	case UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatEmailAddress:
+		return true
+	case UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML11NameidFormatUnspecified:
+		return true
+	case UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatPersistent:
+		return true
+	case UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormatUrnOasisNamesTcSAML20NameidFormatTransient:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UpdateStatusPageSamlConfigurationDataType.
+const (
+	UpdateStatusPageSamlConfigurationDataTypeStatusPageSamlConfigurations UpdateStatusPageSamlConfigurationDataType = "status_page_saml_configurations"
+)
+
+// Valid indicates whether the value is a known member of the UpdateStatusPageSamlConfigurationDataType enum.
+func (e UpdateStatusPageSamlConfigurationDataType) Valid() bool {
+	switch e {
+	case UpdateStatusPageSamlConfigurationDataTypeStatusPageSamlConfigurations:
 		return true
 	default:
 		return false
@@ -44797,19 +45037,19 @@ func (e WebhooksEndpointResponseDataType) Valid() bool {
 
 // Defines values for WorkflowFailureNotificationMode.
 const (
-	Custom  WorkflowFailureNotificationMode = "custom"
-	Inherit WorkflowFailureNotificationMode = "inherit"
-	Off     WorkflowFailureNotificationMode = "off"
+	WorkflowFailureNotificationModeCustom  WorkflowFailureNotificationMode = "custom"
+	WorkflowFailureNotificationModeInherit WorkflowFailureNotificationMode = "inherit"
+	WorkflowFailureNotificationModeOff     WorkflowFailureNotificationMode = "off"
 )
 
 // Valid indicates whether the value is a known member of the WorkflowFailureNotificationMode enum.
 func (e WorkflowFailureNotificationMode) Valid() bool {
 	switch e {
-	case Custom:
+	case WorkflowFailureNotificationModeCustom:
 		return true
-	case Inherit:
+	case WorkflowFailureNotificationModeInherit:
 		return true
-	case Off:
+	case WorkflowFailureNotificationModeOff:
 		return true
 	default:
 		return false
@@ -61717,16 +61957,37 @@ type NewStatusPage struct {
 			// PublicationStatus Publication status of the status page. Draft pages have never been published, active pages are live, and unpublished pages were taken down.
 			PublicationStatus *NewStatusPageDataAttributesPublicationStatus `json:"publication_status,omitempty"`
 
+			// SamlAccessRules Rules that decide which signed-in SAML users can view the page. Values are compared case-sensitively.
+			SamlAccessRules *[]struct {
+				// Claim SAML attribute name. Required for is_any_of.
+				Claim *string `json:"claim,omitempty"`
+
+				// Operator is_any_of matches attribute values; email_domain_is_any_of matches the domain of the signed-in email
+				Operator NewStatusPageDataAttributesSamlAccessRulesOperator `json:"operator"`
+
+				// Values Accepted values
+				Values []string `json:"values"`
+			} `json:"saml_access_rules,omitempty"`
+
+			// SamlAccessRulesMatch Whether all rules or any rule must match
+			SamlAccessRulesMatch *NewStatusPageDataAttributesSamlAccessRulesMatch `json:"saml_access_rules_match,omitempty"`
+
+			// SamlConfigurationId ID of the shared SAML configuration used by the page. Manage shared configurations with /v1/status-page-saml-configurations.
+			SamlConfigurationId *string `json:"saml_configuration_id,omitempty"`
+
 			// SamlIdpCert SAML IdP certificate
 			SamlIdpCert *string `json:"saml_idp_cert,omitempty"`
 
-			// SamlIdpSloServiceUrl SAML IdP SLO service URL
+			// SamlIdpEntityId SAML IdP entity ID (issuer). Blank accepts any issuer. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
+			SamlIdpEntityId *string `json:"saml_idp_entity_id,omitempty"`
+
+			// SamlIdpSloServiceUrl SAML IdP SLO service URL. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
 			SamlIdpSloServiceUrl *string `json:"saml_idp_slo_service_url,omitempty"`
 
-			// SamlIdpSsoServiceUrl SAML IdP SSO service URL
+			// SamlIdpSsoServiceUrl SAML IdP SSO service URL. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
 			SamlIdpSsoServiceUrl *string `json:"saml_idp_sso_service_url,omitempty"`
 
-			// SamlNameIdentifierFormat SAML name identifier format
+			// SamlNameIdentifierFormat SAML name identifier format. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
 			SamlNameIdentifierFormat *NewStatusPageDataAttributesSamlNameIdentifierFormat `json:"saml_name_identifier_format,omitempty"`
 
 			// SectionOrder Order of sections on the status page
@@ -61775,7 +62036,13 @@ type NewStatusPageDataAttributesIncidentHistoryWindow string
 // NewStatusPageDataAttributesPublicationStatus Publication status of the status page. Draft pages have never been published, active pages are live, and unpublished pages were taken down.
 type NewStatusPageDataAttributesPublicationStatus string
 
-// NewStatusPageDataAttributesSamlNameIdentifierFormat SAML name identifier format
+// NewStatusPageDataAttributesSamlAccessRulesOperator is_any_of matches attribute values; email_domain_is_any_of matches the domain of the signed-in email
+type NewStatusPageDataAttributesSamlAccessRulesOperator string
+
+// NewStatusPageDataAttributesSamlAccessRulesMatch Whether all rules or any rule must match
+type NewStatusPageDataAttributesSamlAccessRulesMatch string
+
+// NewStatusPageDataAttributesSamlNameIdentifierFormat SAML name identifier format. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
 type NewStatusPageDataAttributesSamlNameIdentifierFormat string
 
 // NewStatusPageDataAttributesSectionOrder defines model for NewStatusPage.Data.Attributes.SectionOrder.
@@ -61861,6 +62128,38 @@ type NewStatusPageComponentGroup struct {
 
 // NewStatusPageComponentGroupDataType defines model for NewStatusPageComponentGroup.Data.Type.
 type NewStatusPageComponentGroupDataType string
+
+// NewStatusPageSamlConfiguration defines model for new_status_page_saml_configuration.
+type NewStatusPageSamlConfiguration struct {
+	Data struct {
+		Attributes struct {
+			// IdpCert SAML IdP X.509 certificate in PEM format. Returned as [REDACTED].
+			IdpCert string `json:"idp_cert"`
+
+			// IdpEntityId SAML IdP entity ID (issuer)
+			IdpEntityId string `json:"idp_entity_id"`
+
+			// IdpSloServiceUrl SAML IdP SLO service URL
+			IdpSloServiceUrl *string `json:"idp_slo_service_url,omitempty"`
+
+			// IdpSsoServiceUrl SAML IdP SSO service URL
+			IdpSsoServiceUrl string `json:"idp_sso_service_url"`
+
+			// Name The name of the SAML configuration
+			Name string `json:"name"`
+
+			// NameIdentifierFormat SAML name identifier format
+			NameIdentifierFormat *NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormat `json:"name_identifier_format,omitempty"`
+		} `json:"attributes"`
+		Type NewStatusPageSamlConfigurationDataType `json:"type"`
+	} `json:"data"`
+}
+
+// NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormat SAML name identifier format
+type NewStatusPageSamlConfigurationDataAttributesNameIdentifierFormat string
+
+// NewStatusPageSamlConfigurationDataType defines model for NewStatusPageSamlConfiguration.Data.Type.
+type NewStatusPageSamlConfigurationDataType string
 
 // NewStatusPageTeam defines model for new_status_page_team.
 type NewStatusPageTeam struct {
@@ -66151,19 +66450,40 @@ type StatusPage struct {
 	// PublicationStatus Publication status of the status page. Draft pages have never been published, active pages are live, and unpublished pages were taken down.
 	PublicationStatus *StatusPagePublicationStatus `json:"publication_status,omitempty"`
 
+	// SamlAccessRules Rules that decide which signed-in SAML users can view the page. Values are compared case-sensitively.
+	SamlAccessRules *[]struct {
+		// Claim SAML attribute name. Required for is_any_of.
+		Claim *string `json:"claim,omitempty"`
+
+		// Operator is_any_of matches attribute values; email_domain_is_any_of matches the domain of the signed-in email
+		Operator StatusPageSamlAccessRulesOperator `json:"operator"`
+
+		// Values Accepted values
+		Values []string `json:"values"`
+	} `json:"saml_access_rules,omitempty"`
+
+	// SamlAccessRulesMatch Whether all rules or any rule must match
+	SamlAccessRulesMatch *StatusPageSamlAccessRulesMatch `json:"saml_access_rules_match,omitempty"`
+
+	// SamlConfigurationId ID of the shared SAML configuration used by the page. Manage shared configurations with /v1/status-page-saml-configurations.
+	SamlConfigurationId *string `json:"saml_configuration_id,omitempty"`
+
 	// SamlIdpCert SAML IdP certificate
 	SamlIdpCert *string `json:"saml_idp_cert,omitempty"`
 
 	// SamlIdpCertFingerprint SAML IdP certificate fingerprint
 	SamlIdpCertFingerprint *string `json:"saml_idp_cert_fingerprint,omitempty"`
 
-	// SamlIdpSloServiceUrl SAML IdP SLO service URL
+	// SamlIdpEntityId SAML IdP entity ID (issuer). Blank accepts any issuer. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
+	SamlIdpEntityId *string `json:"saml_idp_entity_id,omitempty"`
+
+	// SamlIdpSloServiceUrl SAML IdP SLO service URL. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
 	SamlIdpSloServiceUrl *string `json:"saml_idp_slo_service_url,omitempty"`
 
-	// SamlIdpSsoServiceUrl SAML IdP SSO service URL
+	// SamlIdpSsoServiceUrl SAML IdP SSO service URL. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
 	SamlIdpSsoServiceUrl *string `json:"saml_idp_sso_service_url,omitempty"`
 
-	// SamlNameIdentifierFormat SAML name identifier format
+	// SamlNameIdentifierFormat SAML name identifier format. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
 	SamlNameIdentifierFormat *StatusPageSamlNameIdentifierFormat `json:"saml_name_identifier_format,omitempty"`
 
 	// SectionOrder Order of sections on the status page
@@ -66212,7 +66532,13 @@ type StatusPageIncidentHistoryWindow string
 // StatusPagePublicationStatus Publication status of the status page. Draft pages have never been published, active pages are live, and unpublished pages were taken down.
 type StatusPagePublicationStatus string
 
-// StatusPageSamlNameIdentifierFormat SAML name identifier format
+// StatusPageSamlAccessRulesOperator is_any_of matches attribute values; email_domain_is_any_of matches the domain of the signed-in email
+type StatusPageSamlAccessRulesOperator string
+
+// StatusPageSamlAccessRulesMatch Whether all rules or any rule must match
+type StatusPageSamlAccessRulesMatch string
+
+// StatusPageSamlNameIdentifierFormat SAML name identifier format. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
 type StatusPageSamlNameIdentifierFormat string
 
 // StatusPageSectionOrder defines model for StatusPage.SectionOrder.
@@ -66431,6 +66757,83 @@ type StatusPageResponse struct {
 
 // StatusPageResponseDataType defines model for StatusPageResponse.Data.Type.
 type StatusPageResponseDataType string
+
+// StatusPageSamlConfiguration defines model for status_page_saml_configuration.
+type StatusPageSamlConfiguration struct {
+	// AcsUrl Assertion consumer service URL to configure in the IdP
+	AcsUrl *string `json:"acs_url,omitempty"`
+
+	// CreatedAt Date of creation
+	CreatedAt string `json:"created_at"`
+
+	// IdpCert SAML IdP X.509 certificate in PEM format. Returned as [REDACTED].
+	IdpCert *string `json:"idp_cert,omitempty"`
+
+	// IdpCertFingerprint SHA1 fingerprint of the IdP certificate
+	IdpCertFingerprint *string `json:"idp_cert_fingerprint,omitempty"`
+
+	// IdpEntityId SAML IdP entity ID (issuer)
+	IdpEntityId string `json:"idp_entity_id"`
+
+	// IdpSloServiceUrl SAML IdP SLO service URL
+	IdpSloServiceUrl *string `json:"idp_slo_service_url,omitempty"`
+
+	// IdpSsoServiceUrl SAML IdP SSO service URL
+	IdpSsoServiceUrl string `json:"idp_sso_service_url"`
+
+	// MetadataUrl Service provider metadata URL
+	MetadataUrl *string `json:"metadata_url,omitempty"`
+
+	// Name The name of the SAML configuration
+	Name string `json:"name"`
+
+	// NameIdentifierFormat SAML name identifier format
+	NameIdentifierFormat *StatusPageSamlConfigurationNameIdentifierFormat `json:"name_identifier_format,omitempty"`
+
+	// SpEntityId Service provider entity ID to configure in the IdP
+	SpEntityId *string `json:"sp_entity_id,omitempty"`
+
+	// StatusPagesCount Number of status pages using this SAML configuration
+	StatusPagesCount *int `json:"status_pages_count,omitempty"`
+
+	// UpdatedAt Date of last update
+	UpdatedAt string `json:"updated_at"`
+}
+
+// StatusPageSamlConfigurationNameIdentifierFormat SAML name identifier format
+type StatusPageSamlConfigurationNameIdentifierFormat string
+
+// StatusPageSamlConfigurationList defines model for status_page_saml_configuration_list.
+type StatusPageSamlConfigurationList struct {
+	Data []struct {
+		Attributes StatusPageSamlConfiguration `json:"attributes"`
+
+		// Id Unique ID of the SAML configuration
+		Id   string                                  `json:"id"`
+		Type StatusPageSamlConfigurationListDataType `json:"type"`
+	} `json:"data"`
+	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
+	Links    Links                      `json:"links"`
+	Meta     Meta                       `json:"meta"`
+}
+
+// StatusPageSamlConfigurationListDataType defines model for StatusPageSamlConfigurationList.Data.Type.
+type StatusPageSamlConfigurationListDataType string
+
+// StatusPageSamlConfigurationResponse defines model for status_page_saml_configuration_response.
+type StatusPageSamlConfigurationResponse struct {
+	Data struct {
+		Attributes StatusPageSamlConfiguration `json:"attributes"`
+
+		// Id Unique ID of the SAML configuration
+		Id   string                                      `json:"id"`
+		Type StatusPageSamlConfigurationResponseDataType `json:"type"`
+	} `json:"data"`
+	Included *[]JsonapiIncludedResource `json:"included,omitempty"`
+}
+
+// StatusPageSamlConfigurationResponseDataType defines model for StatusPageSamlConfigurationResponse.Data.Type.
+type StatusPageSamlConfigurationResponseDataType string
 
 // StatusPageTeam defines model for status_page_team.
 type StatusPageTeam struct {
@@ -72477,16 +72880,37 @@ type UpdateStatusPage struct {
 			// PublicationStatus Publication status of the status page. Draft pages have never been published, active pages are live, and unpublished pages were taken down.
 			PublicationStatus *UpdateStatusPageDataAttributesPublicationStatus `json:"publication_status,omitempty"`
 
+			// SamlAccessRules Rules that decide which signed-in SAML users can view the page. Values are compared case-sensitively.
+			SamlAccessRules *[]struct {
+				// Claim SAML attribute name. Required for is_any_of.
+				Claim *string `json:"claim,omitempty"`
+
+				// Operator is_any_of matches attribute values; email_domain_is_any_of matches the domain of the signed-in email
+				Operator UpdateStatusPageDataAttributesSamlAccessRulesOperator `json:"operator"`
+
+				// Values Accepted values
+				Values []string `json:"values"`
+			} `json:"saml_access_rules,omitempty"`
+
+			// SamlAccessRulesMatch Whether all rules or any rule must match
+			SamlAccessRulesMatch *UpdateStatusPageDataAttributesSamlAccessRulesMatch `json:"saml_access_rules_match,omitempty"`
+
+			// SamlConfigurationId ID of the shared SAML configuration used by the page. Manage shared configurations with /v1/status-page-saml-configurations.
+			SamlConfigurationId *string `json:"saml_configuration_id,omitempty"`
+
 			// SamlIdpCert SAML IdP certificate
 			SamlIdpCert *string `json:"saml_idp_cert,omitempty"`
 
-			// SamlIdpSloServiceUrl SAML IdP SLO service URL
+			// SamlIdpEntityId SAML IdP entity ID (issuer). Blank accepts any issuer. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
+			SamlIdpEntityId *string `json:"saml_idp_entity_id,omitempty"`
+
+			// SamlIdpSloServiceUrl SAML IdP SLO service URL. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
 			SamlIdpSloServiceUrl *string `json:"saml_idp_slo_service_url,omitempty"`
 
-			// SamlIdpSsoServiceUrl SAML IdP SSO service URL
+			// SamlIdpSsoServiceUrl SAML IdP SSO service URL. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
 			SamlIdpSsoServiceUrl *string `json:"saml_idp_sso_service_url,omitempty"`
 
-			// SamlNameIdentifierFormat SAML name identifier format
+			// SamlNameIdentifierFormat SAML name identifier format. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
 			SamlNameIdentifierFormat *UpdateStatusPageDataAttributesSamlNameIdentifierFormat `json:"saml_name_identifier_format,omitempty"`
 
 			// SectionOrder Order of sections on the status page
@@ -72538,7 +72962,13 @@ type UpdateStatusPageDataAttributesIncidentHistoryWindow string
 // UpdateStatusPageDataAttributesPublicationStatus Publication status of the status page. Draft pages have never been published, active pages are live, and unpublished pages were taken down.
 type UpdateStatusPageDataAttributesPublicationStatus string
 
-// UpdateStatusPageDataAttributesSamlNameIdentifierFormat SAML name identifier format
+// UpdateStatusPageDataAttributesSamlAccessRulesOperator is_any_of matches attribute values; email_domain_is_any_of matches the domain of the signed-in email
+type UpdateStatusPageDataAttributesSamlAccessRulesOperator string
+
+// UpdateStatusPageDataAttributesSamlAccessRulesMatch Whether all rules or any rule must match
+type UpdateStatusPageDataAttributesSamlAccessRulesMatch string
+
+// UpdateStatusPageDataAttributesSamlNameIdentifierFormat SAML name identifier format. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
 type UpdateStatusPageDataAttributesSamlNameIdentifierFormat string
 
 // UpdateStatusPageDataAttributesSectionOrder defines model for UpdateStatusPage.Data.Attributes.SectionOrder.
@@ -72621,6 +73051,41 @@ type UpdateStatusPageComponentGroup struct {
 
 // UpdateStatusPageComponentGroupDataType defines model for UpdateStatusPageComponentGroup.Data.Type.
 type UpdateStatusPageComponentGroupDataType string
+
+// UpdateStatusPageSamlConfiguration defines model for update_status_page_saml_configuration.
+type UpdateStatusPageSamlConfiguration struct {
+	Data struct {
+		Attributes struct {
+			// IdpCert SAML IdP X.509 certificate in PEM format. Returned as [REDACTED].
+			IdpCert *string `json:"idp_cert,omitempty"`
+
+			// IdpEntityId SAML IdP entity ID (issuer)
+			IdpEntityId *string `json:"idp_entity_id,omitempty"`
+
+			// IdpSloServiceUrl SAML IdP SLO service URL
+			IdpSloServiceUrl *string `json:"idp_slo_service_url,omitempty"`
+
+			// IdpSsoServiceUrl SAML IdP SSO service URL
+			IdpSsoServiceUrl *string `json:"idp_sso_service_url,omitempty"`
+
+			// Name The name of the SAML configuration
+			Name *string `json:"name,omitempty"`
+
+			// NameIdentifierFormat SAML name identifier format
+			NameIdentifierFormat *UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormat `json:"name_identifier_format,omitempty"`
+		} `json:"attributes"`
+
+		// Id Accepted for JSON:API client compatibility, but ignored. The resource to update is identified by the id in the path.
+		Id   *string                                   `json:"id,omitempty"`
+		Type UpdateStatusPageSamlConfigurationDataType `json:"type"`
+	} `json:"data"`
+}
+
+// UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormat SAML name identifier format
+type UpdateStatusPageSamlConfigurationDataAttributesNameIdentifierFormat string
+
+// UpdateStatusPageSamlConfigurationDataType defines model for UpdateStatusPageSamlConfiguration.Data.Type.
+type UpdateStatusPageSamlConfigurationDataType string
 
 // UpdateStatusPageTeam defines model for update_status_page_team.
 type UpdateStatusPageTeam struct {
@@ -76814,6 +77279,16 @@ type ListSLAsParams struct {
 	Sort               *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
+// ListStatusPageSamlConfigurationsParams defines parameters for ListStatusPageSamlConfigurations.
+type ListStatusPageSamlConfigurationsParams struct {
+	PageNumber *int    `form:"page[number],omitempty" json:"page[number],omitempty"`
+	PageSize   *int    `form:"page[size],omitempty" json:"page[size],omitempty"`
+	FilterName *string `form:"filter[name],omitempty" json:"filter[name],omitempty"`
+
+	// Sort Sort by name, created_at or updated_at. Prefix with - for descending.
+	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
+}
+
 // ListStatusPagesParams defines parameters for ListStatusPages.
 type ListStatusPagesParams struct {
 	Include            *string `form:"include,omitempty" json:"include,omitempty"`
@@ -77802,6 +78277,12 @@ type UpdateSLAApplicationVndAPIPlusJSONRequestBody = UpdateSla
 
 // UpdateIncidentStatusPageApplicationVndAPIPlusJSONRequestBody defines body for UpdateIncidentStatusPage for application/vnd.api+json ContentType.
 type UpdateIncidentStatusPageApplicationVndAPIPlusJSONRequestBody = UpdateIncidentStatusPageEvent
+
+// CreateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody defines body for CreateStatusPageSamlConfiguration for application/vnd.api+json ContentType.
+type CreateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody = NewStatusPageSamlConfiguration
+
+// UpdateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody defines body for UpdateStatusPageSamlConfiguration for application/vnd.api+json ContentType.
+type UpdateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody = UpdateStatusPageSamlConfiguration
 
 // CreateStatusPageApplicationVndAPIPlusJSONRequestBody defines body for CreateStatusPage for application/vnd.api+json ContentType.
 type CreateStatusPageApplicationVndAPIPlusJSONRequestBody = NewStatusPage
@@ -95849,6 +96330,25 @@ type ClientInterface interface {
 
 	UpdateIncidentStatusPageWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateIncidentStatusPageApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListStatusPageSamlConfigurations request
+	ListStatusPageSamlConfigurations(ctx context.Context, params *ListStatusPageSamlConfigurationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateStatusPageSamlConfigurationWithBody request with any body
+	CreateStatusPageSamlConfigurationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateStatusPageSamlConfigurationWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteStatusPageSamlConfiguration request
+	DeleteStatusPageSamlConfiguration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetStatusPageSamlConfiguration request
+	GetStatusPageSamlConfiguration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateStatusPageSamlConfigurationWithBody request with any body
+	UpdateStatusPageSamlConfigurationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateStatusPageSamlConfigurationWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListStatusPages request
 	ListStatusPages(ctx context.Context, params *ListStatusPagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -105137,6 +105637,90 @@ func (c *Client) UpdateIncidentStatusPageWithBody(ctx context.Context, id string
 
 func (c *Client) UpdateIncidentStatusPageWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateIncidentStatusPageApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIncidentStatusPageRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListStatusPageSamlConfigurations(ctx context.Context, params *ListStatusPageSamlConfigurationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListStatusPageSamlConfigurationsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateStatusPageSamlConfigurationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateStatusPageSamlConfigurationRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateStatusPageSamlConfigurationWithApplicationVndAPIPlusJSONBody(ctx context.Context, body CreateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateStatusPageSamlConfigurationRequestWithApplicationVndAPIPlusJSONBody(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteStatusPageSamlConfiguration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteStatusPageSamlConfigurationRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetStatusPageSamlConfiguration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetStatusPageSamlConfigurationRequest(c.Server, id)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateStatusPageSamlConfigurationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateStatusPageSamlConfigurationRequestWithBody(c.Server, id, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateStatusPageSamlConfigurationWithApplicationVndAPIPlusJSONBody(ctx context.Context, id string, body UpdateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateStatusPageSamlConfigurationRequestWithApplicationVndAPIPlusJSONBody(c.Server, id, body)
 	if err != nil {
 		return nil, err
 	}
@@ -144912,6 +145496,251 @@ func NewUpdateIncidentStatusPageRequestWithBody(server string, id string, conten
 	return req, nil
 }
 
+// NewListStatusPageSamlConfigurationsRequest generates requests for ListStatusPageSamlConfigurations
+func NewListStatusPageSamlConfigurationsRequest(server string, params *ListStatusPageSamlConfigurationsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/status-page-saml-configurations")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageNumber != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[number]", *params.PageNumber, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page[size]", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FilterName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter[name]", *params.FilterName, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateStatusPageSamlConfigurationRequestWithApplicationVndAPIPlusJSONBody calls the generic CreateStatusPageSamlConfiguration builder with application/vnd.api+json body
+func NewCreateStatusPageSamlConfigurationRequestWithApplicationVndAPIPlusJSONBody(server string, body CreateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateStatusPageSamlConfigurationRequestWithBody(server, "application/vnd.api+json", bodyReader)
+}
+
+// NewCreateStatusPageSamlConfigurationRequestWithBody generates requests for CreateStatusPageSamlConfiguration with any type of body
+func NewCreateStatusPageSamlConfigurationRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/status-page-saml-configurations")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteStatusPageSamlConfigurationRequest generates requests for DeleteStatusPageSamlConfiguration
+func NewDeleteStatusPageSamlConfigurationRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/status-page-saml-configurations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetStatusPageSamlConfigurationRequest generates requests for GetStatusPageSamlConfiguration
+func NewGetStatusPageSamlConfigurationRequest(server string, id string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/status-page-saml-configurations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateStatusPageSamlConfigurationRequestWithApplicationVndAPIPlusJSONBody calls the generic UpdateStatusPageSamlConfiguration builder with application/vnd.api+json body
+func NewUpdateStatusPageSamlConfigurationRequestWithApplicationVndAPIPlusJSONBody(server string, id string, body UpdateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateStatusPageSamlConfigurationRequestWithBody(server, id, "application/vnd.api+json", bodyReader)
+}
+
+// NewUpdateStatusPageSamlConfigurationRequestWithBody generates requests for UpdateStatusPageSamlConfiguration with any type of body
+func NewUpdateStatusPageSamlConfigurationRequestWithBody(server string, id string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "id", id, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/status-page-saml-configurations/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListStatusPagesRequest generates requests for ListStatusPages
 func NewListStatusPagesRequest(server string, params *ListStatusPagesParams) (*http.Request, error) {
 	var err error
@@ -153243,6 +154072,25 @@ type ClientWithResponsesInterface interface {
 	UpdateIncidentStatusPageWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIncidentStatusPageResponse, error)
 
 	UpdateIncidentStatusPageWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateIncidentStatusPageApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIncidentStatusPageResponse, error)
+
+	// ListStatusPageSamlConfigurationsWithResponse request
+	ListStatusPageSamlConfigurationsWithResponse(ctx context.Context, params *ListStatusPageSamlConfigurationsParams, reqEditors ...RequestEditorFn) (*ListStatusPageSamlConfigurationsResponse, error)
+
+	// CreateStatusPageSamlConfigurationWithBodyWithResponse request with any body
+	CreateStatusPageSamlConfigurationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateStatusPageSamlConfigurationResponse, error)
+
+	CreateStatusPageSamlConfigurationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateStatusPageSamlConfigurationResponse, error)
+
+	// DeleteStatusPageSamlConfigurationWithResponse request
+	DeleteStatusPageSamlConfigurationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteStatusPageSamlConfigurationResponse, error)
+
+	// GetStatusPageSamlConfigurationWithResponse request
+	GetStatusPageSamlConfigurationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetStatusPageSamlConfigurationResponse, error)
+
+	// UpdateStatusPageSamlConfigurationWithBodyWithResponse request with any body
+	UpdateStatusPageSamlConfigurationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateStatusPageSamlConfigurationResponse, error)
+
+	UpdateStatusPageSamlConfigurationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateStatusPageSamlConfigurationResponse, error)
 
 	// ListStatusPagesWithResponse request
 	ListStatusPagesWithResponse(ctx context.Context, params *ListStatusPagesParams, reqEditors ...RequestEditorFn) (*ListStatusPagesResponse, error)
@@ -170380,6 +171228,162 @@ func (r UpdateIncidentStatusPageResponse) ContentType() string {
 	return ""
 }
 
+type ListStatusPageSamlConfigurationsResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *StatusPageSamlConfigurationList
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r ListStatusPageSamlConfigurationsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListStatusPageSamlConfigurationsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListStatusPageSamlConfigurationsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CreateStatusPageSamlConfigurationResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON201 *StatusPageSamlConfigurationResponse
+	ApplicationvndApiJSON403 *ErrorsList
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateStatusPageSamlConfigurationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateStatusPageSamlConfigurationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateStatusPageSamlConfigurationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DeleteStatusPageSamlConfigurationResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *StatusPageSamlConfigurationResponse
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteStatusPageSamlConfigurationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteStatusPageSamlConfigurationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DeleteStatusPageSamlConfigurationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetStatusPageSamlConfigurationResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *StatusPageSamlConfigurationResponse
+	ApplicationvndApiJSON404 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetStatusPageSamlConfigurationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetStatusPageSamlConfigurationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetStatusPageSamlConfigurationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateStatusPageSamlConfigurationResponse struct {
+	Body                     []byte
+	HTTPResponse             *http.Response
+	ApplicationvndApiJSON200 *StatusPageSamlConfigurationResponse
+	ApplicationvndApiJSON422 *ErrorsList
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateStatusPageSamlConfigurationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateStatusPageSamlConfigurationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateStatusPageSamlConfigurationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ListStatusPagesResponse struct {
 	Body                     []byte
 	HTTPResponse             *http.Response
@@ -179774,6 +180778,67 @@ func (c *ClientWithResponses) UpdateIncidentStatusPageWithApplicationVndAPIPlusJ
 		return nil, err
 	}
 	return ParseUpdateIncidentStatusPageResponse(rsp)
+}
+
+// ListStatusPageSamlConfigurationsWithResponse request returning *ListStatusPageSamlConfigurationsResponse
+func (c *ClientWithResponses) ListStatusPageSamlConfigurationsWithResponse(ctx context.Context, params *ListStatusPageSamlConfigurationsParams, reqEditors ...RequestEditorFn) (*ListStatusPageSamlConfigurationsResponse, error) {
+	rsp, err := c.ListStatusPageSamlConfigurations(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListStatusPageSamlConfigurationsResponse(rsp)
+}
+
+// CreateStatusPageSamlConfigurationWithBodyWithResponse request with arbitrary body returning *CreateStatusPageSamlConfigurationResponse
+func (c *ClientWithResponses) CreateStatusPageSamlConfigurationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateStatusPageSamlConfigurationResponse, error) {
+	rsp, err := c.CreateStatusPageSamlConfigurationWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateStatusPageSamlConfigurationResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateStatusPageSamlConfigurationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, body CreateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateStatusPageSamlConfigurationResponse, error) {
+	rsp, err := c.CreateStatusPageSamlConfigurationWithApplicationVndAPIPlusJSONBody(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateStatusPageSamlConfigurationResponse(rsp)
+}
+
+// DeleteStatusPageSamlConfigurationWithResponse request returning *DeleteStatusPageSamlConfigurationResponse
+func (c *ClientWithResponses) DeleteStatusPageSamlConfigurationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteStatusPageSamlConfigurationResponse, error) {
+	rsp, err := c.DeleteStatusPageSamlConfiguration(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteStatusPageSamlConfigurationResponse(rsp)
+}
+
+// GetStatusPageSamlConfigurationWithResponse request returning *GetStatusPageSamlConfigurationResponse
+func (c *ClientWithResponses) GetStatusPageSamlConfigurationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetStatusPageSamlConfigurationResponse, error) {
+	rsp, err := c.GetStatusPageSamlConfiguration(ctx, id, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetStatusPageSamlConfigurationResponse(rsp)
+}
+
+// UpdateStatusPageSamlConfigurationWithBodyWithResponse request with arbitrary body returning *UpdateStatusPageSamlConfigurationResponse
+func (c *ClientWithResponses) UpdateStatusPageSamlConfigurationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateStatusPageSamlConfigurationResponse, error) {
+	rsp, err := c.UpdateStatusPageSamlConfigurationWithBody(ctx, id, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateStatusPageSamlConfigurationResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateStatusPageSamlConfigurationWithApplicationVndAPIPlusJSONBodyWithResponse(ctx context.Context, id string, body UpdateStatusPageSamlConfigurationApplicationVndAPIPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateStatusPageSamlConfigurationResponse, error) {
+	rsp, err := c.UpdateStatusPageSamlConfigurationWithApplicationVndAPIPlusJSONBody(ctx, id, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateStatusPageSamlConfigurationResponse(rsp)
 }
 
 // ListStatusPagesWithResponse request returning *ListStatusPagesResponse
@@ -198733,6 +199798,178 @@ func ParseUpdateIncidentStatusPageResponse(rsp *http.Response) (*UpdateIncidentS
 			return nil, err
 		}
 		response.ApplicationvndApiJSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListStatusPageSamlConfigurationsResponse parses an HTTP response from a ListStatusPageSamlConfigurationsWithResponse call
+func ParseListStatusPageSamlConfigurationsResponse(rsp *http.Response) (*ListStatusPageSamlConfigurationsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListStatusPageSamlConfigurationsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest StatusPageSamlConfigurationList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateStatusPageSamlConfigurationResponse parses an HTTP response from a CreateStatusPageSamlConfigurationWithResponse call
+func ParseCreateStatusPageSamlConfigurationResponse(rsp *http.Response) (*CreateStatusPageSamlConfigurationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateStatusPageSamlConfigurationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest StatusPageSamlConfigurationResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteStatusPageSamlConfigurationResponse parses an HTTP response from a DeleteStatusPageSamlConfigurationWithResponse call
+func ParseDeleteStatusPageSamlConfigurationResponse(rsp *http.Response) (*DeleteStatusPageSamlConfigurationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteStatusPageSamlConfigurationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest StatusPageSamlConfigurationResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetStatusPageSamlConfigurationResponse parses an HTTP response from a GetStatusPageSamlConfigurationWithResponse call
+func ParseGetStatusPageSamlConfigurationResponse(rsp *http.Response) (*GetStatusPageSamlConfigurationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetStatusPageSamlConfigurationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest StatusPageSamlConfigurationResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ErrorsList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateStatusPageSamlConfigurationResponse parses an HTTP response from a UpdateStatusPageSamlConfigurationWithResponse call
+func ParseUpdateStatusPageSamlConfigurationResponse(rsp *http.Response) (*UpdateStatusPageSamlConfigurationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateStatusPageSamlConfigurationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest StatusPageSamlConfigurationResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.ApplicationvndApiJSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
 		var dest ErrorsList
