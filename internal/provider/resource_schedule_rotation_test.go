@@ -1,6 +1,7 @@
 package provider
 
 import (
+	"context"
 	"fmt"
 	"regexp"
 	"testing"
@@ -9,7 +10,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/knownvalue"
 	"github.com/hashicorp/terraform-plugin-testing/statecheck"
 	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
+	supertypes "github.com/orange-cloudavenue/terraform-plugin-framework-supertypes"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/acctest"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/apiclient"
+	"github.com/stretchr/testify/require"
 )
 
 func TestAccResourceScheduleRotation_Validation(t *testing.T) {
@@ -396,4 +400,27 @@ resource "rootly_schedule_rotation" "test" {
 	}
 }
 `, name, extras)
+}
+
+// After import, state has no members yet; FromApi must still read them from the API.
+func TestResourceScheduleRotation_FromApiReadsMembersAfterImport(t *testing.T) {
+	t.Parallel()
+	ctx := context.Background()
+
+	m := ScheduleRotationResourceModel{
+		ScheduleRotationMembers: supertypes.NewSetNestedObjectValueOfNull[ScheduleRotationResourceScheduleRotationMemberModel](ctx),
+	}
+
+	diags := m.FromApi(ctx, apiclient.ScheduleRotation{
+		ID: "rotation-id",
+		ScheduleRotationMembers: []apiclient.ScheduleRotationMember{
+			{MemberType: "User", MemberID: "1", Position: 1},
+			{MemberType: "User", MemberID: "2", Position: 2},
+		},
+	})
+	require.False(t, diags.HasError(), diags)
+
+	members, diags := m.ScheduleRotationMembers.Get(ctx)
+	require.False(t, diags.HasError(), diags)
+	require.Len(t, members, 2)
 }
