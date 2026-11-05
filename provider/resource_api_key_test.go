@@ -44,6 +44,7 @@ func TestAccResourceApiKeyTeamScoped(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_api_key.test", "name", rName),
 					resource.TestCheckResourceAttr("rootly_api_key.test", "kind", "team"),
 					resource.TestCheckResourceAttrPair("rootly_api_key.test", "group_id", "rootly_team.first", "id"),
+					resource.TestCheckResourceAttrSet("rootly_api_key.test", "token"),
 					testAccCaptureResourceID("rootly_api_key.test", &firstID),
 				),
 			},
@@ -51,6 +52,8 @@ func TestAccResourceApiKeyTeamScoped(t *testing.T) {
 				ResourceName:      "rootly_api_key.test",
 				ImportState:       true,
 				ImportStateVerify: true,
+				// The token is only returned on create, never on read.
+				ImportStateVerifyIgnore: []string{"token"},
 			},
 			{
 				Config: testAccResourceApiKeyTeamScopedConfig(rName, expiresAt, "second"),

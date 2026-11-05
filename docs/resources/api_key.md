@@ -50,6 +50,7 @@ resource "rootly_api_key" "payments_team" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `token` (String, Sensitive) The API key token. Only returned by the API when the key is created, so it is empty for imported keys.
 
 ## Import
 

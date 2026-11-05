@@ -21,6 +21,7 @@ type ApiKey struct {
 	ExpiresAt         string `jsonapi:"attr,expires_at,omitempty"`
 	LastUsedAt        string `jsonapi:"attr,last_used_at,omitempty"`
 	GracePeriodEndsAt string `jsonapi:"attr,grace_period_ends_at,omitempty"`
+	Token             string `jsonapi:"attr,token,omitempty"`
 }
 
 func (c *Client) ListApiKeys(params *rootlygo.ListApiKeysParams) ([]interface{}, error) {
