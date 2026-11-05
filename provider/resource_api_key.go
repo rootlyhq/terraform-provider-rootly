@@ -125,6 +125,17 @@ func resourceApiKey() *schema.Resource {
 				WriteOnly:   false,
 				Description: "Grace period end date",
 			},
+
+			"token": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    false,
+				Sensitive:   true,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The API key token. Only returned by the API when the key is created, so it is empty for imported keys.",
+			},
 		},
 	}
 }
@@ -171,6 +182,7 @@ func resourceApiKeyCreate(ctx context.Context, d *schema.ResourceData, meta inte
 
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created a api_key resource: %s", d.Id()))
+	d.Set("token", res.Token)
 
 	return resourceApiKeyRead(ctx, d, meta)
 }
