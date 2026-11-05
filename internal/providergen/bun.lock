@@ -15,7 +15,7 @@
         "openapi3-ts": "4.6.2",
       },
       "peerDependencies": {
-        "typescript": "^5",
+        "typescript": "^5 || ^7.0.0",
       },
     },
   },
