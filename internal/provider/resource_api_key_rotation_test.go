@@ -27,6 +27,10 @@ import (
 )
 
 func TestAccResourceApiKeyRotation_Basic(t *testing.T) {
+	if os.Getenv("ROOTLY_ACC_API_KEY_ROTATION") == "" {
+		t.Skip("Skipped: CI uses a service account token which cannot create personal API keys; set ROOTLY_ACC_API_KEY_ROTATION=1 to run")
+	}
+
 	addr := "rootly_api_key_rotation.test"
 
 	// The resource can only rotate the API key the provider is authenticated with. Rotate a throwaway key instead of
