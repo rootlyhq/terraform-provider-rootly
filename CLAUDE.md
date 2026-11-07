@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Build and Development
 - `make build` - Complete build process: generates code from OpenAPI schema, compiles provider, and regenerates docs
-- `make generate` - Downloads Rootly OpenAPI schema and auto-generates client code and provider resources
+- `make codegen` - Downloads Rootly OpenAPI schema and auto-generates client code and provider resources
 - `make docs` - Regenerates Terraform documentation from provider schemas
 - `make test` - Run unit tests
 - `make testacc` - Run acceptance tests (requires `TF_ACC=1` environment variable)
@@ -37,7 +37,7 @@ provider_installation {
 ### Code Generation System
 This provider is heavily auto-generated from Rootly's OpenAPI schema:
 
-1. **Schema Download**: `make generate` fetches the latest OpenAPI spec from Rootly's S3 bucket
+1. **Schema Download**: `make codegen` fetches the latest OpenAPI spec from Rootly's S3 bucket
 2. **Schema Processing**: `tools/clean-swagger.js` cleans the schema, `tools/generate.js` orchestrates generation
 3. **Client Generation**: Uses `oapi-codegen` to generate Go client code in `schema/` directory
 4. **Provider Generation**: Auto-generates data sources and resources in `provider/` directory
@@ -85,7 +85,7 @@ These flags are added to OpenAPI schema properties and processed by `tools/gener
 ## Development Workflow
 
 1. **Adding New Resources**: Most resources are auto-generated. Add exclusions in `tools/generate.js` only if manual implementation is needed.
-2. **Schema Updates**: Run `make generate` to pull latest OpenAPI schema and regenerate all code.
+2. **Schema Updates**: Run `make codegen` to pull latest OpenAPI schema and regenerate all code. Rerun it only once the schema change you rely on (e.g. `rootly_api_key.token`) is published in `swagger.tf.json`, or generated fields that exist only in the new schema are dropped.
 3. **Documentation Updates**: Run `make docs` after any provider schema changes.
 4. **Testing**: Always run `make testacc` before submitting changes. Tests require valid Rootly API credentials.
 5. **Local Testing**: Use the local installation process above to test provider changes against real Terraform configurations.
