@@ -52,6 +52,11 @@ resource "rootly_api_key" "payments_team" {
 - `id` (String) The ID of this resource.
 - `token` (String, Sensitive) The API key token. Only returned by the API when the key is created, so it is empty for imported keys.
 
+## Security considerations
+
+- The `token` is stored in the Terraform state as plain text. Marking it sensitive only hides it from CLI output, so protect the state with an encrypted remote backend and restricted access.
+- The token is only returned by the API when the key is created. If the key is rotated outside Terraform (for example with the `rotate_api_key` endpoint), the `token` stored in state goes stale and Terraform does not detect it. Imported keys have an empty `token`.
+
 ## Import
 
 rootly_api_key can be imported using the [`import` command](https://developer.hashicorp.com/terraform/cli/commands/import).
