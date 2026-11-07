@@ -27,16 +27,6 @@ const generateWorkflowTaskResources = require("./generate-tasks");
 const v2MigrationUtils = require("./v2-migration-utils");
 const swagger = v2MigrationUtils.SchemaMods.reduce((schema, mod) => mod(schema), require(path.resolve(swaggerPath)));
 
-// The create response (api_key_with_token_response) carries the token, but the
-// api_key schema does not. Expose it as a sensitive, computed, create-only-read attribute.
-swagger.components.schemas.api_key.properties.token = {
-  type: "string",
-  description: "The API key token. Only returned by the API when the key is created, so it is empty for imported keys.",
-  tf_computed: true,
-  tf_sensitive: true,
-  tf_create_response_only: true,
-};
-
 const excluded = {
   dataSources: [
     "alert",
