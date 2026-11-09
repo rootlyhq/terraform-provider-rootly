@@ -10,12 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourcePlaybook() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourcePlaybookCreate,
 		ReadContext:   resourcePlaybookRead,
 		UpdateContext: resourcePlaybookUpdate,
@@ -45,6 +48,29 @@ func resourcePlaybook() *schema.Resource {
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "The summary of the playbook",
+			},
+
+			"kind": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Whether the playbook body lives in Rootly (`internal_document`) or at an external link (`external_url`).. Value must be one of `internal_document`, `external_url`.",
+				ValidateFunc: validation.StringInSlice([]string{"internal_document", "external_url"}, false),
+			},
+
+			"content": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Sanitized HTML instructions. Still returned when `kind` is `external_url`, where the body may be stale — branch on `kind`, not on `content` being present.",
 			},
 
 			"external_url": &schema.Schema{
@@ -147,6 +173,21 @@ func resourcePlaybook() *schema.Resource {
 				WriteOnly:        false,
 				Description:      "The Incident Type IDs to attach to the incident",
 			},
+
+			"cause_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "The Cause IDs to attach to the incident",
+			},
 		},
 	}
 }
@@ -163,6 +204,12 @@ func resourcePlaybookCreate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if value, ok := d.GetOkExists("summary"); ok {
 		s.Summary = value.(string)
+	}
+	if value, ok := d.GetOkExists("kind"); ok {
+		s.Kind = value.(string)
+	}
+	if value, ok := d.GetOkExists("content"); ok {
+		s.Content = value.(string)
 	}
 	if value, ok := d.GetOkExists("external_url"); ok {
 		s.ExternalUrl = value.(string)
@@ -184,6 +231,9 @@ func resourcePlaybookCreate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if value, ok := d.GetOkExists("incident_type_ids"); ok {
 		s.IncidentTypeIds = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("cause_ids"); ok {
+		s.CauseIds = value.([]interface{})
 	}
 
 	res, err := c.CreatePlaybook(s)
@@ -216,6 +266,8 @@ func resourcePlaybookRead(ctx context.Context, d *schema.ResourceData, meta inte
 
 	d.Set("title", item.Title)
 	d.Set("summary", item.Summary)
+	d.Set("kind", item.Kind)
+	d.Set("content", item.Content)
 	d.Set("external_url", item.ExternalUrl)
 	d.Set("severity_ids", item.SeverityIds)
 	d.Set("environment_ids", item.EnvironmentIds)
@@ -223,6 +275,7 @@ func resourcePlaybookRead(ctx context.Context, d *schema.ResourceData, meta inte
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("group_ids", item.GroupIds)
 	d.Set("incident_type_ids", item.IncidentTypeIds)
+	d.Set("cause_ids", item.CauseIds)
 
 	return nil
 }
@@ -238,6 +291,12 @@ func resourcePlaybookUpdate(ctx context.Context, d *schema.ResourceData, meta in
 	}
 	if d.HasChange("summary") {
 		s.Summary = d.Get("summary").(string)
+	}
+	if d.HasChange("kind") {
+		s.Kind = d.Get("kind").(string)
+	}
+	if d.HasChange("content") {
+		s.Content = d.Get("content").(string)
 	}
 	if d.HasChange("external_url") {
 		s.ExternalUrl = d.Get("external_url").(string)
@@ -288,6 +347,14 @@ func resourcePlaybookUpdate(ctx context.Context, d *schema.ResourceData, meta in
 			s.IncidentTypeIds = value.([]interface{})
 		} else {
 			s.IncidentTypeIds = []interface{}{}
+		}
+	}
+
+	if d.HasChange("cause_ids") {
+		if value, ok := d.GetOk("cause_ids"); value != nil && ok {
+			s.CauseIds = value.([]interface{})
+		} else {
+			s.CauseIds = []interface{}{}
 		}
 	}
 

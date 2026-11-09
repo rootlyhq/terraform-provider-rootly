@@ -13,11 +13,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceHeartbeat() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceHeartbeatCreate,
 		ReadContext:   resourceHeartbeatRead,
 		UpdateContext: resourceHeartbeatUpdate,
@@ -143,6 +145,17 @@ func resourceHeartbeat() *schema.Resource {
 				Description:      "List of team IDs that own this heartbeat",
 			},
 
+			"attach_owner_groups_to_alerts": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Whether to attach this heartbeat's owning teams to the alerts it creates. Attached teams are not paged.. Value must be one of true or false",
+			},
+
 			"enabled": &schema.Schema{
 				Type:      schema.TypeBool,
 				Default:   true,
@@ -170,7 +183,7 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    false,
-				Sensitive:   false,
+				Sensitive:   true,
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "URL to receive heartbeat pings.",
@@ -181,7 +194,7 @@ func resourceHeartbeat() *schema.Resource {
 				Computed:    true,
 				Required:    false,
 				Optional:    false,
-				Sensitive:   false,
+				Sensitive:   true,
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "Secret used as bearer token when pinging heartbeat.",
@@ -260,6 +273,9 @@ func resourceHeartbeatCreate(ctx context.Context, d *schema.ResourceData, meta i
 	if value, ok := d.GetOkExists("owner_group_ids"); ok {
 		s.OwnerGroupIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("attach_owner_groups_to_alerts"); ok {
+		s.AttachOwnerGroupsToAlerts = tools.Bool(value.(bool))
+	}
 	if value, ok := d.GetOkExists("enabled"); ok {
 		s.Enabled = tools.Bool(value.(bool))
 	}
@@ -314,6 +330,7 @@ func resourceHeartbeatRead(ctx context.Context, d *schema.ResourceData, meta int
 	d.Set("notification_target_id", item.NotificationTargetId)
 	d.Set("notification_target_type", item.NotificationTargetType)
 	d.Set("owner_group_ids", item.OwnerGroupIds)
+	d.Set("attach_owner_groups_to_alerts", item.AttachOwnerGroupsToAlerts)
 	d.Set("enabled", item.Enabled)
 	d.Set("status", item.Status)
 	d.Set("ping_url", item.PingUrl)
@@ -367,6 +384,9 @@ func resourceHeartbeatUpdate(ctx context.Context, d *schema.ResourceData, meta i
 		}
 	}
 
+	if d.HasChange("attach_owner_groups_to_alerts") {
+		s.AttachOwnerGroupsToAlerts = tools.Bool(d.Get("attach_owner_groups_to_alerts").(bool))
+	}
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
 	}

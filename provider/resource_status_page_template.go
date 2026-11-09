@@ -12,11 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceStatusPageTemplate() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceStatusPageTemplateCreate,
 		ReadContext:   resourceStatusPageTemplateRead,
 		UpdateContext: resourceStatusPageTemplateUpdate,
@@ -71,14 +73,15 @@ func resourceStatusPageTemplate() *schema.Resource {
 			},
 
 			"update_status": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Required:    false,
-				Optional:    true,
-				Sensitive:   false,
-				ForceNew:    false,
-				WriteOnly:   false,
-				Description: "Status of the event the template will populate",
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Status of the event the template will populate. Allowed values depend on the team's feature flags. Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `planning`, `scheduled`, `in_progress`, `verifying`, `completed`, `cancelled`.",
+				ValidateFunc: validation.StringInSlice([]string{"investigating", "identified", "monitoring", "resolved", "planning", "scheduled", "in_progress", "verifying", "completed", "cancelled"}, false),
 			},
 
 			"kind": &schema.Schema{

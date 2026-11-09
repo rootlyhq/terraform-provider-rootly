@@ -41,7 +41,7 @@ resource "rootly_status_page_component" "database" {
 ### Optional
 
 - `description` (String) Description of the component (derived from the source for catalog-backed components)
-- `name` (String) Name of the component (derived from the source for catalog-backed components)
+- `name` (String) Name of the component. Returns the component's own name when set, otherwise the source's public name, otherwise the source's name
 - `position` (Number) Position of the component
 - `source_id` (String) ID of the catalog source backing the component (null for ad-hoc components)
 - `source_type` (String) Catalog source type backing the component (null for ad-hoc components)

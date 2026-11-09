@@ -12,11 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceFormFieldPlacementCondition() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceFormFieldPlacementConditionCreate,
 		ReadContext:   resourceFormFieldPlacementConditionRead,
 		UpdateContext: resourceFormFieldPlacementConditionUpdate,
@@ -35,6 +37,17 @@ func resourceFormFieldPlacementCondition() *schema.Resource {
 				ForceNew:    true,
 				WriteOnly:   false,
 				Description: "The form field placement this condition applies.",
+			},
+
+			"condition_group_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The condition group this condition belongs to.",
 			},
 
 			"conditioned": &schema.Schema{
@@ -111,6 +124,9 @@ func resourceFormFieldPlacementConditionCreate(ctx context.Context, d *schema.Re
 	if value, ok := d.GetOkExists("form_field_placement_id"); ok {
 		s.FormFieldPlacementId = value.(string)
 	}
+	if value, ok := d.GetOkExists("condition_group_id"); ok {
+		s.ConditionGroupId = value.(string)
+	}
 	if value, ok := d.GetOkExists("conditioned"); ok {
 		s.Conditioned = value.(string)
 	}
@@ -156,6 +172,7 @@ func resourceFormFieldPlacementConditionRead(ctx context.Context, d *schema.Reso
 	}
 
 	d.Set("form_field_placement_id", item.FormFieldPlacementId)
+	d.Set("condition_group_id", item.ConditionGroupId)
 	d.Set("conditioned", item.Conditioned)
 	d.Set("position", item.Position)
 	d.Set("form_field_id", item.FormFieldId)
@@ -173,6 +190,9 @@ func resourceFormFieldPlacementConditionUpdate(ctx context.Context, d *schema.Re
 
 	if d.HasChange("form_field_placement_id") {
 		s.FormFieldPlacementId = d.Get("form_field_placement_id").(string)
+	}
+	if d.HasChange("condition_group_id") {
+		s.ConditionGroupId = d.Get("condition_group_id").(string)
 	}
 	if d.HasChange("conditioned") {
 		s.Conditioned = d.Get("conditioned").(string)

@@ -106,6 +106,42 @@ resource "rootly_alert_route" "production_route" {
   }
 
   rules {
+    name = "Owning Service Route"
+    destinations {
+      target_type  = "dynamic"
+      catalog_type = "Service"
+      match_keys {
+        property_ref = "builtin:name"
+        source_kind  = "payload"
+        source_ref   = "$.service"
+      }
+    }
+    condition_groups {
+      position = 1
+      conditions {
+        property_field_type           = "payload"
+        property_field_name           = "$.environment"
+        property_field_condition_type = "is_one_of"
+        property_field_values         = ["production"]
+      }
+    }
+  }
+
+  rules {
+    name       = "Ignore Test Alerts"
+    non_paging = true
+    condition_groups {
+      position = 1
+      conditions {
+        property_field_type           = "payload"
+        property_field_name           = "$.environment"
+        property_field_condition_type = "is_one_of"
+        property_field_values         = ["test"]
+      }
+    }
+  }
+
+  rules {
     destinations {
       target_type = "EscalationPolicy"
       target_id   = rootly_escalation_policy.production_ep.id
@@ -142,6 +178,7 @@ Optional:
 - `destinations` (Block List) (see [below for nested schema](#nestedblock--rules--destinations))
 - `fallback_rule` (Boolean) Whether this is a fallback rule. Must be `true` if `condition_groups` is not specified.
 - `name` (String) The name of the alert routing rule. Rootly names a fallback rule `Fallback Rule for <route name>` and ignores this value, so a different `name` on a fallback rule is not treated as a change.
+- `non_paging` (Boolean) Whether alerts matching this rule are left unpaged. A non-paging rule takes no destinations. Only available when dynamic alert routing is enabled for the organization.
 - `position` (Number) The position of the alert routing rule for ordering evaluation
 
 <a id="nestedblock--rules--condition_groups"></a>
@@ -173,8 +210,20 @@ Optional:
 
 Optional:
 
-- `target_id` (String) The ID of the target
-- `target_type` (String) The type of the target. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`.
+- `catalog_id` (String) Dynamic destinations only. The custom catalog's ID when `catalog_type` is `CatalogEntity`.
+- `catalog_type` (String) Dynamic destinations only. The catalog the matched entity belongs to: `CatalogEntity` for a custom catalog. Value must be one of `Service`, `Group`, `Functionality`, `CatalogEntity`.
+- `match_keys` (Block List, Max: 1) Dynamic destinations only. How an alert value is matched to a catalog entity property. (see [below for nested schema](#nestedblock--rules--destinations--match_keys))
+- `target_id` (String) The ID of the target. Required for every `target_type` except `dynamic`.
+- `target_type` (String) The type of the target. `CatalogEntity` pages the escalation policy of a custom catalog entity. `dynamic` pages the escalation policy of the catalog entity matched from the alert and takes `catalog_type`, `catalog_id` and `match_keys` instead of `target_id`. `CatalogEntity` and `dynamic` are only available when dynamic alert routing is enabled for the organization. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`, `CatalogEntity`, `dynamic`.
+
+<a id="nestedblock--rules--destinations--match_keys"></a>
+### Nested Schema for `rules.destinations.match_keys`
+
+Required:
+
+- `property_ref` (String) The catalog property to match: `builtin:<name>` (for example `builtin:name` or `builtin:external_id`) or the ID of a text catalog field.
+- `source_kind` (String) Where the alert value comes from. Value must be one of `payload`, `attribute`, `alert_field`.
+- `source_ref` (String) A JSONPath into the payload for `payload`, an alert attribute name for `attribute`, or an alert field ID for `alert_field`.
 
 ## Import
 

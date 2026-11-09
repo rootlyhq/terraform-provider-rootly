@@ -15,6 +15,7 @@ import (
 
 func resourceRetrospectiveProcessGroupStep() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceRetrospectiveProcessGroupStepCreate,
 		ReadContext:   resourceRetrospectiveProcessGroupStepRead,
 		UpdateContext: resourceRetrospectiveProcessGroupStepUpdate,

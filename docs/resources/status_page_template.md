@@ -26,7 +26,7 @@ description: |-
 - `kind` (String) The kind of the status page template. Value must be one of `normal`, `scheduled`.
 - `position` (Number) Position of the workflow task
 - `should_notify_subscribers` (Boolean) Controls if incident subscribers should be notified. Value must be one of true or false
-- `update_status` (String) Status of the event the template will populate
+- `update_status` (String) Status of the event the template will populate. Allowed values depend on the team's feature flags. Value must be one of `investigating`, `identified`, `monitoring`, `resolved`, `planning`, `scheduled`, `in_progress`, `verifying`, `completed`, `cancelled`.
 - `update_title` (String) Title that will be used for the status page update
 
 ### Read-Only

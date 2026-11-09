@@ -114,6 +114,16 @@ func resourceWorkflowTaskCreateGoogleDocsPage() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
+						"document_mode": &schema.Schema{
+							Description: "Page setup for the Google Doc. pageless makes the doc pageless; pages leaves the page setup unchanged unless the Google Doc template is pageless. Value must be one of `pages`, `pageless`.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "pages",
+							ValidateFunc: validation.StringInSlice([]string{
+								"pages",
+								"pageless",
+							}, false),
+						},
 						"permissions": &schema.Schema{
 							Description: "Page permissions JSON",
 							Type:        schema.TypeString,

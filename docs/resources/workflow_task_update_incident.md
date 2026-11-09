@@ -40,6 +40,7 @@ Required:
 Optional:
 
 - `acknowledged_at` (String)
+- `append_associations` (Boolean) When true, the configured services, functionalities, environments, groups and incident types are added to the incident's existing ones instead of replacing them. Value must be one of true or false
 - `attribute_to_query_by` (String) Value must be one of `id`, `slug`, `sequential_id`, `pagerduty_incident_id`, `opsgenie_incident_id`, `victor_ops_incident_id`, `jira_issue_id`, `asana_task_id`, `shortcut_task_id`, `linear_issue_id`, `zendesk_ticket_id`, `motion_task_id`, `trello_card_id`, `airtable_record_id`, `shortcut_story_id`, `github_issue_id`, `gitlab_issue_id`, `freshservice_ticket_id`, `freshservice_task_id`, `clickup_task_id`.
 - `custom_fields_mapping` (String) Custom field mappings. Can contain liquid markup and need to be valid JSON. Use 'services', 'functionalities', or 'groups' keys with arrays of names/slugs for name/slug lookup
 - `detected_at` (String)

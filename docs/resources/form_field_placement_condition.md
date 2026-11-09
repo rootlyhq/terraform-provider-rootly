@@ -23,6 +23,7 @@ description: |-
 ### Optional
 
 - `comparison` (String) The condition comparison.. Value must be one of `equal`, `not_equal`, `is_set`, `is_not_set`.
+- `condition_group_id` (String) The condition group this condition belongs to.
 - `conditioned` (String) The resource or attribute the condition applies.. Value must be one of `placement`, `required`.
 - `position` (Number) The condition position.
 

@@ -15,6 +15,7 @@ import (
 
 func resourceIncidentSubStatus() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceIncidentSubStatusCreate,
 		ReadContext:   resourceIncidentSubStatusRead,
 		UpdateContext: resourceIncidentSubStatusUpdate,

@@ -68,7 +68,7 @@ func (c *Client) CreateAlertRoute(d *AlertRoute) (*AlertRoute, error) {
 }
 
 func (c *Client) GetAlertRoute(id string) (*AlertRoute, error) {
-	req, err := rootlygo.NewGetAlertRouteRequest(c.Rootly.Server, id)
+	req, err := rootlygo.NewGetAlertRouteRequest(c.Rootly.Server, id, nil)
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}

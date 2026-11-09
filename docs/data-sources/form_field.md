@@ -26,6 +26,7 @@ data "rootly_form_field" "my-form-field" {
 - `enabled` (Boolean)
 - `kind` (String)
 - `name` (String)
+- `resource_type` (String)
 - `slug` (String)
 
 ### Read-Only

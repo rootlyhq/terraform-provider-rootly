@@ -38,6 +38,7 @@ resource "rootly_heartbeat" "nightly_backup" {
 
 - `alert_description` (String) Description of alerts triggered when heartbeat expires.
 - `alert_urgency_id` (String) Urgency of alerts triggered when heartbeat expires.
+- `attach_owner_groups_to_alerts` (Boolean) Whether to attach this heartbeat's owning teams to the alerts it creates. Attached teams are not paged.. Value must be one of true or false
 - `description` (String) The description of the heartbeat
 - `email_address` (String) Email address to receive heartbeat pings.
 - `enabled` (Boolean)
@@ -51,8 +52,8 @@ resource "rootly_heartbeat" "nightly_backup" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-- `ping_url` (String) URL to receive heartbeat pings.
-- `secret` (String) Secret used as bearer token when pinging heartbeat.
+- `ping_url` (String, Sensitive) URL to receive heartbeat pings.
+- `secret` (String, Sensitive) Secret used as bearer token when pinging heartbeat.
 
 ## Import
 

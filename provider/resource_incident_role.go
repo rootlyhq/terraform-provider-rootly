@@ -12,11 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceIncidentRole() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceIncidentRoleCreate,
 		ReadContext:   resourceIncidentRoleRead,
 		UpdateContext: resourceIncidentRoleUpdate,

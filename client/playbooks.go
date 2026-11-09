@@ -14,6 +14,8 @@ type Playbook struct {
 	ID               string        `jsonapi:"primary,playbooks"`
 	Title            string        `jsonapi:"attr,title,omitempty"`
 	Summary          string        `jsonapi:"attr,summary,omitempty"`
+	Kind             string        `jsonapi:"attr,kind,omitempty"`
+	Content          string        `jsonapi:"attr,content,omitempty"`
 	ExternalUrl      string        `jsonapi:"attr,external_url,omitempty"`
 	SeverityIds      []interface{} `jsonapi:"attr,severity_ids,omitempty"`
 	EnvironmentIds   []interface{} `jsonapi:"attr,environment_ids,omitempty"`
@@ -21,6 +23,7 @@ type Playbook struct {
 	ServiceIds       []interface{} `jsonapi:"attr,service_ids,omitempty"`
 	GroupIds         []interface{} `jsonapi:"attr,group_ids,omitempty"`
 	IncidentTypeIds  []interface{} `jsonapi:"attr,incident_type_ids,omitempty"`
+	CauseIds         []interface{} `jsonapi:"attr,cause_ids,omitempty"`
 }
 
 func (c *Client) ListPlaybooks(params *rootlygo.ListPlaybooksParams) ([]interface{}, error) {

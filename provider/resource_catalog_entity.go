@@ -12,11 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceCatalogEntity() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceCatalogEntityCreate,
 		ReadContext:   resourceCatalogEntityRead,
 		UpdateContext: resourceCatalogEntityUpdate,
@@ -72,6 +74,17 @@ func resourceCatalogEntity() *schema.Resource {
 				Description: "The status page description of the catalog entity",
 			},
 
+			"public_name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The public name of the catalog entity shown on status pages instead of its name. Only used and returned when `status-page-v3-phase-1` is enabled",
+			},
+
 			"position": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
@@ -103,6 +116,17 @@ func resourceCatalogEntity() *schema.Resource {
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "An external identifier for this catalog entity. Must be unique within the catalog.",
+			},
+
+			"escalation_policy_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The escalation policy id of the catalog entity",
 			},
 
 			"managed_by": &schema.Schema{
@@ -184,6 +208,9 @@ func resourceCatalogEntityCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("public_description"); ok {
 		s.PublicDescription = value.(string)
 	}
+	if value, ok := d.GetOkExists("public_name"); ok {
+		s.PublicName = value.(string)
+	}
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
@@ -192,6 +219,9 @@ func resourceCatalogEntityCreate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if value, ok := d.GetOkExists("external_id"); ok {
 		s.ExternalId = value.(string)
+	}
+	if value, ok := d.GetOkExists("escalation_policy_id"); ok {
+		s.EscalationPolicyId = value.(string)
 	}
 	if value, ok := d.GetOkExists("properties"); ok {
 		s.Properties = value.([]interface{})
@@ -232,9 +262,11 @@ func resourceCatalogEntityRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
 	d.Set("public_description", item.PublicDescription)
+	d.Set("public_name", item.PublicName)
 	d.Set("position", item.Position)
 	d.Set("backstage_id", item.BackstageId)
 	d.Set("external_id", item.ExternalId)
+	d.Set("escalation_policy_id", item.EscalationPolicyId)
 	d.Set("managed_by", item.ManagedBy)
 
 	if item.Properties != nil {
@@ -276,6 +308,9 @@ func resourceCatalogEntityUpdate(ctx context.Context, d *schema.ResourceData, me
 	if d.HasChange("public_description") {
 		s.PublicDescription = d.Get("public_description").(string)
 	}
+	if d.HasChange("public_name") {
+		s.PublicName = d.Get("public_name").(string)
+	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)
 	}
@@ -284,6 +319,9 @@ func resourceCatalogEntityUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("external_id") {
 		s.ExternalId = d.Get("external_id").(string)
+	}
+	if d.HasChange("escalation_policy_id") {
+		s.EscalationPolicyId = d.Get("escalation_policy_id").(string)
 	}
 
 	if d.HasChange("properties") {

@@ -12,11 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceStatusPageComponent() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceStatusPageComponentCreate,
 		ReadContext:   resourceStatusPageComponentRead,
 		UpdateContext: resourceStatusPageComponentUpdate,
@@ -57,7 +59,7 @@ func resourceStatusPageComponent() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "Name of the component (derived from the source for catalog-backed components)",
+				Description: "Name of the component. Returns the component's own name when set, otherwise the source's public name, otherwise the source's name",
 			},
 
 			"description": &schema.Schema{

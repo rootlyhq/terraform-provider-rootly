@@ -92,6 +92,42 @@ resource "rootly_alert_route" "production_route" {
   }
 
   rules {
+    name = "Owning Service Route"
+    destinations {
+      target_type  = "dynamic"
+      catalog_type = "Service"
+      match_keys {
+        property_ref = "builtin:name"
+        source_kind  = "payload"
+        source_ref   = "$.service"
+      }
+    }
+    condition_groups {
+      position = 1
+      conditions {
+        property_field_type           = "payload"
+        property_field_name           = "$.environment"
+        property_field_condition_type = "is_one_of"
+        property_field_values         = ["production"]
+      }
+    }
+  }
+
+  rules {
+    name       = "Ignore Test Alerts"
+    non_paging = true
+    condition_groups {
+      position = 1
+      conditions {
+        property_field_type           = "payload"
+        property_field_name           = "$.environment"
+        property_field_condition_type = "is_one_of"
+        property_field_values         = ["test"]
+      }
+    }
+  }
+
+  rules {
     destinations {
       target_type = "EscalationPolicy"
       target_id   = rootly_escalation_policy.production_ep.id

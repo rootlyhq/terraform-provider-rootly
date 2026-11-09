@@ -79,3 +79,57 @@ func TestNotFoundErrorErrorsIs(t *testing.T) {
 		})
 	}
 }
+
+// Framework resources check errors.Is(err, client.NotFoundError{}), with the
+// zero value as the target.
+func TestNotFoundErrorErrorsIsZeroValueTarget(t *testing.T) {
+	t.Parallel()
+	tests := []struct {
+		name        string
+		err         error
+		errorsIsFun func(assert.TestingT, error, error, ...interface{}) bool
+	}{
+		{
+			"TestNotFoundErrorFromAPI",
+			NewNotFoundError(`{"errors":[{"title":"Not found or unauthorized","status":"404"}]}`),
+			assert.ErrorIs,
+		},
+		{
+			"TestWrappedNotFoundError",
+			fmt.Errorf("wrapper of %w", NewNotFoundError("wrapped")),
+			assert.ErrorIs,
+		},
+		{
+			"TestZeroValueNotFoundError",
+			NotFoundError{},
+			assert.ErrorIs,
+		},
+		{
+			"TestRequestError404",
+			NewRequestError(404, "Not Found"),
+			assert.NotErrorIs,
+		},
+		{
+			"TestNonRequestError",
+			errors.New(""),
+			assert.NotErrorIs,
+		},
+		{
+			"TestNilError",
+			nil,
+			assert.NotErrorIs,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			tt.errorsIsFun(t, tt.err, NotFoundError{})
+		})
+	}
+}
+
+// A zero-value NotFoundError must still match a NewNotFoundError target.
+func TestZeroValueNotFoundErrorMatchesNewNotFoundErrorTarget(t *testing.T) {
+	t.Parallel()
+	assert.ErrorIs(t, NotFoundError{}, NewNotFoundError(""))
+}

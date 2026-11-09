@@ -74,6 +74,7 @@ resource "rootly_functionality" "logging_in" {
 - `position` (Number) Position of the functionality
 - `properties` (Block List) Array of property values for this functionality. (see [below for nested schema](#nestedblock--properties))
 - `public_description` (String) The status page description of the functionality
+- `public_name` (String) The public name of the functionality shown on status pages instead of its name
 - `service_ids` (List of String) Services associated with this functionality
 - `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this functionality
 - `slack_aliases` (Block List) Slack Aliases associated with this functionality (see [below for nested schema](#nestedblock--slack_aliases))

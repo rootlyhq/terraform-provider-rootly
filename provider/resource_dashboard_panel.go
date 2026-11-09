@@ -13,11 +13,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/converter"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceDashboardPanel() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceDashboardPanelCreate,
 		ReadContext:   resourceDashboardPanelRead,
 		UpdateContext: resourceDashboardPanelUpdate,
@@ -71,8 +73,8 @@ func resourceDashboardPanel() *schema.Resource {
 							Sensitive:    false,
 							ForceNew:     false,
 							WriteOnly:    false,
-							Description:  "Value must be one of `line_chart`, `line_stepped_chart`, `column_chart`, `stacked_column_chart`, `monitoring_chart`, `pie_chart`, `table`, `aggregate_value`.",
-							ValidateFunc: validation.StringInSlice([]string{"line_chart", "line_stepped_chart", "column_chart", "stacked_column_chart", "monitoring_chart", "pie_chart", "table", "aggregate_value"}, false),
+							Description:  "Value must be one of `line_chart`, `line_stepped_chart`, `column_chart`, `stacked_column_chart`, `monitoring_chart`, `pie_chart`, `breakdown_table`, `table`, `aggregate_value`.",
+							ValidateFunc: validation.StringInSlice([]string{"line_chart", "line_stepped_chart", "column_chart", "stacked_column_chart", "monitoring_chart", "pie_chart", "breakdown_table", "table", "aggregate_value"}, false),
 						},
 
 						"description": &schema.Schema{

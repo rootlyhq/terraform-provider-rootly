@@ -22,6 +22,10 @@ provider "rootly" {
 }
 ```
 
+## Releases
+
+Release notes are on the [GitHub Releases page](https://github.com/rootlyhq/terraform-provider-rootly/releases).
+
 ## Migration Script
 
 A migration script is available to help migrate from deprecated Rootly resources to their newer equivalents. The script automates the process of fetching existing resources via the Rootly API and generating Terraform configurations with import statements.

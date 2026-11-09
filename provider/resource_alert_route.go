@@ -64,6 +64,7 @@ func resourceAlertRoute() *schema.Resource {
 					}
 				}
 			},
+			validateAlertRouteDestinationFields,
 		},
 		Schema: map[string]*schema.Schema{
 
@@ -164,6 +165,13 @@ func resourceAlertRoute() *schema.Resource {
 							Description: "Whether this is a fallback rule. Must be `true` if `condition_groups` is not specified.",
 						},
 
+						"non_paging": &schema.Schema{
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+							Description: "Whether alerts matching this rule are left unpaged. A non-paging rule takes no destinations. Only available when dynamic alert routing is enabled for the organization.",
+						},
+
 						"destinations": &schema.Schema{
 							Type:             schema.TypeList,
 							Computed:         false,
@@ -173,7 +181,7 @@ func resourceAlertRoute() *schema.Resource {
 							ForceNew:         false,
 							WriteOnly:        false,
 							Description:      "",
-							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							DiffSuppressFunc: tools.EqualIgnoringOrderOfList("destinations"),
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 
@@ -185,19 +193,61 @@ func resourceAlertRoute() *schema.Resource {
 										Sensitive:    false,
 										ForceNew:     false,
 										WriteOnly:    false,
-										Description:  "The type of the target. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`.",
-										ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "Functionality", "EscalationPolicy"}, false),
+										Description:  "The type of the target. `CatalogEntity` pages the escalation policy of a custom catalog entity. `dynamic` pages the escalation policy of the catalog entity matched from the alert and takes `catalog_type`, `catalog_id` and `match_keys` instead of `target_id`. `CatalogEntity` and `dynamic` are only available when dynamic alert routing is enabled for the organization. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`, `CatalogEntity`, `dynamic`.",
+										ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "Functionality", "EscalationPolicy", "CatalogEntity", alertRouteDynamicTargetType}, false),
 									},
 
 									"target_id": &schema.Schema{
 										Type:        schema.TypeString,
-										Computed:    true,
+										Computed:    false,
 										Required:    false,
 										Optional:    true,
 										Sensitive:   false,
 										ForceNew:    false,
 										WriteOnly:   false,
-										Description: "The ID of the target",
+										Description: "The ID of the target. Required for every `target_type` except `dynamic`.",
+									},
+
+									"catalog_type": &schema.Schema{
+										Type:         schema.TypeString,
+										Optional:     true,
+										Description:  "Dynamic destinations only. The catalog the matched entity belongs to: `CatalogEntity` for a custom catalog. Value must be one of `Service`, `Group`, `Functionality`, `CatalogEntity`.",
+										ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "Functionality", "CatalogEntity"}, false),
+									},
+
+									"catalog_id": &schema.Schema{
+										Type:        schema.TypeString,
+										Optional:    true,
+										Description: "Dynamic destinations only. The custom catalog's ID when `catalog_type` is `CatalogEntity`.",
+									},
+
+									"match_keys": &schema.Schema{
+										Type:        schema.TypeList,
+										Optional:    true,
+										MaxItems:    1,
+										Description: "Dynamic destinations only. How an alert value is matched to a catalog entity property.",
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"property_ref": &schema.Schema{
+													Type:        schema.TypeString,
+													Required:    true,
+													Description: "The catalog property to match: `builtin:<name>` (for example `builtin:name` or `builtin:external_id`) or the ID of a text catalog field.",
+												},
+
+												"source_kind": &schema.Schema{
+													Type:         schema.TypeString,
+													Required:     true,
+													Description:  "Where the alert value comes from. Value must be one of `payload`, `attribute`, `alert_field`.",
+													ValidateFunc: validation.StringInSlice([]string{"payload", "attribute", "alert_field"}, false),
+												},
+
+												"source_ref": &schema.Schema{
+													Type:        schema.TypeString,
+													Required:    true,
+													Description: "A JSONPath into the payload for `payload`, an alert attribute name for `attribute`, or an alert field ID for `alert_field`.",
+												},
+											},
+										},
 									},
 								},
 							},
@@ -446,7 +496,8 @@ func resourceAlertRouteRead(ctx context.Context, d *schema.ResourceData, meta in
 					"name":             rawItem["name"],
 					"position":         rawItem["position"],
 					"fallback_rule":    rawItem["fallback_rule"],
-					"destinations":     rawItem["destinations"],
+					"non_paging":       rawItem["non_paging"],
+					"destinations":     flattenAlertRouteDestinations(rawItem["destinations"]),
 					"condition_groups": rawItem["condition_groups"],
 				}
 				processed_items_rules = append(processed_items_rules, processed_item_rules)
@@ -555,6 +606,73 @@ func resourceAlertRouteDelete(ctx context.Context, d *schema.ResourceData, meta 
 	return nil
 }
 
+const alertRouteDynamicTargetType = "dynamic"
+
+func validateAlertRouteDestinationFields(ctx context.Context, req schema.ValidateResourceConfigFuncRequest, resp *schema.ValidateResourceConfigFuncResponse) {
+	rawRules := req.RawConfig.GetAttr("rules")
+	if !rawRules.IsKnown() || rawRules.IsNull() {
+		return
+	}
+
+	for i, ruleCty := range rawRules.AsValueSlice() {
+		destinationsCty := ruleCty.GetAttr("destinations")
+		if !destinationsCty.IsKnown() || destinationsCty.IsNull() {
+			continue
+		}
+		for j, destinationCty := range destinationsCty.AsValueSlice() {
+			detail := alertRouteDestinationFieldsError(destinationCty)
+			if detail == "" {
+				continue
+			}
+			resp.Diagnostics = append(resp.Diagnostics, diag.Diagnostic{
+				Severity: diag.Error,
+				Summary:  "Invalid alert routing rule destination",
+				Detail:   detail,
+				AttributePath: cty.Path{
+					cty.GetAttrStep{Name: "rules"},
+					cty.IndexStep{Key: cty.NumberIntVal(int64(i))},
+					cty.GetAttrStep{Name: "destinations"},
+					cty.IndexStep{Key: cty.NumberIntVal(int64(j))},
+				},
+			})
+		}
+	}
+}
+
+func alertRouteDestinationFieldsError(destinationCty cty.Value) string {
+	targetTypeCty := destinationCty.GetAttr("target_type")
+	if !targetTypeCty.IsKnown() {
+		return ""
+	}
+
+	if !targetTypeCty.IsNull() && targetTypeCty.AsString() == alertRouteDynamicTargetType {
+		if alertRouteDestinationFieldIsSet(destinationCty.GetAttr("target_id")) {
+			return "`target_id` can't be set on a `dynamic` destination"
+		}
+		return ""
+	}
+
+	for _, field := range []string{"catalog_type", "catalog_id", "match_keys"} {
+		if alertRouteDestinationFieldIsSet(destinationCty.GetAttr(field)) {
+			return "`catalog_type`, `catalog_id` and `match_keys` can only be set on a `dynamic` destination"
+		}
+	}
+	return ""
+}
+
+func alertRouteDestinationFieldIsSet(value cty.Value) bool {
+	switch {
+	case value.IsNull():
+		return false
+	case !value.IsKnown():
+		return value.Type().IsPrimitiveType()
+	case value.Type().IsListType():
+		return value.LengthInt() > 0
+	default:
+		return true
+	}
+}
+
 // alertRouteConditionNullableFields are optional condition attributes that are
 // sent as null when blank, so removing them from config clears them server-side.
 var alertRouteConditionNullableFields = []string{
@@ -581,6 +699,7 @@ func expandAlertRouteRules(rules []interface{}) []interface{} {
 		if !ok {
 			continue
 		}
+		ruleMap["destinations"] = expandAlertRouteDestinations(ruleMap["destinations"])
 		conditionGroups, _ := ruleMap["condition_groups"].([]interface{})
 		for _, conditionGroup := range conditionGroups {
 			conditionGroupMap, ok := conditionGroup.(map[string]interface{})
@@ -602,4 +721,69 @@ func expandAlertRouteRules(rules []interface{}) []interface{} {
 		}
 	}
 	return rules
+}
+
+func expandAlertRouteDestinations(destinations interface{}) []interface{} {
+	items, _ := destinations.([]interface{})
+	expanded := make([]interface{}, 0, len(items))
+	for _, item := range items {
+		destination, ok := item.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		if destination["target_type"] != alertRouteDynamicTargetType {
+			expanded = append(expanded, map[string]interface{}{
+				"target_type": destination["target_type"],
+				"target_id":   destination["target_id"],
+			})
+			continue
+		}
+		var catalogID interface{}
+		if value, ok := destination["catalog_id"].(string); ok && value != "" {
+			catalogID = value
+		}
+		expanded = append(expanded, map[string]interface{}{
+			"target_type":  alertRouteDynamicTargetType,
+			"catalog_type": destination["catalog_type"],
+			"catalog_id":   catalogID,
+			"match_keys":   destination["match_keys"],
+		})
+	}
+	return expanded
+}
+
+func flattenAlertRouteDestinations(destinations interface{}) []interface{} {
+	items, _ := destinations.([]interface{})
+	flattened := make([]interface{}, 0, len(items))
+	for _, item := range items {
+		destination, ok := item.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		flattened = append(flattened, map[string]interface{}{
+			"target_type":  destination["target_type"],
+			"target_id":    destination["target_id"],
+			"catalog_type": destination["catalog_type"],
+			"catalog_id":   destination["catalog_id"],
+			"match_keys":   flattenAlertRouteMatchKeys(destination["match_keys"]),
+		})
+	}
+	return flattened
+}
+
+func flattenAlertRouteMatchKeys(matchKeys interface{}) []interface{} {
+	items, _ := matchKeys.([]interface{})
+	flattened := make([]interface{}, 0, len(items))
+	for _, item := range items {
+		matchKey, ok := item.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		flattened = append(flattened, map[string]interface{}{
+			"property_ref": matchKey["property_ref"],
+			"source_kind":  matchKey["source_kind"],
+			"source_ref":   matchKey["source_ref"],
+		})
+	}
+	return flattened
 }

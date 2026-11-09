@@ -11,11 +11,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceStatusPageComponentGroup() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceStatusPageComponentGroupCreate,
 		ReadContext:   resourceStatusPageComponentGroupRead,
 		UpdateContext: resourceStatusPageComponentGroupUpdate,

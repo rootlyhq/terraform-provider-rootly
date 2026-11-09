@@ -163,6 +163,31 @@ function annotateNullableRelationships(schemas) {
   }
 }
 
+// The API only accepts resource_type when creating a form set and ignores it on
+// update, so a change has to replace the form set.
+function annotateFormSetResourceType(schemas) {
+  const property = schemas.form_set?.properties?.resource_type;
+  if (property) property.tf_force_new = true;
+}
+
+// AI SRE is disabled with a null provider, and the API casts "" to null.
+function annotateAiSreProvider(schemas) {
+  const property = schemas.alert_routing_rule?.properties?.ai_sre_provider;
+  if (!property) return;
+  const note = "Omit to preserve an existing value; set to an empty string to disable AI SRE";
+  property.tf_nullable = true;
+  property.tf_computed = true;
+  if (!property.description?.includes(note)) {
+    property.description = `${(property.description || "").replace(/\.$/, "")}. ${note}`.replace(/^\. /, "");
+  }
+}
+
+// The API reports degraded_performance when synced_component_status is unset.
+function annotatePublishIncidentSyncedComponentStatus(schemas) {
+  const property = schemas.publish_incident_task_params?.properties?.synced_component_status;
+  if (property) property.tf_computed = true;
+}
+
 // Permanent Terraform-side write validation. generateResource builds the
 // resource schema from the response component (swagger.components.schemas[name]),
 // which deliberately carries no enum for retrigger_timeout_minutes: the
@@ -329,6 +354,9 @@ renameEscalationPolicyPathSchemas(swagger);
 addNestedRouteParentIds(swagger.components.schemas);
 annotateNullableRelationships(swagger.components.schemas);
 annotateCatalogExternalIds(swagger.components.schemas);
+annotateFormSetResourceType(swagger.components.schemas);
+annotateAiSreProvider(swagger.components.schemas);
+annotatePublishIncidentSyncedComponentStatus(swagger.components.schemas);
 annotateRetriggerTimeout(swagger.components.schemas);
 preserveCanvasTerraformContract(swagger.components.schemas);
 annotateStatusPageAnnouncement(swagger.components.schemas);
