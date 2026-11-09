@@ -216,9 +216,9 @@ const (
 
 // Defines values for UpdateDashboardPanelDataAttributesParamsDatasetsAggregateOperation.
 const (
-	Average UpdateDashboardPanelDataAttributesParamsDatasetsAggregateOperation = "average"
-	Count   UpdateDashboardPanelDataAttributesParamsDatasetsAggregateOperation = "count"
-	Sum     UpdateDashboardPanelDataAttributesParamsDatasetsAggregateOperation = "sum"
+	UpdateDashboardPanelDataAttributesParamsDatasetsAggregateOperationAverage UpdateDashboardPanelDataAttributesParamsDatasetsAggregateOperation = "average"
+	UpdateDashboardPanelDataAttributesParamsDatasetsAggregateOperationCount   UpdateDashboardPanelDataAttributesParamsDatasetsAggregateOperation = "count"
+	UpdateDashboardPanelDataAttributesParamsDatasetsAggregateOperationSum     UpdateDashboardPanelDataAttributesParamsDatasetsAggregateOperation = "sum"
 )
 
 // Defines values for UpdateDashboardPanelDataAttributesParamsDatasetsFilterOperation.

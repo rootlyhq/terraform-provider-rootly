@@ -16,6 +16,7 @@ import (
 
 func resourceCommunicationsStage() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceCommunicationsStageCreate,
 		ReadContext:   resourceCommunicationsStageRead,
 		UpdateContext: resourceCommunicationsStageUpdate,

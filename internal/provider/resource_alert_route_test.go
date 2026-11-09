@@ -5,11 +5,14 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"regexp"
 	"strings"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"github.com/hashicorp/terraform-plugin-testing/knownvalue"
+	"github.com/hashicorp/terraform-plugin-testing/plancheck"
 	"github.com/hashicorp/terraform-plugin-testing/statecheck"
 	"github.com/hashicorp/terraform-plugin-testing/terraform"
 	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
@@ -163,6 +166,283 @@ func TestAccResourceAlertRoute_RemoveConditionable(t *testing.T) {
 	})
 }
 
+func TestAccResourceAlertRoute_DynamicDestinations(t *testing.T) {
+	testAccSkipUnlessDynamicAlertRouting(t)
+	resName := "rootly_alert_route.test"
+	rName := acctest.RandomWithPrefix("tf-alert-route")
+	uuidPattern := regexp.MustCompile(`^[0-9a-f-]{36}$`)
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceAlertRouteRulesConfig(rName, `
+					rules {
+						name = "Owning catalog entity"
+
+						destinations {
+							target_type  = "dynamic"
+							catalog_type = "CatalogEntity"
+							catalog_id   = rootly_catalog.test.id
+
+							match_keys {
+								property_ref = "builtin:name"
+								source_kind  = "payload"
+								source_ref   = "$.service"
+							}
+						}
+
+						destinations {
+							target_type = "EscalationPolicy"
+							target_id   = rootly_escalation_policy.test.id
+						}
+
+						condition_groups {
+							conditions {
+								property_field_condition_type = "is_one_of"
+								property_field_type           = "payload"
+								property_field_name           = "$.team"
+								property_field_values         = ["infra"]
+							}
+						}
+					}
+				`),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("rules").AtSliceIndex(0).AtMapKey("destinations"), knownvalue.SetExact([]knownvalue.Check{
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"target_type":  knownvalue.StringExact("dynamic"),
+							"target_id":    knownvalue.StringExact(""),
+							"catalog_type": knownvalue.StringExact("CatalogEntity"),
+							"catalog_id":   knownvalue.StringRegexp(uuidPattern),
+							"match_keys": knownvalue.ListExact([]knownvalue.Check{
+								knownvalue.ObjectExact(map[string]knownvalue.Check{
+									"property_ref": knownvalue.StringExact("builtin:name"),
+									"source_kind":  knownvalue.StringExact("payload"),
+									"source_ref":   knownvalue.StringExact("$.service"),
+								}),
+							}),
+						}),
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"target_type":  knownvalue.StringExact("EscalationPolicy"),
+							"target_id":    knownvalue.StringRegexp(uuidPattern),
+							"catalog_type": knownvalue.StringExact(""),
+							"catalog_id":   knownvalue.StringExact(""),
+							"match_keys":   knownvalue.ListExact([]knownvalue.Check{}),
+						}),
+					})),
+				},
+			},
+			{
+				Config: testAccResourceAlertRouteRulesConfig(rName, `
+					rules {
+						name = "Owning service"
+
+						destinations {
+							target_type  = "dynamic"
+							catalog_type = "Service"
+
+							match_keys {
+								property_ref = "builtin:name"
+								source_kind  = "attribute"
+								source_ref   = "summary"
+							}
+						}
+
+						condition_groups {
+							conditions {
+								property_field_condition_type = "is_one_of"
+								property_field_type           = "payload"
+								property_field_name           = "$.team"
+								property_field_values         = ["infra"]
+							}
+						}
+					}
+				`),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("rules").AtSliceIndex(0).AtMapKey("destinations"), knownvalue.ListExact([]knownvalue.Check{
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"target_type":  knownvalue.StringExact("dynamic"),
+							"target_id":    knownvalue.StringExact(""),
+							"catalog_type": knownvalue.StringExact("Service"),
+							"catalog_id":   knownvalue.StringExact(""),
+							"match_keys": knownvalue.ListExact([]knownvalue.Check{
+								knownvalue.ObjectExact(map[string]knownvalue.Check{
+									"property_ref": knownvalue.StringExact("builtin:name"),
+									"source_kind":  knownvalue.StringExact("attribute"),
+									"source_ref":   knownvalue.StringExact("summary"),
+								}),
+							}),
+						}),
+					})),
+				},
+			},
+			{
+				ResourceName:      resName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
+func TestAccResourceAlertRoute_StaticCatalogEntityDestination(t *testing.T) {
+	testAccSkipUnlessDynamicAlertRouting(t)
+	resName := "rootly_alert_route.test"
+	rName := acctest.RandomWithPrefix("tf-alert-route")
+	uuidPattern := regexp.MustCompile(`^[0-9a-f-]{36}$`)
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceAlertRouteRulesConfig(rName, `
+					rules {
+						fallback_rule = true
+
+						destinations {
+							target_type = "CatalogEntity"
+							target_id   = rootly_catalog_entity.test.id
+						}
+					}
+				`) + fmt.Sprintf(`
+resource "rootly_catalog_entity" "test" {
+	catalog_id           = rootly_catalog.test.id
+	name                 = "%[1]s"
+	escalation_policy_id = rootly_escalation_policy.test.id
+}
+`, rName),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("rules").AtSliceIndex(0).AtMapKey("destinations"), knownvalue.ListExact([]knownvalue.Check{
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"target_type":  knownvalue.StringExact("CatalogEntity"),
+							"target_id":    knownvalue.StringRegexp(uuidPattern),
+							"catalog_type": knownvalue.StringExact(""),
+							"catalog_id":   knownvalue.StringExact(""),
+							"match_keys":   knownvalue.ListExact([]knownvalue.Check{}),
+						}),
+					})),
+				},
+			},
+			{
+				ResourceName:      resName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
+func TestAccResourceAlertRoute_NonPaging(t *testing.T) {
+	testAccSkipUnlessDynamicAlertRouting(t)
+	resName := "rootly_alert_route.test"
+	rName := acctest.RandomWithPrefix("tf-alert-route")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceAlertRouteRulesConfig(rName, `
+					rules {
+						name       = "Test alerts"
+						non_paging = true
+
+						condition_groups {
+							conditions {
+								property_field_condition_type = "is_one_of"
+								property_field_type           = "payload"
+								property_field_name           = "$.environment"
+								property_field_values         = ["test"]
+							}
+						}
+					}
+
+					rules {
+						fallback_rule = true
+						non_paging    = true
+					}
+				`),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("rules").AtSliceIndex(0).AtMapKey("non_paging"), knownvalue.Bool(true)),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("rules").AtSliceIndex(0).AtMapKey("destinations"), knownvalue.ListExact([]knownvalue.Check{})),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("rules").AtSliceIndex(1).AtMapKey("fallback_rule"), knownvalue.Bool(true)),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("rules").AtSliceIndex(1).AtMapKey("non_paging"), knownvalue.Bool(true)),
+					statecheck.ExpectKnownValue(resName, tfjsonpath.New("rules").AtSliceIndex(1).AtMapKey("destinations"), knownvalue.ListExact([]knownvalue.Check{})),
+				},
+			},
+			{
+				ResourceName:      resName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
+func TestAccResourceAlertRoute_UpgradeWithStaticDestinations(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-alert-route")
+	config := testAccResourceAlertRouteRulesConfig(rName, `
+		rules {
+			name = "Infra alerts"
+
+			destinations {
+				target_type = "EscalationPolicy"
+				target_id   = rootly_escalation_policy.test.id
+			}
+
+			condition_groups {
+				conditions {
+					property_field_condition_type = "is_one_of"
+					property_field_type           = "payload"
+					property_field_name           = "$.team"
+					property_field_values         = ["infra"]
+				}
+			}
+		}
+
+		rules {
+			fallback_rule = true
+
+			destinations {
+				target_type = "Group"
+				target_id   = rootly_team.test.id
+			}
+		}
+	`)
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck: func() { testAccPreCheck(t) },
+		Steps: []resource.TestStep{
+			{
+				ExternalProviders: map[string]resource.ExternalProvider{
+					"rootly": {
+						Source:            "rootlyhq/rootly",
+						VersionConstraint: "5.24.0",
+					},
+				},
+				Config: config,
+			},
+			{
+				ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+				Config:                   config,
+				ConfigPlanChecks: resource.ConfigPlanChecks{
+					PreApply: []plancheck.PlanCheck{
+						plancheck.ExpectEmptyPlan(),
+					},
+				},
+			},
+		},
+	})
+}
+
+func testAccSkipUnlessDynamicAlertRouting(t *testing.T) {
+	if os.Getenv("ROOTLY_ACC_DYNAMIC_ALERT_ROUTING") == "" {
+		t.Skip("Skipped: dynamic alert routing is not enabled on the CI test org; set ROOTLY_ACC_DYNAMIC_ALERT_ROUTING=1 to run")
+	}
+}
+
 func testAccAlertRouteFirstConditionPath(attr string) tfjsonpath.Path {
 	return tfjsonpath.New("rules").AtSliceIndex(0).AtMapKey("condition_groups").AtSliceIndex(0).AtMapKey("conditions").AtSliceIndex(0).AtMapKey(attr)
 }
@@ -182,7 +462,7 @@ func testAccCheckAlertRouteFirstCondition(resName string, check func(alertRouteC
 			return fmt.Errorf("not found: %s", resName)
 		}
 
-		httpResp, err := acctest.SharedClient.GetAlertRouteWithResponse(context.Background(), rs.Primary.ID)
+		httpResp, err := acctest.SharedClient.GetAlertRouteWithResponse(context.Background(), rs.Primary.ID, nil)
 		if err != nil {
 			return fmt.Errorf("Error getting alert route, got error: %s", err)
 		} else if httpResp.StatusCode() != http.StatusOK {
@@ -250,4 +530,32 @@ resource "rootly_alert_route" "test" {
 	}
 }
 `, name, condition)
+}
+
+func testAccResourceAlertRouteRulesConfig(name, rules string) string {
+	return testAccResourceTeamConfig(name, "") + testAccResourceAlertUrgencyConfig(name, name+" description") + fmt.Sprintf(`
+resource "rootly_catalog" "test" {
+	name = "%[1]s"
+}
+
+resource "rootly_escalation_policy" "test" {
+	name      = "%[1]s"
+	group_ids = [rootly_team.test.id]
+}
+
+resource "rootly_alerts_source" "test" {
+	depends_on = [rootly_alert_urgency.test]
+
+	name            = "%[1]s"
+	source_type     = "generic_webhook"
+	owner_group_ids = [rootly_team.test.id]
+}
+
+resource "rootly_alert_route" "test" {
+	name              = "%[1]s"
+	alerts_source_ids = [rootly_alerts_source.test.id]
+
+	%[2]s
+}
+`, name, rules)
 }

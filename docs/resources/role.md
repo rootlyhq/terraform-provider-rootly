@@ -44,6 +44,8 @@ resource "rootly_role" "custom" {
 
 ### Optional
 
+- `ai_automations_permissions` (List of String) Value must be one of `read`, `manage`.
+- `ai_skills_permissions` (List of String) Value must be one of `read`, `manage`.
 - `alerts_permissions` (List of String) Value must be one of `create`, `read`.
 - `api_keys_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `audits_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.

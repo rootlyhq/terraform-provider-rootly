@@ -13,11 +13,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceRole() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceRoleCreate,
 		ReadContext:   resourceRoleRead,
 		UpdateContext: resourceRoleUpdate,
@@ -580,6 +582,38 @@ func resourceRole() *schema.Resource {
 				Description:      "Private Agent management permissions: create issues enrollment tokens, read views agent inventory and details, and delete revokes agent credentials. Create and delete can be used independently through the API; browser inventory requires read.. Value must be one of `create`, `read`, `update`, `delete`.",
 			},
 
+			"ai_skills_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"read", "manage"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `read`, `manage`.",
+			},
+
+			"ai_automations_permissions": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"read", "manage"}, false),
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Value must be one of `read`, `manage`.",
+			},
+
 			"slas_permissions": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -759,6 +793,12 @@ func resourceRoleCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("private_agent_permissions"); ok {
 		s.PrivateAgentPermissions = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("ai_skills_permissions"); ok {
+		s.AiSkillsPermissions = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("ai_automations_permissions"); ok {
+		s.AiAutomationsPermissions = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("slas_permissions"); ok {
 		s.SlasPermissions = value.([]interface{})
 	}
@@ -836,6 +876,8 @@ func resourceRoleRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("sub_statuses_permissions", item.SubStatusesPermissions)
 	d.Set("edge_connector_permissions", item.EdgeConnectorPermissions)
 	d.Set("private_agent_permissions", item.PrivateAgentPermissions)
+	d.Set("ai_skills_permissions", item.AiSkillsPermissions)
+	d.Set("ai_automations_permissions", item.AiAutomationsPermissions)
 	d.Set("slas_permissions", item.SlasPermissions)
 	d.Set("paging_permissions", item.PagingPermissions)
 	d.Set("incident_communication_permissions", item.IncidentCommunicationPermissions)
@@ -1108,6 +1150,22 @@ func resourceRoleUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 			s.PrivateAgentPermissions = value.([]interface{})
 		} else {
 			s.PrivateAgentPermissions = []interface{}{}
+		}
+	}
+
+	if d.HasChange("ai_skills_permissions") {
+		if value, ok := d.GetOk("ai_skills_permissions"); value != nil && ok {
+			s.AiSkillsPermissions = value.([]interface{})
+		} else {
+			s.AiSkillsPermissions = []interface{}{}
+		}
+	}
+
+	if d.HasChange("ai_automations_permissions") {
+		if value, ok := d.GetOk("ai_automations_permissions"); value != nil && ok {
+			s.AiAutomationsPermissions = value.([]interface{})
+		} else {
+			s.AiAutomationsPermissions = []interface{}{}
 		}
 	}
 

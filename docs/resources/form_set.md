@@ -16,12 +16,13 @@ description: |-
 
 ### Required
 
-- `forms` (List of String) The forms included in the form set. Add custom forms using the custom form's `slug` field. Or choose a built-in form: `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`, `google_chat_new_incident_form`, `google_chat_update_incident_form`, `microsoft_teams_new_incident_form`
+- `forms` (List of String) The forms included in the form set. Add custom forms using the custom form's `slug` field. Or choose a built-in form: `web_new_incident_form`, `web_update_incident_form`, `web_incident_post_mortem_form`, `web_incident_mitigation_form`, `web_incident_resolution_form`, `web_incident_cancellation_form`, `web_scheduled_incident_form`, `web_update_scheduled_incident_form`, `slack_new_incident_form`, `slack_update_incident_form`, `slack_update_incident_status_form`, `slack_incident_mitigation_form`, `slack_incident_resolution_form`, `slack_incident_cancellation_form`, `slack_scheduled_incident_form`, `slack_update_scheduled_incident_form`, `google_chat_new_incident_form`, `google_chat_update_incident_form`, `google_chat_incident_mitigation_form`, `google_chat_incident_resolution_form`, `google_chat_incident_cancellation_form`, `google_chat_scheduled_incident_form`, `microsoft_teams_new_incident_form`. A `problem` form set accepts only problem forms: `web_new_problem_form`, `web_update_problem_form`, `web_problem_in_progress_form`, `web_problem_deferred_form`, `web_problem_completed_form`, `web_problem_cancelled_form`
 - `name` (String) The name of the form set
 
 ### Optional
 
 - `is_default` (Boolean) Whether the form set is default. Value must be one of true or false
+- `resource_type` (String) The area the form set applies to. `problem` form sets are only returned when Problem Management is enabled.. Value must be one of `incident`, `problem`.
 - `slug` (String, Deprecated) The slug of the form set
 
 ### Read-Only

@@ -98,6 +98,7 @@ func resourceWorkflowTaskCreateGoToMeeting() *schema.Resource {
 							Description: "Value must be one of true or false",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Computed:    true,
 						},
 						"post_to_incident_timeline": &schema.Schema{
 							Description: "Value must be one of true or false",
@@ -138,6 +139,7 @@ func resourceWorkflowTaskCreateGoToMeetingCreate(ctx context.Context, d *schema.
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
+	sdkutils.OmitUnsetTaskParams(d, taskParams, "password_required")
 
 	tflog.Trace(ctx, fmt.Sprintf("Creating workflow task: %s", workflowId))
 
@@ -200,6 +202,7 @@ func resourceWorkflowTaskCreateGoToMeetingUpdate(ctx context.Context, d *schema.
 	skipOnFailure := tools.Bool(d.Get("skip_on_failure").(bool))
 	enabled := tools.Bool(d.Get("enabled").(bool))
 	taskParams := d.Get("task_params").([]interface{})[0].(map[string]interface{})
+	sdkutils.OmitUnsetTaskParams(d, taskParams, "password_required")
 
 	s := &client.WorkflowTask{
 		WorkflowId:    workflowId,

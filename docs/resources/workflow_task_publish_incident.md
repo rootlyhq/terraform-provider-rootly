@@ -85,6 +85,8 @@ Optional:
 - `should_tweet` (Boolean) For Statuspage.io integrated pages auto publishes a tweet for your update. Value must be one of true or false
 - `status_page_ids` (List of String) Publishes the update to every listed status page. This field is in limited Early Access; contact Rootly Support to request access. When set, it takes precedence over status_page_id and the first entry becomes status_page_id.
 - `status_page_template` (Map of String) Map must contain two fields, `id` and `name`.
+- `sync_incident_components` (Boolean) When true, every run also publishes the incident's tagged services and functionalities that are components on the target page. Defaults to true when selected_component_keys is empty. This field is in Early Access and is not generally available; contact Rootly Support to request access. Value must be one of true or false
+- `synced_component_status` (String) Default impact status for components synced from the incident. The default only applies to newly synced components and to ones with no earlier status on the incident's updates on a page. A synced component with an earlier status keeps its most recent status there. Defaults to degraded_performance. A component also listed in selected_component_keys keeps its selected_component_statuses entry. Value must be one of `operational`, `degraded_performance`, `partial_outage`, `major_outage`.
 - `task_type` (String)
 
 ## Import

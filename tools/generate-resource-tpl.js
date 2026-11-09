@@ -523,7 +523,8 @@ function generateValidateFunc(schema) {
       return `
 		ValidateFunc: validation.IntInSlice([]int{${enumValues}}),`;
     }
-    const enumValues = schema.enum.map((val) => `"${val}"`).join(", ");
+    const values = schema.tf_nullable && !schema.enum.includes("") ? ["", ...schema.enum] : schema.enum;
+    const enumValues = values.map((val) => `"${val}"`).join(", ");
     return `
 		ValidateFunc: validation.StringInSlice([]string{${enumValues}}, false),`;
   }

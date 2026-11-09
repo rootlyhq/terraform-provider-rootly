@@ -12,11 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceCause() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceCauseCreate,
 		ReadContext:   resourceCauseRead,
 		UpdateContext: resourceCauseUpdate,
@@ -70,6 +72,17 @@ func resourceCause() *schema.Resource {
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "The status page description of the cause",
+			},
+
+			"public_name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The public name of the cause shown on status pages instead of its name. Only used and returned when `status-page-v3-phase-1` is enabled",
 			},
 
 			"position": &schema.Schema{
@@ -140,6 +153,9 @@ func resourceCauseCreate(ctx context.Context, d *schema.ResourceData, meta inter
 	if value, ok := d.GetOkExists("public_description"); ok {
 		s.PublicDescription = value.(string)
 	}
+	if value, ok := d.GetOkExists("public_name"); ok {
+		s.PublicName = value.(string)
+	}
 	if value, ok := d.GetOkExists("position"); ok {
 		s.Position = value.(int)
 	}
@@ -179,6 +195,7 @@ func resourceCauseRead(ctx context.Context, d *schema.ResourceData, meta interfa
 	d.Set("slug", item.Slug)
 	d.Set("description", item.Description)
 	d.Set("public_description", item.PublicDescription)
+	d.Set("public_name", item.PublicName)
 	d.Set("position", item.Position)
 
 	if item.Properties != nil {
@@ -217,6 +234,9 @@ func resourceCauseUpdate(ctx context.Context, d *schema.ResourceData, meta inter
 	}
 	if d.HasChange("public_description") {
 		s.PublicDescription = d.Get("public_description").(string)
+	}
+	if d.HasChange("public_name") {
+		s.PublicName = d.Get("public_name").(string)
 	}
 	if d.HasChange("position") {
 		s.Position = d.Get("position").(int)

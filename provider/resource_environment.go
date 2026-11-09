@@ -12,11 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceEnvironment() *schema.Resource {
 	return &schema.Resource{
+
 		CreateContext: resourceEnvironmentCreate,
 		ReadContext:   resourceEnvironmentRead,
 		UpdateContext: resourceEnvironmentUpdate,
@@ -92,6 +94,17 @@ func resourceEnvironment() *schema.Resource {
 				ForceNew:    false,
 				WriteOnly:   false,
 				Description: "The status page description of the environment",
+			},
+
+			"public_name": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The public name of the environment shown on status pages instead of its name. Only used and returned when `status-page-v3-phase-1` is enabled",
 			},
 
 			"notify_emails": &schema.Schema{
@@ -267,6 +280,9 @@ func resourceEnvironmentCreate(ctx context.Context, d *schema.ResourceData, meta
 	if value, ok := d.GetOkExists("public_description"); ok {
 		s.PublicDescription = value.(string)
 	}
+	if value, ok := d.GetOkExists("public_name"); ok {
+		s.PublicName = value.(string)
+	}
 	if value, ok := d.GetOkExists("notify_emails"); ok {
 		s.NotifyEmails = value.([]interface{})
 	}
@@ -320,6 +336,7 @@ func resourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, meta i
 	d.Set("external_id", item.ExternalId)
 	d.Set("description", item.Description)
 	d.Set("public_description", item.PublicDescription)
+	d.Set("public_name", item.PublicName)
 	d.Set("notify_emails", item.NotifyEmails)
 	d.Set("color", item.Color)
 	d.Set("position", item.Position)
@@ -401,6 +418,9 @@ func resourceEnvironmentUpdate(ctx context.Context, d *schema.ResourceData, meta
 	}
 	if d.HasChange("public_description") {
 		s.PublicDescription = d.Get("public_description").(string)
+	}
+	if d.HasChange("public_name") {
+		s.PublicName = d.Get("public_name").(string)
 	}
 
 	if d.HasChange("notify_emails") {

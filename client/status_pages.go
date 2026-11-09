@@ -22,6 +22,7 @@ type StatusPage struct {
 	AllowSearchEngineIndex   *bool                  `jsonapi:"attr,allow_search_engine_index,omitempty"`
 	ShowUptime               *bool                  `jsonapi:"attr,show_uptime,omitempty"`
 	ShowUptimeLastDays       int                    `jsonapi:"attr,show_uptime_last_days,omitempty"`
+	IncidentHistoryWindow    string                 `jsonapi:"attr,incident_history_window,omitempty"`
 	SuccessMessage           string                 `jsonapi:"attr,success_message,omitempty"`
 	FailureMessage           string                 `jsonapi:"attr,failure_message,omitempty"`
 	AuthenticationMethod     string                 `jsonapi:"attr,authentication_method,omitempty"`
@@ -44,6 +45,7 @@ type StatusPage struct {
 	ExternalDomainNames      []interface{}          `jsonapi:"attr,external_domain_names,omitempty"`
 	CnameRecords             map[string]interface{} `jsonapi:"attr,cname_records,omitempty"`
 	Enabled                  *bool                  `jsonapi:"attr,enabled,omitempty"`
+	PublicationStatus        string                 `jsonapi:"attr,publication_status,omitempty"`
 }
 
 func (c *Client) ListStatusPages(params *rootlygo.ListStatusPagesParams) ([]interface{}, error) {

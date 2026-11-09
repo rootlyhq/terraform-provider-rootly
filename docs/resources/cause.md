@@ -36,6 +36,7 @@ resource "rootly_cause" "infrastructure_failure" {
 - `position` (Number) Position of the cause
 - `properties` (Block List) Array of property values for this cause. (see [below for nested schema](#nestedblock--properties))
 - `public_description` (String) The status page description of the cause
+- `public_name` (String) The public name of the cause shown on status pages instead of its name. Only used and returned when `status-page-v3-phase-1` is enabled
 - `slug` (String, Deprecated) The slug of the cause
 
 ### Read-Only
