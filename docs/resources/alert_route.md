@@ -214,7 +214,7 @@ Optional:
 - `catalog_type` (String) Dynamic destinations only. The catalog the matched entity belongs to: `CatalogEntity` for a custom catalog. Value must be one of `Service`, `Group`, `Functionality`, `CatalogEntity`.
 - `match_keys` (Block List, Max: 1) Dynamic destinations only. How an alert value is matched to a catalog entity property. (see [below for nested schema](#nestedblock--rules--destinations--match_keys))
 - `target_id` (String) The ID of the target. Required for every `target_type` except `dynamic`.
-- `target_type` (String) The type of the target. `dynamic` pages the escalation policy of the catalog entity matched from the alert, takes `catalog_type`, `catalog_id` and `match_keys` instead of `target_id`, and is only available when dynamic alert routing is enabled for the organization. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`, `dynamic`.
+- `target_type` (String) The type of the target. `CatalogEntity` pages the escalation policy of a custom catalog entity. `dynamic` pages the escalation policy of the catalog entity matched from the alert and takes `catalog_type`, `catalog_id` and `match_keys` instead of `target_id`. `CatalogEntity` and `dynamic` are only available when dynamic alert routing is enabled for the organization. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`, `CatalogEntity`, `dynamic`.
 
 <a id="nestedblock--rules--destinations--match_keys"></a>
 ### Nested Schema for `rules.destinations.match_keys`

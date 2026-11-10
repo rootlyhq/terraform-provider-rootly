@@ -192,8 +192,8 @@ func resourceAlertRoute() *schema.Resource {
 										Sensitive:    false,
 										ForceNew:     false,
 										WriteOnly:    false,
-										Description:  "The type of the target. `dynamic` pages the escalation policy of the catalog entity matched from the alert, takes `catalog_type`, `catalog_id` and `match_keys` instead of `target_id`, and is only available when dynamic alert routing is enabled for the organization. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`, `dynamic`.",
-										ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "Functionality", "EscalationPolicy", alertRouteDynamicTargetType}, false),
+										Description:  "The type of the target. `CatalogEntity` pages the escalation policy of a custom catalog entity. `dynamic` pages the escalation policy of the catalog entity matched from the alert and takes `catalog_type`, `catalog_id` and `match_keys` instead of `target_id`. `CatalogEntity` and `dynamic` are only available when dynamic alert routing is enabled for the organization. Value must be one of `Service`, `Group`, `Functionality`, `EscalationPolicy`, `CatalogEntity`, `dynamic`.",
+										ValidateFunc: validation.StringInSlice([]string{"Service", "Group", "Functionality", "EscalationPolicy", "CatalogEntity", alertRouteDynamicTargetType}, false),
 									},
 
 									"target_id": &schema.Schema{

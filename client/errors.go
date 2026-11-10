@@ -1,7 +1,6 @@
 package client
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -37,10 +36,9 @@ func (err NotFoundError) Error() string {
 	return fmt.Sprintf("NotFoundError (%d) %s", err.StatusCode, err.Message)
 }
 
-func (err NotFoundError) Is(e error) bool {
-	notFoundError := NotFoundError{}
-	if errors.As(e, &notFoundError) {
-		return notFoundError.StatusCode == 404
-	}
-	return false
+// Is reports whether target is a NotFoundError, ignoring Message and
+// StatusCode, so both NotFoundError{} and NewNotFoundError("") work as targets.
+func (err NotFoundError) Is(target error) bool {
+	_, ok := target.(NotFoundError)
+	return ok
 }
