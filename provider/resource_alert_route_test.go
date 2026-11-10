@@ -268,6 +268,26 @@ func TestAccResourceAlertRoute_Validation(t *testing.T) {
         `,
 				ExpectError: regexp.MustCompile("`target_id` can't be set on a `dynamic` destination"),
 			},
+			{
+				Config: `
+          resource "rootly_alert_route" "test" {
+            name              = "Test Alert Route"
+            alerts_source_ids = ["alert-source-id"]
+
+            rules {
+              name = "Static catalog entity destination"
+              fallback_rule = true
+
+              destinations {
+                target_type = "CatalogEntity"
+                target_id   = "catalog-entity-id"
+              }
+            }
+          }
+        `,
+				PlanOnly:           true,
+				ExpectNonEmptyPlan: true,
+			},
 		},
 	})
 }
