@@ -134,7 +134,7 @@ func resourceApiKey() *schema.Resource {
 				Sensitive:   true,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "The API key token. Only returned by the API when the key is created, so it is empty for imported keys.",
+				Description: "The API key token. Returned only when the key is created or rotated; omitted from list, show, update and delete responses.",
 			},
 		},
 	}
