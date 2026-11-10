@@ -4,7 +4,6 @@ go 1.26.10
 
 require (
 	github.com/buxizhizhoum/inflection v1.0.4
-	github.com/google/jsonapi v1.0.0
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-cleanhttp v0.5.2
 	github.com/hashicorp/go-cty v1.5.0
@@ -82,7 +81,7 @@ require (
 	github.com/oklog/run v1.2.0 // indirect
 	github.com/onsi/gomega v1.27.6 // indirect
 	github.com/posener/complete v1.2.3 // indirect
-	github.com/rootlyhq/jsonapi v0.0.0-20260818145503-f499cfb9d78f
+	github.com/rootlyhq/jsonapi v0.0.0-20261109170034-45a3b024d895
 	github.com/santhosh-tekuri/jsonschema/v6 v6.0.3 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/speakeasy-api/jsonpath v0.6.3 // indirect

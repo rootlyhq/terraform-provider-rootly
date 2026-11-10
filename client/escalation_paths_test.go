@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/google/jsonapi"
+	"github.com/rootlyhq/jsonapi"
 )
 
 func marshalEscalationPathAttrs(t *testing.T, p *EscalationPath) map[string]interface{} {
