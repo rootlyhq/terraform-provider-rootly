@@ -98,7 +98,6 @@ EOT
 
 resource "rootly_status_page" "test" {
   title                   = "%[1]s"
-  authentication_enabled  = true
   authentication_method   = "saml"
   saml_configuration_id   = rootly_status_page_saml_configuration.test.id
   saml_access_rules_match = "any"
