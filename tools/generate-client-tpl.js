@@ -13,7 +13,7 @@ import (
 	"reflect"
 	"strconv"
 	"fmt"
-	"github.com/google/jsonapi"
+	"github.com/rootlyhq/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -24,10 +24,10 @@ type ${nameCamel} struct {
 
 func (c *Client) List${nameCamelPlural}(${listFnParams(
     nameCamelPlural,
-    pathIdField
+    pathIdField,
   )}) ([]interface{}, error) {
 	req, err := rootlygo.NewList${nameCamelPlural}Request(${listClientParams(
-    pathIdField
+    pathIdField,
   )})
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
@@ -55,7 +55,7 @@ func (c *Client) Create${nameCamel}(d *${nameCamel}) (*${nameCamel}, error) {
 
 	req, err := rootlygo.NewCreate${nameCamel}RequestWithBody(${createParams(
     pathIdField,
-    resourceSchema
+    resourceSchema,
   )})
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
@@ -75,7 +75,7 @@ func (c *Client) Create${nameCamel}(d *${nameCamel}) (*${nameCamel}, error) {
 }
 
 func (c *Client) Get${nameCamel}(id string) (*${nameCamel}, error) {
-	req, err := rootlygo.NewGet${nameCamel}Request(c.Rootly.Server, id${hasIncludeParam ? ', nil' : ''})
+	req, err := rootlygo.NewGet${nameCamel}Request(c.Rootly.Server, id${hasIncludeParam ? ", nil" : ""})
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
 	}
@@ -162,11 +162,11 @@ function createParams(pathIdField, resourceSchema) {
     const schema = resourceSchema.properties[pathIdField];
     if (schema.type === "number") {
       return `c.Rootly.Server, strconv.Itoa(d.${inflect.camelize(
-        pathIdField
+        pathIdField,
       )}), c.ContentType, buffer`;
     } else {
       return `c.Rootly.Server, d.${inflect.camelize(
-        pathIdField
+        pathIdField,
       )}, c.ContentType, buffer`;
     }
   } else {
@@ -184,7 +184,7 @@ function structAttr(name, resourceSchema) {
         return `${inflect.camelize(name)} *string \`jsonapi:"attr,${name},omitempty"\``;
       }
       return `${inflect.camelize(
-        name
+        name,
       )} string \`jsonapi:"attr,${name}${schema.tf_computed === false ? "" : ",omitempty"}"\``;
     case "integer":
       if (schema.tf_nullable) {
@@ -193,24 +193,24 @@ function structAttr(name, resourceSchema) {
         return `${inflect.camelize(name)} *int \`jsonapi:"attr,${name}"\``;
       }
       return `${inflect.camelize(
-        name
+        name,
       )} int \`jsonapi:"attr,${name},omitempty"\``;
     case "number":
       return `${inflect.camelize(
-        name
+        name,
       )} float32 \`jsonapi:"attr,${name},omitempty"\``;
     case "boolean":
       return `${inflect.camelize(
-        name
+        name,
       )} *bool \`jsonapi:"attr,${name},omitempty"\``;
     case "array":
       return `${inflect.camelize(
-        name
+        name,
       )} []interface{} \`jsonapi:"attr,${name},omitempty"\``;
     case "object":
     default:
       return `${inflect.camelize(
-        name
+        name,
       )} map[string]interface{} \`jsonapi:"attr,${name},omitempty"\``;
   }
 }
@@ -218,7 +218,9 @@ function structAttr(name, resourceSchema) {
 function structAttrs(resourceSchema) {
   return Object.entries(resourceSchema.properties)
     .filter(([name, schema]) => {
-      return name !== "created_at" && name !== "updated_at" && !schema.tf_ignore;
+      return (
+        name !== "created_at" && name !== "updated_at" && !schema.tf_ignore
+      );
     })
     .map(([name]) => {
       return structAttr(name, resourceSchema);
