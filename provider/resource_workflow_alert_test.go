@@ -286,3 +286,51 @@ resource "rootly_workflow_alert" "test_afc" {
 }
 `, name)
 }
+
+func TestAccResourceWorkflowAlert_WithGroupAssignmentIds(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-wf-alert-ga")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:          func() { testAccPreCheck(t) },
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceWorkflowAlertGroupAssignmentIdsConfig(rName, "test_1"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_group_assignment", "name", rName),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_group_assignment", "group_assignment_ids.#", "1"),
+					resource.TestCheckResourceAttrPair("rootly_workflow_alert.test_group_assignment", "group_assignment_ids.0", "rootly_team.test_1", "id"),
+				),
+			},
+			{
+				Config: testAccResourceWorkflowAlertGroupAssignmentIdsConfig(rName, "test_2"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test_group_assignment", "group_assignment_ids.#", "1"),
+					resource.TestCheckResourceAttrPair("rootly_workflow_alert.test_group_assignment", "group_assignment_ids.0", "rootly_team.test_2", "id"),
+				),
+			},
+		},
+	})
+}
+
+func testAccResourceWorkflowAlertGroupAssignmentIdsConfig(name, team string) string {
+	return fmt.Sprintf(`
+resource "rootly_team" "test_1" {
+  name = "%[1]s-team-1"
+}
+
+resource "rootly_team" "test_2" {
+  name = "%[1]s-team-2"
+}
+
+resource "rootly_workflow_alert" "test_group_assignment" {
+  name                 = "%[1]s"
+  enabled              = false
+  group_assignment_ids = [rootly_team.%[2]s.id]
+
+  trigger_params {
+    triggers = ["alert_created"]
+  }
+}
+`, name, team)
+}

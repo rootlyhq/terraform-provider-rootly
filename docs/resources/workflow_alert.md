@@ -40,6 +40,7 @@ resource "rootly_workflow_alert" "my-workflow" {
 - `enabled` (Boolean)
 - `environment_ids` (List of String)
 - `functionality_ids` (List of String)
+- `group_assignment_ids` (List of String) Owning team IDs. Requires team-scoped workflows.
 - `group_ids` (List of String)
 - `incident_role_ids` (List of String)
 - `incident_type_ids` (List of String)
