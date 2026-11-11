@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/google/jsonapi"
+	"github.com/rootlyhq/jsonapi"
 )
 
 func marshalAttrs(t *testing.T, c *StatusPageComponent) map[string]interface{} {
