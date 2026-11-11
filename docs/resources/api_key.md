@@ -50,6 +50,15 @@ resource "rootly_api_key" "payments_team" {
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+- `token` (String, Sensitive) The API key token. Returned only when the key is created or rotated; omitted from list, show, update and delete responses.
+
+## Token
+
+`token` holds the API key secret. The Rootly API returns it only in the create response, so:
+
+- It is stored in Terraform state in plain text. Protect your state (encrypted remote backend, restricted access).
+- It is empty for keys brought in with `terraform import`.
+- If the key is rotated outside Terraform (for example through the rotate API endpoint or the web app), the stored `token` is stale and Terraform does not detect it. Recreate the resource (e.g. `terraform apply -replace=rootly_api_key.example`) to get a fresh token in state.
 
 ## Import
 

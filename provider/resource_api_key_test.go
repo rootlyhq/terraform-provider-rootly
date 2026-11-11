@@ -32,7 +32,7 @@ func TestAccResourceApiKey(t *testing.T) {
 func TestAccResourceApiKeyTeamScoped(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-apikey")
 	expiresAt := time.Now().AddDate(1, 0, 0).UTC().Format(time.RFC3339)
-	var firstID string
+	var firstID, firstToken string
 
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
@@ -44,13 +44,26 @@ func TestAccResourceApiKeyTeamScoped(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_api_key.test", "name", rName),
 					resource.TestCheckResourceAttr("rootly_api_key.test", "kind", "team"),
 					resource.TestCheckResourceAttrPair("rootly_api_key.test", "group_id", "rootly_team.first", "id"),
+					resource.TestCheckResourceAttrSet("rootly_api_key.test", "token"),
 					testAccCaptureResourceID("rootly_api_key.test", &firstID),
+					testAccCaptureAttr("rootly_api_key.test", "token", &firstToken),
 				),
 			},
 			{
 				ResourceName:      "rootly_api_key.test",
 				ImportState:       true,
 				ImportStateVerify: true,
+				// The token is only returned on create, never on read.
+				ImportStateVerifyIgnore: []string{"token"},
+			},
+			{
+				// In-place update must keep the token captured on create.
+				Config: testAccResourceApiKeyTeamScopedConfig(rName+"-renamed", expiresAt, "first"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_api_key.test", "name", rName+"-renamed"),
+					testAccCheckResourceIDUnchanged("rootly_api_key.test", &firstID),
+					testAccCheckAttrEquals("rootly_api_key.test", "token", &firstToken),
+				),
 			},
 			{
 				Config: testAccResourceApiKeyTeamScopedConfig(rName, expiresAt, "second"),
@@ -70,6 +83,46 @@ func testAccCaptureResourceID(name string, id *string) resource.TestCheckFunc {
 			return fmt.Errorf("resource %s not found in state", name)
 		}
 		*id = rs.Primary.ID
+		return nil
+	}
+}
+
+func testAccCaptureAttr(name, attr string, value *string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[name]
+		if !ok {
+			return fmt.Errorf("resource %s not found in state", name)
+		}
+		*value = rs.Primary.Attributes[attr]
+		return nil
+	}
+}
+
+func testAccCheckAttrEquals(name, attr string, expected *string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[name]
+		if !ok {
+			return fmt.Errorf("resource %s not found in state", name)
+		}
+		if *expected == "" {
+			return fmt.Errorf("expected value for %s was not captured", attr)
+		}
+		if rs.Primary.Attributes[attr] != *expected {
+			return fmt.Errorf("expected %s.%s to be unchanged, but it differs", name, attr)
+		}
+		return nil
+	}
+}
+
+func testAccCheckResourceIDUnchanged(name string, previous *string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[name]
+		if !ok {
+			return fmt.Errorf("resource %s not found in state", name)
+		}
+		if rs.Primary.ID != *previous {
+			return fmt.Errorf("expected %s to be updated in place, but ID changed from %s to %s", name, *previous, rs.Primary.ID)
+		}
 		return nil
 	}
 }
