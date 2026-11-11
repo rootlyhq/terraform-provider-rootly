@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/google/jsonapi"
+	"github.com/rootlyhq/jsonapi"
 )
 
 func marshalAlertUrgencyAttrs(t *testing.T, p *AlertUrgency) map[string]interface{} {
