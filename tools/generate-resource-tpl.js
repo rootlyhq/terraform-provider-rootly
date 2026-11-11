@@ -70,6 +70,7 @@ func resource${nameCamel}Create(ctx context.Context, d *schema.ResourceData, met
 
 	d.SetId(res.ID)
 	tflog.Trace(ctx, fmt.Sprintf("created a ${name} resource: %s", d.Id()))
+	${setCreateResponseOnlyFields(resourceSchema)}
 
 	return resource${nameCamel}Read(ctx, d, meta)
 }
@@ -139,12 +140,22 @@ function excludeIgnoredProperties([field, schema]) {
   return field !== "created_at" && field !== "updated_at" && !schema.tf_ignore;
 }
 
+// Fields flagged `tf_create_response_only` are returned by the API only in the
+// create response (e.g. an API key token, shown once). They are stored in state
+// right after create and never touched by Read.
+function setCreateResponseOnlyFields(resourceSchema) {
+  return Object.entries(resourceSchema.properties)
+    .filter(([, schema]) => schema.tf_create_response_only)
+    .map(([field]) => `d.Set("${field}", res.${inflect.camelize(field)})`)
+    .join("\n  ");
+}
+
 function setResourceFields(name, resourceSchema) {
   const isV2Resource = v2Resources.includes(name);
 
   return Object.entries(resourceSchema.properties)
     .filter(excludeIgnoredProperties)
-    .filter(([, schema]) => !schema.tf_create_only)
+    .filter(([, schema]) => !schema.tf_create_only && !schema.tf_create_response_only)
     .map(([field]) => {
       const schema = resourceSchema.properties[field];
 
