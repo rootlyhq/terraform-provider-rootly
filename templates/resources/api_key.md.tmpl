@@ -1,0 +1,51 @@
+---
+page_title: "{{.Type}} {{.Name}} - {{.RenderedProviderName}}"
+subcategory:
+description: |-
+  {{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Type}} ({{.Name}})
+
+{{ .Description | trimspace }}
+
+{{ if .HasExample -}}
+## Example Usage
+
+{{ codefile "shell" .ExampleFile }}
+{{- end }}
+
+{{ .SchemaMarkdown | trimspace }}
+
+## Token
+
+`token` holds the API key secret. The Rootly API returns it only in the create response, so:
+
+- It is stored in Terraform state in plain text. Protect your state (encrypted remote backend, restricted access).
+- It is empty for keys brought in with `terraform import`.
+- If the key is rotated outside Terraform (for example through the rotate API endpoint or the web app), the stored `token` is stale and Terraform does not detect it. Recreate the resource (e.g. `terraform apply -replace=rootly_api_key.example`) to get a fresh token in state.
+
+## Import
+
+{{.Name}} can be imported using the [`import` command](https://developer.hashicorp.com/terraform/cli/commands/import).
+
+```sh
+terraform import {{.Name}}.primary a816421c-6ceb-481a-87c4-585e47451f24
+```
+
+Or using an [`import` block](https://developer.hashicorp.com/terraform/language/import).
+
+```terraform
+import {
+  to = {{.Name}}.primary
+  id = "a816421c-6ceb-481a-87c4-585e47451f24"
+}
+```
+
+Locate the resource id in the web app, or retrieve it by listing resources through the API if it's not visible in the web app.
+
+HCL can be generated from the import block using the `-generate-config-out` flag.
+
+```sh
+terraform plan -generate-config-out=generated.tf
+```
