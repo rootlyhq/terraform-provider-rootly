@@ -175,8 +175,8 @@ func resourceEscalationLevel() *schema.Resource {
 							Sensitive:    false,
 							ForceNew:     false,
 							WriteOnly:    false,
-							Description:  "The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`, `microsoft_teams_channel`, `service`.",
-							ValidateFunc: validation.StringInSlice([]string{"team", "user", "schedule", "slack_channel", "microsoft_teams_channel", "service"}, false),
+							Description:  "The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`, `microsoft_teams_channel`, `service`, `ai_sre`. For `ai_sre`, set `id` to the AI SRE provider (e.g. `rootly`) to start an AI SRE investigation when this level is reached; the level must also have at least one other target.",
+							ValidateFunc: validation.StringInSlice([]string{"team", "user", "schedule", "slack_channel", "microsoft_teams_channel", "service", "ai_sre"}, false),
 						},
 
 						"team_members": &schema.Schema{
