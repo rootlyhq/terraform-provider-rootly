@@ -1,8 +1,14 @@
 <!--
 Use a Conventional Commit PR title: <type>(<optional scope>): <description>
 
+Scope the title to the resource type that changed:
+  resource/<name>    resource only
+  datasource/<name>  data source only
+  <name>             both resource and data source
+
 Examples:
-  feat(rootly_api_key_rotation): add API key rotation resource [PRF-3498]
+  feat(resource/rootly_api_key_rotation): add API key rotation resource [PRF-3498]
+  fix(datasource/rootly_alert_route): return all matching alert routes [TER-227]
   fix(rootly_alert_route): allow clearing optional property and condition fields [TER-227]
   docs: clarify provider configuration
   chore(deps): update dependencies
