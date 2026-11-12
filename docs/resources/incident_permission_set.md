@@ -20,7 +20,7 @@ description: |-
 
 ### Optional
 
-- `description` (String) The incident permission set description.
+- `description` (String) A description of the incident permission set. Required when severity-based incident permissions are enabled for your organization.
 - `private_incident_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `public_incident_permissions` (List of String) Value must be one of `create`, `read`, `update`, `delete`.
 - `slug` (String, Deprecated) The incident permission set slug.

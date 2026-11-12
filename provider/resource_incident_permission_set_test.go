@@ -27,7 +27,8 @@ func TestAccResourceIncidentPermissionSet(t *testing.T) {
 func testAccResourceIncidentPermissionSetConfig(name string) string {
 	return fmt.Sprintf(`
 resource "rootly_incident_permission_set" "test" {
-	name = "%s"
+	name        = "%[1]s"
+	description = "%[1]s-description"
 }
 `, name)
 }
