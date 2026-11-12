@@ -245,7 +245,7 @@ Optional:
 
 - `id` (String) The ID of notification target
 - `team_members` (String) For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.. Value must be one of `all`, `admins`, `escalate`.
-- `type` (String) The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`, `microsoft_teams_channel`, `service`, `ai_sre`. For `ai_sre`, set `id` to the AI SRE provider (e.g. `rootly`) to start an AI SRE investigation when this level is reached; the level must also have at least one other target.
+- `type` (String) The type of the notification target. Value must be one of `team`, `user`, `schedule`, `slack_channel`, `microsoft_teams_channel`, `service`, `ai_sre`. For `ai_sre`, set `id` to the AI SRE provider (e.g. `rootly`) to start an AI SRE investigation when this level is reached; the level must also have at least one other target. AI SRE is only available to organizations that have the feature enabled; contact your Customer Success Manager if you are interested.
 
 ## Import
 
