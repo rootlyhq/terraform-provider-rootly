@@ -15,7 +15,8 @@ resource "rootly_incident_permission_set_resource" "sev1" {
   resource_id                = rootly_severity.sev1.id
 
   severity_params {
-    fully_enabled = false
-    severity_ids  = [rootly_severity.sev0.id, rootly_severity.sev1.id]
+    fully_enabled         = false
+    applies_to_unassigned = false
+    severity_ids          = [rootly_severity.sev0.id, rootly_severity.sev1.id]
   }
 }
