@@ -256,6 +256,93 @@ func resourceStatusPage() *schema.Resource {
 				ValidateFunc: validation.StringInSlice([]string{"urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"}, false),
 			},
 
+			"saml_idp_entity_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "SAML IdP entity ID (issuer). Blank accepts any issuer. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.",
+			},
+
+			"saml_configuration_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "ID of the shared SAML configuration used by the page. Manage shared configurations with /v1/status-page-saml-configurations.",
+			},
+
+			"saml_access_rules": &schema.Schema{
+				Type:             schema.TypeList,
+				Computed:         false,
+				Required:         false,
+				Optional:         true,
+				Sensitive:        false,
+				ForceNew:         false,
+				WriteOnly:        false,
+				Description:      "Rules that decide which signed-in SAML users can view the page. Values are compared case-sensitively.",
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"claim": &schema.Schema{
+							Type:        schema.TypeString,
+							Computed:    true,
+							Required:    false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "SAML attribute name. Required for is_any_of.",
+						},
+
+						"operator": &schema.Schema{
+							Type:         schema.TypeString,
+							Default:      "is_any_of",
+							Required:     false,
+							Optional:     true,
+							Sensitive:    false,
+							ForceNew:     false,
+							WriteOnly:    false,
+							Description:  "is_any_of matches attribute values; email_domain_is_any_of matches the domain of the signed-in email. Value must be one of `is_any_of`, `email_domain_is_any_of`.",
+							ValidateFunc: validation.StringInSlice([]string{"is_any_of", "email_domain_is_any_of"}, false),
+						},
+
+						"values": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         false,
+							Required:         false,
+							Optional:         true,
+							Sensitive:        false,
+							ForceNew:         false,
+							WriteOnly:        false,
+							Description:      "Accepted values",
+						},
+					},
+				},
+			},
+
+			"saml_access_rules_match": &schema.Schema{
+				Type:         schema.TypeString,
+				Default:      "all",
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Whether all rules or any rule must match. Value must be one of `all`, `any`.",
+				ValidateFunc: validation.StringInSlice([]string{"all", "any"}, false),
+			},
+
 			"section_order": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -467,6 +554,18 @@ func resourceStatusPageCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("saml_name_identifier_format"); ok {
 		s.SamlNameIdentifierFormat = value.(string)
 	}
+	if value, ok := d.GetOkExists("saml_idp_entity_id"); ok {
+		s.SamlIdpEntityId = value.(string)
+	}
+	if value, ok := d.GetOkExists("saml_configuration_id"); ok {
+		s.SamlConfigurationId = value.(string)
+	}
+	if value, ok := d.GetOkExists("saml_access_rules"); ok {
+		s.SamlAccessRules = value.([]interface{})
+	}
+	if value, ok := d.GetOkExists("saml_access_rules_match"); ok {
+		s.SamlAccessRulesMatch = value.(string)
+	}
 	if value, ok := d.GetOkExists("section_order"); ok {
 		s.SectionOrder = value.([]interface{})
 	}
@@ -549,6 +648,24 @@ func resourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("saml_idp_cert", item.SamlIdpCert)
 	d.Set("saml_idp_cert_fingerprint", item.SamlIdpCertFingerprint)
 	d.Set("saml_name_identifier_format", item.SamlNameIdentifierFormat)
+	d.Set("saml_idp_entity_id", item.SamlIdpEntityId)
+	d.Set("saml_configuration_id", item.SamlConfigurationId)
+	if item.SamlAccessRules != nil {
+		processedSamlAccessRules := make([]map[string]interface{}, 0)
+		for _, c := range item.SamlAccessRules {
+			if rawItem, ok := c.(map[string]interface{}); ok {
+				processedSamlAccessRules = append(processedSamlAccessRules, map[string]interface{}{
+					"claim":    rawItem["claim"],
+					"operator": rawItem["operator"],
+					"values":   rawItem["values"],
+				})
+			}
+		}
+		d.Set("saml_access_rules", processedSamlAccessRules)
+	} else {
+		d.Set("saml_access_rules", nil)
+	}
+	d.Set("saml_access_rules_match", item.SamlAccessRulesMatch)
 	d.Set("section_order", item.SectionOrder)
 	d.Set("website_url", item.WebsiteUrl)
 	d.Set("website_privacy_url", item.WebsitePrivacyUrl)
@@ -627,6 +744,22 @@ func resourceStatusPageUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if d.HasChange("saml_name_identifier_format") {
 		s.SamlNameIdentifierFormat = d.Get("saml_name_identifier_format").(string)
+	}
+	if d.HasChange("saml_idp_entity_id") {
+		s.SamlIdpEntityId = d.Get("saml_idp_entity_id").(string)
+	}
+	if d.HasChange("saml_configuration_id") {
+		s.SamlConfigurationId = d.Get("saml_configuration_id").(string)
+	}
+	if d.HasChange("saml_access_rules") {
+		if value, ok := d.GetOk("saml_access_rules"); value != nil && ok {
+			s.SamlAccessRules = value.([]interface{})
+		} else {
+			s.SamlAccessRules = []interface{}{}
+		}
+	}
+	if d.HasChange("saml_access_rules_match") {
+		s.SamlAccessRulesMatch = d.Get("saml_access_rules_match").(string)
 	}
 
 	if d.HasChange("section_order") {
