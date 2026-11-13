@@ -117,6 +117,17 @@ func EqualIgnoringOrderAndFields(fieldsToCompare []string) schema.SchemaDiffSupp
 	}
 }
 
+// ListChangeFromDiffKey returns the old and new values of the list that
+// contains the attribute named by a DiffSuppressFunc key.
+func ListChangeFromDiffKey(key string, d *schema.ResourceData) ([]interface{}, []interface{}, bool) {
+	return listChangeFromDiffKey(key, d)
+}
+
+// ListsAreEqualIgnoringOrder reports whether two lists hold the same values,
+// ignoring order.
+func ListsAreEqualIgnoringOrder(list1, list2 []interface{}) bool {
+	return listsAreEqual(list1, list2)
+
 func EqualIgnoringOrderOfList(listName string) schema.SchemaDiffSuppressFunc {
 	return func(key, oldValue, newValue string, d *schema.ResourceData) bool {
 		listKey, ok := enclosingListKey(key, listName)

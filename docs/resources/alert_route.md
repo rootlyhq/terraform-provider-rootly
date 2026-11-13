@@ -177,7 +177,7 @@ Optional:
 - `condition_groups` (Block List) Must be specified if `fallback_rule` is `false`. (see [below for nested schema](#nestedblock--rules--condition_groups))
 - `destinations` (Block List) (see [below for nested schema](#nestedblock--rules--destinations))
 - `fallback_rule` (Boolean) Whether this is a fallback rule. Must be `true` if `condition_groups` is not specified.
-- `name` (String) The name of the alert routing rule
+- `name` (String) The name of the alert routing rule. Rootly names a fallback rule `Fallback Rule for <route name>` and ignores this value, so a different `name` on a fallback rule is not treated as a change.
 - `non_paging` (Boolean) Whether alerts matching this rule are left unpaged. A non-paging rule takes no destinations. Only available when dynamic alert routing is enabled for the organization.
 - `position` (Number) The position of the alert routing rule for ordering evaluation
 
