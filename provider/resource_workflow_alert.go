@@ -708,6 +708,7 @@ func resourceWorkflowAlertRead(ctx context.Context, d *schema.ResourceData, meta
 		}
 		tp["alert_field_conditions"] = afc
 	}
+	// Prevent panic when new attributes are added to `trigger_params`.
 	triggerParamsSchema := resourceWorkflowAlert().Schema["trigger_params"].Elem.(*schema.Resource).Schema
 	safeTriggerParams := sdkutils.FilterToSchema(tp, triggerParamsSchema)
 	d.Set("trigger_params", []interface{}{safeTriggerParams})
