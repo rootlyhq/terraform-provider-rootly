@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
@@ -225,6 +226,26 @@ func resourceWorkflowAlert() *schema.Resource {
 							Required:         false,
 							Optional:         true,
 							Description:      "",
+						},
+
+						"alert_condition_source_id": &schema.Schema{
+							Type:        schema.TypeString,
+							Default:     "ANY",
+							Required:    false,
+							Optional:    true,
+							Description: "Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+						},
+
+						"alert_source_ids": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         true,
+							Required:         false,
+							Optional:         true,
+							Description:      "IDs of the alert sources the alert must come from. Use alert_sources to match on source type instead.",
 						},
 
 						"alert_condition_label": &schema.Schema{
@@ -677,7 +698,6 @@ func resourceWorkflowAlertRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("position", item.Position)
 	d.Set("workflow_group_id", item.WorkflowGroupId)
 
-	tps := make([]interface{}, 1, 1)
 	tp := item.TriggerParams
 	if tp != nil {
 		stateupgrade.CoerceAlertPayloadConditions(ctx, tp)
@@ -688,8 +708,10 @@ func resourceWorkflowAlertRead(ctx context.Context, d *schema.ResourceData, meta
 		}
 		tp["alert_field_conditions"] = afc
 	}
-	tps[0] = tp
-	d.Set("trigger_params", tps)
+	// Prevent panic when new attributes are added to `trigger_params`.
+	triggerParamsSchema := resourceWorkflowAlert().Schema["trigger_params"].Elem.(*schema.Resource).Schema
+	safeTriggerParams := sdkutils.FilterToSchema(tp, triggerParamsSchema)
+	d.Set("trigger_params", []interface{}{safeTriggerParams})
 
 	d.Set("environment_ids", item.EnvironmentIds)
 	d.Set("severity_ids", item.SeverityIds)
