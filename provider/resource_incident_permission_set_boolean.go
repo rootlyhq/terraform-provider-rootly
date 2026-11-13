@@ -70,6 +70,68 @@ func resourceIncidentPermissionSetBoolean() *schema.Resource {
 				ForceNew:  false,
 				WriteOnly: false,
 			},
+
+			"severity_params": &schema.Schema{
+				Type:        schema.TypeList,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Severity scoping for this permission. Null unless severity-based incident permissions are enabled for the team.",
+				MinItems:    0,
+				MaxItems:    1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+
+						"fully_enabled": &schema.Schema{
+							Type:        schema.TypeBool,
+							Default:     true,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "Whether permissions are enabled for any severity incident. Value must be one of true or false",
+						},
+
+						"applies_to_unassigned": &schema.Schema{
+							Type:        schema.TypeBool,
+							Default:     true,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "Whether permissions are enabled for incident without severity. Value must be one of true or false",
+						},
+
+						"create_enabled": &schema.Schema{
+							Type:        schema.TypeBool,
+							Default:     false,
+							Optional:    true,
+							Sensitive:   false,
+							ForceNew:    false,
+							WriteOnly:   false,
+							Description: "Whether permissions are enabled when creating incident. Value must be one of true or false",
+						},
+
+						"severity_ids": &schema.Schema{
+							Type: schema.TypeList,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							},
+							DiffSuppressFunc: tools.EqualIgnoringOrder,
+							Computed:         false,
+							Required:         false,
+							Optional:         true,
+							Sensitive:        false,
+							ForceNew:         false,
+							WriteOnly:        false,
+							Description:      "Severity ids that determine if an incident is permitted based on matching severity",
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -92,6 +154,13 @@ func resourceIncidentPermissionSetBooleanCreate(ctx context.Context, d *schema.R
 	}
 	if value, ok := d.GetOkExists("enabled"); ok {
 		s.Enabled = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("severity_params"); ok {
+		if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
+			if mapValue, ok := valueList[0].(map[string]interface{}); ok {
+				s.SeverityParams = mapValue
+			}
+		}
 	}
 
 	res, err := c.CreateIncidentPermissionSetBoolean(s)
@@ -126,6 +195,19 @@ func resourceIncidentPermissionSetBooleanRead(ctx context.Context, d *schema.Res
 	d.Set("kind", item.Kind)
 	d.Set("private", item.Private)
 	d.Set("enabled", item.Enabled)
+	if item.SeverityParams != nil {
+		singleton_list_severity_params := make([]interface{}, 1, 1)
+		processed_item_severity_params := map[string]interface{}{
+			"fully_enabled":         item.SeverityParams["fully_enabled"],
+			"applies_to_unassigned": item.SeverityParams["applies_to_unassigned"],
+			"create_enabled":        item.SeverityParams["create_enabled"],
+			"severity_ids":          item.SeverityParams["severity_ids"],
+		}
+		singleton_list_severity_params[0] = processed_item_severity_params
+		d.Set("severity_params", singleton_list_severity_params)
+	} else {
+		d.Set("severity_params", nil)
+	}
 
 	return nil
 }
@@ -147,6 +229,12 @@ func resourceIncidentPermissionSetBooleanUpdate(ctx context.Context, d *schema.R
 	}
 	if d.HasChange("enabled") {
 		s.Enabled = tools.Bool(d.Get("enabled").(bool))
+	}
+	if d.HasChange("severity_params") {
+		tps := d.Get("severity_params").([]interface{})
+		for _, tpsi := range tps {
+			s.SeverityParams = tpsi.(map[string]interface{})
+		}
 	}
 
 	_, err := c.UpdateIncidentPermissionSetBoolean(d.Id(), s)

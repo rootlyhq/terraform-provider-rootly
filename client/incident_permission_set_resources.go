@@ -11,12 +11,13 @@ import (
 )
 
 type IncidentPermissionSetResource struct {
-	ID                      string `jsonapi:"primary,incident_permission_set_resources"`
-	IncidentPermissionSetId string `jsonapi:"attr,incident_permission_set_id,omitempty"`
-	Kind                    string `jsonapi:"attr,kind,omitempty"`
-	Private                 *bool  `jsonapi:"attr,private,omitempty"`
-	ResourceId              string `jsonapi:"attr,resource_id,omitempty"`
-	ResourceType            string `jsonapi:"attr,resource_type,omitempty"`
+	ID                      string                 `jsonapi:"primary,incident_permission_set_resources"`
+	IncidentPermissionSetId string                 `jsonapi:"attr,incident_permission_set_id,omitempty"`
+	Kind                    string                 `jsonapi:"attr,kind,omitempty"`
+	Private                 *bool                  `jsonapi:"attr,private,omitempty"`
+	ResourceId              string                 `jsonapi:"attr,resource_id,omitempty"`
+	ResourceType            string                 `jsonapi:"attr,resource_type,omitempty"`
+	SeverityParams          map[string]interface{} `jsonapi:"attr,severity_params,omitempty"`
 }
 
 func (c *Client) ListIncidentPermissionSetResources(id string, params *rootlygo.ListIncidentPermissionSetResourcesParams) ([]interface{}, error) {
