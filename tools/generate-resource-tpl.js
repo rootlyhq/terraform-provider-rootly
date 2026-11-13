@@ -8,6 +8,7 @@ function forceMapFor(name) {
       "resolution_rule_attributes",
       "alert_template_attributes",
       "sourceable_attributes",
+      "severity_params",
     ].includes(name)
   );
 }
@@ -211,18 +212,22 @@ function setResourceFields(name, resourceSchema) {
       } else if (
         schema.type == "object" &&
         schema.properties &&
-        !forceMapFor(name)
+        !forceMapFor(field)
       ) {
-        return `singleton_list_${field} := make([]interface{}, 1, 1)
-          processed_item_${field} := map[string]interface{}{
-            ${Object.keys(schema.properties)
-              .map(
-                (key) => `"${key}": item.${inflect.camelize(field)}["${key}"]`
-              )
-              .join(",\n")},
+        return `if item.${inflect.camelize(field)} != nil {
+            singleton_list_${field} := make([]interface{}, 1, 1)
+            processed_item_${field} := map[string]interface{}{
+              ${Object.keys(schema.properties)
+                .map(
+                  (key) => `"${key}": item.${inflect.camelize(field)}["${key}"]`
+                )
+                .join(",\n")},
+            }
+            singleton_list_${field}[0] = processed_item_${field}
+            d.Set("${field}", singleton_list_${field})
+          } else {
+            d.Set("${field}", nil)
           }
-          singleton_list_${field}[0] = processed_item_${field}
-          d.Set("${field}", singleton_list_${field})
         `;
       }
       return `d.Set("${field}", item.${inflect.camelize(field)})`;
@@ -316,7 +321,7 @@ function createResourceFields(name, resourceSchema, writableFields, deprecatedFi
       } else if (
         schema.type == "object" &&
         schema.properties &&
-        !forceMapFor(name)
+        !forceMapFor(field)
       ) {
         return `  if value, ok := d.GetOkExists("${field}"); ok {
 				if valueList, ok := value.([]interface{}); ok && len(valueList) > 0 && valueList[0] != nil {
@@ -440,7 +445,7 @@ function updateResourceFields(name, resourceSchema, writableFields, deprecatedFi
       } else if (
         schema.type == "object" &&
         schema.properties &&
-        !forceMapFor(name)
+        !forceMapFor(field)
       ) {
         return `  if d.HasChange("${field}") {
       		tps := d.Get("${field}").([]interface{})

@@ -11,11 +11,12 @@ import (
 )
 
 type IncidentPermissionSetBoolean struct {
-	ID                      string `jsonapi:"primary,incident_permission_set_booleans"`
-	IncidentPermissionSetId string `jsonapi:"attr,incident_permission_set_id,omitempty"`
-	Kind                    string `jsonapi:"attr,kind,omitempty"`
-	Private                 *bool  `jsonapi:"attr,private,omitempty"`
-	Enabled                 *bool  `jsonapi:"attr,enabled,omitempty"`
+	ID                      string                 `jsonapi:"primary,incident_permission_set_booleans"`
+	IncidentPermissionSetId string                 `jsonapi:"attr,incident_permission_set_id,omitempty"`
+	Kind                    string                 `jsonapi:"attr,kind,omitempty"`
+	Private                 *bool                  `jsonapi:"attr,private,omitempty"`
+	Enabled                 *bool                  `jsonapi:"attr,enabled,omitempty"`
+	SeverityParams          map[string]interface{} `jsonapi:"attr,severity_params,omitempty"`
 }
 
 func (c *Client) ListIncidentPermissionSetBooleans(id string, params *rootlygo.ListIncidentPermissionSetBooleansParams) ([]interface{}, error) {
