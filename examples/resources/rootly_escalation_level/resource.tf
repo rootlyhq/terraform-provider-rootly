@@ -182,3 +182,19 @@ resource "rootly_escalation_level" "third" {
     id   = rootly_schedule.primary.id
   }
 }
+# Start a Rootly AI SRE investigation when this level is reached.
+# An ai_sre target needs at least one other target on the same level.
+resource "rootly_escalation_level" "ai_sre" {
+  escalation_policy_path_id = rootly_escalation_path.default.id
+  escalation_policy_id      = rootly_escalation_policy.primary.id
+  position                  = 5
+  delay                     = 5
+  notification_target_params {
+    type = "ai_sre"
+    id   = "rootly"
+  }
+  notification_target_params {
+    type = "schedule"
+    id   = rootly_schedule.primary.id
+  }
+}

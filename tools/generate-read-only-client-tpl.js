@@ -13,7 +13,7 @@ import (
 	"reflect"
 	"strconv"
 	"fmt"
-	"github.com/google/jsonapi"
+	"github.com/rootlyhq/jsonapi"
 	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
@@ -24,10 +24,10 @@ type ${nameCamel} struct {
 
 func (c *Client) List${nameCamelPlural}(${listFnParams(
     nameCamelPlural,
-    pathIdField
+    pathIdField,
   )}) ([]interface{}, error) {
 	req, err := rootlygo.NewList${nameCamelPlural}Request(${listClientParams(
-    pathIdField
+    pathIdField,
   )})
 	if err != nil {
 		return nil, fmt.Errorf("Error building request: %w", err)
@@ -70,25 +70,25 @@ function structAttr(name, resourceSchema) {
   switch (schema.type) {
     case "string":
       return `${inflect.camelize(
-        name
+        name,
       )} string \`jsonapi:"attr,${name},omitempty"\``;
     case "integer":
     case "number":
       return `${inflect.camelize(
-        name
+        name,
       )} int \`jsonapi:"attr,${name},omitempty"\``;
     case "boolean":
       return `${inflect.camelize(
-        name
+        name,
       )} *bool \`jsonapi:"attr,${name},omitempty"\``;
     case "array":
       return `${inflect.camelize(
-        name
+        name,
       )} []interface{} \`jsonapi:"attr,${name},omitempty"\``;
     case "object":
     default:
       return `${inflect.camelize(
-        name
+        name,
       )} map[string]interface{} \`jsonapi:"attr,${name},omitempty"\``;
   }
 }

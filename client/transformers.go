@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"io"
 
-	"github.com/google/jsonapi"
+	"github.com/rootlyhq/jsonapi"
 )
 
 func MarshalData(entity interface{}) (io.Reader, error) {

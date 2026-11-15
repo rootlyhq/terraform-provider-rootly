@@ -505,6 +505,18 @@ func resourceWorkflowAlert() *schema.Resource {
 				Description:      "",
 			},
 
+			"group_assignment_ids": &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				DiffSuppressFunc: tools.EqualIgnoringOrder,
+				Computed:         true,
+				Required:         false,
+				Optional:         true,
+				Description:      "Owning team IDs. Requires team-scoped workflows.",
+			},
+
 			"cause_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -611,6 +623,9 @@ func resourceWorkflowAlertCreate(ctx context.Context, d *schema.ResourceData, me
 	if value, ok := d.GetOkExists("group_ids"); ok {
 		s.GroupIds = value.([]interface{})
 	}
+	if value, ok := d.GetOkExists("group_assignment_ids"); ok {
+		s.GroupAssignmentIds = value.([]interface{})
+	}
 	if value, ok := d.GetOkExists("cause_ids"); ok {
 		s.CauseIds = value.([]interface{})
 	}
@@ -683,6 +698,7 @@ func resourceWorkflowAlertRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("service_ids", item.ServiceIds)
 	d.Set("functionality_ids", item.FunctionalityIds)
 	d.Set("group_ids", item.GroupIds)
+	d.Set("group_assignment_ids", item.GroupAssignmentIds)
 	d.Set("cause_ids", item.CauseIds)
 	d.Set("sub_status_ids", item.SubStatusIds)
 
@@ -770,6 +786,9 @@ func resourceWorkflowAlertUpdate(ctx context.Context, d *schema.ResourceData, me
 	}
 	if d.HasChange("group_ids") {
 		s.GroupIds = d.Get("group_ids").([]interface{})
+	}
+	if d.HasChange("group_assignment_ids") {
+		s.GroupAssignmentIds = d.Get("group_assignment_ids").([]interface{})
 	}
 	if d.HasChange("cause_ids") {
 		s.CauseIds = d.Get("cause_ids").([]interface{})

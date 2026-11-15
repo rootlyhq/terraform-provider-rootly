@@ -502,13 +502,17 @@ func resourceAlertRoutingRuleRead(ctx context.Context, d *schema.ResourceData, m
 		d.Set("conditions", nil)
 	}
 
-	singleton_list_destination := make([]interface{}, 1, 1)
-	processed_item_destination := map[string]interface{}{
-		"target_type": item.Destination["target_type"],
-		"target_id":   item.Destination["target_id"],
+	if item.Destination != nil {
+		singleton_list_destination := make([]interface{}, 1, 1)
+		processed_item_destination := map[string]interface{}{
+			"target_type": item.Destination["target_type"],
+			"target_id":   item.Destination["target_id"],
+		}
+		singleton_list_destination[0] = processed_item_destination
+		d.Set("destination", singleton_list_destination)
+	} else {
+		d.Set("destination", nil)
 	}
-	singleton_list_destination[0] = processed_item_destination
-	d.Set("destination", singleton_list_destination)
 
 	if item.ConditionGroups != nil {
 		processed_items_condition_groups := make([]map[string]interface{}, 0)

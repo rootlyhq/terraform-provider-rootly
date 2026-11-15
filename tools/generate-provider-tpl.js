@@ -102,6 +102,7 @@ ${resources
 				"rootly_escalation_level": resourceEscalationLevel(),
 				"rootly_escalation_path": resourceEscalationPath(),
 				"rootly_escalation_policy": resourceEscalationPolicy(),
+				"rootly_incident_permission_set": resourceIncidentPermissionSet(),
 				"rootly_retrospective_configuration": resourceRetrospectiveConfiguration(),
 				"rootly_retrospective_process": resourceRetrospectiveProcess(),
 				"rootly_retrospective_step": resourceRetrospectiveStep(),

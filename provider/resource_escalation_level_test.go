@@ -193,3 +193,52 @@ resource "rootly_escalation_level" "cycle" {
 }
 `, rName, rName, repeatsMode, repeats, rotationScope)
 }
+
+func TestAccResourceEscalationLevelAiSreTarget(t *testing.T) {
+	epName := acctest.RandomWithPrefix("tf-ep")
+	teamName := acctest.RandomWithPrefix("tf-team")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:          func() { testAccPreCheck(t) },
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceEscalationLevelAiSreConfig(epName, teamName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_escalation_level.test", "notification_target_params.#", "2"),
+					resource.TestCheckResourceAttr("rootly_escalation_level.test", "notification_target_params.0.type", "ai_sre"),
+					resource.TestCheckResourceAttr("rootly_escalation_level.test", "notification_target_params.0.id", "rootly"),
+					resource.TestCheckResourceAttr("rootly_escalation_level.test", "notification_target_params.1.type", "team"),
+				),
+			},
+		},
+	})
+}
+
+func testAccResourceEscalationLevelAiSreConfig(epName, teamName string) string {
+	return fmt.Sprintf(`
+resource "rootly_team" "test" {
+	name = "%s"
+}
+
+resource "rootly_escalation_policy" "test" {
+	name = "%s"
+}
+
+resource "rootly_escalation_level" "test" {
+	escalation_policy_id = rootly_escalation_policy.test.id
+	position             = 1
+	delay                = 0
+
+	notification_target_params {
+		id   = "rootly"
+		type = "ai_sre"
+	}
+
+	notification_target_params {
+		id   = rootly_team.test.id
+		type = "team"
+	}
+}
+`, teamName, epName)
+}

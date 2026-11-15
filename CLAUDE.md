@@ -78,6 +78,7 @@ The provider uses custom OpenAPI schema annotations to control Terraform resourc
 - **`tf_write_only`** - Used for arguments that handle secret values that do not need to be persisted in Terraform plan or state, such as passwords, API keys, etc. Write-only argument values are not sent to Terraform and do not persist in the Terraform plan or state artifact.
 - **`tf_computed`** - Controls whether a field is computed by Terraform (`true`) or must be explicitly set (`false`). Affects JSON serialization and whether the field gets the `omitempty` tag.
 - **`tf_include_unchanged`** - Forces a field to be included in update operations even if it hasn't changed. Bypasses the normal `d.HasChange()` check. Used for fields the API requires in every update request.
+- **`tf_create_response_only`** - For attributes the API returns only in the create response (e.g. an API key token, shown once). The value is stored in state right after create and is never set by Read, so it stays empty after import. Combine with `tf_computed: true` and `tf_sensitive: true`.
 
 These flags are added to OpenAPI schema properties and processed by `tools/generate-resource-tpl.js` to customize Terraform field behavior.
 

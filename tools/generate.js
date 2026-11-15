@@ -105,6 +105,7 @@ const excluded = {
     "incident_event",
     "incident_feedback",
     "incident_form_field_selection",
+    "incident_permission_set",
     "incident_post_mortem",
     "incident",
     "ip_ranges",
