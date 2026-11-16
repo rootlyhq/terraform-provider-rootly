@@ -73,6 +73,7 @@ Optional:
 - `alert_condition_payload` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `alert_condition_payload_use_regexp` (Boolean) Value must be one of true or false
 - `alert_condition_source` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
+- `alert_condition_source_id` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `alert_condition_source_use_regexp` (Boolean) Value must be one of true or false
 - `alert_condition_status` (String) Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.
 - `alert_condition_status_use_regexp` (Boolean) Value must be one of true or false
@@ -82,6 +83,7 @@ Optional:
 - `alert_payload` (List of String)
 - `alert_payload_conditions` (Block List, Max: 1) (see [below for nested schema](#nestedblock--trigger_params--alert_payload_conditions))
 - `alert_query_payload` (String) You can use jsonpath syntax. eg: $.incident.teams[*]
+- `alert_source_ids` (List of String) IDs of the alert sources the alert must come from. Use alert_sources to match on source type instead.
 - `alert_sources` (List of String)
 - `alert_statuses` (List of String)
 - `alert_urgency_ids` (List of String)
