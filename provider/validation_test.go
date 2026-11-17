@@ -222,3 +222,33 @@ func TestValidateTeamAdminIdsInUserIds_NoUsers(t *testing.T) {
 		t.Fatalf("expected error when admin set but no user_ids, got nil")
 	}
 }
+
+// A valid reorder (task "a" moved from 1 to 5, the rest shifted up)
+// should be accepted.
+func TestValidateUniqueWorkflowTaskPosition_ReorderDeadlock(t *testing.T) {
+	c := &dummyClient{
+		tasks: []*struct {
+			ID       string
+			Name     string
+			Position int
+		}{
+			{ID: "a", Name: "Task A", Position: 1},
+			{ID: "b", Name: "Task B", Position: 2},
+			{ID: "c", Name: "Task C", Position: 3},
+			{ID: "d", Name: "Task D", Position: 4},
+			{ID: "e", Name: "Task E", Position: 5},
+		},
+	}
+	planned := map[string]int{"a": 5, "b": 1, "c": 2, "d": 3, "e": 4}
+
+	for id, position := range planned {
+		d := &ResourceDiffMock{
+			Id_:         id,
+			Values:      map[string]interface{}{"position": position, "workflow_id": "wf1"},
+			ChangedKeys: map[string]bool{"position": true},
+		}
+		if err := validateUniqueWorkflowTaskPositionInternal(context.Background(), d, c); err != nil {
+			t.Errorf("task %s -> %d: %v", id, position, err)
+		}
+	}
+}
