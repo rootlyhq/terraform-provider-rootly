@@ -193,6 +193,51 @@ resource "rootly_workflow_alert" "test_regexp" {
 `, name)
 }
 
+func TestAccResourceWorkflowAlert_WithAlertSourceIds(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-wf-alert-src")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:          func() { testAccPreCheck(t) },
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceWorkflowAlertAlertSourceIdsConfig(rName, "IS"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test", "trigger_params.0.alert_condition_source_id", "IS"),
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test", "trigger_params.0.alert_source_ids.#", "1"),
+					resource.TestCheckResourceAttrPair("rootly_workflow_alert.test", "trigger_params.0.alert_source_ids.0", "rootly_alerts_source.test", "id"),
+				),
+			},
+			{
+				Config: testAccResourceWorkflowAlertAlertSourceIdsConfig(rName, "IS NOT"),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_workflow_alert.test", "trigger_params.0.alert_condition_source_id", "IS NOT"),
+					resource.TestCheckResourceAttrPair("rootly_workflow_alert.test", "trigger_params.0.alert_source_ids.0", "rootly_alerts_source.test", "id"),
+				),
+			},
+		},
+	})
+}
+
+func testAccResourceWorkflowAlertAlertSourceIdsConfig(name, condition string) string {
+	return fmt.Sprintf(`
+resource "rootly_alerts_source" "test" {
+  name        = "%[1]s-source"
+  source_type = "generic_webhook"
+}
+
+resource "rootly_workflow_alert" "test" {
+  name = "%[1]s"
+
+  trigger_params {
+    triggers                  = ["alert_created"]
+    alert_condition_source_id = "%[2]s"
+    alert_source_ids          = [rootly_alerts_source.test.id]
+  }
+}
+`, name, condition)
+}
+
 func TestAccResourceWorkflowAlert_WithAlertFieldConditions(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-wf-alert-afc")
 
