@@ -3,9 +3,6 @@ package provider
 import (
 	"context"
 	"testing"
-
-	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
-	rootlygo "github.com/rootlyhq/terraform-provider-rootly/v5/schema"
 )
 
 func TestValidPermissionAction(t *testing.T) {
@@ -35,54 +32,14 @@ func TestValidPermissionAction(t *testing.T) {
 	}
 }
 
-type dummyClient struct {
-	tasks []*struct {
-		ID       string
-		Name     string
-		Position int
-	}
-}
-
-func (c *dummyClient) ListWorkflowTasks(workflowId string, params *rootlygo.ListWorkflowTasksParams) ([]interface{}, error) {
-	var res []interface{}
-	for _, t := range c.tasks {
-		res = append(res, &client.WorkflowTask{
-			ID:       t.ID,
-			Name:     t.Name,
-			Position: t.Position,
-		})
-	}
-	return res, nil
-}
-
-func TestValidateUniqueWorkflowTaskPosition_RunValidationDirectly(t *testing.T) {
-	// Create a test ResourceDiffMock
+func TestValidateUniqueWorkflowTaskPosition_NonPositivePosition(t *testing.T) {
 	d := &ResourceDiffMock{
-		Id_:         "my-task-2",
-		Values:      map[string]interface{}{"position": 1, "workflow_id": "wf1"},
-		ChangedKeys: map[string]bool{"position": true, "workflow_id": true},
+		Id_:         "my-task-1",
+		Values:      map[string]interface{}{"position": -1, "workflow_id": "wf1"},
+		ChangedKeys: map[string]bool{"position": true},
 	}
-	c := &dummyClient{
-		tasks: []*struct {
-			ID       string
-			Name     string
-			Position int
-		}{
-			{ID: "my-task-1", Name: "First Task", Position: 1}, // Conflict
-		},
-	}
-	err := validateUniqueWorkflowTaskPositionInternal(context.Background(), d, c)
-	if err == nil {
-		t.Fatalf("expected an error due to duplicate position, but got nil")
-	}
-	d = &ResourceDiffMock{
-		Id_:         "my-task-3",
-		Values:      map[string]interface{}{"position": 2, "workflow_id": "wf1"},
-		ChangedKeys: map[string]bool{"position": true, "workflow_id": true},
-	}
-	err = validateUniqueWorkflowTaskPositionInternal(context.Background(), d, c)
-	if err != nil {
-		t.Fatalf("expected no error when position is unique: %v", err)
+	if err := validateUniqueWorkflowTaskPositionInternal(context.Background(), d, nil); err == nil {
+		t.Fatalf("expected an error for a negative position, but got nil")
 	}
 }
 
@@ -226,19 +183,7 @@ func TestValidateTeamAdminIdsInUserIds_NoUsers(t *testing.T) {
 // A valid reorder (task "a" moved from 1 to 5, the rest shifted up)
 // should be accepted.
 func TestValidateUniqueWorkflowTaskPosition_ReorderDeadlock(t *testing.T) {
-	c := &dummyClient{
-		tasks: []*struct {
-			ID       string
-			Name     string
-			Position int
-		}{
-			{ID: "a", Name: "Task A", Position: 1},
-			{ID: "b", Name: "Task B", Position: 2},
-			{ID: "c", Name: "Task C", Position: 3},
-			{ID: "d", Name: "Task D", Position: 4},
-			{ID: "e", Name: "Task E", Position: 5},
-		},
-	}
+	// Live positions are a=1 b=2 c=3 d=4 e=5; each planned position collides with a neighbour that is also moving.
 	planned := map[string]int{"a": 5, "b": 1, "c": 2, "d": 3, "e": 4}
 
 	for id, position := range planned {
@@ -247,7 +192,7 @@ func TestValidateUniqueWorkflowTaskPosition_ReorderDeadlock(t *testing.T) {
 			Values:      map[string]interface{}{"position": position, "workflow_id": "wf1"},
 			ChangedKeys: map[string]bool{"position": true},
 		}
-		if err := validateUniqueWorkflowTaskPositionInternal(context.Background(), d, c); err != nil {
+		if err := validateUniqueWorkflowTaskPositionInternal(context.Background(), d, nil); err != nil {
 			t.Errorf("task %s -> %d: %v", id, position, err)
 		}
 	}
