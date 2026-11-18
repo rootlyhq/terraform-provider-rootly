@@ -13,11 +13,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceStatusPageSamlConfiguration() *schema.Resource {
 	return &schema.Resource{
-
+		CustomizeDiff: sdkutils.ExplicitEmptyStrings("idp_slo_service_url"),
 		CreateContext: resourceStatusPageSamlConfigurationCreate,
 		ReadContext:   resourceStatusPageSamlConfigurationRead,
 		UpdateContext: resourceStatusPageSamlConfigurationUpdate,
@@ -57,7 +59,7 @@ func resourceStatusPageSamlConfiguration() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "SAML IdP SLO service URL",
+				Description: "SAML IdP SLO service URL. Omit to preserve an existing value; set to an empty string to clear it.",
 			},
 
 			"idp_entity_id": &schema.Schema{
@@ -167,7 +169,7 @@ func resourceStatusPageSamlConfigurationCreate(ctx context.Context, d *schema.Re
 		s.IdpSsoServiceUrl = value.(string)
 	}
 	if value, ok := d.GetOkExists("idp_slo_service_url"); ok {
-		s.IdpSloServiceUrl = value.(string)
+		s.IdpSloServiceUrl = tools.String(value.(string))
 	}
 	if value, ok := d.GetOkExists("idp_entity_id"); ok {
 		s.IdpEntityId = value.(string)
@@ -234,9 +236,7 @@ func resourceStatusPageSamlConfigurationUpdate(ctx context.Context, d *schema.Re
 	if d.HasChange("idp_sso_service_url") {
 		s.IdpSsoServiceUrl = d.Get("idp_sso_service_url").(string)
 	}
-	if d.HasChange("idp_slo_service_url") {
-		s.IdpSloServiceUrl = d.Get("idp_slo_service_url").(string)
-	}
+	s.IdpSloServiceUrl = sdkutils.OptionalComputedStringUpdate(d, "idp_slo_service_url")
 	if d.HasChange("idp_entity_id") {
 		s.IdpEntityId = d.Get("idp_entity_id").(string)
 	}

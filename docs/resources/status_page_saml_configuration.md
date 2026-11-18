@@ -50,7 +50,7 @@ resource "rootly_status_page" "internal" {
 
 ### Optional
 
-- `idp_slo_service_url` (String) SAML IdP SLO service URL
+- `idp_slo_service_url` (String) SAML IdP SLO service URL. Omit to preserve an existing value; set to an empty string to clear it.
 - `name_identifier_format` (String) SAML name identifier format. Value must be one of `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`, `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`, `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`, `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`.
 
 ### Read-Only

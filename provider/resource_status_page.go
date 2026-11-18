@@ -16,11 +16,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
 func resourceStatusPage() *schema.Resource {
 	return &schema.Resource{
+		CustomizeDiff: sdkutils.ExplicitEmptyStrings("saml_idp_entity_id", "saml_configuration_id"),
 		CreateContext: resourceStatusPageCreate,
 		ReadContext:   resourceStatusPageRead,
 		UpdateContext: resourceStatusPageUpdate,
@@ -264,7 +266,7 @@ func resourceStatusPage() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "SAML IdP entity ID (issuer). Blank accepts any issuer. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.",
+				Description: "SAML IdP entity ID (issuer). Blank accepts any issuer. For pages on a shared SAML configuration, returns the configuration's value and rejects different values. Omit to preserve an existing value; set to an empty string to clear it.",
 			},
 
 			"saml_configuration_id": &schema.Schema{
@@ -275,7 +277,7 @@ func resourceStatusPage() *schema.Resource {
 				Sensitive:   false,
 				ForceNew:    false,
 				WriteOnly:   false,
-				Description: "ID of the shared SAML configuration used by the page. Manage shared configurations with /v1/status-page-saml-configurations.",
+				Description: "ID of the shared SAML configuration used by the page. Manage shared configurations with /v1/status-page-saml-configurations. Omit to preserve an existing value; set to an empty string to clear it.",
 			},
 
 			"saml_access_rules": &schema.Schema{
@@ -555,10 +557,10 @@ func resourceStatusPageCreate(ctx context.Context, d *schema.ResourceData, meta 
 		s.SamlNameIdentifierFormat = value.(string)
 	}
 	if value, ok := d.GetOkExists("saml_idp_entity_id"); ok {
-		s.SamlIdpEntityId = value.(string)
+		s.SamlIdpEntityId = tools.String(value.(string))
 	}
 	if value, ok := d.GetOkExists("saml_configuration_id"); ok {
-		s.SamlConfigurationId = value.(string)
+		s.SamlConfigurationId = tools.String(value.(string))
 	}
 	if value, ok := d.GetOkExists("saml_access_rules"); ok {
 		s.SamlAccessRules = value.([]interface{})
@@ -745,12 +747,8 @@ func resourceStatusPageUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	if d.HasChange("saml_name_identifier_format") {
 		s.SamlNameIdentifierFormat = d.Get("saml_name_identifier_format").(string)
 	}
-	if d.HasChange("saml_idp_entity_id") {
-		s.SamlIdpEntityId = d.Get("saml_idp_entity_id").(string)
-	}
-	if d.HasChange("saml_configuration_id") {
-		s.SamlConfigurationId = d.Get("saml_configuration_id").(string)
-	}
+	s.SamlIdpEntityId = sdkutils.OptionalComputedStringUpdate(d, "saml_idp_entity_id")
+	s.SamlConfigurationId = sdkutils.OptionalComputedStringUpdate(d, "saml_configuration_id")
 	if d.HasChange("saml_access_rules") {
 		if value, ok := d.GetOk("saml_access_rules"); value != nil && ok {
 			s.SamlAccessRules = value.([]interface{})

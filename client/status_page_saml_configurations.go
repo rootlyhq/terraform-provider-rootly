@@ -11,18 +11,18 @@ import (
 )
 
 type StatusPageSamlConfiguration struct {
-	ID                   string `jsonapi:"primary,status_page_saml_configurations"`
-	Name                 string `jsonapi:"attr,name,omitempty"`
-	IdpSsoServiceUrl     string `jsonapi:"attr,idp_sso_service_url,omitempty"`
-	IdpSloServiceUrl     string `jsonapi:"attr,idp_slo_service_url,omitempty"`
-	IdpEntityId          string `jsonapi:"attr,idp_entity_id,omitempty"`
-	IdpCert              string `jsonapi:"attr,idp_cert,omitempty"`
-	NameIdentifierFormat string `jsonapi:"attr,name_identifier_format,omitempty"`
-	IdpCertFingerprint   string `jsonapi:"attr,idp_cert_fingerprint,omitempty"`
-	SpEntityId           string `jsonapi:"attr,sp_entity_id,omitempty"`
-	AcsUrl               string `jsonapi:"attr,acs_url,omitempty"`
-	MetadataUrl          string `jsonapi:"attr,metadata_url,omitempty"`
-	StatusPagesCount     int    `jsonapi:"attr,status_pages_count,omitempty"`
+	ID                   string  `jsonapi:"primary,status_page_saml_configurations"`
+	Name                 string  `jsonapi:"attr,name,omitempty"`
+	IdpSsoServiceUrl     string  `jsonapi:"attr,idp_sso_service_url,omitempty"`
+	IdpSloServiceUrl     *string `jsonapi:"attr,idp_slo_service_url,omitempty"`
+	IdpEntityId          string  `jsonapi:"attr,idp_entity_id,omitempty"`
+	IdpCert              string  `jsonapi:"attr,idp_cert,omitempty"`
+	NameIdentifierFormat string  `jsonapi:"attr,name_identifier_format,omitempty"`
+	IdpCertFingerprint   string  `jsonapi:"attr,idp_cert_fingerprint,omitempty"`
+	SpEntityId           string  `jsonapi:"attr,sp_entity_id,omitempty"`
+	AcsUrl               string  `jsonapi:"attr,acs_url,omitempty"`
+	MetadataUrl          string  `jsonapi:"attr,metadata_url,omitempty"`
+	StatusPagesCount     int     `jsonapi:"attr,status_pages_count,omitempty"`
 }
 
 func (c *Client) ListStatusPageSamlConfigurations(params *rootlygo.ListStatusPageSamlConfigurationsParams) ([]interface{}, error) {

@@ -51,10 +51,10 @@ resource "rootly_status_page" "public" {
 - `public_title` (String) The public title of the status page
 - `saml_access_rules` (Block List) Rules that decide which signed-in SAML users can view the page. Values are compared case-sensitively. (see [below for nested schema](#nestedblock--saml_access_rules))
 - `saml_access_rules_match` (String) Whether all rules or any rule must match. Value must be one of `all`, `any`.
-- `saml_configuration_id` (String) ID of the shared SAML configuration used by the page. Manage shared configurations with /v1/status-page-saml-configurations.
+- `saml_configuration_id` (String) ID of the shared SAML configuration used by the page. Manage shared configurations with /v1/status-page-saml-configurations. Omit to preserve an existing value; set to an empty string to clear it.
 - `saml_idp_cert` (String) SAML IdP certificate
 - `saml_idp_cert_fingerprint` (String) SAML IdP certificate fingerprint
-- `saml_idp_entity_id` (String) SAML IdP entity ID (issuer). Blank accepts any issuer. For pages on a shared SAML configuration, returns the configuration's value and rejects different values.
+- `saml_idp_entity_id` (String) SAML IdP entity ID (issuer). Blank accepts any issuer. For pages on a shared SAML configuration, returns the configuration's value and rejects different values. Omit to preserve an existing value; set to an empty string to clear it.
 - `saml_idp_slo_service_url` (String) SAML IdP SLO service URL
 - `saml_idp_sso_service_url` (String) SAML IdP SSO service URL
 - `saml_name_identifier_format` (String) SAML name identifier format. Value must be one of `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`, `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`, `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`, `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`.
