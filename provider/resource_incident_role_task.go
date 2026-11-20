@@ -70,6 +70,17 @@ func resourceIncidentRoleTask() *schema.Resource {
 				Description:  "The priority of the incident task. Value must be one of `high`, `medium`, `low`.",
 				ValidateFunc: validation.StringInSlice([]string{"high", "medium", "low"}, false),
 			},
+
+			"position": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "Position of the incident task",
+			},
 		},
 	}
 }
@@ -92,6 +103,9 @@ func resourceIncidentRoleTaskCreate(ctx context.Context, d *schema.ResourceData,
 	}
 	if value, ok := d.GetOkExists("priority"); ok {
 		s.Priority = value.(string)
+	}
+	if value, ok := d.GetOkExists("position"); ok {
+		s.Position = value.(int)
 	}
 
 	res, err := c.CreateIncidentRoleTask(s)
@@ -126,6 +140,7 @@ func resourceIncidentRoleTaskRead(ctx context.Context, d *schema.ResourceData, m
 	d.Set("task", item.Task)
 	d.Set("description", item.Description)
 	d.Set("priority", item.Priority)
+	d.Set("position", item.Position)
 
 	return nil
 }
@@ -147,6 +162,9 @@ func resourceIncidentRoleTaskUpdate(ctx context.Context, d *schema.ResourceData,
 	}
 	if d.HasChange("priority") {
 		s.Priority = d.Get("priority").(string)
+	}
+	if d.HasChange("position") {
+		s.Position = d.Get("position").(int)
 	}
 
 	_, err := c.UpdateIncidentRoleTask(d.Id(), s)
