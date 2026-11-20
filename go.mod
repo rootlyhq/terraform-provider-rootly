@@ -81,7 +81,7 @@ require (
 	github.com/oklog/run v1.2.0 // indirect
 	github.com/onsi/gomega v1.27.6 // indirect
 	github.com/posener/complete v1.2.3 // indirect
-	github.com/rootlyhq/jsonapi v0.0.0-20261109170034-45a3b024d895
+	github.com/rootlyhq/jsonapi v0.0.0-20261110164532-3d063a1dd5aa
 	github.com/santhosh-tekuri/jsonschema/v6 v6.0.3 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/speakeasy-api/jsonpath v0.6.3 // indirect
