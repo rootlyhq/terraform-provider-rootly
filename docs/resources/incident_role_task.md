@@ -36,6 +36,7 @@ resource "rootly_incident_role_task" "send_status_update" {
 ### Optional
 
 - `description` (String) The description of incident task
+- `position` (Number) Position of the incident task
 - `priority` (String) The priority of the incident task. Value must be one of `high`, `medium`, `low`.
 
 ### Read-Only
