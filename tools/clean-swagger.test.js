@@ -192,3 +192,34 @@ test("publish incident synced component status keeps the API default", () => {
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+test("Notion page export sections keep their API default in Terraform", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-clean-swagger-"));
+  const swaggerPath = path.join(directory, "swagger.json");
+  const exportSections = () => ({
+    include_timeline: {type: "boolean", default: true},
+    include_follow_ups: {type: "boolean", default: true},
+    show_timeline_as_table: {type: "boolean"},
+  });
+  const swagger = {paths: {}, components: {schemas: {
+    create_notion_page_task_params: {properties: exportSections()},
+    update_notion_page_task_params: {properties: exportSections()},
+    create_confluence_page_task_params: {properties: exportSections()},
+  }}};
+  try {
+    fs.writeFileSync(swaggerPath, JSON.stringify(swagger));
+    const result = spawnSync(process.execPath, [path.join(__dirname, "clean-swagger.js"), swaggerPath], {encoding: "utf8"});
+    assert.equal(result.status, 0, result.stderr);
+    const schemas = JSON.parse(fs.readFileSync(swaggerPath, "utf8")).components.schemas;
+    for (const name of ["create_notion_page_task_params", "update_notion_page_task_params"]) {
+      assert.equal(schemas[name].properties.include_timeline.tf_use_default, true);
+      assert.equal(schemas[name].properties.include_follow_ups.tf_use_default, true);
+      assert.match(schemas[name].properties.include_timeline.description, /Defaults to true/);
+      assert.match(schemas[name].properties.include_follow_ups.description, /Defaults to true/);
+      assert.equal(schemas[name].properties.show_timeline_as_table.tf_use_default, undefined);
+    }
+    assert.equal(schemas.create_confluence_page_task_params.properties.include_timeline.tf_use_default, undefined);
+  } finally {
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});

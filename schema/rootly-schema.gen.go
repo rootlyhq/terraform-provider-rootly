@@ -52400,8 +52400,14 @@ type CreateMotionTaskTaskParamsTaskType string
 // CreateNotionPageTaskParams defines model for create_notion_page_task_params.
 type CreateNotionPageTaskParams struct {
 	// Content Custom page content with liquid templating support. When provided, only this content will be rendered (no default sections)
-	Content                   *string `json:"content,omitempty"`
-	MarkPostMortemAsPublished *bool   `json:"mark_post_mortem_as_published,omitempty"`
+	Content *string `json:"content,omitempty"`
+
+	// IncludeFollowUps Include follow-up items in the page. Defaults to true
+	IncludeFollowUps *bool `json:"include_follow_ups,omitempty"`
+
+	// IncludeTimeline Include the incident timeline in the page. Defaults to true
+	IncludeTimeline           *bool `json:"include_timeline,omitempty"`
+	MarkPostMortemAsPublished *bool `json:"mark_post_mortem_as_published,omitempty"`
 
 	// ParentPage The parent page id and display name
 	ParentPage struct {
@@ -70882,6 +70888,12 @@ type UpdateNotionPageTaskParams struct {
 
 	// FileId The Notion page ID
 	FileId string `json:"file_id"`
+
+	// IncludeFollowUps Include follow-up items in the page. Defaults to true
+	IncludeFollowUps *bool `json:"include_follow_ups,omitempty"`
+
+	// IncludeTimeline Include the incident timeline in the page. Defaults to true
+	IncludeTimeline *bool `json:"include_timeline,omitempty"`
 
 	// PostMortemTemplateId Retrospective template to use when creating page task, if desired
 	PostMortemTemplateId   *string                             `json:"post_mortem_template_id,omitempty"`

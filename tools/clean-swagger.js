@@ -276,6 +276,24 @@ function annotateStatusPageAnnouncement(schemas) {
   announcement.properties.published_at.tf_computed = true;
 }
 
+// Notion page exports include the timeline and follow-ups unless turned off.
+// Workflow task params are sent as a whole map, so without a Terraform default
+// an unset boolean is sent as false and drops those sections from the page.
+function annotateNotionPageExportDefaults(schemas) {
+  const descriptions = {
+    include_timeline: "Include the incident timeline in the page. Defaults to true",
+    include_follow_ups: "Include follow-up items in the page. Defaults to true",
+  };
+  for (const action of ["create_notion_page", "update_notion_page"]) {
+    for (const [field, description] of Object.entries(descriptions)) {
+      const property = schemas[`${action}_task_params`]?.properties?.[field];
+      if (!property) continue;
+      property.tf_use_default = true;
+      property.description ??= description;
+    }
+  }
+}
+
 // The published schema currently lists incident_role_id as required without
 // defining the property. Restore the field so generated clients and Terraform
 // resources can satisfy the API contract.
@@ -357,6 +375,7 @@ annotateCatalogExternalIds(swagger.components.schemas);
 annotateFormSetResourceType(swagger.components.schemas);
 annotateAiSreProvider(swagger.components.schemas);
 annotatePublishIncidentSyncedComponentStatus(swagger.components.schemas);
+annotateNotionPageExportDefaults(swagger.components.schemas);
 annotateRetriggerTimeout(swagger.components.schemas);
 preserveCanvasTerraformContract(swagger.components.schemas);
 annotateStatusPageAnnouncement(swagger.components.schemas);
