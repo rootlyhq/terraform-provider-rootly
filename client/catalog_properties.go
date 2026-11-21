@@ -15,6 +15,7 @@ type CatalogProperty struct {
 	CatalogId     string `jsonapi:"attr,catalog_id,omitempty"`
 	Name          string `jsonapi:"attr,name,omitempty"`
 	Slug          string `jsonapi:"attr,slug,omitempty"`
+	Description   string `jsonapi:"attr,description,omitempty"`
 	Kind          string `jsonapi:"attr,kind,omitempty"`
 	KindCatalogId string `jsonapi:"attr,kind_catalog_id,omitempty"`
 	Multiple      *bool  `jsonapi:"attr,multiple,omitempty"`

@@ -13,9 +13,10 @@ description: |-
 
 ```shell
 resource "rootly_catalog_property" "support_level" {
-  catalog_id = rootly_catalog.customer_tier.id
-  name       = "Support Level"
-  kind       = "select"
+  catalog_id  = rootly_catalog.customer_tier.id
+  name        = "Support Level"
+  kind        = "select"
+  description = "Use Gold, Silver or Bronze, matching the customer's contract."
 }
 ```
 
@@ -30,6 +31,7 @@ resource "rootly_catalog_property" "support_level" {
 
 - `catalog_id` (String)
 - `catalog_type` (String) The type of catalog the property belongs to.. Value must be one of `catalog`, `cause`, `environment`, `functionality`, `incident_type`, `service`, `team`.
+- `description` (String) Helper text shown under the property when filling in a catalog entry.
 - `kind` (String) Value must be one of `text`, `reference`, `boolean`, `service`, `functionality`, `environment`, `group`, `cause`, `incident_type`, `user`.
 - `kind_catalog_id` (String) Restricts values to items of specified catalog.
 - `multiple` (Boolean) Whether the attribute accepts multiple values.. Value must be one of true or false

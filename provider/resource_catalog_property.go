@@ -60,6 +60,18 @@ func resourceCatalogProperty() *schema.Resource {
 				DiffSuppressFunc: diffsuppressfunc.Skip,
 			},
 
+			"description": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Helper text shown under the property when filling in a catalog entry.",
+				ValidateFunc: validation.StringLenBetween(0, 500),
+			},
+
 			"kind": &schema.Schema{
 				Type:        schema.TypeString,
 				Default:     "text",
@@ -147,6 +159,9 @@ func resourceCatalogPropertyCreate(ctx context.Context, d *schema.ResourceData, 
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
 	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = value.(string)
+	}
 	if value, ok := d.GetOkExists("kind"); ok {
 		s.Kind = value.(string)
 	}
@@ -194,6 +209,7 @@ func resourceCatalogPropertyRead(ctx context.Context, d *schema.ResourceData, me
 	d.Set("catalog_id", item.CatalogId)
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
+	d.Set("description", item.Description)
 	d.Set("kind", item.Kind)
 	d.Set("kind_catalog_id", item.KindCatalogId)
 	d.Set("multiple", item.Multiple)
@@ -214,6 +230,9 @@ func resourceCatalogPropertyUpdate(ctx context.Context, d *schema.ResourceData, 
 	}
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
+	}
+	if d.HasChange("description") {
+		s.Description = d.Get("description").(string)
 	}
 	if d.HasChange("kind") {
 		s.Kind = d.Get("kind").(string)
