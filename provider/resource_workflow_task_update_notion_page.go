@@ -107,6 +107,18 @@ func resourceWorkflowTaskUpdateNotionPage() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
+						"include_timeline": &schema.Schema{
+							Description: "Include the incident timeline in the page. Defaults to true. Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     true,
+						},
+						"include_follow_ups": &schema.Schema{
+							Description: "Include follow-up items in the page. Defaults to true. Value must be one of true or false",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     true,
+						},
 					},
 				},
 			},
