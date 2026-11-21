@@ -294,7 +294,7 @@ func resourceStatusPage() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"claim": &schema.Schema{
 							Type:        schema.TypeString,
-							Computed:    true,
+							Computed:    false,
 							Required:    false,
 							Optional:    true,
 							Sensitive:   false,
