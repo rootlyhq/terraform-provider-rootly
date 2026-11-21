@@ -192,3 +192,41 @@ test("publish incident synced component status keeps the API default", () => {
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+test("status page SAML fields can be cleared with an empty string", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-clean-swagger-"));
+  const swaggerPath = path.join(directory, "swagger.json");
+  const swagger = {paths: {}, components: {schemas: {
+    status_page: {properties: {
+      saml_idp_entity_id: {type: "string", description: "SAML IdP entity ID (issuer). Blank accepts any issuer.", nullable: true, tf_computed: true},
+      saml_configuration_id: {type: "string", description: "ID of the shared SAML configuration used by the page.", nullable: true},
+      saml_idp_sso_service_url: {type: "string", nullable: true, tf_computed: true},
+    }},
+    status_page_saml_configuration: {properties: {
+      idp_slo_service_url: {type: "string", description: "SAML IdP SLO service URL", nullable: true},
+      idp_entity_id: {type: "string"},
+    }},
+  }}};
+  try {
+    fs.writeFileSync(swaggerPath, JSON.stringify(swagger));
+    for (let run = 0; run < 2; run++) {
+      const result = spawnSync(process.execPath, [path.join(__dirname, "clean-swagger.js"), swaggerPath], {encoding: "utf8"});
+      assert.equal(result.status, 0, result.stderr);
+    }
+    const schemas = JSON.parse(fs.readFileSync(swaggerPath, "utf8")).components.schemas;
+    const cleared = [
+      schemas.status_page.properties.saml_idp_entity_id,
+      schemas.status_page.properties.saml_configuration_id,
+      schemas.status_page_saml_configuration.properties.idp_slo_service_url,
+    ];
+    for (const property of cleared) {
+      assert.equal(property.tf_nullable, true);
+      assert.equal(property.tf_computed, true);
+      assert.equal((property.description.match(/set to an empty string to clear it/g) || []).length, 1);
+    }
+    assert.deepEqual(schemas.status_page.properties.saml_idp_sso_service_url, swagger.components.schemas.status_page.properties.saml_idp_sso_service_url);
+    assert.deepEqual(schemas.status_page_saml_configuration.properties.idp_entity_id, {type: "string"});
+  } finally {
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});

@@ -308,6 +308,25 @@ function annotateCatalogExternalIds(schemas) {
   }
 }
 
+function annotateStatusPageSamlClearableFields(schemas) {
+  const fields = {
+    status_page: ["saml_idp_entity_id", "saml_configuration_id"],
+    status_page_saml_configuration: ["idp_slo_service_url"],
+  };
+  const note = "Omit to preserve an existing value; set to an empty string to clear it.";
+  for (const [name, names] of Object.entries(fields)) {
+    for (const field of names) {
+      const property = schemas[name]?.properties[field];
+      if (!property) continue;
+      property.tf_nullable = true;
+      property.tf_computed = true;
+      if (!property.description?.includes(note)) {
+        property.description = `${(property.description || "").replace(/\.$/, "")}. ${note}`.replace(/^\. /, "");
+      }
+    }
+  }
+}
+
 function annotateCanvasWorkspaces(schemas) {
   const note = "Typed Go requests omit a nil workspace; use a map or raw JSON to send null.";
   for (const action of ["create_slack_canvas", "update_slack_canvas"]) {
@@ -354,6 +373,7 @@ renameEscalationPolicyPathSchemas(swagger);
 addNestedRouteParentIds(swagger.components.schemas);
 annotateNullableRelationships(swagger.components.schemas);
 annotateCatalogExternalIds(swagger.components.schemas);
+annotateStatusPageSamlClearableFields(swagger.components.schemas);
 annotateFormSetResourceType(swagger.components.schemas);
 annotateAiSreProvider(swagger.components.schemas);
 annotatePublishIncidentSyncedComponentStatus(swagger.components.schemas);
