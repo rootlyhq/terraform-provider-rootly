@@ -120,6 +120,27 @@ func resourceStatusPage() *schema.Resource {
 				Description: "Allow search engines to include your public status page in search results. Value must be one of true or false",
 			},
 
+			"allow_email_subscribers": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Optional:    true,
+				Description: "Allow users to receive notifications via email. Value must be one of true or false",
+			},
+
+			"allow_sms_subscribers": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Optional:    true,
+				Description: "Allow users to receive notifications via SMS. Value must be one of true or false",
+			},
+
+			"allow_rss_atom_feeds": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Optional:    true,
+				Description: "Allow users to access incident feeds via RSS/Atom. The API ignores this on private status pages. Value must be one of true or false",
+			},
+
 			"show_uptime": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
@@ -431,6 +452,15 @@ func resourceStatusPageCreate(ctx context.Context, d *schema.ResourceData, meta 
 	if value, ok := d.GetOkExists("allow_search_engine_index"); ok {
 		s.AllowSearchEngineIndex = tools.Bool(value.(bool))
 	}
+	if value, ok := d.GetOkExists("allow_email_subscribers"); ok {
+		s.AllowEmailSubscribers = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("allow_sms_subscribers"); ok {
+		s.AllowSmsSubscribers = tools.Bool(value.(bool))
+	}
+	if value, ok := d.GetOkExists("allow_rss_atom_feeds"); ok {
+		s.AllowRssAtomFeeds = tools.Bool(value.(bool))
+	}
 	if value, ok := d.GetOkExists("show_uptime"); ok {
 		s.ShowUptime = tools.Bool(value.(bool))
 	}
@@ -537,6 +567,9 @@ func resourceStatusPageRead(ctx context.Context, d *schema.ResourceData, meta in
 	d.Set("header_color", item.HeaderColor)
 	d.Set("footer_color", item.FooterColor)
 	d.Set("allow_search_engine_index", item.AllowSearchEngineIndex)
+	d.Set("allow_email_subscribers", item.AllowEmailSubscribers)
+	d.Set("allow_sms_subscribers", item.AllowSmsSubscribers)
+	d.Set("allow_rss_atom_feeds", item.AllowRssAtomFeeds)
 	d.Set("show_uptime", item.ShowUptime)
 	d.Set("show_uptime_last_days", item.ShowUptimeLastDays)
 	d.Set("success_message", item.SuccessMessage)
@@ -591,6 +624,15 @@ func resourceStatusPageUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	}
 	if d.HasChange("allow_search_engine_index") {
 		s.AllowSearchEngineIndex = tools.Bool(d.Get("allow_search_engine_index").(bool))
+	}
+	if d.HasChange("allow_email_subscribers") {
+		s.AllowEmailSubscribers = tools.Bool(d.Get("allow_email_subscribers").(bool))
+	}
+	if d.HasChange("allow_sms_subscribers") {
+		s.AllowSmsSubscribers = tools.Bool(d.Get("allow_sms_subscribers").(bool))
+	}
+	if d.HasChange("allow_rss_atom_feeds") {
+		s.AllowRssAtomFeeds = tools.Bool(d.Get("allow_rss_atom_feeds").(bool))
 	}
 	if d.HasChange("show_uptime") {
 		s.ShowUptime = tools.Bool(d.Get("show_uptime").(bool))

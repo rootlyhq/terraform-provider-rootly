@@ -113,3 +113,43 @@ resource "rootly_status_page" "test" {
 }
 `, name, sectionOrder)
 }
+
+func TestAccResourceStatusPage_subscriberSettings(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-status-page")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:          func() { testAccPreCheck(t) },
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceStatusPageSubscriberSettingsConfig(rName, true, false, true),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_status_page.test", "allow_email_subscribers", "true"),
+					resource.TestCheckResourceAttr("rootly_status_page.test", "allow_sms_subscribers", "false"),
+					resource.TestCheckResourceAttr("rootly_status_page.test", "allow_rss_atom_feeds", "true"),
+				),
+			},
+			{
+				Config: testAccResourceStatusPageSubscriberSettingsConfig(rName, false, true, false),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_status_page.test", "allow_email_subscribers", "false"),
+					resource.TestCheckResourceAttr("rootly_status_page.test", "allow_sms_subscribers", "true"),
+					resource.TestCheckResourceAttr("rootly_status_page.test", "allow_rss_atom_feeds", "false"),
+				),
+			},
+		},
+	})
+}
+
+// RSS/Atom feeds are only honored on public pages.
+func testAccResourceStatusPageSubscriberSettingsConfig(name string, email, sms, rss bool) string {
+	return fmt.Sprintf(`
+resource "rootly_status_page" "test" {
+  title                   = "%s"
+  public                  = true
+  allow_email_subscribers = %t
+  allow_sms_subscribers   = %t
+  allow_rss_atom_feeds    = %t
+}
+`, name, email, sms, rss)
+}
