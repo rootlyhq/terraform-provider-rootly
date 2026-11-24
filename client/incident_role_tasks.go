@@ -16,6 +16,7 @@ type IncidentRoleTask struct {
 	Task           string `jsonapi:"attr,task,omitempty"`
 	Description    string `jsonapi:"attr,description,omitempty"`
 	Priority       string `jsonapi:"attr,priority,omitempty"`
+	Position       int    `jsonapi:"attr,position,omitempty"`
 }
 
 func (c *Client) ListIncidentRoleTasks(id string, params *rootlygo.ListIncidentRoleTasksParams) ([]interface{}, error) {
