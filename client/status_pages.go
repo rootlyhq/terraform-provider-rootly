@@ -20,6 +20,9 @@ type StatusPage struct {
 	HeaderColor              string                 `jsonapi:"attr,header_color,omitempty"`
 	FooterColor              string                 `jsonapi:"attr,footer_color,omitempty"`
 	AllowSearchEngineIndex   *bool                  `jsonapi:"attr,allow_search_engine_index,omitempty"`
+	AllowEmailSubscribers    *bool                  `jsonapi:"attr,allow_email_subscribers,omitempty"`
+	AllowSmsSubscribers      *bool                  `jsonapi:"attr,allow_sms_subscribers,omitempty"`
+	AllowRssAtomFeeds        *bool                  `jsonapi:"attr,allow_rss_atom_feeds,omitempty"`
 	ShowUptime               *bool                  `jsonapi:"attr,show_uptime,omitempty"`
 	ShowUptimeLastDays       int                    `jsonapi:"attr,show_uptime_last_days,omitempty"`
 	IncidentHistoryWindow    string                 `jsonapi:"attr,incident_history_window,omitempty"`
