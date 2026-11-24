@@ -34,7 +34,10 @@ resource "rootly_status_page" "public" {
 
 ### Optional
 
+- `allow_email_subscribers` (Boolean) Allow users to receive notifications via email. Value must be one of true or false
+- `allow_rss_atom_feeds` (Boolean) Allow users to access incident feeds via RSS/Atom. The API ignores this on private status pages. Value must be one of true or false
 - `allow_search_engine_index` (Boolean) Allow search engines to include your public status page in search results. Value must be one of true or false
+- `allow_sms_subscribers` (Boolean) Allow users to receive notifications via SMS. Value must be one of true or false
 - `authentication_enabled` (Boolean) Enable authentication (deprecated - use authentication_method instead). Value must be one of true or false
 - `authentication_method` (String) Authentication method. Value must be one of `none`, `password`, `saml`.
 - `authentication_password` (String, Sensitive) Authentication password
