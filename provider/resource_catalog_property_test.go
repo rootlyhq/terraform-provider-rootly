@@ -32,6 +32,12 @@ func TestAccResourceCatalogProperty(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_catalog_property.test", "description", "Use T0 to T4"),
 				),
 			},
+			{
+				Config: testAccResourceCatalogPropertyConfig(rName+"-updated", "text", true, ""),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_catalog_property.test", "description", ""),
+				),
+			},
 		},
 	})
 }

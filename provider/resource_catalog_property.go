@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -23,6 +24,7 @@ func resourceCatalogProperty() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
+		CustomizeDiff: sdkutils.ExplicitEmptyStrings("description"),
 		Schema: map[string]*schema.Schema{
 
 			"catalog_id": &schema.Schema{
@@ -160,7 +162,7 @@ func resourceCatalogPropertyCreate(ctx context.Context, d *schema.ResourceData, 
 		s.Name = value.(string)
 	}
 	if value, ok := d.GetOkExists("description"); ok {
-		s.Description = value.(string)
+		s.Description = tools.String(value.(string))
 	}
 	if value, ok := d.GetOkExists("kind"); ok {
 		s.Kind = value.(string)
@@ -231,9 +233,7 @@ func resourceCatalogPropertyUpdate(ctx context.Context, d *schema.ResourceData, 
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
 	}
-	if d.HasChange("description") {
-		s.Description = d.Get("description").(string)
-	}
+	s.Description = sdkutils.OptionalComputedStringUpdate(d, "description")
 	if d.HasChange("kind") {
 		s.Kind = d.Get("kind").(string)
 	}
