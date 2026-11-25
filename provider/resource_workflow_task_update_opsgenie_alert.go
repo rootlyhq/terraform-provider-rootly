@@ -22,7 +22,7 @@ func resourceWorkflowTaskUpdateOpsgenieAlert() *schema.Resource {
 		Description: "Manages workflow update_opsgenie_alert task.",
 
 		CreateContext: resourceWorkflowTaskUpdateOpsgenieAlertCreate,
-		ReadContext:   resourceWorkflowTaskUpdateOpsgenieAlertRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateOpsgenieAlertRead),
 		UpdateContext: resourceWorkflowTaskUpdateOpsgenieAlertUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateOpsgenieAlertDelete,
 		Importer: &schema.ResourceImporter{

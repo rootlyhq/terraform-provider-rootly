@@ -24,7 +24,7 @@ func resourceWorkflowTaskCreateAsanaSubtask() *schema.Resource {
 		Description: "Manages workflow create_asana_subtask task.",
 
 		CreateContext: resourceWorkflowTaskCreateAsanaSubtaskCreate,
-		ReadContext:   resourceWorkflowTaskCreateAsanaSubtaskRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateAsanaSubtaskRead),
 		UpdateContext: resourceWorkflowTaskCreateAsanaSubtaskUpdate,
 		DeleteContext: resourceWorkflowTaskCreateAsanaSubtaskDelete,
 		Importer: &schema.ResourceImporter{

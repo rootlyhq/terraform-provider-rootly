@@ -22,7 +22,7 @@ func resourceWorkflowTaskSendDashboardReport() *schema.Resource {
 		Description: "Manages workflow send_dashboard_report task.",
 
 		CreateContext: resourceWorkflowTaskSendDashboardReportCreate,
-		ReadContext:   resourceWorkflowTaskSendDashboardReportRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskSendDashboardReportRead),
 		UpdateContext: resourceWorkflowTaskSendDashboardReportUpdate,
 		DeleteContext: resourceWorkflowTaskSendDashboardReportDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskSendMicrosoftTeamsMessage() *schema.Resource {
 		Description: "Manages workflow send_microsoft_teams_message task.",
 
 		CreateContext: resourceWorkflowTaskSendMicrosoftTeamsMessageCreate,
-		ReadContext:   resourceWorkflowTaskSendMicrosoftTeamsMessageRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskSendMicrosoftTeamsMessageRead),
 		UpdateContext: resourceWorkflowTaskSendMicrosoftTeamsMessageUpdate,
 		DeleteContext: resourceWorkflowTaskSendMicrosoftTeamsMessageDelete,
 		Importer: &schema.ResourceImporter{

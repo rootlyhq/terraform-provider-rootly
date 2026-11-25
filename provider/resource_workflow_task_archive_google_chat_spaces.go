@@ -22,7 +22,7 @@ func resourceWorkflowTaskArchiveGoogleChatSpaces() *schema.Resource {
 		Description: "Manages workflow archive_google_chat_spaces task.",
 
 		CreateContext: resourceWorkflowTaskArchiveGoogleChatSpacesCreate,
-		ReadContext:   resourceWorkflowTaskArchiveGoogleChatSpacesRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskArchiveGoogleChatSpacesRead),
 		UpdateContext: resourceWorkflowTaskArchiveGoogleChatSpacesUpdate,
 		DeleteContext: resourceWorkflowTaskArchiveGoogleChatSpacesDelete,
 		Importer: &schema.ResourceImporter{

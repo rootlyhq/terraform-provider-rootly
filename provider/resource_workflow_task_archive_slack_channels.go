@@ -22,7 +22,7 @@ func resourceWorkflowTaskArchiveSlackChannels() *schema.Resource {
 		Description: "Manages workflow archive_slack_channels task.",
 
 		CreateContext: resourceWorkflowTaskArchiveSlackChannelsCreate,
-		ReadContext:   resourceWorkflowTaskArchiveSlackChannelsRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskArchiveSlackChannelsRead),
 		UpdateContext: resourceWorkflowTaskArchiveSlackChannelsUpdate,
 		DeleteContext: resourceWorkflowTaskArchiveSlackChannelsDelete,
 		Importer: &schema.ResourceImporter{

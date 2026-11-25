@@ -22,7 +22,7 @@ func resourceWorkflowTaskGetGithubCommits() *schema.Resource {
 		Description: "Manages workflow get_github_commits task.",
 
 		CreateContext: resourceWorkflowTaskGetGithubCommitsCreate,
-		ReadContext:   resourceWorkflowTaskGetGithubCommitsRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskGetGithubCommitsRead),
 		UpdateContext: resourceWorkflowTaskGetGithubCommitsUpdate,
 		DeleteContext: resourceWorkflowTaskGetGithubCommitsDelete,
 		Importer: &schema.ResourceImporter{

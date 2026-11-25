@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateMicrosoftTeamsChannel() *schema.Resource {
 		Description: "Manages workflow create_microsoft_teams_channel task.",
 
 		CreateContext: resourceWorkflowTaskCreateMicrosoftTeamsChannelCreate,
-		ReadContext:   resourceWorkflowTaskCreateMicrosoftTeamsChannelRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateMicrosoftTeamsChannelRead),
 		UpdateContext: resourceWorkflowTaskCreateMicrosoftTeamsChannelUpdate,
 		DeleteContext: resourceWorkflowTaskCreateMicrosoftTeamsChannelDelete,
 		Importer: &schema.ResourceImporter{

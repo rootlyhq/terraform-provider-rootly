@@ -22,7 +22,7 @@ func resourceWorkflowTaskSendGoogleChatAttachments() *schema.Resource {
 		Description: "Manages workflow send_google_chat_attachments task.",
 
 		CreateContext: resourceWorkflowTaskSendGoogleChatAttachmentsCreate,
-		ReadContext:   resourceWorkflowTaskSendGoogleChatAttachmentsRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskSendGoogleChatAttachmentsRead),
 		UpdateContext: resourceWorkflowTaskSendGoogleChatAttachmentsUpdate,
 		DeleteContext: resourceWorkflowTaskSendGoogleChatAttachmentsDelete,
 		Importer: &schema.ResourceImporter{

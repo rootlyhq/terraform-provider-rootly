@@ -22,7 +22,7 @@ func resourceWorkflowTaskTweetTwitterMessage() *schema.Resource {
 		Description: "Manages workflow tweet_twitter_message task.",
 
 		CreateContext: resourceWorkflowTaskTweetTwitterMessageCreate,
-		ReadContext:   resourceWorkflowTaskTweetTwitterMessageRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskTweetTwitterMessageRead),
 		UpdateContext: resourceWorkflowTaskTweetTwitterMessageUpdate,
 		DeleteContext: resourceWorkflowTaskTweetTwitterMessageDelete,
 		Importer: &schema.ResourceImporter{

@@ -24,7 +24,7 @@ func resourceWorkflowTaskUpdateJiraIssue() *schema.Resource {
 		Description: "Manages workflow update_jira_issue task.",
 
 		CreateContext: resourceWorkflowTaskUpdateJiraIssueCreate,
-		ReadContext:   resourceWorkflowTaskUpdateJiraIssueRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateJiraIssueRead),
 		UpdateContext: resourceWorkflowTaskUpdateJiraIssueUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateJiraIssueDelete,
 		Importer: &schema.ResourceImporter{

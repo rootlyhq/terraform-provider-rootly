@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateGitlabIssue() *schema.Resource {
 		Description: "Manages workflow create_gitlab_issue task.",
 
 		CreateContext: resourceWorkflowTaskCreateGitlabIssueCreate,
-		ReadContext:   resourceWorkflowTaskCreateGitlabIssueRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateGitlabIssueRead),
 		UpdateContext: resourceWorkflowTaskCreateGitlabIssueUpdate,
 		DeleteContext: resourceWorkflowTaskCreateGitlabIssueDelete,
 		Importer: &schema.ResourceImporter{

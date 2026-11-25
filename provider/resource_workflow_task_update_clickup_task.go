@@ -24,7 +24,7 @@ func resourceWorkflowTaskUpdateClickupTask() *schema.Resource {
 		Description: "Manages workflow update_clickup_task task.",
 
 		CreateContext: resourceWorkflowTaskUpdateClickupTaskCreate,
-		ReadContext:   resourceWorkflowTaskUpdateClickupTaskRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateClickupTaskRead),
 		UpdateContext: resourceWorkflowTaskUpdateClickupTaskUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateClickupTaskDelete,
 		Importer: &schema.ResourceImporter{

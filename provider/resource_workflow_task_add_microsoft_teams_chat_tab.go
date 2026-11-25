@@ -22,7 +22,7 @@ func resourceWorkflowTaskAddMicrosoftTeamsChatTab() *schema.Resource {
 		Description: "Manages workflow add_microsoft_teams_chat_tab task.",
 
 		CreateContext: resourceWorkflowTaskAddMicrosoftTeamsChatTabCreate,
-		ReadContext:   resourceWorkflowTaskAddMicrosoftTeamsChatTabRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAddMicrosoftTeamsChatTabRead),
 		UpdateContext: resourceWorkflowTaskAddMicrosoftTeamsChatTabUpdate,
 		DeleteContext: resourceWorkflowTaskAddMicrosoftTeamsChatTabDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskRunCommandHeroku() *schema.Resource {
 		Description: "Manages workflow run_command_heroku task.",
 
 		CreateContext: resourceWorkflowTaskRunCommandHerokuCreate,
-		ReadContext:   resourceWorkflowTaskRunCommandHerokuRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskRunCommandHerokuRead),
 		UpdateContext: resourceWorkflowTaskRunCommandHerokuUpdate,
 		DeleteContext: resourceWorkflowTaskRunCommandHerokuDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskUpdateQuipPage() *schema.Resource {
 		Description: "Manages workflow update_quip_page task.",
 
 		CreateContext: resourceWorkflowTaskUpdateQuipPageCreate,
-		ReadContext:   resourceWorkflowTaskUpdateQuipPageRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateQuipPageRead),
 		UpdateContext: resourceWorkflowTaskUpdateQuipPageUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateQuipPageDelete,
 		Importer: &schema.ResourceImporter{

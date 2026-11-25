@@ -24,7 +24,7 @@ func resourceWorkflowTaskUpdateActionItem() *schema.Resource {
 		Description: "Manages workflow update_action_item task.",
 
 		CreateContext: resourceWorkflowTaskUpdateActionItemCreate,
-		ReadContext:   resourceWorkflowTaskUpdateActionItemRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateActionItemRead),
 		UpdateContext: resourceWorkflowTaskUpdateActionItemUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateActionItemDelete,
 		Importer: &schema.ResourceImporter{

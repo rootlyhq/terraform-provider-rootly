@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateLinearIssueComment() *schema.Resource {
 		Description: "Manages workflow create_linear_issue_comment task.",
 
 		CreateContext: resourceWorkflowTaskCreateLinearIssueCommentCreate,
-		ReadContext:   resourceWorkflowTaskCreateLinearIssueCommentRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateLinearIssueCommentRead),
 		UpdateContext: resourceWorkflowTaskCreateLinearIssueCommentUpdate,
 		DeleteContext: resourceWorkflowTaskCreateLinearIssueCommentDelete,
 		Importer: &schema.ResourceImporter{

@@ -24,7 +24,7 @@ func resourceWorkflowTaskCreateJiraSubtask() *schema.Resource {
 		Description: "Manages workflow create_jira_subtask task.",
 
 		CreateContext: resourceWorkflowTaskCreateJiraSubtaskCreate,
-		ReadContext:   resourceWorkflowTaskCreateJiraSubtaskRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateJiraSubtaskRead),
 		UpdateContext: resourceWorkflowTaskCreateJiraSubtaskUpdate,
 		DeleteContext: resourceWorkflowTaskCreateJiraSubtaskDelete,
 		Importer: &schema.ResourceImporter{

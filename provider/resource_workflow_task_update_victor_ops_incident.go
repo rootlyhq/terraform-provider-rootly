@@ -22,7 +22,7 @@ func resourceWorkflowTaskUpdateVictorOpsIncident() *schema.Resource {
 		Description: "Manages workflow update_victor_ops_incident task.",
 
 		CreateContext: resourceWorkflowTaskUpdateVictorOpsIncidentCreate,
-		ReadContext:   resourceWorkflowTaskUpdateVictorOpsIncidentRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateVictorOpsIncidentRead),
 		UpdateContext: resourceWorkflowTaskUpdateVictorOpsIncidentUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateVictorOpsIncidentDelete,
 		Importer: &schema.ResourceImporter{

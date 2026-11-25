@@ -22,7 +22,7 @@ func resourceWorkflowTaskAddTeam() *schema.Resource {
 		Description: "Manages workflow add_team task.",
 
 		CreateContext: resourceWorkflowTaskAddTeamCreate,
-		ReadContext:   resourceWorkflowTaskAddTeamRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAddTeamRead),
 		UpdateContext: resourceWorkflowTaskAddTeamUpdate,
 		DeleteContext: resourceWorkflowTaskAddTeamDelete,
 		Importer: &schema.ResourceImporter{

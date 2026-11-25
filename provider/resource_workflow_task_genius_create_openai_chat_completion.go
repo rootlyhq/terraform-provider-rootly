@@ -20,7 +20,7 @@ func resourceWorkflowTaskGeniusCreateOpenaiChatCompletion() *schema.Resource {
 		Description: "Manages workflow genius_create_openai_chat_completion task.",
 
 		CreateContext: resourceWorkflowTaskGeniusCreateOpenaiChatCompletionCreate,
-		ReadContext:   resourceWorkflowTaskGeniusCreateOpenaiChatCompletionRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskGeniusCreateOpenaiChatCompletionRead),
 		UpdateContext: resourceWorkflowTaskGeniusCreateOpenaiChatCompletionUpdate,
 		DeleteContext: resourceWorkflowTaskGeniusCreateOpenaiChatCompletionDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskAutoAssignRoleRootly() *schema.Resource {
 		Description: "Manages workflow auto_assign_role_rootly task.",
 
 		CreateContext: resourceWorkflowTaskAutoAssignRoleRootlyCreate,
-		ReadContext:   resourceWorkflowTaskAutoAssignRoleRootlyRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAutoAssignRoleRootlyRead),
 		UpdateContext: resourceWorkflowTaskAutoAssignRoleRootlyUpdate,
 		DeleteContext: resourceWorkflowTaskAutoAssignRoleRootlyDelete,
 		Importer: &schema.ResourceImporter{

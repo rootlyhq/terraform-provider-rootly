@@ -24,7 +24,7 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 		Description: "Manages workflow send_slack_blocks task.",
 
 		CreateContext: resourceWorkflowTaskSendSlackBlocksCreate,
-		ReadContext:   resourceWorkflowTaskSendSlackBlocksRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskSendSlackBlocksRead),
 		UpdateContext: resourceWorkflowTaskSendSlackBlocksUpdate,
 		DeleteContext: resourceWorkflowTaskSendSlackBlocksDelete,
 		Importer: &schema.ResourceImporter{

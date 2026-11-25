@@ -22,7 +22,7 @@ func resourceWorkflowTaskUpdateMotionTask() *schema.Resource {
 		Description: "Manages workflow update_motion_task task.",
 
 		CreateContext: resourceWorkflowTaskUpdateMotionTaskCreate,
-		ReadContext:   resourceWorkflowTaskUpdateMotionTaskRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateMotionTaskRead),
 		UpdateContext: resourceWorkflowTaskUpdateMotionTaskUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateMotionTaskDelete,
 		Importer: &schema.ResourceImporter{

@@ -24,7 +24,7 @@ func resourceWorkflowTaskSendMicrosoftTeamsBlocks() *schema.Resource {
 		Description: "Manages workflow send_microsoft_teams_blocks task.",
 
 		CreateContext: resourceWorkflowTaskSendMicrosoftTeamsBlocksCreate,
-		ReadContext:   resourceWorkflowTaskSendMicrosoftTeamsBlocksRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskSendMicrosoftTeamsBlocksRead),
 		UpdateContext: resourceWorkflowTaskSendMicrosoftTeamsBlocksUpdate,
 		DeleteContext: resourceWorkflowTaskSendMicrosoftTeamsBlocksDelete,
 		Importer: &schema.ResourceImporter{

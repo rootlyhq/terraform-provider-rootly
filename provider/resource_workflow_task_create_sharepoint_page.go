@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateSharepointPage() *schema.Resource {
 		Description: "Manages workflow create_sharepoint_page task.",
 
 		CreateContext: resourceWorkflowTaskCreateSharepointPageCreate,
-		ReadContext:   resourceWorkflowTaskCreateSharepointPageRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateSharepointPageRead),
 		UpdateContext: resourceWorkflowTaskCreateSharepointPageUpdate,
 		DeleteContext: resourceWorkflowTaskCreateSharepointPageDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskUpdateIncidentStatusTimestamp() *schema.Resource {
 		Description: "Manages workflow update_incident_status_timestamp task.",
 
 		CreateContext: resourceWorkflowTaskUpdateIncidentStatusTimestampCreate,
-		ReadContext:   resourceWorkflowTaskUpdateIncidentStatusTimestampRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateIncidentStatusTimestampRead),
 		UpdateContext: resourceWorkflowTaskUpdateIncidentStatusTimestampUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateIncidentStatusTimestampDelete,
 		Importer: &schema.ResourceImporter{

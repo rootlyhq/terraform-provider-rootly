@@ -22,7 +22,7 @@ func resourceWorkflowTaskRenameGoogleChatSpace() *schema.Resource {
 		Description: "Manages workflow rename_google_chat_space task.",
 
 		CreateContext: resourceWorkflowTaskRenameGoogleChatSpaceCreate,
-		ReadContext:   resourceWorkflowTaskRenameGoogleChatSpaceRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskRenameGoogleChatSpaceRead),
 		UpdateContext: resourceWorkflowTaskRenameGoogleChatSpaceUpdate,
 		DeleteContext: resourceWorkflowTaskRenameGoogleChatSpaceDelete,
 		Importer: &schema.ResourceImporter{

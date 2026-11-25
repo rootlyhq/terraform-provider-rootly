@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateZendeskJiraLink() *schema.Resource {
 		Description: "Manages workflow create_zendesk_jira_link task.",
 
 		CreateContext: resourceWorkflowTaskCreateZendeskJiraLinkCreate,
-		ReadContext:   resourceWorkflowTaskCreateZendeskJiraLinkRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateZendeskJiraLinkRead),
 		UpdateContext: resourceWorkflowTaskCreateZendeskJiraLinkUpdate,
 		DeleteContext: resourceWorkflowTaskCreateZendeskJiraLinkDelete,
 		Importer: &schema.ResourceImporter{

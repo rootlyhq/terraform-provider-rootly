@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateWatsonxChatCompletion() *schema.Resource {
 		Description: "Manages workflow create_watsonx_chat_completion task.",
 
 		CreateContext: resourceWorkflowTaskCreateWatsonxChatCompletionCreate,
-		ReadContext:   resourceWorkflowTaskCreateWatsonxChatCompletionRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateWatsonxChatCompletionRead),
 		UpdateContext: resourceWorkflowTaskCreateWatsonxChatCompletionUpdate,
 		DeleteContext: resourceWorkflowTaskCreateWatsonxChatCompletionDelete,
 		Importer: &schema.ResourceImporter{

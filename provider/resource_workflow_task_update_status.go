@@ -22,7 +22,7 @@ func resourceWorkflowTaskUpdateStatus() *schema.Resource {
 		Description: "Manages workflow update_status task.",
 
 		CreateContext: resourceWorkflowTaskUpdateStatusCreate,
-		ReadContext:   resourceWorkflowTaskUpdateStatusRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateStatusRead),
 		UpdateContext: resourceWorkflowTaskUpdateStatusUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateStatusDelete,
 		Importer: &schema.ResourceImporter{

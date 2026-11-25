@@ -22,7 +22,7 @@ func resourceWorkflowTaskSendWhatsappMessage() *schema.Resource {
 		Description: "Manages workflow send_whatsapp_message task.",
 
 		CreateContext: resourceWorkflowTaskSendWhatsappMessageCreate,
-		ReadContext:   resourceWorkflowTaskSendWhatsappMessageRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskSendWhatsappMessageRead),
 		UpdateContext: resourceWorkflowTaskSendWhatsappMessageUpdate,
 		DeleteContext: resourceWorkflowTaskSendWhatsappMessageDelete,
 		Importer: &schema.ResourceImporter{

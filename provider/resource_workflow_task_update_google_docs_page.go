@@ -22,7 +22,7 @@ func resourceWorkflowTaskUpdateGoogleDocsPage() *schema.Resource {
 		Description: "Manages workflow update_google_docs_page task.",
 
 		CreateContext: resourceWorkflowTaskUpdateGoogleDocsPageCreate,
-		ReadContext:   resourceWorkflowTaskUpdateGoogleDocsPageRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateGoogleDocsPageRead),
 		UpdateContext: resourceWorkflowTaskUpdateGoogleDocsPageUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateGoogleDocsPageDelete,
 		Importer: &schema.ResourceImporter{

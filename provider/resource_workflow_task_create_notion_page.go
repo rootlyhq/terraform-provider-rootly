@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateNotionPage() *schema.Resource {
 		Description: "Manages workflow create_notion_page task.",
 
 		CreateContext: resourceWorkflowTaskCreateNotionPageCreate,
-		ReadContext:   resourceWorkflowTaskCreateNotionPageRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateNotionPageRead),
 		UpdateContext: resourceWorkflowTaskCreateNotionPageUpdate,
 		DeleteContext: resourceWorkflowTaskCreateNotionPageDelete,
 		Importer: &schema.ResourceImporter{

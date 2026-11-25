@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateGoogleChatSpace() *schema.Resource {
 		Description: "Manages workflow create_google_chat_space task.",
 
 		CreateContext: resourceWorkflowTaskCreateGoogleChatSpaceCreate,
-		ReadContext:   resourceWorkflowTaskCreateGoogleChatSpaceRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateGoogleChatSpaceRead),
 		UpdateContext: resourceWorkflowTaskCreateGoogleChatSpaceUpdate,
 		DeleteContext: resourceWorkflowTaskCreateGoogleChatSpaceDelete,
 		Importer: &schema.ResourceImporter{

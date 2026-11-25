@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateMistralChatCompletion() *schema.Resource {
 		Description: "Manages workflow create_mistral_chat_completion task.",
 
 		CreateContext: resourceWorkflowTaskCreateMistralChatCompletionCreate,
-		ReadContext:   resourceWorkflowTaskCreateMistralChatCompletionRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateMistralChatCompletionRead),
 		UpdateContext: resourceWorkflowTaskCreateMistralChatCompletionUpdate,
 		DeleteContext: resourceWorkflowTaskCreateMistralChatCompletionDelete,
 		Importer: &schema.ResourceImporter{

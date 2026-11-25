@@ -22,7 +22,7 @@ func resourceWorkflowTaskInviteToSlackChannelPagerduty() *schema.Resource {
 		Description: "Manages workflow invite_to_slack_channel_pagerduty task.",
 
 		CreateContext: resourceWorkflowTaskInviteToSlackChannelPagerdutyCreate,
-		ReadContext:   resourceWorkflowTaskInviteToSlackChannelPagerdutyRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskInviteToSlackChannelPagerdutyRead),
 		UpdateContext: resourceWorkflowTaskInviteToSlackChannelPagerdutyUpdate,
 		DeleteContext: resourceWorkflowTaskInviteToSlackChannelPagerdutyDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskAttachRetrospectivePdfToJiraIssue() *schema.Resource {
 		Description: "Manages workflow attach_retrospective_pdf_to_jira_issue task.",
 
 		CreateContext: resourceWorkflowTaskAttachRetrospectivePdfToJiraIssueCreate,
-		ReadContext:   resourceWorkflowTaskAttachRetrospectivePdfToJiraIssueRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAttachRetrospectivePdfToJiraIssueRead),
 		UpdateContext: resourceWorkflowTaskAttachRetrospectivePdfToJiraIssueUpdate,
 		DeleteContext: resourceWorkflowTaskAttachRetrospectivePdfToJiraIssueDelete,
 		Importer: &schema.ResourceImporter{

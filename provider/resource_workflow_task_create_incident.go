@@ -24,7 +24,7 @@ func resourceWorkflowTaskCreateIncident() *schema.Resource {
 		Description: "Manages workflow create_incident task.",
 
 		CreateContext: resourceWorkflowTaskCreateIncidentCreate,
-		ReadContext:   resourceWorkflowTaskCreateIncidentRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateIncidentRead),
 		UpdateContext: resourceWorkflowTaskCreateIncidentUpdate,
 		DeleteContext: resourceWorkflowTaskCreateIncidentDelete,
 		Importer: &schema.ResourceImporter{
