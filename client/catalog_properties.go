@@ -11,16 +11,17 @@ import (
 )
 
 type CatalogProperty struct {
-	ID            string `jsonapi:"primary,catalog_properties"`
-	CatalogId     string `jsonapi:"attr,catalog_id,omitempty"`
-	Name          string `jsonapi:"attr,name,omitempty"`
-	Slug          string `jsonapi:"attr,slug,omitempty"`
-	Kind          string `jsonapi:"attr,kind,omitempty"`
-	KindCatalogId string `jsonapi:"attr,kind_catalog_id,omitempty"`
-	Multiple      *bool  `jsonapi:"attr,multiple,omitempty"`
-	Position      int    `jsonapi:"attr,position,omitempty"`
-	Required      *bool  `jsonapi:"attr,required,omitempty"`
-	CatalogType   string `jsonapi:"attr,catalog_type,omitempty"`
+	ID            string  `jsonapi:"primary,catalog_properties"`
+	CatalogId     string  `jsonapi:"attr,catalog_id,omitempty"`
+	Name          string  `jsonapi:"attr,name,omitempty"`
+	Slug          string  `jsonapi:"attr,slug,omitempty"`
+	Description   *string `jsonapi:"attr,description,omitempty"`
+	Kind          string  `jsonapi:"attr,kind,omitempty"`
+	KindCatalogId string  `jsonapi:"attr,kind_catalog_id,omitempty"`
+	Multiple      *bool   `jsonapi:"attr,multiple,omitempty"`
+	Position      int     `jsonapi:"attr,position,omitempty"`
+	Required      *bool   `jsonapi:"attr,required,omitempty"`
+	CatalogType   string  `jsonapi:"attr,catalog_type,omitempty"`
 }
 
 // catalogPropertyCollectionPath returns the API path for listing/creating catalog properties

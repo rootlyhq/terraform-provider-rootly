@@ -16,18 +16,26 @@ func TestAccResourceCatalogProperty(t *testing.T) {
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccResourceCatalogPropertyConfig(rName, "text", false),
+				Config: testAccResourceCatalogPropertyConfig(rName, "text", false, "Use T0 to T3"),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_catalog_property.test", "name", rName),
 					resource.TestCheckResourceAttr("rootly_catalog_property.test", "kind", "text"),
 					resource.TestCheckResourceAttr("rootly_catalog_property.test", "required", "false"),
+					resource.TestCheckResourceAttr("rootly_catalog_property.test", "description", "Use T0 to T3"),
 				),
 			},
 			{
-				Config: testAccResourceCatalogPropertyConfig(rName+"-updated", "text", true),
+				Config: testAccResourceCatalogPropertyConfig(rName+"-updated", "text", true, "Use T0 to T4"),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("rootly_catalog_property.test", "name", rName+"-updated"),
 					resource.TestCheckResourceAttr("rootly_catalog_property.test", "required", "true"),
+					resource.TestCheckResourceAttr("rootly_catalog_property.test", "description", "Use T0 to T4"),
+				),
+			},
+			{
+				Config: testAccResourceCatalogPropertyConfig(rName+"-updated", "text", true, ""),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_catalog_property.test", "description", ""),
 				),
 			},
 		},
@@ -52,19 +60,20 @@ func TestAccResourceCatalogPropertyWithCatalogType(t *testing.T) {
 	})
 }
 
-func testAccResourceCatalogPropertyConfig(name, kind string, required bool) string {
+func testAccResourceCatalogPropertyConfig(name, kind string, required bool, description string) string {
 	return fmt.Sprintf(`
 resource "rootly_catalog" "test" {
   name = "%s-catalog"
 }
 
 resource "rootly_catalog_property" "test" {
-  catalog_id = rootly_catalog.test.id
-  name       = "%s"
-  kind       = "%s"
-  required   = %t
+  catalog_id  = rootly_catalog.test.id
+  name        = "%s"
+  kind        = "%s"
+  required    = %t
+  description = "%s"
 }
-`, name, name, kind, required)
+`, name, name, kind, required, description)
 }
 
 func testAccResourceCatalogPropertyWithCatalogTypeConfig(name, catalogType string) string {
