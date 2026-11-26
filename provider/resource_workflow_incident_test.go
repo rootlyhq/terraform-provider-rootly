@@ -155,9 +155,15 @@ resource "rootly_workflow_incident" "fn" {
 }
 
 // The deprecated incident_post_mortem_condition_cause aliases incident_condition_cause in the API,
-// so its "ANY" default must not overwrite the value set on the current attribute.
+// so it must only be sent when configured, never with its default or a stale state value.
 func TestAccResourceWorkflowIncidentConditionCause(t *testing.T) {
 	rName := acctest.RandomWithPrefix("tf-wf-inc-cause")
+	check := func(cause string) resource.TestCheckFunc {
+		return resource.ComposeTestCheckFunc(
+			resource.TestCheckResourceAttr("rootly_workflow_incident.cause", "trigger_params.0.incident_condition_cause", cause),
+			resource.TestCheckResourceAttr("rootly_workflow_incident.cause", "trigger_params.0.incident_post_mortem_condition_cause", cause),
+		)
+	}
 
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck: func() {
@@ -165,31 +171,54 @@ func TestAccResourceWorkflowIncidentConditionCause(t *testing.T) {
 		},
 		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
+			// Create with only the current attribute.
 			{
-				Config: testAccResourceWorkflowIncidentConditionCauseConfig(rName, true),
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_incident.cause", "trigger_params.0.incident_condition_cause", "UNSET"),
-				),
+				Config: testAccResourceWorkflowIncidentConditionCauseConfig(rName, true, "UNSET", ""),
+				Check:  check("UNSET"),
+			},
+			// Update another trigger param; the condition must survive.
+			{
+				Config: testAccResourceWorkflowIncidentConditionCauseConfig(rName, false, "UNSET", ""),
+				Check:  check("UNSET"),
+			},
+			// Change the condition; the deprecated attribute's state value must not be sent back.
+			{
+				Config: testAccResourceWorkflowIncidentConditionCauseConfig(rName, false, "SET", ""),
+				Check:  check("SET"),
+			},
+			// Both attributes set to the same value.
+			{
+				Config: testAccResourceWorkflowIncidentConditionCauseConfig(rName, false, "UNSET", "UNSET"),
+				Check:  check("UNSET"),
+			},
+			// Drop the deprecated attribute from config; the condition must stay as configured.
+			{
+				Config: testAccResourceWorkflowIncidentConditionCauseConfig(rName, false, "UNSET", ""),
+				Check:  check("UNSET"),
 			},
 			{
-				Config: testAccResourceWorkflowIncidentConditionCauseConfig(rName, false),
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("rootly_workflow_incident.cause", "trigger_params.0.incident_condition_cause", "UNSET"),
-				),
+				ResourceName:      "rootly_workflow_incident.cause",
+				ImportState:       true,
+				ImportStateVerify: true,
 			},
 		},
 	})
 }
 
-func testAccResourceWorkflowIncidentConditionCauseConfig(rName string, visibility bool) string {
+func testAccResourceWorkflowIncidentConditionCauseConfig(rName string, visibility bool, cause, deprecatedCause string) string {
+	deprecated := ""
+	if deprecatedCause != "" {
+		deprecated = fmt.Sprintf("incident_post_mortem_condition_cause = %q", deprecatedCause)
+	}
 	return fmt.Sprintf(`
 resource "rootly_workflow_incident" "cause" {
   name = "%s"
   trigger_params {
     triggers                 = ["incident_updated"]
     incident_visibilities    = [%t]
-    incident_condition_cause = "UNSET"
+    incident_condition_cause = %q
+    %s
   }
 }
-`, rName, visibility)
+`, rName, visibility, cause, deprecated)
 }

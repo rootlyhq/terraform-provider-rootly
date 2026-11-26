@@ -192,3 +192,30 @@ test("publish incident synced component status keeps the API default", () => {
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+test("deprecated condition cause has no default and is only sent when configured", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-clean-swagger-"));
+  const swaggerPath = path.join(directory, "swagger.json");
+  const cause = {type: "string", enum: ["ANY", "UNSET"], default: "ANY", description: "[DEPRECATED] Use incident_condition_cause instead"};
+  const swagger = {paths: {}, components: {schemas: {
+    incident_trigger_params: {properties: {incident_post_mortem_condition_cause: structuredClone(cause)}},
+    post_mortem_trigger_params: {properties: {incident_post_mortem_condition_cause: structuredClone(cause)}},
+  }}};
+  try {
+    fs.writeFileSync(swaggerPath, JSON.stringify(swagger));
+    for (let run = 0; run < 2; run++) {
+      const result = spawnSync(process.execPath, [path.join(__dirname, "clean-swagger.js"), swaggerPath], {encoding: "utf8"});
+      assert.equal(result.status, 0, result.stderr);
+    }
+    const schemas = JSON.parse(fs.readFileSync(swaggerPath, "utf8")).components.schemas;
+    for (const name of ["incident_trigger_params", "post_mortem_trigger_params"]) {
+      const property = schemas[name].properties.incident_post_mortem_condition_cause;
+      assert.equal(property.default, undefined);
+      assert.equal(property.deprecated, true);
+      assert.equal(property.tf_computed, true);
+      assert.equal(property.description, "Use incident_condition_cause instead");
+    }
+  } finally {
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});

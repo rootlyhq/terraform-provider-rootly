@@ -64,3 +64,36 @@ resource "rootly_workflow_post_mortem" "foo" {
 }
 `, name)
 }
+
+// The deprecated incident_post_mortem_condition_cause default must not overwrite incident_condition_cause.
+func TestAccResourceWorkflowPostMortemConditionCause(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-wf-pm-cause")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck:          func() { testAccPreCheck(t) },
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceWorkflowPostMortemConditionCauseConfig(rName, true),
+				Check:  resource.TestCheckResourceAttr("rootly_workflow_post_mortem.cause", "trigger_params.0.incident_condition_cause", "UNSET"),
+			},
+			{
+				Config: testAccResourceWorkflowPostMortemConditionCauseConfig(rName, false),
+				Check:  resource.TestCheckResourceAttr("rootly_workflow_post_mortem.cause", "trigger_params.0.incident_condition_cause", "UNSET"),
+			},
+		},
+	})
+}
+
+func testAccResourceWorkflowPostMortemConditionCauseConfig(rName string, visibility bool) string {
+	return fmt.Sprintf(`
+resource "rootly_workflow_post_mortem" "cause" {
+  name = "%s"
+  trigger_params {
+    triggers                 = ["post_mortem_created"]
+    incident_visibilities    = [%t]
+    incident_condition_cause = "UNSET"
+  }
+}
+`, rName, visibility)
+}
