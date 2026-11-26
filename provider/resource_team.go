@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
@@ -424,6 +425,18 @@ func resourceTeam() *schema.Resource {
 				Description: "Auto add members to incident channel when team is attached. Value must be one of true or false",
 			},
 
+			"schedule_override_policy": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Who can create and update overrides for schedules owned by this team: `everyone` in the organization, only team `members`, or only team `admins`. Users still need override permission from their on-call role. Only available when the team-level schedule override policy feature is enabled for the organization. Value must be one of `everyone`, `members`, `admins`.",
+				ValidateFunc: validation.StringInSlice([]string{"everyone", "members", "admins"}, false),
+			},
+
 			"properties": &schema.Schema{
 				Type:             schema.TypeList,
 				Computed:         false,
@@ -552,6 +565,9 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("auto_add_members_when_attached"); ok {
 		s.AutoAddMembersWhenAttached = tools.Bool(value.(bool))
 	}
+	if value, ok := d.GetOkExists("schedule_override_policy"); ok {
+		s.ScheduleOverridePolicy = value.(string)
+	}
 	if value, ok := d.GetOkExists("properties"); ok {
 		s.Properties = value.([]interface{})
 	}
@@ -667,6 +683,7 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("incident_broadcast_channel", singleton_list_incident_broadcast_channel)
 
 	d.Set("auto_add_members_when_attached", item.AutoAddMembersWhenAttached)
+	d.Set("schedule_override_policy", item.ScheduleOverridePolicy)
 
 	if item.Properties != nil {
 		processed_items_properties := make([]map[string]interface{}, 0)
@@ -812,6 +829,10 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 
 	if d.HasChange("auto_add_members_when_attached") {
 		s.AutoAddMembersWhenAttached = tools.Bool(d.Get("auto_add_members_when_attached").(bool))
+	}
+
+	if d.HasChange("schedule_override_policy") {
+		s.ScheduleOverridePolicy = d.Get("schedule_override_policy").(string)
 	}
 
 	if d.HasChange("properties") {
