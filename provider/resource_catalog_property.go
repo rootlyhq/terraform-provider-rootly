@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
 )
 
@@ -23,6 +24,7 @@ func resourceCatalogProperty() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
+		CustomizeDiff: sdkutils.ExplicitEmptyStrings("description"),
 		Schema: map[string]*schema.Schema{
 
 			"catalog_id": &schema.Schema{
@@ -58,6 +60,18 @@ func resourceCatalogProperty() *schema.Resource {
 				Description:      "",
 				Deprecated:       "`slug` is derived from `name` and any configured value is ignored. It will become read-only in the next major version; remove it from your configuration.",
 				DiffSuppressFunc: diffsuppressfunc.Skip,
+			},
+
+			"description": &schema.Schema{
+				Type:         schema.TypeString,
+				Computed:     true,
+				Required:     false,
+				Optional:     true,
+				Sensitive:    false,
+				ForceNew:     false,
+				WriteOnly:    false,
+				Description:  "Helper text shown under the property when filling in a catalog entry.",
+				ValidateFunc: validation.StringLenBetween(0, 500),
 			},
 
 			"kind": &schema.Schema{
@@ -147,6 +161,9 @@ func resourceCatalogPropertyCreate(ctx context.Context, d *schema.ResourceData, 
 	if value, ok := d.GetOkExists("name"); ok {
 		s.Name = value.(string)
 	}
+	if value, ok := d.GetOkExists("description"); ok {
+		s.Description = tools.String(value.(string))
+	}
 	if value, ok := d.GetOkExists("kind"); ok {
 		s.Kind = value.(string)
 	}
@@ -194,6 +211,7 @@ func resourceCatalogPropertyRead(ctx context.Context, d *schema.ResourceData, me
 	d.Set("catalog_id", item.CatalogId)
 	d.Set("name", item.Name)
 	d.Set("slug", item.Slug)
+	d.Set("description", item.Description)
 	d.Set("kind", item.Kind)
 	d.Set("kind_catalog_id", item.KindCatalogId)
 	d.Set("multiple", item.Multiple)
@@ -215,6 +233,7 @@ func resourceCatalogPropertyUpdate(ctx context.Context, d *schema.ResourceData, 
 	if d.HasChange("name") {
 		s.Name = d.Get("name").(string)
 	}
+	s.Description = sdkutils.OptionalComputedStringUpdate(d, "description")
 	if d.HasChange("kind") {
 		s.Kind = d.Get("kind").(string)
 	}
