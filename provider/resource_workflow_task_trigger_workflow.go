@@ -22,7 +22,7 @@ func resourceWorkflowTaskTriggerWorkflow() *schema.Resource {
 		Description: "Manages workflow trigger_workflow task.",
 
 		CreateContext: resourceWorkflowTaskTriggerWorkflowCreate,
-		ReadContext:   resourceWorkflowTaskTriggerWorkflowRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskTriggerWorkflowRead),
 		UpdateContext: resourceWorkflowTaskTriggerWorkflowUpdate,
 		DeleteContext: resourceWorkflowTaskTriggerWorkflowDelete,
 		Importer: &schema.ResourceImporter{

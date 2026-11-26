@@ -24,7 +24,7 @@ func resourceWorkflowTaskCreateGithubIssue() *schema.Resource {
 		Description: "Manages workflow create_github_issue task.",
 
 		CreateContext: resourceWorkflowTaskCreateGithubIssueCreate,
-		ReadContext:   resourceWorkflowTaskCreateGithubIssueRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateGithubIssueRead),
 		UpdateContext: resourceWorkflowTaskCreateGithubIssueUpdate,
 		DeleteContext: resourceWorkflowTaskCreateGithubIssueDelete,
 		Importer: &schema.ResourceImporter{

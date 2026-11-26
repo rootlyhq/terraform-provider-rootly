@@ -22,7 +22,7 @@ func resourceWorkflowTaskUpdateOpsgenieIncident() *schema.Resource {
 		Description: "Manages workflow update_opsgenie_incident task.",
 
 		CreateContext: resourceWorkflowTaskUpdateOpsgenieIncidentCreate,
-		ReadContext:   resourceWorkflowTaskUpdateOpsgenieIncidentRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateOpsgenieIncidentRead),
 		UpdateContext: resourceWorkflowTaskUpdateOpsgenieIncidentUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateOpsgenieIncidentDelete,
 		Importer: &schema.ResourceImporter{

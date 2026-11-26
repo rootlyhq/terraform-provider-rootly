@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateDatadogNotebook() *schema.Resource {
 		Description: "Manages workflow create_datadog_notebook task.",
 
 		CreateContext: resourceWorkflowTaskCreateDatadogNotebookCreate,
-		ReadContext:   resourceWorkflowTaskCreateDatadogNotebookRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateDatadogNotebookRead),
 		UpdateContext: resourceWorkflowTaskCreateDatadogNotebookUpdate,
 		DeleteContext: resourceWorkflowTaskCreateDatadogNotebookDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskAutoAssignRoleVictorOps() *schema.Resource {
 		Description: "Manages workflow auto_assign_role_victor_ops task.",
 
 		CreateContext: resourceWorkflowTaskAutoAssignRoleVictorOpsCreate,
-		ReadContext:   resourceWorkflowTaskAutoAssignRoleVictorOpsRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAutoAssignRoleVictorOpsRead),
 		UpdateContext: resourceWorkflowTaskAutoAssignRoleVictorOpsUpdate,
 		DeleteContext: resourceWorkflowTaskAutoAssignRoleVictorOpsDelete,
 		Importer: &schema.ResourceImporter{

@@ -24,7 +24,7 @@ func resourceWorkflowTaskCreateAirtableTableRecord() *schema.Resource {
 		Description: "Manages workflow create_airtable_table_record task.",
 
 		CreateContext: resourceWorkflowTaskCreateAirtableTableRecordCreate,
-		ReadContext:   resourceWorkflowTaskCreateAirtableTableRecordRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateAirtableTableRecordRead),
 		UpdateContext: resourceWorkflowTaskCreateAirtableTableRecordUpdate,
 		DeleteContext: resourceWorkflowTaskCreateAirtableTableRecordDelete,
 		Importer: &schema.ResourceImporter{

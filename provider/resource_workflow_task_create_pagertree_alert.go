@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreatePagertreeAlert() *schema.Resource {
 		Description: "Manages workflow create_pagertree_alert task.",
 
 		CreateContext: resourceWorkflowTaskCreatePagertreeAlertCreate,
-		ReadContext:   resourceWorkflowTaskCreatePagertreeAlertRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreatePagertreeAlertRead),
 		UpdateContext: resourceWorkflowTaskCreatePagertreeAlertUpdate,
 		DeleteContext: resourceWorkflowTaskCreatePagertreeAlertDelete,
 		Importer: &schema.ResourceImporter{

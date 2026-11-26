@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateOutlookEvent() *schema.Resource {
 		Description: "Manages workflow create_outlook_event task.",
 
 		CreateContext: resourceWorkflowTaskCreateOutlookEventCreate,
-		ReadContext:   resourceWorkflowTaskCreateOutlookEventRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateOutlookEventRead),
 		UpdateContext: resourceWorkflowTaskCreateOutlookEventUpdate,
 		DeleteContext: resourceWorkflowTaskCreateOutlookEventDelete,
 		Importer: &schema.ResourceImporter{

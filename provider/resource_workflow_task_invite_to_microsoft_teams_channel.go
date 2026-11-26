@@ -22,7 +22,7 @@ func resourceWorkflowTaskInviteToMicrosoftTeamsChannel() *schema.Resource {
 		Description: "Manages workflow invite_to_microsoft_teams_channel task.",
 
 		CreateContext: resourceWorkflowTaskInviteToMicrosoftTeamsChannelCreate,
-		ReadContext:   resourceWorkflowTaskInviteToMicrosoftTeamsChannelRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskInviteToMicrosoftTeamsChannelRead),
 		UpdateContext: resourceWorkflowTaskInviteToMicrosoftTeamsChannelUpdate,
 		DeleteContext: resourceWorkflowTaskInviteToMicrosoftTeamsChannelDelete,
 		Importer: &schema.ResourceImporter{

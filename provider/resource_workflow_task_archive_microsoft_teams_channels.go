@@ -22,7 +22,7 @@ func resourceWorkflowTaskArchiveMicrosoftTeamsChannels() *schema.Resource {
 		Description: "Manages workflow archive_microsoft_teams_channels task.",
 
 		CreateContext: resourceWorkflowTaskArchiveMicrosoftTeamsChannelsCreate,
-		ReadContext:   resourceWorkflowTaskArchiveMicrosoftTeamsChannelsRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskArchiveMicrosoftTeamsChannelsRead),
 		UpdateContext: resourceWorkflowTaskArchiveMicrosoftTeamsChannelsUpdate,
 		DeleteContext: resourceWorkflowTaskArchiveMicrosoftTeamsChannelsDelete,
 		Importer: &schema.ResourceImporter{

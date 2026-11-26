@@ -22,7 +22,7 @@ func resourceWorkflowTaskAddMicrosoftTeamsTab() *schema.Resource {
 		Description: "Manages workflow add_microsoft_teams_tab task.",
 
 		CreateContext: resourceWorkflowTaskAddMicrosoftTeamsTabCreate,
-		ReadContext:   resourceWorkflowTaskAddMicrosoftTeamsTabRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAddMicrosoftTeamsTabRead),
 		UpdateContext: resourceWorkflowTaskAddMicrosoftTeamsTabUpdate,
 		DeleteContext: resourceWorkflowTaskAddMicrosoftTeamsTabDelete,
 		Importer: &schema.ResourceImporter{

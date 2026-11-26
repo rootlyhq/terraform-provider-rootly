@@ -22,7 +22,7 @@ func resourceWorkflowTaskAddRole() *schema.Resource {
 		Description: "Manages workflow add_role task.",
 
 		CreateContext: resourceWorkflowTaskAddRoleCreate,
-		ReadContext:   resourceWorkflowTaskAddRoleRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAddRoleRead),
 		UpdateContext: resourceWorkflowTaskAddRoleUpdate,
 		DeleteContext: resourceWorkflowTaskAddRoleDelete,
 		Importer: &schema.ResourceImporter{

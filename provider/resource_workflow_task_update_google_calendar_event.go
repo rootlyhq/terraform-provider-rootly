@@ -22,7 +22,7 @@ func resourceWorkflowTaskUpdateGoogleCalendarEvent() *schema.Resource {
 		Description: "Manages workflow update_google_calendar_event task.",
 
 		CreateContext: resourceWorkflowTaskUpdateGoogleCalendarEventCreate,
-		ReadContext:   resourceWorkflowTaskUpdateGoogleCalendarEventRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateGoogleCalendarEventRead),
 		UpdateContext: resourceWorkflowTaskUpdateGoogleCalendarEventUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateGoogleCalendarEventDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateZoomMeeting() *schema.Resource {
 		Description: "Manages workflow create_zoom_meeting task.",
 
 		CreateContext: resourceWorkflowTaskCreateZoomMeetingCreate,
-		ReadContext:   resourceWorkflowTaskCreateZoomMeetingRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateZoomMeetingRead),
 		UpdateContext: resourceWorkflowTaskCreateZoomMeetingUpdate,
 		DeleteContext: resourceWorkflowTaskCreateZoomMeetingDelete,
 		Importer: &schema.ResourceImporter{

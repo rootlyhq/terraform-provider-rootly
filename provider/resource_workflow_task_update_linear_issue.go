@@ -24,7 +24,7 @@ func resourceWorkflowTaskUpdateLinearIssue() *schema.Resource {
 		Description: "Manages workflow update_linear_issue task.",
 
 		CreateContext: resourceWorkflowTaskUpdateLinearIssueCreate,
-		ReadContext:   resourceWorkflowTaskUpdateLinearIssueRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateLinearIssueRead),
 		UpdateContext: resourceWorkflowTaskUpdateLinearIssueUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateLinearIssueDelete,
 		Importer: &schema.ResourceImporter{

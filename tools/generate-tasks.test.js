@@ -123,6 +123,7 @@ import (
   "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 func validateUniqueWorkflowTaskPosition(context.Context, *schema.ResourceDiff, interface{}) error { return nil }
+func readWorkflowTaskWithPositionWarning(read schema.ReadContextFunc) schema.ReadContextFunc { return read }
 `);
     const compiled = spawnSync("go", ["test", `./${path.basename(directory)}/provider`], {cwd: previous, encoding: "utf8"});
     assert.ifError(compiled.error);

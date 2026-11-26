@@ -28,7 +28,7 @@ func resourceWorkflowTaskUpdateSlackCanvas() *schema.Resource {
 		Description: "Manages workflow update_slack_canvas task.",
 
 		CreateContext: resourceWorkflowTaskUpdateSlackCanvasCreate,
-		ReadContext:   resourceWorkflowTaskUpdateSlackCanvasRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateSlackCanvasRead),
 		UpdateContext: resourceWorkflowTaskUpdateSlackCanvasUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateSlackCanvasDelete,
 		Importer: &schema.ResourceImporter{

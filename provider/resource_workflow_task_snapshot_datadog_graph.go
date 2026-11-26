@@ -22,7 +22,7 @@ func resourceWorkflowTaskSnapshotDatadogGraph() *schema.Resource {
 		Description: "Manages workflow snapshot_datadog_graph task.",
 
 		CreateContext: resourceWorkflowTaskSnapshotDatadogGraphCreate,
-		ReadContext:   resourceWorkflowTaskSnapshotDatadogGraphRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskSnapshotDatadogGraphRead),
 		UpdateContext: resourceWorkflowTaskSnapshotDatadogGraphUpdate,
 		DeleteContext: resourceWorkflowTaskSnapshotDatadogGraphDelete,
 		Importer: &schema.ResourceImporter{

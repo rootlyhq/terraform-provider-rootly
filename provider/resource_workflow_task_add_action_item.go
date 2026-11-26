@@ -24,7 +24,7 @@ func resourceWorkflowTaskAddActionItem() *schema.Resource {
 		Description: "Manages workflow add_action_item task.",
 
 		CreateContext: resourceWorkflowTaskAddActionItemCreate,
-		ReadContext:   resourceWorkflowTaskAddActionItemRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAddActionItemRead),
 		UpdateContext: resourceWorkflowTaskAddActionItemUpdate,
 		DeleteContext: resourceWorkflowTaskAddActionItemDelete,
 		Importer: &schema.ResourceImporter{

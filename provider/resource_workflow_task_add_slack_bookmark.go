@@ -22,7 +22,7 @@ func resourceWorkflowTaskAddSlackBookmark() *schema.Resource {
 		Description: "Manages workflow add_slack_bookmark task.",
 
 		CreateContext: resourceWorkflowTaskAddSlackBookmarkCreate,
-		ReadContext:   resourceWorkflowTaskAddSlackBookmarkRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAddSlackBookmarkRead),
 		UpdateContext: resourceWorkflowTaskAddSlackBookmarkUpdate,
 		DeleteContext: resourceWorkflowTaskAddSlackBookmarkDelete,
 		Importer: &schema.ResourceImporter{

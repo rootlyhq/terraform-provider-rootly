@@ -20,7 +20,7 @@ func resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletion() *schema.Resour
 		Description: "Manages workflow genius_create_google_gemini_chat_completion task.",
 
 		CreateContext: resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionCreate,
-		ReadContext:   resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionRead),
 		UpdateContext: resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionUpdate,
 		DeleteContext: resourceWorkflowTaskGeniusCreateGoogleGeminiChatCompletionDelete,
 		Importer: &schema.ResourceImporter{

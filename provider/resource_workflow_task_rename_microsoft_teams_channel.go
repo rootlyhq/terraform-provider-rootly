@@ -22,7 +22,7 @@ func resourceWorkflowTaskRenameMicrosoftTeamsChannel() *schema.Resource {
 		Description: "Manages workflow rename_microsoft_teams_channel task.",
 
 		CreateContext: resourceWorkflowTaskRenameMicrosoftTeamsChannelCreate,
-		ReadContext:   resourceWorkflowTaskRenameMicrosoftTeamsChannelRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskRenameMicrosoftTeamsChannelRead),
 		UpdateContext: resourceWorkflowTaskRenameMicrosoftTeamsChannelUpdate,
 		DeleteContext: resourceWorkflowTaskRenameMicrosoftTeamsChannelDelete,
 		Importer: &schema.ResourceImporter{

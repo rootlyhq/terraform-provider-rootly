@@ -22,7 +22,7 @@ func resourceWorkflowTaskChangeSlackChannelPrivacy() *schema.Resource {
 		Description: "Manages workflow change_slack_channel_privacy task.",
 
 		CreateContext: resourceWorkflowTaskChangeSlackChannelPrivacyCreate,
-		ReadContext:   resourceWorkflowTaskChangeSlackChannelPrivacyRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskChangeSlackChannelPrivacyRead),
 		UpdateContext: resourceWorkflowTaskChangeSlackChannelPrivacyUpdate,
 		DeleteContext: resourceWorkflowTaskChangeSlackChannelPrivacyDelete,
 		Importer: &schema.ResourceImporter{

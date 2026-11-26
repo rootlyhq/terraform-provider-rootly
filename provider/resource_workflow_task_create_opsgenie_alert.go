@@ -24,7 +24,7 @@ func resourceWorkflowTaskCreateOpsgenieAlert() *schema.Resource {
 		Description: "Manages workflow create_opsgenie_alert task.",
 
 		CreateContext: resourceWorkflowTaskCreateOpsgenieAlertCreate,
-		ReadContext:   resourceWorkflowTaskCreateOpsgenieAlertRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateOpsgenieAlertRead),
 		UpdateContext: resourceWorkflowTaskCreateOpsgenieAlertUpdate,
 		DeleteContext: resourceWorkflowTaskCreateOpsgenieAlertDelete,
 		Importer: &schema.ResourceImporter{

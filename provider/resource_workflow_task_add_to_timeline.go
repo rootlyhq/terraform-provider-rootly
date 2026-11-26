@@ -22,7 +22,7 @@ func resourceWorkflowTaskAddToTimeline() *schema.Resource {
 		Description: "Manages workflow add_to_timeline task.",
 
 		CreateContext: resourceWorkflowTaskAddToTimelineCreate,
-		ReadContext:   resourceWorkflowTaskAddToTimelineRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAddToTimelineRead),
 		UpdateContext: resourceWorkflowTaskAddToTimelineUpdate,
 		DeleteContext: resourceWorkflowTaskAddToTimelineDelete,
 		Importer: &schema.ResourceImporter{

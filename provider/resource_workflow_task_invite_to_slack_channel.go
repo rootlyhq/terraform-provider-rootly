@@ -22,7 +22,7 @@ func resourceWorkflowTaskInviteToSlackChannel() *schema.Resource {
 		Description: "Manages workflow invite_to_slack_channel task.",
 
 		CreateContext: resourceWorkflowTaskInviteToSlackChannelCreate,
-		ReadContext:   resourceWorkflowTaskInviteToSlackChannelRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskInviteToSlackChannelRead),
 		UpdateContext: resourceWorkflowTaskInviteToSlackChannelUpdate,
 		DeleteContext: resourceWorkflowTaskInviteToSlackChannelDelete,
 		Importer: &schema.ResourceImporter{

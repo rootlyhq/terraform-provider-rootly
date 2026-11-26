@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateConfluencePage() *schema.Resource {
 		Description: "Manages workflow create_confluence_page task.",
 
 		CreateContext: resourceWorkflowTaskCreateConfluencePageCreate,
-		ReadContext:   resourceWorkflowTaskCreateConfluencePageRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateConfluencePageRead),
 		UpdateContext: resourceWorkflowTaskCreateConfluencePageUpdate,
 		DeleteContext: resourceWorkflowTaskCreateConfluencePageDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskPagePagerdutyOnCallResponders() *schema.Resource {
 		Description: "Manages workflow page_pagerduty_on_call_responders task.",
 
 		CreateContext: resourceWorkflowTaskPagePagerdutyOnCallRespondersCreate,
-		ReadContext:   resourceWorkflowTaskPagePagerdutyOnCallRespondersRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskPagePagerdutyOnCallRespondersRead),
 		UpdateContext: resourceWorkflowTaskPagePagerdutyOnCallRespondersUpdate,
 		DeleteContext: resourceWorkflowTaskPagePagerdutyOnCallRespondersDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskPageJsmopsOnCallResponders() *schema.Resource {
 		Description: "Manages workflow page_jsmops_on_call_responders task.",
 
 		CreateContext: resourceWorkflowTaskPageJsmopsOnCallRespondersCreate,
-		ReadContext:   resourceWorkflowTaskPageJsmopsOnCallRespondersRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskPageJsmopsOnCallRespondersRead),
 		UpdateContext: resourceWorkflowTaskPageJsmopsOnCallRespondersUpdate,
 		DeleteContext: resourceWorkflowTaskPageJsmopsOnCallRespondersDelete,
 		Importer: &schema.ResourceImporter{

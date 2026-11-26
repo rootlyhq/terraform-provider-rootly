@@ -22,7 +22,7 @@ func resourceWorkflowTaskPrint() *schema.Resource {
 		Description: "Manages workflow print task.",
 
 		CreateContext: resourceWorkflowTaskPrintCreate,
-		ReadContext:   resourceWorkflowTaskPrintRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskPrintRead),
 		UpdateContext: resourceWorkflowTaskPrintUpdate,
 		DeleteContext: resourceWorkflowTaskPrintDelete,
 		Importer: &schema.ResourceImporter{

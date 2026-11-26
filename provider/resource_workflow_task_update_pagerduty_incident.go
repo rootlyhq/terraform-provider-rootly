@@ -22,7 +22,7 @@ func resourceWorkflowTaskUpdatePagerdutyIncident() *schema.Resource {
 		Description: "Manages workflow update_pagerduty_incident task.",
 
 		CreateContext: resourceWorkflowTaskUpdatePagerdutyIncidentCreate,
-		ReadContext:   resourceWorkflowTaskUpdatePagerdutyIncidentRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdatePagerdutyIncidentRead),
 		UpdateContext: resourceWorkflowTaskUpdatePagerdutyIncidentUpdate,
 		DeleteContext: resourceWorkflowTaskUpdatePagerdutyIncidentDelete,
 		Importer: &schema.ResourceImporter{

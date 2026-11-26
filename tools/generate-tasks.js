@@ -130,7 +130,7 @@ ${hasNestedObjects ? `var workflowTask${task_name_camel}ObjectFields = ${genWork
 		Description: "Manages workflow ${task_name} task.",
 
 		CreateContext: resourceWorkflowTask${task_name_camel}Create,
-		ReadContext:   resourceWorkflowTask${task_name_camel}Read,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTask${task_name_camel}Read),
 		UpdateContext: resourceWorkflowTask${task_name_camel}Update,
 		DeleteContext: resourceWorkflowTask${task_name_camel}Delete,
 		Importer: &schema.ResourceImporter{

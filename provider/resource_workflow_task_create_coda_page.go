@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateCodaPage() *schema.Resource {
 		Description: "Manages workflow create_coda_page task.",
 
 		CreateContext: resourceWorkflowTaskCreateCodaPageCreate,
-		ReadContext:   resourceWorkflowTaskCreateCodaPageRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateCodaPageRead),
 		UpdateContext: resourceWorkflowTaskCreateCodaPageUpdate,
 		DeleteContext: resourceWorkflowTaskCreateCodaPageDelete,
 		Importer: &schema.ResourceImporter{

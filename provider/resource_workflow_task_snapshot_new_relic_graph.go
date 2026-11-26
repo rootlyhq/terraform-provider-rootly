@@ -22,7 +22,7 @@ func resourceWorkflowTaskSnapshotNewRelicGraph() *schema.Resource {
 		Description: "Manages workflow snapshot_new_relic_graph task.",
 
 		CreateContext: resourceWorkflowTaskSnapshotNewRelicGraphCreate,
-		ReadContext:   resourceWorkflowTaskSnapshotNewRelicGraphRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskSnapshotNewRelicGraphRead),
 		UpdateContext: resourceWorkflowTaskSnapshotNewRelicGraphUpdate,
 		DeleteContext: resourceWorkflowTaskSnapshotNewRelicGraphDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskPageRootlyOnCallResponders() *schema.Resource {
 		Description: "Manages workflow page_rootly_on_call_responders task.",
 
 		CreateContext: resourceWorkflowTaskPageRootlyOnCallRespondersCreate,
-		ReadContext:   resourceWorkflowTaskPageRootlyOnCallRespondersRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskPageRootlyOnCallRespondersRead),
 		UpdateContext: resourceWorkflowTaskPageRootlyOnCallRespondersUpdate,
 		DeleteContext: resourceWorkflowTaskPageRootlyOnCallRespondersDelete,
 		Importer: &schema.ResourceImporter{

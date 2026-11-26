@@ -22,7 +22,7 @@ func resourceWorkflowTaskUpdateAttachedAlerts() *schema.Resource {
 		Description: "Manages workflow update_attached_alerts task.",
 
 		CreateContext: resourceWorkflowTaskUpdateAttachedAlertsCreate,
-		ReadContext:   resourceWorkflowTaskUpdateAttachedAlertsRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateAttachedAlertsRead),
 		UpdateContext: resourceWorkflowTaskUpdateAttachedAlertsUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateAttachedAlertsDelete,
 		Importer: &schema.ResourceImporter{

@@ -24,7 +24,7 @@ func resourceWorkflowTaskUpdateAirtableTableRecord() *schema.Resource {
 		Description: "Manages workflow update_airtable_table_record task.",
 
 		CreateContext: resourceWorkflowTaskUpdateAirtableTableRecordCreate,
-		ReadContext:   resourceWorkflowTaskUpdateAirtableTableRecordRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateAirtableTableRecordRead),
 		UpdateContext: resourceWorkflowTaskUpdateAirtableTableRecordUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateAirtableTableRecordDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskCallPeople() *schema.Resource {
 		Description: "Manages workflow call_people task.",
 
 		CreateContext: resourceWorkflowTaskCallPeopleCreate,
-		ReadContext:   resourceWorkflowTaskCallPeopleRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCallPeopleRead),
 		UpdateContext: resourceWorkflowTaskCallPeopleUpdate,
 		DeleteContext: resourceWorkflowTaskCallPeopleDelete,
 		Importer: &schema.ResourceImporter{

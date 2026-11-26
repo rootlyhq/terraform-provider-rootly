@@ -22,7 +22,7 @@ func resourceWorkflowTaskSendSlackMessage() *schema.Resource {
 		Description: "Manages workflow send_slack_message task.",
 
 		CreateContext: resourceWorkflowTaskSendSlackMessageCreate,
-		ReadContext:   resourceWorkflowTaskSendSlackMessageRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskSendSlackMessageRead),
 		UpdateContext: resourceWorkflowTaskSendSlackMessageUpdate,
 		DeleteContext: resourceWorkflowTaskSendSlackMessageDelete,
 		Importer: &schema.ResourceImporter{

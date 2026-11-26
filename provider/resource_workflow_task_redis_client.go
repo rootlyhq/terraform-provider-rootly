@@ -22,7 +22,7 @@ func resourceWorkflowTaskRedisClient() *schema.Resource {
 		Description: "Manages workflow redis_client task.",
 
 		CreateContext: resourceWorkflowTaskRedisClientCreate,
-		ReadContext:   resourceWorkflowTaskRedisClientRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskRedisClientRead),
 		UpdateContext: resourceWorkflowTaskRedisClientUpdate,
 		DeleteContext: resourceWorkflowTaskRedisClientDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateTrelloCard() *schema.Resource {
 		Description: "Manages workflow create_trello_card task.",
 
 		CreateContext: resourceWorkflowTaskCreateTrelloCardCreate,
-		ReadContext:   resourceWorkflowTaskCreateTrelloCardRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateTrelloCardRead),
 		UpdateContext: resourceWorkflowTaskCreateTrelloCardUpdate,
 		DeleteContext: resourceWorkflowTaskCreateTrelloCardDelete,
 		Importer: &schema.ResourceImporter{
