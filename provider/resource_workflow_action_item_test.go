@@ -35,6 +35,8 @@ func TestAccResourceWorkflowActionItem(t *testing.T) {
 					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "enabled", "false"),
 					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "trigger_params.0.incident_visibilities.#", "1"),
 					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "trigger_params.0.incident_visibilities.0", "false"),
+					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "trigger_params.0.incident_action_item_condition_group", "CONTAINS"),
+					resource.TestCheckResourceAttr("rootly_workflow_action_item.foo", "trigger_params.0.incident_action_item_group_ids.#", "2"),
 				),
 			},
 		},
@@ -50,7 +52,7 @@ resource "rootly_workflow_action_item" "foo" {
 		incident_visibilities = [true]
 	}
 }
-`, name)
+`, name) + testAccResourceWorkflowActionItemTeamsConfig(name)
 }
 
 func testAccResourceWorkflowActionItemUpdateConfig(name string) string {
@@ -62,7 +64,22 @@ resource "rootly_workflow_action_item" "foo" {
 	trigger_params {
 		triggers = ["action_item_updated"]
 		incident_visibilities = [false]
+		incident_action_item_condition_group = "CONTAINS"
+		incident_action_item_group_ids = [rootly_team.a.id, rootly_team.b.id]
 	}
+}
+`, name) + testAccResourceWorkflowActionItemTeamsConfig(name)
+}
+
+// Teams are created in the first step so their IDs are known when the second step plans.
+func testAccResourceWorkflowActionItemTeamsConfig(name string) string {
+	return fmt.Sprintf(`
+resource "rootly_team" "a" {
+  name = "%[1]s-a"
+}
+
+resource "rootly_team" "b" {
+  name = "%[1]s-b"
 }
 `, name)
 }
