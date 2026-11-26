@@ -196,6 +196,17 @@ func resourceTeam() *schema.Resource {
 				Description: "The Service Now CI sys id associated to this team",
 			},
 
+			"scim_group_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Required:    false,
+				Optional:    true,
+				Sensitive:   false,
+				ForceNew:    false,
+				WriteOnly:   false,
+				Description: "The SCIM group id linked to this team. Membership syncs from the SCIM group while the team keeps its own name.",
+			},
+
 			"user_ids": &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -514,6 +525,9 @@ func resourceTeamCreate(ctx context.Context, d *schema.ResourceData, meta interf
 	if value, ok := d.GetOkExists("service_now_ci_sys_id"); ok {
 		s.ServiceNowCiSysId = value.(string)
 	}
+	if value, ok := d.GetOkExists("scim_group_id"); ok {
+		s.ScimGroupId = value.(string)
+	}
 	if value, ok := d.GetOkExists("user_ids"); ok {
 		s.UserIds = value.([]interface{})
 	}
@@ -599,6 +613,7 @@ func resourceTeamRead(ctx context.Context, d *schema.ResourceData, meta interfac
 	d.Set("pagertree_id", item.PagertreeId)
 	d.Set("cortex_id", item.CortexId)
 	d.Set("service_now_ci_sys_id", item.ServiceNowCiSysId)
+	d.Set("scim_group_id", item.ScimGroupId)
 	d.Set("user_ids", item.UserIds)
 	d.Set("admin_ids", item.AdminIds)
 	d.Set("alert_urgency_id", item.AlertUrgencyId)
@@ -743,6 +758,9 @@ func resourceTeamUpdate(ctx context.Context, d *schema.ResourceData, meta interf
 	}
 	if d.HasChange("service_now_ci_sys_id") {
 		s.ServiceNowCiSysId = d.Get("service_now_ci_sys_id").(string)
+	}
+	if d.HasChange("scim_group_id") {
+		s.ScimGroupId = d.Get("scim_group_id").(string)
 	}
 
 	if d.HasChange("user_ids") {
