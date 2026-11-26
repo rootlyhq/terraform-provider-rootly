@@ -54,6 +54,7 @@ resource "rootly_team" "sre" {
 - `pagertree_id` (String) The PagerTree group id associated to this team
 - `position` (Number) Position of the team
 - `properties` (Block List) Array of property values for this team. (see [below for nested schema](#nestedblock--properties))
+- `schedule_override_policy` (String) Who can create and update overrides for schedules owned by this team: `everyone` in the organization, only team `members`, or only team `admins`. Users still need override permission from their on-call role. Only available when the team-level schedule override policy feature is enabled for the organization. Value must be one of `everyone`, `members`, `admins`.
 - `service_now_ci_sys_id` (String) The Service Now CI sys id associated to this team
 - `slack_aliases` (Block List) Slack Aliases associated with this team (see [below for nested schema](#nestedblock--slack_aliases))
 - `slack_channels` (Block List) Slack Channels associated with this team (see [below for nested schema](#nestedblock--slack_channels))
