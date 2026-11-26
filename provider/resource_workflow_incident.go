@@ -364,10 +364,11 @@ func resourceWorkflowIncident() *schema.Resource {
 
 						"incident_post_mortem_condition_cause": &schema.Schema{
 							Type:        schema.TypeString,
-							Default:     "ANY",
+							Computed:    true,
 							Required:    false,
 							Optional:    true,
-							Description: "[DEPRECATED] Use incident_condition_cause instead. Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Description: "Use incident_condition_cause instead. Value must be one of `IS`, `IS NOT`, `ANY`, `CONTAINS`, `CONTAINS_ALL`, `CONTAINS_NONE`, `NONE`, `SET`, `UNSET`.",
+							Deprecated:  "Use incident_condition_cause instead",
 						},
 
 						"incident_condition_summary": &schema.Schema{
@@ -654,6 +655,7 @@ func resourceWorkflowIncidentCreate(ctx context.Context, d *schema.ResourceData,
 	}
 	if value, ok := d.GetOkExists("trigger_params"); ok {
 		s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+		sdkutils.OmitUnsetBlockParams(d, "trigger_params", s.TriggerParams, "incident_post_mortem_condition_cause")
 	}
 	if value, ok := d.GetOkExists("environment_ids"); ok {
 		s.EnvironmentIds = value.([]interface{})
@@ -814,6 +816,7 @@ func resourceWorkflowIncidentUpdate(ctx context.Context, d *schema.ResourceData,
 		for _, tpsi := range tps {
 			s.TriggerParams = tpsi.(map[string]interface{})
 		}
+		sdkutils.OmitUnsetBlockParams(d, "trigger_params", s.TriggerParams, "incident_post_mortem_condition_cause")
 	}
 	if d.HasChange("environment_ids") {
 		s.EnvironmentIds = d.Get("environment_ids").([]interface{})

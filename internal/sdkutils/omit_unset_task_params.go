@@ -8,11 +8,16 @@ import (
 // OmitUnsetTaskParams drops task params the configuration leaves unset, so the
 // API applies its own default instead of receiving the zero value.
 func OmitUnsetTaskParams(data *schema.ResourceData, params map[string]interface{}, keys ...string) {
+	OmitUnsetBlockParams(data, "task_params", params, keys...)
+}
+
+// OmitUnsetBlockParams drops keys of a single nested block that the configuration leaves unset.
+func OmitUnsetBlockParams(data *schema.ResourceData, blockName string, params map[string]interface{}, keys ...string) {
 	config := data.GetRawConfig()
 	if config.IsNull() || !config.IsKnown() {
 		return
 	}
-	taskParams := config.GetAttr("task_params")
+	taskParams := config.GetAttr(blockName)
 	var block cty.Value
 	if !taskParams.IsNull() && taskParams.IsKnown() && taskParams.LengthInt() > 0 {
 		block = taskParams.Index(cty.NumberIntVal(0))

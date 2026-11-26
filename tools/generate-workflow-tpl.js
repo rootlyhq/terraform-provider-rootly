@@ -57,7 +57,7 @@ func resource${nameCamel}Create(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.Workflow{}
 
-	${createResourceFields(resourceSchema, deprecatedFields)}
+	${createResourceFields(resourceSchema, deprecatedFields, taskParamsSchema)}
 
 	res, err := c.CreateWorkflow(s)
 	if err != nil {
@@ -98,7 +98,7 @@ func resource${nameCamel}Update(ctx context.Context, d *schema.ResourceData, met
 
 	s := &client.Workflow{}
 
-	${updateResourceFields(resourceSchema, deprecatedFields)}
+	${updateResourceFields(resourceSchema, deprecatedFields, taskParamsSchema)}
 
 	_, err := c.UpdateWorkflow(d.Id(), s)
 	if err != nil {
@@ -152,7 +152,14 @@ function setResourceFields({ resourceSchema, nameCamel }) {
     .join("\n  ");
 }
 
-function createResourceFields(resourceSchema, deprecatedFields) {
+// Deprecated trigger params alias current ones in the API, so they are only sent when configured.
+function omitUnsetDeprecatedTriggerParams(taskParamsSchema) {
+  const keys = Object.keys(taskParamsSchema.properties).filter((key) => taskParamsSchema.properties[key].deprecated);
+  if (keys.length === 0) return "";
+  return `\n\t\tsdkutils.OmitUnsetBlockParams(d, "trigger_params", s.TriggerParams, ${keys.map((key) => `"${key}"`).join(", ")})`;
+}
+
+function createResourceFields(resourceSchema, deprecatedFields, taskParamsSchema) {
   return Object.keys(resourceSchema.properties)
     .filter(excludeDateFields)
     .filter((field) => !(deprecatedFields && deprecatedFields[field]))
@@ -160,7 +167,7 @@ function createResourceFields(resourceSchema, deprecatedFields) {
       const schema = resourceSchema.properties[field];
       if (field === "trigger_params") {
         return `  if value, ok := d.GetOkExists("${field}"); ok {
-			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})
+			s.TriggerParams = value.([]interface{})[0].(map[string]interface{})${omitUnsetDeprecatedTriggerParams(taskParamsSchema)}
 	}`;
       } else if (schema.type === "boolean") {
         return `  if value, ok := d.GetOkExists("${field}"); ok {
@@ -177,7 +184,7 @@ function createResourceFields(resourceSchema, deprecatedFields) {
     .join("\n  ");
 }
 
-function updateResourceFields(resourceSchema, deprecatedFields) {
+function updateResourceFields(resourceSchema, deprecatedFields, taskParamsSchema) {
   return Object.keys(resourceSchema.properties)
     .filter(excludeDateFields)
     .filter((field) => !(deprecatedFields && deprecatedFields[field]))
@@ -189,7 +196,7 @@ function updateResourceFields(resourceSchema, deprecatedFields) {
 					tps := d.Get("trigger_params").([]interface{})
 					for _, tpsi := range tps {
 						s.TriggerParams = tpsi.(map[string]interface{})
-					}
+					}${omitUnsetDeprecatedTriggerParams(taskParamsSchema)}
 				}`;
       } else if (schema.type === "boolean") {
         return `  if d.HasChange("${field}") {
@@ -310,6 +317,8 @@ function schemaField(
   const isDeprecated = Boolean(deprecationMessage);
   const deprecationFields = isDeprecated
     ? `\n\t\t\t\tDiffSuppressFunc: diffsuppressfunc.Skip,\n\t\t\t\tDeprecated: "${deprecationMessage.replace(/"/g, '\\"')}",`
+    : schema.deprecated
+    ? `\n\t\t\t\tDeprecated: "${(schema.description || "This attribute is deprecated").replace(/"/g, '\\"')}",`
     : "";
   switch (schema.type) {
     case "string":
