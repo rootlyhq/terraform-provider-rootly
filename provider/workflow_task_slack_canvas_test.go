@@ -31,6 +31,12 @@ func TestWorkflowTaskSlackCanvasWorkspaceRoundTripOnWire(t *testing.T) {
 			}
 			params := map[string]interface{}{"task_type": action.name, "content": "# Updated {{ incident.title }}", "title": "Incident report", "channel": savedChannel}
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				// Read lists the workflow's tasks to warn about shared positions.
+				if r.Method == http.MethodGet && r.URL.Path == "/api/v1/workflows/workflow-id/workflow_tasks" {
+					w.Header().Set("Content-Type", "application/vnd.api+json")
+					w.Write([]byte(`{"data":[]}`))
+					return
+				}
 				expectedPath := "/api/v1/workflow_tasks/task-id"
 				if r.Method == http.MethodPost {
 					expectedPath = "/api/v1/workflows/workflow-id/workflow_tasks"
