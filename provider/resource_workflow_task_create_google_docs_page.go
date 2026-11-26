@@ -24,7 +24,7 @@ func resourceWorkflowTaskCreateGoogleDocsPage() *schema.Resource {
 		Description: "Manages workflow create_google_docs_page task.",
 
 		CreateContext: resourceWorkflowTaskCreateGoogleDocsPageCreate,
-		ReadContext:   resourceWorkflowTaskCreateGoogleDocsPageRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateGoogleDocsPageRead),
 		UpdateContext: resourceWorkflowTaskCreateGoogleDocsPageUpdate,
 		DeleteContext: resourceWorkflowTaskCreateGoogleDocsPageDelete,
 		Importer: &schema.ResourceImporter{

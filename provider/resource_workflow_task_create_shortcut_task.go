@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateShortcutTask() *schema.Resource {
 		Description: "Manages workflow create_shortcut_task task.",
 
 		CreateContext: resourceWorkflowTaskCreateShortcutTaskCreate,
-		ReadContext:   resourceWorkflowTaskCreateShortcutTaskRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateShortcutTaskRead),
 		UpdateContext: resourceWorkflowTaskCreateShortcutTaskUpdate,
 		DeleteContext: resourceWorkflowTaskCreateShortcutTaskDelete,
 		Importer: &schema.ResourceImporter{

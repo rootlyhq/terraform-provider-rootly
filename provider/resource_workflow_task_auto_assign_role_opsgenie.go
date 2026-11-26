@@ -22,7 +22,7 @@ func resourceWorkflowTaskAutoAssignRoleOpsgenie() *schema.Resource {
 		Description: "Manages workflow auto_assign_role_opsgenie task.",
 
 		CreateContext: resourceWorkflowTaskAutoAssignRoleOpsgenieCreate,
-		ReadContext:   resourceWorkflowTaskAutoAssignRoleOpsgenieRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAutoAssignRoleOpsgenieRead),
 		UpdateContext: resourceWorkflowTaskAutoAssignRoleOpsgenieUpdate,
 		DeleteContext: resourceWorkflowTaskAutoAssignRoleOpsgenieDelete,
 		Importer: &schema.ResourceImporter{

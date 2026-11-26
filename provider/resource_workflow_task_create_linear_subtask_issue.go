@@ -24,7 +24,7 @@ func resourceWorkflowTaskCreateLinearSubtaskIssue() *schema.Resource {
 		Description: "Manages workflow create_linear_subtask_issue task.",
 
 		CreateContext: resourceWorkflowTaskCreateLinearSubtaskIssueCreate,
-		ReadContext:   resourceWorkflowTaskCreateLinearSubtaskIssueRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateLinearSubtaskIssueRead),
 		UpdateContext: resourceWorkflowTaskCreateLinearSubtaskIssueUpdate,
 		DeleteContext: resourceWorkflowTaskCreateLinearSubtaskIssueDelete,
 		Importer: &schema.ResourceImporter{

@@ -22,7 +22,7 @@ func resourceWorkflowTaskSnapshotGrafanaDashboard() *schema.Resource {
 		Description: "Manages workflow snapshot_grafana_dashboard task.",
 
 		CreateContext: resourceWorkflowTaskSnapshotGrafanaDashboardCreate,
-		ReadContext:   resourceWorkflowTaskSnapshotGrafanaDashboardRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskSnapshotGrafanaDashboardRead),
 		UpdateContext: resourceWorkflowTaskSnapshotGrafanaDashboardUpdate,
 		DeleteContext: resourceWorkflowTaskSnapshotGrafanaDashboardDelete,
 		Importer: &schema.ResourceImporter{

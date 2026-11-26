@@ -24,7 +24,7 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 		Description: "Manages workflow http_client task.",
 
 		CreateContext: resourceWorkflowTaskHttpClientCreate,
-		ReadContext:   resourceWorkflowTaskHttpClientRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskHttpClientRead),
 		UpdateContext: resourceWorkflowTaskHttpClientUpdate,
 		DeleteContext: resourceWorkflowTaskHttpClientDelete,
 		Importer: &schema.ResourceImporter{

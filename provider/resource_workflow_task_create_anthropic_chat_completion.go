@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateAnthropicChatCompletion() *schema.Resource {
 		Description: "Manages workflow create_anthropic_chat_completion task.",
 
 		CreateContext: resourceWorkflowTaskCreateAnthropicChatCompletionCreate,
-		ReadContext:   resourceWorkflowTaskCreateAnthropicChatCompletionRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateAnthropicChatCompletionRead),
 		UpdateContext: resourceWorkflowTaskCreateAnthropicChatCompletionUpdate,
 		DeleteContext: resourceWorkflowTaskCreateAnthropicChatCompletionDelete,
 		Importer: &schema.ResourceImporter{

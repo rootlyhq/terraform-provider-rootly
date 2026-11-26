@@ -22,7 +22,7 @@ func resourceWorkflowTaskInviteToSlackChannelOpsgenie() *schema.Resource {
 		Description: "Manages workflow invite_to_slack_channel_opsgenie task.",
 
 		CreateContext: resourceWorkflowTaskInviteToSlackChannelOpsgenieCreate,
-		ReadContext:   resourceWorkflowTaskInviteToSlackChannelOpsgenieRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskInviteToSlackChannelOpsgenieRead),
 		UpdateContext: resourceWorkflowTaskInviteToSlackChannelOpsgenieUpdate,
 		DeleteContext: resourceWorkflowTaskInviteToSlackChannelOpsgenieDelete,
 		Importer: &schema.ResourceImporter{

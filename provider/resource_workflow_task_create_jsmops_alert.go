@@ -24,7 +24,7 @@ func resourceWorkflowTaskCreateJsmopsAlert() *schema.Resource {
 		Description: "Manages workflow create_jsmops_alert task.",
 
 		CreateContext: resourceWorkflowTaskCreateJsmopsAlertCreate,
-		ReadContext:   resourceWorkflowTaskCreateJsmopsAlertRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateJsmopsAlertRead),
 		UpdateContext: resourceWorkflowTaskCreateJsmopsAlertUpdate,
 		DeleteContext: resourceWorkflowTaskCreateJsmopsAlertDelete,
 		Importer: &schema.ResourceImporter{

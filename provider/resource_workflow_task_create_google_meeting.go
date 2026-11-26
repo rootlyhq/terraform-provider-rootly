@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateGoogleMeeting() *schema.Resource {
 		Description: "Manages workflow create_google_meeting task.",
 
 		CreateContext: resourceWorkflowTaskCreateGoogleMeetingCreate,
-		ReadContext:   resourceWorkflowTaskCreateGoogleMeetingRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateGoogleMeetingRead),
 		UpdateContext: resourceWorkflowTaskCreateGoogleMeetingUpdate,
 		DeleteContext: resourceWorkflowTaskCreateGoogleMeetingDelete,
 		Importer: &schema.ResourceImporter{

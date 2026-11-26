@@ -22,7 +22,7 @@ func resourceWorkflowTaskSnapshotLookerLook() *schema.Resource {
 		Description: "Manages workflow snapshot_looker_look task.",
 
 		CreateContext: resourceWorkflowTaskSnapshotLookerLookCreate,
-		ReadContext:   resourceWorkflowTaskSnapshotLookerLookRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskSnapshotLookerLookRead),
 		UpdateContext: resourceWorkflowTaskSnapshotLookerLookUpdate,
 		DeleteContext: resourceWorkflowTaskSnapshotLookerLookDelete,
 		Importer: &schema.ResourceImporter{

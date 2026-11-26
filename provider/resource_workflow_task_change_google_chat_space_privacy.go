@@ -22,7 +22,7 @@ func resourceWorkflowTaskChangeGoogleChatSpacePrivacy() *schema.Resource {
 		Description: "Manages workflow change_google_chat_space_privacy task.",
 
 		CreateContext: resourceWorkflowTaskChangeGoogleChatSpacePrivacyCreate,
-		ReadContext:   resourceWorkflowTaskChangeGoogleChatSpacePrivacyRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskChangeGoogleChatSpacePrivacyRead),
 		UpdateContext: resourceWorkflowTaskChangeGoogleChatSpacePrivacyUpdate,
 		DeleteContext: resourceWorkflowTaskChangeGoogleChatSpacePrivacyDelete,
 		Importer: &schema.ResourceImporter{

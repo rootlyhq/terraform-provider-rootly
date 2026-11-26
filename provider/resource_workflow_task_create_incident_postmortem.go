@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateIncidentPostmortem() *schema.Resource {
 		Description: "Manages workflow create_incident_postmortem task.",
 
 		CreateContext: resourceWorkflowTaskCreateIncidentPostmortemCreate,
-		ReadContext:   resourceWorkflowTaskCreateIncidentPostmortemRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateIncidentPostmortemRead),
 		UpdateContext: resourceWorkflowTaskCreateIncidentPostmortemUpdate,
 		DeleteContext: resourceWorkflowTaskCreateIncidentPostmortemDelete,
 		Importer: &schema.ResourceImporter{

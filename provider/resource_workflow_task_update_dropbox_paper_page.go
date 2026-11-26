@@ -22,7 +22,7 @@ func resourceWorkflowTaskUpdateDropboxPaperPage() *schema.Resource {
 		Description: "Manages workflow update_dropbox_paper_page task.",
 
 		CreateContext: resourceWorkflowTaskUpdateDropboxPaperPageCreate,
-		ReadContext:   resourceWorkflowTaskUpdateDropboxPaperPageRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateDropboxPaperPageRead),
 		UpdateContext: resourceWorkflowTaskUpdateDropboxPaperPageUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateDropboxPaperPageDelete,
 		Importer: &schema.ResourceImporter{

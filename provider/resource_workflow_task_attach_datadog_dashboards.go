@@ -22,7 +22,7 @@ func resourceWorkflowTaskAttachDatadogDashboards() *schema.Resource {
 		Description: "Manages workflow attach_datadog_dashboards task.",
 
 		CreateContext: resourceWorkflowTaskAttachDatadogDashboardsCreate,
-		ReadContext:   resourceWorkflowTaskAttachDatadogDashboardsRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAttachDatadogDashboardsRead),
 		UpdateContext: resourceWorkflowTaskAttachDatadogDashboardsUpdate,
 		DeleteContext: resourceWorkflowTaskAttachDatadogDashboardsDelete,
 		Importer: &schema.ResourceImporter{

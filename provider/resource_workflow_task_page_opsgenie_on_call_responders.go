@@ -22,7 +22,7 @@ func resourceWorkflowTaskPageOpsgenieOnCallResponders() *schema.Resource {
 		Description: "Manages workflow page_opsgenie_on_call_responders task.",
 
 		CreateContext: resourceWorkflowTaskPageOpsgenieOnCallRespondersCreate,
-		ReadContext:   resourceWorkflowTaskPageOpsgenieOnCallRespondersRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskPageOpsgenieOnCallRespondersRead),
 		UpdateContext: resourceWorkflowTaskPageOpsgenieOnCallRespondersUpdate,
 		DeleteContext: resourceWorkflowTaskPageOpsgenieOnCallRespondersDelete,
 		Importer: &schema.ResourceImporter{

@@ -24,7 +24,7 @@ func resourceWorkflowTaskUpdateZendeskTicket() *schema.Resource {
 		Description: "Manages workflow update_zendesk_ticket task.",
 
 		CreateContext: resourceWorkflowTaskUpdateZendeskTicketCreate,
-		ReadContext:   resourceWorkflowTaskUpdateZendeskTicketRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskUpdateZendeskTicketRead),
 		UpdateContext: resourceWorkflowTaskUpdateZendeskTicketUpdate,
 		DeleteContext: resourceWorkflowTaskUpdateZendeskTicketDelete,
 		Importer: &schema.ResourceImporter{

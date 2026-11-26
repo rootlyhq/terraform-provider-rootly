@@ -22,7 +22,7 @@ func resourceWorkflowTaskAutoAssignRolePagerduty() *schema.Resource {
 		Description: "Manages workflow auto_assign_role_pagerduty task.",
 
 		CreateContext: resourceWorkflowTaskAutoAssignRolePagerdutyCreate,
-		ReadContext:   resourceWorkflowTaskAutoAssignRolePagerdutyRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAutoAssignRolePagerdutyRead),
 		UpdateContext: resourceWorkflowTaskAutoAssignRolePagerdutyUpdate,
 		DeleteContext: resourceWorkflowTaskAutoAssignRolePagerdutyDelete,
 		Importer: &schema.ResourceImporter{

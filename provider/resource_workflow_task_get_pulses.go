@@ -22,7 +22,7 @@ func resourceWorkflowTaskGetPulses() *schema.Resource {
 		Description: "Manages workflow get_pulses task.",
 
 		CreateContext: resourceWorkflowTaskGetPulsesCreate,
-		ReadContext:   resourceWorkflowTaskGetPulsesRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskGetPulsesRead),
 		UpdateContext: resourceWorkflowTaskGetPulsesUpdate,
 		DeleteContext: resourceWorkflowTaskGetPulsesDelete,
 		Importer: &schema.ResourceImporter{

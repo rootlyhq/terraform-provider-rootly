@@ -22,7 +22,7 @@ func resourceWorkflowTaskGetGitlabCommits() *schema.Resource {
 		Description: "Manages workflow get_gitlab_commits task.",
 
 		CreateContext: resourceWorkflowTaskGetGitlabCommitsCreate,
-		ReadContext:   resourceWorkflowTaskGetGitlabCommitsRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskGetGitlabCommitsRead),
 		UpdateContext: resourceWorkflowTaskGetGitlabCommitsUpdate,
 		DeleteContext: resourceWorkflowTaskGetGitlabCommitsDelete,
 		Importer: &schema.ResourceImporter{

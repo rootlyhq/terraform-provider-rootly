@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateMicrosoftTeamsMeeting() *schema.Resource {
 		Description: "Manages workflow create_microsoft_teams_meeting task.",
 
 		CreateContext: resourceWorkflowTaskCreateMicrosoftTeamsMeetingCreate,
-		ReadContext:   resourceWorkflowTaskCreateMicrosoftTeamsMeetingRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateMicrosoftTeamsMeetingRead),
 		UpdateContext: resourceWorkflowTaskCreateMicrosoftTeamsMeetingUpdate,
 		DeleteContext: resourceWorkflowTaskCreateMicrosoftTeamsMeetingDelete,
 		Importer: &schema.ResourceImporter{

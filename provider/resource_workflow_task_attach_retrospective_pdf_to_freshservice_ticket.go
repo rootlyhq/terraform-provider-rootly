@@ -22,7 +22,7 @@ func resourceWorkflowTaskAttachRetrospectivePdfToFreshserviceTicket() *schema.Re
 		Description: "Manages workflow attach_retrospective_pdf_to_freshservice_ticket task.",
 
 		CreateContext: resourceWorkflowTaskAttachRetrospectivePdfToFreshserviceTicketCreate,
-		ReadContext:   resourceWorkflowTaskAttachRetrospectivePdfToFreshserviceTicketRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskAttachRetrospectivePdfToFreshserviceTicketRead),
 		UpdateContext: resourceWorkflowTaskAttachRetrospectivePdfToFreshserviceTicketUpdate,
 		DeleteContext: resourceWorkflowTaskAttachRetrospectivePdfToFreshserviceTicketDelete,
 		Importer: &schema.ResourceImporter{

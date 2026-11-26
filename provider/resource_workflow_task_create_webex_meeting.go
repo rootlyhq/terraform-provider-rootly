@@ -22,7 +22,7 @@ func resourceWorkflowTaskCreateWebexMeeting() *schema.Resource {
 		Description: "Manages workflow create_webex_meeting task.",
 
 		CreateContext: resourceWorkflowTaskCreateWebexMeetingCreate,
-		ReadContext:   resourceWorkflowTaskCreateWebexMeetingRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskCreateWebexMeetingRead),
 		UpdateContext: resourceWorkflowTaskCreateWebexMeetingUpdate,
 		DeleteContext: resourceWorkflowTaskCreateWebexMeetingDelete,
 		Importer: &schema.ResourceImporter{

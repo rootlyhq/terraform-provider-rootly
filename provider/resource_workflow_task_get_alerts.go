@@ -22,7 +22,7 @@ func resourceWorkflowTaskGetAlerts() *schema.Resource {
 		Description: "Manages workflow get_alerts task.",
 
 		CreateContext: resourceWorkflowTaskGetAlertsCreate,
-		ReadContext:   resourceWorkflowTaskGetAlertsRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskGetAlertsRead),
 		UpdateContext: resourceWorkflowTaskGetAlertsUpdate,
 		DeleteContext: resourceWorkflowTaskGetAlertsDelete,
 		Importer: &schema.ResourceImporter{

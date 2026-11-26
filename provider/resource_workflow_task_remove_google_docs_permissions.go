@@ -22,7 +22,7 @@ func resourceWorkflowTaskRemoveGoogleDocsPermissions() *schema.Resource {
 		Description: "Manages workflow remove_google_docs_permissions task.",
 
 		CreateContext: resourceWorkflowTaskRemoveGoogleDocsPermissionsCreate,
-		ReadContext:   resourceWorkflowTaskRemoveGoogleDocsPermissionsRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskRemoveGoogleDocsPermissionsRead),
 		UpdateContext: resourceWorkflowTaskRemoveGoogleDocsPermissionsUpdate,
 		DeleteContext: resourceWorkflowTaskRemoveGoogleDocsPermissionsDelete,
 		Importer: &schema.ResourceImporter{

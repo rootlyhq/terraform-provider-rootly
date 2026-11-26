@@ -22,7 +22,7 @@ func resourceWorkflowTaskSendSms() *schema.Resource {
 		Description: "Manages workflow send_sms task.",
 
 		CreateContext: resourceWorkflowTaskSendSmsCreate,
-		ReadContext:   resourceWorkflowTaskSendSmsRead,
+		ReadContext:   readWorkflowTaskWithPositionWarning(resourceWorkflowTaskSendSmsRead),
 		UpdateContext: resourceWorkflowTaskSendSmsUpdate,
 		DeleteContext: resourceWorkflowTaskSendSmsDelete,
 		Importer: &schema.ResourceImporter{
