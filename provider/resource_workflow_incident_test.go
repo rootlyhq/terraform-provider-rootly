@@ -153,3 +153,43 @@ resource "rootly_workflow_incident" "fn" {
 }
 `, rName)
 }
+
+// The deprecated incident_post_mortem_condition_cause aliases incident_condition_cause in the API,
+// so its "ANY" default must not overwrite the value set on the current attribute.
+func TestAccResourceWorkflowIncidentConditionCause(t *testing.T) {
+	rName := acctest.RandomWithPrefix("tf-wf-inc-cause")
+
+	resource.UnitTest(t, resource.TestCase{
+		PreCheck: func() {
+			testAccPreCheck(t)
+		},
+		ProviderFactories: providerFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceWorkflowIncidentConditionCauseConfig(rName, true),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_workflow_incident.cause", "trigger_params.0.incident_condition_cause", "UNSET"),
+				),
+			},
+			{
+				Config: testAccResourceWorkflowIncidentConditionCauseConfig(rName, false),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("rootly_workflow_incident.cause", "trigger_params.0.incident_condition_cause", "UNSET"),
+				),
+			},
+		},
+	})
+}
+
+func testAccResourceWorkflowIncidentConditionCauseConfig(rName string, visibility bool) string {
+	return fmt.Sprintf(`
+resource "rootly_workflow_incident" "cause" {
+  name = "%s"
+  trigger_params {
+    triggers                 = ["incident_updated"]
+    incident_visibilities    = [%t]
+    incident_condition_cause = "UNSET"
+  }
+}
+`, rName, visibility)
+}
