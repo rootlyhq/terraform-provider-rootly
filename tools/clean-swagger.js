@@ -289,6 +289,19 @@ function preserveWorkflowTaskContracts(schemas) {
   }
 }
 
+// incident_post_mortem_condition_cause aliases incident_condition_cause in the API.
+// Sending its default would overwrite the current field, so only send it when configured.
+function annotateDeprecatedConditionCause(schemas) {
+  for (const name of ["incident_trigger_params", "post_mortem_trigger_params"]) {
+    const property = schemas[name]?.properties?.incident_post_mortem_condition_cause;
+    if (!property) continue;
+    delete property.default;
+    property.deprecated = true;
+    property.description = property.description?.replace(/^\[DEPRECATED\]\s*/, "");
+    property.tf_computed = true;
+  }
+}
+
 function annotateCatalogExternalIds(schemas) {
   const fields = [
     "backstage_id", "external_id", "pagerduty_id", "opsgenie_id",
@@ -361,6 +374,7 @@ annotateRetriggerTimeout(swagger.components.schemas);
 preserveCanvasTerraformContract(swagger.components.schemas);
 annotateStatusPageAnnouncement(swagger.components.schemas);
 preserveWorkflowTaskContracts(swagger.components.schemas);
+annotateDeprecatedConditionCause(swagger.components.schemas);
 annotateCanvasWorkspaces(swagger.components.schemas);
 stripBulkOperations(swagger);
 fs.writeFileSync(process.argv[2], JSON.stringify(swagger));
