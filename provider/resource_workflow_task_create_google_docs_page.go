@@ -4,16 +4,15 @@ package provider
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
-	"reflect"
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
@@ -125,23 +124,11 @@ func resourceWorkflowTaskCreateGoogleDocsPage() *schema.Resource {
 							}, false),
 						},
 						"permissions": &schema.Schema{
-							Description: "Page permissions JSON",
-							Type:        schema.TypeString,
-							Optional:    true,
-							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
-								var oldJSONAsInterface, newJSONAsInterface interface{}
-
-								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
-									return false
-								}
-
-								if err := json.Unmarshal([]byte(new), &newJSONAsInterface); err != nil {
-									return false
-								}
-
-								return reflect.DeepEqual(oldJSONAsInterface, newJSONAsInterface)
-							},
-							Default: "{}",
+							Description:      "Page permissions JSON",
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: diffsuppressfunc.JSON,
+							Default:          "{}",
 						},
 						"include_overview": &schema.Schema{
 							Description: "Value must be one of true or false",

@@ -110,14 +110,13 @@ function genResourceFile(task_name, task_schema) {
 import (
 	"context"
 	"errors"
-	"fmt"${needsJSON ? `
-	"reflect"
-	"encoding/json"` : ""}
+	"fmt"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
-	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/client"${needsJSON ? `
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"` : ""}
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 	${stateUpgrade ? '"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"' : ""}
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
@@ -415,19 +414,7 @@ function genTaskSchemaProperty(property_name, property_schema, required_props, n
   }
   if (isJSON) {
     a = `${a}
-							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
-								var oldJSONAsInterface, newJSONAsInterface interface{}
-							
-								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
-									return false
-								}
-
-								if err := json.Unmarshal([]byte(new), &newJSONAsInterface); err != nil {
-									return false
-								}
-
-								return reflect.DeepEqual(oldJSONAsInterface, newJSONAsInterface)
-							},`;
+							DiffSuppressFunc: diffsuppressfunc.JSON,`;
     if (!isRequired) {
       a = `${a}
 							Default: "{}",`;
