@@ -182,7 +182,7 @@ func resourceWorkflowTaskPublishIncident() *schema.Resource {
 							Description:      "Additional API Payload you can pass to statuspage.io for example. Can contain liquid markup and need to be valid JSON",
 							Type:             schema.TypeString,
 							Optional:         true,
-							DiffSuppressFunc: diffsuppressfunc.JSON,
+							DiffSuppressFunc: diffsuppressfunc.LiquidJSON,
 							Default:          "{}",
 						},
 					},

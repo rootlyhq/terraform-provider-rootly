@@ -91,14 +91,14 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 							Type:             schema.TypeString,
 							Optional:         true,
 							Sensitive:        true,
-							DiffSuppressFunc: diffsuppressfunc.JSON,
+							DiffSuppressFunc: diffsuppressfunc.LiquidJSON,
 							Default:          "{}",
 						},
 						"params": &schema.Schema{
 							Description:      "JSON map of HTTP query parameters",
 							Type:             schema.TypeString,
 							Optional:         true,
-							DiffSuppressFunc: diffsuppressfunc.JSON,
+							DiffSuppressFunc: diffsuppressfunc.LiquidJSON,
 							Default:          "{}",
 						},
 						"body": &schema.Schema{

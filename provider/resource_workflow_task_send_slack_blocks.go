@@ -87,13 +87,13 @@ func resourceWorkflowTaskSendSlackBlocks() *schema.Resource {
 							Description:      "Support liquid markup. Needs to be a valid JSON string after liquid is parsed",
 							Type:             schema.TypeString,
 							Required:         true,
-							DiffSuppressFunc: diffsuppressfunc.JSON,
+							DiffSuppressFunc: diffsuppressfunc.LiquidJSON,
 						},
 						"attachments": &schema.Schema{
 							Description:      "Support liquid markup. Needs to be a valid JSON string after liquid is parsed",
 							Type:             schema.TypeString,
 							Optional:         true,
-							DiffSuppressFunc: diffsuppressfunc.JSON,
+							DiffSuppressFunc: diffsuppressfunc.LiquidJSON,
 							Default:          "{}",
 						},
 						"channels": &schema.Schema{

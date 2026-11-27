@@ -100,7 +100,7 @@ func resourceWorkflowTaskSendMicrosoftTeamsBlocks() *schema.Resource {
 							Description:      "Support liquid markup. Needs to be a valid JSON string after liquid is parsed",
 							Type:             schema.TypeString,
 							Required:         true,
-							DiffSuppressFunc: diffsuppressfunc.JSON,
+							DiffSuppressFunc: diffsuppressfunc.LiquidJSON,
 						},
 					},
 				},

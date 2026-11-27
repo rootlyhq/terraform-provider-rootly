@@ -127,7 +127,7 @@ func resourceWorkflowTaskCreateGoogleDocsPage() *schema.Resource {
 							Description:      "Page permissions JSON",
 							Type:             schema.TypeString,
 							Optional:         true,
-							DiffSuppressFunc: diffsuppressfunc.JSON,
+							DiffSuppressFunc: diffsuppressfunc.LiquidJSON,
 							Default:          "{}",
 						},
 						"include_overview": &schema.Schema{

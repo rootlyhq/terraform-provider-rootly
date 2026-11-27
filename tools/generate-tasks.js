@@ -414,7 +414,7 @@ function genTaskSchemaProperty(property_name, property_schema, required_props, n
   }
   if (isJSON) {
     a = `${a}
-							DiffSuppressFunc: diffsuppressfunc.JSON,`;
+							DiffSuppressFunc: diffsuppressfunc.LiquidJSON,`;
     if (!isRequired) {
       a = `${a}
 							Default: "{}",`;

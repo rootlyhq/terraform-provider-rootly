@@ -147,7 +147,7 @@ func resourceWorkflowTaskCreateIncident() *schema.Resource {
 							Description:      "Custom field mappings. Can contain liquid markup and need to be valid JSON. Use 'services', 'functionalities', or 'groups' keys with arrays of names/slugs for name/slug lookup",
 							Type:             schema.TypeString,
 							Optional:         true,
-							DiffSuppressFunc: diffsuppressfunc.JSON,
+							DiffSuppressFunc: diffsuppressfunc.LiquidJSON,
 							Default:          "{}",
 						},
 					},

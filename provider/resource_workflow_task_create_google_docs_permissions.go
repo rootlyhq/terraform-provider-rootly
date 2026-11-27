@@ -87,7 +87,7 @@ func resourceWorkflowTaskCreateGoogleDocsPermissions() *schema.Resource {
 							Description:      "Page permissions JSON",
 							Type:             schema.TypeString,
 							Required:         true,
-							DiffSuppressFunc: diffsuppressfunc.JSON,
+							DiffSuppressFunc: diffsuppressfunc.LiquidJSON,
 						},
 						"send_notification_email": &schema.Schema{
 							Description: "Value must be one of true or false",

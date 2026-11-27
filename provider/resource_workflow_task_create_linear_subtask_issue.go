@@ -130,7 +130,7 @@ func resourceWorkflowTaskCreateLinearSubtaskIssue() *schema.Resource {
 							Description:      "Custom field mappings. Can contain liquid markup and need to be valid JSON",
 							Type:             schema.TypeString,
 							Optional:         true,
-							DiffSuppressFunc: diffsuppressfunc.JSON,
+							DiffSuppressFunc: diffsuppressfunc.LiquidJSON,
 							Default:          "{}",
 						},
 					},
