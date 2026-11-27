@@ -109,11 +109,9 @@ test("nested JSON fields generate compilable imports without changing flat maps"
     }}});
     const nested = fs.readFileSync("provider/resource_workflow_task_nested_json.go", "utf8");
     const flat = fs.readFileSync("provider/resource_workflow_task_flat_json.go", "utf8");
-    assert.match(nested, /"encoding\/json"/);
-    assert.match(nested, /"reflect"/);
-    assert.match(nested, /json\.Unmarshal/);
-    assert.match(nested, /reflect\.DeepEqual/);
-    assert.doesNotMatch(flat, /"encoding\/json"|"reflect"|json\.Unmarshal|reflect\.DeepEqual/);
+    assert.match(nested, /internal\/diffsuppressfunc"/);
+    assert.match(nested, /DiffSuppressFunc: diffsuppressfunc\.LiquidJSON,/);
+    assert.doesNotMatch(flat, /diffsuppressfunc/);
     for (const task of ["nested_json", "flat_json"]) {
       fs.unlinkSync(`provider/resource_workflow_task_${task}_test.go`);
     }

@@ -4,16 +4,15 @@ package provider
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
-	"reflect"
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/client"
+	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/diffsuppressfunc"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/internal/sdkutils"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/provider/stateupgrade"
 	"github.com/rootlyhq/terraform-provider-rootly/v5/tools"
@@ -88,43 +87,19 @@ func resourceWorkflowTaskHttpClient() *schema.Resource {
 							}, false),
 						},
 						"headers": &schema.Schema{
-							Description: "JSON map of HTTP headers",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Sensitive:   true,
-							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
-								var oldJSONAsInterface, newJSONAsInterface interface{}
-
-								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
-									return false
-								}
-
-								if err := json.Unmarshal([]byte(new), &newJSONAsInterface); err != nil {
-									return false
-								}
-
-								return reflect.DeepEqual(oldJSONAsInterface, newJSONAsInterface)
-							},
-							Default: "{}",
+							Description:      "JSON map of HTTP headers",
+							Type:             schema.TypeString,
+							Optional:         true,
+							Sensitive:        true,
+							DiffSuppressFunc: diffsuppressfunc.LiquidJSON,
+							Default:          "{}",
 						},
 						"params": &schema.Schema{
-							Description: "JSON map of HTTP query parameters",
-							Type:        schema.TypeString,
-							Optional:    true,
-							DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
-								var oldJSONAsInterface, newJSONAsInterface interface{}
-
-								if err := json.Unmarshal([]byte(old), &oldJSONAsInterface); err != nil {
-									return false
-								}
-
-								if err := json.Unmarshal([]byte(new), &newJSONAsInterface); err != nil {
-									return false
-								}
-
-								return reflect.DeepEqual(oldJSONAsInterface, newJSONAsInterface)
-							},
-							Default: "{}",
+							Description:      "JSON map of HTTP query parameters",
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: diffsuppressfunc.LiquidJSON,
+							Default:          "{}",
 						},
 						"body": &schema.Schema{
 							Description: "HTTP body",
