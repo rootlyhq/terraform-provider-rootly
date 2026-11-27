@@ -200,3 +200,27 @@ test("tf_computed task params are computed", () => {
     fs.rmSync(directory, {recursive: true, force: true});
   }
 });
+
+test("boolean task params emit their default only with tf_use_default", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "rootly-task-generator-"));
+  const previous = process.cwd();
+  try {
+    fs.mkdirSync(path.join(directory, "provider"));
+    process.chdir(directory);
+    generateTasks(["export_page"], {components: {schemas: {export_page_task_params: {
+      properties: {
+        include_timeline: {type: "boolean", default: true, tf_use_default: true},
+        include_overview: {type: "boolean", default: true},
+      },
+    }}}});
+    const resource = fs.readFileSync("provider/resource_workflow_task_export_page.go", "utf8");
+    const timelineSchema = resource.slice(resource.indexOf('"include_timeline": &schema.Schema'), resource.indexOf('"include_overview": &schema.Schema'));
+    const overviewSchema = resource.slice(resource.indexOf('"include_overview": &schema.Schema'));
+    assert.match(timelineSchema, /Default:\s+true,/);
+    assert.doesNotMatch(timelineSchema, /Computed:/);
+    assert.doesNotMatch(overviewSchema.slice(0, overviewSchema.indexOf("},")), /Default:/);
+  } finally {
+    process.chdir(previous);
+    fs.rmSync(directory, {recursive: true, force: true});
+  }
+});
